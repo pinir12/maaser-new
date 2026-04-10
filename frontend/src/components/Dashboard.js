@@ -462,6 +462,9 @@ export function Dashboard() {
         maaserBalance={maaserBalance}
         userId={user?.id}
         useHebrewCalendar={user?.use_hebrew_calendar || false}
+        defaultMaaserPercentage={user?.default_maaser_percentage ?? 10}
+        giveRatio={user?.give_ratio ?? 50}
+        lendRatio={user?.lend_ratio ?? 50}
       />
 
       <SettingsModal

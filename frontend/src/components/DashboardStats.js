@@ -6,51 +6,27 @@ export function DashboardStats({ stats, maaserBalance, baseCurrency, distributio
   const symbol = getCurrencySymbol(baseCurrency);
   const fmt = (n) => n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
+  const cards = [
+    { label: 'Income', value: stats.totalIncome, icon: TrendingUp, color: 'text-emerald-600', iconColor: 'text-emerald-500', testId: 'total-income-amount' },
+    { label: 'Maaser', value: stats.totalMaaserOwed, icon: PiggyBank, color: 'text-amber-600', iconColor: 'text-amber-500', testId: 'maaser-owed-amount' },
+    { label: 'Balance', value: Math.abs(maaserBalance), icon: Wallet, color: maaserBalance >= 0 ? 'text-blue-600' : 'text-red-600', iconColor: maaserBalance >= 0 ? 'text-blue-500' : 'text-red-500', testId: 'maaser-balance-amount', prefix: maaserBalance < 0 ? '-' : '', borderClass: maaserBalance < 0 ? 'border-red-300' : 'border-slate-200/80' },
+    { label: 'Given', value: stats.totalGiven, icon: Heart, color: 'text-blue-600', iconColor: 'text-blue-500', testId: 'total-given-amount' },
+    ...(!isGiveOnly ? [{ label: 'Lent', value: stats.totalLent, icon: HandCoins, color: 'text-rose-600', iconColor: 'text-rose-500', testId: 'total-lent-amount' }] : [])
+  ];
+
   return (
-    <div data-testid="dashboard-stats" className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
-      <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-sm">
-        <div className="flex items-center justify-between mb-1">
-          <span className="text-xs font-medium text-slate-500">Income</span>
-          <TrendingUp className="w-4 h-4 text-emerald-500" />
-        </div>
-        <p data-testid="total-income-amount" className="text-xl font-bold text-emerald-600">{symbol}{fmt(stats.totalIncome)}</p>
-      </div>
-
-      <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-sm">
-        <div className="flex items-center justify-between mb-1">
-          <span className="text-xs font-medium text-slate-500">Maaser</span>
-          <PiggyBank className="w-4 h-4 text-amber-500" />
-        </div>
-        <p data-testid="maaser-owed-amount" className="text-xl font-bold text-amber-600">{symbol}{fmt(stats.totalMaaserOwed)}</p>
-      </div>
-
-      <div className={`bg-white rounded-xl p-3 border shadow-sm ${maaserBalance < 0 ? 'border-red-300' : 'border-slate-200'}`}>
-        <div className="flex items-center justify-between mb-1">
-          <span className="text-xs font-medium text-slate-500">Balance</span>
-          <Wallet className={`w-4 h-4 ${maaserBalance >= 0 ? 'text-blue-500' : 'text-red-500'}`} />
-        </div>
-        <p data-testid="maaser-balance-amount" className={`text-xl font-bold ${maaserBalance >= 0 ? 'text-blue-600' : 'text-red-600'}`}>
-          {maaserBalance < 0 && '-'}{symbol}{fmt(Math.abs(maaserBalance))}
-        </p>
-      </div>
-
-      <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-sm">
-        <div className="flex items-center justify-between mb-1">
-          <span className="text-xs font-medium text-slate-500">Given</span>
-          <Heart className="w-4 h-4 text-blue-500" />
-        </div>
-        <p data-testid="total-given-amount" className="text-xl font-bold text-blue-600">{symbol}{fmt(stats.totalGiven)}</p>
-      </div>
-
-      {!isGiveOnly && (
-        <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-sm">
+    <div data-testid="dashboard-stats" className="flex gap-3">
+      {cards.map(({ label, value, icon: Icon, color, iconColor, testId, prefix, borderClass }) => (
+        <div key={label} className={`flex-1 min-w-0 bg-white/80 backdrop-blur-sm rounded-xl p-3 border ${borderClass || 'border-slate-200/80'} shadow-sm`}>
           <div className="flex items-center justify-between mb-1">
-            <span className="text-xs font-medium text-slate-500">Lent</span>
-            <HandCoins className="w-4 h-4 text-rose-500" />
+            <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">{label}</span>
+            <Icon className={`w-4 h-4 ${iconColor}`} />
           </div>
-          <p data-testid="total-lent-amount" className="text-xl font-bold text-rose-600">{symbol}{fmt(stats.totalLent)}</p>
+          <p data-testid={testId} className={`text-lg font-bold ${color} truncate`}>
+            {prefix || ''}{symbol}{fmt(value)}
+          </p>
         </div>
-      )}
+      ))}
     </div>
   );
 }

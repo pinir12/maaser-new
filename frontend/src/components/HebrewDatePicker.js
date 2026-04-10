@@ -1,10 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { HDate, months } from '@hebcal/core';
 import { getHebrewMonths } from '../lib/hebrew-calendar';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export function HebrewDatePicker({ value, onChange }) {
-  const today = new HDate();
+  const todayRef = useRef(new HDate());
+  const today = todayRef.current;
   const initial = value ? new HDate(new Date(value)) : today;
   
   const [viewYear, setViewYear] = useState(initial.getFullYear());

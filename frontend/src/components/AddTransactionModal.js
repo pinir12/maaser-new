@@ -7,7 +7,7 @@ import { HebrewDatePicker } from './HebrewDatePicker';
 import { X, Calendar, DollarSign, User, Repeat, TrendingUp, Heart, HandCoins, Zap, RefreshCw } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
-export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction, baseCurrency, distributionMode, maaserBalance = 0, userId, useHebrewCalendar = false }) {
+export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction, baseCurrency, distributionMode, maaserBalance = 0, userId, useHebrewCalendar = false, defaultMaaserPercentage = 10, giveRatio = 50, lendRatio = 50 }) {
   const [txnType, setTxnType] = useState(TRANSACTION_TYPES.INCOME);
   const isGiveOnly = distributionMode === 'give_only';
   const [showHebrewPicker, setShowHebrewPicker] = useState(false);
@@ -22,7 +22,7 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
 
   const { register, handleSubmit, watch, setValue, reset, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(getSchema()),
-    defaultValues: { description: '', amount: '', currency: baseCurrency || 'USD', exchange_rate_to_base: 1, date: new Date().toISOString().split('T')[0], maaser_percentage: 10, recipient_name: '', is_recurring: false, recurring_frequency: 'none', recurring_end_date: '' }
+    defaultValues: { description: '', amount: '', currency: baseCurrency || 'USD', exchange_rate_to_base: 1, date: new Date().toISOString().split('T')[0], maaser_percentage: defaultMaaserPercentage, recipient_name: '', is_recurring: false, recurring_frequency: 'none', recurring_end_date: '' }
   });
 
   const watchCurrency = watch('currency');
@@ -145,7 +145,7 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
           recurring_end_date: editTransaction.recurring_end_date || ''
         });
       } else {
-        reset({ description: '', amount: '', currency: baseCurrency || 'USD', exchange_rate_to_base: 1, date: new Date().toISOString().split('T')[0], maaser_percentage: 10, recipient_name: '', is_recurring: false, recurring_frequency: 'none', recurring_end_date: '' });
+        reset({ description: '', amount: '', currency: baseCurrency || 'USD', exchange_rate_to_base: 1, date: new Date().toISOString().split('T')[0], maaser_percentage: defaultMaaserPercentage, recipient_name: '', is_recurring: false, recurring_frequency: 'none', recurring_end_date: '' });
       }
       setShowHebrewPicker(false);
     }
@@ -201,8 +201,13 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
         </div>
 
         {(txnType === TRANSACTION_TYPES.GIVE || txnType === TRANSACTION_TYPES.LEND) && (
-          <div className="mx-4 mt-4 p-3 bg-blue-50 rounded-xl text-sm text-blue-700">
-            Available Maaser: <strong>{getCurrencySymbol(baseCurrency)}{maaserBalance.toFixed(2)}</strong>
+          <div className="mx-4 mt-4 p-3 bg-blue-50 rounded-xl text-sm text-blue-700 space-y-1">
+            <div>Available Maaser: <strong>{getCurrencySymbol(baseCurrency)}{maaserBalance.toFixed(2)}</strong></div>
+            {!isGiveOnly && maaserBalance > 0 && (
+              <div className="text-xs text-blue-600">
+                Suggested: Give {getCurrencySymbol(baseCurrency)}{(maaserBalance * giveRatio / 100).toFixed(2)} ({giveRatio}%) / Lend {getCurrencySymbol(baseCurrency)}{(maaserBalance * lendRatio / 100).toFixed(2)} ({lendRatio}%)
+              </div>
+            )}
           </div>
         )}
 
