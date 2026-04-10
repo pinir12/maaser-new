@@ -105,6 +105,10 @@ self.__SERVER_FILES_MANIFEST={
       }
     },
     "outputFileTracingRoot": "/app",
+    "allowedDevOrigins": [
+      "hebrew-month-view.preview.emergentagent.com",
+      "hebrew-month-view.cluster-8.preview.emergentcf.cloud"
+    ],
     "cacheComponents": false,
     "cacheLife": {
       "default": {
