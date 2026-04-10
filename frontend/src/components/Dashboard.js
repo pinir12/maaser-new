@@ -298,7 +298,6 @@ export function Dashboard() {
           </button>
           <div className="flex-1">
             <DashboardStats
-              stats={allTimeStats}
               balances={balances}
               baseCurrency={user?.base_currency || 'USD'}
               distributionMode={user?.distribution_mode || 'both'}
@@ -341,44 +340,54 @@ export function Dashboard() {
             baseCurrency={user?.base_currency || 'USD'} userName={user?.name || 'User'} />
         </div>
 
-        {/* Period Summary */}
-        {viewMode !== VIEW_MODES.ALL_TIME && (
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-slate-200/80 shadow-sm">
-            <div className={`grid gap-4 text-center ${isGiveOnly ? 'grid-cols-3' : 'grid-cols-2 md:grid-cols-4'}`}>
-              <div className="p-3 bg-emerald-50/80 rounded-xl">
-                <p className="text-[10px] text-emerald-600 uppercase tracking-wider font-semibold mb-1">Period Income</p>
-                <p className="text-lg font-bold text-emerald-700">{sym}{periodStats.totalIncome.toFixed(2)}</p>
-              </div>
-              {isGiveOnly ? (
-                <div className="p-3 bg-amber-50/80 rounded-xl">
-                  <p className="text-[10px] text-amber-600 uppercase tracking-wider font-semibold mb-1">Period Maaser</p>
-                  <p className="text-lg font-bold text-amber-700">{sym}{periodStats.totalMaaser.toFixed(2)}</p>
+        {/* Totals Summary - always visible, shows all-time or period depending on view */}
+        {(() => {
+          const isAllTime = viewMode === VIEW_MODES.ALL_TIME;
+          const s = isAllTime ? allTimeStats : periodStats;
+          const label = isAllTime ? 'All Time' : viewMode === VIEW_MODES.YEAR ? 'Year' : 'Month';
+          return (
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-slate-200/80 shadow-sm">
+              <p className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-3">{label} Totals</p>
+              <div className={`grid gap-4 text-center ${isGiveOnly ? 'grid-cols-3' : 'grid-cols-2 md:grid-cols-5'}`}>
+                <div className="p-3 bg-emerald-50/80 rounded-xl">
+                  <p className="text-[10px] text-emerald-600 uppercase tracking-wider font-semibold mb-1">Income</p>
+                  <p data-testid="totals-income" className="text-lg font-bold text-emerald-700">{sym}{s.totalIncome.toFixed(2)}</p>
                 </div>
-              ) : (
-                <>
-                  <div className="p-3 bg-blue-50/80 rounded-xl">
-                    <p className="text-[10px] text-blue-600 uppercase tracking-wider font-semibold mb-1">Period Give Portion</p>
-                    <p className="text-lg font-bold text-blue-700">{sym}{(periodStats.totalMaaser * giveRatio).toFixed(2)}</p>
-                  </div>
-                  <div className="p-3 bg-rose-50/80 rounded-xl">
-                    <p className="text-[10px] text-rose-600 uppercase tracking-wider font-semibold mb-1">Period Lend Portion</p>
-                    <p className="text-lg font-bold text-rose-700">{sym}{(periodStats.totalMaaser * lendRatio).toFixed(2)}</p>
-                  </div>
-                </>
-              )}
-              <div className="p-3 bg-blue-50/80 rounded-xl">
-                <p className="text-[10px] text-blue-600 uppercase tracking-wider font-semibold mb-1">Period Given</p>
-                <p className="text-lg font-bold text-blue-700">{sym}{periodStats.totalGiven.toFixed(2)}</p>
+                {isGiveOnly ? (
+                  <>
+                    <div className="p-3 bg-amber-50/80 rounded-xl">
+                      <p className="text-[10px] text-amber-600 uppercase tracking-wider font-semibold mb-1">Maaser</p>
+                      <p data-testid="totals-maaser" className="text-lg font-bold text-amber-700">{sym}{s.totalMaaser.toFixed(2)}</p>
+                    </div>
+                    <div className="p-3 bg-blue-50/80 rounded-xl">
+                      <p className="text-[10px] text-blue-600 uppercase tracking-wider font-semibold mb-1">Given</p>
+                      <p data-testid="totals-given" className="text-lg font-bold text-blue-700">{sym}{s.totalGiven.toFixed(2)}</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="p-3 bg-blue-50/80 rounded-xl">
+                      <p className="text-[10px] text-blue-600 uppercase tracking-wider font-semibold mb-1">Give Portion</p>
+                      <p data-testid="totals-give-portion" className="text-lg font-bold text-blue-700">{sym}{(s.totalMaaser * giveRatio).toFixed(2)}</p>
+                    </div>
+                    <div className="p-3 bg-rose-50/80 rounded-xl">
+                      <p className="text-[10px] text-rose-600 uppercase tracking-wider font-semibold mb-1">Lend Portion</p>
+                      <p data-testid="totals-lend-portion" className="text-lg font-bold text-rose-700">{sym}{(s.totalMaaser * lendRatio).toFixed(2)}</p>
+                    </div>
+                    <div className="p-3 bg-blue-50/80 rounded-xl">
+                      <p className="text-[10px] text-blue-600 uppercase tracking-wider font-semibold mb-1">Given</p>
+                      <p data-testid="totals-given" className="text-lg font-bold text-blue-700">{sym}{s.totalGiven.toFixed(2)}</p>
+                    </div>
+                    <div className="p-3 bg-rose-50/80 rounded-xl">
+                      <p className="text-[10px] text-rose-600 uppercase tracking-wider font-semibold mb-1">Lent</p>
+                      <p data-testid="totals-lent" className="text-lg font-bold text-rose-700">{sym}{s.totalLent.toFixed(2)}</p>
+                    </div>
+                  </>
+                )}
               </div>
-              {!isGiveOnly && (
-                <div className="p-3 bg-rose-50/80 rounded-xl">
-                  <p className="text-[10px] text-rose-600 uppercase tracking-wider font-semibold mb-1">Period Lent</p>
-                  <p className="text-lg font-bold text-rose-700">{sym}{periodStats.totalLent.toFixed(2)}</p>
-                </div>
-              )}
             </div>
-          </div>
-        )}
+          );
+        })()}
 
         {showCharts && <AnalyticsCharts transactions={allTransactions} baseCurrency={user?.base_currency || 'USD'} distributionMode={user?.distribution_mode || 'both'} />}
 
