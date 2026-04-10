@@ -5,39 +5,26 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 0 0% 96%;
-    --foreground: 150 8% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 150 8% 10%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 150 8% 10%;
-    --primary: 156 52% 18%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 8 50% 52%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 150 6% 44%;
-    --muted-foreground: 150 6% 44%;
-    --accent: 200 28% 40%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 8 50% 52%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 100%;
-    --input: 0 0% 100%;
-    --ring: 156 52% 18%;
-    --radius: 1rem;
-  }
-}
-
-@layer base {
   * {
-    @apply border-border;
+    @apply border-slate-200;
   }
   body {
-    @apply bg-[#F5F5F0] text-[#181C1A];
+    @apply bg-slate-50 text-slate-900 antialiased;
     font-family: 'IBM Plex Sans', sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Manrope', sans-serif;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-slate-100 rounded;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded hover:bg-slate-400;
   }
 }

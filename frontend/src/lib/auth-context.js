@@ -9,7 +9,6 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for existing session in localStorage
     const storedUser = localStorage.getItem('finance_user');
     if (storedUser) {
       try {
@@ -23,66 +22,40 @@ export function AuthProvider({ children }) {
 
   const signIn = async (email, password) => {
     try {
-      // Use Supabase client directly
       const { data: users, error } = await supabase
         .from('users')
         .select('*')
         .eq('email', email.toLowerCase())
         .limit(1);
 
-      if (error) {
-        console.error('Supabase error:', error);
-        throw new Error(error.message || 'Database connection error');
-      }
-
-      if (!users || users.length === 0) {
-        throw new Error('Invalid email or password');
-      }
+      if (error) throw new Error(error.message || 'Database error');
+      if (!users || users.length === 0) throw new Error('Invalid email or password');
 
       const dbUser = users[0];
-
-      // Verify password
       const isValid = await bcrypt.compare(password, dbUser.password_hash);
-      if (!isValid) {
-        throw new Error('Invalid email or password');
-      }
+      if (!isValid) throw new Error('Invalid email or password');
 
-      // Remove password hash before storing
       const { password_hash, ...userWithoutPassword } = dbUser;
-      
       setUser(userWithoutPassword);
       localStorage.setItem('finance_user', JSON.stringify(userWithoutPassword));
-      
       return { user: userWithoutPassword, error: null };
     } catch (error) {
-      console.error('Sign in error:', error);
-      return { user: null, error: error.message || 'Sign in failed' };
+      return { user: null, error: error.message };
     }
   };
 
   const signUp = async (email, password, name, base_currency) => {
     try {
-      // Check if user already exists
-      const { data: existing, error: checkError } = await supabase
+      const { data: existing } = await supabase
         .from('users')
         .select('id')
         .eq('email', email.toLowerCase())
         .limit(1);
 
-      if (checkError) {
-        console.error('Supabase check error:', checkError);
-        throw new Error(checkError.message || 'Database connection error');
-      }
+      if (existing && existing.length > 0) throw new Error('Email already registered');
 
-      if (existing && existing.length > 0) {
-        throw new Error('Email already registered');
-      }
-
-      // Hash password
       const password_hash = await bcrypt.hash(password, 10);
-
-      // Create user
-      const { data: newUser, error: insertError } = await supabase
+      const { data: newUser, error } = await supabase
         .from('users')
         .insert([{
           email: email.toLowerCase(),
@@ -90,25 +63,21 @@ export function AuthProvider({ children }) {
           name,
           base_currency,
           distribution_mode: 'both',
+          default_view: 'month',
+          use_hebrew_calendar: false,
           created_at: new Date().toISOString()
         }])
         .select()
         .single();
 
-      if (insertError) {
-        console.error('Supabase insert error:', insertError);
-        throw new Error(insertError.message || 'Failed to create account');
-      }
+      if (error) throw new Error(error.message || 'Failed to create account');
 
       const { password_hash: _, ...userWithoutPassword } = newUser;
-      
       setUser(userWithoutPassword);
       localStorage.setItem('finance_user', JSON.stringify(userWithoutPassword));
-      
       return { user: userWithoutPassword, error: null };
     } catch (error) {
-      console.error('Sign up error:', error);
-      return { user: null, error: error.message || 'Registration failed' };
+      return { user: null, error: error.message };
     }
   };
 
@@ -126,19 +95,14 @@ export function AuthProvider({ children }) {
         .select()
         .single();
 
-      if (error) {
-        console.error('Update error:', error);
-        throw new Error(error.message || 'Update failed');
-      }
+      if (error) throw new Error(error.message);
 
       const { password_hash: _, ...userWithoutPassword } = data;
       setUser(userWithoutPassword);
       localStorage.setItem('finance_user', JSON.stringify(userWithoutPassword));
-      
       return { user: userWithoutPassword, error: null };
     } catch (error) {
-      console.error('Update user error:', error);
-      return { user: null, error: error.message || 'Update failed' };
+      return { user: null, error: error.message };
     }
   };
 
@@ -151,8 +115,6 @@ export function AuthProvider({ children }) {
 
 export function useAuth() {
   const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
+  if (!context) throw new Error('useAuth must be used within AuthProvider');
   return context;
 }

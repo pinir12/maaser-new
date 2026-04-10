@@ -201,7 +201,7 @@ export function ExportButtons({ transactions, stats, maaserBalance, baseCurrency
       <button
         data-testid="export-csv-btn"
         onClick={handleExportCSV}
-        className="flex items-center gap-2 px-3 py-2 bg-white/50 hover:bg-white/70 text-[#68706B] hover:text-[#181C1A] rounded-xl transition-all text-sm font-medium"
+        className="flex items-center gap-2 px-3 py-2 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 rounded-xl border border-slate-200 transition-colors text-sm font-medium"
       >
         <FileSpreadsheet className="w-4 h-4" />
         CSV
@@ -209,7 +209,7 @@ export function ExportButtons({ transactions, stats, maaserBalance, baseCurrency
       <button
         data-testid="export-pdf-btn"
         onClick={handleExportPDF}
-        className="flex items-center gap-2 px-3 py-2 bg-white/50 hover:bg-white/70 text-[#68706B] hover:text-[#181C1A] rounded-xl transition-all text-sm font-medium"
+        className="flex items-center gap-2 px-3 py-2 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 rounded-xl border border-slate-200 transition-colors text-sm font-medium"
       >
         <FileText className="w-4 h-4" />
         PDF

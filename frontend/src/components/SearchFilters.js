@@ -2,24 +2,13 @@ import { useState } from 'react';
 import { Search, Filter, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { TRANSACTION_TYPES } from '../lib/validation';
 
-export function SearchFilters({ 
-  searchQuery, 
-  onSearchChange, 
-  filters, 
-  onFiltersChange,
-  distributionMode 
-}) {
+export function SearchFilters({ searchQuery, onSearchChange, filters, onFiltersChange, distributionMode }) {
   const [showFilters, setShowFilters] = useState(false);
   const isGiveOnly = distributionMode === 'give_only';
 
-  const activeFilterCount = [
-    filters.types.length > 0,
-    filters.dateFrom,
-    filters.dateTo,
-    filters.amountMin,
-    filters.amountMax,
-    filters.isRecurring !== null,
-    filters.recipient
+  const activeCount = [
+    filters.types.length > 0, filters.dateFrom, filters.dateTo,
+    filters.amountMin, filters.amountMax, filters.isRecurring !== null, filters.recipient
   ].filter(Boolean).length;
 
   const handleTypeToggle = (type) => {
@@ -29,47 +18,32 @@ export function SearchFilters({
     onFiltersChange({ ...filters, types: newTypes });
   };
 
-  const handleClearFilters = () => {
-    onFiltersChange({
-      types: [],
-      dateFrom: '',
-      dateTo: '',
-      amountMin: '',
-      amountMax: '',
-      isRecurring: null,
-      recipient: ''
-    });
+  const handleClear = () => {
+    onFiltersChange({ types: [], dateFrom: '', dateTo: '', amountMin: '', amountMax: '', isRecurring: null, recipient: '' });
     onSearchChange('');
   };
 
-  const transactionTypes = [
+  const types = [
     { type: TRANSACTION_TYPES.INCOME, label: 'Income', color: 'bg-emerald-500' },
-    { type: TRANSACTION_TYPES.GIVE, label: 'Give', color: 'bg-[#1E3F32]' },
+    { type: TRANSACTION_TYPES.GIVE, label: 'Give', color: 'bg-blue-500' },
+    ...(!isGiveOnly ? [{ type: TRANSACTION_TYPES.LEND, label: 'Lend', color: 'bg-rose-500' }] : [])
   ];
-  
-  if (!isGiveOnly) {
-    transactionTypes.push({ type: TRANSACTION_TYPES.LEND, label: 'Lend', color: 'bg-[#C2574A]' });
-  }
 
   return (
-    <div className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-2xl p-4 space-y-4">
-      {/* Search Bar */}
+    <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 space-y-4">
       <div className="flex gap-3">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#68706B]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             data-testid="search-input"
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search transactions..."
-            className="w-full pl-10 pr-4 py-2.5 bg-white/50 border border-white/40 rounded-xl focus:ring-2 focus:ring-[#1E3F32]/50 focus:bg-white transition-all text-[#181C1A] placeholder:text-[#68706B]/50"
+            className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
           {searchQuery && (
-            <button
-              onClick={() => onSearchChange('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#68706B] hover:text-[#181C1A]"
-            >
+            <button onClick={() => onSearchChange('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
               <X className="w-4 h-4" />
             </button>
           )}
@@ -78,41 +52,28 @@ export function SearchFilters({
         <button
           data-testid="toggle-filters-btn"
           onClick={() => setShowFilters(!showFilters)}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all ${
-            showFilters || activeFilterCount > 0
-              ? 'bg-[#1E3F32] text-white'
-              : 'bg-white/50 text-[#68706B] hover:bg-white/70'
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-colors ${
+            showFilters || activeCount > 0 ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
           }`}
         >
           <Filter className="w-4 h-4" />
-          Filters
-          {activeFilterCount > 0 && (
-            <span className="bg-white/20 px-2 py-0.5 rounded-full text-xs">
-              {activeFilterCount}
-            </span>
-          )}
+          {activeCount > 0 && <span className="bg-white/20 px-1.5 py-0.5 rounded text-xs">{activeCount}</span>}
           {showFilters ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>
       </div>
 
-      {/* Expanded Filters */}
       {showFilters && (
-        <div className="space-y-4 pt-4 border-t border-white/20">
-          {/* Transaction Type Filter */}
+        <div className="space-y-4 pt-4 border-t border-slate-200">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
-              Transaction Type
-            </label>
+            <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2 block">Type</label>
             <div className="flex flex-wrap gap-2">
-              {transactionTypes.map(({ type, label, color }) => (
+              {types.map(({ type, label, color }) => (
                 <button
                   key={type}
                   data-testid={`filter-type-${type}`}
                   onClick={() => handleTypeToggle(type)}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                    filters.types.includes(type)
-                      ? `${color} text-white`
-                      : 'bg-white/50 text-[#68706B] hover:bg-white/70'
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                    filters.types.includes(type) ? `${color} text-white` : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
                 >
                   {label}
@@ -121,83 +82,64 @@ export function SearchFilters({
             </div>
           </div>
 
-          {/* Date Range */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
-                From Date
-              </label>
+              <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2 block">From</label>
               <input
                 data-testid="filter-date-from"
                 type="date"
                 value={filters.dateFrom}
                 onChange={(e) => onFiltersChange({ ...filters, dateFrom: e.target.value })}
-                className="w-full px-3 py-2 bg-white/50 border border-white/40 rounded-xl text-[#181C1A]"
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
-                To Date
-              </label>
+              <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2 block">To</label>
               <input
                 data-testid="filter-date-to"
                 type="date"
                 value={filters.dateTo}
                 onChange={(e) => onFiltersChange({ ...filters, dateTo: e.target.value })}
-                className="w-full px-3 py-2 bg-white/50 border border-white/40 rounded-xl text-[#181C1A]"
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900"
               />
             </div>
           </div>
 
-          {/* Amount Range */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
-                Min Amount
-              </label>
+              <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2 block">Min Amount</label>
               <input
                 data-testid="filter-amount-min"
                 type="number"
                 value={filters.amountMin}
                 onChange={(e) => onFiltersChange({ ...filters, amountMin: e.target.value })}
                 placeholder="0"
-                className="w-full px-3 py-2 bg-white/50 border border-white/40 rounded-xl text-[#181C1A]"
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
-                Max Amount
-              </label>
+              <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2 block">Max Amount</label>
               <input
                 data-testid="filter-amount-max"
                 type="number"
                 value={filters.amountMax}
                 onChange={(e) => onFiltersChange({ ...filters, amountMax: e.target.value })}
                 placeholder="∞"
-                className="w-full px-3 py-2 bg-white/50 border border-white/40 rounded-xl text-[#181C1A]"
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900"
               />
             </div>
           </div>
 
-          {/* Recurring Filter */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
-              Recurring Status
-            </label>
+            <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2 block">Recurring</label>
             <div className="flex gap-2">
-              {[
-                { value: null, label: 'All' },
-                { value: true, label: 'Recurring Only' },
-                { value: false, label: 'One-time Only' }
-              ].map(({ value, label }) => (
+              {[{ value: null, label: 'All' }, { value: true, label: 'Recurring' }, { value: false, label: 'One-time' }].map(({ value, label }) => (
                 <button
                   key={String(value)}
                   data-testid={`filter-recurring-${value}`}
                   onClick={() => onFiltersChange({ ...filters, isRecurring: value })}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                    filters.isRecurring === value
-                      ? 'bg-[#4A6E82] text-white'
-                      : 'bg-white/50 text-[#68706B] hover:bg-white/70'
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                    filters.isRecurring === value ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
                 >
                   {label}
@@ -206,29 +148,13 @@ export function SearchFilters({
             </div>
           </div>
 
-          {/* Recipient Filter */}
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
-              Recipient
-            </label>
-            <input
-              data-testid="filter-recipient"
-              type="text"
-              value={filters.recipient}
-              onChange={(e) => onFiltersChange({ ...filters, recipient: e.target.value })}
-              placeholder="Filter by recipient name..."
-              className="w-full px-3 py-2 bg-white/50 border border-white/40 rounded-xl text-[#181C1A]"
-            />
-          </div>
-
-          {/* Clear Filters */}
-          {(activeFilterCount > 0 || searchQuery) && (
+          {(activeCount > 0 || searchQuery) && (
             <button
               data-testid="clear-filters-btn"
-              onClick={handleClearFilters}
-              className="w-full py-2 text-sm font-medium text-[#C2574A] hover:bg-[#C2574A]/10 rounded-xl transition-all"
+              onClick={handleClear}
+              className="w-full py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-xl transition-colors"
             >
-              Clear All Filters
+              Clear All
             </button>
           )}
         </div>

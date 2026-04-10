@@ -1,175 +1,78 @@
-import { 
-  getCurrentHebrewMonth, 
-  getHebrewMonths, 
-  getHebrewMonthBounds,
-  navigateHebrewMonth 
-} from '../lib/hebrew-calendar';
+import { getCurrentHebrewMonth, getHebrewMonthBounds, navigateHebrewMonth } from '../lib/hebrew-calendar';
 import { HDate } from '@hebcal/core';
 import { ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 
-export function MonthlyViewToggle({ 
-  useHebrewDates, 
-  onToggle, 
-  selectedMonth,
-  selectedYear,
-  onMonthChange,
-  showMonthNav = true
-}) {
+export function MonthlyViewToggle({ useHebrewDates, onToggle, selectedMonth, selectedYear, onMonthChange, showMonthNav = true }) {
   const currentHebrew = getCurrentHebrewMonth();
 
-  const handlePrevMonth = () => {
+  const handlePrev = () => {
     if (useHebrewDates) {
-      const { month, year } = navigateHebrewMonth(
-        selectedMonth || currentHebrew.month,
-        selectedYear || currentHebrew.year,
-        -1
-      );
+      const { month, year } = navigateHebrewMonth(selectedMonth || currentHebrew.month, selectedYear || currentHebrew.year, -1);
       onMonthChange(month, year);
     } else {
-      const currentDate = new Date(selectedYear, selectedMonth - 1, 1);
-      currentDate.setMonth(currentDate.getMonth() - 1);
-      onMonthChange(currentDate.getMonth() + 1, currentDate.getFullYear());
+      const d = new Date(selectedYear, selectedMonth - 1, 1);
+      d.setMonth(d.getMonth() - 1);
+      onMonthChange(d.getMonth() + 1, d.getFullYear());
     }
   };
 
-  const handleNextMonth = () => {
+  const handleNext = () => {
     if (useHebrewDates) {
-      const { month, year } = navigateHebrewMonth(
-        selectedMonth || currentHebrew.month,
-        selectedYear || currentHebrew.year,
-        1
-      );
+      const { month, year } = navigateHebrewMonth(selectedMonth || currentHebrew.month, selectedYear || currentHebrew.year, 1);
       onMonthChange(month, year);
     } else {
-      const currentDate = new Date(selectedYear, selectedMonth - 1, 1);
-      currentDate.setMonth(currentDate.getMonth() + 1);
-      onMonthChange(currentDate.getMonth() + 1, currentDate.getFullYear());
+      const d = new Date(selectedYear, selectedMonth - 1, 1);
+      d.setMonth(d.getMonth() + 1);
+      onMonthChange(d.getMonth() + 1, d.getFullYear());
     }
   };
 
-  const getDisplayMonth = () => {
+  const getDisplay = () => {
     if (useHebrewDates) {
-      // Create an HDate for the first day of the selected Hebrew month to get proper name
       try {
         const hd = new HDate(1, selectedMonth, selectedYear);
         return `${hd.getMonthName()} ${selectedYear}`;
-      } catch (e) {
-        return `Month ${selectedMonth}, ${selectedYear}`;
-      }
-    } else {
-      const date = new Date(selectedYear, selectedMonth - 1, 1);
-      return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      } catch { return `${selectedMonth}/${selectedYear}`; }
     }
-  };
-
-  const getMonthBoundsDisplay = () => {
-    if (useHebrewDates) {
-      const bounds = getHebrewMonthBounds(selectedYear, selectedMonth);
-      return `${bounds.start.toLocaleDateString()} - ${bounds.end.toLocaleDateString()}`;
-    }
-    return null;
+    return new Date(selectedYear, selectedMonth - 1, 1).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
   };
 
   return (
-    <div 
-      data-testid="monthly-view-toggle"
-      className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-2xl p-4"
-    >
-      {/* Calendar Type Toggle */}
-      <div className="flex items-center justify-between mb-4">
-        <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#68706B]">
-          Calendar Mode
-        </span>
-        <button
-          data-testid="calendar-toggle-btn"
-          onClick={onToggle}
-          className={`
-            relative w-32 h-9 rounded-xl transition-all duration-300
-            ${useHebrewDates 
-              ? 'bg-[#1E3F32]' 
-              : 'bg-[#68706B]/20'
-            }
-          `}
-        >
-          <span 
-            className={`
-              absolute left-1 top-1 bottom-1 w-[calc(50%-4px)] rounded-lg bg-white shadow-sm
-              transition-transform duration-300
-              ${useHebrewDates ? 'translate-x-full' : 'translate-x-0'}
-            `}
-          />
-          <span className={`absolute left-0 w-1/2 text-center text-xs font-semibold transition-colors ${!useHebrewDates ? 'text-[#181C1A]' : 'text-white/70'}`}>
-            Gregorian
-          </span>
-          <span className={`absolute right-0 w-1/2 text-center text-xs font-semibold transition-colors ${useHebrewDates ? 'text-[#181C1A]' : 'text-[#68706B]'}`}>
-            Hebrew
-          </span>
-        </button>
-      </div>
-
-      {/* Month Navigation */}
+    <div className="flex items-center gap-2 bg-white rounded-xl px-3 py-2 border border-slate-200 shadow-sm">
       {showMonthNav ? (
-        <div className="flex items-center justify-between">
-          <button
-            data-testid="prev-month-btn"
-            onClick={handlePrevMonth}
-            className="p-2 text-[#68706B] hover:text-[#181C1A] hover:bg-black/5 rounded-xl transition-all"
-          >
-            <ChevronLeft className="w-5 h-5" />
+        <>
+          <button onClick={handlePrev} className="p-1 text-slate-400 hover:text-slate-600 rounded">
+            <ChevronLeft className="w-4 h-4" />
           </button>
-          
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2">
-              <Calendar className="w-4 h-4 text-[#1E3F32]" />
-              <span 
-                data-testid="current-month-display"
-                className="font-bold text-[#181C1A]"
-              >
-                {getDisplayMonth()}
-              </span>
-            </div>
-            {useHebrewDates && (
-              <p 
-                data-testid="month-bounds-display"
-                className="text-xs text-[#68706B] mt-1"
-              >
-                {getMonthBoundsDisplay()}
-              </p>
-            )}
+          <div className="flex items-center gap-2 min-w-[120px] justify-center">
+            <Calendar className="w-4 h-4 text-blue-500" />
+            <span data-testid="current-month-display" className="font-medium text-slate-900 text-sm">{getDisplay()}</span>
           </div>
-          
-          <button
-            data-testid="next-month-btn"
-            onClick={handleNextMonth}
-            className="p-2 text-[#68706B] hover:text-[#181C1A] hover:bg-black/5 rounded-xl transition-all"
-          >
-            <ChevronRight className="w-5 h-5" />
+          <button onClick={handleNext} className="p-1 text-slate-400 hover:text-slate-600 rounded">
+            <ChevronRight className="w-4 h-4" />
           </button>
-        </div>
+        </>
       ) : (
-        <div className="text-center">
-          <div className="flex items-center justify-center gap-2">
-            <Calendar className="w-4 h-4 text-[#1E3F32]" />
-            <span className="font-bold text-[#181C1A]">
-              {selectedYear}
-            </span>
-          </div>
-          <div className="flex justify-center gap-2 mt-2">
-            <button
-              onClick={() => onMonthChange(selectedMonth, selectedYear - 1)}
-              className="px-3 py-1 text-sm text-[#68706B] hover:text-[#181C1A] hover:bg-black/5 rounded-lg"
-            >
-              ← Prev Year
-            </button>
-            <button
-              onClick={() => onMonthChange(selectedMonth, selectedYear + 1)}
-              className="px-3 py-1 text-sm text-[#68706B] hover:text-[#181C1A] hover:bg-black/5 rounded-lg"
-            >
-              Next Year →
-            </button>
-          </div>
+        <div className="flex items-center gap-2">
+          <button onClick={() => onMonthChange(selectedMonth, selectedYear - 1)} className="p-1 text-slate-400 hover:text-slate-600 rounded">
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <span className="font-medium text-slate-900 text-sm min-w-[60px] text-center">{selectedYear}</span>
+          <button onClick={() => onMonthChange(selectedMonth, selectedYear + 1)} className="p-1 text-slate-400 hover:text-slate-600 rounded">
+            <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
       )}
+      
+      <button
+        data-testid="calendar-toggle-btn"
+        onClick={onToggle}
+        className={`ml-2 px-2 py-1 text-xs font-medium rounded-lg transition-colors ${
+          useHebrewDates ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'
+        }`}
+      >
+        {useHebrewDates ? 'HEB' : 'GRE'}
+      </button>
     </div>
   );
 }
