@@ -1,132 +1,332 @@
-import { useState, useEffect, useOptimistic, useTransition, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useAuth } from '../lib/auth-context';
 import { supabase } from '../lib/supabase';
 import { getCurrentHebrewMonth, getHebrewMonthBounds } from '../lib/hebrew-calendar';
-import { currencies, TRANSACTION_TYPES } from '../lib/validation';
+import { currencies, TRANSACTION_TYPES, getCurrencySymbol } from '../lib/validation';
 import { DashboardStats } from './DashboardStats';
 import { TransactionList } from './TransactionList';
 import { AddTransactionModal } from './AddTransactionModal';
 import { MonthlyViewToggle } from './MonthlyViewToggle';
+import { SearchFilters } from './SearchFilters';
 import { 
   Plus, 
   Settings, 
   LogOut, 
   Menu,
   X,
-  ChevronDown
+  ChevronDown,
+  RefreshCw
 } from 'lucide-react';
+
+const VIEW_MODES = {
+  ALL_TIME: 'all_time',
+  YEAR: 'year',
+  MONTH: 'month'
+};
 
 export function Dashboard() {
   const { user, signOut, updateUser } = useAuth();
-  const [transactions, setTransactions] = useState([]);
+  
+  // All transactions (for all-time stats)
+  const [allTransactions, setAllTransactions] = useState([]);
+  // Filtered transactions (for display)
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editTransaction, setEditTransaction] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [processingRecurring, setProcessingRecurring] = useState(false);
+  
+  // View mode state
+  const [viewMode, setViewMode] = useState(VIEW_MODES.MONTH);
   
   // Calendar state
   const [useHebrewDates, setUseHebrewDates] = useState(false);
   const currentHebrew = getCurrentHebrewMonth();
   const currentGregorian = new Date();
-  const [selectedMonth, setSelectedMonth] = useState(
-    useHebrewDates ? currentHebrew.month : currentGregorian.getMonth() + 1
-  );
-  const [selectedYear, setSelectedYear] = useState(
-    useHebrewDates ? currentHebrew.year : currentGregorian.getFullYear()
-  );
+  const [selectedMonth, setSelectedMonth] = useState(currentGregorian.getMonth() + 1);
+  const [selectedYear, setSelectedYear] = useState(currentGregorian.getFullYear());
 
-  // Optimistic updates
-  const [isPending, startTransition] = useTransition();
-  const [optimisticTransactions, updateOptimisticTransactions] = useOptimistic(
-    transactions,
-    (state, { action, transaction, id }) => {
-      switch (action) {
-        case 'add':
-          return [{ ...transaction, id: 'optimistic-' + Date.now(), optimistic: true }, ...state];
-        case 'delete':
-          return state.filter(t => t.id !== id);
-        case 'update':
-          return state.map(t => t.id === transaction.id ? { ...transaction, optimistic: true } : t);
-        default:
-          return state;
-      }
-    }
-  );
+  // Search & Filter state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filters, setFilters] = useState({
+    types: [], // empty = all types
+    dateFrom: '',
+    dateTo: '',
+    amountMin: '',
+    amountMax: '',
+    isRecurring: null, // null = all, true = only recurring, false = only non-recurring
+    recipient: ''
+  });
 
-  // Calculate maaser balance for the modal
-  const maaserBalance = useMemo(() => {
+  // Calculate all-time stats (always from allTransactions)
+  const allTimeStats = useMemo(() => {
     const baseCurrency = user?.base_currency || 'USD';
     const isGiveOnly = user?.distribution_mode === 'give_only';
     
-    return optimisticTransactions.reduce((acc, t) => {
+    return allTransactions.reduce((acc, t) => {
       const normalizedAmount = t.currency === baseCurrency 
         ? t.amount 
         : t.amount * (t.exchange_rate_to_base || 1);
       
       if (t.type === TRANSACTION_TYPES.INCOME) {
         const maaserAmount = normalizedAmount * ((t.maaser_percentage || 10) / 100);
-        return acc + maaserAmount;
+        return {
+          ...acc,
+          totalIncome: acc.totalIncome + normalizedAmount,
+          totalMaaserOwed: acc.totalMaaserOwed + maaserAmount,
+          incomeCount: acc.incomeCount + 1
+        };
       } else if (t.type === TRANSACTION_TYPES.GIVE) {
-        return acc - normalizedAmount;
+        return {
+          ...acc,
+          totalGiven: acc.totalGiven + normalizedAmount,
+          giveCount: acc.giveCount + 1
+        };
       } else if (t.type === TRANSACTION_TYPES.LEND && !isGiveOnly) {
-        return acc - normalizedAmount;
+        return {
+          ...acc,
+          totalLent: acc.totalLent + normalizedAmount,
+          lendCount: acc.lendCount + 1
+        };
       }
       return acc;
-    }, 0);
-  }, [optimisticTransactions, user?.base_currency, user?.distribution_mode]);
+    }, { 
+      totalIncome: 0, 
+      totalMaaserOwed: 0, 
+      totalGiven: 0, 
+      totalLent: 0,
+      incomeCount: 0,
+      giveCount: 0,
+      lendCount: 0
+    });
+  }, [allTransactions, user?.base_currency, user?.distribution_mode]);
 
-  // Fetch transactions based on month/year and calendar type
-  useEffect(() => {
-    if (user) {
-      fetchTransactions();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, selectedMonth, selectedYear, useHebrewDates]);
+  const maaserBalance = useMemo(() => {
+    const isGiveOnly = user?.distribution_mode === 'give_only';
+    const distributed = allTimeStats.totalGiven + (isGiveOnly ? 0 : allTimeStats.totalLent);
+    return allTimeStats.totalMaaserOwed - distributed;
+  }, [allTimeStats, user?.distribution_mode]);
 
-  const fetchTransactions = async () => {
+  // Fetch all transactions
+  const fetchAllTransactions = useCallback(async () => {
+    if (!user) return;
+    
     setLoading(true);
     try {
-      let startDate, endDate;
-      
-      if (useHebrewDates) {
-        const bounds = getHebrewMonthBounds(selectedYear, selectedMonth);
-        startDate = bounds.start.toISOString().split('T')[0];
-        endDate = bounds.end.toISOString().split('T')[0];
-      } else {
-        startDate = new Date(selectedYear, selectedMonth - 1, 1).toISOString().split('T')[0];
-        endDate = new Date(selectedYear, selectedMonth, 0).toISOString().split('T')[0];
-      }
-
-      // Use Supabase client
       const { data, error } = await supabase
         .from('transactions')
         .select('*')
         .eq('user_id', user.id)
-        .gte('date', startDate)
-        .lte('date', endDate)
         .order('date', { ascending: false });
 
       if (error) throw error;
-      setTransactions(data || []);
+      setAllTransactions(data || []);
     } catch (error) {
       console.error('Error fetching transactions:', error);
     } finally {
       setLoading(false);
+    }
+  }, [user]);
+
+  // Apply filters to transactions
+  useEffect(() => {
+    let filtered = [...allTransactions];
+    
+    // Apply view mode filter
+    if (viewMode === VIEW_MODES.MONTH) {
+      let startDate, endDate;
+      if (useHebrewDates) {
+        const bounds = getHebrewMonthBounds(selectedYear, selectedMonth);
+        startDate = bounds.start;
+        endDate = bounds.end;
+      } else {
+        startDate = new Date(selectedYear, selectedMonth - 1, 1);
+        endDate = new Date(selectedYear, selectedMonth, 0);
+      }
+      filtered = filtered.filter(t => {
+        const tDate = new Date(t.date);
+        return tDate >= startDate && tDate <= endDate;
+      });
+    } else if (viewMode === VIEW_MODES.YEAR) {
+      filtered = filtered.filter(t => {
+        const tDate = new Date(t.date);
+        return tDate.getFullYear() === selectedYear;
+      });
+    }
+    
+    // Apply search query
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(t => 
+        t.description?.toLowerCase().includes(query) ||
+        t.recipient_name?.toLowerCase().includes(query)
+      );
+    }
+    
+    // Apply type filter
+    if (filters.types.length > 0) {
+      filtered = filtered.filter(t => filters.types.includes(t.type));
+    }
+    
+    // Apply date range filter
+    if (filters.dateFrom) {
+      filtered = filtered.filter(t => new Date(t.date) >= new Date(filters.dateFrom));
+    }
+    if (filters.dateTo) {
+      filtered = filtered.filter(t => new Date(t.date) <= new Date(filters.dateTo));
+    }
+    
+    // Apply amount filter
+    if (filters.amountMin) {
+      filtered = filtered.filter(t => t.amount >= Number(filters.amountMin));
+    }
+    if (filters.amountMax) {
+      filtered = filtered.filter(t => t.amount <= Number(filters.amountMax));
+    }
+    
+    // Apply recurring filter
+    if (filters.isRecurring !== null) {
+      filtered = filtered.filter(t => t.is_recurring === filters.isRecurring);
+    }
+    
+    // Apply recipient filter
+    if (filters.recipient.trim()) {
+      filtered = filtered.filter(t => 
+        t.recipient_name?.toLowerCase().includes(filters.recipient.toLowerCase())
+      );
+    }
+    
+    setFilteredTransactions(filtered);
+  }, [allTransactions, viewMode, selectedMonth, selectedYear, useHebrewDates, searchQuery, filters]);
+
+  // Initial fetch
+  useEffect(() => {
+    fetchAllTransactions();
+  }, [fetchAllTransactions]);
+
+  // Process recurring transactions
+  const processRecurringTransactions = async () => {
+    setProcessingRecurring(true);
+    try {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      // Get all recurring transactions
+      const { data: recurringTxns, error } = await supabase
+        .from('transactions')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('is_recurring', true);
+      
+      if (error) throw error;
+      
+      let created = 0;
+      
+      for (const txn of recurringTxns || []) {
+        // Check if end date passed
+        if (txn.recurring_end_date && new Date(txn.recurring_end_date) < today) {
+          continue;
+        }
+        
+        // Calculate next occurrence date
+        const lastDate = new Date(txn.date);
+        let nextDate = new Date(lastDate);
+        
+        switch (txn.recurring_frequency) {
+          case 'daily':
+            nextDate.setDate(nextDate.getDate() + 1);
+            break;
+          case 'weekly':
+            nextDate.setDate(nextDate.getDate() + 7);
+            break;
+          case 'biweekly':
+            nextDate.setDate(nextDate.getDate() + 14);
+            break;
+          case 'monthly':
+            nextDate.setMonth(nextDate.getMonth() + 1);
+            break;
+          case 'yearly':
+            nextDate.setFullYear(nextDate.getFullYear() + 1);
+            break;
+          default:
+            continue;
+        }
+        
+        // Check if next occurrence should be created
+        while (nextDate <= today) {
+          // Check if transaction already exists for this date
+          const dateStr = nextDate.toISOString().split('T')[0];
+          const existingCheck = await supabase
+            .from('transactions')
+            .select('id')
+            .eq('user_id', user.id)
+            .eq('description', txn.description)
+            .eq('date', dateStr)
+            .limit(1);
+          
+          if (!existingCheck.data || existingCheck.data.length === 0) {
+            // Create new transaction
+            const newTxn = {
+              user_id: user.id,
+              description: txn.description,
+              amount: txn.amount,
+              currency: txn.currency,
+              exchange_rate_to_base: txn.exchange_rate_to_base,
+              type: txn.type,
+              maaser_percentage: txn.maaser_percentage,
+              maaser_amount: txn.maaser_amount,
+              recipient_name: txn.recipient_name,
+              date: dateStr,
+              is_recurring: true,
+              recurring_frequency: txn.recurring_frequency,
+              recurring_end_date: txn.recurring_end_date,
+              created_at: new Date().toISOString()
+            };
+            
+            await supabase.from('transactions').insert([newTxn]);
+            created++;
+          }
+          
+          // Move to next occurrence
+          switch (txn.recurring_frequency) {
+            case 'daily':
+              nextDate.setDate(nextDate.getDate() + 1);
+              break;
+            case 'weekly':
+              nextDate.setDate(nextDate.getDate() + 7);
+              break;
+            case 'biweekly':
+              nextDate.setDate(nextDate.getDate() + 14);
+              break;
+            case 'monthly':
+              nextDate.setMonth(nextDate.getMonth() + 1);
+              break;
+            case 'yearly':
+              nextDate.setFullYear(nextDate.getFullYear() + 1);
+              break;
+          }
+        }
+      }
+      
+      if (created > 0) {
+        await fetchAllTransactions();
+        alert(`Created ${created} recurring transaction(s)`);
+      } else {
+        alert('No new recurring transactions to create');
+      }
+    } catch (error) {
+      console.error('Error processing recurring transactions:', error);
+      alert('Error processing recurring transactions');
+    } finally {
+      setProcessingRecurring(false);
     }
   };
 
   const handleAddTransaction = async (data, editId) => {
     try {
       if (editId) {
-        // Update existing using Supabase client
-        startTransition(() => {
-          updateOptimisticTransactions({ 
-            action: 'update', 
-            transaction: { ...data, id: editId } 
-          });
-        });
-
         const { error } = await supabase
           .from('transactions')
           .update({
@@ -134,29 +334,18 @@ export function Dashboard() {
             updated_at: new Date().toISOString()
           })
           .eq('id', editId);
-
         if (error) throw error;
       } else {
-        // Add new using Supabase client
-        const newTransaction = {
-          ...data,
-          user_id: user.id,
-          created_at: new Date().toISOString()
-        };
-
-        startTransition(() => {
-          updateOptimisticTransactions({ action: 'add', transaction: newTransaction });
-        });
-
         const { error } = await supabase
           .from('transactions')
-          .insert([newTransaction]);
-
+          .insert([{
+            ...data,
+            user_id: user.id,
+            created_at: new Date().toISOString()
+          }]);
         if (error) throw error;
       }
-
-      // Refresh transactions
-      await fetchTransactions();
+      await fetchAllTransactions();
     } catch (error) {
       console.error('Error saving transaction:', error);
     }
@@ -164,15 +353,12 @@ export function Dashboard() {
 
   const handleDeleteTransaction = async (id) => {
     try {
-      // Use Supabase client
       const { error } = await supabase
         .from('transactions')
         .delete()
         .eq('id', id);
-
       if (error) throw error;
-      
-      setTransactions(prev => prev.filter(t => t.id !== id));
+      setAllTransactions(prev => prev.filter(t => t.id !== id));
     } catch (error) {
       console.error('Error deleting transaction:', error);
     }
@@ -191,8 +377,6 @@ export function Dashboard() {
   const handleCalendarToggle = () => {
     const newUseHebrew = !useHebrewDates;
     setUseHebrewDates(newUseHebrew);
-    
-    // Reset to current month in new calendar system
     if (newUseHebrew) {
       const heb = getCurrentHebrewMonth();
       setSelectedMonth(heb.month);
@@ -212,6 +396,49 @@ export function Dashboard() {
     await updateUser({ base_currency: currency });
   };
 
+  // Calculate period-specific stats
+  const periodStats = useMemo(() => {
+    const baseCurrency = user?.base_currency || 'USD';
+    const isGiveOnly = user?.distribution_mode === 'give_only';
+    
+    return filteredTransactions.reduce((acc, t) => {
+      const normalizedAmount = t.currency === baseCurrency 
+        ? t.amount 
+        : t.amount * (t.exchange_rate_to_base || 1);
+      
+      if (t.type === TRANSACTION_TYPES.INCOME) {
+        const maaserAmount = normalizedAmount * ((t.maaser_percentage || 10) / 100);
+        return {
+          ...acc,
+          totalIncome: acc.totalIncome + normalizedAmount,
+          totalMaaserOwed: acc.totalMaaserOwed + maaserAmount,
+          incomeCount: acc.incomeCount + 1
+        };
+      } else if (t.type === TRANSACTION_TYPES.GIVE) {
+        return {
+          ...acc,
+          totalGiven: acc.totalGiven + normalizedAmount,
+          giveCount: acc.giveCount + 1
+        };
+      } else if (t.type === TRANSACTION_TYPES.LEND && !isGiveOnly) {
+        return {
+          ...acc,
+          totalLent: acc.totalLent + normalizedAmount,
+          lendCount: acc.lendCount + 1
+        };
+      }
+      return acc;
+    }, { 
+      totalIncome: 0, 
+      totalMaaserOwed: 0, 
+      totalGiven: 0, 
+      totalLent: 0,
+      incomeCount: 0,
+      giveCount: 0,
+      lendCount: 0
+    });
+  }, [filteredTransactions, user?.base_currency, user?.distribution_mode]);
+
   return (
     <div 
       data-testid="dashboard"
@@ -227,16 +454,25 @@ export function Dashboard() {
       <header className="sticky top-0 z-40 bg-white/70 backdrop-blur-xl border-b border-white/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
             <h1 className="text-xl font-black text-[#181C1A] tracking-tight">
               Finance Tracker
             </h1>
 
-            {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-4">
               <span className="text-sm text-[#68706B]">
                 Welcome, <span className="font-semibold text-[#181C1A]">{user?.name}</span>
               </span>
+              
+              {/* Process Recurring Button */}
+              <button
+                data-testid="process-recurring-btn"
+                onClick={processRecurringTransactions}
+                disabled={processingRecurring}
+                className="flex items-center gap-2 px-3 py-2 text-[#4A6E82] hover:text-[#181C1A] hover:bg-[#4A6E82]/10 rounded-xl transition-all disabled:opacity-50"
+              >
+                <RefreshCw className={`w-4 h-4 ${processingRecurring ? 'animate-spin' : ''}`} />
+                Sync Recurring
+              </button>
               
               {/* Settings Dropdown */}
               <div className="relative">
@@ -255,7 +491,6 @@ export function Dashboard() {
                     data-testid="settings-dropdown"
                     className="absolute right-0 mt-2 w-72 bg-white/95 backdrop-blur-xl border border-white/40 rounded-2xl shadow-xl p-4 space-y-4"
                   >
-                    {/* Distribution Mode */}
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
                         Distribution Mode
@@ -269,15 +504,8 @@ export function Dashboard() {
                         <option value="both">Give & Lend</option>
                         <option value="give_only">Give Only</option>
                       </select>
-                      <p className="text-xs text-[#68706B] mt-1">
-                        {user?.distribution_mode === 'give_only' 
-                          ? 'Lend tracking is disabled' 
-                          : 'Track both gives and lends'
-                        }
-                      </p>
                     </div>
 
-                    {/* Base Currency */}
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
                         Base Currency
@@ -309,7 +537,6 @@ export function Dashboard() {
               </button>
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               data-testid="mobile-menu-btn"
               onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -320,12 +547,20 @@ export function Dashboard() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {showMobileMenu && (
           <div className="md:hidden border-t border-white/20 p-4 space-y-4">
             <p className="text-sm text-[#68706B]">
               Welcome, <span className="font-semibold text-[#181C1A]">{user?.name}</span>
             </p>
+            
+            <button
+              onClick={processRecurringTransactions}
+              disabled={processingRecurring}
+              className="w-full flex items-center justify-center gap-2 py-2 text-[#4A6E82] hover:bg-[#4A6E82]/10 rounded-xl"
+            >
+              <RefreshCw className={`w-4 h-4 ${processingRecurring ? 'animate-spin' : ''}`} />
+              Sync Recurring
+            </button>
             
             <div>
               <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
@@ -371,17 +606,56 @@ export function Dashboard() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Left Column - Stats & Controls */}
-          <div className="lg:col-span-1 space-y-6">
-            {/* Monthly View Toggle */}
-            <MonthlyViewToggle
-              useHebrewDates={useHebrewDates}
-              onToggle={handleCalendarToggle}
-              selectedMonth={selectedMonth}
-              selectedYear={selectedYear}
-              onMonthChange={handleMonthChange}
-            />
+        {/* All-Time Stats (Always visible) */}
+        <DashboardStats
+          stats={allTimeStats}
+          maaserBalance={maaserBalance}
+          baseCurrency={user?.base_currency || 'USD'}
+          distributionMode={user?.distribution_mode || 'both'}
+          isAllTime={true}
+        />
+
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-6">
+          {/* Left Column - Controls */}
+          <div className="lg:col-span-1 space-y-4">
+            {/* View Mode Selector */}
+            <div className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-2xl p-4">
+              <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-3">
+                View Period
+              </label>
+              <div className="flex flex-col gap-2">
+                {[
+                  { value: VIEW_MODES.ALL_TIME, label: 'All Time' },
+                  { value: VIEW_MODES.YEAR, label: 'This Year' },
+                  { value: VIEW_MODES.MONTH, label: 'This Month' }
+                ].map(({ value, label }) => (
+                  <button
+                    key={value}
+                    data-testid={`view-mode-${value}`}
+                    onClick={() => setViewMode(value)}
+                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                      viewMode === value
+                        ? 'bg-[#1E3F32] text-white'
+                        : 'bg-white/50 text-[#68706B] hover:bg-white/70'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Month/Year Selector (only for month/year views) */}
+            {viewMode !== VIEW_MODES.ALL_TIME && (
+              <MonthlyViewToggle
+                useHebrewDates={useHebrewDates}
+                onToggle={handleCalendarToggle}
+                selectedMonth={selectedMonth}
+                selectedYear={selectedYear}
+                onMonthChange={handleMonthChange}
+                showMonthNav={viewMode === VIEW_MODES.MONTH}
+              />
+            )}
 
             {/* Add Transaction Button */}
             <button
@@ -397,20 +671,64 @@ export function Dashboard() {
             </button>
           </div>
 
-          {/* Right Column - Dashboard Content */}
-          <div className="lg:col-span-3 space-y-6">
-            {/* Stats */}
-            <DashboardStats
-              transactions={optimisticTransactions}
-              baseCurrency={user?.base_currency || 'USD'}
+          {/* Right Column - Content */}
+          <div className="lg:col-span-3 space-y-4">
+            {/* Period Stats (if not all-time) */}
+            {viewMode !== VIEW_MODES.ALL_TIME && (
+              <div className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-2xl p-4">
+                <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-[#68706B] mb-3">
+                  {viewMode === VIEW_MODES.MONTH ? 'Monthly' : 'Yearly'} Summary
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div>
+                    <p className="text-xs text-[#68706B]">Income</p>
+                    <p className="text-lg font-bold text-emerald-600">
+                      {getCurrencySymbol(user?.base_currency || 'USD')}{periodStats.totalIncome.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#68706B]">Maaser</p>
+                    <p className="text-lg font-bold text-amber-600">
+                      {getCurrencySymbol(user?.base_currency || 'USD')}{periodStats.totalMaaserOwed.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#68706B]">Given</p>
+                    <p className="text-lg font-bold text-[#1E3F32]">
+                      {getCurrencySymbol(user?.base_currency || 'USD')}{periodStats.totalGiven.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                    </p>
+                  </div>
+                  {user?.distribution_mode !== 'give_only' && (
+                    <div>
+                      <p className="text-xs text-[#68706B]">Lent</p>
+                      <p className="text-lg font-bold text-[#C2574A]">
+                        {getCurrencySymbol(user?.base_currency || 'USD')}{periodStats.totalLent.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Search & Filters */}
+            <SearchFilters
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              filters={filters}
+              onFiltersChange={setFilters}
               distributionMode={user?.distribution_mode || 'both'}
             />
 
             {/* Transaction List */}
             <div className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-2xl p-6">
-              <h3 className="text-lg font-bold text-[#181C1A] mb-4">
-                Transactions
-              </h3>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-[#181C1A]">
+                  Transactions
+                </h3>
+                <span className="text-sm text-[#68706B]">
+                  {filteredTransactions.length} result{filteredTransactions.length !== 1 ? 's' : ''}
+                </span>
+              </div>
               
               {loading ? (
                 <div className="text-center py-12">
@@ -419,7 +737,7 @@ export function Dashboard() {
                 </div>
               ) : (
                 <TransactionList
-                  transactions={optimisticTransactions}
+                  transactions={filteredTransactions}
                   onEdit={handleEditTransaction}
                   onDelete={handleDeleteTransaction}
                   useHebrewDates={useHebrewDates}
@@ -445,7 +763,6 @@ export function Dashboard() {
         maaserBalance={maaserBalance}
       />
 
-      {/* Click outside to close settings */}
       {showSettings && (
         <div 
           className="fixed inset-0 z-30" 
