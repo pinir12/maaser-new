@@ -31,7 +31,7 @@ export function AuthPage({ defaultTab = 'login', onBack = null }) {
               <ArrowLeft className="w-4 h-4" />Back to home
             </button>
           )}
-          <h1 className="text-3xl font-bold text-slate-900">Finance Tracker</h1>
+          <h1 className="text-3xl font-bold text-slate-900">Maaser Tracker</h1>
           <p className="text-slate-500 mt-2">Track your maaser with ease</p>
         </div>
 

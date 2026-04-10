@@ -64,9 +64,9 @@ export function HomePage() {
         <div className="max-w-5xl mx-auto px-5 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">F</span>
+              <span className="text-white font-bold text-sm">M</span>
             </div>
-            <span className="text-lg font-bold text-slate-900 tracking-tight">Finance Tracker</span>
+            <span className="text-lg font-bold text-slate-900 tracking-tight">Maaser Tracker</span>
           </div>
           <div className="flex items-center gap-2">
             <button data-testid="nav-login-btn" onClick={() => { setDefaultTab('login'); setShowAuth(true); }}
@@ -185,9 +185,9 @@ export function HomePage() {
         <div className="max-w-5xl mx-auto px-5 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-md flex items-center justify-center">
-              <span className="text-white font-bold text-[10px]">F</span>
+              <span className="text-white font-bold text-[10px]">M</span>
             </div>
-            <span className="text-sm text-slate-500">Finance Tracker</span>
+            <span className="text-sm text-slate-500">Maaser Tracker</span>
           </div>
           <p className="text-xs text-slate-400">Your data is private and encrypted. We never share your information.</p>
         </div>
