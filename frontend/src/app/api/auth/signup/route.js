@@ -17,7 +17,7 @@ export async function POST(request) {
       password_hash: hash,
       name,
       base_currency,
-      distribution_mode: 'both',
+      distribution_mode: 'give_only',
       default_view: 'month',
       use_hebrew_calendar: false,
       default_maaser_percentage: 10,
