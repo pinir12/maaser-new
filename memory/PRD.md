@@ -2,11 +2,12 @@
 
 ## Original Problem Statement
 Personal finance tracker with:
-- **Currency Normalization**: Dashboard stats in base_currency using exchange_rate_to_base
-- **State Management**: useOptimistic for instant UI feel
-- **Lend Cleanup**: distribution_mode === 'give_only' unmounts lend components (not CSS hidden)
+- **Separate Transaction Types**: Income, Give (charity), Lend (loans)
+- **Maaser Calculation**: Auto-calculate 10% from income
+- **Currency Normalization**: Dashboard stats in base_currency
 - **Hebrew Date Logic**: @hebcal/core for Monthly View toggle
-- **Zod Validation**: give_percentage + lend_percentage <= 100%
+- **Recurring Transactions**: For all transaction types
+- **Lend Cleanup**: distribution_mode === 'give_only' unmounts lend components
 
 ## Tech Stack
 - **Frontend**: React 19 with Tailwind CSS
@@ -14,51 +15,66 @@ Personal finance tracker with:
 - **Auth**: Custom credentials auth with bcrypt
 - **Libraries**: @hebcal/core, zod, react-hook-form, lucide-react
 
-## User Personas
-1. **Personal Finance User**: Tracks charitable giving and lending
-2. **Hebrew Calendar User**: Prefers viewing finances by Hebrew month
+## User Flow
+1. **Add Income** → System calculates Maaser (default 10%)
+2. **Add Give** → Charity donation (reduces maaser balance)
+3. **Add Lend** → Loan to someone (reduces maaser balance, only if not give_only mode)
+4. **Track Balance** → Dashboard shows: Income, Maaser Owed, Maaser Balance, Given, Lent
 
 ## Core Requirements (Static)
-- [x] User registration and login
-- [x] Dashboard with Total Balance, Total Given, Total Owed stats
-- [x] Add/Edit/Delete transactions
+- [x] Separate transaction types: Income, Give, Lend
+- [x] Maaser auto-calculation from income
+- [x] Dashboard with proper stats separation
 - [x] Currency selection with exchange rate
 - [x] Hebrew/Gregorian calendar toggle
 - [x] Monthly view navigation
 - [x] Distribution mode toggle (both/give_only)
-- [x] Zod validation for percentages
+- [x] Recurring transactions for all types
 
 ## What's Been Implemented (January 2026)
 - [x] Auth system with bcrypt password hashing
-- [x] Glassmorphism UI design with organic/earthy theme
-- [x] Dashboard with stats cards
-- [x] Transaction CRUD operations
+- [x] Glassmorphism UI design
+- [x] Transaction types: Income (green), Give (dark green), Lend (red)
+- [x] Maaser percentage input (default 10%)
+- [x] Real-time maaser calculation display
+- [x] Dashboard stats: Total Income, Maaser Owed, Maaser Balance, Total Given, Total Lent
+- [x] Transactions grouped by type in list view
 - [x] Hebrew date display using @hebcal/core
-- [x] useOptimistic for instant UI updates
 - [x] give_only mode properly UNMOUNTS lend components
-- [x] Zod validation ensuring give + lend <= 100%
-- [x] Currency normalization (exchange_rate_to_base)
+- [x] Recurring transaction options: Daily, Weekly, Bi-weekly, Monthly, Yearly
+- [x] Currency normalization with exchange_rate_to_base
 - [x] Mobile responsive design
+
+## Database Schema
+```sql
+transactions:
+- id, user_id, description, amount, currency
+- exchange_rate_to_base, type (income/give/lend)
+- maaser_percentage, maaser_amount (for income)
+- recipient_name (for give/lend)
+- date, hebrew_date
+- is_recurring, recurring_frequency, recurring_end_date
+```
 
 ## Prioritized Backlog
 
 ### P0 (Critical) - Done
-- [x] Core auth flow
-- [x] Transaction management
+- [x] Income/Give/Lend separation
+- [x] Maaser calculation
 - [x] Hebrew calendar integration
-- [x] Distribution mode unmounting
+- [x] Recurring transactions
 
 ### P1 (High Priority) - Future
-- [ ] Session persistence improvements
+- [ ] Recurring transaction auto-generation (cron job)
 - [ ] Export transactions (CSV/PDF)
-- [ ] Category tagging for transactions
+- [ ] Maaser distribution suggestions
 
 ### P2 (Medium Priority) - Future
 - [ ] Charts and analytics view
-- [ ] Recurring transactions
+- [ ] Category tagging
 - [ ] Multi-user household support
 
 ## Next Tasks
-1. Add charts/analytics for spending trends
-2. Implement transaction categories
-3. Add export functionality
+1. Implement cron job for recurring transaction generation
+2. Add export functionality
+3. Add charts for income/maaser trends
