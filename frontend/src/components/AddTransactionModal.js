@@ -152,7 +152,7 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
   }, [isOpen, editTransaction, reset, baseCurrency]);
 
   const hebrewDate = watchDate ? toHebrewDate(new Date(watchDate)) : null;
-  const calcMaaser = txnType === TRANSACTION_TYPES.INCOME && watchAmount ? calculateMaaser(Number(watchAmount), Number(watchMaaserPct) || 10) : 0;
+  const calcMaaser = txnType === TRANSACTION_TYPES.INCOME && watchAmount && !isNaN(Number(watchAmount)) ? calculateMaaser(Number(watchAmount), Number(watchMaaserPct) || 10) : 0;
 
   const onFormSubmit = async (data) => {
     const formData = {
