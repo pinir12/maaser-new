@@ -1,13 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { incomeSchema, giveSchema, lendSchema, currencies, getCurrencySymbol, calculateMaaser, TRANSACTION_TYPES, RECURRING_FREQUENCIES, getRecurringLabel } from '../lib/validation';
 import { toHebrewDate } from '../lib/hebrew-calendar';
-import { X, Calendar, DollarSign, User, Repeat, TrendingUp, Heart, HandCoins } from 'lucide-react';
+import { HebrewDatePicker } from './HebrewDatePicker';
+import { X, Calendar, DollarSign, User, Repeat, TrendingUp, Heart, HandCoins, Zap, RefreshCw } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
-export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction, baseCurrency, distributionMode, maaserBalance = 0 }) {
+export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction, baseCurrency, distributionMode, maaserBalance = 0, userId, useHebrewCalendar = false }) {
   const [txnType, setTxnType] = useState(TRANSACTION_TYPES.INCOME);
   const isGiveOnly = distributionMode === 'give_only';
+  const [showHebrewPicker, setShowHebrewPicker] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [pastTransactions, setPastTransactions] = useState([]);
+  const [ratesCache, setRatesCache] = useState({});
+  const [loadingRate, setLoadingRate] = useState(false);
+  const suggestRef = useRef(null);
 
   const getSchema = () => txnType === TRANSACTION_TYPES.INCOME ? incomeSchema : txnType === TRANSACTION_TYPES.GIVE ? giveSchema : lendSchema;
 
@@ -21,6 +30,103 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
   const watchAmount = watch('amount');
   const watchMaaserPct = watch('maaser_percentage');
   const watchRecurring = watch('is_recurring');
+  const watchDescription = watch('description');
+
+  // Fetch past transactions for autofill
+  useEffect(() => {
+    if (isOpen && userId) {
+      supabase
+        .from('transactions')
+        .select('description, amount, currency, recipient_name, type, maaser_percentage')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false })
+        .limit(200)
+        .then(({ data }) => {
+          if (data) {
+            // Deduplicate by description
+            const unique = new Map();
+            data.forEach(t => {
+              const key = t.description?.toLowerCase();
+              if (key && !unique.has(key)) unique.set(key, t);
+            });
+            setPastTransactions(Array.from(unique.values()));
+          }
+        });
+    }
+  }, [isOpen, userId]);
+
+  // Live currency conversion
+  const fetchRate = useCallback(async (from, to) => {
+    const cacheKey = `${from}_${to}`;
+    if (ratesCache[cacheKey]) {
+      setValue('exchange_rate_to_base', ratesCache[cacheKey]);
+      return;
+    }
+    setLoadingRate(true);
+    try {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/currency/rates/${from}`);
+      if (res.ok) {
+        const data = await res.json();
+        const rate = data.rates?.[to];
+        if (rate) {
+          const newCache = { ...ratesCache };
+          // Cache all rates from this base
+          Object.entries(data.rates).forEach(([code, r]) => {
+            newCache[`${from}_${code}`] = r;
+          });
+          setRatesCache(newCache);
+          setValue('exchange_rate_to_base', Number(rate.toFixed(4)));
+        }
+      }
+    } catch (err) {
+      console.error('Rate fetch error:', err);
+    } finally {
+      setLoadingRate(false);
+    }
+  }, [ratesCache, setValue]);
+
+  useEffect(() => {
+    if (watchCurrency && watchCurrency !== baseCurrency) {
+      fetchRate(watchCurrency, baseCurrency);
+    } else if (watchCurrency === baseCurrency) {
+      setValue('exchange_rate_to_base', 1);
+    }
+  }, [watchCurrency, baseCurrency, fetchRate, setValue]);
+
+  // Description autofill
+  useEffect(() => {
+    if (watchDescription && watchDescription.length >= 2 && !editTransaction) {
+      const q = watchDescription.toLowerCase();
+      const matches = pastTransactions
+        .filter(t => t.description?.toLowerCase().includes(q))
+        .slice(0, 5);
+      setSuggestions(matches);
+      setShowSuggestions(matches.length > 0);
+    } else {
+      setShowSuggestions(false);
+    }
+  }, [watchDescription, pastTransactions, editTransaction]);
+
+  // Close suggestions on outside click
+  useEffect(() => {
+    const handler = (e) => {
+      if (suggestRef.current && !suggestRef.current.contains(e.target)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const applySuggestion = (t) => {
+    setValue('description', t.description);
+    if (t.amount) setValue('amount', t.amount);
+    if (t.currency) setValue('currency', t.currency);
+    if (t.recipient_name) setValue('recipient_name', t.recipient_name);
+    if (t.type) setTxnType(t.type);
+    if (t.maaser_percentage) setValue('maaser_percentage', t.maaser_percentage);
+    setShowSuggestions(false);
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -41,10 +147,9 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
       } else {
         reset({ description: '', amount: '', currency: baseCurrency || 'USD', exchange_rate_to_base: 1, date: new Date().toISOString().split('T')[0], maaser_percentage: 10, recipient_name: '', is_recurring: false, recurring_frequency: 'none', recurring_end_date: '' });
       }
+      setShowHebrewPicker(false);
     }
   }, [isOpen, editTransaction, reset, baseCurrency]);
-
-  useEffect(() => { if (watchCurrency === baseCurrency) setValue('exchange_rate_to_base', 1); }, [watchCurrency, baseCurrency, setValue]);
 
   const hebrewDate = watchDate ? toHebrewDate(new Date(watchDate)) : null;
   const calcMaaser = txnType === TRANSACTION_TYPES.INCOME && watchAmount ? calculateMaaser(Number(watchAmount), Number(watchMaaserPct) || 10) : 0;
@@ -102,11 +207,38 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
         )}
 
         <form onSubmit={handleSubmit(onFormSubmit)} className="p-4 space-y-4">
-          <div>
-            <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1 block">Description</label>
+          {/* Description with autofill */}
+          <div className="relative" ref={suggestRef}>
+            <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1 flex items-center gap-1">
+              Description
+              {!editTransaction && <Zap className="w-3 h-3 text-amber-500" title="Autofill enabled" />}
+            </label>
             <input data-testid="transaction-description-input" type="text" {...register('description')} placeholder={txnType === TRANSACTION_TYPES.INCOME ? 'e.g., Salary' : txnType === TRANSACTION_TYPES.GIVE ? 'e.g., Charity' : 'e.g., Loan'}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500" />
+              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500"
+              autoComplete="off"
+            />
             {errors.description && <p className="mt-1 text-xs text-red-500">{errors.description.message}</p>}
+
+            {/* Autofill suggestions dropdown */}
+            {showSuggestions && (
+              <div data-testid="autofill-suggestions" className="absolute z-10 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden">
+                {suggestions.map((s, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    data-testid={`suggestion-${i}`}
+                    onClick={() => applySuggestion(s)}
+                    className="w-full px-3 py-2 text-left hover:bg-blue-50 transition-colors flex items-center justify-between text-sm border-b border-slate-50 last:border-0"
+                  >
+                    <div>
+                      <span className="font-medium text-slate-900">{s.description}</span>
+                      {s.recipient_name && <span className="text-slate-400 ml-2">({s.recipient_name})</span>}
+                    </div>
+                    <span className="text-slate-500 text-xs">{getCurrencySymbol(s.currency)}{s.amount}</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -129,9 +261,18 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
 
           {watchCurrency !== baseCurrency && (
             <div>
-              <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1 block">Exchange Rate to {baseCurrency}</label>
+              <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1 flex items-center gap-1">
+                Exchange Rate to {baseCurrency}
+                {loadingRate && <RefreshCw className="w-3 h-3 text-blue-500 animate-spin" />}
+                {!loadingRate && <span className="text-blue-500 text-[10px]">LIVE</span>}
+              </label>
               <input data-testid="transaction-exchange-rate-input" type="number" step="0.0001" {...register('exchange_rate_to_base', { valueAsNumber: true })} placeholder="1.0"
                 className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500" />
+              {watchAmount && watchCurrency !== baseCurrency && (
+                <p className="mt-1 text-xs text-blue-600">
+                  {getCurrencySymbol(watchCurrency)}{Number(watchAmount).toLocaleString()} = {getCurrencySymbol(baseCurrency)}{(Number(watchAmount) * (watch('exchange_rate_to_base') || 1)).toFixed(2)}
+                </p>
+              )}
             </div>
           )}
 
@@ -157,12 +298,35 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
             </div>
           )}
 
+          {/* Date with Hebrew picker toggle */}
           <div>
-            <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1 block">Date</label>
-            <div className="relative">
-              <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-              <input data-testid="transaction-date-input" type="date" {...register('date')} className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500" />
-            </div>
+            <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1 flex items-center gap-2">
+              Date
+              {useHebrewCalendar && (
+                <button
+                  type="button"
+                  data-testid="toggle-hebrew-picker-btn"
+                  onClick={() => setShowHebrewPicker(!showHebrewPicker)}
+                  className={`px-2 py-0.5 text-[10px] rounded-full font-medium transition-colors ${
+                    showHebrewPicker ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                  }`}
+                >
+                  {showHebrewPicker ? 'Hebrew' : 'Switch to Hebrew'}
+                </button>
+              )}
+            </label>
+
+            {showHebrewPicker && useHebrewCalendar ? (
+              <HebrewDatePicker
+                value={watchDate}
+                onChange={(isoDate) => setValue('date', isoDate)}
+              />
+            ) : (
+              <div className="relative">
+                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input data-testid="transaction-date-input" type="date" {...register('date')} className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500" />
+              </div>
+            )}
             {hebrewDate && <p data-testid="hebrew-date-display" className="mt-1 text-xs text-blue-600">{hebrewDate.displayEn}</p>}
           </div>
 

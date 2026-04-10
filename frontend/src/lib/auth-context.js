@@ -75,6 +75,16 @@ export function AuthProvider({ children }) {
       const { password_hash: _, ...userWithoutPassword } = newUser;
       setUser(userWithoutPassword);
       localStorage.setItem('finance_user', JSON.stringify(userWithoutPassword));
+
+      // Send admin notification (fire and forget)
+      try {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/email/signup-notification`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user_name: name, user_email: email.toLowerCase() })
+        });
+      } catch (_) { /* non-blocking */ }
+
       return { user: userWithoutPassword, error: null };
     } catch (error) {
       return { user: null, error: error.message };
