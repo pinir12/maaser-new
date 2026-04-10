@@ -1,6 +1,6 @@
 import { useState, useEffect, useOptimistic, useTransition } from 'react';
 import { useAuth } from '../lib/auth-context';
-import { supabase } from '../lib/supabase';
+import { db } from '../lib/supabase';
 import { getCurrentHebrewMonth, getHebrewMonthBounds } from '../lib/hebrew-calendar';
 import { currencies } from '../lib/validation';
 import { DashboardStats } from './DashboardStats';
@@ -59,6 +59,7 @@ export function Dashboard() {
     if (user) {
       fetchTransactions();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, selectedMonth, selectedYear, useHebrewDates]);
 
   const fetchTransactions = async () => {
@@ -75,13 +76,12 @@ export function Dashboard() {
         endDate = new Date(selectedYear, selectedMonth, 0).toISOString().split('T')[0];
       }
 
-      const { data, error } = await supabase
-        .from('transactions')
-        .select('*')
-        .eq('user_id', user.id)
-        .gte('date', startDate)
-        .lte('date', endDate)
-        .order('date', { ascending: false });
+      // Use Supabase client helper
+      const { data, error } = await db.transactions.getByUserAndDateRange(
+        user.id, 
+        startDate, 
+        endDate
+      );
 
       if (error) throw error;
       setTransactions(data || []);
@@ -95,7 +95,7 @@ export function Dashboard() {
   const handleAddTransaction = async (data, editId) => {
     try {
       if (editId) {
-        // Update existing
+        // Update existing using Supabase client
         startTransition(() => {
           updateOptimisticTransactions({ 
             action: 'update', 
@@ -103,17 +103,14 @@ export function Dashboard() {
           });
         });
 
-        const { error } = await supabase
-          .from('transactions')
-          .update({
-            ...data,
-            updated_at: new Date().toISOString()
-          })
-          .eq('id', editId);
+        const { error } = await db.transactions.update(editId, {
+          ...data,
+          updated_at: new Date().toISOString()
+        });
 
         if (error) throw error;
       } else {
-        // Add new
+        // Add new using Supabase client
         const newTransaction = {
           ...data,
           user_id: user.id,
@@ -124,9 +121,7 @@ export function Dashboard() {
           updateOptimisticTransactions({ action: 'add', transaction: newTransaction });
         });
 
-        const { error } = await supabase
-          .from('transactions')
-          .insert([newTransaction]);
+        const { error } = await db.transactions.create(newTransaction);
 
         if (error) throw error;
       }
@@ -140,10 +135,8 @@ export function Dashboard() {
 
   const handleDeleteTransaction = async (id) => {
     try {
-      const { error } = await supabase
-        .from('transactions')
-        .delete()
-        .eq('id', id);
+      // Use Supabase client helper
+      const { error } = await db.transactions.delete(id);
 
       if (error) throw error;
       

@@ -9,7 +9,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for existing session
+    // Check for existing session in localStorage
     const storedUser = localStorage.getItem('finance_user');
     if (storedUser) {
       try {
@@ -23,20 +23,24 @@ export function AuthProvider({ children }) {
 
   const signIn = async (email, password) => {
     try {
-      // Fetch user from Supabase
+      // Use Supabase client directly
       const { data: users, error } = await supabase
         .from('users')
         .select('*')
         .eq('email', email.toLowerCase())
         .limit(1);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase error:', error);
+        throw new Error(error.message || 'Database connection error');
+      }
+
       if (!users || users.length === 0) {
         throw new Error('Invalid email or password');
       }
 
       const dbUser = users[0];
-      
+
       // Verify password
       const isValid = await bcrypt.compare(password, dbUser.password_hash);
       if (!isValid) {
@@ -51,18 +55,24 @@ export function AuthProvider({ children }) {
       
       return { user: userWithoutPassword, error: null };
     } catch (error) {
-      return { user: null, error: error.message };
+      console.error('Sign in error:', error);
+      return { user: null, error: error.message || 'Sign in failed' };
     }
   };
 
   const signUp = async (email, password, name, base_currency) => {
     try {
       // Check if user already exists
-      const { data: existing } = await supabase
+      const { data: existing, error: checkError } = await supabase
         .from('users')
         .select('id')
         .eq('email', email.toLowerCase())
         .limit(1);
+
+      if (checkError) {
+        console.error('Supabase check error:', checkError);
+        throw new Error(checkError.message || 'Database connection error');
+      }
 
       if (existing && existing.length > 0) {
         throw new Error('Email already registered');
@@ -72,7 +82,7 @@ export function AuthProvider({ children }) {
       const password_hash = await bcrypt.hash(password, 10);
 
       // Create user
-      const { data: newUser, error } = await supabase
+      const { data: newUser, error: insertError } = await supabase
         .from('users')
         .insert([{
           email: email.toLowerCase(),
@@ -85,7 +95,10 @@ export function AuthProvider({ children }) {
         .select()
         .single();
 
-      if (error) throw error;
+      if (insertError) {
+        console.error('Supabase insert error:', insertError);
+        throw new Error(insertError.message || 'Failed to create account');
+      }
 
       const { password_hash: _, ...userWithoutPassword } = newUser;
       
@@ -94,7 +107,8 @@ export function AuthProvider({ children }) {
       
       return { user: userWithoutPassword, error: null };
     } catch (error) {
-      return { user: null, error: error.message };
+      console.error('Sign up error:', error);
+      return { user: null, error: error.message || 'Registration failed' };
     }
   };
 
@@ -112,7 +126,10 @@ export function AuthProvider({ children }) {
         .select()
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Update error:', error);
+        throw new Error(error.message || 'Update failed');
+      }
 
       const { password_hash: _, ...userWithoutPassword } = data;
       setUser(userWithoutPassword);
@@ -120,7 +137,8 @@ export function AuthProvider({ children }) {
       
       return { user: userWithoutPassword, error: null };
     } catch (error) {
-      return { user: null, error: error.message };
+      console.error('Update user error:', error);
+      return { user: null, error: error.message || 'Update failed' };
     }
   };
 
