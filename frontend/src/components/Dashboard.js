@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useAuth } from '../lib/auth-context';
-import { supabase } from '../lib/supabase';
-import { getCurrentHebrewMonth, getHebrewMonthBounds } from '../lib/hebrew-calendar';
+import { apiGetTransactions, apiCreateTransaction, apiUpdateTransaction, apiDeleteTransaction, apiProcessRecurring } from '../lib/api';
+import { getCurrentHebrewMonth, getHebrewMonthBounds, getHebrewYearBounds } from '../lib/hebrew-calendar';
 import { currencies, TRANSACTION_TYPES, getCurrencySymbol } from '../lib/validation';
 import { ExportButtons } from '../lib/export';
 import { DashboardStats } from './DashboardStats';
@@ -84,12 +84,7 @@ export function Dashboard() {
     if (!user) return;
     setLoading(true);
     try {
-      const { data, error } = await supabase
-        .from('transactions')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('date', { ascending: false });
-      if (error) throw error;
+      const data = await apiGetTransactions();
       setAllTransactions(data || []);
     } catch (error) {
       console.error('Error fetching transactions:', error);
@@ -115,7 +110,16 @@ export function Dashboard() {
         return d >= startDate && d <= endDate;
       });
     } else if (viewMode === VIEW_MODES.YEAR) {
-      filtered = filtered.filter(t => new Date(t.date).getFullYear() === selectedYear);
+      if (useHebrewDates) {
+        // Convert Hebrew year to Gregorian date range
+        const yearBounds = getHebrewYearBounds(selectedYear);
+        filtered = filtered.filter(t => {
+          const d = new Date(t.date);
+          return d >= yearBounds.start && d <= yearBounds.end;
+        });
+      } else {
+        filtered = filtered.filter(t => new Date(t.date).getFullYear() === selectedYear);
+      }
     }
     
     if (searchQuery.trim()) {
@@ -138,8 +142,7 @@ export function Dashboard() {
   const processRecurringTransactions = async () => {
     setProcessingRecurring(true);
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cron/recurring`, { method: 'POST' });
-      const result = await response.json();
+      const result = await apiProcessRecurring();
       if (result.created > 0) {
         await fetchAllTransactions();
         alert(`Created ${result.created} recurring transaction(s)`);
@@ -156,9 +159,9 @@ export function Dashboard() {
   const handleAddTransaction = async (data, editId) => {
     try {
       if (editId) {
-        await supabase.from('transactions').update({ ...data, updated_at: new Date().toISOString() }).eq('id', editId);
+        await apiUpdateTransaction(editId, data);
       } else {
-        await supabase.from('transactions').insert([{ ...data, user_id: user.id, created_at: new Date().toISOString() }]);
+        await apiCreateTransaction(data);
       }
       await fetchAllTransactions();
     } catch (error) {
@@ -168,8 +171,8 @@ export function Dashboard() {
 
   const handleDeleteTransaction = async (id) => {
     try {
-      await supabase.from('transactions').delete().eq('id', id);
-      setAllTransactions(prev => prev.filter(t => t.id !== id));
+      await apiDeleteTransaction(id);
+      await fetchAllTransactions();
     } catch (error) {
       console.error('Error:', error);
     }
@@ -323,7 +326,6 @@ export function Dashboard() {
             </div>
             <div className="p-4">
               <RecurringManager
-                userId={user?.id}
                 baseCurrency={user?.base_currency || 'USD'}
                 onBack={() => setShowRecurring(false)}
               />

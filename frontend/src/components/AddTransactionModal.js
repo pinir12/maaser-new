@@ -5,7 +5,7 @@ import { incomeSchema, giveSchema, lendSchema, currencies, getCurrencySymbol, ca
 import { toHebrewDate } from '../lib/hebrew-calendar';
 import { HebrewDatePicker } from './HebrewDatePicker';
 import { X, Calendar, DollarSign, User, Repeat, TrendingUp, Heart, HandCoins, Zap, RefreshCw } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { apiGetSuggestions, apiGetCurrencyRates } from '../lib/api';
 
 export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction, baseCurrency, distributionMode, maaserBalance = 0, userId, useHebrewCalendar = false, defaultMaaserPercentage = 10, giveRatio = 50, lendRatio = 50 }) {
   const [txnType, setTxnType] = useState(TRANSACTION_TYPES.INCOME);
@@ -35,23 +35,11 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
   // Fetch past transactions for autofill
   useEffect(() => {
     if (isOpen && userId) {
-      supabase
-        .from('transactions')
-        .select('description, amount, currency, recipient_name, type, maaser_percentage')
-        .eq('user_id', userId)
-        .order('created_at', { ascending: false })
-        .limit(200)
-        .then(({ data }) => {
-          if (data) {
-            // Deduplicate by description
-            const unique = new Map();
-            data.forEach(t => {
-              const key = t.description?.toLowerCase();
-              if (key && !unique.has(key)) unique.set(key, t);
-            });
-            setPastTransactions(Array.from(unique.values()));
-          }
-        });
+      apiGetSuggestions()
+        .then(data => {
+          if (data) setPastTransactions(data);
+        })
+        .catch(() => {});
     }
   }, [isOpen, userId]);
 
@@ -64,19 +52,15 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
     }
     setLoadingRate(true);
     try {
-      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/currency/rates/${from}`);
-      if (res.ok) {
-        const data = await res.json();
-        const rate = data.rates?.[to];
-        if (rate) {
-          const newCache = { ...ratesCache };
-          // Cache all rates from this base
-          Object.entries(data.rates).forEach(([code, r]) => {
-            newCache[`${from}_${code}`] = r;
-          });
-          setRatesCache(newCache);
-          setValue('exchange_rate_to_base', Number(rate.toFixed(4)));
-        }
+      const data = await apiGetCurrencyRates(from);
+      const rate = data.rates?.[to];
+      if (rate) {
+        const newCache = { ...ratesCache };
+        Object.entries(data.rates).forEach(([code, r]) => {
+          newCache[`${from}_${code}`] = r;
+        });
+        setRatesCache(newCache);
+        setValue('exchange_rate_to_base', Number(rate.toFixed(4)));
       }
     } catch (err) {
       console.error('Rate fetch error:', err);

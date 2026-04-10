@@ -47,6 +47,24 @@ export function getHebrewMonthBounds(year, month) {
 }
 
 /**
+ * Get Gregorian date bounds for a full Hebrew year
+ */
+export function getHebrewYearBounds(hebrewYear) {
+  // Hebrew year starts on 1 Tishrei and ends on 29 Elul
+  const startHd = new HDate(1, 7, hebrewYear); // Tishrei = month 7 in @hebcal/core
+  const isLeap = HDate.isLeapYear(hebrewYear);
+  const lastMonth = isLeap ? 13 : 12;
+  // End of Elul (month 6 in the civil calendar ordering, but we need the actual last day)
+  // Actually, Elul is month 6, last day is 29
+  const endHd = new HDate(29, 6, hebrewYear);
+  return {
+    start: startHd.greg(),
+    end: endHd.greg()
+  };
+}
+
+
+/**
  * Get current Hebrew month info
  * @returns {Object} Current Hebrew month details
  */

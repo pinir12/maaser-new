@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { apiSendContact } from '../lib/api';
 import { X, Send, Mail } from 'lucide-react';
 
 export function ContactModal({ isOpen, onClose, userName, userEmail }) {
@@ -16,12 +17,7 @@ export function ContactModal({ isOpen, onClose, userName, userEmail }) {
     setSending(true);
     setError('');
     try {
-      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/email/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), email: email.trim(), message: message.trim() })
-      });
-      if (!res.ok) throw new Error('Failed to send');
+      await apiSendContact(name.trim(), email.trim(), message.trim());
       setSent(true);
       setTimeout(() => { onClose(); setSent(false); setMessage(''); }, 2000);
     } catch (err) {
