@@ -87,6 +87,7 @@ UPDATE users SET is_admin = TRUE WHERE email = 'mail@pinir.co.uk';
 - Top balance cards: fixed-width, left-aligned next to Add Transaction button
 - Period totals (give+lend mode): combined Give Portion + Given into one card, Lend Portion + Lent into one card (3 cards total instead of 5)
 - Insights panel: compares current vs previous period (income trend, giving/lending changes, maaser fulfillment). Hidden when no previous data exists or in All Time view
+- Homepage / landing page for non-authenticated users (hero, dashboard preview, feature cards, testimonial, CTA)
 - CRON endpoints confirmed ready: POST /api/cron/recurring (daily), POST /api/cron/monthly-summary (monthly 1st)
 
 ## Next Tasks

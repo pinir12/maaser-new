@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, registerSchema, currencies } from '../lib/validation';
 import { useAuth } from '../lib/auth-context';
-import { LogIn, UserPlus, Mail, Lock, User, DollarSign } from 'lucide-react';
+import { LogIn, UserPlus, Mail, Lock, User, DollarSign, ArrowLeft } from 'lucide-react';
 
-export function AuthPage() {
-  const [isLogin, setIsLogin] = useState(true);
+export function AuthPage({ defaultTab = 'login', onBack = null }) {
+  const [isLogin, setIsLogin] = useState(defaultTab === 'login');
   const [error, setError] = useState('');
   const { signIn, signUp } = useAuth();
 
@@ -24,6 +24,11 @@ export function AuthPage() {
     <div data-testid="auth-page" className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
+          {onBack && (
+            <button data-testid="auth-back-btn" onClick={onBack} className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-blue-600 mb-4 transition-colors">
+              <ArrowLeft className="w-4 h-4" />Back to home
+            </button>
+          )}
           <h1 className="text-3xl font-bold text-slate-900">Finance Tracker</h1>
           <p className="text-slate-500 mt-2">Track your maaser with ease</p>
         </div>
