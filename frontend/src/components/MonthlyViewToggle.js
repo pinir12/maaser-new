@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import { 
   getCurrentHebrewMonth, 
   getHebrewMonths, 
   getHebrewMonthBounds,
   navigateHebrewMonth 
 } from '../lib/hebrew-calendar';
+import { HDate } from '@hebcal/core';
 import { ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 
 export function MonthlyViewToggle({ 
@@ -15,7 +15,6 @@ export function MonthlyViewToggle({
   onMonthChange 
 }) {
   const currentHebrew = getCurrentHebrewMonth();
-  const hebrewMonths = getHebrewMonths(selectedYear || currentHebrew.year);
 
   const handlePrevMonth = () => {
     if (useHebrewDates) {
@@ -49,8 +48,13 @@ export function MonthlyViewToggle({
 
   const getDisplayMonth = () => {
     if (useHebrewDates) {
-      const monthData = hebrewMonths.find(m => m.value === selectedMonth);
-      return `${monthData?.name || 'Unknown'} ${selectedYear}`;
+      // Create an HDate for the first day of the selected Hebrew month to get proper name
+      try {
+        const hd = new HDate(1, selectedMonth, selectedYear);
+        return `${hd.getMonthName()} ${selectedYear}`;
+      } catch (e) {
+        return `Month ${selectedMonth}, ${selectedYear}`;
+      }
     } else {
       const date = new Date(selectedYear, selectedMonth - 1, 1);
       return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
