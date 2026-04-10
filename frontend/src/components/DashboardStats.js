@@ -9,7 +9,7 @@ export function DashboardStats({ balances, baseCurrency, distributionMode }) {
   if (isGiveOnly) {
     const bal = balances.maaserBalance ?? 0;
     return (
-      <div data-testid="dashboard-stats" className="flex gap-3 justify-end">
+      <div data-testid="dashboard-stats" className="flex gap-3">
         <div className={`w-48 sm:w-56 bg-white/80 backdrop-blur-sm rounded-xl p-4 border ${bal < 0 ? 'border-red-300' : 'border-slate-200/80'} shadow-sm`}>
           <div className="flex items-center justify-between mb-1">
             <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Maaser Balance</span>
@@ -27,7 +27,7 @@ export function DashboardStats({ balances, baseCurrency, distributionMode }) {
   const lBal = balances.lendBalance ?? 0;
 
   return (
-    <div data-testid="dashboard-stats" className="flex gap-3 justify-end">
+    <div data-testid="dashboard-stats" className="flex gap-3">
       <div className={`w-44 sm:w-52 bg-white/80 backdrop-blur-sm rounded-xl p-4 border ${gBal < 0 ? 'border-red-300' : 'border-slate-200/80'} shadow-sm`}>
         <div className="flex items-center justify-between mb-1">
           <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Give Balance</span>

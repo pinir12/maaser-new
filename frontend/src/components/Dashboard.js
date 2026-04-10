@@ -14,6 +14,7 @@ import { SettingsModal } from './SettingsModal';
 import { ContactModal } from './ContactModal';
 import { AdminPanel } from './AdminPanel';
 import { RecurringManager } from './RecurringManager';
+import { Insights } from './Insights';
 import { Plus, Settings, LogOut, RefreshCw, BarChart3, Mail, Shield, Repeat } from 'lucide-react';
 
 const VIEW_MODES = { ALL_TIME: 'all_time', YEAR: 'year', MONTH: 'month' };
@@ -248,6 +249,58 @@ export function Dashboard() {
     }, { totalIncome: 0, totalMaaser: 0, totalGiven: 0, totalLent: 0 });
   }, [filteredTransactions, user?.base_currency]);
 
+  // Previous period stats for Insights comparison
+  const previousPeriodStats = useMemo(() => {
+    if (viewMode === VIEW_MODES.ALL_TIME) return null;
+    const baseCurrency = user?.base_currency || 'USD';
+
+    let startStr, endStr;
+    if (viewMode === VIEW_MODES.MONTH) {
+      let pm = selectedMonth - 1, py = selectedYear;
+      if (useHebrewDates) {
+        if (pm < 1) { pm = 13; py -= 1; }
+        try {
+          const bounds = getHebrewMonthBounds(py, pm);
+          startStr = dateToStr(bounds.start);
+          endStr = dateToStr(bounds.end);
+        } catch { return null; }
+      } else {
+        if (pm < 1) { pm = 12; py -= 1; }
+        startStr = `${py}-${String(pm).padStart(2, '0')}-01`;
+        const lastDay = new Date(py, pm, 0).getDate();
+        endStr = `${py}-${String(pm).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
+      }
+    } else {
+      const py = selectedYear - 1;
+      if (useHebrewDates) {
+        try {
+          const bounds = getHebrewYearBounds(py);
+          startStr = dateToStr(bounds.start);
+          endStr = dateToStr(bounds.end);
+        } catch { return null; }
+      } else {
+        startStr = `${py}-01-01`;
+        endStr = `${py}-12-31`;
+      }
+    }
+
+    return allTransactions.filter(t => {
+      const ds = txnDateStr(t);
+      return ds >= startStr && ds <= endStr;
+    }).reduce((acc, t) => {
+      const norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
+      if (t.type === TRANSACTION_TYPES.INCOME) {
+        const maaser = norm * ((t.maaser_percentage || 10) / 100);
+        return { ...acc, totalIncome: acc.totalIncome + norm, totalMaaser: acc.totalMaaser + maaser };
+      } else if (t.type === TRANSACTION_TYPES.GIVE) {
+        return { ...acc, totalGiven: acc.totalGiven + norm };
+      } else if (t.type === TRANSACTION_TYPES.LEND) {
+        return { ...acc, totalLent: acc.totalLent + norm };
+      }
+      return acc;
+    }, { totalIncome: 0, totalMaaser: 0, totalGiven: 0, totalLent: 0 });
+  }, [allTransactions, viewMode, selectedMonth, selectedYear, useHebrewDates, user?.base_currency]);
+
   if (showAdmin) return <AdminPanel onBack={() => setShowAdmin(false)} />;
 
   const sym = getCurrencySymbol(user?.base_currency || 'USD');
@@ -400,6 +453,18 @@ export function Dashboard() {
             </div>
           );
         })()}
+
+        {previousPeriodStats && (
+          <Insights
+            currentStats={viewMode === VIEW_MODES.ALL_TIME ? allTimeStats : periodStats}
+            previousStats={previousPeriodStats}
+            isGiveOnly={isGiveOnly}
+            periodLabel={viewMode === VIEW_MODES.YEAR ? 'Year' : 'Month'}
+            hasCurrentData={filteredTransactions.length > 0}
+            hasPreviousData={previousPeriodStats.totalIncome > 0 || previousPeriodStats.totalGiven > 0 || previousPeriodStats.totalLent > 0}
+            isAllTime={viewMode === VIEW_MODES.ALL_TIME}
+          />
+        )}
 
         {showCharts && <AnalyticsCharts transactions={allTransactions} baseCurrency={user?.base_currency || 'USD'} distributionMode={user?.distribution_mode || 'both'} />}
 
