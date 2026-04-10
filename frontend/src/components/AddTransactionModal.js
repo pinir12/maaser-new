@@ -1,9 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { transactionSchema, currencies, getCurrencySymbol } from '../lib/validation';
+import { 
+  incomeSchema, 
+  giveSchema, 
+  lendSchema,
+  currencies, 
+  getCurrencySymbol,
+  calculateMaaser,
+  TRANSACTION_TYPES,
+  RECURRING_FREQUENCIES,
+  getRecurringLabel
+} from '../lib/validation';
 import { toHebrewDate } from '../lib/hebrew-calendar';
-import { X, Calendar, DollarSign, Percent, User } from 'lucide-react';
+import { X, Calendar, DollarSign, User, Repeat, TrendingUp, Heart, HandCoins } from 'lucide-react';
 
 export function AddTransactionModal({ 
   isOpen, 
@@ -11,10 +21,26 @@ export function AddTransactionModal({
   onSubmit, 
   editTransaction,
   baseCurrency,
-  distributionMode 
+  distributionMode,
+  maaserBalance = 0
 }) {
+  const [transactionType, setTransactionType] = useState(TRANSACTION_TYPES.INCOME);
   const isGiveOnly = distributionMode === 'give_only';
   
+  // Get the right schema based on type
+  const getSchema = () => {
+    switch (transactionType) {
+      case TRANSACTION_TYPES.INCOME:
+        return incomeSchema;
+      case TRANSACTION_TYPES.GIVE:
+        return giveSchema;
+      case TRANSACTION_TYPES.LEND:
+        return lendSchema;
+      default:
+        return incomeSchema;
+    }
+  };
+
   const {
     register,
     handleSubmit,
@@ -23,47 +49,43 @@ export function AddTransactionModal({
     reset,
     formState: { errors, isSubmitting }
   } = useForm({
-    resolver: zodResolver(transactionSchema),
+    resolver: zodResolver(getSchema()),
     defaultValues: {
       description: '',
       amount: '',
       currency: baseCurrency || 'USD',
       exchange_rate_to_base: 1,
-      type: isGiveOnly ? 'give' : 'both',
-      give_percentage: 100,
-      lend_percentage: 0,
+      date: new Date().toISOString().split('T')[0],
+      maaser_percentage: 10,
       recipient_name: '',
-      date: new Date().toISOString().split('T')[0]
+      is_recurring: false,
+      recurring_frequency: 'none',
+      recurring_end_date: ''
     }
   });
 
   const watchCurrency = watch('currency');
-  const watchGivePercentage = watch('give_percentage');
-  const watchLendPercentage = watch('lend_percentage');
   const watchDate = watch('date');
+  const watchAmount = watch('amount');
+  const watchMaaserPercentage = watch('maaser_percentage');
+  const watchIsRecurring = watch('is_recurring');
 
-  // Auto-adjust lend percentage when give percentage changes
-  useEffect(() => {
-    if (isGiveOnly) {
-      setValue('lend_percentage', 0);
-      setValue('give_percentage', 100);
-    }
-  }, [isGiveOnly, setValue]);
-
-  // Reset form when modal opens/closes or edit transaction changes
+  // Reset form when modal opens/closes or type changes
   useEffect(() => {
     if (isOpen) {
       if (editTransaction) {
+        setTransactionType(editTransaction.type);
         reset({
           description: editTransaction.description,
           amount: editTransaction.amount,
           currency: editTransaction.currency,
           exchange_rate_to_base: editTransaction.exchange_rate_to_base,
-          type: editTransaction.type,
-          give_percentage: editTransaction.give_percentage,
-          lend_percentage: isGiveOnly ? 0 : editTransaction.lend_percentage,
+          date: editTransaction.date?.split('T')[0] || new Date().toISOString().split('T')[0],
+          maaser_percentage: editTransaction.maaser_percentage || 10,
           recipient_name: editTransaction.recipient_name || '',
-          date: editTransaction.date?.split('T')[0] || new Date().toISOString().split('T')[0]
+          is_recurring: editTransaction.is_recurring || false,
+          recurring_frequency: editTransaction.recurring_frequency || 'none',
+          recurring_end_date: editTransaction.recurring_end_date || ''
         });
       } else {
         reset({
@@ -71,15 +93,16 @@ export function AddTransactionModal({
           amount: '',
           currency: baseCurrency || 'USD',
           exchange_rate_to_base: 1,
-          type: isGiveOnly ? 'give' : 'both',
-          give_percentage: 100,
-          lend_percentage: 0,
+          date: new Date().toISOString().split('T')[0],
+          maaser_percentage: 10,
           recipient_name: '',
-          date: new Date().toISOString().split('T')[0]
+          is_recurring: false,
+          recurring_frequency: 'none',
+          recurring_end_date: ''
         });
       }
     }
-  }, [isOpen, editTransaction, reset, baseCurrency, isGiveOnly]);
+  }, [isOpen, editTransaction, reset, baseCurrency, transactionType]);
 
   // Auto-set exchange rate when currency matches base
   useEffect(() => {
@@ -89,16 +112,18 @@ export function AddTransactionModal({
   }, [watchCurrency, baseCurrency, setValue]);
 
   const hebrewDate = watchDate ? toHebrewDate(new Date(watchDate)) : null;
-  const totalPercentage = (Number(watchGivePercentage) || 0) + (Number(watchLendPercentage) || 0);
-  const percentageError = totalPercentage > 100;
+  const calculatedMaaser = transactionType === TRANSACTION_TYPES.INCOME && watchAmount 
+    ? calculateMaaser(Number(watchAmount), Number(watchMaaserPercentage) || 10)
+    : 0;
 
   const onFormSubmit = async (data) => {
     const formData = {
       ...data,
+      type: transactionType,
       amount: Number(data.amount),
       exchange_rate_to_base: Number(data.exchange_rate_to_base),
-      give_percentage: Number(data.give_percentage),
-      lend_percentage: isGiveOnly ? 0 : Number(data.lend_percentage),
+      maaser_percentage: transactionType === TRANSACTION_TYPES.INCOME ? Number(data.maaser_percentage) : null,
+      maaser_amount: transactionType === TRANSACTION_TYPES.INCOME ? calculatedMaaser : null,
       hebrew_date: hebrewDate?.displayEn || null
     };
     
@@ -107,6 +132,15 @@ export function AddTransactionModal({
   };
 
   if (!isOpen) return null;
+
+  const typeButtons = [
+    { type: TRANSACTION_TYPES.INCOME, label: 'Income', icon: TrendingUp, color: 'bg-emerald-500' },
+    { type: TRANSACTION_TYPES.GIVE, label: 'Give', icon: Heart, color: 'bg-[#1E3F32]' },
+  ];
+  
+  if (!isGiveOnly) {
+    typeButtons.push({ type: TRANSACTION_TYPES.LEND, label: 'Lend', icon: HandCoins, color: 'bg-[#C2574A]' });
+  }
 
   return (
     <div 
@@ -120,7 +154,7 @@ export function AddTransactionModal({
       />
       
       {/* Modal */}
-      <div className="relative w-full max-w-lg bg-white/90 backdrop-blur-xl border border-white/40 rounded-2xl shadow-2xl">
+      <div className="relative w-full max-w-lg bg-white/90 backdrop-blur-xl border border-white/40 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-white/20">
           <h2 className="text-xl font-bold text-[#181C1A]">
@@ -135,6 +169,37 @@ export function AddTransactionModal({
           </button>
         </div>
         
+        {/* Transaction Type Tabs */}
+        <div className="flex gap-2 p-4 border-b border-white/20">
+          {typeButtons.map(({ type, label, icon: Icon, color }) => (
+            <button
+              key={type}
+              data-testid={`type-${type}-btn`}
+              onClick={() => setTransactionType(type)}
+              className={`
+                flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-semibold transition-all
+                ${transactionType === type 
+                  ? `${color} text-white shadow-md` 
+                  : 'bg-white/50 text-[#68706B] hover:bg-white/70'
+                }
+              `}
+            >
+              <Icon className="w-4 h-4" />
+              {label}
+            </button>
+          ))}
+        </div>
+
+        {/* Maaser Balance Info (for Give/Lend) */}
+        {(transactionType === TRANSACTION_TYPES.GIVE || transactionType === TRANSACTION_TYPES.LEND) && (
+          <div className="mx-6 mt-4 p-3 bg-[#1E3F32]/10 rounded-xl">
+            <p className="text-sm text-[#1E3F32]">
+              <span className="font-semibold">Available Maaser:</span>{' '}
+              {getCurrencySymbol(baseCurrency)}{maaserBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+            </p>
+          </div>
+        )}
+
         {/* Form */}
         <form onSubmit={handleSubmit(onFormSubmit)} className="p-6 space-y-5">
           {/* Description */}
@@ -146,7 +211,11 @@ export function AddTransactionModal({
               data-testid="transaction-description-input"
               type="text"
               {...register('description')}
-              placeholder="What's this transaction for?"
+              placeholder={
+                transactionType === TRANSACTION_TYPES.INCOME ? "e.g., Monthly salary" :
+                transactionType === TRANSACTION_TYPES.GIVE ? "e.g., Charity donation" :
+                "e.g., Loan to friend"
+              }
               className="w-full px-4 py-3 bg-white/50 backdrop-blur-md border border-white/40 rounded-xl focus:ring-2 focus:ring-[#1E3F32]/50 focus:bg-white transition-all text-[#181C1A] placeholder:text-[#68706B]/50"
             />
             {errors.description && (
@@ -218,6 +287,55 @@ export function AddTransactionModal({
             </div>
           )}
 
+          {/* Maaser Percentage (Income only) */}
+          {transactionType === TRANSACTION_TYPES.INCOME && (
+            <div className="p-4 bg-emerald-500/10 rounded-xl">
+              <label className="block text-xs font-bold uppercase tracking-[0.2em] text-emerald-700 mb-2">
+                Maaser Percentage
+              </label>
+              <div className="flex items-center gap-4">
+                <input
+                  data-testid="maaser-percentage-input"
+                  type="number"
+                  min="0"
+                  max="100"
+                  {...register('maaser_percentage', { valueAsNumber: true })}
+                  className="w-24 px-4 py-2 bg-white/70 border border-white/40 rounded-xl focus:ring-2 focus:ring-emerald-500/50 transition-all text-[#181C1A]"
+                />
+                <span className="text-emerald-700 font-medium">%</span>
+                {watchAmount && (
+                  <span className="text-emerald-700">
+                    = {getCurrencySymbol(watchCurrency)}{calculatedMaaser.toFixed(2)} maaser
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Recipient Name (Give/Lend) */}
+          {(transactionType === TRANSACTION_TYPES.GIVE || transactionType === TRANSACTION_TYPES.LEND) && (
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
+                {transactionType === TRANSACTION_TYPES.GIVE ? 'Recipient/Organization (optional)' : 'Recipient Name'}
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#68706B]" />
+                <input
+                  data-testid="recipient-name-input"
+                  type="text"
+                  {...register('recipient_name')}
+                  placeholder={transactionType === TRANSACTION_TYPES.GIVE ? "e.g., Local charity" : "e.g., John Doe"}
+                  className="w-full pl-10 pr-4 py-3 bg-white/50 backdrop-blur-md border border-white/40 rounded-xl focus:ring-2 focus:ring-[#1E3F32]/50 focus:bg-white transition-all text-[#181C1A]"
+                />
+              </div>
+              {errors.recipient_name && (
+                <p className="mt-1 text-sm text-[#C2574A]">
+                  {errors.recipient_name.message}
+                </p>
+              )}
+            </div>
+          )}
+
           {/* Date with Hebrew display */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
@@ -239,96 +357,67 @@ export function AddTransactionModal({
             )}
           </div>
 
-          {/* Distribution Percentages - Only show if not give_only mode */}
-          {!isGiveOnly && (
-            <div className="p-4 bg-[#1E3F32]/5 rounded-xl">
-              <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-3">
-                Distribution
+          {/* Recurring Options */}
+          <div className="p-4 bg-[#4A6E82]/10 rounded-xl space-y-3">
+            <div className="flex items-center gap-3">
+              <input
+                data-testid="is-recurring-checkbox"
+                type="checkbox"
+                {...register('is_recurring')}
+                className="w-5 h-5 rounded border-white/40 text-[#1E3F32] focus:ring-[#1E3F32]/50"
+              />
+              <label className="flex items-center gap-2 text-sm font-medium text-[#181C1A]">
+                <Repeat className="w-4 h-4 text-[#4A6E82]" />
+                Make this recurring
               </label>
-              <div className="grid grid-cols-2 gap-4">
+            </div>
+            
+            {watchIsRecurring && (
+              <div className="grid grid-cols-2 gap-4 pt-2">
                 <div>
-                  <label className="text-sm text-[#181C1A] mb-1 block">Give %</label>
-                  <div className="relative">
-                    <Percent className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#68706B]" />
-                    <input
-                      data-testid="give-percentage-input"
-                      type="number"
-                      min="0"
-                      max="100"
-                      {...register('give_percentage', { valueAsNumber: true })}
-                      className="w-full px-4 py-2 pr-10 bg-white/70 border border-white/40 rounded-xl focus:ring-2 focus:ring-[#1E3F32]/50 transition-all text-[#181C1A]"
-                    />
-                  </div>
+                  <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
+                    Frequency
+                  </label>
+                  <select
+                    data-testid="recurring-frequency-select"
+                    {...register('recurring_frequency')}
+                    className="w-full px-3 py-2 bg-white/70 border border-white/40 rounded-xl text-[#181C1A]"
+                  >
+                    {Object.entries(RECURRING_FREQUENCIES).filter(([k]) => k !== 'NONE').map(([key, value]) => (
+                      <option key={value} value={value}>
+                        {getRecurringLabel(value)}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div>
-                  <label className="text-sm text-[#181C1A] mb-1 block">Lend %</label>
-                  <div className="relative">
-                    <Percent className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#68706B]" />
-                    <input
-                      data-testid="lend-percentage-input"
-                      type="number"
-                      min="0"
-                      max="100"
-                      {...register('lend_percentage', { valueAsNumber: true })}
-                      className="w-full px-4 py-2 pr-10 bg-white/70 border border-white/40 rounded-xl focus:ring-2 focus:ring-[#1E3F32]/50 transition-all text-[#181C1A]"
-                    />
-                  </div>
-                </div>
-              </div>
-              
-              {/* Percentage indicator */}
-              <div className="mt-3 flex items-center gap-2">
-                <div className="flex-1 h-2 bg-white/50 rounded-full overflow-hidden">
-                  <div 
-                    className={`h-full transition-all ${percentageError ? 'bg-[#C2574A]' : 'bg-[#1E3F32]'}`}
-                    style={{ width: `${Math.min(totalPercentage, 100)}%` }}
+                  <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
+                    End Date (optional)
+                  </label>
+                  <input
+                    data-testid="recurring-end-date-input"
+                    type="date"
+                    {...register('recurring_end_date')}
+                    className="w-full px-3 py-2 bg-white/70 border border-white/40 rounded-xl text-[#181C1A]"
                   />
                 </div>
-                <span className={`text-sm font-bold ${percentageError ? 'text-[#C2574A]' : 'text-[#181C1A]'}`}>
-                  {totalPercentage}%
-                </span>
               </div>
-              
-              {percentageError && (
-                <p data-testid="percentage-error" className="mt-2 text-sm text-[#C2574A]">
-                  Total percentage cannot exceed 100%
-                </p>
-              )}
-              {errors.lend_percentage && (
-                <p data-testid="lend-percentage-error" className="mt-2 text-sm text-[#C2574A]">
-                  {errors.lend_percentage.message}
-                </p>
-              )}
-            </div>
-          )}
-
-          {/* Recipient Name (for lends) */}
-          {!isGiveOnly && Number(watchLendPercentage) > 0 && (
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-2">
-                Recipient Name (for Lend)
-              </label>
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#68706B]" />
-                <input
-                  data-testid="recipient-name-input"
-                  type="text"
-                  {...register('recipient_name')}
-                  placeholder="Who are you lending to?"
-                  className="w-full pl-10 pr-4 py-3 bg-white/50 backdrop-blur-md border border-white/40 rounded-xl focus:ring-2 focus:ring-[#1E3F32]/50 focus:bg-white transition-all text-[#181C1A]"
-                />
-              </div>
-            </div>
-          )}
+            )}
+          </div>
 
           {/* Submit Button */}
           <button
             data-testid="submit-transaction-btn"
             type="submit"
-            disabled={isSubmitting || percentageError}
-            className="w-full py-3 bg-[#1E3F32] text-white font-semibold rounded-xl hover:bg-[#152e24] shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
+            className={`
+              w-full py-3 text-white font-semibold rounded-xl shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed
+              ${transactionType === TRANSACTION_TYPES.INCOME ? 'bg-emerald-500 hover:bg-emerald-600' :
+                transactionType === TRANSACTION_TYPES.GIVE ? 'bg-[#1E3F32] hover:bg-[#152e24]' :
+                'bg-[#C2574A] hover:bg-[#a84a3f]'}
+            `}
           >
-            {isSubmitting ? 'Saving...' : editTransaction ? 'Update Transaction' : 'Add Transaction'}
+            {isSubmitting ? 'Saving...' : editTransaction ? 'Update' : `Add ${transactionType.charAt(0).toUpperCase() + transactionType.slice(1)}`}
           </button>
         </form>
       </div>

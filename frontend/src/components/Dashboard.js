@@ -1,8 +1,8 @@
-import { useState, useEffect, useOptimistic, useTransition } from 'react';
+import { useState, useEffect, useOptimistic, useTransition, useMemo } from 'react';
 import { useAuth } from '../lib/auth-context';
 import { supabase } from '../lib/supabase';
 import { getCurrentHebrewMonth, getHebrewMonthBounds } from '../lib/hebrew-calendar';
-import { currencies } from '../lib/validation';
+import { currencies, TRANSACTION_TYPES } from '../lib/validation';
 import { DashboardStats } from './DashboardStats';
 import { TransactionList } from './TransactionList';
 import { AddTransactionModal } from './AddTransactionModal';
@@ -53,6 +53,28 @@ export function Dashboard() {
       }
     }
   );
+
+  // Calculate maaser balance for the modal
+  const maaserBalance = useMemo(() => {
+    const baseCurrency = user?.base_currency || 'USD';
+    const isGiveOnly = user?.distribution_mode === 'give_only';
+    
+    return optimisticTransactions.reduce((acc, t) => {
+      const normalizedAmount = t.currency === baseCurrency 
+        ? t.amount 
+        : t.amount * (t.exchange_rate_to_base || 1);
+      
+      if (t.type === TRANSACTION_TYPES.INCOME) {
+        const maaserAmount = normalizedAmount * ((t.maaser_percentage || 10) / 100);
+        return acc + maaserAmount;
+      } else if (t.type === TRANSACTION_TYPES.GIVE) {
+        return acc - normalizedAmount;
+      } else if (t.type === TRANSACTION_TYPES.LEND && !isGiveOnly) {
+        return acc - normalizedAmount;
+      }
+      return acc;
+    }, 0);
+  }, [optimisticTransactions, user?.base_currency, user?.distribution_mode]);
 
   // Fetch transactions based on month/year and calendar type
   useEffect(() => {
@@ -420,6 +442,7 @@ export function Dashboard() {
         editTransaction={editTransaction}
         baseCurrency={user?.base_currency || 'USD'}
         distributionMode={user?.distribution_mode || 'both'}
+        maaserBalance={maaserBalance}
       />
 
       {/* Click outside to close settings */}

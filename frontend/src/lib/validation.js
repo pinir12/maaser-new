@@ -1,29 +1,67 @@
 import { z } from 'zod';
 
-// Transaction form schema with percentage validation
-export const transactionSchema = z.object({
-  description: z.string().min(1, 'Description is required').max(200, 'Description too long'),
+// Transaction types
+export const TRANSACTION_TYPES = {
+  INCOME: 'income',
+  GIVE: 'give',
+  LEND: 'lend'
+};
+
+// Recurring frequencies
+export const RECURRING_FREQUENCIES = {
+  NONE: 'none',
+  DAILY: 'daily',
+  WEEKLY: 'weekly',
+  BIWEEKLY: 'biweekly',
+  MONTHLY: 'monthly',
+  YEARLY: 'yearly'
+};
+
+// Income transaction schema
+export const incomeSchema = z.object({
+  description: z.string().min(1, 'Description is required').max(200),
   amount: z.number().positive('Amount must be positive'),
   currency: z.string().min(1, 'Currency is required'),
   exchange_rate_to_base: z.number().positive('Exchange rate must be positive'),
-  type: z.enum(['give', 'lend', 'both']),
-  give_percentage: z.number().min(0).max(100).default(100),
-  lend_percentage: z.number().min(0).max(100).default(0),
-  recipient_name: z.string().optional(),
   date: z.string().or(z.date()),
-}).refine(
-  (data) => data.give_percentage + data.lend_percentage <= 100,
-  {
-    message: 'Give percentage + Lend percentage cannot exceed 100%',
-    path: ['lend_percentage'],
-  }
-);
+  maaser_percentage: z.number().min(0).max(100).default(10),
+  is_recurring: z.boolean().default(false),
+  recurring_frequency: z.string().default('none'),
+  recurring_end_date: z.string().optional().nullable()
+});
+
+// Give transaction schema
+export const giveSchema = z.object({
+  description: z.string().min(1, 'Description is required').max(200),
+  amount: z.number().positive('Amount must be positive'),
+  currency: z.string().min(1, 'Currency is required'),
+  exchange_rate_to_base: z.number().positive('Exchange rate must be positive'),
+  date: z.string().or(z.date()),
+  recipient_name: z.string().optional(),
+  is_recurring: z.boolean().default(false),
+  recurring_frequency: z.string().default('none'),
+  recurring_end_date: z.string().optional().nullable()
+});
+
+// Lend transaction schema
+export const lendSchema = z.object({
+  description: z.string().min(1, 'Description is required').max(200),
+  amount: z.number().positive('Amount must be positive'),
+  currency: z.string().min(1, 'Currency is required'),
+  exchange_rate_to_base: z.number().positive('Exchange rate must be positive'),
+  date: z.string().or(z.date()),
+  recipient_name: z.string().min(1, 'Recipient name is required'),
+  is_recurring: z.boolean().default(false),
+  recurring_frequency: z.string().default('none'),
+  recurring_end_date: z.string().optional().nullable()
+});
 
 // User settings schema
 export const userSettingsSchema = z.object({
   name: z.string().min(1, 'Name is required').max(100),
   base_currency: z.string().min(1, 'Base currency is required'),
   distribution_mode: z.enum(['both', 'give_only']),
+  default_maaser_percentage: z.number().min(0).max(100).default(10)
 });
 
 // Login schema
@@ -58,4 +96,22 @@ export const currencies = [
 
 export function getCurrencySymbol(code) {
   return currencies.find(c => c.code === code)?.symbol || code;
+}
+
+// Calculate maaser from income
+export function calculateMaaser(amount, percentage = 10) {
+  return (amount * percentage) / 100;
+}
+
+// Get recurring frequency label
+export function getRecurringLabel(frequency) {
+  const labels = {
+    none: 'One-time',
+    daily: 'Daily',
+    weekly: 'Weekly',
+    biweekly: 'Bi-weekly',
+    monthly: 'Monthly',
+    yearly: 'Yearly'
+  };
+  return labels[frequency] || frequency;
 }
