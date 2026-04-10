@@ -1,6 +1,6 @@
 import { useState, useEffect, useOptimistic, useTransition } from 'react';
 import { useAuth } from '../lib/auth-context';
-import { db } from '../lib/supabase';
+import { supabase } from '../lib/supabase';
 import { getCurrentHebrewMonth, getHebrewMonthBounds } from '../lib/hebrew-calendar';
 import { currencies } from '../lib/validation';
 import { DashboardStats } from './DashboardStats';
@@ -76,12 +76,14 @@ export function Dashboard() {
         endDate = new Date(selectedYear, selectedMonth, 0).toISOString().split('T')[0];
       }
 
-      // Use Supabase client helper
-      const { data, error } = await db.transactions.getByUserAndDateRange(
-        user.id, 
-        startDate, 
-        endDate
-      );
+      // Use Supabase client
+      const { data, error } = await supabase
+        .from('transactions')
+        .select('*')
+        .eq('user_id', user.id)
+        .gte('date', startDate)
+        .lte('date', endDate)
+        .order('date', { ascending: false });
 
       if (error) throw error;
       setTransactions(data || []);
@@ -103,10 +105,13 @@ export function Dashboard() {
           });
         });
 
-        const { error } = await db.transactions.update(editId, {
-          ...data,
-          updated_at: new Date().toISOString()
-        });
+        const { error } = await supabase
+          .from('transactions')
+          .update({
+            ...data,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', editId);
 
         if (error) throw error;
       } else {
@@ -121,7 +126,9 @@ export function Dashboard() {
           updateOptimisticTransactions({ action: 'add', transaction: newTransaction });
         });
 
-        const { error } = await db.transactions.create(newTransaction);
+        const { error } = await supabase
+          .from('transactions')
+          .insert([newTransaction]);
 
         if (error) throw error;
       }
@@ -135,8 +142,11 @@ export function Dashboard() {
 
   const handleDeleteTransaction = async (id) => {
     try {
-      // Use Supabase client helper
-      const { error } = await db.transactions.delete(id);
+      // Use Supabase client
+      const { error } = await supabase
+        .from('transactions')
+        .delete()
+        .eq('id', id);
 
       if (error) throw error;
       
