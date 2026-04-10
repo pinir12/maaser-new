@@ -1,0 +1,189 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/:path*",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,DELETE,PATCH,POST,PUT,OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization"
+        }
+      ],
+      "regex": "^/api(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+    }
+  ],
+  "onMatchHeaders": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/api/admin/users/[id]",
+      "regex": "^/api/admin/users/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/admin/users/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/currency/rates/[base]",
+      "regex": "^/api/currency/rates/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPbase": "nxtPbase"
+      },
+      "namedRegex": "^/api/currency/rates/(?<nxtPbase>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/transactions/[id]",
+      "regex": "^/api/transactions/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/transactions/(?<nxtPid>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/api/admin/users",
+      "regex": "^/api/admin/users(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin/users(?:/)?$"
+    },
+    {
+      "page": "/api/auth/login",
+      "regex": "^/api/auth/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/login(?:/)?$"
+    },
+    {
+      "page": "/api/auth/me",
+      "regex": "^/api/auth/me(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/me(?:/)?$"
+    },
+    {
+      "page": "/api/auth/signup",
+      "regex": "^/api/auth/signup(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/signup(?:/)?$"
+    },
+    {
+      "page": "/api/cron/monthly-summary",
+      "regex": "^/api/cron/monthly\\-summary(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/cron/monthly\\-summary(?:/)?$"
+    },
+    {
+      "page": "/api/cron/recurring",
+      "regex": "^/api/cron/recurring(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/cron/recurring(?:/)?$"
+    },
+    {
+      "page": "/api/email/contact",
+      "regex": "^/api/email/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/email/contact(?:/)?$"
+    },
+    {
+      "page": "/api/transactions",
+      "regex": "^/api/transactions(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/transactions(?:/)?$"
+    },
+    {
+      "page": "/api/transactions/recurring",
+      "regex": "^/api/transactions/recurring(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/transactions/recurring(?:/)?$"
+    },
+    {
+      "page": "/api/transactions/recurring/bulk-delete",
+      "regex": "^/api/transactions/recurring/bulk\\-delete(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/transactions/recurring/bulk\\-delete(?:/)?$"
+    },
+    {
+      "page": "/api/transactions/recurring/bulk-update",
+      "regex": "^/api/transactions/recurring/bulk\\-update(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/transactions/recurring/bulk\\-update(?:/)?$"
+    },
+    {
+      "page": "/api/transactions/suggestions",
+      "regex": "^/api/transactions/suggestions(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/transactions/suggestions(?:/)?$"
+    },
+    {
+      "page": "/api/user/settings",
+      "regex": "^/api/user/settings(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/user/settings(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

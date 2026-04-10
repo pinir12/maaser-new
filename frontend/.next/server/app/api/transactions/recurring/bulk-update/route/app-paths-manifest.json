@@ -1,0 +1,3 @@
+{
+  "/api/transactions/recurring/bulk-update/route": "app/api/transactions/recurring/bulk-update/route.js"
+}

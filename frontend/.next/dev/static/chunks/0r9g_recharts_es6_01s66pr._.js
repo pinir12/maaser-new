@@ -12,11 +12,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 var PanoramaContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])(null);
-var useIsPanorama = function useIsPanorama() {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(PanoramaContext) != null;
-};
-var PanoramaContextProvider = function PanoramaContextProvider(_ref) {
-    var children = _ref.children;
+var useIsPanorama = ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(PanoramaContext) != null;
+var PanoramaContextProvider = (_ref)=>{
+    var { children } = _ref;
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](PanoramaContext.Provider, {
         value: true
     }, children);
@@ -86,7 +84,7 @@ function cartesianViewBoxToTrapezoid(box) {
         height: box.height
     };
 }
-var useViewBox = function useViewBox() {
+var useViewBox = ()=>{
     var _useAppSelector;
     var panorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     var rootViewBox = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartViewBox"]);
@@ -111,54 +109,48 @@ var manyComponentsThrowErrorsIfOffsetIsUndefined = {
     height: 0,
     brushBottom: 0
 };
-var useOffsetInternal = function useOffsetInternal() {
+var useOffsetInternal = ()=>{
     var _useAppSelector2;
     return (_useAppSelector2 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"])) !== null && _useAppSelector2 !== void 0 ? _useAppSelector2 : manyComponentsThrowErrorsIfOffsetIsUndefined;
 };
-var useChartWidth = function useChartWidth() {
+var useChartWidth = ()=>{
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartWidth"]);
 };
-var useChartHeight = function useChartHeight() {
+var useChartHeight = ()=>{
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartHeight"]);
 };
-var useMargin = function useMargin() {
+var useMargin = ()=>{
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useMargin.useAppSelector": function(state) {
-            return state.layout.margin;
-        }
+        "useMargin.useAppSelector": (state)=>state.layout.margin
     }["useMargin.useAppSelector"]);
 };
-var selectChartLayout = function selectChartLayout(state) {
-    return state.layout.layoutType;
-};
-var useChartLayout = function useChartLayout() {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(selectChartLayout);
-};
-var useCartesianChartLayout = function useCartesianChartLayout() {
+var selectChartLayout = (state)=>state.layout.layoutType;
+var useChartLayout = ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(selectChartLayout);
+var useCartesianChartLayout = ()=>{
     var layout = useChartLayout();
     if (layout === 'horizontal' || layout === 'vertical') {
         return layout;
     }
     return undefined;
 };
-var selectPolarChartLayout = function selectPolarChartLayout(state) {
+var selectPolarChartLayout = (state)=>{
     var layout = state.layout.layoutType;
     if (layout === 'centric' || layout === 'radial') {
         return layout;
     }
     return undefined;
 };
-var usePolarChartLayout = function usePolarChartLayout() {
+var usePolarChartLayout = ()=>{
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(selectPolarChartLayout);
 };
-var useIsInChartContext = function useIsInChartContext() {
+var useIsInChartContext = ()=>{
     /*
    * All charts provide a layout type in the chart context.
    * If we have a layout type, we are in a chart context.
    */ var layout = useChartLayout();
     return layout !== undefined;
 };
-var ReportChartSize = function ReportChartSize(props) {
+var ReportChartSize = (props)=>{
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     /*
    * Skip dispatching properties in panorama chart for two reasons:
@@ -166,7 +158,7 @@ var ReportChartSize = function ReportChartSize(props) {
    * 2. Brush reads these properties from redux store, and so they must remain stable
    *      to avoid circular dependency and infinite re-rendering.
    */ var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
-    var widthFromProps = props.width, heightFromProps = props.height;
+    var { width: widthFromProps, height: heightFromProps } = props;
     var responsiveContainerCalculations = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$component$2f$ResponsiveContainer$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useResponsiveContainerContext"])();
     var width = widthFromProps;
     var height = heightFromProps;
@@ -185,11 +177,11 @@ var ReportChartSize = function ReportChartSize(props) {
         height = responsiveContainerCalculations.height > 0 ? responsiveContainerCalculations.height : heightFromProps;
     }
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "ReportChartSize.useEffect": function() {
+        "ReportChartSize.useEffect": ()=>{
             if (!isPanorama && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isPositiveNumber"])(width) && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isPositiveNumber"])(height)) {
                 dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$layoutSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setChartSize"])({
-                    width: width,
-                    height: height
+                    width,
+                    height
                 }));
             }
         }
@@ -201,11 +193,11 @@ var ReportChartSize = function ReportChartSize(props) {
     ]);
     return null;
 };
-var ReportChartMargin = function ReportChartMargin(_ref) {
-    var margin = _ref.margin;
+var ReportChartMargin = (_ref)=>{
+    var { margin } = _ref;
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "ReportChartMargin.useEffect": function() {
+        "ReportChartMargin.useEffect": ()=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$layoutSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setMargin"])(margin));
         }
     }["ReportChartMargin.useEffect"], [
@@ -236,23 +228,23 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-var ChartDataContextProvider = function ChartDataContextProvider(props) {
-    var chartData = props.chartData;
+var ChartDataContextProvider = (props)=>{
+    var { chartData } = props;
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "ChartDataContextProvider.useEffect": function() {
+        "ChartDataContextProvider.useEffect": ()=>{
             if (isPanorama) {
                 // Panorama mode reuses data from the main chart, so we must not overwrite it here.
                 return ({
-                    "ChartDataContextProvider.useEffect": function() {
+                    "ChartDataContextProvider.useEffect": ()=>{
                     // there is nothing to clean up
                     }
                 })["ChartDataContextProvider.useEffect"];
             }
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$chartDataSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setChartData"])(chartData));
             return ({
-                "ChartDataContextProvider.useEffect": function() {
+                "ChartDataContextProvider.useEffect": ()=>{
                     dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$chartDataSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setChartData"])(undefined));
                 }
             })["ChartDataContextProvider.useEffect"];
@@ -264,14 +256,14 @@ var ChartDataContextProvider = function ChartDataContextProvider(props) {
     ]);
     return null;
 };
-var SetComputedData = function SetComputedData(props) {
-    var computedData = props.computedData;
+var SetComputedData = (props)=>{
+    var { computedData } = props;
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "SetComputedData.useEffect": function() {
+        "SetComputedData.useEffect": ()=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$chartDataSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setComputedData"])(computedData));
             return ({
-                "SetComputedData.useEffect": function() {
+                "SetComputedData.useEffect": ()=>{
                     dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$chartDataSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setChartData"])(undefined));
                 }
             })["SetComputedData.useEffect"];
@@ -282,20 +274,16 @@ var SetComputedData = function SetComputedData(props) {
     ]);
     return null;
 };
-var selectChartData = function selectChartData(state) {
-    return state.chartData.chartData;
-};
-var useChartData = function useChartData() {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(selectChartData);
-};
-var selectDataIndex = function selectDataIndex(state) {
-    var _state_chartData = state.chartData, dataStartIndex = _state_chartData.dataStartIndex, dataEndIndex = _state_chartData.dataEndIndex;
+var selectChartData = (state)=>state.chartData.chartData;
+var useChartData = ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(selectChartData);
+var selectDataIndex = (state)=>{
+    var { dataStartIndex, dataEndIndex } = state.chartData;
     return {
         startIndex: dataStartIndex,
         endIndex: dataEndIndex
     };
 };
-var useDataIndex = function useDataIndex() {
+var useDataIndex = ()=>{
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(selectDataIndex);
 };
 }),
@@ -308,12 +296,10 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/hooks.js [app-client] (ecmascript)");
 ;
-var useAccessibilityLayer = function useAccessibilityLayer() {
+var useAccessibilityLayer = ()=>{
     var _useAppSelector;
     return (_useAppSelector = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useAccessibilityLayer.useAppSelector": function(state) {
-            return state.rootProps.accessibilityLayer;
-        }
+        "useAccessibilityLayer.useAppSelector": (state)=>state.rootProps.accessibilityLayer
     }["useAccessibilityLayer.useAppSelector"])) !== null && _useAppSelector !== void 0 ? _useAppSelector : true;
 };
 }),
@@ -329,9 +315,7 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 ;
 var TooltipPortalContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])(null);
-var useTooltipPortal = function useTooltipPortal() {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(TooltipPortalContext);
-};
+var useTooltipPortal = ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(TooltipPortalContext);
 }),
 "[project]/frontend/node_modules/recharts/es6/context/legendPortalContext.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -345,9 +329,7 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 ;
 var LegendPortalContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])(null);
-var useLegendPortal = function useLegendPortal() {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(LegendPortalContext);
-};
+var useLegendPortal = ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(LegendPortalContext);
 }),
 "[project]/frontend/node_modules/recharts/es6/context/RegisterGraphicalItemId.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -364,8 +346,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 var GraphicalItemIdContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])(undefined);
-var RegisterGraphicalItemId = function RegisterGraphicalItemId(_ref) {
-    var id = _ref.id, type = _ref.type, children = _ref.children;
+var RegisterGraphicalItemId = (_ref)=>{
+    var { id, type, children } = _ref;
     var resolvedId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$useUniqueId$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useUniqueId"])("recharts-".concat(type), id);
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](GraphicalItemIdContext.Provider, {
         value: resolvedId
@@ -384,12 +366,10 @@ __turbopack_context__.s([
     "useTooltipAxisBandSize",
     ()=>useTooltipAxisBandSize
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/hooks.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/ChartUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/axisSelectors.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/tooltipSelectors.js [app-client] (ecmascript)");
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -421,14 +401,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -437,10 +417,8 @@ function _toPrimitive(t, r) {
 ;
 ;
 ;
-var useTooltipAxis = function useTooltipAxis() {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxis"]);
-};
-var useTooltipAxisBandSize = function useTooltipAxisBandSize() {
+var useTooltipAxis = ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxis"]);
+var useTooltipAxisBandSize = ()=>{
     var tooltipAxis = useTooltipAxis();
     var tooltipTicks = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisTicks"]);
     var tooltipAxisScale = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisScale"]);
@@ -467,10 +445,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/tooltipSlice.js [app-client] (ecmascript)");
 ;
 ;
-var useMouseEnterItemDispatch = function useMouseEnterItemDispatch(onMouseEnterFromProps, dataKey, graphicalItemId) {
+var useMouseEnterItemDispatch = (onMouseEnterFromProps, dataKey, graphicalItemId)=>{
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
-    return function(data, index) {
-        return function(event) {
+    return (data, index)=>(event)=>{
             onMouseEnterFromProps === null || onMouseEnterFromProps === void 0 || onMouseEnterFromProps(data, index, event);
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setActiveMouseOverItemIndex"])({
                 activeIndex: String(index),
@@ -479,21 +456,17 @@ var useMouseEnterItemDispatch = function useMouseEnterItemDispatch(onMouseEnterF
                 activeGraphicalItemId: graphicalItemId
             }));
         };
-    };
 };
-var useMouseLeaveItemDispatch = function useMouseLeaveItemDispatch(onMouseLeaveFromProps) {
+var useMouseLeaveItemDispatch = (onMouseLeaveFromProps)=>{
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
-    return function(data, index) {
-        return function(event) {
+    return (data, index)=>(event)=>{
             onMouseLeaveFromProps === null || onMouseLeaveFromProps === void 0 || onMouseLeaveFromProps(data, index, event);
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mouseLeaveItem"])());
         };
-    };
 };
-var useMouseClickItemDispatch = function useMouseClickItemDispatch(onMouseClickFromProps, dataKey, graphicalItemId) {
+var useMouseClickItemDispatch = (onMouseClickFromProps, dataKey, graphicalItemId)=>{
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
-    return function(data, index) {
-        return function(event) {
+    return (data, index)=>(event)=>{
             onMouseClickFromProps === null || onMouseClickFromProps === void 0 || onMouseClickFromProps(data, index, event);
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setActiveClickItemIndex"])({
                 activeIndex: String(index),
@@ -502,7 +475,6 @@ var useMouseClickItemDispatch = function useMouseClickItemDispatch(onMouseClickF
                 activeGraphicalItemId: graphicalItemId
             }));
         };
-    };
 };
 }),
 "[project]/frontend/node_modules/recharts/es6/context/ErrorBarContext.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -550,31 +522,27 @@ var initialContextState = {
     data: [],
     xAxisId: 'xAxis-0',
     yAxisId: 'yAxis-0',
-    dataPointFormatter: function dataPointFormatter() {
-        return {
+    dataPointFormatter: ()=>({
             x: 0,
             y: 0,
             value: 0
-        };
-    },
+        }),
     errorBarOffset: 0
 };
 var ErrorBarContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])(initialContextState);
 function SetErrorBarContext(props) {
-    var children = props.children, rest = _objectWithoutProperties(props, _excluded);
+    var { children } = props, rest = _objectWithoutProperties(props, _excluded);
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](ErrorBarContext.Provider, {
         value: rest
     }, children);
 }
-var useErrorBarContext = function useErrorBarContext() {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(ErrorBarContext);
-};
+var useErrorBarContext = ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(ErrorBarContext);
 function ReportErrorBarSettings(props) {
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     var graphicalItemId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$RegisterGraphicalItemId$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGraphicalItemId"])();
     var prevPropsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "ReportErrorBarSettings.useEffect": function() {
+        "ReportErrorBarSettings.useEffect": ()=>{
             if (graphicalItemId == null) {
                 // ErrorBar outside a graphical item context does not do anything.
                 return;
@@ -599,9 +567,9 @@ function ReportErrorBarSettings(props) {
         props
     ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "ReportErrorBarSettings.useEffect": function() {
+        "ReportErrorBarSettings.useEffect": ()=>{
             return ({
-                "ReportErrorBarSettings.useEffect": function() {
+                "ReportErrorBarSettings.useEffect": ()=>{
                     if (prevPropsRef.current != null && graphicalItemId != null) {
                         dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$errorBarSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["removeErrorBar"])({
                             itemId: graphicalItemId,
@@ -715,13 +683,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-var selectZIndexPortalElement = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(function(state) {
-    return state.zIndex.zIndexMap;
-}, function(_, zIndex) {
-    return zIndex;
-}, function(_, _zIndex, isPanorama) {
-    return isPanorama;
-}, function(zIndexMap, zIndex, isPanorama) {
+var selectZIndexPortalElement = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])((state)=>state.zIndex.zIndexMap, (_, zIndex)=>zIndex, (_, _zIndex, isPanorama)=>isPanorama, (zIndexMap, zIndex, isPanorama)=>{
     if (zIndex == null) {
         return undefined;
     }
@@ -734,16 +696,10 @@ var selectZIndexPortalElement = (0, __TURBOPACK__imported__module__$5b$project$5
     }
     return entry.element;
 });
-var selectAllRegisteredZIndexes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(function(state) {
-    return state.zIndex.zIndexMap;
-}, function(zIndexMap) {
-    var allNumbers = Object.keys(zIndexMap).map(function(zIndexStr) {
-        return parseInt(zIndexStr, 10);
-    }).concat(Object.values(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$zIndex$2f$DefaultZIndexes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DefaultZIndexes"]));
+var selectAllRegisteredZIndexes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])((state)=>state.zIndex.zIndexMap, (zIndexMap)=>{
+    var allNumbers = Object.keys(zIndexMap).map((zIndexStr)=>parseInt(zIndexStr, 10)).concat(Object.values(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$zIndex$2f$DefaultZIndexes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DefaultZIndexes"]));
     var uniqueNumbers = Array.from(new Set(allNumbers));
-    return uniqueNumbers.sort(function(a, b) {
-        return a - b;
-    });
+    return uniqueNumbers.sort((a, b)=>a - b);
 }, {
     memoizeOptions: {
         resultEqualityCheck: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$arrayEqualityCheck$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["arrayContentsAreEqualCheck"]
@@ -767,23 +723,23 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 function ZIndexSvgPortal(_ref) {
-    var zIndex = _ref.zIndex, isPanorama = _ref.isPanorama;
+    var { zIndex, isPanorama } = _ref;
     var ref = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "ZIndexSvgPortal.useLayoutEffect": function() {
+        "ZIndexSvgPortal.useLayoutEffect": ()=>{
             if (ref.current) {
                 dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$zIndexSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["registerZIndexPortalElement"])({
-                    zIndex: zIndex,
+                    zIndex,
                     element: ref.current,
-                    isPanorama: isPanorama
+                    isPanorama
                 }));
             }
             return ({
-                "ZIndexSvgPortal.useLayoutEffect": function() {
+                "ZIndexSvgPortal.useLayoutEffect": ()=>{
                     dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$zIndexSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["unregisterZIndexPortalElement"])({
-                        zIndex: zIndex,
-                        isPanorama: isPanorama
+                        zIndex,
+                        isPanorama
                     }));
                 }
             })["ZIndexSvgPortal.useLayoutEffect"];
@@ -801,31 +757,23 @@ function ZIndexSvgPortal(_ref) {
     });
 }
 function AllZIndexPortals(_ref2) {
-    var children = _ref2.children, isPanorama = _ref2.isPanorama;
+    var { children, isPanorama } = _ref2;
     var allRegisteredZIndexes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$zIndex$2f$zIndexSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAllRegisteredZIndexes"]);
     if (!allRegisteredZIndexes || allRegisteredZIndexes.length === 0) {
         return children;
     }
-    var allNegativeZIndexes = allRegisteredZIndexes.filter(function(zIndex) {
-        return zIndex < 0;
-    });
+    var allNegativeZIndexes = allRegisteredZIndexes.filter((zIndex)=>zIndex < 0);
     // We exclude zero on purpose - that is the default layer, and it doesn't need a portal.
-    var allPositiveZIndexes = allRegisteredZIndexes.filter(function(zIndex) {
-        return zIndex > 0;
-    });
-    return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], null, allNegativeZIndexes.map(function(zIndex) {
-        return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](ZIndexSvgPortal, {
+    var allPositiveZIndexes = allRegisteredZIndexes.filter((zIndex)=>zIndex > 0);
+    return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], null, allNegativeZIndexes.map((zIndex)=>/*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](ZIndexSvgPortal, {
             key: zIndex,
             zIndex: zIndex,
             isPanorama: isPanorama
-        });
-    }), children, allPositiveZIndexes.map(function(zIndex) {
-        return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](ZIndexSvgPortal, {
+        })), children, allPositiveZIndexes.map((zIndex)=>/*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](ZIndexSvgPortal, {
             key: zIndex,
             zIndex: zIndex,
             isPanorama: isPanorama
-        });
-    }));
+        })));
 }
 }),
 "[project]/frontend/node_modules/recharts/es6/zIndex/ZIndexLayer.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -850,7 +798,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 function ZIndexLayer(_ref) {
-    var zIndex = _ref.zIndex, children = _ref.children;
+    var { zIndex, children } = _ref;
     /*
    * If we are outside of chart, then we can't rely on the zIndex portal state,
    * so we just render normally.
@@ -874,9 +822,7 @@ function ZIndexLayer(_ref) {
     var registeredZIndexesRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(new Set());
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     var portalElement = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "ZIndexLayer.useAppSelector[portalElement]": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$zIndex$2f$zIndexSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectZIndexPortalElement"])(state, zIndex, isPanorama);
-        }
+        "ZIndexLayer.useAppSelector[portalElement]": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$zIndex$2f$zIndexSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectZIndexPortalElement"])(state, zIndex, isPanorama)
     }["ZIndexLayer.useAppSelector[portalElement]"]);
     /*
    * Lifecycle effect — handles both registration and deferred cleanup.
@@ -888,12 +834,12 @@ function ZIndexLayer(_ref) {
    * Deferred cleanup: once `portalElement` for the *new* zIndex becomes
    * available we unregister every stale zIndex that is no longer needed.
    */ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "ZIndexLayer.useLayoutEffect": function() {
+        "ZIndexLayer.useLayoutEffect": ()=>{
             if (!shouldRenderInPortal) {
                 // Portal rendering was disabled — clean up any stale registrations
                 var registered = registeredZIndexesRef.current;
                 registered.forEach({
-                    "ZIndexLayer.useLayoutEffect": function(z) {
+                    "ZIndexLayer.useLayoutEffect": (z)=>{
                         dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$zIndexSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["unregisterZIndexPortal"])({
                             zIndex: z
                         }));
@@ -911,7 +857,7 @@ function ZIndexLayer(_ref) {
      */ // Register the current zIndex (idempotent — skips if already registered)
             if (!registeredZIndexesRef.current.has(zIndex)) {
                 dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$zIndexSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["registerZIndexPortal"])({
-                    zIndex: zIndex
+                    zIndex
                 }));
                 registeredZIndexesRef.current.add(zIndex);
             }
@@ -920,7 +866,7 @@ function ZIndexLayer(_ref) {
                 lastPortalElementRef.current = portalElement;
                 var _registered = registeredZIndexesRef.current;
                 _registered.forEach({
-                    "ZIndexLayer.useLayoutEffect": function(z) {
+                    "ZIndexLayer.useLayoutEffect": (z)=>{
                         if (z !== zIndex) {
                             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$zIndexSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["unregisterZIndexPortal"])({
                                 zIndex: z
@@ -939,12 +885,12 @@ function ZIndexLayer(_ref) {
     ]);
     // Unmount-only cleanup — unregister everything when the component is removed
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "ZIndexLayer.useLayoutEffect": function() {
+        "ZIndexLayer.useLayoutEffect": ()=>{
             var registered = registeredZIndexesRef.current;
             return ({
-                "ZIndexLayer.useLayoutEffect": function() {
+                "ZIndexLayer.useLayoutEffect": ()=>{
                     registered.forEach({
-                        "ZIndexLayer.useLayoutEffect": function(z) {
+                        "ZIndexLayer.useLayoutEffect": (z)=>{
                             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$zIndexSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["unregisterZIndexPortal"])({
                                 zIndex: z
                             }));
@@ -976,12 +922,10 @@ __turbopack_context__.s([
     "getZIndexFromUnknown",
     ()=>getZIndexFromUnknown
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/isWellBehavedNumber.js [app-client] (ecmascript)");
 ;
-;
 function getZIndexFromUnknown(input, defaultZIndex) {
-    if (input && (typeof input === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(input)) === 'object' && 'zIndex' in input && typeof input.zIndex === 'number' && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(input.zIndex)) {
+    if (input && typeof input === 'object' && 'zIndex' in input && typeof input.zIndex === 'number' && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(input.zIndex)) {
         return input.zIndex;
     }
     return defaultZIndex;
@@ -1063,9 +1007,6 @@ __turbopack_context__.s([
     "defaultPieProps",
     ()=>defaultPieProps
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_define_property.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$get$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/es-toolkit/compat/get.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/clsx/dist/clsx.mjs [app-client] (ecmascript)");
@@ -1096,9 +1037,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$zIndex$2f$ZIndexLayer$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/zIndex/ZIndexLayer.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$zIndex$2f$DefaultZIndexes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/zIndex/DefaultZIndexes.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$getClassNameFromUnknown$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/getClassNameFromUnknown.js [app-client] (ecmascript)");
-;
-;
-;
 var _excluded = [
     "key"
 ], _excluded2 = [
@@ -1162,14 +1100,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -1220,16 +1158,12 @@ function _toPrimitive(t, r) {
  * Internal props, combination of external props + defaultProps + private Recharts state
  */ function SetPiePayloadLegend(props) {
     var cells = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "SetPiePayloadLegend.useMemo[cells]": function() {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ReactUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["findAllByType"])(props.children, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Cell$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Cell"]);
-        }
+        "SetPiePayloadLegend.useMemo[cells]": ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ReactUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["findAllByType"])(props.children, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Cell$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Cell"])
     }["SetPiePayloadLegend.useMemo[cells]"], [
         props.children
     ]);
     var legendPayload = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "SetPiePayloadLegend.useAppSelector[legendPayload]": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pieSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectPieLegend"])(state, props.id, cells);
-        }
+        "SetPiePayloadLegend.useAppSelector[legendPayload]": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pieSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectPieLegend"])(state, props.id, cells)
     }["SetPiePayloadLegend.useAppSelector[legendPayload]"]);
     if (legendPayload == null) {
         return null;
@@ -1249,38 +1183,36 @@ function getActiveShapeFill(activeShape) {
         var _fill = (_activeShape$props = activeShape.props) === null || _activeShape$props === void 0 ? void 0 : _activeShape$props.fill;
         return typeof _fill === 'string' ? _fill : undefined;
     }
-    var fill = activeShape.fill;
+    var { fill } = activeShape;
     return typeof fill === 'string' ? fill : undefined;
 }
-var SetPieTooltipEntrySettings = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["memo"](function(_ref) {
-    var dataKey = _ref.dataKey, nameKey = _ref.nameKey, sectors = _ref.sectors, stroke = _ref.stroke, strokeWidth = _ref.strokeWidth, fill = _ref.fill, name = _ref.name, hide = _ref.hide, tooltipType = _ref.tooltipType, id = _ref.id, activeShape = _ref.activeShape;
+var SetPieTooltipEntrySettings = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["memo"]((_ref)=>{
+    var { dataKey, nameKey, sectors, stroke, strokeWidth, fill, name, hide, tooltipType, id, activeShape } = _ref;
     var activeShapeFill = getActiveShapeFill(activeShape);
-    var tooltipDataDefinedOnItem = sectors.map(function(sector) {
+    var tooltipDataDefinedOnItem = sectors.map((sector)=>{
         var sectorTooltipPayload = sector.tooltipPayload;
         if (activeShapeFill == null || sectorTooltipPayload == null) {
             return sectorTooltipPayload;
         }
-        return sectorTooltipPayload.map(function(item) {
-            return _objectSpread(_objectSpread({}, item), {}, {
+        return sectorTooltipPayload.map((item)=>_objectSpread(_objectSpread({}, item), {}, {
                 color: activeShapeFill,
                 fill: activeShapeFill
-            });
-        });
+            }));
     });
     var tooltipEntrySettings = {
         dataDefinedOnItem: tooltipDataDefinedOnItem,
-        getPosition: function getPosition(index) {
+        getPosition: (index)=>{
             var _sectors$Number;
             return (_sectors$Number = sectors[Number(index)]) === null || _sectors$Number === void 0 ? void 0 : _sectors$Number.tooltipPosition;
         },
         settings: {
-            stroke: stroke,
-            strokeWidth: strokeWidth,
-            fill: fill,
-            dataKey: dataKey,
-            nameKey: nameKey,
+            stroke,
+            strokeWidth,
+            fill,
+            dataKey,
+            nameKey,
             name: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getTooltipNameProp"])(name, dataKey),
-            hide: hide,
+            hide,
             type: tooltipType,
             color: fill,
             unit: '',
@@ -1292,7 +1224,7 @@ var SetPieTooltipEntrySettings = /*#__PURE__*/ __TURBOPACK__imported__module__$5
         tooltipEntrySettings: tooltipEntrySettings
     });
 });
-var getTextAnchor = function getTextAnchor(x, cx) {
+var getTextAnchor = (x, cx)=>{
     if (x > cx) {
         return 'start';
     }
@@ -1301,14 +1233,14 @@ var getTextAnchor = function getTextAnchor(x, cx) {
     }
     return 'middle';
 };
-var getOuterRadius = function getOuterRadius(dataPoint, outerRadius, maxPieRadius) {
+var getOuterRadius = (dataPoint, outerRadius, maxPieRadius)=>{
     if (typeof outerRadius === 'function') {
         return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getPercentValue"])(outerRadius(dataPoint), maxPieRadius, maxPieRadius * 0.8);
     }
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getPercentValue"])(outerRadius, maxPieRadius, maxPieRadius * 0.8);
 };
-var parseCoordinateOfPie = function parseCoordinateOfPie(pieSettings, offset, dataPoint) {
-    var top = offset.top, left = offset.left, width = offset.width, height = offset.height;
+var parseCoordinateOfPie = (pieSettings, offset, dataPoint)=>{
+    var { top, left, width, height } = offset;
     var maxPieRadius = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getMaxRadius"])(width, height);
     var cx = left + (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getPercentValue"])(pieSettings.cx, width, width / 2);
     var cy = top + (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getPercentValue"])(pieSettings.cy, height, height / 2);
@@ -1316,19 +1248,19 @@ var parseCoordinateOfPie = function parseCoordinateOfPie(pieSettings, offset, da
     var outerRadius = getOuterRadius(dataPoint, pieSettings.outerRadius, maxPieRadius);
     var maxRadius = pieSettings.maxRadius || Math.sqrt(width * width + height * height) / 2;
     return {
-        cx: cx,
-        cy: cy,
-        innerRadius: innerRadius,
-        outerRadius: outerRadius,
-        maxRadius: maxRadius
+        cx,
+        cy,
+        innerRadius,
+        outerRadius,
+        maxRadius
     };
 };
-var parseDeltaAngle = function parseDeltaAngle(startAngle, endAngle) {
+var parseDeltaAngle = (startAngle, endAngle)=>{
     var sign = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mathSign"])(endAngle - startAngle);
     var deltaAngle = Math.min(Math.abs(endAngle - startAngle), 360);
     return sign * deltaAngle;
 };
-var renderLabelLineItem = function renderLabelLineItem(option, props) {
+var renderLabelLineItem = (option, props)=>{
     if (/*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isValidElement"](option)) {
         // @ts-expect-error we can't know if the type of props matches the element
         return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cloneElement"](option, props);
@@ -1338,13 +1270,13 @@ var renderLabelLineItem = function renderLabelLineItem(option, props) {
     }
     var className = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["clsx"])('recharts-pie-label-line', typeof option !== 'boolean' ? option.className : '');
     // React doesn't like it when we spread a key property onto an element
-    var key = props.key, otherProps = _objectWithoutProperties(props, _excluded);
+    var { key } = props, otherProps = _objectWithoutProperties(props, _excluded);
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$shape$2f$Curve$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Curve"], _extends({}, otherProps, {
         type: "linear",
         className: className
     }));
 };
-var renderLabelItem = function renderLabelItem(option, props, value) {
+var renderLabelItem = (option, props, value)=>{
     if (/*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isValidElement"](option)) {
         // @ts-expect-error element cloning is not typed
         return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cloneElement"](option, props);
@@ -1363,16 +1295,16 @@ var renderLabelItem = function renderLabelItem(option, props, value) {
     }), label);
 };
 function PieLabels(_ref2) {
-    var sectors = _ref2.sectors, props = _ref2.props, showLabels = _ref2.showLabels;
-    var label = props.label, labelLine = props.labelLine, dataKey = props.dataKey;
+    var { sectors, props, showLabels } = _ref2;
+    var { label, labelLine, dataKey } = props;
     if (!showLabels || !label || !sectors) {
         return null;
     }
     var pieProps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesNoEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["svgPropertiesNoEvents"])(props);
     var customLabelProps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesNoEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["svgPropertiesNoEventsFromUnknown"])(label);
     var customLabelLineProps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesNoEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["svgPropertiesNoEventsFromUnknown"])(labelLine);
-    var offsetRadius = (typeof label === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(label)) === 'object' && 'offsetRadius' in label && typeof label.offsetRadius === 'number' && label.offsetRadius || 20;
-    var labels = sectors.map(function(entry, i) {
+    var offsetRadius = typeof label === 'object' && 'offsetRadius' in label && typeof label.offsetRadius === 'number' && label.offsetRadius || 20;
+    var labels = sectors.map((entry, i)=>{
         var midAngle = (entry.startAngle + entry.endAngle) / 2;
         var endPoint = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["polarToCartesian"])(entry.cx, entry.cy, entry.outerRadius + offsetRadius, midAngle);
         var labelProps = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, pieProps), entry), {}, {
@@ -1405,9 +1337,9 @@ function PieLabels(_ref2) {
     }, labels);
 }
 function PieLabelList(_ref3) {
-    var sectors = _ref3.sectors, props = _ref3.props, showLabels = _ref3.showLabels;
-    var label = props.label;
-    if ((typeof label === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(label)) === 'object' && label != null && 'position' in label) {
+    var { sectors, props, showLabels } = _ref3;
+    var { label } = props;
+    if (typeof label === 'object' && label != null && 'position' in label) {
         return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$component$2f$LabelList$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LabelListFromLabelProp"], {
             label: label
         });
@@ -1419,18 +1351,18 @@ function PieLabelList(_ref3) {
     });
 }
 function PieSectors(props) {
-    var sectors = props.sectors, activeShape = props.activeShape, inactiveShapeProp = props.inactiveShape, allOtherPieProps = props.allOtherPieProps, shape = props.shape, id = props.id;
+    var { sectors, activeShape, inactiveShape: inactiveShapeProp, allOtherPieProps, shape, id } = props;
     var activeIndex = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectActiveTooltipIndex"]);
     var activeDataKey = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectActiveTooltipDataKey"]);
     var activeGraphicalItemId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectActiveTooltipGraphicalItemId"]);
-    var onMouseEnterFromProps = allOtherPieProps.onMouseEnter, onItemClickFromProps = allOtherPieProps.onClick, onMouseLeaveFromProps = allOtherPieProps.onMouseLeave, restOfAllOtherProps = _objectWithoutProperties(allOtherPieProps, _excluded2);
+    var { onMouseEnter: onMouseEnterFromProps, onClick: onItemClickFromProps, onMouseLeave: onMouseLeaveFromProps } = allOtherPieProps, restOfAllOtherProps = _objectWithoutProperties(allOtherPieProps, _excluded2);
     var onMouseEnterFromContext = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$tooltipContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMouseEnterItemDispatch"])(onMouseEnterFromProps, allOtherPieProps.dataKey, id);
     var onMouseLeaveFromContext = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$tooltipContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMouseLeaveItemDispatch"])(onMouseLeaveFromProps);
     var onClickFromContext = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$tooltipContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMouseClickItemDispatch"])(onItemClickFromProps, allOtherPieProps.dataKey, id);
     if (sectors == null || sectors.length === 0) {
         return null;
     }
-    return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], null, sectors.map(function(entry, i) {
+    return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], null, sectors.map((entry, i)=>{
         if ((entry === null || entry === void 0 ? void 0 : entry.startAngle) === 0 && (entry === null || entry === void 0 ? void 0 : entry.endAngle) === 0 && sectors.length !== 1) return null;
         // For Pie charts, when multiple Pies share the same dataKey, we need to ensure only the hovered Pie's sector is active.
         // We do this by checking if the active graphical item ID matches this Pie's ID.
@@ -1438,11 +1370,12 @@ function PieSectors(props) {
         var isActive = String(i) === activeIndex && (activeDataKey == null || allOtherPieProps.dataKey === activeDataKey) && graphicalItemMatches;
         var inactiveShape = activeIndex ? inactiveShapeProp : null;
         var sectorOptions = activeShape && isActive ? activeShape : inactiveShape;
-        var _obj;
-        var sectorProps = _objectSpread(_objectSpread({}, entry), {}, (_obj = {
+        var sectorProps = _objectSpread(_objectSpread({}, entry), {}, {
             stroke: entry.stroke,
-            tabIndex: -1
-        }, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_obj, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Constants$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DATA_ITEM_INDEX_ATTRIBUTE_NAME"], i), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_obj, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Constants$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DATA_ITEM_GRAPHICAL_ITEM_ID_ATTRIBUTE_NAME"], id), _obj));
+            tabIndex: -1,
+            [__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Constants$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DATA_ITEM_INDEX_ATTRIBUTE_NAME"]]: i,
+            [__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Constants$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DATA_ITEM_GRAPHICAL_ITEM_ID_ATTRIBUTE_NAME"]]: id
+        });
         return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$container$2f$Layer$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Layer"], _extends({
             key: "sector-".concat(entry === null || entry === void 0 ? void 0 : entry.startAngle, "-").concat(entry === null || entry === void 0 ? void 0 : entry.endAngle, "-").concat(entry.midAngle, "-").concat(i),
             tabIndex: -1,
@@ -1461,17 +1394,15 @@ function PieSectors(props) {
 }
 function computePieSectors(_ref4) {
     var _pieSettings$paddingA;
-    var pieSettings = _ref4.pieSettings, displayedData = _ref4.displayedData, cells = _ref4.cells, offset = _ref4.offset;
-    var cornerRadius = pieSettings.cornerRadius, startAngle = pieSettings.startAngle, endAngle = pieSettings.endAngle, dataKey = pieSettings.dataKey, nameKey = pieSettings.nameKey, tooltipType = pieSettings.tooltipType;
+    var { pieSettings, displayedData, cells, offset } = _ref4;
+    var { cornerRadius, startAngle, endAngle, dataKey, nameKey, tooltipType } = pieSettings;
     var minAngle = Math.abs(pieSettings.minAngle);
     var deltaAngle = parseDeltaAngle(startAngle, endAngle);
     var absDeltaAngle = Math.abs(deltaAngle);
     var paddingAngle = displayedData.length <= 1 ? 0 : (_pieSettings$paddingA = pieSettings.paddingAngle) !== null && _pieSettings$paddingA !== void 0 ? _pieSettings$paddingA : 0;
-    var notZeroItemCount = displayedData.filter(function(entry) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(entry, dataKey, 0) !== 0;
-    }).length;
+    var notZeroItemCount = displayedData.filter((entry)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(entry, dataKey, 0) !== 0).length;
     var totalPaddingAngle = (absDeltaAngle >= 360 ? notZeroItemCount : notZeroItemCount - 1) * paddingAngle;
-    var sum = displayedData.reduce(function(result, entry) {
+    var sum = displayedData.reduce((result, entry)=>{
         var val = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(entry, dataKey, 0);
         return result + ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(val) ? val : 0);
     }, 0);
@@ -1479,7 +1410,7 @@ function computePieSectors(_ref4) {
     // natural angle falls below the minAngle threshold. Otherwise, minAngle
     // unnecessarily shifts all segments even when none need the boost.
     // See: https://github.com/recharts/recharts/issues/6814
-    var needsMinAngleAdjustment = minAngle > 0 && sum > 0 && displayedData.some(function(entry) {
+    var needsMinAngleAdjustment = minAngle > 0 && sum > 0 && displayedData.some((entry)=>{
         var val = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(entry, dataKey, 0);
         var percent = ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(val) ? val : 0) / sum;
         return val !== 0 && percent * absDeltaAngle < minAngle;
@@ -1489,7 +1420,7 @@ function computePieSectors(_ref4) {
     var sectors;
     if (sum > 0) {
         var prev;
-        sectors = displayedData.map(function(entry, i) {
+        sectors = displayedData.map((entry, i)=>{
             var val = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(entry, dataKey, 0);
             var name = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(entry, nameKey, i);
             var coordinate = parseCoordinateOfPie(pieSettings, offset, entry);
@@ -1508,10 +1439,10 @@ function computePieSectors(_ref4) {
             var middleRadius = (coordinate.innerRadius + coordinate.outerRadius) / 2;
             var tooltipPayload = [
                 {
-                    name: name,
+                    name,
                     value: val,
                     payload: entryWithCellInfo,
-                    dataKey: dataKey,
+                    dataKey,
                     type: tooltipType,
                     color: sectorColor,
                     fill: sectorColor,
@@ -1520,16 +1451,16 @@ function computePieSectors(_ref4) {
             ];
             var tooltipPosition = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["polarToCartesian"])(coordinate.cx, coordinate.cy, middleRadius, midAngle);
             prev = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, pieSettings.presentationProps), {}, {
-                percent: percent,
+                percent,
                 cornerRadius: typeof cornerRadius === 'string' ? parseFloat(cornerRadius) : cornerRadius,
-                name: name,
-                tooltipPayload: tooltipPayload,
-                midAngle: midAngle,
-                middleRadius: middleRadius,
-                tooltipPosition: tooltipPosition
+                name,
+                tooltipPayload,
+                midAngle,
+                middleRadius,
+                tooltipPosition
             }, entryWithCellInfo), coordinate), {}, {
                 value: val,
-                dataKey: dataKey,
+                dataKey,
                 startAngle: tempStartAngle,
                 endAngle: tempEndAngle,
                 payload: entryWithCellInfo,
@@ -1541,15 +1472,14 @@ function computePieSectors(_ref4) {
     return sectors;
 }
 function PieLabelListProvider(_ref5) {
-    var showLabels = _ref5.showLabels, sectors = _ref5.sectors, children = _ref5.children;
+    var { showLabels, sectors, children } = _ref5;
     var labelListEntries = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "PieLabelListProvider.useMemo[labelListEntries]": function() {
+        "PieLabelListProvider.useMemo[labelListEntries]": ()=>{
             if (!showLabels || !sectors) {
                 return [];
             }
             return sectors.map({
-                "PieLabelListProvider.useMemo[labelListEntries]": function(entry) {
-                    return {
+                "PieLabelListProvider.useMemo[labelListEntries]": (entry)=>({
                         value: entry.value,
                         payload: entry.payload,
                         clockWise: false,
@@ -1564,8 +1494,7 @@ function PieLabelListProvider(_ref5) {
                             clockWise: false
                         },
                         fill: entry.fill
-                    };
-                }
+                    })
             }["PieLabelListProvider.useMemo[labelListEntries]"]);
         }
     }["PieLabelListProvider.useMemo[labelListEntries]"], [
@@ -1577,13 +1506,13 @@ function PieLabelListProvider(_ref5) {
     }, children);
 }
 function SectorsWithAnimation(_ref6) {
-    var props = _ref6.props, previousSectorsRef = _ref6.previousSectorsRef, id = _ref6.id;
-    var sectors = props.sectors, isAnimationActive = props.isAnimationActive, animationBegin = props.animationBegin, animationDuration = props.animationDuration, animationEasing = props.animationEasing, activeShape = props.activeShape, inactiveShape = props.inactiveShape, onAnimationStart = props.onAnimationStart, onAnimationEnd = props.onAnimationEnd;
+    var { props, previousSectorsRef, id } = _ref6;
+    var { sectors, isAnimationActive, animationBegin, animationDuration, animationEasing, activeShape, inactiveShape, onAnimationStart, onAnimationEnd } = props;
     var animationId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$useAnimationId$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAnimationId"])(props, 'recharts-pie-');
     var prevSectors = previousSectorsRef.current;
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), isAnimating = _useState[0], setIsAnimating = _useState[1];
+    var [isAnimating, setIsAnimating] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     var handleAnimationEnd = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "SectorsWithAnimation.useCallback[handleAnimationEnd]": function() {
+        "SectorsWithAnimation.useCallback[handleAnimationEnd]": ()=>{
             if (typeof onAnimationEnd === 'function') {
                 onAnimationEnd();
             }
@@ -1593,7 +1522,7 @@ function SectorsWithAnimation(_ref6) {
         onAnimationEnd
     ]);
     var handleAnimationStart = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "SectorsWithAnimation.useCallback[handleAnimationStart]": function() {
+        "SectorsWithAnimation.useCallback[handleAnimationStart]": ()=>{
             if (typeof onAnimationStart === 'function') {
                 onAnimationStart();
             }
@@ -1614,12 +1543,12 @@ function SectorsWithAnimation(_ref6) {
         onAnimationStart: handleAnimationStart,
         onAnimationEnd: handleAnimationEnd,
         key: animationId
-    }, function(t) {
+    }, (t)=>{
         var _first$startAngle;
         var stepData = [];
         var first = sectors && sectors[0];
         var curAngle = (_first$startAngle = first === null || first === void 0 ? void 0 : first.startAngle) !== null && _first$startAngle !== void 0 ? _first$startAngle : 0;
-        sectors === null || sectors === void 0 || sectors.forEach(function(entry, index) {
+        sectors === null || sectors === void 0 || sectors.forEach((entry, index)=>{
             var prev = prevSectors && prevSectors[index];
             var paddingAngle = index > 0 ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$get$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(entry, 'paddingAngle', 0) : 0;
             if (prev) {
@@ -1631,7 +1560,7 @@ function SectorsWithAnimation(_ref6) {
                 stepData.push(latest);
                 curAngle = latest.endAngle;
             } else {
-                var endAngle = entry.endAngle, startAngle = entry.startAngle;
+                var { endAngle, startAngle } = entry;
                 var deltaAngle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["interpolate"])(0, endAngle - startAngle, t);
                 var _latest = _objectSpread(_objectSpread({}, entry), {}, {
                     startAngle: curAngle + paddingAngle,
@@ -1682,19 +1611,15 @@ var defaultPieProps = {
     zIndex: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$zIndex$2f$DefaultZIndexes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DefaultZIndexes"].area
 };
 function PieImpl(props) {
-    var id = props.id, propsWithoutId = _objectWithoutProperties(props, _excluded3);
-    var hide = props.hide, className = props.className, rootTabIndex = props.rootTabIndex;
+    var { id } = props, propsWithoutId = _objectWithoutProperties(props, _excluded3);
+    var { hide, className, rootTabIndex } = props;
     var cells = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "PieImpl.useMemo[cells]": function() {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ReactUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["findAllByType"])(props.children, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Cell$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Cell"]);
-        }
+        "PieImpl.useMemo[cells]": ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ReactUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["findAllByType"])(props.children, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Cell$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Cell"])
     }["PieImpl.useMemo[cells]"], [
         props.children
     ]);
     var sectors = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "PieImpl.useAppSelector[sectors]": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pieSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectPieSectors"])(state, id, cells);
-        }
+        "PieImpl.useAppSelector[sectors]": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pieSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectPieSectors"])(state, id, cells)
     }["PieImpl.useAppSelector[sectors]"]);
     var previousSectorsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     var layerClass = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["clsx"])('recharts-pie', className);
@@ -1724,7 +1649,7 @@ function PieImpl(props) {
         className: layerClass
     }, /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](SectorsWithAnimation, {
         props: _objectSpread(_objectSpread({}, propsWithoutId), {}, {
-            sectors: sectors
+            sectors
         }),
         previousSectorsRef: previousSectorsRef,
         id: id
@@ -1736,13 +1661,12 @@ function PieImpl(props) {
  * @provides CellReader
  */ function PieFn(outsideProps) {
     var props = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$resolveDefaultProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveDefaultProps"])(outsideProps, defaultPieProps);
-    var externalId = props.id, propsWithoutId = _objectWithoutProperties(props, _excluded4);
+    var { id: externalId } = props, propsWithoutId = _objectWithoutProperties(props, _excluded4);
     var presentationProps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesNoEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["svgPropertiesNoEvents"])(propsWithoutId);
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$RegisterGraphicalItemId$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RegisterGraphicalItemId"], {
         id: externalId,
         type: "pie"
-    }, function(id) {
-        return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], null, /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$SetGraphicalItem$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SetPolarGraphicalItem"], {
+    }, (id)=>/*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], null, /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$SetGraphicalItem$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SetPolarGraphicalItem"], {
             type: "pie",
             id: id,
             data: propsWithoutId.data,
@@ -1770,8 +1694,7 @@ function PieImpl(props) {
             id: id
         })), /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](PieImpl, _extends({}, propsWithoutId, {
             id: id
-        })));
-    });
+        }))));
 }
 var Pie = PieFn;
 // @ts-expect-error we need to set the displayName for debugging purposes
@@ -1822,11 +1745,11 @@ function _objectWithoutPropertiesLoose(r, e) {
 ;
 ;
 ;
-var Surface = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function(props, ref) {
-    var children = props.children, width = props.width, height = props.height, viewBox = props.viewBox, className = props.className, style = props.style, title = props.title, desc = props.desc, others = _objectWithoutProperties(props, _excluded);
+var Surface = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((props, ref)=>{
+    var { children, width, height, viewBox, className, style, title, desc } = props, others = _objectWithoutProperties(props, _excluded);
     var svgView = viewBox || {
-        width: width,
-        height: height,
+        width,
+        height,
         x: 0,
         y: 0
     };
@@ -1904,14 +1827,14 @@ var FULL_WIDTH_AND_HEIGHT = {
    * Interestingly, Firefox does not have this problem, but it doesn't hurt to add the style anyway.
    */ display: 'block'
 };
-var MainChartSurface = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function(props, ref) {
+var MainChartSurface = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((props, ref)=>{
     var width = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useChartWidth"])();
     var height = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useChartHeight"])();
     var hasAccessibilityLayer = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$accessibilityContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAccessibilityLayer"])();
     if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isPositiveNumber"])(width) || !(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isPositiveNumber"])(height)) {
         return null;
     }
-    var children = props.children, otherAttributes = props.otherAttributes, title = props.title, desc = props.desc;
+    var { children, otherAttributes, title, desc } = props;
     var tabIndex, role;
     if (otherAttributes != null) {
         if (typeof otherAttributes.tabIndex === 'number') {
@@ -1936,13 +1859,13 @@ var MainChartSurface = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proj
         ref: ref
     }), children);
 });
-var BrushPanoramaSurface = function BrushPanoramaSurface(_ref) {
-    var children = _ref.children;
+var BrushPanoramaSurface = (_ref)=>{
+    var { children } = _ref;
     var brushDimensions = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$brushSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectBrushDimensions"]);
     if (!brushDimensions) {
         return null;
     }
-    var width = brushDimensions.width, height = brushDimensions.height, y = brushDimensions.y, x = brushDimensions.x;
+    var { width, height, y, x } = brushDimensions;
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$container$2f$Surface$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Surface"], {
         width: width,
         height: height,
@@ -1950,8 +1873,8 @@ var BrushPanoramaSurface = function BrushPanoramaSurface(_ref) {
         y: y
     }, children);
 };
-var RootSurface = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function(_ref2, ref) {
-    var children = _ref2.children, rest = _objectWithoutProperties(_ref2, _excluded);
+var RootSurface = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((_ref2, ref)=>{
+    var { children } = _ref2, rest = _objectWithoutProperties(_ref2, _excluded);
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     if (isPanorama) {
         return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](BrushPanoramaSurface, null, /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$zIndex$2f$ZIndexPortal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AllZIndexPortals"], {
@@ -1974,7 +1897,6 @@ __turbopack_context__.s([
     "useClipPathId",
     ()=>useClipPathId
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/hooks.js [app-client] (ecmascript)");
@@ -1982,16 +1904,15 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-;
 var ClipPathIdContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])(undefined);
-var ClipPathProvider = function ClipPathProvider(_ref) {
-    var children = _ref.children;
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("".concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["uniqueId"])('recharts'), "-clip")), 1), clipPathId = _useState[0];
+var ClipPathProvider = (_ref)=>{
+    var { children } = _ref;
+    var [clipPathId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("".concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["uniqueId"])('recharts'), "-clip"));
     var plotArea = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePlotArea"])();
     if (plotArea == null) {
         return null;
     }
-    var x = plotArea.x, y = plotArea.y, width = plotArea.width, height = plotArea.height;
+    var { x, y, width, height } = plotArea;
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](ClipPathIdContext.Provider, {
         value: clipPathId
     }, /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"]("defs", null, /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"]("clipPath", {
@@ -2003,7 +1924,7 @@ var ClipPathProvider = function ClipPathProvider(_ref) {
         width: width
     }))), children);
 };
-var useClipPathId = function useClipPathId() {
+var useClipPathId = ()=>{
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(ClipPathIdContext);
 };
 }),
@@ -2045,8 +1966,8 @@ function _objectWithoutPropertiesLoose(r, e) {
 ;
 ;
 ;
-var Layer = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"](function(props, ref) {
-    var children = props.children, className = props.className, others = _objectWithoutProperties(props, _excluded);
+var Layer = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"]((props, ref)=>{
+    var { children, className } = props, others = _objectWithoutProperties(props, _excluded);
     var layerClass = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["clsx"])('recharts-layer', className);
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"]("g", _extends({
         className: layerClass
@@ -2077,7 +1998,6 @@ __turbopack_context__.s([
     "useTooltipChartSynchronisation",
     ()=>useTooltipChartSynchronisation
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/hooks.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/rootPropsSelectors.js [app-client] (ecmascript)");
@@ -2090,7 +2010,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/context/chartLayoutContext.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$chartDataSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/chartDataSlice.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
-;
 var _excluded = [
     "x",
     "y"
@@ -2126,14 +2045,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -2188,104 +2107,101 @@ function _objectWithoutPropertiesLoose(r, e) {
     var layout = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useChartLayout"])();
     var viewBox = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useViewBox"])();
     var className = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useTooltipSyncEventsListener.useAppSelector[className]": function(state) {
-            return state.rootProps.className;
-        }
+        "useTooltipSyncEventsListener.useAppSelector[className]": (state)=>state.rootProps.className
     }["useTooltipSyncEventsListener.useAppSelector[className]"]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "useTooltipSyncEventsListener.useEffect": function() {
+        "useTooltipSyncEventsListener.useEffect": ()=>{
             if (mySyncId == null) {
                 // This chart is not synchronised with any other chart so we don't need to listen for any events.
                 return __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["noop"];
             }
-            var listener = function listener(incomingSyncId, action, emitter) {
-                if (myEventEmitter === emitter) {
-                    // We don't want to dispatch actions that we sent ourselves.
-                    return;
-                }
-                if (mySyncId !== incomingSyncId) {
-                    // This event is not for this chart
-                    return;
-                }
-                /*
+            var listener = {
+                "useTooltipSyncEventsListener.useEffect.listener": (incomingSyncId, action, emitter)=>{
+                    if (myEventEmitter === emitter) {
+                        // We don't want to dispatch actions that we sent ourselves.
+                        return;
+                    }
+                    if (mySyncId !== incomingSyncId) {
+                        // This event is not for this chart
+                        return;
+                    }
+                    /*
        * Handle source chart deactivation (mouseLeave) for ALL sync methods.
        * This must be checked before any syncMethod-specific logic to ensure
        * sourceViewBox is cleared, which allows isReceivingSynchronisation
        * to become false and lets the normal emission flow resume.
        */ if (action.payload.active === false) {
-                    dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setSyncInteraction"])({
-                        active: false,
-                        coordinate: undefined,
-                        dataKey: undefined,
-                        index: null,
-                        label: undefined,
-                        sourceViewBox: undefined,
-                        graphicalItemId: undefined
-                    }));
-                    return;
-                }
-                if (syncMethod === 'index') {
-                    var _action$payload;
-                    if (viewBox && action !== null && action !== void 0 && (_action$payload = action.payload) !== null && _action$payload !== void 0 && _action$payload.coordinate && action.payload.sourceViewBox) {
-                        var _action$payload$coord = action.payload.coordinate, _x = _action$payload$coord.x, _y = _action$payload$coord.y, otherCoordinateProps = _objectWithoutProperties(_action$payload$coord, _excluded);
-                        var _action_payload_sourceViewBox = action.payload.sourceViewBox, sourceX = _action_payload_sourceViewBox.x, sourceY = _action_payload_sourceViewBox.y, sourceWidth = _action_payload_sourceViewBox.width, sourceHeight = _action_payload_sourceViewBox.height;
-                        var scaledCoordinate = _objectSpread(_objectSpread({}, otherCoordinateProps), {}, {
-                            x: viewBox.x + (sourceWidth ? (_x - sourceX) / sourceWidth : 0) * viewBox.width,
-                            y: viewBox.y + (sourceHeight ? (_y - sourceY) / sourceHeight : 0) * viewBox.height
-                        });
-                        dispatch(_objectSpread(_objectSpread({}, action), {}, {
-                            payload: _objectSpread(_objectSpread({}, action.payload), {}, {
-                                coordinate: scaledCoordinate
-                            })
+                        dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setSyncInteraction"])({
+                            active: false,
+                            coordinate: undefined,
+                            dataKey: undefined,
+                            index: null,
+                            label: undefined,
+                            sourceViewBox: undefined,
+                            graphicalItemId: undefined
                         }));
-                    } else {
-                        dispatch(action);
+                        return;
                     }
-                    return;
-                }
-                if (tooltipTicks == null) {
-                    // for the other two sync methods, we need the ticks to be available
-                    return;
-                }
-                var activeTick;
-                if (typeof syncMethod === 'function') {
-                    /*
+                    if (syncMethod === 'index') {
+                        var _action$payload;
+                        if (viewBox && action !== null && action !== void 0 && (_action$payload = action.payload) !== null && _action$payload !== void 0 && _action$payload.coordinate && action.payload.sourceViewBox) {
+                            var _action$payload$coord = action.payload.coordinate, { x: _x, y: _y } = _action$payload$coord, otherCoordinateProps = _objectWithoutProperties(_action$payload$coord, _excluded);
+                            var { x: sourceX, y: sourceY, width: sourceWidth, height: sourceHeight } = action.payload.sourceViewBox;
+                            var scaledCoordinate = _objectSpread(_objectSpread({}, otherCoordinateProps), {}, {
+                                x: viewBox.x + (sourceWidth ? (_x - sourceX) / sourceWidth : 0) * viewBox.width,
+                                y: viewBox.y + (sourceHeight ? (_y - sourceY) / sourceHeight : 0) * viewBox.height
+                            });
+                            dispatch(_objectSpread(_objectSpread({}, action), {}, {
+                                payload: _objectSpread(_objectSpread({}, action.payload), {}, {
+                                    coordinate: scaledCoordinate
+                                })
+                            }));
+                        } else {
+                            dispatch(action);
+                        }
+                        return;
+                    }
+                    if (tooltipTicks == null) {
+                        // for the other two sync methods, we need the ticks to be available
+                        return;
+                    }
+                    var activeTick;
+                    if (typeof syncMethod === 'function') {
+                        /*
          * This is what the data shape in 2.x CategoricalChartState used to look like.
          * In 3.x we store things differently but let's try to keep the old shape for compatibility.
          */ var syncMethodParam = {
-                        activeTooltipIndex: action.payload.index == null ? undefined : Number(action.payload.index),
-                        isTooltipActive: action.payload.active,
-                        activeIndex: action.payload.index == null ? undefined : Number(action.payload.index),
-                        activeLabel: action.payload.label,
-                        activeDataKey: action.payload.dataKey,
-                        activeCoordinate: action.payload.coordinate
-                    };
-                    // Call a callback function. If there is an application specific algorithm
-                    var activeTooltipIndex = syncMethod(tooltipTicks, syncMethodParam);
-                    activeTick = tooltipTicks[activeTooltipIndex];
-                } else if (syncMethod === 'value') {
-                    // labels are always strings, tick.value might be a string or a number, depending on axis type
-                    activeTick = tooltipTicks.find({
-                        "useTooltipSyncEventsListener.useEffect.listener": function(tick) {
-                            return String(tick.value) === action.payload.label;
-                        }
-                    }["useTooltipSyncEventsListener.useEffect.listener"]);
-                }
-                var coordinate = action.payload.coordinate;
-                if (coordinate == null || viewBox == null) {
-                    dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setSyncInteraction"])({
-                        active: false,
-                        coordinate: undefined,
-                        dataKey: undefined,
-                        index: null,
-                        label: undefined,
-                        sourceViewBox: undefined,
-                        graphicalItemId: undefined
-                    }));
-                    return;
-                }
-                if (activeTick == null) {
-                    /*
+                            activeTooltipIndex: action.payload.index == null ? undefined : Number(action.payload.index),
+                            isTooltipActive: action.payload.active,
+                            activeIndex: action.payload.index == null ? undefined : Number(action.payload.index),
+                            activeLabel: action.payload.label,
+                            activeDataKey: action.payload.dataKey,
+                            activeCoordinate: action.payload.coordinate
+                        };
+                        // Call a callback function. If there is an application specific algorithm
+                        var activeTooltipIndex = syncMethod(tooltipTicks, syncMethodParam);
+                        activeTick = tooltipTicks[activeTooltipIndex];
+                    } else if (syncMethod === 'value') {
+                        // labels are always strings, tick.value might be a string or a number, depending on axis type
+                        activeTick = tooltipTicks.find({
+                            "useTooltipSyncEventsListener.useEffect.listener": (tick)=>String(tick.value) === action.payload.label
+                        }["useTooltipSyncEventsListener.useEffect.listener"]);
+                    }
+                    var { coordinate } = action.payload;
+                    if (coordinate == null || viewBox == null) {
+                        dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setSyncInteraction"])({
+                            active: false,
+                            coordinate: undefined,
+                            dataKey: undefined,
+                            index: null,
+                            label: undefined,
+                            sourceViewBox: undefined,
+                            graphicalItemId: undefined
+                        }));
+                        return;
+                    }
+                    if (activeTick == null) {
+                        /*
          * The label from the source chart doesn't match any tick in this chart.
          * This happens when synced charts have different data arrays
          * (e.g., one chart has 3 data points while another has 252).
@@ -2297,37 +2213,38 @@ function _objectWithoutPropertiesLoose(r, e) {
          * Without this, the chart would emit a counter-sync event with active: false,
          * cascading to clear tooltips on ALL other synced charts.
          */ dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setSyncInteraction"])({
-                        active: false,
-                        coordinate: undefined,
-                        dataKey: undefined,
-                        index: null,
-                        label: undefined,
+                            active: false,
+                            coordinate: undefined,
+                            dataKey: undefined,
+                            index: null,
+                            label: undefined,
+                            sourceViewBox: action.payload.sourceViewBox,
+                            graphicalItemId: undefined
+                        }));
+                        return;
+                    }
+                    var { x, y } = coordinate;
+                    var validateChartX = Math.min(x, viewBox.x + viewBox.width);
+                    var validateChartY = Math.min(y, viewBox.y + viewBox.height);
+                    var activeCoordinate = {
+                        x: layout === 'horizontal' ? activeTick.coordinate : validateChartX,
+                        y: layout === 'horizontal' ? validateChartY : activeTick.coordinate
+                    };
+                    var syncAction = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setSyncInteraction"])({
+                        active: action.payload.active,
+                        coordinate: activeCoordinate,
+                        dataKey: action.payload.dataKey,
+                        index: String(activeTick.index),
+                        label: action.payload.label,
                         sourceViewBox: action.payload.sourceViewBox,
-                        graphicalItemId: undefined
-                    }));
-                    return;
+                        graphicalItemId: action.payload.graphicalItemId
+                    });
+                    dispatch(syncAction);
                 }
-                var x = coordinate.x, y = coordinate.y;
-                var validateChartX = Math.min(x, viewBox.x + viewBox.width);
-                var validateChartY = Math.min(y, viewBox.y + viewBox.height);
-                var activeCoordinate = {
-                    x: layout === 'horizontal' ? activeTick.coordinate : validateChartX,
-                    y: layout === 'horizontal' ? validateChartY : activeTick.coordinate
-                };
-                var syncAction = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setSyncInteraction"])({
-                    active: action.payload.active,
-                    coordinate: activeCoordinate,
-                    dataKey: action.payload.dataKey,
-                    index: String(activeTick.index),
-                    label: action.payload.label,
-                    sourceViewBox: action.payload.sourceViewBox,
-                    graphicalItemId: action.payload.graphicalItemId
-                });
-                dispatch(syncAction);
-            };
+            }["useTooltipSyncEventsListener.useEffect.listener"];
             __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Events$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["eventCenter"].on(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Events$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TOOLTIP_SYNC_EVENT"], listener);
             return ({
-                "useTooltipSyncEventsListener.useEffect": function() {
+                "useTooltipSyncEventsListener.useEffect": ()=>{
                     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Events$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["eventCenter"].off(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Events$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TOOLTIP_SYNC_EVENT"], listener);
                 }
             })["useTooltipSyncEventsListener.useEffect"];
@@ -2351,23 +2268,25 @@ function _objectWithoutPropertiesLoose(r, e) {
     var myEventEmitter = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectEventEmitter"]);
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "useBrushSyncEventsListener.useEffect": function() {
+        "useBrushSyncEventsListener.useEffect": ()=>{
             if (mySyncId == null) {
                 // This chart is not synchronised with any other chart so we don't need to listen for any events.
                 return __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["noop"];
             }
-            var listener = function listener(incomingSyncId, action, emitter) {
-                if (myEventEmitter === emitter) {
-                    // We don't want to dispatch actions that we sent ourselves.
-                    return;
+            var listener = {
+                "useBrushSyncEventsListener.useEffect.listener": (incomingSyncId, action, emitter)=>{
+                    if (myEventEmitter === emitter) {
+                        // We don't want to dispatch actions that we sent ourselves.
+                        return;
+                    }
+                    if (mySyncId === incomingSyncId) {
+                        dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$chartDataSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setDataStartEndIndexes"])(action));
+                    }
                 }
-                if (mySyncId === incomingSyncId) {
-                    dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$chartDataSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setDataStartEndIndexes"])(action));
-                }
-            };
+            }["useBrushSyncEventsListener.useEffect.listener"];
             __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Events$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["eventCenter"].on(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Events$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BRUSH_SYNC_EVENT"], listener);
             return ({
-                "useBrushSyncEventsListener.useEffect": function() {
+                "useBrushSyncEventsListener.useEffect": ()=>{
                     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Events$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["eventCenter"].off(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Events$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BRUSH_SYNC_EVENT"], listener);
                 }
             })["useBrushSyncEventsListener.useEffect"];
@@ -2381,7 +2300,7 @@ function _objectWithoutPropertiesLoose(r, e) {
 function useSynchronisedEventsFromOtherCharts() {
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "useSynchronisedEventsFromOtherCharts.useEffect": function() {
+        "useSynchronisedEventsFromOtherCharts.useEffect": ()=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$optionsSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createEventEmitter"])());
         }
     }["useSynchronisedEventsFromOtherCharts.useEffect"], [
@@ -2392,9 +2311,7 @@ function useSynchronisedEventsFromOtherCharts() {
 }
 function useTooltipChartSynchronisation(tooltipEventType, trigger, activeCoordinate, activeLabel, activeIndex, isTooltipActive) {
     var activeDataKey = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useTooltipChartSynchronisation.useAppSelector[activeDataKey]": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipDataKey"])(state, tooltipEventType, trigger);
-        }
+        "useTooltipChartSynchronisation.useAppSelector[activeDataKey]": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipDataKey"])(state, tooltipEventType, trigger)
     }["useTooltipChartSynchronisation.useAppSelector[activeDataKey]"]);
     var activeGraphicalItemId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectActiveTooltipGraphicalItemId"]);
     var eventEmitterSymbol = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectEventEmitter"]);
@@ -2410,7 +2327,7 @@ function useTooltipChartSynchronisation(tooltipEventType, trigger, activeCoordin
    */ var isReceivingSynchronisation = (tooltipState === null || tooltipState === void 0 ? void 0 : tooltipState.sourceViewBox) != null;
     var viewBox = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useViewBox"])();
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "useTooltipChartSynchronisation.useEffect": function() {
+        "useTooltipChartSynchronisation.useEffect": ()=>{
             if (isReceivingSynchronisation) {
                 /*
        * This chart is currently receiving synchronisation events from another chart.
@@ -2459,17 +2376,13 @@ function useBrushChartSynchronisation() {
     var syncId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectSyncId"]);
     var eventEmitterSymbol = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectEventEmitter"]);
     var brushStartIndex = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useBrushChartSynchronisation.useAppSelector[brushStartIndex]": function(state) {
-            return state.chartData.dataStartIndex;
-        }
+        "useBrushChartSynchronisation.useAppSelector[brushStartIndex]": (state)=>state.chartData.dataStartIndex
     }["useBrushChartSynchronisation.useAppSelector[brushStartIndex]"]);
     var brushEndIndex = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useBrushChartSynchronisation.useAppSelector[brushEndIndex]": function(state) {
-            return state.chartData.dataEndIndex;
-        }
+        "useBrushChartSynchronisation.useAppSelector[brushEndIndex]": (state)=>state.chartData.dataEndIndex
     }["useBrushChartSynchronisation.useAppSelector[brushEndIndex]"]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "useBrushChartSynchronisation.useEffect": function() {
+        "useBrushChartSynchronisation.useEffect": ()=>{
             if (syncId == null || brushStartIndex == null || brushEndIndex == null || eventEmitterSymbol == null) {
                 return;
             }
@@ -2494,8 +2407,6 @@ __turbopack_context__.s([
     "RechartsWrapper",
     ()=>RechartsWrapper
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/clsx/dist/clsx.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/tooltipSlice.js [app-client] (ecmascript)");
@@ -2510,8 +2421,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$legendPortalContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/context/legendPortalContext.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/context/chartLayoutContext.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$component$2f$ResponsiveContainer$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/component/ResponsiveContainer.js [app-client] (ecmascript)");
-;
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -2543,14 +2452,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -2573,7 +2482,7 @@ function _extends() {
 ;
 ;
 ;
-var EventSynchronizer = function EventSynchronizer() {
+var EventSynchronizer = ()=>{
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$synchronisation$2f$useChartSynchronisation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSynchronisedEventsFromOtherCharts"])();
     return null;
 };
@@ -2589,17 +2498,17 @@ function getNumberOrZero(value) {
     }
     return 0;
 }
-var ResponsiveDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function(props, ref) {
+var ResponsiveDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((props, ref)=>{
     var _props$style, _props$style2;
     var observerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+    var [sizes, setSizes] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
         containerWidth: getNumberOrZero((_props$style = props.style) === null || _props$style === void 0 ? void 0 : _props$style.width),
         containerHeight: getNumberOrZero((_props$style2 = props.style) === null || _props$style2 === void 0 ? void 0 : _props$style2.height)
-    }), 2), sizes = _useState[0], setSizes = _useState[1];
+    });
     var setContainerSize = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "ResponsiveDiv.useCallback[setContainerSize]": function(newWidth, newHeight) {
+        "ResponsiveDiv.useCallback[setContainerSize]": (newWidth, newHeight)=>{
             setSizes({
-                "ResponsiveDiv.useCallback[setContainerSize]": function(prevState) {
+                "ResponsiveDiv.useCallback[setContainerSize]": (prevState)=>{
                     var roundedWidth = Math.round(newWidth);
                     var roundedHeight = Math.round(newHeight);
                     if (prevState.containerWidth === roundedWidth && prevState.containerHeight === roundedHeight) {
@@ -2614,7 +2523,7 @@ var ResponsiveDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project
         }
     }["ResponsiveDiv.useCallback[setContainerSize]"], []);
     var innerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "ResponsiveDiv.useCallback[innerRef]": function(node) {
+        "ResponsiveDiv.useCallback[innerRef]": (node)=>{
             // 1. First, call the external ref if it was provided
             if (typeof ref === 'function') {
                 ref(node);
@@ -2626,16 +2535,18 @@ var ResponsiveDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project
             }
             // 3. Initiate a new ResizeObserver on the valid DOM node
             if (node != null && typeof ResizeObserver !== 'undefined') {
-                var _node_getBoundingClientRect = node.getBoundingClientRect(), containerWidth = _node_getBoundingClientRect.width, containerHeight = _node_getBoundingClientRect.height;
+                var { width: containerWidth, height: containerHeight } = node.getBoundingClientRect();
                 setContainerSize(containerWidth, containerHeight);
-                var callback = function callback(entries) {
-                    var entry = entries[0];
-                    if (entry == null) {
-                        return;
+                var callback = {
+                    "ResponsiveDiv.useCallback[innerRef].callback": (entries)=>{
+                        var entry = entries[0];
+                        if (entry == null) {
+                            return;
+                        }
+                        var { width, height } = entry.contentRect;
+                        setContainerSize(width, height);
                     }
-                    var _entry_contentRect = entry.contentRect, width = _entry_contentRect.width, height = _entry_contentRect.height;
-                    setContainerSize(width, height);
-                };
+                }["ResponsiveDiv.useCallback[innerRef].callback"];
                 var observer = new ResizeObserver(callback);
                 observer.observe(node);
                 observerRef.current = observer;
@@ -2646,9 +2557,9 @@ var ResponsiveDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project
         setContainerSize
     ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "ResponsiveDiv.useEffect": function() {
+        "ResponsiveDiv.useEffect": ()=>{
             return ({
-                "ResponsiveDiv.useEffect": function() {
+                "ResponsiveDiv.useEffect": ()=>{
                     var observer = observerRef.current;
                     if (observer != null) {
                         observer.disconnect();
@@ -2666,16 +2577,16 @@ var ResponsiveDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project
         ref: innerRef
     }, props)));
 });
-var ReadSizeOnceDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function(props, ref) {
-    var width = props.width, height = props.height;
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+var ReadSizeOnceDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((props, ref)=>{
+    var { width, height } = props;
+    var [sizes, setSizes] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
         containerWidth: getNumberOrZero(width),
         containerHeight: getNumberOrZero(height)
-    }), 2), sizes = _useState[0], setSizes = _useState[1];
+    });
     var setContainerSize = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "ReadSizeOnceDiv.useCallback[setContainerSize]": function(newWidth, newHeight) {
+        "ReadSizeOnceDiv.useCallback[setContainerSize]": (newWidth, newHeight)=>{
             setSizes({
-                "ReadSizeOnceDiv.useCallback[setContainerSize]": function(prevState) {
+                "ReadSizeOnceDiv.useCallback[setContainerSize]": (prevState)=>{
                     var roundedWidth = Math.round(newWidth);
                     var roundedHeight = Math.round(newHeight);
                     if (prevState.containerWidth === roundedWidth && prevState.containerHeight === roundedHeight) {
@@ -2690,12 +2601,12 @@ var ReadSizeOnceDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
         }
     }["ReadSizeOnceDiv.useCallback[setContainerSize]"], []);
     var innerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "ReadSizeOnceDiv.useCallback[innerRef]": function(node) {
+        "ReadSizeOnceDiv.useCallback[innerRef]": (node)=>{
             if (typeof ref === 'function') {
                 ref(node);
             }
             if (node != null) {
-                var _node_getBoundingClientRect = node.getBoundingClientRect(), containerWidth = _node_getBoundingClientRect.width, containerHeight = _node_getBoundingClientRect.height;
+                var { width: containerWidth, height: containerHeight } = node.getBoundingClientRect();
                 setContainerSize(containerWidth, containerHeight);
             }
         }
@@ -2710,8 +2621,8 @@ var ReadSizeOnceDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
         ref: innerRef
     }, props)));
 });
-var StaticDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function(props, ref) {
-    var width = props.width, height = props.height;
+var StaticDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((props, ref)=>{
+    var { width, height } = props;
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], null, /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ReportChartSize"], {
         width: width,
         height: height
@@ -2719,8 +2630,8 @@ var StaticDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2
         ref: ref
     }, props)));
 });
-var NonResponsiveDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function(props, ref) {
-    var width = props.width, height = props.height;
+var NonResponsiveDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((props, ref)=>{
+    var { width, height } = props;
     // When width or height are percentages or CSS short names, read size from DOM once
     if (typeof width === 'string' || typeof height === 'string') {
         return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](ReadSizeOnceDiv, _extends({}, props, {
@@ -2747,18 +2658,18 @@ var NonResponsiveDiv = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proj
 function getWrapperDivComponent(responsive) {
     return responsive ? ResponsiveDiv : NonResponsiveDiv;
 }
-var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function(props, ref) {
-    var children = props.children, className = props.className, heightFromProps = props.height, onClick = props.onClick, onContextMenu = props.onContextMenu, onDoubleClick = props.onDoubleClick, onMouseDown = props.onMouseDown, onMouseEnter = props.onMouseEnter, onMouseLeave = props.onMouseLeave, onMouseMove = props.onMouseMove, onMouseUp = props.onMouseUp, onTouchEnd = props.onTouchEnd, onTouchMove = props.onTouchMove, onTouchStart = props.onTouchStart, style = props.style, widthFromProps = props.width, responsive = props.responsive, _props_dispatchTouchEvents = props.dispatchTouchEvents, dispatchTouchEvents = _props_dispatchTouchEvents === void 0 ? true : _props_dispatchTouchEvents;
+var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((props, ref)=>{
+    var { children, className, height: heightFromProps, onClick, onContextMenu, onDoubleClick, onMouseDown, onMouseEnter, onMouseLeave, onMouseMove, onMouseUp, onTouchEnd, onTouchMove, onTouchStart, style, width: widthFromProps, responsive, dispatchTouchEvents = true } = props;
     var containerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null), 2), tooltipPortal = _useState[0], setTooltipPortal = _useState[1];
-    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null), 2), legendPortal = _useState1[0], setLegendPortal = _useState1[1];
+    var [tooltipPortal, setTooltipPortal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    var [legendPortal, setLegendPortal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     var setScaleRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$useReportScale$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useReportScale"])();
     var responsiveContainerCalculations = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$component$2f$ResponsiveContainer$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useResponsiveContainerContext"])();
     var width = (responsiveContainerCalculations === null || responsiveContainerCalculations === void 0 ? void 0 : responsiveContainerCalculations.width) > 0 ? responsiveContainerCalculations.width : widthFromProps;
     var height = (responsiveContainerCalculations === null || responsiveContainerCalculations === void 0 ? void 0 : responsiveContainerCalculations.height) > 0 ? responsiveContainerCalculations.height : heightFromProps;
     var innerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[innerRef]": function(node) {
+        "RechartsWrapper.useCallback[innerRef]": (node)=>{
             setScaleRef(node);
             if (typeof ref === 'function') {
                 ref(node);
@@ -2776,7 +2687,7 @@ var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
         setLegendPortal
     ]);
     var myOnClick = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[myOnClick]": function(e) {
+        "RechartsWrapper.useCallback[myOnClick]": (e)=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$mouseEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mouseClickAction"])(e));
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$externalEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["externalEventAction"])({
                 handler: onClick,
@@ -2788,7 +2699,7 @@ var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
         onClick
     ]);
     var myOnMouseEnter = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[myOnMouseEnter]": function(e) {
+        "RechartsWrapper.useCallback[myOnMouseEnter]": (e)=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$mouseEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mouseMoveAction"])(e));
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$externalEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["externalEventAction"])({
                 handler: onMouseEnter,
@@ -2800,7 +2711,7 @@ var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
         onMouseEnter
     ]);
     var myOnMouseLeave = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[myOnMouseLeave]": function(e) {
+        "RechartsWrapper.useCallback[myOnMouseLeave]": (e)=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mouseLeaveChart"])());
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$externalEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["externalEventAction"])({
                 handler: onMouseLeave,
@@ -2812,7 +2723,7 @@ var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
         onMouseLeave
     ]);
     var myOnMouseMove = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[myOnMouseMove]": function(e) {
+        "RechartsWrapper.useCallback[myOnMouseMove]": (e)=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$mouseEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mouseMoveAction"])(e));
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$externalEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["externalEventAction"])({
                 handler: onMouseMove,
@@ -2824,28 +2735,28 @@ var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
         onMouseMove
     ]);
     var onFocus = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[onFocus]": function() {
+        "RechartsWrapper.useCallback[onFocus]": ()=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$keyboardEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["focusAction"])());
         }
     }["RechartsWrapper.useCallback[onFocus]"], [
         dispatch
     ]);
     var onBlur = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[onBlur]": function() {
+        "RechartsWrapper.useCallback[onBlur]": ()=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$keyboardEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["blurAction"])());
         }
     }["RechartsWrapper.useCallback[onBlur]"], [
         dispatch
     ]);
     var onKeyDown = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[onKeyDown]": function(e) {
+        "RechartsWrapper.useCallback[onKeyDown]": (e)=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$keyboardEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["keyDownAction"])(e.key));
         }
     }["RechartsWrapper.useCallback[onKeyDown]"], [
         dispatch
     ]);
     var myOnContextMenu = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[myOnContextMenu]": function(e) {
+        "RechartsWrapper.useCallback[myOnContextMenu]": (e)=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$externalEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["externalEventAction"])({
                 handler: onContextMenu,
                 reactEvent: e
@@ -2856,7 +2767,7 @@ var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
         onContextMenu
     ]);
     var myOnDoubleClick = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[myOnDoubleClick]": function(e) {
+        "RechartsWrapper.useCallback[myOnDoubleClick]": (e)=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$externalEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["externalEventAction"])({
                 handler: onDoubleClick,
                 reactEvent: e
@@ -2867,7 +2778,7 @@ var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
         onDoubleClick
     ]);
     var myOnMouseDown = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[myOnMouseDown]": function(e) {
+        "RechartsWrapper.useCallback[myOnMouseDown]": (e)=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$externalEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["externalEventAction"])({
                 handler: onMouseDown,
                 reactEvent: e
@@ -2878,7 +2789,7 @@ var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
         onMouseDown
     ]);
     var myOnMouseUp = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[myOnMouseUp]": function(e) {
+        "RechartsWrapper.useCallback[myOnMouseUp]": (e)=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$externalEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["externalEventAction"])({
                 handler: onMouseUp,
                 reactEvent: e
@@ -2889,7 +2800,7 @@ var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
         onMouseUp
     ]);
     var myOnTouchStart = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[myOnTouchStart]": function(e) {
+        "RechartsWrapper.useCallback[myOnTouchStart]": (e)=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$externalEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["externalEventAction"])({
                 handler: onTouchStart,
                 reactEvent: e
@@ -2908,7 +2819,7 @@ var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
    * ourselves. Fortunately, there's a convenient method for that:
    * https://developer.mozilla.org/en-US/docs/Web/API/Document/elementFromPoint
    */ var myOnTouchMove = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[myOnTouchMove]": function(e) {
+        "RechartsWrapper.useCallback[myOnTouchMove]": (e)=>{
             if (dispatchTouchEvents) {
                 dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$touchEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["touchEventAction"])(e));
             }
@@ -2923,7 +2834,7 @@ var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
         onTouchMove
     ]);
     var myOnTouchEnd = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RechartsWrapper.useCallback[myOnTouchEnd]": function(e) {
+        "RechartsWrapper.useCallback[myOnTouchEnd]": (e)=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$externalEventsMiddleware$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["externalEventAction"])({
                 handler: onTouchEnd,
                 reactEvent: e
@@ -2945,8 +2856,8 @@ var RechartsWrapper = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
         style: _objectSpread({
             position: 'relative',
             cursor: 'default',
-            width: width,
-            height: height
+            width,
+            height
         }, style),
         onClick: myOnClick,
         onContextMenu: myOnContextMenu,
@@ -3015,8 +2926,8 @@ function _objectWithoutPropertiesLoose(r, e) {
 ;
 ;
 ;
-var CategoricalChart = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function(props, ref) {
-    var width = props.width, height = props.height, responsive = props.responsive, children = props.children, className = props.className, style = props.style, compact = props.compact, title = props.title, desc = props.desc, others = _objectWithoutProperties(props, _excluded);
+var CategoricalChart = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((props, ref)=>{
+    var { width, height, responsive, children, className, style, compact, title, desc } = props, others = _objectWithoutProperties(props, _excluded);
     var attrs = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesNoEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["svgPropertiesNoEvents"])(others);
     /*
    * The "compact" mode is used as the panorama within Brush.
@@ -3065,7 +2976,6 @@ __turbopack_context__.s([
     "defaultCartesianChartProps",
     ()=>defaultCartesianChartProps
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$RechartsStoreProvider$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/RechartsStoreProvider.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartDataContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/context/chartDataContext.js [app-client] (ecmascript)");
@@ -3075,7 +2985,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$chart$2f$CategoricalChart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/chart/CategoricalChart.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$resolveDefaultProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/resolveDefaultProps.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$eventSettingsSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/eventSettingsSlice.js [app-client] (ecmascript)");
-;
 function _extends() {
     return _extends = ("TURBOPACK compile-time truthy", 1) ? Object.assign.bind() : "TURBOPACK unreachable", _extends.apply(null, arguments);
 }
@@ -3110,14 +3019,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -3152,17 +3061,17 @@ var defaultCartesianChartProps = _objectSpread({
 var CartesianChart = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function CartesianChart(props, ref) {
     var _categoricalChartProp;
     var rootChartProps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$resolveDefaultProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveDefaultProps"])(props.categoricalChartProps, defaultCartesianChartProps);
-    var chartName = props.chartName, defaultTooltipEventType = props.defaultTooltipEventType, validateTooltipEventTypes = props.validateTooltipEventTypes, tooltipPayloadSearcher = props.tooltipPayloadSearcher, categoricalChartProps = props.categoricalChartProps;
+    var { chartName, defaultTooltipEventType, validateTooltipEventTypes, tooltipPayloadSearcher, categoricalChartProps } = props;
     var options = {
-        chartName: chartName,
-        defaultTooltipEventType: defaultTooltipEventType,
-        validateTooltipEventTypes: validateTooltipEventTypes,
-        tooltipPayloadSearcher: tooltipPayloadSearcher,
+        chartName,
+        defaultTooltipEventType,
+        validateTooltipEventTypes,
+        tooltipPayloadSearcher,
         eventEmitter: undefined
     };
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$RechartsStoreProvider$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RechartsStoreProvider"], {
         preloadedState: {
-            options: options
+            options
         },
         reduxStoreName: (_categoricalChartProp = categoricalChartProps.id) !== null && _categoricalChartProp !== void 0 ? _categoricalChartProp : chartName
     }, /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartDataContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ChartDataContextProvider"], {
@@ -3207,7 +3116,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var allowedTooltipTypes = [
     'axis'
 ];
-var AreaChart = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function(props, ref) {
+var AreaChart = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((props, ref)=>{
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$chart$2f$CartesianChart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CartesianChart"], {
         chartName: "AreaChart",
         defaultTooltipEventType: "axis",
@@ -3236,7 +3145,7 @@ var allowedTooltipTypes = [
     'axis',
     'item'
 ];
-var BarChart = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function(props, ref) {
+var BarChart = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((props, ref)=>{
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$chart$2f$CartesianChart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CartesianChart"], {
         chartName: "BarChart",
         defaultTooltipEventType: "axis",
@@ -3256,7 +3165,6 @@ __turbopack_context__.s([
     "defaultPolarChartProps",
     ()=>defaultPolarChartProps
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$RechartsStoreProvider$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/RechartsStoreProvider.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartDataContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/context/chartDataContext.js [app-client] (ecmascript)");
@@ -3267,7 +3175,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$chart$2f$CategoricalChart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/chart/CategoricalChart.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$resolveDefaultProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/resolveDefaultProps.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$eventSettingsSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/eventSettingsSlice.js [app-client] (ecmascript)");
-;
 var _excluded = [
     "layout"
 ];
@@ -3323,14 +3230,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -3370,18 +3277,18 @@ var defaultPolarChartProps = _objectSpread({
 var PolarChart = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function PolarChart(props, ref) {
     var _polarChartProps$id;
     var polarChartProps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$resolveDefaultProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveDefaultProps"])(props.categoricalChartProps, defaultPolarChartProps);
-    var layout = polarChartProps.layout, otherCategoricalProps = _objectWithoutProperties(polarChartProps, _excluded);
-    var chartName = props.chartName, defaultTooltipEventType = props.defaultTooltipEventType, validateTooltipEventTypes = props.validateTooltipEventTypes, tooltipPayloadSearcher = props.tooltipPayloadSearcher;
+    var { layout } = polarChartProps, otherCategoricalProps = _objectWithoutProperties(polarChartProps, _excluded);
+    var { chartName, defaultTooltipEventType, validateTooltipEventTypes, tooltipPayloadSearcher } = props;
     var options = {
-        chartName: chartName,
-        defaultTooltipEventType: defaultTooltipEventType,
-        validateTooltipEventTypes: validateTooltipEventTypes,
-        tooltipPayloadSearcher: tooltipPayloadSearcher,
+        chartName,
+        defaultTooltipEventType,
+        validateTooltipEventTypes,
+        tooltipPayloadSearcher,
         eventEmitter: undefined
     };
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$RechartsStoreProvider$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RechartsStoreProvider"], {
         preloadedState: {
-            options: options
+            options
         },
         reduxStoreName: (_polarChartProps$id = polarChartProps.id) !== null && _polarChartProps$id !== void 0 ? _polarChartProps$id : chartName
     }, /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartDataContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ChartDataContextProvider"], {
@@ -3425,12 +3332,10 @@ __turbopack_context__.s([
     "defaultPieChartProps",
     ()=>defaultPieChartProps
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$optionsSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/optionsSlice.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$chart$2f$PolarChart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/chart/PolarChart.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$resolveDefaultProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/resolveDefaultProps.js [app-client] (ecmascript)");
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -3462,14 +3367,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -3487,7 +3392,7 @@ var defaultPieChartProps = _objectSpread(_objectSpread({}, __TURBOPACK__imported
     startAngle: 0,
     endAngle: 360
 });
-var PieChart = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(function(props, ref) {
+var PieChart = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((props, ref)=>{
     var propsWithDefaults = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$resolveDefaultProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveDefaultProps"])(props, defaultPieChartProps);
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$chart$2f$PolarChart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PolarChart"], {
         chartName: "PieChart",
@@ -3560,29 +3465,23 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-var useXAxis = function useXAxis(xAxisId) {
+var useXAxis = (xAxisId)=>{
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useXAxis.useAppSelector": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisWithScale"])(state, 'xAxis', xAxisId, isPanorama);
-        }
+        "useXAxis.useAppSelector": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisWithScale"])(state, 'xAxis', xAxisId, isPanorama)
     }["useXAxis.useAppSelector"]);
 };
-var useYAxis = function useYAxis(yAxisId) {
+var useYAxis = (yAxisId)=>{
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useYAxis.useAppSelector": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisWithScale"])(state, 'yAxis', yAxisId, isPanorama);
-        }
+        "useYAxis.useAppSelector": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisWithScale"])(state, 'yAxis', yAxisId, isPanorama)
     }["useYAxis.useAppSelector"]);
 };
 var useXAxisScale = function useXAxisScale() {
     var xAxisId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     var scale = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useXAxisScale.useAppSelector[scale]": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisScale"])(state, 'xAxis', xAxisId, isPanorama);
-        }
+        "useXAxisScale.useAppSelector[scale]": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisScale"])(state, 'xAxis', xAxisId, isPanorama)
     }["useXAxisScale.useAppSelector[scale]"]);
     return scale === null || scale === void 0 ? void 0 : scale.map;
 };
@@ -3590,9 +3489,7 @@ var useYAxisScale = function useYAxisScale() {
     var yAxisId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     var scale = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useYAxisScale.useAppSelector[scale]": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisScale"])(state, 'yAxis', yAxisId, isPanorama);
-        }
+        "useYAxisScale.useAppSelector[scale]": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisScale"])(state, 'yAxis', yAxisId, isPanorama)
     }["useYAxisScale.useAppSelector[scale]"]);
     return scale === null || scale === void 0 ? void 0 : scale.map;
 };
@@ -3600,68 +3497,52 @@ var useXAxisInverseScale = function useXAxisInverseScale() {
     var xAxisId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useXAxisInverseScale.useAppSelector": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisInverseScale"])(state, 'xAxis', xAxisId, isPanorama);
-        }
+        "useXAxisInverseScale.useAppSelector": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisInverseScale"])(state, 'xAxis', xAxisId, isPanorama)
     }["useXAxisInverseScale.useAppSelector"]);
 };
 var useXAxisInverseDataSnapScale = function useXAxisInverseDataSnapScale() {
     var xAxisId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useXAxisInverseDataSnapScale.useAppSelector": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisInverseDataSnapScale"])(state, 'xAxis', xAxisId, isPanorama);
-        }
+        "useXAxisInverseDataSnapScale.useAppSelector": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisInverseDataSnapScale"])(state, 'xAxis', xAxisId, isPanorama)
     }["useXAxisInverseDataSnapScale.useAppSelector"]);
 };
 var useXAxisInverseTickSnapScale = function useXAxisInverseTickSnapScale() {
     var xAxisId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useXAxisInverseTickSnapScale.useAppSelector": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisInverseTickSnapScale"])(state, 'xAxis', xAxisId);
-        }
+        "useXAxisInverseTickSnapScale.useAppSelector": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisInverseTickSnapScale"])(state, 'xAxis', xAxisId)
     }["useXAxisInverseTickSnapScale.useAppSelector"]);
 };
 var useYAxisInverseScale = function useYAxisInverseScale() {
     var yAxisId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useYAxisInverseScale.useAppSelector": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisInverseScale"])(state, 'yAxis', yAxisId, isPanorama);
-        }
+        "useYAxisInverseScale.useAppSelector": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisInverseScale"])(state, 'yAxis', yAxisId, isPanorama)
     }["useYAxisInverseScale.useAppSelector"]);
 };
 var useYAxisInverseDataSnapScale = function useYAxisInverseDataSnapScale() {
     var yAxisId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useYAxisInverseDataSnapScale.useAppSelector": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisInverseDataSnapScale"])(state, 'yAxis', yAxisId, isPanorama);
-        }
+        "useYAxisInverseDataSnapScale.useAppSelector": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisInverseDataSnapScale"])(state, 'yAxis', yAxisId, isPanorama)
     }["useYAxisInverseDataSnapScale.useAppSelector"]);
 };
 var useYAxisInverseTickSnapScale = function useYAxisInverseTickSnapScale() {
     var yAxisId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useYAxisInverseTickSnapScale.useAppSelector": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisInverseTickSnapScale"])(state, 'yAxis', yAxisId);
-        }
+        "useYAxisInverseTickSnapScale.useAppSelector": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisInverseTickSnapScale"])(state, 'yAxis', yAxisId)
     }["useYAxisInverseTickSnapScale.useAppSelector"]);
 };
 var useXAxisTicks = function useXAxisTicks() {
     var xAxisId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useXAxisTicks.useAppSelector": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectRenderedTicksOfAxis"])(state, 'xAxis', xAxisId);
-        }
+        "useXAxisTicks.useAppSelector": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectRenderedTicksOfAxis"])(state, 'xAxis', xAxisId)
     }["useXAxisTicks.useAppSelector"]);
 };
 var useYAxisTicks = function useYAxisTicks() {
     var yAxisId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useYAxisTicks.useAppSelector": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectRenderedTicksOfAxis"])(state, 'yAxis', yAxisId);
-        }
+        "useYAxisTicks.useAppSelector": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectRenderedTicksOfAxis"])(state, 'yAxis', yAxisId)
     }["useYAxisTicks.useAppSelector"]);
 };
 var useCartesianScale = function useCartesianScale(dataPoint) {
@@ -3682,41 +3563,37 @@ var useCartesianScale = function useCartesianScale(dataPoint) {
         y: pixelY
     };
 };
-var useActiveTooltipLabel = function useActiveTooltipLabel() {
+var useActiveTooltipLabel = ()=>{
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectActiveLabel"]);
 };
-var useOffset = function useOffset() {
+var useOffset = ()=>{
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffset$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffset"]);
 };
-var usePlotArea = function usePlotArea() {
+var usePlotArea = ()=>{
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectPlotArea$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectPlotArea"]);
 };
-var useActiveTooltipDataPoints = function useActiveTooltipDataPoints() {
+var useActiveTooltipDataPoints = ()=>{
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectActiveTooltipDataPoints"]);
 };
 var useXAxisDomain = function useXAxisDomain() {
     var xAxisId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useXAxisDomain.useAppSelector": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisDomain"])(state, 'xAxis', xAxisId, isPanorama);
-        }
+        "useXAxisDomain.useAppSelector": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisDomain"])(state, 'xAxis', xAxisId, isPanorama)
     }["useXAxisDomain.useAppSelector"]);
 };
 var useYAxisDomain = function useYAxisDomain() {
     var yAxisId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useYAxisDomain.useAppSelector": function(state) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisDomain"])(state, 'yAxis', yAxisId, isPanorama);
-        }
+        "useYAxisDomain.useAppSelector": (state)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisDomain"])(state, 'yAxis', yAxisId, isPanorama)
     }["useYAxisDomain.useAppSelector"]);
 };
-var useIsTooltipActive = function useIsTooltipActive() {
+var useIsTooltipActive = ()=>{
     var _useAppSelector;
     return (_useAppSelector = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectIsTooltipActive"])) !== null && _useAppSelector !== void 0 ? _useAppSelector : false;
 };
-var useActiveTooltipCoordinate = function useActiveTooltipCoordinate() {
+var useActiveTooltipCoordinate = ()=>{
     var coordinate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectActiveTooltipCoordinate"]);
     if (coordinate == null) {
         return undefined;
@@ -3738,7 +3615,6 @@ __turbopack_context__.s([
     "getPath",
     ()=>getPath
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 /**
  * @fileOverview Curve
  */ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
@@ -3764,7 +3640,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/isWellBehavedNumber.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesNoEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/svgPropertiesNoEvents.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/context/chartLayoutContext.js [app-client] (ecmascript)");
-;
 function _extends() {
     return _extends = ("TURBOPACK compile-time truthy", 1) ? Object.assign.bind() : "TURBOPACK unreachable", _extends.apply(null, arguments);
 }
@@ -3799,14 +3674,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -3838,19 +3713,11 @@ var CURVE_FACTORIES = {
  * @inline
  */ /**
  * @inline
- */ var defined = function defined(p) {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(p.x) && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(p.y);
-};
-var areaDefined = function areaDefined(d) {
-    return d.base != null && defined(d.base) && defined(d);
-};
-var getX = function getX(p) {
-    return p.x;
-};
-var getY = function getY(p) {
-    return p.y;
-};
-var getCurveFactory = function getCurveFactory(type, layout) {
+ */ var defined = (p)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(p.x) && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(p.y);
+var areaDefined = (d)=>d.base != null && defined(d.base) && defined(d);
+var getX = (p)=>p.x;
+var getY = (p)=>p.y;
+var getCurveFactory = (type, layout)=>{
     if (typeof type === 'function') {
         return type;
     }
@@ -3867,8 +3734,8 @@ var defaultCurveProps = {
     connectNulls: false,
     type: 'linear'
 };
-var getPath = function getPath(_ref) {
-    var _ref_type = _ref.type, type = _ref_type === void 0 ? defaultCurveProps.type : _ref_type, _ref_points = _ref.points, points = _ref_points === void 0 ? [] : _ref_points, baseLine = _ref.baseLine, layout = _ref.layout, _ref_connectNulls = _ref.connectNulls, connectNulls = _ref_connectNulls === void 0 ? defaultCurveProps.connectNulls : _ref_connectNulls;
+var getPath = (_ref)=>{
+    var { type = defaultCurveProps.type, points = [], baseLine, layout, connectNulls = defaultCurveProps.connectNulls } = _ref;
     var curveFactory = getCurveFactory(type, layout);
     var formatPoints = connectNulls ? points.filter(defined) : points;
     // When dealing with an area chart (where `baseLine` is an array),
@@ -3877,19 +3744,13 @@ var getPath = function getPath(_ref) {
     // preventing errors from mismatched array lengths and ensuring `defined` checks both.
     if (Array.isArray(baseLine)) {
         var _lineFunction;
-        var areaPoints = points.map(function(entry, index) {
-            return _objectSpread(_objectSpread({}, entry), {}, {
+        var areaPoints = points.map((entry, index)=>_objectSpread(_objectSpread({}, entry), {}, {
                 base: baseLine[index]
-            });
-        });
+            }));
         if (layout === 'vertical') {
-            _lineFunction = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$area$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__area$3e$__["area"])().y(getY).x1(getX).x0(function(d) {
-                return d.base.x;
-            });
+            _lineFunction = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$area$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__area$3e$__["area"])().y(getY).x1(getX).x0((d)=>d.base.x);
         } else {
-            _lineFunction = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$area$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__area$3e$__["area"])().x(getX).y1(getY).y0(function(d) {
-                return d.base.y;
-            });
+            _lineFunction = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$area$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__area$3e$__["area"])().x(getX).y1(getY).y0((d)=>d.base.y);
         }
         /*
      * What happens here is that the `.defined()` call will make it so that this function can accept
@@ -3916,8 +3777,8 @@ var getPath = function getPath(_ref) {
     var nullableLineFunction = lineFunction.defined(defined).curve(curveFactory);
     return nullableLineFunction(formatPoints);
 };
-var Curve = function Curve(props) {
-    var className = props.className, points = props.points, path = props.path, pathRef = props.pathRef;
+var Curve = (props)=>{
+    var { className, points, path, pathRef } = props;
     var layout = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useChartLayout"])();
     if ((!points || !points.length) && !path) {
         return null;
@@ -3957,8 +3818,8 @@ function _extends() {
 ;
 ;
 ;
-var Dot = function Dot(props) {
-    var cx = props.cx, cy = props.cy, r = props.r, className = props.className;
+var Dot = (props)=>{
+    var { cx, cy, r, className } = props;
     var layerClass = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["clsx"])('recharts-dot', className);
     if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(cx) && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(cy) && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(r)) {
         return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"]("circle", _extends({}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesNoEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["svgPropertiesNoEvents"])(props), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$types$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["adaptEventHandlers"])(props), {
@@ -3978,14 +3839,12 @@ __turbopack_context__.s([
     "Cross",
     ()=>Cross
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 /**
  * @fileOverview Cross
  */ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/clsx/dist/clsx.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesAndEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/svgPropertiesAndEvents.js [app-client] (ecmascript)");
-;
 var _excluded = [
     "x",
     "y",
@@ -4029,14 +3888,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -4063,18 +3922,18 @@ function _objectWithoutPropertiesLoose(r, e) {
 ;
 ;
 ;
-var getPath = function getPath(x, y, width, height, top, left) {
+var getPath = (x, y, width, height, top, left)=>{
     return "M".concat(x, ",").concat(top, "v").concat(height, "M").concat(left, ",").concat(y, "h").concat(width);
 };
-var Cross = function Cross(_ref) {
-    var _ref_x = _ref.x, x = _ref_x === void 0 ? 0 : _ref_x, _ref_y = _ref.y, y = _ref_y === void 0 ? 0 : _ref_y, _ref_top = _ref.top, top = _ref_top === void 0 ? 0 : _ref_top, _ref_left = _ref.left, left = _ref_left === void 0 ? 0 : _ref_left, _ref_width = _ref.width, width = _ref_width === void 0 ? 0 : _ref_width, _ref_height = _ref.height, height = _ref_height === void 0 ? 0 : _ref_height, className = _ref.className, rest = _objectWithoutProperties(_ref, _excluded);
+var Cross = (_ref)=>{
+    var { x = 0, y = 0, top = 0, left = 0, width = 0, height = 0, className } = _ref, rest = _objectWithoutProperties(_ref, _excluded);
     var props = _objectSpread({
-        x: x,
-        y: y,
-        top: top,
-        left: left,
-        width: width,
-        height: height
+        x,
+        y,
+        top,
+        left,
+        width,
+        height
     }, rest);
     if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(x) || !(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(y) || !(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(width) || !(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(height) || !(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(top) || !(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(left)) {
         return null;
@@ -4094,8 +3953,6 @@ __turbopack_context__.s([
     "defaultRectangleProps",
     ()=>defaultRectangleProps
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 /**
  * @fileOverview Rectangle
  */ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
@@ -4107,8 +3964,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/animation/util.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesAndEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/svgPropertiesAndEvents.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$round$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/round.js [app-client] (ecmascript)");
-;
-;
 var _excluded = [
     "radius"
 ], _excluded2 = [
@@ -4146,14 +4001,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -4198,7 +4053,7 @@ function _taggedTemplateLiteral(e, t) {
 ;
 /**
  * @inline
- */ var getRectanglePath = function getRectanglePath(x, y, width, height, radius) {
+ */ var getRectanglePath = (x, y, width, height, radius)=>{
     var roundedWidth = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$round$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["round"])(width);
     var roundedHeight = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$round$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["round"])(height);
     var maxRadius = Math.min(Math.abs(roundedWidth) / 2, Math.abs(roundedHeight) / 2);
@@ -4336,12 +4191,12 @@ var defaultRectangleProps = {
     animationDuration: 1500,
     animationEasing: 'ease'
 };
-var Rectangle = function Rectangle(rectangleProps) {
+var Rectangle = (rectangleProps)=>{
     var props = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$resolveDefaultProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveDefaultProps"])(rectangleProps, defaultRectangleProps);
     var pathRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(-1), 2), totalLength = _useState[0], setTotalLength = _useState[1];
+    var [totalLength, setTotalLength] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(-1);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "Rectangle.useEffect": function() {
+        "Rectangle.useEffect": ()=>{
             if (pathRef.current && pathRef.current.getTotalLength) {
                 try {
                     var pathTotalLength = pathRef.current.getTotalLength();
@@ -4354,22 +4209,20 @@ var Rectangle = function Rectangle(rectangleProps) {
             }
         }
     }["Rectangle.useEffect"], []);
-    var x = props.x, y = props.y, width = props.width, height = props.height, radius = props.radius, className = props.className;
-    var animationEasing = props.animationEasing, animationDuration = props.animationDuration, animationBegin = props.animationBegin, isAnimationActive = props.isAnimationActive, isUpdateAnimationActive = props.isUpdateAnimationActive;
+    var { x, y, width, height, radius, className } = props;
+    var { animationEasing, animationDuration, animationBegin, isAnimationActive, isUpdateAnimationActive } = props;
     var prevWidthRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(width);
     var prevHeightRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(height);
     var prevXRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(x);
     var prevYRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(y);
     var animationIdInput = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "Rectangle.useMemo[animationIdInput]": function() {
-            return {
-                x: x,
-                y: y,
-                width: width,
-                height: height,
-                radius: radius
-            };
-        }
+        "Rectangle.useMemo[animationIdInput]": ()=>({
+                x,
+                y,
+                width,
+                height,
+                radius
+            })
     }["Rectangle.useMemo[animationIdInput]"], [
         x,
         y,
@@ -4383,7 +4236,7 @@ var Rectangle = function Rectangle(rectangleProps) {
     }
     var layerClass = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["clsx"])('recharts-rectangle', className);
     if (!isUpdateAnimationActive) {
-        var _svgPropertiesAndEven = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesAndEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["svgPropertiesAndEvents"])(props), _ = _svgPropertiesAndEven.radius, otherPathProps = _objectWithoutProperties(_svgPropertiesAndEven, _excluded);
+        var _svgPropertiesAndEven = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesAndEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["svgPropertiesAndEvents"])(props), { radius: _ } = _svgPropertiesAndEven, otherPathProps = _objectWithoutProperties(_svgPropertiesAndEven, _excluded);
         return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"]("path", _extends({}, otherPathProps, {
             x: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$round$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["round"])(x),
             y: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$round$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["round"])(y),
@@ -4411,7 +4264,7 @@ var Rectangle = function Rectangle(rectangleProps) {
         easing: animationEasing,
         isActive: isUpdateAnimationActive,
         begin: animationBegin
-    }, function(t) {
+    }, (t)=>{
         var currWidth = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["interpolate"])(prevWidth, width, t);
         var currHeight = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["interpolate"])(prevHeight, height, t);
         var currX = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["interpolate"])(prevX, x, t);
@@ -4429,7 +4282,7 @@ var Rectangle = function Rectangle(rectangleProps) {
             };
         } else if (t > 0) {
             animationStyle = {
-                transition: transition,
+                transition,
                 strokeDasharray: to
             };
         } else {
@@ -4437,7 +4290,7 @@ var Rectangle = function Rectangle(rectangleProps) {
                 strokeDasharray: from
             };
         }
-        var _svgPropertiesAndEven2 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesAndEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["svgPropertiesAndEvents"])(props), _ = _svgPropertiesAndEven2.radius, otherPathProps = _objectWithoutProperties(_svgPropertiesAndEven2, _excluded2);
+        var _svgPropertiesAndEven2 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesAndEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["svgPropertiesAndEvents"])(props), { radius: _ } = _svgPropertiesAndEven2, otherPathProps = _objectWithoutProperties(_svgPropertiesAndEven2, _excluded2);
         return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"]("path", _extends({}, otherPathProps, {
             radius: typeof radius === 'number' ? radius : undefined,
             className: layerClass,
@@ -4482,13 +4335,13 @@ function _taggedTemplateLiteral(e, t) {
 ;
 ;
 ;
-var getDeltaAngle = function getDeltaAngle(startAngle, endAngle) {
+var getDeltaAngle = (startAngle, endAngle)=>{
     var sign = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mathSign"])(endAngle - startAngle);
     var deltaAngle = Math.min(Math.abs(endAngle - startAngle), 359.999);
     return sign * deltaAngle;
 };
-var getTangentCircle = function getTangentCircle(_ref) {
-    var cx = _ref.cx, cy = _ref.cy, radius = _ref.radius, angle = _ref.angle, sign = _ref.sign, isExternal = _ref.isExternal, cornerRadius = _ref.cornerRadius, cornerIsExternal = _ref.cornerIsExternal;
+var getTangentCircle = (_ref)=>{
+    var { cx, cy, radius, angle, sign, isExternal, cornerRadius, cornerIsExternal } = _ref;
     var centerRadius = cornerRadius * (isExternal ? 1 : -1) + radius;
     var theta = Math.asin(cornerRadius / centerRadius) / __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RADIAN"];
     var centerAngle = cornerIsExternal ? angle : angle + sign * theta;
@@ -4499,14 +4352,14 @@ var getTangentCircle = function getTangentCircle(_ref) {
     var lineTangencyAngle = cornerIsExternal ? angle - sign * theta : angle;
     var lineTangency = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["polarToCartesian"])(cx, cy, centerRadius * Math.cos(theta * __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RADIAN"]), lineTangencyAngle);
     return {
-        center: center,
-        circleTangency: circleTangency,
-        lineTangency: lineTangency,
-        theta: theta
+        center,
+        circleTangency,
+        lineTangency,
+        theta
     };
 };
-var getSectorPath = function getSectorPath(_ref2) {
-    var cx = _ref2.cx, cy = _ref2.cy, innerRadius = _ref2.innerRadius, outerRadius = _ref2.outerRadius, startAngle = _ref2.startAngle, endAngle = _ref2.endAngle;
+var getSectorPath = (_ref2)=>{
+    var { cx, cy, innerRadius, outerRadius, startAngle, endAngle } = _ref2;
     var angle = getDeltaAngle(startAngle, endAngle);
     // When the angle of sector equals to 360, star point and end point coincide
     var tempEndAngle = startAngle + angle;
@@ -4546,27 +4399,27 @@ var getSectorPath = function getSectorPath(_ref2) {
     }
     return path;
 };
-var getSectorWithCorner = function getSectorWithCorner(_ref3) {
-    var cx = _ref3.cx, cy = _ref3.cy, innerRadius = _ref3.innerRadius, outerRadius = _ref3.outerRadius, cornerRadius = _ref3.cornerRadius, forceCornerRadius = _ref3.forceCornerRadius, cornerIsExternal = _ref3.cornerIsExternal, startAngle = _ref3.startAngle, endAngle = _ref3.endAngle;
+var getSectorWithCorner = (_ref3)=>{
+    var { cx, cy, innerRadius, outerRadius, cornerRadius, forceCornerRadius, cornerIsExternal, startAngle, endAngle } = _ref3;
     var sign = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mathSign"])(endAngle - startAngle);
-    var _getTangentCircle = getTangentCircle({
-        cx: cx,
-        cy: cy,
+    var { circleTangency: soct, lineTangency: solt, theta: sot } = getTangentCircle({
+        cx,
+        cy,
         radius: outerRadius,
         angle: startAngle,
-        sign: sign,
-        cornerRadius: cornerRadius,
-        cornerIsExternal: cornerIsExternal
-    }), soct = _getTangentCircle.circleTangency, solt = _getTangentCircle.lineTangency, sot = _getTangentCircle.theta;
-    var _getTangentCircle1 = getTangentCircle({
-        cx: cx,
-        cy: cy,
+        sign,
+        cornerRadius,
+        cornerIsExternal
+    });
+    var { circleTangency: eoct, lineTangency: eolt, theta: eot } = getTangentCircle({
+        cx,
+        cy,
         radius: outerRadius,
         angle: endAngle,
         sign: -sign,
-        cornerRadius: cornerRadius,
-        cornerIsExternal: cornerIsExternal
-    }), eoct = _getTangentCircle1.circleTangency, eolt = _getTangentCircle1.lineTangency, eot = _getTangentCircle1.theta;
+        cornerRadius,
+        cornerIsExternal
+    });
     var outerArcAngle = cornerIsExternal ? Math.abs(startAngle - endAngle) : Math.abs(startAngle - endAngle) - sot - eot;
     if (outerArcAngle < 0) {
         if (forceCornerRadius) {
@@ -4583,12 +4436,12 @@ var getSectorWithCorner = function getSectorWithCorner(_ref3) {
             ])), solt.x, solt.y, cornerRadius, cornerRadius, cornerRadius * 2, cornerRadius, cornerRadius, -cornerRadius * 2);
         }
         return getSectorPath({
-            cx: cx,
-            cy: cy,
-            innerRadius: innerRadius,
-            outerRadius: outerRadius,
-            startAngle: startAngle,
-            endAngle: endAngle
+            cx,
+            cy,
+            innerRadius,
+            outerRadius,
+            startAngle,
+            endAngle
         });
     }
     var path = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$round$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["roundTemplateLiteral"])(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral([
@@ -4613,26 +4466,26 @@ var getSectorWithCorner = function getSectorWithCorner(_ref3) {
         "\n  "
     ])), solt.x, solt.y, cornerRadius, cornerRadius, +(sign < 0), soct.x, soct.y, outerRadius, outerRadius, +(outerArcAngle > 180), +(sign < 0), eoct.x, eoct.y, cornerRadius, cornerRadius, +(sign < 0), eolt.x, eolt.y);
     if (innerRadius > 0) {
-        var _getTangentCircle2 = getTangentCircle({
-            cx: cx,
-            cy: cy,
+        var { circleTangency: sict, lineTangency: silt, theta: sit } = getTangentCircle({
+            cx,
+            cy,
             radius: innerRadius,
             angle: startAngle,
-            sign: sign,
+            sign,
             isExternal: true,
-            cornerRadius: cornerRadius,
-            cornerIsExternal: cornerIsExternal
-        }), sict = _getTangentCircle2.circleTangency, silt = _getTangentCircle2.lineTangency, sit = _getTangentCircle2.theta;
-        var _getTangentCircle3 = getTangentCircle({
-            cx: cx,
-            cy: cy,
+            cornerRadius,
+            cornerIsExternal
+        });
+        var { circleTangency: eict, lineTangency: eilt, theta: eit } = getTangentCircle({
+            cx,
+            cy,
             radius: innerRadius,
             angle: endAngle,
             sign: -sign,
             isExternal: true,
-            cornerRadius: cornerRadius,
-            cornerIsExternal: cornerIsExternal
-        }), eict = _getTangentCircle3.circleTangency, eilt = _getTangentCircle3.lineTangency, eit = _getTangentCircle3.theta;
+            cornerRadius,
+            cornerIsExternal
+        });
         var innerArcAngle = cornerIsExternal ? Math.abs(startAngle - endAngle) : Math.abs(startAngle - endAngle) - sit - eit;
         if (innerArcAngle < 0 && cornerRadius === 0) {
             return "".concat(path, "L").concat(cx, ",").concat(cy, "Z");
@@ -4678,9 +4531,9 @@ var defaultSectorProps = {
     forceCornerRadius: false,
     cornerIsExternal: false
 };
-var Sector = function Sector(sectorProps) {
+var Sector = (sectorProps)=>{
     var props = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$resolveDefaultProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveDefaultProps"])(sectorProps, defaultSectorProps);
-    var cx = props.cx, cy = props.cy, innerRadius = props.innerRadius, outerRadius = props.outerRadius, cornerRadius = props.cornerRadius, forceCornerRadius = props.forceCornerRadius, cornerIsExternal = props.cornerIsExternal, startAngle = props.startAngle, endAngle = props.endAngle, className = props.className;
+    var { cx, cy, innerRadius, outerRadius, cornerRadius, forceCornerRadius, cornerIsExternal, startAngle, endAngle, className } = props;
     if (outerRadius < innerRadius || startAngle === endAngle) {
         return null;
     }
@@ -4690,24 +4543,24 @@ var Sector = function Sector(sectorProps) {
     var path;
     if (cr > 0 && Math.abs(startAngle - endAngle) < 360) {
         path = getSectorWithCorner({
-            cx: cx,
-            cy: cy,
-            innerRadius: innerRadius,
-            outerRadius: outerRadius,
+            cx,
+            cy,
+            innerRadius,
+            outerRadius,
             cornerRadius: Math.min(cr, deltaRadius / 2),
-            forceCornerRadius: forceCornerRadius,
-            cornerIsExternal: cornerIsExternal,
-            startAngle: startAngle,
-            endAngle: endAngle
+            forceCornerRadius,
+            cornerIsExternal,
+            startAngle,
+            endAngle
         });
     } else {
         path = getSectorPath({
-            cx: cx,
-            cy: cy,
-            innerRadius: innerRadius,
-            outerRadius: outerRadius,
-            startAngle: startAngle,
-            endAngle: endAngle
+            cx,
+            cy,
+            innerRadius,
+            outerRadius,
+            startAngle,
+            endAngle
         });
     }
     return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"]("path", _extends({}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesAndEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["svgPropertiesAndEvents"])(props), {
@@ -4725,8 +4578,6 @@ __turbopack_context__.s([
     "defaultTrapezoidProps",
     ()=>defaultTrapezoidProps
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 /**
  * @fileOverview Rectangle
  */ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
@@ -4738,8 +4589,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/animation/util.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesAndEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/svgPropertiesAndEvents.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$round$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/round.js [app-client] (ecmascript)");
-;
-;
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 function ownKeys(e, r) {
     var t = Object.keys(e);
@@ -4772,14 +4621,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -4804,7 +4653,7 @@ function _taggedTemplateLiteral(e, t) {
 ;
 ;
 ;
-var getTrapezoidPath = function getTrapezoidPath(x, y, upperWidth, lowerWidth, height) {
+var getTrapezoidPath = (x, y, upperWidth, lowerWidth, height)=>{
     var widthGap = upperWidth - lowerWidth;
     var path;
     path = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$round$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["roundTemplateLiteral"])(_templateObject || (_templateObject = _taggedTemplateLiteral([
@@ -4845,12 +4694,12 @@ var defaultTrapezoidProps = {
     animationDuration: 1500,
     animationEasing: 'ease'
 };
-var Trapezoid = function Trapezoid(outsideProps) {
+var Trapezoid = (outsideProps)=>{
     var trapezoidProps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$resolveDefaultProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveDefaultProps"])(outsideProps, defaultTrapezoidProps);
-    var x = trapezoidProps.x, y = trapezoidProps.y, upperWidth = trapezoidProps.upperWidth, lowerWidth = trapezoidProps.lowerWidth, height = trapezoidProps.height, className = trapezoidProps.className;
-    var animationEasing = trapezoidProps.animationEasing, animationDuration = trapezoidProps.animationDuration, animationBegin = trapezoidProps.animationBegin, isUpdateAnimationActive = trapezoidProps.isUpdateAnimationActive;
+    var { x, y, upperWidth, lowerWidth, height, className } = trapezoidProps;
+    var { animationEasing, animationDuration, animationBegin, isUpdateAnimationActive } = trapezoidProps;
     var pathRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(-1), 2), totalLength = _useState[0], setTotalLength = _useState[1];
+    var [totalLength, setTotalLength] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(-1);
     var prevUpperWidthRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(upperWidth);
     var prevLowerWidthRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(lowerWidth);
     var prevHeightRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(height);
@@ -4858,7 +4707,7 @@ var Trapezoid = function Trapezoid(outsideProps) {
     var prevYRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(y);
     var animationId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$useAnimationId$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAnimationId"])(outsideProps, 'trapezoid-');
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "Trapezoid.useEffect": function() {
+        "Trapezoid.useEffect": ()=>{
             if (pathRef.current && pathRef.current.getTotalLength) {
                 try {
                     var pathTotalLength = pathRef.current.getTotalLength();
@@ -4899,7 +4748,7 @@ var Trapezoid = function Trapezoid(outsideProps) {
         easing: animationEasing,
         isActive: isUpdateAnimationActive,
         begin: animationBegin
-    }, function(t) {
+    }, (t)=>{
         var currUpperWidth = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["interpolate"])(prevUpperWidth, upperWidth, t);
         var currLowerWidth = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["interpolate"])(prevLowerWidth, lowerWidth, t);
         var currHeight = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["interpolate"])(prevHeight, height, t);
@@ -4913,7 +4762,7 @@ var Trapezoid = function Trapezoid(outsideProps) {
             prevYRef.current = currY;
         }
         var animationStyle = t > 0 ? {
-            transition: transition,
+            transition,
             strokeDasharray: to
         } : {
             strokeDasharray: from
@@ -4934,7 +4783,6 @@ __turbopack_context__.s([
     "Symbols",
     ()=>Symbols
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$victory$2d$vendor$2f$es$2f$d3$2d$shape$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/victory-vendor/es/d3-shape.js [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$symbol$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__symbol$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/d3-shape/src/symbol.js [app-client] (ecmascript) <export default as symbol>");
@@ -4948,7 +4796,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/clsx/dist/clsx.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesAndEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/svgPropertiesAndEvents.js [app-client] (ecmascript)");
-;
 var _excluded = [
     "type",
     "size",
@@ -4988,14 +4835,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -5033,11 +4880,11 @@ var symbolFactories = {
     symbolWye: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$symbol$2f$wye$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__symbolWye$3e$__["symbolWye"]
 };
 var RADIAN = Math.PI / 180;
-var getSymbolFactory = function getSymbolFactory(type) {
+var getSymbolFactory = (type)=>{
     var name = "symbol".concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["upperFirst"])(type));
     return symbolFactories[name] || __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$symbol$2f$circle$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__symbolCircle$3e$__["symbolCircle"];
 };
-var calculateAreaSize = function calculateAreaSize(size, sizeType, type) {
+var calculateAreaSize = (size, sizeType, type)=>{
     if (sizeType === 'area') {
         return size;
     }
@@ -5051,7 +4898,7 @@ var calculateAreaSize = function calculateAreaSize(size, sizeType, type) {
         case 'star':
             {
                 var angle = 18 * RADIAN;
-                return 1.25 * size * size * (Math.tan(angle) - Math.tan(angle * 2) * Math.pow(Math.tan(angle), 2));
+                return 1.25 * size * size * (Math.tan(angle) - Math.tan(angle * 2) * Math.tan(angle) ** 2);
             }
         case 'triangle':
             return Math.sqrt(3) * size * size / 4;
@@ -5061,15 +4908,15 @@ var calculateAreaSize = function calculateAreaSize(size, sizeType, type) {
             return Math.PI * size * size / 4;
     }
 };
-var registerSymbol = function registerSymbol(key, factory) {
+var registerSymbol = (key, factory)=>{
     symbolFactories["symbol".concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["upperFirst"])(key))] = factory;
 };
-var Symbols = function Symbols(_ref) {
-    var _ref_type = _ref.type, type = _ref_type === void 0 ? 'circle' : _ref_type, _ref_size = _ref.size, size = _ref_size === void 0 ? 64 : _ref_size, _ref_sizeType = _ref.sizeType, sizeType = _ref_sizeType === void 0 ? 'area' : _ref_sizeType, rest = _objectWithoutProperties(_ref, _excluded);
+var Symbols = (_ref)=>{
+    var { type = 'circle', size = 64, sizeType = 'area' } = _ref, rest = _objectWithoutProperties(_ref, _excluded);
     var props = _objectSpread(_objectSpread({}, rest), {}, {
-        type: type,
-        size: size,
-        sizeType: sizeType
+        type,
+        size,
+        sizeType
     });
     var realType = 'circle';
     if (typeof type === 'string') {
@@ -5084,7 +4931,7 @@ var Symbols = function Symbols(_ref) {
     /**
    * Calculate the path of curve
    * @return {String} path
-   */ var getPath = function getPath() {
+   */ var getPath = ()=>{
         var symbolFactory = getSymbolFactory(realType);
         var symbol = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$symbol$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__symbol$3e$__["symbol"])().type(symbolFactory).size(calculateAreaSize(size, sizeType, realType));
         var s = symbol();
@@ -5093,7 +4940,7 @@ var Symbols = function Symbols(_ref) {
         }
         return s;
     };
-    var className = props.className, cx = props.cx, cy = props.cy;
+    var { className, cx, cy } = props;
     var filteredProps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesAndEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["svgPropertiesAndEvents"])(props);
     if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(cx) && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(cy) && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(size)) {
         return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"]("path", _extends({}, filteredProps, {
@@ -5119,10 +4966,6 @@ __turbopack_context__.s([
     "mapObject",
     ()=>mapObject
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_define_property.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-;
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -5154,43 +4997,27 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
 }
-var getDashCase = function getDashCase(name) {
-    return name.replace(/([A-Z])/g, function(v) {
-        return "-".concat(v.toLowerCase());
-    });
-};
-var getTransitionVal = function getTransitionVal(props, duration, easing) {
-    return props.map(function(prop) {
-        return "".concat(getDashCase(prop), " ").concat(duration, "ms ").concat(easing);
-    }).join(',');
-};
-var getIntersectionKeys = function getIntersectionKeys(preObj, nextObj) {
-    return [
+var getDashCase = (name)=>name.replace(/([A-Z])/g, (v)=>"-".concat(v.toLowerCase()));
+var getTransitionVal = (props, duration, easing)=>props.map((prop)=>"".concat(getDashCase(prop), " ").concat(duration, "ms ").concat(easing)).join(',');
+var getIntersectionKeys = (preObj, nextObj)=>[
         Object.keys(preObj),
         Object.keys(nextObj)
-    ].reduce(function(a, b) {
-        return a.filter(function(c) {
-            return b.includes(c);
-        });
-    });
-};
-var mapObject = function mapObject(fn, obj) {
-    return Object.keys(obj).reduce(function(res, key) {
-        return _objectSpread(_objectSpread({}, res), {}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, key, fn(key, obj[key])));
-    }, {});
-};
+    ].reduce((a, b)=>a.filter((c)=>b.includes(c)));
+var mapObject = (fn, obj)=>Object.keys(obj).reduce((res, key)=>_objectSpread(_objectSpread({}, res), {}, {
+            [key]: fn(key, obj[key])
+        }), {});
 }),
 "[project]/frontend/node_modules/recharts/es6/animation/configUpdate.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -5201,15 +5028,7 @@ __turbopack_context__.s([
     "default",
     ()=>__TURBOPACK__default__export__
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_define_property.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/animation/util.js [app-client] (ecmascript)");
-;
-;
-;
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -5241,33 +5060,31 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
 }
 ;
-var alpha = function alpha(begin, end, k) {
-    return begin + (end - begin) * k;
-};
-var needContinue = function needContinue(_ref) {
-    var from = _ref.from, to = _ref.to;
+var alpha = (begin, end, k)=>begin + (end - begin) * k;
+var needContinue = (_ref)=>{
+    var { from, to } = _ref;
     return from !== to;
 };
 /*
  * @description: cal new from value and velocity in each stepper
  * @return: { [styleProperty]: { from, to, velocity } }
- */ var calStepperVals = function calStepperVals1(easing, preVals, steps) {
-    var nextStepVals = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mapObject"])(function(key, val) {
+ */ var calStepperVals = (easing, preVals, steps)=>{
+    var nextStepVals = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mapObject"])((key, val)=>{
         if (needContinue(val)) {
-            var _easing = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(easing(val.from, val.to, val.velocity), 2), newX = _easing[0], newV = _easing[1];
+            var [newX, newV] = easing(val.from, val.to, val.velocity);
             return _objectSpread(_objectSpread({}, val), {}, {
                 from: newX,
                 velocity: newV
@@ -5276,7 +5093,7 @@ var needContinue = function needContinue(_ref) {
         return val;
     }, preVals);
     if (steps < 1) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mapObject"])(function(key, val) {
+        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mapObject"])((key, val)=>{
             if (needContinue(val) && nextStepVals[key] != null) {
                 return _objectSpread(_objectSpread({}, val), {}, {
                     velocity: alpha(val.velocity, nextStepVals[key].velocity, steps),
@@ -5290,23 +5107,17 @@ var needContinue = function needContinue(_ref) {
 };
 function createStepperUpdate(from, to, easing, interKeys, render, timeoutController) {
     var preTime;
-    var stepperStyle = interKeys.reduce(function(res, key) {
-        return _objectSpread(_objectSpread({}, res), {}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, key, {
-            from: from[key],
-            velocity: 0,
-            to: to[key]
-        }));
-    }, {});
-    var getCurrStyle = function getCurrStyle() {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mapObject"])(function(key, val) {
-            return val.from;
-        }, stepperStyle);
-    };
-    var shouldStopAnimation = function shouldStopAnimation() {
-        return !Object.values(stepperStyle).filter(needContinue).length;
-    };
+    var stepperStyle = interKeys.reduce((res, key)=>_objectSpread(_objectSpread({}, res), {}, {
+            [key]: {
+                from: from[key],
+                velocity: 0,
+                to: to[key]
+            }
+        }), {});
+    var getCurrStyle = ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mapObject"])((key, val)=>val.from, stepperStyle);
+    var shouldStopAnimation = ()=>!Object.values(stepperStyle).filter(needContinue).length;
     var stopAnimation = null;
-    var stepperUpdate = function stepperUpdate1(now) {
+    var stepperUpdate = (now)=>{
         if (!preTime) {
             preTime = now;
         }
@@ -5321,10 +5132,10 @@ function createStepperUpdate(from, to, easing, interKeys, render, timeoutControl
         }
     };
     // return start animation method
-    return function() {
+    return ()=>{
         stopAnimation = timeoutController.setTimeout(stepperUpdate);
         // return stop animation method
-        return function() {
+        return ()=>{
             var _stopAnimation;
             (_stopAnimation = stopAnimation) === null || _stopAnimation === void 0 || _stopAnimation();
         };
@@ -5332,58 +5143,52 @@ function createStepperUpdate(from, to, easing, interKeys, render, timeoutControl
 }
 function createTimingUpdate(from, to, easing, duration, interKeys, render, timeoutController) {
     var stopAnimation = null;
-    var timingStyle = interKeys.reduce(function(res, key) {
+    var timingStyle = interKeys.reduce((res, key)=>{
         var fromElement = from[key];
         var toElement = to[key];
         if (fromElement == null || toElement == null) {
             return res;
         }
-        return _objectSpread(_objectSpread({}, res), {}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, key, [
-            fromElement,
-            toElement
-        ]));
+        return _objectSpread(_objectSpread({}, res), {}, {
+            [key]: [
+                fromElement,
+                toElement
+            ]
+        });
     }, {});
     var beginTime;
-    var timingUpdate = function timingUpdate1(now) {
+    var timingUpdate = (now)=>{
         if (!beginTime) {
             beginTime = now;
         }
         var t = (now - beginTime) / duration;
-        var currStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mapObject"])(function(key, val) {
-            return alpha.apply(void 0, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(val).concat([
-                easing(t)
-            ]));
-        }, timingStyle);
+        var currStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mapObject"])((key, val)=>alpha(...val, easing(t)), timingStyle);
         // get union set and add compatible prefix
         render(_objectSpread(_objectSpread(_objectSpread({}, from), to), currStyle));
         if (t < 1) {
             stopAnimation = timeoutController.setTimeout(timingUpdate);
         } else {
-            var finalStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mapObject"])(function(key, val) {
-                return alpha.apply(void 0, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(val).concat([
-                    easing(1)
-                ]));
-            }, timingStyle);
+            var finalStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mapObject"])((key, val)=>alpha(...val, easing(1)), timingStyle);
             render(_objectSpread(_objectSpread(_objectSpread({}, from), to), finalStyle));
         }
     };
     // return start animation method
-    return function() {
+    return ()=>{
         stopAnimation = timeoutController.setTimeout(timingUpdate);
         // return stop animation method
-        return function() {
+        return ()=>{
             var _stopAnimation2;
             (_stopAnimation2 = stopAnimation) === null || _stopAnimation2 === void 0 || _stopAnimation2();
         };
     };
 }
-const __TURBOPACK__default__export__ = function(from, to, easing, duration, render, timeoutController) {
+const __TURBOPACK__default__export__ = (from, to, easing, duration, render, timeoutController)=>{
     var interKeys = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$util$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getIntersectionKeys"])(from, to);
     if (easing == null) {
         // no animation, just set to final state
-        return function() {
+        return ()=>{
             render(_objectSpread(_objectSpread({}, from), to));
-            return function() {};
+            return ()=>{};
         };
     }
     return easing.isStepper === true ? createStepperUpdate(from, to, easing, interKeys, render, timeoutController) : createTimingUpdate(from, to, easing, duration, interKeys, render, timeoutController);
@@ -5402,42 +5207,27 @@ __turbopack_context__.s([
     "configSpring",
     ()=>configSpring
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
-;
 var ACCURACY = 1e-4;
-var cubicBezierFactor = function cubicBezierFactor(c1, c2) {
-    return [
+var cubicBezierFactor = (c1, c2)=>[
         0,
         3 * c1,
         3 * c2 - 6 * c1,
         3 * c1 - 3 * c2 + 1
     ];
-};
-var evaluatePolynomial = function evaluatePolynomial(params, t) {
-    return params.map(function(param, i) {
-        return param * Math.pow(t, i);
-    }).reduce(function(pre, curr) {
-        return pre + curr;
-    });
-};
-var cubicBezier = function cubicBezier(c1, c2) {
-    return function(t) {
+var evaluatePolynomial = (params, t)=>params.map((param, i)=>param * t ** i).reduce((pre, curr)=>pre + curr);
+var cubicBezier = (c1, c2)=>(t)=>{
         var params = cubicBezierFactor(c1, c2);
         return evaluatePolynomial(params, t);
     };
-};
-var derivativeCubicBezier = function derivativeCubicBezier(c1, c2) {
-    return function(t) {
+var derivativeCubicBezier = (c1, c2)=>(t)=>{
         var params = cubicBezierFactor(c1, c2);
-        var newParams = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(params.map(function(param, i) {
-            return param * i;
-        }).slice(1)).concat([
+        var newParams = [
+            ...params.map((param, i)=>param * i).slice(1),
             0
-        ]);
+        ];
         return evaluatePolynomial(newParams, t);
     };
-};
-var parseCubicBezier = function parseCubicBezier(easing) {
+var parseCubicBezier = (easing)=>{
     var _easingParts$;
     var easingParts = easing.split('(');
     if (easingParts.length !== 2 || easingParts[0] !== 'cubic-bezier') {
@@ -5447,9 +5237,7 @@ var parseCubicBezier = function parseCubicBezier(easing) {
     if (numbers == null || numbers.length !== 4) {
         return null;
     }
-    var coords = numbers.map(function(x) {
-        return parseFloat(x);
-    });
+    var coords = numbers.map((x)=>parseFloat(x));
     return [
         coords[0],
         coords[1],
@@ -5519,11 +5307,11 @@ var getBezierCoordinates = function getBezierCoordinates() {
         1.0
     ];
 };
-var createBezierEasing = function createBezierEasing(x1, y1, x2, y2) {
+var createBezierEasing = (x1, y1, x2, y2)=>{
     var curveX = cubicBezier(x1, x2);
     var curveY = cubicBezier(y1, y2);
     var derCurveX = derivativeCubicBezier(x1, x2);
-    var rangeValue = function rangeValue(value) {
+    var rangeValue = (value)=>{
         if (value > 1) {
             return 1;
         }
@@ -5532,7 +5320,7 @@ var createBezierEasing = function createBezierEasing(x1, y1, x2, y2) {
         }
         return value;
     };
-    var bezier = function bezier(_t) {
+    var bezier = (_t)=>{
         var t = _t > 1 ? 1 : _t;
         var x = t;
         for(var i = 0; i < 8; ++i){
@@ -5549,12 +5337,12 @@ var createBezierEasing = function createBezierEasing(x1, y1, x2, y2) {
     return bezier;
 };
 var configBezier = function configBezier() {
-    return createBezierEasing.apply(void 0, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(getBezierCoordinates.apply(void 0, arguments)));
+    return createBezierEasing(...getBezierCoordinates(...arguments));
 };
 var configSpring = function configSpring() {
     var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var _config_stiff = config.stiff, stiff = _config_stiff === void 0 ? 100 : _config_stiff, _config_damping = config.damping, damping = _config_damping === void 0 ? 8 : _config_damping, _config_dt = config.dt, dt = _config_dt === void 0 ? 17 : _config_dt;
-    var stepper = function stepper(currX, destX, currV) {
+    var { stiff = 100, damping = 8, dt = 17 } = config;
+    var stepper = (currX, destX, currV)=>{
         var FSpring = -(currX - destX) * stiff;
         var FDamping = currV * damping;
         var newV = currV + (FSpring - FDamping) * dt / 1000;
@@ -5574,7 +5362,7 @@ var configSpring = function configSpring() {
     stepper.dt = dt;
     return stepper;
 };
-var configEasing = function configEasing(easing) {
+var configEasing = (easing)=>{
     if (typeof easing === 'string') {
         switch(easing){
             case 'ease':
@@ -5612,18 +5400,12 @@ var configEasing = function configEasing(easing) {
     "createAnimateManager",
     ()=>createAnimateManager
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-;
-;
 function createAnimateManager(timeoutController) {
     var currStyle;
-    var handleChange = function handleChange() {
-        return null;
-    };
+    var handleChange = ()=>null;
     var shouldStop = false;
     var cancelTimeout = null;
-    var setStyle = function setStyle1(_style) {
+    var setStyle = (_style)=>{
         if (shouldStop) {
             return;
         }
@@ -5632,7 +5414,7 @@ function createAnimateManager(timeoutController) {
                 return;
             }
             var styles = _style;
-            var _styles = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(styles), curr = _styles[0], restStyles = _styles.slice(1);
+            var [curr, ...restStyles] = styles;
             if (typeof curr === 'number') {
                 cancelTimeout = timeoutController.setTimeout(setStyle.bind(null, restStyles), curr);
                 return;
@@ -5645,7 +5427,7 @@ function createAnimateManager(timeoutController) {
             currStyle = _style;
             handleChange(currStyle);
         }
-        if ((typeof _style === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_style)) === 'object') {
+        if (typeof _style === 'object') {
             currStyle = _style;
             handleChange(currStyle);
         }
@@ -5654,10 +5436,10 @@ function createAnimateManager(timeoutController) {
         }
     };
     return {
-        stop: function stop() {
+        stop: ()=>{
             shouldStop = true;
         },
-        start: function start(style) {
+        start: (style)=>{
             shouldStop = false;
             if (cancelTimeout) {
                 cancelTimeout();
@@ -5665,17 +5447,13 @@ function createAnimateManager(timeoutController) {
             }
             setStyle(style);
         },
-        subscribe: function subscribe(_handleChange) {
+        subscribe: (_handleChange)=>{
             handleChange = _handleChange;
-            return function() {
-                handleChange = function handleChange() {
-                    return null;
-                };
+            return ()=>{
+                handleChange = ()=>null;
             };
         },
-        getTimeoutController: function getTimeoutController() {
-            return timeoutController;
-        }
+        getTimeoutController: ()=>timeoutController
     };
 }
 }),
@@ -5691,42 +5469,28 @@ function createAnimateManager(timeoutController) {
     "RequestAnimationFrameTimeoutController",
     ()=>RequestAnimationFrameTimeoutController
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_class_call_check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_class_call_check.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_create_class$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_create_class.js [app-client] (ecmascript)");
-;
-;
-var RequestAnimationFrameTimeoutController = /*#__PURE__*/ function() {
-    "use strict";
-    function RequestAnimationFrameTimeoutController() {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_class_call_check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(this, RequestAnimationFrameTimeoutController);
-    }
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_create_class$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(RequestAnimationFrameTimeoutController, [
-        {
-            key: "setTimeout",
-            value: function setTimeout(callback) {
-                var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-                var startTime = performance.now();
-                var requestId = null;
-                var executeCallback = function executeCallback1(now) {
-                    if (now - startTime >= delay) {
-                        callback(now);
-                    // tests fail without the extra if, even when five lines below it's not needed
-                    // TODO finish transition to the mocked timeout controller and then remove this condition
-                    } else if (typeof requestAnimationFrame === 'function') {
-                        requestId = requestAnimationFrame(executeCallback);
-                    }
-                };
+class RequestAnimationFrameTimeoutController {
+    setTimeout(callback) {
+        var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        var startTime = performance.now();
+        var requestId = null;
+        var executeCallback = (now)=>{
+            if (now - startTime >= delay) {
+                callback(now);
+            // tests fail without the extra if, even when five lines below it's not needed
+            // TODO finish transition to the mocked timeout controller and then remove this condition
+            } else if (typeof requestAnimationFrame === 'function') {
                 requestId = requestAnimationFrame(executeCallback);
-                return function() {
-                    if (requestId != null) {
-                        cancelAnimationFrame(requestId);
-                    }
-                };
             }
-        }
-    ]);
-    return RequestAnimationFrameTimeoutController;
-}();
+        };
+        requestId = requestAnimationFrame(executeCallback);
+        return ()=>{
+            if (requestId != null) {
+                cancelAnimationFrame(requestId);
+            }
+        };
+    }
+}
 }),
 "[project]/frontend/node_modules/recharts/es6/animation/createDefaultAnimationManager.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -5760,9 +5524,7 @@ var AnimationManagerContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$
 function useAnimationManager(animationId, animationManagerFromProps) {
     var contextAnimationManager = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(AnimationManagerContext);
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "useAnimationManager.useMemo": function() {
-            return animationManagerFromProps !== null && animationManagerFromProps !== void 0 ? animationManagerFromProps : contextAnimationManager(animationId);
-        }
+        "useAnimationManager.useMemo": ()=>animationManagerFromProps !== null && animationManagerFromProps !== void 0 ? animationManagerFromProps : contextAnimationManager(animationId)
     }["useAnimationManager.useMemo"], [
         animationId,
         animationManagerFromProps,
@@ -5777,7 +5539,6 @@ __turbopack_context__.s([
     "JavascriptAnimate",
     ()=>JavascriptAnimate
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$resolveDefaultProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/resolveDefaultProps.js [app-client] (ecmascript)");
@@ -5794,15 +5555,14 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-;
 var defaultJavascriptAnimateProps = {
     begin: 0,
     duration: 1000,
     easing: 'ease',
     isActive: true,
     canBegin: true,
-    onAnimationEnd: function onAnimationEnd() {},
-    onAnimationStart: function onAnimationStart() {}
+    onAnimationEnd: ()=>{},
+    onAnimationStart: ()=>{}
 };
 var from = {
     t: 0
@@ -5812,14 +5572,14 @@ var to = {
 };
 function JavascriptAnimate(outsideProps) {
     var props = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$resolveDefaultProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveDefaultProps"])(outsideProps, defaultJavascriptAnimateProps);
-    var isActiveProp = props.isActive, canBegin = props.canBegin, duration = props.duration, easing = props.easing, begin = props.begin, onAnimationEnd = props.onAnimationEnd, onAnimationStart = props.onAnimationStart, children = props.children;
+    var { isActive: isActiveProp, canBegin, duration, easing, begin, onAnimationEnd, onAnimationStart, children } = props;
     var prefersReducedMotion = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$usePrefersReducedMotion$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePrefersReducedMotion"])();
     var isActive = isActiveProp === 'auto' ? !__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Global$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Global"].isSsr && !prefersReducedMotion : isActiveProp;
     var animationManager = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$useAnimationManager$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAnimationManager"])(props.animationId, props.animationManager);
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(isActive ? from : to), 2), style = _useState[0], setStyle = _useState[1];
+    var [style, setStyle] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(isActive ? from : to);
     var stopJSAnimation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "JavascriptAnimate.useEffect": function() {
+        "JavascriptAnimate.useEffect": ()=>{
             if (!isActive) {
                 setStyle(to);
             }
@@ -5828,14 +5588,16 @@ function JavascriptAnimate(outsideProps) {
         isActive
     ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "JavascriptAnimate.useEffect": function() {
+        "JavascriptAnimate.useEffect": ()=>{
             if (!isActive || !canBegin) {
                 return __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["noop"];
             }
             var startAnimation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$configUpdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(from, to, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$animation$2f$easing$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["configEasing"])(easing), duration, setStyle, animationManager.getTimeoutController());
-            var onAnimationActive = function onAnimationActive() {
-                stopJSAnimation.current = startAnimation();
-            };
+            var onAnimationActive = {
+                "JavascriptAnimate.useEffect.onAnimationActive": ()=>{
+                    stopJSAnimation.current = startAnimation();
+                }
+            }["JavascriptAnimate.useEffect.onAnimationActive"];
             animationManager.start([
                 onAnimationStart,
                 begin,
@@ -5844,7 +5606,7 @@ function JavascriptAnimate(outsideProps) {
                 onAnimationEnd
             ]);
             return ({
-                "JavascriptAnimate.useEffect": function() {
+                "JavascriptAnimate.useEffect": ()=>{
                     animationManager.stop();
                     if (stopJSAnimation.current) {
                         stopJSAnimation.current();

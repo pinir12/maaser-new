@@ -1,14 +1,12 @@
 (globalThis["TURBOPACK"] || (globalThis["TURBOPACK"] = [])).push([typeof document === "object" ? document.currentScript : undefined,
 "[project]/frontend/node_modules/html2canvas/dist/html2canvas.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 
-var _instanceof = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_instanceof.cjs [app-client] (ecmascript)");
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 /*!
  * html2canvas 1.4.1 <https://html2canvas.hertzen.com>
  * Copyright (c) 2022 Niklas von Hertzen <https://hertzen.com>
  * Released under MIT License
  */ (function(global, factory) {
-    (("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : _type_of._(exports)) === 'object' && ("TURBOPACK compile-time value", "object") !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? ((r)=>r !== undefined && __turbopack_context__.v(r))(factory(__turbopack_context__.r, exports, module)) : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.html2canvas = factory());
+    ("TURBOPACK compile-time truthy", 1) ? module.exports = factory() : "TURBOPACK unreachable";
 })(/*TURBOPACK member replacement*/ __turbopack_context__.e, function() {
     'use strict';
     /*! *****************************************************************************
@@ -24,10 +22,10 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
     OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
     PERFORMANCE OF THIS SOFTWARE.
-    ***************************************************************************** */ /* global Reflect, Promise */ var extendStatics = function extendStatics1(d, b) {
-        extendStatics = Object.setPrototypeOf || _instanceof._({
+    ***************************************************************************** */ /* global Reflect, Promise */ var extendStatics = function(d, b) {
+        extendStatics = Object.setPrototypeOf || ({
             __proto__: []
-        }, Array) && function(d, b) {
+        }) instanceof Array && function(d, b) {
             d.__proto__ = b;
         } || function(d, b) {
             for(var p in b)if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
@@ -42,7 +40,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     }
-    var __assign = function __assign1() {
+    var __assign = function() {
         __assign = Object.assign || function __assign(t) {
             for(var s, i = 1, n = arguments.length; i < n; i++){
                 s = arguments[i];
@@ -54,7 +52,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     };
     function __awaiter(thisArg, _arguments, P, generator) {
         function adopt(value) {
-            return _instanceof._(value, P) ? value : new P(function(resolve) {
+            return value instanceof P ? value : new P(function(resolve) {
                 resolve(value);
             });
         }
@@ -82,7 +80,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     function __generator(thisArg, body) {
         var _ = {
             label: 0,
-            sent: function sent() {
+            sent: function() {
                 if (t[0] & 1) throw t[1];
                 return t[1];
             },
@@ -207,10 +205,10 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         Bounds.EMPTY = new Bounds(0, 0, 0, 0);
         return Bounds;
     }();
-    var parseBounds = function parseBounds(context, node) {
+    var parseBounds = function(context, node) {
         return Bounds.fromClientRect(context, node.getBoundingClientRect());
     };
-    var parseDocumentSize = function parseDocumentSize(document1) {
+    var parseDocumentSize = function(document1) {
         var body = document1.body;
         var documentElement = document1.documentElement;
         if (!body || !documentElement) {
@@ -224,7 +222,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
      * css-line-break 2.1.0 <https://github.com/niklasvh/css-line-break#readme>
      * Copyright (c) 2022 Niklas von Hertzen <https://hertzen.com>
      * Released under MIT License
-     */ var toCodePoints$1 = function toCodePoints$1(str) {
+     */ var toCodePoints$1 = function(str) {
         var codePoints = [];
         var i = 0;
         var length = str.length;
@@ -244,7 +242,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return codePoints;
     };
-    var fromCodePoint$1 = function fromCodePoint$1() {
+    var fromCodePoint$1 = function() {
         var codePoints = [];
         for(var _i = 0; _i < arguments.length; _i++){
             codePoints[_i] = arguments[_i];
@@ -290,7 +288,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     for(var i$1$1 = 0; i$1$1 < chars$1$1.length; i$1$1++){
         lookup$1$1[chars$1$1.charCodeAt(i$1$1)] = i$1$1;
     }
-    var decode$1 = function decode$1(base64) {
+    var decode$1 = function(base64) {
         var bufferLength = base64.length * 0.75, len = base64.length, i, p = 0, encoded1, encoded2, encoded3, encoded4;
         if (base64[base64.length - 1] === '=') {
             bufferLength--;
@@ -311,7 +309,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return buffer;
     };
-    var polyUint16Array$1 = function polyUint16Array$1(buffer) {
+    var polyUint16Array$1 = function(buffer) {
         var length = buffer.length;
         var bytes = [];
         for(var i = 0; i < length; i += 2){
@@ -319,7 +317,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return bytes;
     };
-    var polyUint32Array$1 = function polyUint32Array$1(buffer) {
+    var polyUint32Array$1 = function(buffer) {
         var length = buffer.length;
         var bytes = [];
         for(var i = 0; i < length; i += 4){
@@ -372,19 +370,19 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
      */ var UTRIE2_OMITTED_BMP_INDEX_1_LENGTH$1 = 0x10000 >> UTRIE2_SHIFT_1$1;
     /** Number of entries in an index-2 block. 64=0x40 */ var UTRIE2_INDEX_2_BLOCK_LENGTH$1 = 1 << UTRIE2_SHIFT_1_2$1;
     /** Mask for getting the lower bits for the in-index-2-block offset. */ var UTRIE2_INDEX_2_MASK$1 = UTRIE2_INDEX_2_BLOCK_LENGTH$1 - 1;
-    var slice16$1 = function slice16$1(view, start, end) {
+    var slice16$1 = function(view, start, end) {
         if (view.slice) {
             return view.slice(start, end);
         }
         return new Uint16Array(Array.prototype.slice.call(view, start, end));
     };
-    var slice32$1 = function slice32$1(view, start, end) {
+    var slice32$1 = function(view, start, end) {
         if (view.slice) {
             return view.slice(start, end);
         }
         return new Uint32Array(Array.prototype.slice.call(view, start, end));
     };
-    var createTrieFromBase64$1 = function createTrieFromBase64$1(base64, _byteLength) {
+    var createTrieFromBase64$1 = function(base64, _byteLength) {
         var buffer = decode$1(base64);
         var view32 = Array.isArray(buffer) ? polyUint32Array$1(buffer) : new Uint32Array(buffer);
         var view16 = Array.isArray(buffer) ? polyUint16Array$1(buffer) : new Uint16Array(buffer);
@@ -544,7 +542,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         HY,
         BA
     ];
-    var codePointsToCharacterClasses = function codePointsToCharacterClasses(codePoints, lineBreak) {
+    var codePointsToCharacterClasses = function(codePoints, lineBreak) {
         if (lineBreak === void 0) {
             lineBreak = 'strict';
         }
@@ -619,7 +617,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             categories
         ];
     };
-    var isAdjacentWithSpaceIgnored = function isAdjacentWithSpaceIgnored(a, b, currentIndex, classTypes) {
+    var isAdjacentWithSpaceIgnored = function(a, b, currentIndex, classTypes) {
         var current = classTypes[currentIndex];
         if (Array.isArray(a) ? a.indexOf(current) !== -1 : a === current) {
             var i = currentIndex;
@@ -659,7 +657,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return false;
     };
-    var previousNonSpaceClassType = function previousNonSpaceClassType(currentIndex, classTypes) {
+    var previousNonSpaceClassType = function(currentIndex, classTypes) {
         var i = currentIndex;
         while(i >= 0){
             var type = classTypes[i];
@@ -671,7 +669,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return 0;
     };
-    var _lineBreakAtIndex = function _lineBreakAtIndex(codePoints, classTypes, indicies, index, forbiddenBreaks) {
+    var _lineBreakAtIndex = function(codePoints, classTypes, indicies, index, forbiddenBreaks) {
         if (indicies[index] === 0) {
             return BREAK_NOT_ALLOWED$1;
         }
@@ -933,7 +931,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return BREAK_ALLOWED$1;
     };
-    var cssFormattedClasses = function cssFormattedClasses(codePoints, options) {
+    var cssFormattedClasses = function(codePoints, options) {
         if (!options) {
             options = {
                 lineBreak: 'normal',
@@ -971,14 +969,14 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         };
         return Break;
     }();
-    var LineBreaker = function LineBreaker(str, options) {
+    var LineBreaker = function(str, options) {
         var codePoints = toCodePoints$1(str);
         var _a = cssFormattedClasses(codePoints, options), indicies = _a[0], classTypes = _a[1], forbiddenBreakpoints = _a[2];
         var length = codePoints.length;
         var lastEnd = 0;
         var nextIndex = 0;
         return {
-            next: function next() {
+            next: function() {
                 if (nextIndex >= length) {
                     return {
                         done: true,
@@ -1060,46 +1058,46 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     var F = 0x0046;
     var U = 0x0055;
     var Z = 0x005a;
-    var isDigit = function isDigit(codePoint) {
+    var isDigit = function(codePoint) {
         return codePoint >= ZERO && codePoint <= 0x0039;
     };
-    var isSurrogateCodePoint = function isSurrogateCodePoint(codePoint) {
+    var isSurrogateCodePoint = function(codePoint) {
         return codePoint >= 0xd800 && codePoint <= 0xdfff;
     };
-    var isHex = function isHex(codePoint) {
+    var isHex = function(codePoint) {
         return isDigit(codePoint) || codePoint >= A && codePoint <= F || codePoint >= a && codePoint <= f;
     };
-    var isLowerCaseLetter = function isLowerCaseLetter(codePoint) {
+    var isLowerCaseLetter = function(codePoint) {
         return codePoint >= a && codePoint <= z;
     };
-    var isUpperCaseLetter = function isUpperCaseLetter(codePoint) {
+    var isUpperCaseLetter = function(codePoint) {
         return codePoint >= A && codePoint <= Z;
     };
-    var isLetter = function isLetter(codePoint) {
+    var isLetter = function(codePoint) {
         return isLowerCaseLetter(codePoint) || isUpperCaseLetter(codePoint);
     };
-    var isNonASCIICodePoint = function isNonASCIICodePoint(codePoint) {
+    var isNonASCIICodePoint = function(codePoint) {
         return codePoint >= CONTROL;
     };
-    var isWhiteSpace = function isWhiteSpace(codePoint) {
+    var isWhiteSpace = function(codePoint) {
         return codePoint === LINE_FEED || codePoint === CHARACTER_TABULATION || codePoint === SPACE;
     };
-    var isNameStartCodePoint = function isNameStartCodePoint(codePoint) {
+    var isNameStartCodePoint = function(codePoint) {
         return isLetter(codePoint) || isNonASCIICodePoint(codePoint) || codePoint === LOW_LINE;
     };
-    var isNameCodePoint = function isNameCodePoint(codePoint) {
+    var isNameCodePoint = function(codePoint) {
         return isNameStartCodePoint(codePoint) || isDigit(codePoint) || codePoint === HYPHEN_MINUS;
     };
-    var isNonPrintableCodePoint = function isNonPrintableCodePoint(codePoint) {
+    var isNonPrintableCodePoint = function(codePoint) {
         return codePoint >= NULL && codePoint <= BACKSPACE || codePoint === LINE_TABULATION || codePoint >= SHIFT_OUT && codePoint <= INFORMATION_SEPARATOR_ONE || codePoint === DELETE;
     };
-    var isValidEscape = function isValidEscape(c1, c2) {
+    var isValidEscape = function(c1, c2) {
         if (c1 !== REVERSE_SOLIDUS) {
             return false;
         }
         return c2 !== LINE_FEED;
     };
-    var isIdentifierStart = function isIdentifierStart(c1, c2, c3) {
+    var isIdentifierStart = function(c1, c2, c3) {
         if (c1 === HYPHEN_MINUS) {
             return isNameStartCodePoint(c2) || isValidEscape(c2, c3);
         } else if (isNameStartCodePoint(c1)) {
@@ -1109,7 +1107,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return false;
     };
-    var isNumberStart = function isNumberStart(c1, c2, c3) {
+    var isNumberStart = function(c1, c2, c3) {
         if (c1 === PLUS_SIGN || c1 === HYPHEN_MINUS) {
             if (isDigit(c2)) {
                 return true;
@@ -1121,7 +1119,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return isDigit(c1);
     };
-    var stringToNumber = function stringToNumber(codePoints) {
+    var stringToNumber = function(codePoints) {
         var c = 0;
         var sign = 1;
         if (codePoints[c] === PLUS_SIGN || codePoints[c] === HYPHEN_MINUS) {
@@ -1806,28 +1804,28 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         };
         return Parser;
     }();
-    var isDimensionToken = function isDimensionToken(token) {
+    var isDimensionToken = function(token) {
         return token.type === 15 /* DIMENSION_TOKEN */ ;
     };
-    var isNumberToken = function isNumberToken(token) {
+    var isNumberToken = function(token) {
         return token.type === 17 /* NUMBER_TOKEN */ ;
     };
-    var isIdentToken = function isIdentToken(token) {
+    var isIdentToken = function(token) {
         return token.type === 20 /* IDENT_TOKEN */ ;
     };
-    var isStringToken = function isStringToken(token) {
+    var isStringToken = function(token) {
         return token.type === 0 /* STRING_TOKEN */ ;
     };
-    var isIdentWithValue = function isIdentWithValue(token, value) {
+    var isIdentWithValue = function(token, value) {
         return isIdentToken(token) && token.value === value;
     };
-    var nonWhiteSpace = function nonWhiteSpace(token) {
+    var nonWhiteSpace = function(token) {
         return token.type !== 31 /* WHITESPACE_TOKEN */ ;
     };
-    var nonFunctionArgSeparator = function nonFunctionArgSeparator(token) {
+    var nonFunctionArgSeparator = function(token) {
         return token.type !== 31 /* WHITESPACE_TOKEN */  && token.type !== 4 /* COMMA_TOKEN */ ;
     };
-    var parseFunctionArgs = function parseFunctionArgs(tokens) {
+    var parseFunctionArgs = function(tokens) {
         var args = [];
         var arg = [];
         tokens.forEach(function(token) {
@@ -1848,7 +1846,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return args;
     };
-    var isEndingTokenFor = function isEndingTokenFor(token, type) {
+    var isEndingTokenFor = function(token, type) {
         if (type === 11 /* LEFT_CURLY_BRACKET_TOKEN */  && token.type === 12 /* RIGHT_CURLY_BRACKET_TOKEN */ ) {
             return true;
         }
@@ -1857,13 +1855,13 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return type === 2 /* LEFT_PARENTHESIS_TOKEN */  && token.type === 3 /* RIGHT_PARENTHESIS_TOKEN */ ;
     };
-    var isLength = function isLength(token) {
+    var isLength = function(token) {
         return token.type === 17 /* NUMBER_TOKEN */  || token.type === 15 /* DIMENSION_TOKEN */ ;
     };
-    var isLengthPercentage = function isLengthPercentage(token) {
+    var isLengthPercentage = function(token) {
         return token.type === 16 /* PERCENTAGE_TOKEN */  || isLength(token);
     };
-    var parseLengthPercentageTuple = function parseLengthPercentageTuple(tokens) {
+    var parseLengthPercentageTuple = function(tokens) {
         return tokens.length > 1 ? [
             tokens[0],
             tokens[1]
@@ -1886,14 +1884,14 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         number: 100,
         flags: FLAG_INTEGER
     };
-    var getAbsoluteValueForTuple = function getAbsoluteValueForTuple(tuple, width, height) {
+    var getAbsoluteValueForTuple = function(tuple, width, height) {
         var x = tuple[0], y = tuple[1];
         return [
             getAbsoluteValue(x, width),
             getAbsoluteValue(typeof y !== 'undefined' ? y : x, height)
         ];
     };
-    var getAbsoluteValue = function getAbsoluteValue(token, parent) {
+    var getAbsoluteValue = function(token, parent) {
         if (token.type === 16 /* PERCENTAGE_TOKEN */ ) {
             return token.number / 100 * parent;
         }
@@ -1915,7 +1913,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     var TURN = 'turn';
     var angle = {
         name: 'angle',
-        parse: function parse(_context, value) {
+        parse: function(_context, value) {
             if (value.type === 15 /* DIMENSION_TOKEN */ ) {
                 switch(value.unit){
                     case DEG:
@@ -1931,7 +1929,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             throw new Error("Unsupported angle type");
         }
     };
-    var isAngle = function isAngle(value) {
+    var isAngle = function(value) {
         if (value.type === 15 /* DIMENSION_TOKEN */ ) {
             if (value.unit === DEG || value.unit === GRAD || value.unit === RAD || value.unit === TURN) {
                 return true;
@@ -1939,7 +1937,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return false;
     };
-    var parseNamedSide = function parseNamedSide(tokens) {
+    var parseNamedSide = function(tokens) {
         var sideOrCorner = tokens.filter(isIdentToken).map(function(ident) {
             return ident.value;
         }).join(' ');
@@ -1991,12 +1989,12 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return 0;
     };
-    var deg = function deg(_deg) {
-        return Math.PI * _deg / 180;
+    var deg = function(deg) {
+        return Math.PI * deg / 180;
     };
     var color$1 = {
         name: 'color',
-        parse: function parse(context, value) {
+        parse: function(context, value) {
             if (value.type === 18 /* FUNCTION */ ) {
                 var colorFunction = SUPPORTED_COLOR_FUNCTIONS[value.name];
                 if (typeof colorFunction === 'undefined') {
@@ -2041,20 +2039,20 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             return COLORS.TRANSPARENT;
         }
     };
-    var isTransparent = function isTransparent(color) {
+    var isTransparent = function(color) {
         return (0xff & color) === 0;
     };
-    var asString = function asString(color) {
+    var asString = function(color) {
         var alpha = 0xff & color;
         var blue = 0xff & color >> 8;
         var green = 0xff & color >> 16;
         var red = 0xff & color >> 24;
         return alpha < 255 ? "rgba(" + red + "," + green + "," + blue + "," + alpha / 255 + ")" : "rgb(" + red + "," + green + "," + blue + ")";
     };
-    var pack = function pack(r, g, b, a) {
+    var pack = function(r, g, b, a) {
         return (r << 24 | g << 16 | b << 8 | Math.round(a * 255) << 0) >>> 0;
     };
-    var getTokenColorValue = function getTokenColorValue(token, i) {
+    var getTokenColorValue = function(token, i) {
         if (token.type === 17 /* NUMBER_TOKEN */ ) {
             return token.number;
         }
@@ -2064,7 +2062,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return 0;
     };
-    var rgb = function rgb(_context, args) {
+    var rgb = function(_context, args) {
         var tokens = args.filter(nonFunctionArgSeparator);
         if (tokens.length === 3) {
             var _a = tokens.map(getTokenColorValue), r = _a[0], g = _a[1], b = _a[2];
@@ -2093,7 +2091,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             return t1;
         }
     }
-    var hsl = function hsl(context, args) {
+    var hsl = function(context, args) {
         var tokens = args.filter(nonFunctionArgSeparator);
         var hue = tokens[0], saturation = tokens[1], lightness = tokens[2], alpha = tokens[3];
         var h = (hue.type === 17 /* NUMBER_TOKEN */  ? deg(hue.number) : angle.parse(context, hue)) / (Math.PI * 2);
@@ -2116,7 +2114,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         rgb: rgb,
         rgba: rgb
     };
-    var parseColor = function parseColor(context, value) {
+    var parseColor = function(context, value) {
         return color$1.parse(context, Parser.create(value).parseComponentValue());
     };
     var COLORS = {
@@ -2275,7 +2273,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'border-box',
         prefix: false,
         type: 1 /* LIST */ ,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             return tokens.map(function(token) {
                 if (isIdentToken(token)) {
                     switch(token.value){
@@ -2296,7 +2294,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         type: 3 /* TYPE_VALUE */ ,
         format: 'color'
     };
-    var parseColorStop = function parseColorStop(context, args) {
+    var parseColorStop = function(context, args) {
         var color = color$1.parse(context, args[0]);
         var stop = args[1];
         return stop && isLengthPercentage(stop) ? {
@@ -2307,7 +2305,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             stop: null
         };
     };
-    var processColorStops = function processColorStops(stops, lineLength) {
+    var processColorStops = function(stops, lineLength) {
         var first = stops[0];
         var last = stops[stops.length - 1];
         if (first.stop === null) {
@@ -2357,14 +2355,14 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             };
         });
     };
-    var getAngleFromCorner = function getAngleFromCorner(corner, width, height) {
+    var getAngleFromCorner = function(corner, width, height) {
         var centerX = width / 2;
         var centerY = height / 2;
         var x = getAbsoluteValue(corner[0], width) - centerX;
         var y = centerY - getAbsoluteValue(corner[1], height);
         return (Math.atan2(y, x) + Math.PI * 2) % (Math.PI * 2);
     };
-    var calculateGradientDirection = function calculateGradientDirection(angle, width, height) {
+    var calculateGradientDirection = function(angle, width, height) {
         var radian = typeof angle === 'number' ? angle : getAngleFromCorner(angle, width, height);
         var lineLength = Math.abs(width * Math.sin(radian)) + Math.abs(height * Math.cos(radian));
         var halfWidth = width / 2;
@@ -2380,10 +2378,10 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             halfHeight + yDiff
         ];
     };
-    var distance = function distance(a, b) {
+    var distance = function(a, b) {
         return Math.sqrt(a * a + b * b);
     };
-    var findCorner = function findCorner(width, height, x, y, closest) {
+    var findCorner = function(width, height, x, y, closest) {
         var corners = [
             [
                 0,
@@ -2417,7 +2415,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             optimumCorner: null
         }).optimumCorner;
     };
-    var calculateRadius = function calculateRadius(gradient, x, y, width, height) {
+    var calculateRadius = function(gradient, x, y, width, height) {
         var rx = 0;
         var ry = 0;
         switch(gradient.size){
@@ -2476,7 +2474,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             ry
         ];
     };
-    var linearGradient = function linearGradient(context, tokens) {
+    var linearGradient = function(context, tokens) {
         var angle$1 = deg(180);
         var stops = [];
         parseFunctionArgs(tokens).forEach(function(arg, i) {
@@ -2499,7 +2497,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             type: 1 /* LINEAR_GRADIENT */ 
         };
     };
-    var prefixLinearGradient = function prefixLinearGradient(context, tokens) {
+    var prefixLinearGradient = function(context, tokens) {
         var angle$1 = deg(180);
         var stops = [];
         parseFunctionArgs(tokens).forEach(function(arg, i) {
@@ -2527,7 +2525,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             type: 1 /* LINEAR_GRADIENT */ 
         };
     };
-    var webkitGradient = function webkitGradient(context, tokens) {
+    var webkitGradient = function(context, tokens) {
         var angle = deg(180);
         var stops = [];
         var type = 1 /* LINEAR_GRADIENT */ ;
@@ -2597,7 +2595,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     var ELLIPSE = 'ellipse';
     var COVER = 'cover';
     var CONTAIN = 'contain';
-    var radialGradient = function radialGradient(context, tokens) {
+    var radialGradient = function(context, tokens) {
         var shape = 0 /* CIRCLE */ ;
         var size = 3 /* FARTHEST_CORNER */ ;
         var stops = [];
@@ -2674,7 +2672,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             type: 2 /* RADIAL_GRADIENT */ 
         };
     };
-    var prefixRadialGradient = function prefixRadialGradient(context, tokens) {
+    var prefixRadialGradient = function(context, tokens) {
         var shape = 0 /* CIRCLE */ ;
         var size = 3 /* FARTHEST_CORNER */ ;
         var stops = [];
@@ -2751,15 +2749,15 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             type: 2 /* RADIAL_GRADIENT */ 
         };
     };
-    var isLinearGradient = function isLinearGradient(background) {
+    var isLinearGradient = function(background) {
         return background.type === 1 /* LINEAR_GRADIENT */ ;
     };
-    var isRadialGradient = function isRadialGradient(background) {
+    var isRadialGradient = function(background) {
         return background.type === 2 /* RADIAL_GRADIENT */ ;
     };
     var image = {
         name: 'image',
-        parse: function parse(context, value) {
+        parse: function(context, value) {
             if (value.type === 22 /* URL_TOKEN */ ) {
                 var image_1 = {
                     url: value.value,
@@ -2799,7 +2797,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         type: 1 /* LIST */ ,
         prefix: false,
-        parse: function parse(context, tokens) {
+        parse: function(context, tokens) {
             if (tokens.length === 0) {
                 return [];
             }
@@ -2819,7 +2817,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'border-box',
         prefix: false,
         type: 1 /* LIST */ ,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             return tokens.map(function(token) {
                 if (isIdentToken(token)) {
                     switch(token.value){
@@ -2838,7 +2836,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: '0% 0%',
         type: 1 /* LIST */ ,
         prefix: false,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             return parseFunctionArgs(tokens).map(function(values) {
                 return values.filter(isLengthPercentage);
             }).map(parseLengthPercentageTuple);
@@ -2849,7 +2847,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'repeat',
         prefix: false,
         type: 1 /* LIST */ ,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             return parseFunctionArgs(tokens).map(function(values) {
                 return values.filter(isIdentToken).map(function(token) {
                     return token.value;
@@ -2857,7 +2855,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             }).map(parseBackgroundRepeat);
         }
     };
-    var parseBackgroundRepeat = function parseBackgroundRepeat(value) {
+    var parseBackgroundRepeat = function(value) {
         switch(value){
             case 'no-repeat':
                 return 1 /* NO_REPEAT */ ;
@@ -2883,16 +2881,16 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: '0',
         prefix: false,
         type: 1 /* LIST */ ,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             return parseFunctionArgs(tokens).map(function(values) {
                 return values.filter(isBackgroundSizeInfoToken);
             });
         }
     };
-    var isBackgroundSizeInfoToken = function isBackgroundSizeInfoToken(value) {
+    var isBackgroundSizeInfoToken = function(value) {
         return isIdentToken(value) || isLengthPercentage(value);
     };
-    var borderColorForSide = function borderColorForSide(side) {
+    var borderColorForSide = function(side) {
         return {
             name: "border-" + side + "-color",
             initialValue: 'transparent',
@@ -2905,13 +2903,13 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     var borderRightColor = borderColorForSide('right');
     var borderBottomColor = borderColorForSide('bottom');
     var borderLeftColor = borderColorForSide('left');
-    var borderRadiusForSide = function borderRadiusForSide(side) {
+    var borderRadiusForSide = function(side) {
         return {
             name: "border-radius-" + side,
             initialValue: '0 0',
             prefix: false,
             type: 1 /* LIST */ ,
-            parse: function parse(_context, tokens) {
+            parse: function(_context, tokens) {
                 return parseLengthPercentageTuple(tokens.filter(isLengthPercentage));
             }
         };
@@ -2920,13 +2918,13 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     var borderTopRightRadius = borderRadiusForSide('top-right');
     var borderBottomRightRadius = borderRadiusForSide('bottom-right');
     var borderBottomLeftRadius = borderRadiusForSide('bottom-left');
-    var borderStyleForSide = function borderStyleForSide(side) {
+    var borderStyleForSide = function(side) {
         return {
             name: "border-" + side + "-style",
             initialValue: 'solid',
             prefix: false,
             type: 2 /* IDENT_VALUE */ ,
-            parse: function parse(_context, style) {
+            parse: function(_context, style) {
                 switch(style){
                     case 'none':
                         return 0 /* NONE */ ;
@@ -2945,13 +2943,13 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     var borderRightStyle = borderStyleForSide('right');
     var borderBottomStyle = borderStyleForSide('bottom');
     var borderLeftStyle = borderStyleForSide('left');
-    var borderWidthForSide = function borderWidthForSide(side) {
+    var borderWidthForSide = function(side) {
         return {
             name: "border-" + side + "-width",
             initialValue: '0',
             type: 0 /* VALUE */ ,
             prefix: false,
-            parse: function parse(_context, token) {
+            parse: function(_context, token) {
                 if (isDimensionToken(token)) {
                     return token.number;
                 }
@@ -2975,7 +2973,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'ltr',
         prefix: false,
         type: 2 /* IDENT_VALUE */ ,
-        parse: function parse(_context, direction) {
+        parse: function(_context, direction) {
             switch(direction){
                 case 'rtl':
                     return 1 /* RTL */ ;
@@ -2990,13 +2988,13 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'inline-block',
         prefix: false,
         type: 1 /* LIST */ ,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             return tokens.filter(isIdentToken).reduce(function(bit, token) {
                 return bit | parseDisplayValue(token.value);
             }, 0 /* NONE */ );
         }
     };
-    var parseDisplayValue = function parseDisplayValue(display) {
+    var parseDisplayValue = function(display) {
         switch(display){
             case 'block':
             case '-webkit-box':
@@ -3067,7 +3065,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         prefix: false,
         type: 2 /* IDENT_VALUE */ ,
-        parse: function parse(_context, float) {
+        parse: function(_context, float) {
             switch(float){
                 case 'left':
                     return 1 /* LEFT */ ;
@@ -3086,7 +3084,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: '0',
         prefix: false,
         type: 0 /* VALUE */ ,
-        parse: function parse(_context, token) {
+        parse: function(_context, token) {
             if (token.type === 20 /* IDENT_TOKEN */  && token.value === 'normal') {
                 return 0;
             }
@@ -3109,7 +3107,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'normal',
         prefix: false,
         type: 2 /* IDENT_VALUE */ ,
-        parse: function parse(_context, lineBreak) {
+        parse: function(_context, lineBreak) {
             switch(lineBreak){
                 case 'strict':
                     return LINE_BREAK.STRICT;
@@ -3125,7 +3123,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         prefix: false,
         type: 4 /* TOKEN_VALUE */ 
     };
-    var computeLineHeight = function computeLineHeight(token, fontSize) {
+    var computeLineHeight = function(token, fontSize) {
         if (isIdentToken(token) && token.value === 'normal') {
             return 1.2 * fontSize;
         } else if (token.type === 17 /* NUMBER_TOKEN */ ) {
@@ -3140,7 +3138,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         type: 0 /* VALUE */ ,
         prefix: false,
-        parse: function parse(context, token) {
+        parse: function(context, token) {
             if (token.type === 20 /* IDENT_TOKEN */  && token.value === 'none') {
                 return null;
             }
@@ -3152,7 +3150,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'outside',
         prefix: false,
         type: 2 /* IDENT_VALUE */ ,
-        parse: function parse(_context, position) {
+        parse: function(_context, position) {
             switch(position){
                 case 'inside':
                     return 0 /* INSIDE */ ;
@@ -3167,7 +3165,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         prefix: false,
         type: 2 /* IDENT_VALUE */ ,
-        parse: function parse(_context, type) {
+        parse: function(_context, type) {
             switch(type){
                 case 'disc':
                     return 0 /* DISC */ ;
@@ -3281,7 +3279,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             }
         }
     };
-    var marginForSide = function marginForSide(side) {
+    var marginForSide = function(side) {
         return {
             name: "margin-" + side,
             initialValue: '0',
@@ -3298,7 +3296,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'visible',
         prefix: false,
         type: 1 /* LIST */ ,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             return tokens.filter(isIdentToken).map(function(overflow) {
                 switch(overflow.value){
                     case 'hidden':
@@ -3321,7 +3319,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'normal',
         prefix: false,
         type: 2 /* IDENT_VALUE */ ,
-        parse: function parse(_context, overflow) {
+        parse: function(_context, overflow) {
             switch(overflow){
                 case 'break-word':
                     return "break-word" /* BREAK_WORD */ ;
@@ -3331,7 +3329,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             }
         }
     };
-    var paddingForSide = function paddingForSide(side) {
+    var paddingForSide = function(side) {
         return {
             name: "padding-" + side,
             initialValue: '0',
@@ -3349,7 +3347,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'left',
         prefix: false,
         type: 2 /* IDENT_VALUE */ ,
-        parse: function parse(_context, textAlign) {
+        parse: function(_context, textAlign) {
             switch(textAlign){
                 case 'right':
                     return 2 /* RIGHT */ ;
@@ -3367,7 +3365,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'static',
         prefix: false,
         type: 2 /* IDENT_VALUE */ ,
-        parse: function parse(_context, position) {
+        parse: function(_context, position) {
             switch(position){
                 case 'relative':
                     return 1 /* RELATIVE */ ;
@@ -3386,7 +3384,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         type: 1 /* LIST */ ,
         prefix: false,
-        parse: function parse(context, tokens) {
+        parse: function(context, tokens) {
             if (tokens.length === 1 && isIdentWithValue(tokens[0], 'none')) {
                 return [];
             }
@@ -3422,7 +3420,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         prefix: false,
         type: 2 /* IDENT_VALUE */ ,
-        parse: function parse(_context, textTransform) {
+        parse: function(_context, textTransform) {
             switch(textTransform){
                 case 'uppercase':
                     return 2 /* UPPERCASE */ ;
@@ -3439,7 +3437,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         prefix: true,
         type: 0 /* VALUE */ ,
-        parse: function parse(_context, token) {
+        parse: function(_context, token) {
             if (token.type === 20 /* IDENT_TOKEN */  && token.value === 'none') {
                 return null;
             }
@@ -3453,7 +3451,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             return null;
         }
     };
-    var matrix = function matrix(args) {
+    var matrix = function(args) {
         var values = args.filter(function(arg) {
             return arg.type === 17 /* NUMBER_TOKEN */ ;
         }).map(function(arg) {
@@ -3462,7 +3460,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         return values.length === 6 ? values : null;
     };
     // doesn't support 3D transforms at the moment
-    var matrix3d = function matrix3d(args) {
+    var matrix3d = function(args) {
         var values = args.filter(function(arg) {
             return arg.type === 17 /* NUMBER_TOKEN */ ;
         }).map(function(arg) {
@@ -3508,7 +3506,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: '50% 50%',
         prefix: true,
         type: 1 /* LIST */ ,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             var origins = tokens.filter(isLengthPercentage);
             if (origins.length !== 2) {
                 return DEFAULT;
@@ -3524,7 +3522,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         prefix: false,
         type: 2 /* IDENT_VALUE */ ,
-        parse: function parse(_context, visibility) {
+        parse: function(_context, visibility) {
             switch(visibility){
                 case 'hidden':
                     return 1 /* HIDDEN */ ;
@@ -3547,7 +3545,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'normal',
         prefix: false,
         type: 2 /* IDENT_VALUE */ ,
-        parse: function parse(_context, wordBreak) {
+        parse: function(_context, wordBreak) {
             switch(wordBreak){
                 case 'break-all':
                     return WORD_BREAK.BREAK_ALL;
@@ -3564,7 +3562,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'auto',
         prefix: false,
         type: 0 /* VALUE */ ,
-        parse: function parse(_context, token) {
+        parse: function(_context, token) {
             if (token.type === 20 /* IDENT_TOKEN */ ) {
                 return {
                     auto: true,
@@ -3582,7 +3580,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     };
     var time = {
         name: 'time',
-        parse: function parse(_context, value) {
+        parse: function(_context, value) {
             if (value.type === 15 /* DIMENSION_TOKEN */ ) {
                 switch(value.unit.toLowerCase()){
                     case 's':
@@ -3599,7 +3597,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: '1',
         type: 0 /* VALUE */ ,
         prefix: false,
-        parse: function parse(_context, token) {
+        parse: function(_context, token) {
             if (isNumberToken(token)) {
                 return token.number;
             }
@@ -3618,7 +3616,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         prefix: false,
         type: 1 /* LIST */ ,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             return tokens.filter(isIdentToken).map(function(token) {
                 switch(token.value){
                     case 'underline':
@@ -3641,7 +3639,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: '',
         prefix: false,
         type: 1 /* LIST */ ,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             var accumulator = [];
             var results = [];
             tokens.forEach(function(token) {
@@ -3679,7 +3677,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'normal',
         type: 0 /* VALUE */ ,
         prefix: false,
-        parse: function parse(_context, token) {
+        parse: function(_context, token) {
             if (isNumberToken(token)) {
                 return token.number;
             }
@@ -3700,7 +3698,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         type: 1 /* LIST */ ,
         prefix: false,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             return tokens.filter(isIdentToken).map(function(token) {
                 return token.value;
             });
@@ -3711,7 +3709,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'normal',
         prefix: false,
         type: 2 /* IDENT_VALUE */ ,
-        parse: function parse(_context, overflow) {
+        parse: function(_context, overflow) {
             switch(overflow){
                 case 'oblique':
                     return "oblique" /* OBLIQUE */ ;
@@ -3723,7 +3721,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             }
         }
     };
-    var contains = function contains(bit, value) {
+    var contains = function(bit, value) {
         return (bit & value) !== 0;
     };
     var content = {
@@ -3731,7 +3729,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         type: 1 /* LIST */ ,
         prefix: false,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             if (tokens.length === 0) {
                 return [];
             }
@@ -3747,7 +3745,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         prefix: true,
         type: 1 /* LIST */ ,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             if (tokens.length === 0) {
                 return null;
             }
@@ -3776,7 +3774,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         prefix: true,
         type: 1 /* LIST */ ,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             if (tokens.length === 0) {
                 return [];
             }
@@ -3801,7 +3799,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: '0s',
         prefix: false,
         type: 1 /* LIST */ ,
-        parse: function parse(context, tokens) {
+        parse: function(context, tokens) {
             return tokens.filter(isDimensionToken).map(function(token) {
                 return time.parse(context, token);
             });
@@ -3812,7 +3810,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         prefix: true,
         type: 1 /* LIST */ ,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             if (tokens.length === 0) {
                 return null;
             }
@@ -3836,7 +3834,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             return quotes;
         }
     };
-    var getQuote = function getQuote(quotes, depth, open) {
+    var getQuote = function(quotes, depth, open) {
         if (!quotes) {
             return '';
         }
@@ -3851,7 +3849,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'none',
         type: 1 /* LIST */ ,
         prefix: false,
-        parse: function parse(context, tokens) {
+        parse: function(context, tokens) {
             if (tokens.length === 1 && isIdentWithValue(tokens[0], 'none')) {
                 return [];
             }
@@ -3893,7 +3891,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: 'normal',
         prefix: false,
         type: 1 /* LIST */ ,
-        parse: function parse(_context, tokens) {
+        parse: function(_context, tokens) {
             var DEFAULT_VALUE = [
                 0 /* FILL */ ,
                 1 /* STROKE */ ,
@@ -3933,7 +3931,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         initialValue: '0',
         type: 0 /* VALUE */ ,
         prefix: false,
-        parse: function parse(_context, token) {
+        parse: function(_context, token) {
             if (isDimensionToken(token)) {
                 return token.number;
             }
@@ -4049,7 +4047,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         return CSSParsedCounterDeclaration;
     }();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    var parse = function parse(context, descriptor, style) {
+    var parse = function(context, descriptor, style) {
         var tokenizer = new Tokenizer();
         var value = style !== null && typeof style !== 'undefined' ? style.toString() : descriptor.initialValue;
         tokenizer.write(value);
@@ -4085,7 +4083,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
     };
     var elementDebuggerAttribute = 'data-html2canvas-debug';
-    var getElementDebugType = function getElementDebugType(element) {
+    var getElementDebugType = function(element) {
         var attribute = element.getAttribute(elementDebuggerAttribute);
         switch(attribute){
             case 'all':
@@ -4100,7 +4098,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                 return 0 /* NONE */ ;
         }
     };
-    var isDebugging = function isDebugging(element, type) {
+    var isDebugging = function(element, type) {
         var elementType = getElementDebugType(element);
         return elementType === 1 /* ALL */  || type === elementType;
     };
@@ -4147,7 +4145,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     for(var i$1 = 0; i$1 < chars$1.length; i$1++){
         lookup$1[chars$1.charCodeAt(i$1)] = i$1;
     }
-    var decode = function decode(base64) {
+    var decode = function(base64) {
         var bufferLength = base64.length * 0.75, len = base64.length, i, p = 0, encoded1, encoded2, encoded3, encoded4;
         if (base64[base64.length - 1] === '=') {
             bufferLength--;
@@ -4168,7 +4166,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return buffer;
     };
-    var polyUint16Array = function polyUint16Array(buffer) {
+    var polyUint16Array = function(buffer) {
         var length = buffer.length;
         var bytes = [];
         for(var i = 0; i < length; i += 2){
@@ -4176,7 +4174,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return bytes;
     };
-    var polyUint32Array = function polyUint32Array(buffer) {
+    var polyUint32Array = function(buffer) {
         var length = buffer.length;
         var bytes = [];
         for(var i = 0; i < length; i += 4){
@@ -4229,19 +4227,19 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
      */ var UTRIE2_OMITTED_BMP_INDEX_1_LENGTH = 0x10000 >> UTRIE2_SHIFT_1;
     /** Number of entries in an index-2 block. 64=0x40 */ var UTRIE2_INDEX_2_BLOCK_LENGTH = 1 << UTRIE2_SHIFT_1_2;
     /** Mask for getting the lower bits for the in-index-2-block offset. */ var UTRIE2_INDEX_2_MASK = UTRIE2_INDEX_2_BLOCK_LENGTH - 1;
-    var slice16 = function slice16(view, start, end) {
+    var slice16 = function(view, start, end) {
         if (view.slice) {
             return view.slice(start, end);
         }
         return new Uint16Array(Array.prototype.slice.call(view, start, end));
     };
-    var slice32 = function slice32(view, start, end) {
+    var slice32 = function(view, start, end) {
         if (view.slice) {
             return view.slice(start, end);
         }
         return new Uint32Array(Array.prototype.slice.call(view, start, end));
     };
-    var createTrieFromBase64 = function createTrieFromBase64(base64, _byteLength) {
+    var createTrieFromBase64 = function(base64, _byteLength) {
         var buffer = decode(base64);
         var view32 = Array.isArray(buffer) ? polyUint32Array(buffer) : new Uint32Array(buffer);
         var view16 = Array.isArray(buffer) ? polyUint16Array(buffer) : new Uint16Array(buffer);
@@ -4328,7 +4326,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     var ZWJ = 13;
     var Extended_Pictographic = 14;
     var RI = 15;
-    var toCodePoints = function toCodePoints(str) {
+    var toCodePoints = function(str) {
         var codePoints = [];
         var i = 0;
         var length = str.length;
@@ -4348,7 +4346,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return codePoints;
     };
-    var fromCodePoint = function fromCodePoint() {
+    var fromCodePoint = function() {
         var codePoints = [];
         for(var _i = 0; _i < arguments.length; _i++){
             codePoints[_i] = arguments[_i];
@@ -4381,10 +4379,10 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     var UnicodeTrie = createTrieFromBase64(base64);
     var BREAK_NOT_ALLOWED = '×';
     var BREAK_ALLOWED = '÷';
-    var codePointToClass = function codePointToClass(codePoint) {
+    var codePointToClass = function(codePoint) {
         return UnicodeTrie.get(codePoint);
     };
-    var _graphemeBreakAtIndex = function _graphemeBreakAtIndex(_codePoints, classTypes, index) {
+    var _graphemeBreakAtIndex = function(_codePoints, classTypes, index) {
         var prevIndex = index - 2;
         var prev = classTypes[prevIndex];
         var current = classTypes[index - 1];
@@ -4456,14 +4454,14 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return BREAK_ALLOWED;
     };
-    var GraphemeBreaker = function GraphemeBreaker(str) {
+    var GraphemeBreaker = function(str) {
         var codePoints = toCodePoints(str);
         var length = codePoints.length;
         var index = 0;
         var lastEnd = 0;
         var classTypes = codePoints.map(codePointToClass);
         return {
-            next: function next() {
+            next: function() {
                 if (index >= length) {
                     return {
                         done: true,
@@ -4487,7 +4485,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             }
         };
     };
-    var splitGraphemes = function splitGraphemes(str) {
+    var splitGraphemes = function(str) {
         var breaker = GraphemeBreaker(str);
         var graphemes = [];
         var bk;
@@ -4498,7 +4496,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return graphemes;
     };
-    var testRangeBounds = function testRangeBounds(document1) {
+    var testRangeBounds = function(document1) {
         var TEST_HEIGHT = 123;
         if (document1.createRange) {
             var range = document1.createRange();
@@ -4518,7 +4516,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return false;
     };
-    var testIOSLineBreak = function testIOSLineBreak(document1) {
+    var testIOSLineBreak = function(document1) {
         var testElement = document1.createElement('boundtest');
         testElement.style.width = '50px';
         testElement.style.display = 'block';
@@ -4550,13 +4548,13 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         document1.body.removeChild(testElement);
         return supports;
     };
-    var testCORS = function testCORS() {
+    var testCORS = function() {
         return typeof new Image().crossOrigin !== 'undefined';
     };
-    var testResponseType = function testResponseType() {
+    var testResponseType = function() {
         return typeof new XMLHttpRequest().responseType === 'string';
     };
-    var testSVG = function testSVG(document1) {
+    var testSVG = function(document1) {
         var img = new Image();
         var canvas = document1.createElement('canvas');
         var ctx = canvas.getContext('2d');
@@ -4572,10 +4570,10 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return true;
     };
-    var isGreenPixel = function isGreenPixel(data) {
+    var isGreenPixel = function(data) {
         return data[0] === 0 && data[1] === 255 && data[2] === 0 && data[3] === 255;
     };
-    var testForeignObject = function testForeignObject(document1) {
+    var testForeignObject = function(document1) {
         var canvas = document1.createElement('canvas');
         var size = 100;
         canvas.width = size;
@@ -4610,7 +4608,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             return false;
         });
     };
-    var createForeignObjectSVG = function createForeignObjectSVG(width, height, x, y, node) {
+    var createForeignObjectSVG = function(width, height, x, y, node) {
         var xmlns = 'http://www.w3.org/2000/svg';
         var svg = document.createElementNS(xmlns, 'svg');
         var foreignObject = document.createElementNS(xmlns, 'foreignObject');
@@ -4625,7 +4623,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         foreignObject.appendChild(node);
         return svg;
     };
-    var loadSerializedSVG$1 = function loadSerializedSVG$1(svg) {
+    var loadSerializedSVG$1 = function(svg) {
         return new Promise(function(resolve, reject) {
             var img = new Image();
             img.onload = function() {
@@ -4701,7 +4699,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return TextBounds;
     }();
-    var parseTextBounds = function parseTextBounds(context, value, styles, node) {
+    var parseTextBounds = function(context, value, styles, node) {
         var textList = breakText(value, styles);
         var textBounds = [];
         var offset = 0;
@@ -4731,7 +4729,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         });
         return textBounds;
     };
-    var getWrapperBounds = function getWrapperBounds(context, node) {
+    var getWrapperBounds = function(context, node) {
         var ownerDocument = node.ownerDocument;
         if (ownerDocument) {
             var wrapper = ownerDocument.createElement('html2canvaswrapper');
@@ -4748,7 +4746,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return Bounds.EMPTY;
     };
-    var createRange = function createRange(node, offset, length) {
+    var createRange = function(node, offset, length) {
         var ownerDocument = node.ownerDocument;
         if (!ownerDocument) {
             throw new Error('Node has no owner document');
@@ -4758,7 +4756,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         range.setEnd(node, offset + length);
         return range;
     };
-    var segmentGraphemes = function segmentGraphemes(value) {
+    var segmentGraphemes = function(value) {
         if (FEATURES.SUPPORT_NATIVE_TEXT_SEGMENTATION) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             var segmenter = new Intl.Segmenter(void 0, {
@@ -4771,7 +4769,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return splitGraphemes(value);
     };
-    var segmentWords = function segmentWords(value, styles) {
+    var segmentWords = function(value, styles) {
         if (FEATURES.SUPPORT_NATIVE_TEXT_SEGMENTATION) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             var segmenter = new Intl.Segmenter(void 0, {
@@ -4784,7 +4782,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return breakWords(value, styles);
     };
-    var breakText = function breakText(value, styles) {
+    var breakText = function(value, styles) {
         return styles.letterSpacing !== 0 ? segmentGraphemes(value) : segmentWords(value, styles);
     };
     // https://drafts.csswg.org/css-text/#word-separator
@@ -4797,14 +4795,14 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         0x1039,
         0x1091
     ];
-    var breakWords = function breakWords(str, styles) {
+    var breakWords = function(str, styles) {
         var breaker = LineBreaker(str, {
             lineBreak: styles.lineBreak,
             wordBreak: styles.overflowWrap === "break-word" /* BREAK_WORD */  ? 'break-word' : styles.wordBreak
         });
         var words = [];
         var bk;
-        var _loop_1 = function _loop_1() {
+        var _loop_1 = function() {
             if (bk.value) {
                 var value = bk.value.slice();
                 var codePoints = toCodePoints$1(value);
@@ -4837,8 +4835,8 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return TextContainer;
     }();
-    var transform = function transform(text, _transform) {
-        switch(_transform){
+    var transform = function(text, transform) {
+        switch(transform){
             case 1 /* LOWERCASE */ :
                 return text.toLowerCase();
             case 3 /* CAPITALIZE */ :
@@ -4850,7 +4848,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
     };
     var CAPITALIZE = /(^|\s|:|-|\(|\))([a-z])/g;
-    var capitalize = function capitalize(m, p1, p2) {
+    var capitalize = function(m, p1, p2) {
         if (m.length > 0) {
             return p1 + p2.toUpperCase();
         }
@@ -4929,7 +4927,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             number: 50
         }
     ];
-    var reformatInputBounds = function reformatInputBounds(bounds) {
+    var reformatInputBounds = function(bounds) {
         if (bounds.width > bounds.height) {
             return new Bounds(bounds.left + (bounds.width - bounds.height) / 2, bounds.top, bounds.height, bounds.height);
         } else if (bounds.width < bounds.height) {
@@ -4937,7 +4935,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return bounds;
     };
-    var getInputValue = function getInputValue(node) {
+    var getInputValue = function(node) {
         var value = node.type === PASSWORD ? new Array(node.value.length + 1).join('\u2022') : node.value;
         return value.length === 0 ? node.placeholder || '' : value;
     };
@@ -5022,7 +5020,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         'UL',
         'MENU'
     ];
-    var parseNodeTree = function parseNodeTree1(context, node, parent, root) {
+    var parseNodeTree = function(context, node, parent, root) {
         for(var childNode = node.firstChild, nextNode = void 0; childNode; childNode = nextNode){
             nextNode = childNode.nextSibling;
             if (isTextNode(childNode) && childNode.data.trim().length > 0) {
@@ -5055,7 +5053,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             }
         }
     };
-    var createContainer = function createContainer(context, element) {
+    var createContainer = function(context, element) {
         if (isImageElement(element)) {
             return new ImageElementContainer(context, element);
         }
@@ -5085,77 +5083,77 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return new ElementContainer(context, element);
     };
-    var parseTree = function parseTree(context, element) {
+    var parseTree = function(context, element) {
         var container = createContainer(context, element);
         container.flags |= 4 /* CREATES_REAL_STACKING_CONTEXT */ ;
         parseNodeTree(context, element, container, container);
         return container;
     };
-    var createsRealStackingContext = function createsRealStackingContext(node, container, root) {
+    var createsRealStackingContext = function(node, container, root) {
         return container.styles.isPositionedWithZIndex() || container.styles.opacity < 1 || container.styles.isTransformed() || isBodyElement(node) && root.styles.isTransparent();
     };
-    var createsStackingContext = function createsStackingContext(styles) {
+    var createsStackingContext = function(styles) {
         return styles.isPositioned() || styles.isFloating();
     };
-    var isTextNode = function isTextNode(node) {
+    var isTextNode = function(node) {
         return node.nodeType === Node.TEXT_NODE;
     };
-    var isElementNode = function isElementNode(node) {
+    var isElementNode = function(node) {
         return node.nodeType === Node.ELEMENT_NODE;
     };
-    var isHTMLElementNode = function isHTMLElementNode(node) {
+    var isHTMLElementNode = function(node) {
         return isElementNode(node) && typeof node.style !== 'undefined' && !isSVGElementNode(node);
     };
-    var isSVGElementNode = function isSVGElementNode(element) {
-        return _type_of._(element.className) === 'object';
+    var isSVGElementNode = function(element) {
+        return typeof element.className === 'object';
     };
-    var isLIElement = function isLIElement(node) {
+    var isLIElement = function(node) {
         return node.tagName === 'LI';
     };
-    var isOLElement = function isOLElement(node) {
+    var isOLElement = function(node) {
         return node.tagName === 'OL';
     };
-    var isInputElement = function isInputElement(node) {
+    var isInputElement = function(node) {
         return node.tagName === 'INPUT';
     };
-    var isHTMLElement = function isHTMLElement(node) {
+    var isHTMLElement = function(node) {
         return node.tagName === 'HTML';
     };
-    var isSVGElement = function isSVGElement(node) {
+    var isSVGElement = function(node) {
         return node.tagName === 'svg';
     };
-    var isBodyElement = function isBodyElement(node) {
+    var isBodyElement = function(node) {
         return node.tagName === 'BODY';
     };
-    var isCanvasElement = function isCanvasElement(node) {
+    var isCanvasElement = function(node) {
         return node.tagName === 'CANVAS';
     };
-    var isVideoElement = function isVideoElement(node) {
+    var isVideoElement = function(node) {
         return node.tagName === 'VIDEO';
     };
-    var isImageElement = function isImageElement(node) {
+    var isImageElement = function(node) {
         return node.tagName === 'IMG';
     };
-    var isIFrameElement = function isIFrameElement(node) {
+    var isIFrameElement = function(node) {
         return node.tagName === 'IFRAME';
     };
-    var isStyleElement = function isStyleElement(node) {
+    var isStyleElement = function(node) {
         return node.tagName === 'STYLE';
     };
-    var isScriptElement = function isScriptElement(node) {
+    var isScriptElement = function(node) {
         return node.tagName === 'SCRIPT';
     };
-    var isTextareaElement = function isTextareaElement(node) {
+    var isTextareaElement = function(node) {
         return node.tagName === 'TEXTAREA';
     };
-    var isSelectElement = function isSelectElement(node) {
+    var isSelectElement = function(node) {
         return node.tagName === 'SELECT';
     };
-    var isSlotElement = function isSlotElement(node) {
+    var isSlotElement = function(node) {
         return node.tagName === 'SLOT';
     };
     // https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name
-    var isCustomElement = function isCustomElement(node) {
+    var isCustomElement = function(node) {
         return node.tagName.indexOf('-') > 0;
     };
     var CounterState = function() {
@@ -5481,7 +5479,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             'ა'
         ]
     };
-    var createAdditiveCounter = function createAdditiveCounter(value, min, max, symbols, fallback, suffix) {
+    var createAdditiveCounter = function(value, min, max, symbols, fallback, suffix) {
         if (value < min || value > max) {
             return createCounterText(value, fallback, suffix.length > 0);
         }
@@ -5493,7 +5491,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             return string;
         }, '') + suffix;
     };
-    var createCounterStyleWithSymbolResolver = function createCounterStyleWithSymbolResolver(value, codePointRangeLength, isNumeric, resolver) {
+    var createCounterStyleWithSymbolResolver = function(value, codePointRangeLength, isNumeric, resolver) {
         var string = '';
         do {
             if (!isNumeric) {
@@ -5504,13 +5502,13 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }while (value * codePointRangeLength >= codePointRangeLength)
         return string;
     };
-    var createCounterStyleFromRange = function createCounterStyleFromRange(value, codePointRangeStart, codePointRangeEnd, isNumeric, suffix) {
+    var createCounterStyleFromRange = function(value, codePointRangeStart, codePointRangeEnd, isNumeric, suffix) {
         var codePointRangeLength = codePointRangeEnd - codePointRangeStart + 1;
         return (value < 0 ? '-' : '') + (createCounterStyleWithSymbolResolver(Math.abs(value), codePointRangeLength, isNumeric, function(codePoint) {
             return fromCodePoint$1(Math.floor(codePoint % codePointRangeLength) + codePointRangeStart);
         }) + suffix);
     };
-    var createCounterStyleFromSymbols = function createCounterStyleFromSymbols(value, symbols, suffix) {
+    var createCounterStyleFromSymbols = function(value, symbols, suffix) {
         if (suffix === void 0) {
             suffix = '. ';
         }
@@ -5523,7 +5521,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     var CJK_TEN_COEFFICIENTS = 1 << 1;
     var CJK_TEN_HIGH_COEFFICIENTS = 1 << 2;
     var CJK_HUNDRED_COEFFICIENTS = 1 << 3;
-    var createCJKCounter = function createCJKCounter(value, numbers, multipliers, negativeSign, suffix, flags) {
+    var createCJKCounter = function(value, numbers, multipliers, negativeSign, suffix, flags) {
         if (value < -9999 || value > 9999) {
             return createCounterText(value, 4 /* CJK_DECIMAL */ , suffix.length > 0);
         }
@@ -5549,7 +5547,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     var CHINESE_FORMAL_MULTIPLIERS = '拾佰仟萬';
     var JAPANESE_NEGATIVE = 'マイナス';
     var KOREAN_NEGATIVE = '마이너스';
-    var createCounterText = function createCounterText(value, type, appendSuffix) {
+    var createCounterText = function(value, type, appendSuffix) {
         var defaultSuffix = appendSuffix ? '. ' : '';
         var cjkSuffix = appendSuffix ? '、' : '';
         var koreanSuffix = appendSuffix ? ', ' : '';
@@ -5895,13 +5893,13 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             if (!node.ownerDocument) {
                 return node.cloneNode(false);
             }
-            var _$window = node.ownerDocument.defaultView;
-            if (_$window && isElementNode(node) && (isHTMLElementNode(node) || isSVGElementNode(node))) {
+            var window1 = node.ownerDocument.defaultView;
+            if (window1 && isElementNode(node) && (isHTMLElementNode(node) || isSVGElementNode(node))) {
                 var clone = this.createElementClone(node);
                 clone.style.transitionProperty = 'none';
-                var style = _$window.getComputedStyle(node);
-                var styleBefore = _$window.getComputedStyle(node, ':before');
-                var styleAfter = _$window.getComputedStyle(node, ':after');
+                var style = window1.getComputedStyle(node);
+                var styleBefore = window1.getComputedStyle(node, ':before');
+                var styleAfter = window1.getComputedStyle(node, ':after');
                 if (this.referenceElement === node && isHTMLElementNode(clone)) {
                     this.clonedReferenceElement = clone;
                 }
@@ -5947,19 +5945,19 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                 return;
             }
             var value = style.content;
-            var _$document = clone.ownerDocument;
-            if (!_$document || !value || value === 'none' || value === '-moz-alt-content' || style.display === 'none') {
+            var document1 = clone.ownerDocument;
+            if (!document1 || !value || value === 'none' || value === '-moz-alt-content' || style.display === 'none') {
                 return;
             }
             this.counters.parse(new CSSParsedCounterDeclaration(this.context, style));
             var declaration = new CSSParsedPseudoDeclaration(this.context, style);
-            var anonymousReplacedElement = _$document.createElement('html2canvaspseudoelement');
+            var anonymousReplacedElement = document1.createElement('html2canvaspseudoelement');
             copyCSSStyles(style, anonymousReplacedElement);
             declaration.content.forEach(function(token) {
                 if (token.type === 0 /* STRING_TOKEN */ ) {
-                    anonymousReplacedElement.appendChild(_$document.createTextNode(token.value));
+                    anonymousReplacedElement.appendChild(document1.createTextNode(token.value));
                 } else if (token.type === 22 /* URL_TOKEN */ ) {
-                    var img = _$document.createElement('img');
+                    var img = document1.createElement('img');
                     img.src = token.value;
                     img.style.opacity = '1';
                     anonymousReplacedElement.appendChild(img);
@@ -5967,14 +5965,14 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                     if (token.name === 'attr') {
                         var attr = token.values.filter(isIdentToken);
                         if (attr.length) {
-                            anonymousReplacedElement.appendChild(_$document.createTextNode(node.getAttribute(attr[0].value) || ''));
+                            anonymousReplacedElement.appendChild(document1.createTextNode(node.getAttribute(attr[0].value) || ''));
                         }
                     } else if (token.name === 'counter') {
                         var _a = token.values.filter(nonFunctionArgSeparator), counter = _a[0], counterStyle = _a[1];
                         if (counter && isIdentToken(counter)) {
                             var counterState = _this.counters.getCounterValue(counter.value);
                             var counterType = counterStyle && isIdentToken(counterStyle) ? listStyleType.parse(_this.context, counterStyle.value) : 3 /* DECIMAL */ ;
-                            anonymousReplacedElement.appendChild(_$document.createTextNode(createCounterText(counterState, counterType, false)));
+                            anonymousReplacedElement.appendChild(document1.createTextNode(createCounterText(counterState, counterType, false)));
                         }
                     } else if (token.name === 'counters') {
                         var _b = token.values.filter(nonFunctionArgSeparator), counter = _b[0], delim = _b[1], counterStyle = _b[2];
@@ -5985,20 +5983,20 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                             var text = counterStates.map(function(value) {
                                 return createCounterText(value, counterType_1, false);
                             }).join(separator);
-                            anonymousReplacedElement.appendChild(_$document.createTextNode(text));
+                            anonymousReplacedElement.appendChild(document1.createTextNode(text));
                         }
                     } else ;
                 } else if (token.type === 20 /* IDENT_TOKEN */ ) {
                     switch(token.value){
                         case 'open-quote':
-                            anonymousReplacedElement.appendChild(_$document.createTextNode(getQuote(declaration.quotes, _this.quoteDepth++, true)));
+                            anonymousReplacedElement.appendChild(document1.createTextNode(getQuote(declaration.quotes, _this.quoteDepth++, true)));
                             break;
                         case 'close-quote':
-                            anonymousReplacedElement.appendChild(_$document.createTextNode(getQuote(declaration.quotes, --_this.quoteDepth, false)));
+                            anonymousReplacedElement.appendChild(document1.createTextNode(getQuote(declaration.quotes, --_this.quoteDepth, false)));
                             break;
                         default:
                             // safari doesn't parse string tokens correctly because of lack of quotes
-                            anonymousReplacedElement.appendChild(_$document.createTextNode(token.value));
+                            anonymousReplacedElement.appendChild(document1.createTextNode(token.value));
                     }
                 }
             });
@@ -6025,7 +6023,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         PseudoElementType[PseudoElementType["BEFORE"] = 0] = "BEFORE";
         PseudoElementType[PseudoElementType["AFTER"] = 1] = "AFTER";
     })(PseudoElementType || (PseudoElementType = {}));
-    var createIFrameContainer = function createIFrameContainer(ownerDocument, bounds) {
+    var createIFrameContainer = function(ownerDocument, bounds) {
         var cloneIframeContainer = ownerDocument.createElement('iframe');
         cloneIframeContainer.className = 'html2canvas-container';
         cloneIframeContainer.style.visibility = 'hidden';
@@ -6040,7 +6038,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         ownerDocument.body.appendChild(cloneIframeContainer);
         return cloneIframeContainer;
     };
-    var imageReady = function imageReady(img) {
+    var imageReady = function(img) {
         return new Promise(function(resolve) {
             if (img.complete) {
                 resolve();
@@ -6054,10 +6052,10 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             img.onerror = resolve;
         });
     };
-    var imagesReady = function imagesReady(document1) {
+    var imagesReady = function(document1) {
         return Promise.all([].slice.call(document1.images, 0).map(imageReady));
     };
-    var iframeLoader = function iframeLoader(iframe) {
+    var iframeLoader = function(iframe) {
         return new Promise(function(resolve, reject) {
             var cloneWindow = iframe.contentWindow;
             if (!cloneWindow) {
@@ -6080,7 +6078,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         'd',
         'content' // Safari shows pseudoelements if content is set
     ];
-    var copyCSSStyles = function copyCSSStyles(style, target) {
+    var copyCSSStyles = function(style, target) {
         // Edge does not provide value for cssText
         for(var i = style.length - 1; i >= 0; i--){
             var property = style.item(i);
@@ -6090,7 +6088,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return target;
     };
-    var serializeDoctype = function serializeDoctype(doctype) {
+    var serializeDoctype = function(doctype) {
         var str = '';
         if (doctype) {
             str += '<!DOCTYPE ';
@@ -6110,12 +6108,12 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return str;
     };
-    var restoreOwnerScroll = function restoreOwnerScroll(ownerDocument, x, y) {
+    var restoreOwnerScroll = function(ownerDocument, x, y) {
         if (ownerDocument && ownerDocument.defaultView && (x !== ownerDocument.defaultView.pageXOffset || y !== ownerDocument.defaultView.pageYOffset)) {
             ownerDocument.defaultView.scrollTo(x, y);
         }
     };
-    var restoreNodeScroll = function restoreNodeScroll(_a) {
+    var restoreNodeScroll = function(_a) {
         var element = _a[0], x = _a[1], y = _a[2];
         element.scrollLeft = x;
         element.scrollTop = y;
@@ -6125,13 +6123,13 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     var PSEUDO_HIDE_ELEMENT_CLASS_BEFORE = '___html2canvas___pseudoelement_before';
     var PSEUDO_HIDE_ELEMENT_CLASS_AFTER = '___html2canvas___pseudoelement_after';
     var PSEUDO_HIDE_ELEMENT_STYLE = "{\n    content: \"\" !important;\n    display: none !important;\n}";
-    var createPseudoHideStyles = function createPseudoHideStyles(body) {
+    var createPseudoHideStyles = function(body) {
         createStyles(body, "." + PSEUDO_HIDE_ELEMENT_CLASS_BEFORE + PSEUDO_BEFORE + PSEUDO_HIDE_ELEMENT_STYLE + "\n         ." + PSEUDO_HIDE_ELEMENT_CLASS_AFTER + PSEUDO_AFTER + PSEUDO_HIDE_ELEMENT_STYLE);
     };
-    var createStyles = function createStyles(body, styles) {
-        var _$document = body.ownerDocument;
-        if (_$document) {
-            var style = _$document.createElement('style');
+    var createStyles = function(body, styles) {
+        var document1 = body.ownerDocument;
+        if (document1) {
+            var style = document1.createElement('style');
             style.textContent = styles;
             body.appendChild(style);
         }
@@ -6282,7 +6280,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                 xhr.onerror = reject;
                 var queryString = proxy.indexOf('?') > -1 ? '&' : '?';
                 xhr.open('GET', "" + proxy + queryString + "url=" + encodeURIComponent(src) + "&responseType=" + responseType);
-                if (responseType !== 'text' && _instanceof._(xhr, XMLHttpRequest)) {
+                if (responseType !== 'text' && xhr instanceof XMLHttpRequest) {
                     xhr.responseType = responseType;
                 }
                 if (_this._options.imageTimeout) {
@@ -6300,19 +6298,19 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     var INLINE_SVG = /^data:image\/svg\+xml/i;
     var INLINE_BASE64 = /^data:image\/.*;base64,/i;
     var INLINE_IMG = /^data:image\/.*/i;
-    var isRenderable = function isRenderable(src) {
+    var isRenderable = function(src) {
         return FEATURES.SUPPORT_SVG_DRAWING || !isSVG(src);
     };
-    var isInlineImage = function isInlineImage(src) {
+    var isInlineImage = function(src) {
         return INLINE_IMG.test(src);
     };
-    var isInlineBase64Image = function isInlineBase64Image(src) {
+    var isInlineBase64Image = function(src) {
         return INLINE_BASE64.test(src);
     };
-    var isBlobImage = function isBlobImage(src) {
+    var isBlobImage = function(src) {
         return src.substr(0, 4) === 'blob';
     };
-    var isSVG = function isSVG(src) {
+    var isSVG = function(src) {
         return src.substr(-3).toLowerCase() === 'svg' || INLINE_SVG.test(src);
     };
     var Vector = function() {
@@ -6326,7 +6324,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         };
         return Vector;
     }();
-    var lerp = function lerp(a, b, t) {
+    var lerp = function(a, b, t) {
         return new Vector(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t);
     };
     var BezierCurve = function() {
@@ -6354,7 +6352,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         };
         return BezierCurve;
     }();
-    var isBezierCurve = function isBezierCurve(path) {
+    var isBezierCurve = function(path) {
         return path.type === 1 /* BEZIER_CURVE */ ;
     };
     var BoundCurves = function() {
@@ -6427,7 +6425,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         CORNER[CORNER["BOTTOM_RIGHT"] = 2] = "BOTTOM_RIGHT";
         CORNER[CORNER["BOTTOM_LEFT"] = 3] = "BOTTOM_LEFT";
     })(CORNER || (CORNER = {}));
-    var getCurvePoints = function getCurvePoints(x, y, r1, r2, position) {
+    var getCurvePoints = function(x, y, r1, r2, position) {
         var kappa = 4 * ((Math.sqrt(2) - 1) / 3);
         var ox = r1 * kappa; // control point offset horizontal
         var oy = r2 * kappa; // control point offset vertical
@@ -6445,7 +6443,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                 return new BezierCurve(new Vector(xm, ym), new Vector(xm - ox, ym), new Vector(x, y + oy), new Vector(x, y));
         }
     };
-    var calculateBorderBoxPath = function calculateBorderBoxPath(curves) {
+    var calculateBorderBoxPath = function(curves) {
         return [
             curves.topLeftBorderBox,
             curves.topRightBorderBox,
@@ -6453,7 +6451,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             curves.bottomLeftBorderBox
         ];
     };
-    var calculateContentBoxPath = function calculateContentBoxPath(curves) {
+    var calculateContentBoxPath = function(curves) {
         return [
             curves.topLeftContentBox,
             curves.topRightContentBox,
@@ -6461,7 +6459,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             curves.bottomLeftContentBox
         ];
     };
-    var calculatePaddingBoxPath = function calculatePaddingBoxPath(curves) {
+    var calculatePaddingBoxPath = function(curves) {
         return [
             curves.topLeftPaddingBox,
             curves.topRightPaddingBox,
@@ -6495,16 +6493,16 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return OpacityEffect;
     }();
-    var isTransformEffect = function isTransformEffect(effect) {
+    var isTransformEffect = function(effect) {
         return effect.type === 0 /* TRANSFORM */ ;
     };
-    var isClipEffect = function isClipEffect(effect) {
+    var isClipEffect = function(effect) {
         return effect.type === 1 /* CLIP */ ;
     };
-    var isOpacityEffect = function isOpacityEffect(effect) {
+    var isOpacityEffect = function(effect) {
         return effect.type === 2 /* OPACITY */ ;
     };
-    var equalPath = function equalPath(a, b) {
+    var equalPath = function(a, b) {
         if (a.length === b.length) {
             return a.some(function(v, i) {
                 return v === b[i];
@@ -6512,7 +6510,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return false;
     };
-    var transformPath = function transformPath(path, deltaX, deltaY, deltaW, deltaH) {
+    var transformPath = function(path, deltaX, deltaY, deltaW, deltaH) {
         return path.map(function(point, index) {
             switch(index){
                 case 0:
@@ -6601,7 +6599,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         };
         return ElementPaint;
     }();
-    var parseStackTree = function parseStackTree1(parent, stackingContext, realStackingContext, listItems) {
+    var parseStackTree = function(parent, stackingContext, realStackingContext, listItems) {
         parent.container.elements.forEach(function(child) {
             var treatAsRealStackingContext = contains(child.flags, 4 /* CREATES_REAL_STACKING_CONTEXT */ );
             var createsStackingContext = contains(child.flags, 2 /* CREATES_STACKING_CONTEXT */ );
@@ -6663,19 +6661,19 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             }
         });
     };
-    var processListItems = function processListItems(owner, elements) {
-        var numbering = _instanceof._(owner, OLElementContainer) ? owner.start : 1;
-        var reversed = _instanceof._(owner, OLElementContainer) ? owner.reversed : false;
+    var processListItems = function(owner, elements) {
+        var numbering = owner instanceof OLElementContainer ? owner.start : 1;
+        var reversed = owner instanceof OLElementContainer ? owner.reversed : false;
         for(var i = 0; i < elements.length; i++){
             var item = elements[i];
-            if (_instanceof._(item.container, LIElementContainer) && typeof item.container.value === 'number' && item.container.value !== 0) {
+            if (item.container instanceof LIElementContainer && typeof item.container.value === 'number' && item.container.value !== 0) {
                 numbering = item.container.value;
             }
             item.listValue = createCounterText(numbering, item.container.styles.listStyleType, true);
             numbering += reversed ? -1 : 1;
         }
     };
-    var parseStackingContexts = function parseStackingContexts(container) {
+    var parseStackingContexts = function(container) {
         var paintContainer = new ElementPaint(container, null);
         var root = new StackingContext(paintContainer);
         var listItems = [];
@@ -6683,7 +6681,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         processListItems(paintContainer.container, listItems);
         return root;
     };
-    var parsePathForBorder = function parsePathForBorder(curves, borderSide) {
+    var parsePathForBorder = function(curves, borderSide) {
         switch(borderSide){
             case 0:
                 return createPathFromCurves(curves.topLeftBorderBox, curves.topLeftPaddingBox, curves.topRightBorderBox, curves.topRightPaddingBox);
@@ -6696,7 +6694,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                 return createPathFromCurves(curves.bottomLeftBorderBox, curves.bottomLeftPaddingBox, curves.topLeftBorderBox, curves.topLeftPaddingBox);
         }
     };
-    var parsePathForBorderDoubleOuter = function parsePathForBorderDoubleOuter(curves, borderSide) {
+    var parsePathForBorderDoubleOuter = function(curves, borderSide) {
         switch(borderSide){
             case 0:
                 return createPathFromCurves(curves.topLeftBorderBox, curves.topLeftBorderDoubleOuterBox, curves.topRightBorderBox, curves.topRightBorderDoubleOuterBox);
@@ -6709,7 +6707,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                 return createPathFromCurves(curves.bottomLeftBorderBox, curves.bottomLeftBorderDoubleOuterBox, curves.topLeftBorderBox, curves.topLeftBorderDoubleOuterBox);
         }
     };
-    var parsePathForBorderDoubleInner = function parsePathForBorderDoubleInner(curves, borderSide) {
+    var parsePathForBorderDoubleInner = function(curves, borderSide) {
         switch(borderSide){
             case 0:
                 return createPathFromCurves(curves.topLeftBorderDoubleInnerBox, curves.topLeftPaddingBox, curves.topRightBorderDoubleInnerBox, curves.topRightPaddingBox);
@@ -6722,7 +6720,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                 return createPathFromCurves(curves.bottomLeftBorderDoubleInnerBox, curves.bottomLeftPaddingBox, curves.topLeftBorderDoubleInnerBox, curves.topLeftPaddingBox);
         }
     };
-    var parsePathForBorderStroke = function parsePathForBorderStroke(curves, borderSide) {
+    var parsePathForBorderStroke = function(curves, borderSide) {
         switch(borderSide){
             case 0:
                 return createStrokePathFromCurves(curves.topLeftBorderStroke, curves.topRightBorderStroke);
@@ -6735,7 +6733,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                 return createStrokePathFromCurves(curves.bottomLeftBorderStroke, curves.topLeftBorderStroke);
         }
     };
-    var createStrokePathFromCurves = function createStrokePathFromCurves(outer1, outer2) {
+    var createStrokePathFromCurves = function(outer1, outer2) {
         var path = [];
         if (isBezierCurve(outer1)) {
             path.push(outer1.subdivide(0.5, false));
@@ -6749,7 +6747,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return path;
     };
-    var createPathFromCurves = function createPathFromCurves(outer1, inner1, outer2, inner2) {
+    var createPathFromCurves = function(outer1, inner1, outer2, inner2) {
         var path = [];
         if (isBezierCurve(outer1)) {
             path.push(outer1.subdivide(0.5, false));
@@ -6773,12 +6771,12 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return path;
     };
-    var paddingBox = function paddingBox(element) {
+    var paddingBox = function(element) {
         var bounds = element.bounds;
         var styles = element.styles;
         return bounds.add(styles.borderLeftWidth, styles.borderTopWidth, -(styles.borderRightWidth + styles.borderLeftWidth), -(styles.borderTopWidth + styles.borderBottomWidth));
     };
-    var contentBox = function contentBox(element) {
+    var contentBox = function(element) {
         var styles = element.styles;
         var bounds = element.bounds;
         var paddingLeft = getAbsoluteValue(styles.paddingLeft, bounds.width);
@@ -6787,7 +6785,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         var paddingBottom = getAbsoluteValue(styles.paddingBottom, bounds.width);
         return bounds.add(paddingLeft + styles.borderLeftWidth, paddingTop + styles.borderTopWidth, -(styles.borderRightWidth + styles.borderLeftWidth + paddingLeft + paddingRight), -(styles.borderTopWidth + styles.borderBottomWidth + paddingTop + paddingBottom));
     };
-    var calculateBackgroundPositioningArea = function calculateBackgroundPositioningArea(backgroundOrigin, element) {
+    var calculateBackgroundPositioningArea = function(backgroundOrigin, element) {
         if (backgroundOrigin === 0 /* BORDER_BOX */ ) {
             return element.bounds;
         }
@@ -6796,7 +6794,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return paddingBox(element);
     };
-    var calculateBackgroundPaintingArea = function calculateBackgroundPaintingArea(backgroundClip, element) {
+    var calculateBackgroundPaintingArea = function(backgroundClip, element) {
         if (backgroundClip === 0 /* BORDER_BOX */ ) {
             return element.bounds;
         }
@@ -6805,7 +6803,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         return paddingBox(element);
     };
-    var calculateBackgroundRendering = function calculateBackgroundRendering(container, index, intrinsicSize) {
+    var calculateBackgroundRendering = function(container, index, intrinsicSize) {
         var backgroundPositioningArea = calculateBackgroundPositioningArea(getBackgroundValueForIndex(container.styles.backgroundOrigin, index), container);
         var backgroundPaintingArea = calculateBackgroundPaintingArea(getBackgroundValueForIndex(container.styles.backgroundClip, index), container);
         var backgroundImageSize = calculateBackgroundSize(getBackgroundValueForIndex(container.styles.backgroundSize, index), intrinsicSize, backgroundPositioningArea);
@@ -6822,13 +6820,13 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             sizeHeight
         ];
     };
-    var isAuto = function isAuto(token) {
+    var isAuto = function(token) {
         return isIdentToken(token) && token.value === BACKGROUND_SIZE.AUTO;
     };
-    var hasIntrinsicValue = function hasIntrinsicValue(value) {
+    var hasIntrinsicValue = function(value) {
         return typeof value === 'number';
     };
-    var calculateBackgroundSize = function calculateBackgroundSize(size, _a, bounds) {
+    var calculateBackgroundSize = function(size, _a, bounds) {
         var intrinsicWidth = _a[0], intrinsicHeight = _a[1], intrinsicProportion = _a[2];
         var first = size[0], second = size[1];
         if (!first) {
@@ -6945,14 +6943,14 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         }
         throw new Error("Unable to calculate background-size for element");
     };
-    var getBackgroundValueForIndex = function getBackgroundValueForIndex(values, index) {
+    var getBackgroundValueForIndex = function(values, index) {
         var value = values[index];
         if (typeof value === 'undefined') {
             return values[0];
         }
         return value;
     };
-    var calculateBackgroundRepeatPath = function calculateBackgroundRepeatPath(repeat, _a, _b, backgroundPositioningArea, backgroundPaintingArea) {
+    var calculateBackgroundRepeatPath = function(repeat, _a, _b, backgroundPositioningArea, backgroundPaintingArea) {
         var x = _a[0], y = _a[1];
         var width = _b[0], height = _b[1];
         switch(repeat){
@@ -7303,7 +7301,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                                 1
                             ];
                         case 4:
-                            if (!_instanceof._(container, ImageElementContainer)) return [
+                            if (!(container instanceof ImageElementContainer)) return [
                                 3 /*break*/ ,
                                 8
                             ];
@@ -7334,10 +7332,10 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                                 8
                             ];
                         case 8:
-                            if (_instanceof._(container, CanvasElementContainer)) {
+                            if (container instanceof CanvasElementContainer) {
                                 this.renderReplacedElement(container, curves, container.canvas);
                             }
-                            if (!_instanceof._(container, SVGElementContainer)) return [
+                            if (!(container instanceof SVGElementContainer)) return [
                                 3 /*break*/ ,
                                 12
                             ];
@@ -7368,7 +7366,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                                 12
                             ];
                         case 12:
-                            if (!(_instanceof._(container, IFrameElementContainer) && container.tree)) return [
+                            if (!(container instanceof IFrameElementContainer && container.tree)) return [
                                 3 /*break*/ ,
                                 14
                             ];
@@ -7391,7 +7389,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                             }
                             _c.label = 14;
                         case 14:
-                            if (_instanceof._(container, InputElementContainer)) {
+                            if (container instanceof InputElementContainer) {
                                 size = Math.min(container.bounds.width, container.bounds.height);
                                 if (container.type === CHECKBOX) {
                                     if (container.checked) {
@@ -7762,7 +7760,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                     switch(_b.label){
                         case 0:
                             index = container.styles.backgroundImage.length - 1;
-                            _loop_1 = function _loop_1(backgroundImage) {
+                            _loop_1 = function(backgroundImage) {
                                 var image, url, _c, path, x, y, width, height, pattern, _d, path, x, y, width, height, _e, lineLength, x0, x1, y0, y1, canvas, ctx, gradient_1, pattern, _f, path, left, top_1, width, height, position, x, y, _g, rx, ry, radialGradient_1, midX, midY, f, invF;
                                 return __generator(this, function(_h) {
                                     switch(_h.label){
@@ -8246,17 +8244,17 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         };
         return CanvasRenderer;
     }(Renderer);
-    var isTextInputElement = function isTextInputElement(container) {
-        if (_instanceof._(container, TextareaElementContainer)) {
+    var isTextInputElement = function(container) {
+        if (container instanceof TextareaElementContainer) {
             return true;
-        } else if (_instanceof._(container, SelectElementContainer)) {
+        } else if (container instanceof SelectElementContainer) {
             return true;
-        } else if (_instanceof._(container, InputElementContainer) && container.type !== RADIO && container.type !== CHECKBOX) {
+        } else if (container instanceof InputElementContainer && container.type !== RADIO && container.type !== CHECKBOX) {
             return true;
         }
         return false;
     };
-    var calculateBackgroundCurvedPaintingArea = function calculateBackgroundCurvedPaintingArea(clip, curves) {
+    var calculateBackgroundCurvedPaintingArea = function(clip, curves) {
         switch(clip){
             case 0 /* BORDER_BOX */ :
                 return calculateBorderBoxPath(curves);
@@ -8267,7 +8265,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
                 return calculatePaddingBoxPath(curves);
         }
     };
-    var canvasTextAlign = function canvasTextAlign(textAlign) {
+    var canvasTextAlign = function(textAlign) {
         switch(textAlign){
             case 1 /* CENTER */ :
                 return 'center';
@@ -8283,7 +8281,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         '-apple-system',
         'system-ui'
     ];
-    var fixIOSSystemFonts = function fixIOSSystemFonts(fontFamilies) {
+    var fixIOSSystemFonts = function(fontFamilies) {
         return /iPhone OS 15_(0|1)/.test(window.navigator.userAgent) ? fontFamilies.filter(function(fontFamily) {
             return iOSBrokenFonts.indexOf(fontFamily) === -1;
         }) : fontFamilies;
@@ -8332,7 +8330,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         };
         return ForeignObjectRenderer;
     }(Renderer);
-    var loadSerializedSVG = function loadSerializedSVG(svg) {
+    var loadSerializedSVG = function(svg) {
         return new Promise(function(resolve, reject) {
             var img = new Image();
             img.onload = function() {
@@ -8443,7 +8441,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
         Context.instanceCount = 1;
         return Context;
     }();
-    var html2canvas = function html2canvas(element, options) {
+    var html2canvas = function(element, options) {
         if (options === void 0) {
             options = {};
         }
@@ -8452,14 +8450,14 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
     if (typeof window !== 'undefined') {
         CacheStorage.setContext(window);
     }
-    var renderElement = function renderElement(element, opts) {
+    var renderElement = function(element, opts) {
         return __awaiter(void 0, void 0, void 0, function() {
             var ownerDocument, defaultView, resourceOptions, contextOptions, windowOptions, windowBounds, context, foreignObjectRendering, cloneOptions, documentCloner, clonedElement, container, _a, width, height, left, top, backgroundColor, renderOptions, canvas, renderer, root, renderer;
             var _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
             return __generator(this, function(_u) {
                 switch(_u.label){
                     case 0:
-                        if (!element || (typeof element === "undefined" ? "undefined" : _type_of._(element)) !== 'object') {
+                        if (!element || typeof element !== 'object') {
                             return [
                                 2 /*return*/ ,
                                 Promise.reject('Invalid element provided as first argument')
@@ -8572,7 +8570,7 @@ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/hel
             });
         });
     };
-    var parseBackgroundColor = function parseBackgroundColor(context, element, backgroundColorOverride) {
+    var parseBackgroundColor = function(context, element, backgroundColorOverride) {
         var ownerDocument = element.ownerDocument;
         // http://www.w3.org/TR/css3-background/#special-backgrounds
         var documentBackgroundColor = ownerDocument.documentElement ? parseColor(context, getComputedStyle(ownerDocument.documentElement).backgroundColor) : COLORS.TRANSPARENT;

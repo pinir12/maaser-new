@@ -2,15 +2,14 @@
 "[project]/frontend/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 var _global_process, _global_process1;
-module.exports = ((_global_process = /*TURBOPACK member replacement*/ __turbopack_context__.g.process) == null ? void 0 : _global_process.env) && _type_of._((_global_process1 = /*TURBOPACK member replacement*/ __turbopack_context__.g.process) == null ? void 0 : _global_process1.env) === 'object' ? /*TURBOPACK member replacement*/ __turbopack_context__.g.process : __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/process/browser.js [app-client] (ecmascript)");
+module.exports = ((_global_process = /*TURBOPACK member replacement*/ __turbopack_context__.g.process) == null ? void 0 : _global_process.env) && typeof ((_global_process1 = /*TURBOPACK member replacement*/ __turbopack_context__.g.process) == null ? void 0 : _global_process1.env) === 'object' ? /*TURBOPACK member replacement*/ __turbopack_context__.g.process : __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/process/browser.js [app-client] (ecmascript)");
 }),
 "[project]/frontend/node_modules/next/dist/build/polyfills/polyfill-module.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 
 "trimStart" in String.prototype || (String.prototype.trimStart = String.prototype.trimLeft), "trimEnd" in String.prototype || (String.prototype.trimEnd = String.prototype.trimRight), "description" in Symbol.prototype || Object.defineProperty(Symbol.prototype, "description", {
     configurable: !0,
-    get: function get() {
+    get: function() {
         var t = /\((.*)\)/.exec(this.toString());
         return t ? t[1] : void 0;
     }
@@ -69,20 +68,20 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    getAssetToken: function getAssetToken1() {
+    getAssetToken: function() {
         return getAssetToken;
     },
-    getAssetTokenQuery: function getAssetTokenQuery1() {
+    getAssetTokenQuery: function() {
         return getAssetTokenQuery;
     },
-    getDeploymentId: function getDeploymentId1() {
+    getDeploymentId: function() {
         return getDeploymentId;
     },
-    getDeploymentIdQuery: function getDeploymentIdQuery1() {
+    getDeploymentIdQuery: function() {
         return getDeploymentIdQuery;
     }
 });
-var deploymentId;
+let deploymentId;
 if (typeof window !== 'undefined') {
     deploymentId = document.documentElement.dataset.dplId;
     // Immediately remove the attribute to prevent hydration errors (the dplId was inserted into the
@@ -96,20 +95,18 @@ if (typeof window !== 'undefined') {
 function getDeploymentId() {
     return deploymentId;
 }
-function getDeploymentIdQuery() {
-    var ampersand = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : false;
-    var id = getDeploymentId();
+function getDeploymentIdQuery(ampersand = false) {
+    let id = getDeploymentId();
     if (id) {
-        return "".concat(ampersand ? '&' : '?', "dpl=").concat(id);
+        return `${ampersand ? '&' : '?'}dpl=${id}`;
     }
     return '';
 }
 function getAssetToken() {
     return ("TURBOPACK compile-time value", "") || ("TURBOPACK compile-time value", false);
 }
-function getAssetTokenQuery() {
-    var ampersand = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : false;
-    var id = getAssetToken();
+function getAssetTokenQuery(ampersand = false) {
+    let id = getAssetToken();
     if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
     ;
     return '';
@@ -118,33 +115,21 @@ function getAssetTokenQuery() {
 "[project]/frontend/node_modules/next/dist/shared/lib/invariant-error.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _call_super = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_call_super.cjs [app-client] (ecmascript)");
-var _class_call_check = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_class_call_check.cjs [app-client] (ecmascript)");
-var _inherits = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_inherits.cjs [app-client] (ecmascript)");
-var _wrap_native_super = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_wrap_native_super.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 Object.defineProperty(exports, "InvariantError", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return InvariantError;
     }
 });
-var InvariantError = /*#__PURE__*/ function(Error1) {
-    _inherits._(InvariantError, Error1);
-    function InvariantError(message, options) {
-        _class_call_check._(this, InvariantError);
-        var _this;
-        _this = _call_super._(this, InvariantError, [
-            "Invariant: ".concat(message.endsWith('.') ? message : message + '.', " This is a bug in Next.js."),
-            options
-        ]);
-        _this.name = 'InvariantError';
-        return _this;
+class InvariantError extends Error {
+    constructor(message, options){
+        super(`Invariant: ${message.endsWith('.') ? message : message + '.'} This is a bug in Next.js.`, options);
+        this.name = 'InvariantError';
     }
-    return InvariantError;
-}(_wrap_native_super._(Error));
+}
 }),
 "[project]/frontend/node_modules/next/dist/shared/lib/is-plain-object.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
@@ -163,10 +148,10 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    getObjectClassLabel: function getObjectClassLabel1() {
+    getObjectClassLabel: function() {
         return getObjectClassLabel;
     },
-    isPlainObject: function isPlainObject1() {
+    isPlainObject: function() {
         return isPlainObject;
     }
 });
@@ -177,7 +162,7 @@ function isPlainObject(value) {
     if (getObjectClassLabel(value) !== '[object Object]') {
         return false;
     }
-    var prototype = Object.getPrototypeOf(value);
+    const prototype = Object.getPrototypeOf(value);
     /**
    * this used to be previously:
    *
@@ -193,11 +178,6 @@ function isPlainObject(value) {
 "use strict";
 
 // This has to be a shared module which is shared between client component error boundary and dynamic component
-var _call_super = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_call_super.cjs [app-client] (ecmascript)");
-var _class_call_check = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_class_call_check.cjs [app-client] (ecmascript)");
-var _inherits = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_inherits.cjs [app-client] (ecmascript)");
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
-var _wrap_native_super = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_wrap_native_super.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -212,28 +192,21 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    BailoutToCSRError: function BailoutToCSRError1() {
+    BailoutToCSRError: function() {
         return BailoutToCSRError;
     },
-    isBailoutToCSRError: function isBailoutToCSRError1() {
+    isBailoutToCSRError: function() {
         return isBailoutToCSRError;
     }
 });
-var BAILOUT_TO_CSR = 'BAILOUT_TO_CLIENT_SIDE_RENDERING';
-var BailoutToCSRError = /*#__PURE__*/ function(Error1) {
-    _inherits._(BailoutToCSRError, Error1);
-    function BailoutToCSRError(reason) {
-        _class_call_check._(this, BailoutToCSRError);
-        var _this;
-        _this = _call_super._(this, BailoutToCSRError, [
-            "Bail out to client-side rendering: ".concat(reason)
-        ]), _this.reason = reason, _this.digest = BAILOUT_TO_CSR;
-        return _this;
+const BAILOUT_TO_CSR = 'BAILOUT_TO_CLIENT_SIDE_RENDERING';
+class BailoutToCSRError extends Error {
+    constructor(reason){
+        super(`Bail out to client-side rendering: ${reason}`), this.reason = reason, this.digest = BAILOUT_TO_CSR;
     }
-    return BailoutToCSRError;
-}(_wrap_native_super._(Error));
+}
 function isBailoutToCSRError(err) {
-    if ((typeof err === "undefined" ? "undefined" : _type_of._(err)) !== 'object' || err === null || !('digest' in err)) {
+    if (typeof err !== 'object' || err === null || !('digest' in err)) {
         return false;
     }
     return err.digest === BAILOUT_TO_CSR;
@@ -256,14 +229,14 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    decorateServerError: function decorateServerError1() {
+    decorateServerError: function() {
         return decorateServerError;
     },
-    getErrorSource: function getErrorSource1() {
+    getErrorSource: function() {
         return getErrorSource;
     }
 });
-var symbolError = Symbol.for('NextjsError');
+const symbolError = Symbol.for('NextjsError');
 function getErrorSource(error) {
     return error[symbolError] || null;
 }
@@ -284,18 +257,17 @@ function decorateServerError(error, type) {
  *
  * @param promise the maybe-thenable value
  * @returns true if the value is thenable
- */ var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
-Object.defineProperty(exports, "__esModule", {
+ */ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 Object.defineProperty(exports, "isThenable", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return isThenable;
     }
 });
 function isThenable(promise) {
-    return promise !== null && (typeof promise === "undefined" ? "undefined" : _type_of._(promise)) === 'object' && 'then' in promise && typeof promise.then === 'function';
+    return promise !== null && typeof promise === 'object' && 'then' in promise && typeof promise.then === 'function';
 }
 }),
 "[project]/frontend/node_modules/next/dist/shared/lib/head-manager-context.shared-runtime.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
@@ -308,13 +280,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "HeadManagerContext", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return HeadManagerContext;
     }
 });
-var _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
-var _react = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
-var HeadManagerContext = _react.default.createContext({});
+const _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
+const _react = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
+const HeadManagerContext = _react.default.createContext({});
 if ("TURBOPACK compile-time truthy", 1) {
     HeadManagerContext.displayName = 'HeadManagerContext';
 }
@@ -343,36 +315,36 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    NavigationPromisesContext: function NavigationPromisesContext1() {
+    NavigationPromisesContext: function() {
         return NavigationPromisesContext;
     },
-    PathParamsContext: function PathParamsContext1() {
+    PathParamsContext: function() {
         return PathParamsContext;
     },
-    PathnameContext: function PathnameContext1() {
+    PathnameContext: function() {
         return PathnameContext;
     },
-    ReadonlyURLSearchParams: function ReadonlyURLSearchParams() {
+    ReadonlyURLSearchParams: function() {
         return _readonlyurlsearchparams.ReadonlyURLSearchParams;
     },
-    SearchParamsContext: function SearchParamsContext1() {
+    SearchParamsContext: function() {
         return SearchParamsContext;
     },
-    createDevToolsInstrumentedPromise: function createDevToolsInstrumentedPromise1() {
+    createDevToolsInstrumentedPromise: function() {
         return createDevToolsInstrumentedPromise;
     }
 });
-var _react = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
-var _readonlyurlsearchparams = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/readonly-url-search-params.js [app-client] (ecmascript)");
-var SearchParamsContext = (0, _react.createContext)(null);
-var PathnameContext = (0, _react.createContext)(null);
-var PathParamsContext = (0, _react.createContext)(null);
-var NavigationPromisesContext = (0, _react.createContext)(null);
+const _react = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+const _readonlyurlsearchparams = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/readonly-url-search-params.js [app-client] (ecmascript)");
+const SearchParamsContext = (0, _react.createContext)(null);
+const PathnameContext = (0, _react.createContext)(null);
+const PathParamsContext = (0, _react.createContext)(null);
+const NavigationPromisesContext = (0, _react.createContext)(null);
 function createDevToolsInstrumentedPromise(displayName, value) {
-    var promise = Promise.resolve(value);
+    const promise = Promise.resolve(value);
     promise.status = 'fulfilled';
     promise.value = value;
-    promise.displayName = "".concat(displayName, " (SSR)");
+    promise.displayName = `${displayName} (SSR)`;
     return promise;
 }
 if ("TURBOPACK compile-time truthy", 1) {
@@ -390,22 +362,22 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "createPromiseWithResolvers", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return createPromiseWithResolvers;
     }
 });
 function createPromiseWithResolvers() {
     // Shim of Stage 4 Promise.withResolvers proposal
-    var resolve;
-    var reject;
-    var promise = new Promise(function(res, rej) {
+    let resolve;
+    let reject;
+    const promise = new Promise((res, rej)=>{
         resolve = res;
         reject = rej;
     });
     return {
         resolve: resolve,
         reject: reject,
-        promise: promise
+        promise
     };
 }
 }),
@@ -421,11 +393,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "HTML_LIMITED_BOT_UA_RE", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return HTML_LIMITED_BOT_UA_RE;
     }
 });
-var HTML_LIMITED_BOT_UA_RE = /[\w-]+-Google|Google-[\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight/i;
+const HTML_LIMITED_BOT_UA_RE = /[\w-]+-Google|Google-[\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight/i;
 }),
 "[project]/frontend/node_modules/next/dist/shared/lib/router/utils/is-bot.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
@@ -446,26 +418,26 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    HTML_LIMITED_BOT_UA_RE: function HTML_LIMITED_BOT_UA_RE() {
+    HTML_LIMITED_BOT_UA_RE: function() {
         return _htmlbots.HTML_LIMITED_BOT_UA_RE;
     },
-    HTML_LIMITED_BOT_UA_RE_STRING: function HTML_LIMITED_BOT_UA_RE_STRING1() {
+    HTML_LIMITED_BOT_UA_RE_STRING: function() {
         return HTML_LIMITED_BOT_UA_RE_STRING;
     },
-    getBotType: function getBotType1() {
+    getBotType: function() {
         return getBotType;
     },
-    isBot: function isBot1() {
+    isBot: function() {
         return isBot;
     }
 });
-var _htmlbots = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/router/utils/html-bots.js [app-client] (ecmascript)");
+const _htmlbots = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/router/utils/html-bots.js [app-client] (ecmascript)");
 // Bot crawler that will spin up a headless browser and execute JS.
 // Only the main Googlebot search crawler executes JavaScript, not other Google crawlers.
 // x-ref: https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
 // This regex specifically matches "Googlebot" but NOT "Mediapartners-Google", "AdsBot-Google", etc.
-var HEADLESS_BROWSER_BOT_UA_RE = /Googlebot(?!-)|Googlebot$/i;
-var HTML_LIMITED_BOT_UA_RE_STRING = _htmlbots.HTML_LIMITED_BOT_UA_RE.source;
+const HEADLESS_BROWSER_BOT_UA_RE = /Googlebot(?!-)|Googlebot$/i;
+const HTML_LIMITED_BOT_UA_RE_STRING = _htmlbots.HTML_LIMITED_BOT_UA_RE.source;
 function isDomBotUA(userAgent) {
     return HEADLESS_BROWSER_BOT_UA_RE.test(userAgent);
 }
@@ -508,35 +480,35 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    AppRouterContext: function AppRouterContext1() {
+    AppRouterContext: function() {
         return AppRouterContext;
     },
-    GlobalLayoutRouterContext: function GlobalLayoutRouterContext1() {
+    GlobalLayoutRouterContext: function() {
         return GlobalLayoutRouterContext;
     },
-    LayoutRouterContext: function LayoutRouterContext1() {
+    LayoutRouterContext: function() {
         return LayoutRouterContext;
     },
-    MissingSlotContext: function MissingSlotContext1() {
+    MissingSlotContext: function() {
         return MissingSlotContext;
     },
-    TemplateContext: function TemplateContext1() {
+    TemplateContext: function() {
         return TemplateContext;
     }
 });
-var _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
-var _react = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
-var AppRouterContext = _react.default.createContext(null);
-var LayoutRouterContext = _react.default.createContext(null);
-var GlobalLayoutRouterContext = _react.default.createContext(null);
-var TemplateContext = _react.default.createContext(null);
+const _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
+const _react = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
+const AppRouterContext = _react.default.createContext(null);
+const LayoutRouterContext = _react.default.createContext(null);
+const GlobalLayoutRouterContext = _react.default.createContext(null);
+const TemplateContext = _react.default.createContext(null);
 if ("TURBOPACK compile-time truthy", 1) {
     AppRouterContext.displayName = 'AppRouterContext';
     LayoutRouterContext.displayName = 'LayoutRouterContext';
     GlobalLayoutRouterContext.displayName = 'GlobalLayoutRouterContext';
     TemplateContext.displayName = 'TemplateContext';
 }
-var MissingSlotContext = _react.default.createContext(new Set());
+const MissingSlotContext = _react.default.createContext(new Set());
 }),
 "[project]/frontend/node_modules/next/dist/shared/lib/segment.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
@@ -562,31 +534,31 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    DEFAULT_SEGMENT_KEY: function DEFAULT_SEGMENT_KEY1() {
+    DEFAULT_SEGMENT_KEY: function() {
         return DEFAULT_SEGMENT_KEY;
     },
-    NOT_FOUND_SEGMENT_KEY: function NOT_FOUND_SEGMENT_KEY1() {
+    NOT_FOUND_SEGMENT_KEY: function() {
         return NOT_FOUND_SEGMENT_KEY;
     },
-    PAGE_SEGMENT_KEY: function PAGE_SEGMENT_KEY1() {
+    PAGE_SEGMENT_KEY: function() {
         return PAGE_SEGMENT_KEY;
     },
-    addSearchParamsIfPageSegment: function addSearchParamsIfPageSegment1() {
+    addSearchParamsIfPageSegment: function() {
         return addSearchParamsIfPageSegment;
     },
-    computeSelectedLayoutSegment: function computeSelectedLayoutSegment1() {
+    computeSelectedLayoutSegment: function() {
         return computeSelectedLayoutSegment;
     },
-    getSegmentValue: function getSegmentValue1() {
+    getSegmentValue: function() {
         return getSegmentValue;
     },
-    getSelectedLayoutSegmentPath: function getSelectedLayoutSegmentPath1() {
+    getSelectedLayoutSegmentPath: function() {
         return getSelectedLayoutSegmentPath;
     },
-    isGroupSegment: function isGroupSegment1() {
+    isGroupSegment: function() {
         return isGroupSegment;
     },
-    isParallelRouteSegment: function isParallelRouteSegment1() {
+    isParallelRouteSegment: function() {
         return isParallelRouteSegment;
     }
 });
@@ -601,9 +573,9 @@ function isParallelRouteSegment(segment) {
     return segment.startsWith('@') && segment !== '@children';
 }
 function addSearchParamsIfPageSegment(segment, searchParams) {
-    var isPageSegment = segment.includes(PAGE_SEGMENT_KEY);
+    const isPageSegment = segment.includes(PAGE_SEGMENT_KEY);
     if (isPageSegment) {
-        var stringifiedQuery = JSON.stringify(searchParams);
+        const stringifiedQuery = JSON.stringify(searchParams);
         return stringifiedQuery !== '{}' ? PAGE_SEGMENT_KEY + '?' + stringifiedQuery : PAGE_SEGMENT_KEY;
     }
     return segment;
@@ -613,35 +585,33 @@ function computeSelectedLayoutSegment(segments, parallelRouteKey) {
         return null;
     }
     // For 'children', use first segment; for other parallel routes, use last segment
-    var rawSegment = parallelRouteKey === 'children' ? segments[0] : segments[segments.length - 1];
+    const rawSegment = parallelRouteKey === 'children' ? segments[0] : segments[segments.length - 1];
     // If the default slot is showing, return null since it's not technically "selected" (it's a fallback)
     // Returning an internal value like `__DEFAULT__` would be confusing
     return rawSegment === DEFAULT_SEGMENT_KEY ? null : rawSegment;
 }
-function getSelectedLayoutSegmentPath(tree, parallelRouteKey) {
-    var first = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : true, segmentPath = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : [];
-    var node;
+function getSelectedLayoutSegmentPath(tree, parallelRouteKey, first = true, segmentPath = []) {
+    let node;
     if (first) {
         // Use the provided parallel route key on the first parallel route
         node = tree[1][parallelRouteKey];
     } else {
-        var _parallelRoutes_children;
         // After first parallel route prefer children, if there's no children pick the first parallel route.
-        var parallelRoutes = tree[1];
-        node = (_parallelRoutes_children = parallelRoutes.children) !== null && _parallelRoutes_children !== void 0 ? _parallelRoutes_children : Object.values(parallelRoutes)[0];
+        const parallelRoutes = tree[1];
+        node = parallelRoutes.children ?? Object.values(parallelRoutes)[0];
     }
     if (!node) return segmentPath;
-    var segment = node[0];
-    var segmentValue = getSegmentValue(segment);
+    const segment = node[0];
+    let segmentValue = getSegmentValue(segment);
     if (!segmentValue || segmentValue.startsWith(PAGE_SEGMENT_KEY)) {
         return segmentPath;
     }
     segmentPath.push(segmentValue);
     return getSelectedLayoutSegmentPath(node, parallelRouteKey, false, segmentPath);
 }
-var PAGE_SEGMENT_KEY = '__PAGE__';
-var DEFAULT_SEGMENT_KEY = '__DEFAULT__';
-var NOT_FOUND_SEGMENT_KEY = '/_not-found';
+const PAGE_SEGMENT_KEY = '__PAGE__';
+const DEFAULT_SEGMENT_KEY = '__DEFAULT__';
+const NOT_FOUND_SEGMENT_KEY = '/_not-found';
 }),
 "[project]/frontend/node_modules/next/dist/shared/lib/segment-cache/segment-value-encoding.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
@@ -663,25 +633,25 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    HEAD_REQUEST_KEY: function HEAD_REQUEST_KEY1() {
+    HEAD_REQUEST_KEY: function() {
         return HEAD_REQUEST_KEY;
     },
-    ROOT_SEGMENT_REQUEST_KEY: function ROOT_SEGMENT_REQUEST_KEY1() {
+    ROOT_SEGMENT_REQUEST_KEY: function() {
         return ROOT_SEGMENT_REQUEST_KEY;
     },
-    appendSegmentRequestKeyPart: function appendSegmentRequestKeyPart1() {
+    appendSegmentRequestKeyPart: function() {
         return appendSegmentRequestKeyPart;
     },
-    convertSegmentPathToStaticExportFilename: function convertSegmentPathToStaticExportFilename1() {
+    convertSegmentPathToStaticExportFilename: function() {
         return convertSegmentPathToStaticExportFilename;
     },
-    createSegmentRequestKeyPart: function createSegmentRequestKeyPart1() {
+    createSegmentRequestKeyPart: function() {
         return createSegmentRequestKeyPart;
     }
 });
-var _segment = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/segment.js [app-client] (ecmascript)");
-var ROOT_SEGMENT_REQUEST_KEY = '';
-var HEAD_REQUEST_KEY = '/_head';
+const _segment = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/segment.js [app-client] (ecmascript)");
+const ROOT_SEGMENT_REQUEST_KEY = '';
+const HEAD_REQUEST_KEY = '/_head';
 function createSegmentRequestKeyPart(segment) {
     if (typeof segment === 'string') {
         if (segment.startsWith(_segment.PAGE_SEGMENT_KEY)) {
@@ -696,17 +666,17 @@ function createSegmentRequestKeyPart(segment) {
             // type entirely, This is our plan for dynamic route params, too.
             return _segment.PAGE_SEGMENT_KEY;
         }
-        var safeName = // But params typically don't include the leading slash. We should use
+        const safeName = // But params typically don't include the leading slash. We should use
         // a different encoding to avoid this special case.
         segment === '/_not-found' ? '_not-found' : encodeToFilesystemAndURLSafeString(segment);
         // Since this is not a dynamic segment, it's fully encoded. It does not
         // need to be "hydrated" with a param value.
         return safeName;
     }
-    var name = segment[0];
-    var paramType = segment[2];
-    var safeName1 = encodeToFilesystemAndURLSafeString(name);
-    var encodedName = '$' + paramType + '$' + safeName1;
+    const name = segment[0];
+    const paramType = segment[2];
+    const safeName = encodeToFilesystemAndURLSafeString(name);
+    const encodedName = '$' + paramType + '$' + safeName;
     return encodedName;
 }
 function appendSegmentRequestKeyPart(parentRequestKey, parallelRouteKey, childRequestKeyPart) {
@@ -717,7 +687,7 @@ function appendSegmentRequestKeyPart(parentRequestKey, parallelRouteKey, childRe
     // we wanted to do we could just use a flat structure.
     // Omit the parallel route key for children, since this is the most
     // common case. Saves some bytes (and it's what the app directory does).
-    var slotKey = parallelRouteKey === 'children' ? childRequestKeyPart : "@".concat(encodeToFilesystemAndURLSafeString(parallelRouteKey), "/").concat(childRequestKeyPart);
+    const slotKey = parallelRouteKey === 'children' ? childRequestKeyPart : `@${encodeToFilesystemAndURLSafeString(parallelRouteKey)}/${childRequestKeyPart}`;
     return parentRequestKey + '/' + slotKey;
 }
 // Define a regex pattern to match the most common characters found in a route
@@ -725,21 +695,21 @@ function appendSegmentRequestKeyPart(parentRequestKey, parallelRouteKey, childRe
 // compatible, like |. It does not need to be precise because the fallback is to
 // just base64url-encode the whole parameter, which is fine; we just don't do it
 // by default for compactness, and for easier debugging.
-var simpleParamValueRegex = /^[a-zA-Z0-9\-_@]+$/;
+const simpleParamValueRegex = /^[a-zA-Z0-9\-_@]+$/;
 function encodeToFilesystemAndURLSafeString(value) {
     if (simpleParamValueRegex.test(value)) {
         return value;
     }
     // If there are any unsafe characters, base64url-encode the entire value.
     // We also add a ! prefix so it doesn't collide with the simple case.
-    var base64url = btoa(value).replace(/\+/g, '-') // Replace '+' with '-'
+    const base64url = btoa(value).replace(/\+/g, '-') // Replace '+' with '-'
     .replace(/\//g, '_') // Replace '/' with '_'
     .replace(/=+$/, '') // Remove trailing '='
     ;
     return '!' + base64url;
 }
 function convertSegmentPathToStaticExportFilename(segmentPath) {
-    return "__next".concat(segmentPath.replace(/\//g, '.'), ".txt");
+    return `__next${segmentPath.replace(/\//g, '.')}.txt`;
 }
 }),
 "[project]/frontend/node_modules/next/dist/shared/lib/hash.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
@@ -766,17 +736,17 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    djb2Hash: function djb2Hash1() {
+    djb2Hash: function() {
         return djb2Hash;
     },
-    hexHash: function hexHash1() {
+    hexHash: function() {
         return hexHash;
     }
 });
 function djb2Hash(str) {
-    var hash = 5381;
-    for(var i = 0; i < str.length; i++){
-        var char = str.charCodeAt(i);
+    let hash = 5381;
+    for(let i = 0; i < str.length; i++){
+        const char = str.charCodeAt(i);
         hash = (hash << 5) + hash + char & 0xffffffff;
     }
     return hash >>> 0;
@@ -793,11 +763,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "computeCacheBustingSearchParam", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return computeCacheBustingSearchParam;
     }
 });
-var _hash = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/hash.js [app-client] (ecmascript)");
+const _hash = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/hash.js [app-client] (ecmascript)");
 function computeCacheBustingSearchParam(prefetchHeader, segmentPrefetchHeader, stateTreeHeader, nextUrlHeader) {
     if ((prefetchHeader === undefined || prefetchHeader === '0') && segmentPrefetchHeader === undefined && stateTreeHeader === undefined && nextUrlHeader === undefined) {
         return '';
@@ -822,7 +792,7 @@ function computeCacheBustingSearchParam(prefetchHeader, segmentPrefetchHeader, s
 });
 Object.defineProperty(exports, "readVaryParams", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return readVaryParams;
     }
 });
@@ -841,7 +811,7 @@ function readVaryParams(thenable) {
     }
     return thenable.value;
 }
-var noop = function noop() {};
+const noop = ()=>{};
 }),
 "[project]/frontend/node_modules/next/dist/shared/lib/app-router-types.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
@@ -856,7 +826,7 @@ var noop = function noop() {};
 });
 Object.defineProperty(exports, "PrefetchHint", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return PrefetchHint;
     }
 });
@@ -902,14 +872,14 @@ var PrefetchHint = /*#__PURE__*/ function(PrefetchHint) {
 });
 Object.defineProperty(exports, "parsePath", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return parsePath;
     }
 });
 function parsePath(path) {
-    var hashIndex = path.indexOf('#');
-    var queryIndex = path.indexOf('?');
-    var hasQuery = queryIndex > -1 && (hashIndex < 0 || queryIndex < hashIndex);
+    const hashIndex = path.indexOf('#');
+    const queryIndex = path.indexOf('?');
+    const hasQuery = queryIndex > -1 && (hashIndex < 0 || queryIndex < hashIndex);
     if (hasQuery || hashIndex > -1) {
         return {
             pathname: path.substring(0, hasQuery ? queryIndex : hashIndex),
@@ -932,17 +902,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "addPathPrefix", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return addPathPrefix;
     }
 });
-var _parsepath = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/router/utils/parse-path.js [app-client] (ecmascript)");
+const _parsepath = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/router/utils/parse-path.js [app-client] (ecmascript)");
 function addPathPrefix(path, prefix) {
     if (!path.startsWith('/') || !prefix) {
         return path;
     }
-    var _ref = (0, _parsepath.parsePath)(path), pathname = _ref.pathname, query = _ref.query, hash = _ref.hash;
-    return "".concat(prefix).concat(pathname).concat(query).concat(hash);
+    const { pathname, query, hash } = (0, _parsepath.parsePath)(path);
+    return `${prefix}${pathname}${query}${hash}`;
 }
 }),
 "[project]/frontend/node_modules/next/dist/shared/lib/router/utils/remove-trailing-slash.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
@@ -959,7 +929,7 @@ function addPathPrefix(path, prefix) {
 });
 Object.defineProperty(exports, "removeTrailingSlash", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return removeTrailingSlash;
     }
 });
@@ -978,12 +948,12 @@ function removeTrailingSlash(route) {
 });
 Object.defineProperty(exports, "ensureLeadingSlash", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return ensureLeadingSlash;
     }
 });
 function ensureLeadingSlash(path) {
-    return path.startsWith('/') ? path : "/".concat(path);
+    return path.startsWith('/') ? path : `/${path}`;
 }
 }),
 "[project]/frontend/node_modules/next/dist/shared/lib/router/utils/app-paths.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
@@ -1004,20 +974,20 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    compareAppPaths: function compareAppPaths1() {
+    compareAppPaths: function() {
         return compareAppPaths;
     },
-    normalizeAppPath: function normalizeAppPath1() {
+    normalizeAppPath: function() {
         return normalizeAppPath;
     },
-    normalizeRscURL: function normalizeRscURL1() {
+    normalizeRscURL: function() {
         return normalizeRscURL;
     }
 });
-var _ensureleadingslash = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/page-path/ensure-leading-slash.js [app-client] (ecmascript)");
-var _segment = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/segment.js [app-client] (ecmascript)");
+const _ensureleadingslash = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/page-path/ensure-leading-slash.js [app-client] (ecmascript)");
+const _segment = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/segment.js [app-client] (ecmascript)");
 function normalizeAppPath(route) {
-    return (0, _ensureleadingslash.ensureLeadingSlash)(route.split('/').reduce(function(pathname, segment, index, segments) {
+    return (0, _ensureleadingslash.ensureLeadingSlash)(route.split('/').reduce((pathname, segment, index, segments)=>{
         // Empty segments are ignored.
         if (!segment) {
             return pathname;
@@ -1034,12 +1004,12 @@ function normalizeAppPath(route) {
         if ((segment === 'page' || segment === 'route') && index === segments.length - 1) {
             return pathname;
         }
-        return "".concat(pathname, "/").concat(segment);
+        return `${pathname}/${segment}`;
     }, ''));
 }
 function compareAppPaths(a, b) {
-    var aHasSlot = a.includes('/@');
-    var bHasSlot = b.includes('/@');
+    const aHasSlot = a.includes('/@');
+    const bHasSlot = b.includes('/@');
     if (aHasSlot && !bHasSlot) return -1;
     if (!aHasSlot && bHasSlot) return 1;
     return a.localeCompare(b);
@@ -1051,7 +1021,6 @@ function normalizeRscURL(url) {
 "[project]/frontend/node_modules/next/dist/shared/lib/router/utils/interception-routes.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _sliced_to_array = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_sliced_to_array.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -1067,18 +1036,18 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    INTERCEPTION_ROUTE_MARKERS: function INTERCEPTION_ROUTE_MARKERS1() {
+    INTERCEPTION_ROUTE_MARKERS: function() {
         return INTERCEPTION_ROUTE_MARKERS;
     },
-    extractInterceptionRouteInformation: function extractInterceptionRouteInformation1() {
+    extractInterceptionRouteInformation: function() {
         return extractInterceptionRouteInformation;
     },
-    isInterceptionRouteAppPath: function isInterceptionRouteAppPath1() {
+    isInterceptionRouteAppPath: function() {
         return isInterceptionRouteAppPath;
     }
 });
-var _apppaths = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/router/utils/app-paths.js [app-client] (ecmascript)");
-var INTERCEPTION_ROUTE_MARKERS = [
+const _apppaths = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/router/utils/app-paths.js [app-client] (ecmascript)");
+const INTERCEPTION_ROUTE_MARKERS = [
     '(..)(..)',
     '(.)',
     '(..)',
@@ -1086,50 +1055,22 @@ var INTERCEPTION_ROUTE_MARKERS = [
 ];
 function isInterceptionRouteAppPath(path) {
     // TODO-APP: add more serious validation
-    return path.split('/').find(function(segment) {
-        return INTERCEPTION_ROUTE_MARKERS.find(function(m) {
-            return segment.startsWith(m);
-        });
-    }) !== undefined;
+    return path.split('/').find((segment)=>INTERCEPTION_ROUTE_MARKERS.find((m)=>segment.startsWith(m))) !== undefined;
 }
 function extractInterceptionRouteInformation(path) {
-    var interceptingRoute;
-    var marker;
-    var interceptedRoute;
-    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
-    try {
-        var _loop = function() {
-            var segment = _step.value;
-            marker = INTERCEPTION_ROUTE_MARKERS.find(function(m) {
-                return segment.startsWith(m);
-            });
-            if (marker) {
-                ;
-                var ref;
-                ref = _sliced_to_array._(path.split(marker, 2), 2), interceptingRoute = ref[0], interceptedRoute = ref[1], ref;
-                return "break";
-            }
-        };
-        for(var _iterator = path.split('/')[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
-            var _ret = _loop();
-            if (_ret === "break") break;
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally{
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-            }
-        } finally{
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
+    let interceptingRoute;
+    let marker;
+    let interceptedRoute;
+    for (const segment of path.split('/')){
+        marker = INTERCEPTION_ROUTE_MARKERS.find((m)=>segment.startsWith(m));
+        if (marker) {
+            ;
+            [interceptingRoute, interceptedRoute] = path.split(marker, 2);
+            break;
         }
     }
     if (!interceptingRoute || !marker || !interceptedRoute) {
-        throw Object.defineProperty(new Error("Invalid interception route: ".concat(path, ". Must be in the format /<intercepting route>/(..|...|..)(..)/<intercepted route>")), "__NEXT_ERROR_CODE", {
+        throw Object.defineProperty(new Error(`Invalid interception route: ${path}. Must be in the format /<intercepting route>/(..|...|..)(..)/<intercepted route>`), "__NEXT_ERROR_CODE", {
             value: "E269",
             enumerable: false,
             configurable: true
@@ -1141,7 +1082,7 @@ function extractInterceptionRouteInformation(path) {
         case '(.)':
             // (.) indicates that we should match with sibling routes, so we just need to append the intercepted route to the intercepting route
             if (interceptingRoute === '/') {
-                interceptedRoute = "/".concat(interceptedRoute);
+                interceptedRoute = `/${interceptedRoute}`;
             } else {
                 interceptedRoute = interceptingRoute + '/' + interceptedRoute;
             }
@@ -1149,7 +1090,7 @@ function extractInterceptionRouteInformation(path) {
         case '(..)':
             // (..) indicates that we should match at one level up, so we need to remove the last segment of the intercepting route
             if (interceptingRoute === '/') {
-                throw Object.defineProperty(new Error("Invalid interception route: ".concat(path, ". Cannot use (..) marker at the root level, use (.) instead.")), "__NEXT_ERROR_CODE", {
+                throw Object.defineProperty(new Error(`Invalid interception route: ${path}. Cannot use (..) marker at the root level, use (.) instead.`), "__NEXT_ERROR_CODE", {
                     value: "E207",
                     enumerable: false,
                     configurable: true
@@ -1163,9 +1104,9 @@ function extractInterceptionRouteInformation(path) {
             break;
         case '(..)(..)':
             // (..)(..) indicates that we should match at two levels up, so we need to remove the last two segments of the intercepting route
-            var splitInterceptingRoute = interceptingRoute.split('/');
+            const splitInterceptingRoute = interceptingRoute.split('/');
             if (splitInterceptingRoute.length <= 2) {
-                throw Object.defineProperty(new Error("Invalid interception route: ".concat(path, ". Cannot use (..)(..) marker at the root level or one level up.")), "__NEXT_ERROR_CODE", {
+                throw Object.defineProperty(new Error(`Invalid interception route: ${path}. Cannot use (..)(..) marker at the root level or one level up.`), "__NEXT_ERROR_CODE", {
                     value: "E486",
                     enumerable: false,
                     configurable: true
@@ -1181,8 +1122,8 @@ function extractInterceptionRouteInformation(path) {
             });
     }
     return {
-        interceptingRoute: interceptingRoute,
-        interceptedRoute: interceptedRoute
+        interceptingRoute,
+        interceptedRoute
     };
 }
 }),
@@ -1194,16 +1135,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "pathHasPrefix", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return pathHasPrefix;
     }
 });
-var _parsepath = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/router/utils/parse-path.js [app-client] (ecmascript)");
+const _parsepath = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/router/utils/parse-path.js [app-client] (ecmascript)");
 function pathHasPrefix(path, prefix) {
     if (typeof path !== 'string') {
         return false;
     }
-    var pathname = (0, _parsepath.parsePath)(path).pathname;
+    const { pathname } = (0, _parsepath.parsePath)(path);
     return pathname === prefix || pathname.startsWith(prefix + '/');
 }
 }),
@@ -1224,22 +1165,22 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    extractInfoFromServerReferenceId: function extractInfoFromServerReferenceId1() {
+    extractInfoFromServerReferenceId: function() {
         return extractInfoFromServerReferenceId;
     },
-    omitUnusedArgs: function omitUnusedArgs1() {
+    omitUnusedArgs: function() {
         return omitUnusedArgs;
     }
 });
 function extractInfoFromServerReferenceId(id) {
-    var infoByte = parseInt(id.slice(0, 2), 16);
-    var typeBit = infoByte >> 7 & 0x1;
-    var argMask = infoByte >> 1 & 0x3f;
-    var restArgs = infoByte & 0x1;
-    var usedArgs = Array(6);
-    for(var index = 0; index < 6; index++){
-        var bitPosition = 5 - index;
-        var bit = argMask >> bitPosition & 0x1;
+    const infoByte = parseInt(id.slice(0, 2), 16);
+    const typeBit = infoByte >> 7 & 0x1;
+    const argMask = infoByte >> 1 & 0x3f;
+    const restArgs = infoByte & 0x1;
+    const usedArgs = Array(6);
+    for(let index = 0; index < 6; index++){
+        const bitPosition = 5 - index;
+        const bit = argMask >> bitPosition & 0x1;
         usedArgs[index] = bit === 1;
     }
     return {
@@ -1249,9 +1190,9 @@ function extractInfoFromServerReferenceId(id) {
     };
 }
 function omitUnusedArgs(args, info) {
-    var filteredArgs = new Array(args.length);
-    var length = 0;
-    for(var index = 0; index < args.length; index++){
+    const filteredArgs = new Array(args.length);
+    let length = 0;
+    for(let index = 0; index < args.length; index++){
         if (index < 6 && info.usedArgs[index] || // This assumes that the server reference info byte has the restArgs bit
         // set to 1 if there are more than 6 args.
         index >= 6 && info.hasRestArgs) {
@@ -1282,19 +1223,19 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    ActionDidNotRevalidate: function ActionDidNotRevalidate1() {
+    ActionDidNotRevalidate: function() {
         return ActionDidNotRevalidate;
     },
-    ActionDidRevalidateDynamicOnly: function ActionDidRevalidateDynamicOnly1() {
+    ActionDidRevalidateDynamicOnly: function() {
         return ActionDidRevalidateDynamicOnly;
     },
-    ActionDidRevalidateStaticAndDynamic: function ActionDidRevalidateStaticAndDynamic1() {
+    ActionDidRevalidateStaticAndDynamic: function() {
         return ActionDidRevalidateStaticAndDynamic;
     }
 });
-var ActionDidNotRevalidate = 0;
-var ActionDidRevalidateStaticAndDynamic = 1;
-var ActionDidRevalidateDynamicOnly = 2;
+const ActionDidNotRevalidate = 0;
+const ActionDidRevalidateStaticAndDynamic = 1;
+const ActionDidRevalidateDynamicOnly = 2;
 }),
 "[project]/frontend/node_modules/next/dist/shared/lib/server-inserted-html.shared-runtime.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
@@ -1313,18 +1254,18 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    ServerInsertedHTMLContext: function ServerInsertedHTMLContext1() {
+    ServerInsertedHTMLContext: function() {
         return ServerInsertedHTMLContext;
     },
-    useServerInsertedHTML: function useServerInsertedHTML1() {
+    useServerInsertedHTML: function() {
         return useServerInsertedHTML;
     }
 });
-var _interop_require_wildcard = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_wildcard.cjs [app-client] (ecmascript)");
-var _react = /*#__PURE__*/ _interop_require_wildcard._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
-var ServerInsertedHTMLContext = /*#__PURE__*/ _react.default.createContext(null);
+const _interop_require_wildcard = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_wildcard.cjs [app-client] (ecmascript)");
+const _react = /*#__PURE__*/ _interop_require_wildcard._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
+const ServerInsertedHTMLContext = /*#__PURE__*/ _react.default.createContext(null);
 function useServerInsertedHTML(callback) {
-    var addInsertedServerHTMLCallback = (0, _react.useContext)(ServerInsertedHTMLContext);
+    const addInsertedServerHTMLCallback = (0, _react.useContext)(ServerInsertedHTMLContext);
     // Should have no effects on client where there's no flush effects provider
     if (addInsertedServerHTMLCallback) {
         addInsertedServerHTMLCallback(callback);
@@ -1341,14 +1282,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "warnOnce", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return warnOnce;
     }
 });
-var warnOnce = function warnOnce(_) {};
+let warnOnce = (_)=>{};
 if ("TURBOPACK compile-time truthy", 1) {
-    var warnings = new Set();
-    warnOnce = function warnOnce(msg) {
+    const warnings = new Set();
+    warnOnce = (msg)=>{
         if (!warnings.has(msg)) {
             console.warn(msg);
         }
@@ -1383,61 +1324,52 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */ "use strict";
-var _object_spread = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_object_spread.cjs [app-client] (ecmascript)");
-var _object_spread_props = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_object_spread_props.cjs [app-client] (ecmascript)");
-var _sliced_to_array = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_sliced_to_array.cjs [app-client] (ecmascript)");
-var _to_consumable_array = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_to_consumable_array.cjs [app-client] (ecmascript)");
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 Object.defineProperty(exports, "default", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return formatWebpackMessages;
     }
 });
-var _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
-var _stripansi = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/strip-ansi/index.js [app-client] (ecmascript)"));
+const _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
+const _stripansi = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/strip-ansi/index.js [app-client] (ecmascript)"));
 // This file is based on https://github.com/facebook/create-react-app/blob/7b1a32be6ec9f99a6c9a3c66813f3ac09c4736b9/packages/react-dev-utils/formatWebpackMessages.js
 // It's been edited to remove chalk and CRA-specific logic
-var friendlySyntaxErrorLabel = 'Syntax error:';
-var WEBPACK_BREAKING_CHANGE_POLYFILLS = '\n\nBREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.';
+const friendlySyntaxErrorLabel = 'Syntax error:';
+const WEBPACK_BREAKING_CHANGE_POLYFILLS = '\n\nBREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.';
 function isLikelyASyntaxError(message) {
     return (0, _stripansi.default)(message).includes(friendlySyntaxErrorLabel);
 }
-var hadMissingSassError = false;
+let hadMissingSassError = false;
 // Cleans up webpack error messages.
 function formatMessage(message, verbose, importTraceNote) {
     // TODO: Replace this once webpack 5 is stable
-    if ((typeof message === "undefined" ? "undefined" : _type_of._(message)) === 'object' && message.message) {
-        var filteredModuleTrace = message.moduleTrace && message.moduleTrace.filter(function(trace) {
-            return !/next-(middleware|client-pages|route|edge-function)-loader\.js/.test(trace.originName);
-        });
-        var body = message.message;
-        var breakingChangeIndex = body.indexOf(WEBPACK_BREAKING_CHANGE_POLYFILLS);
+    if (typeof message === 'object' && message.message) {
+        const filteredModuleTrace = message.moduleTrace && message.moduleTrace.filter((trace)=>!/next-(middleware|client-pages|route|edge-function)-loader\.js/.test(trace.originName));
+        let body = message.message;
+        const breakingChangeIndex = body.indexOf(WEBPACK_BREAKING_CHANGE_POLYFILLS);
         if (breakingChangeIndex >= 0) {
             body = body.slice(0, breakingChangeIndex);
         }
         // TODO: Rspack currently doesn't populate moduleName correctly in some cases,
         // fall back to moduleIdentifier as a workaround
         if (__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_RSPACK && !message.moduleName && !message.file && message.moduleIdentifier) {
-            var parts = message.moduleIdentifier.split('!');
+            const parts = message.moduleIdentifier.split('!');
             message.moduleName = parts[parts.length - 1];
         }
-        message = (message.moduleName ? (0, _stripansi.default)(message.moduleName) + '\n' : '') + (message.file ? (0, _stripansi.default)(message.file) + '\n' : '') + body + (message.details && verbose ? '\n' + message.details : '') + (filteredModuleTrace && filteredModuleTrace.length ? (importTraceNote || '\n\nImport trace for requested module:') + filteredModuleTrace.map(function(trace) {
-            return "\n".concat(trace.moduleName);
-        }).join('') : '') + (message.stack && verbose ? '\n' + message.stack : '');
+        message = (message.moduleName ? (0, _stripansi.default)(message.moduleName) + '\n' : '') + (message.file ? (0, _stripansi.default)(message.file) + '\n' : '') + body + (message.details && verbose ? '\n' + message.details : '') + (filteredModuleTrace && filteredModuleTrace.length ? (importTraceNote || '\n\nImport trace for requested module:') + filteredModuleTrace.map((trace)=>`\n${trace.moduleName}`).join('') : '') + (message.stack && verbose ? '\n' + message.stack : '');
     }
-    var lines = message.split('\n');
+    let lines = message.split('\n');
     // Extract loader paths from Webpack-added headers and move them to end.
     // Original format: "Module build failed (from ./loaders/foo-loader.js):"
     // The header line is removed and the path is appended at the end as:
     //   "  (from ./loaders/foo-loader.js)"
     // https://github.com/webpack/webpack/blob/master/lib/ModuleError.js
-    var loaderPaths = [];
-    lines = lines.filter(function(line) {
-        var match = /Module [A-z ]+\(from (.+)\):?\s*$/.exec(line);
+    const loaderPaths = [];
+    lines = lines.filter((line)=>{
+        const match = /Module [A-z ]+\(from (.+)\):?\s*$/.exec(line);
         if (match) {
             loaderPaths.push(match[1]);
             return false;
@@ -1446,21 +1378,21 @@ function formatMessage(message, verbose, importTraceNote) {
     });
     // Transform parsing error into syntax error
     // TODO: move this to our ESLint formatter?
-    lines = lines.map(function(line) {
-        var parsingError = /Line (\d+):(?:(\d+):)?\s*Parsing error: (.+)$/.exec(line);
+    lines = lines.map((line)=>{
+        const parsingError = /Line (\d+):(?:(\d+):)?\s*Parsing error: (.+)$/.exec(line);
         if (!parsingError) {
             return line;
         }
-        var _parsingError = _sliced_to_array._(parsingError, 4), errorLine = _parsingError[1], errorColumn = _parsingError[2], errorMessage = _parsingError[3];
-        return "".concat(friendlySyntaxErrorLabel, " ").concat(errorMessage, " (").concat(errorLine, ":").concat(errorColumn, ")");
+        const [, errorLine, errorColumn, errorMessage] = parsingError;
+        return `${friendlySyntaxErrorLabel} ${errorMessage} (${errorLine}:${errorColumn})`;
     });
     message = lines.join('\n');
     // Smoosh syntax errors (commonly found in CSS)
-    message = message.replace(/SyntaxError\s+\((\d+):(\d+)\)\s*(.+?)\n/g, "".concat(friendlySyntaxErrorLabel, " $3 ($1:$2)\n"));
+    message = message.replace(/SyntaxError\s+\((\d+):(\d+)\)\s*(.+?)\n/g, `${friendlySyntaxErrorLabel} $3 ($1:$2)\n`);
     // Clean up export errors
-    message = message.replace(/^.*export '(.+?)' was not found in '(.+?)'.*$/gm, "Attempted import error: '$1' is not exported from '$2'.");
-    message = message.replace(/^.*export 'default' \(imported as '(.+?)'\) was not found in '(.+?)'.*$/gm, "Attempted import error: '$2' does not contain a default export (imported as '$1').");
-    message = message.replace(/^.*export '(.+?)' \(imported as '(.+?)'\) was not found in '(.+?)'.*$/gm, "Attempted import error: '$1' is not exported from '$3' (imported as '$2').");
+    message = message.replace(/^.*export '(.+?)' was not found in '(.+?)'.*$/gm, `Attempted import error: '$1' is not exported from '$2'.`);
+    message = message.replace(/^.*export 'default' \(imported as '(.+?)'\) was not found in '(.+?)'.*$/gm, `Attempted import error: '$2' does not contain a default export (imported as '$1').`);
+    message = message.replace(/^.*export '(.+?)' \(imported as '(.+?)'\) was not found in '(.+?)'.*$/gm, `Attempted import error: '$1' is not exported from '$3' (imported as '$2').`);
     lines = message.split('\n');
     // Remove leading newline
     if (lines.length > 2 && lines[1].trim() === '') {
@@ -1470,13 +1402,14 @@ function formatMessage(message, verbose, importTraceNote) {
     if (lines[1] && lines[1].startsWith('Module not found: ')) {
         lines = [
             lines[0],
-            lines[1].replace('Error: ', '').replace('Module not found: Cannot find file:', 'Cannot find file:')
-        ].concat(_to_consumable_array._(lines.slice(2)));
+            lines[1].replace('Error: ', '').replace('Module not found: Cannot find file:', 'Cannot find file:'),
+            ...lines.slice(2)
+        ];
     }
     // Add helpful message for users trying to use Sass for the first time
     if (lines[1] && lines[1].match(/Cannot find module.+sass/)) {
         // ./file.module.scss (<<loader info>>) => ./file.module.scss
-        var firstLine = lines[0].split('!');
+        const firstLine = lines[0].split('!');
         lines[0] = firstLine[firstLine.length - 1];
         lines[1] = "To use Next.js' built-in Sass support, you first need to install `sass`.\n";
         lines[1] += 'Run `npm i sass` or `yarn add sass` inside your workspace.\n';
@@ -1503,50 +1436,31 @@ function formatMessage(message, verbose, importTraceNote) {
     }
     // Append loader paths at the end (before any remaining stack trace)
     if (loaderPaths.length > 0) {
-        var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
-        try {
-            for(var _iterator = loaderPaths[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
-                var loaderPath = _step.value;
-                // Don't show internal Next.js loader paths — they're noise for users
-                if (!/[/\\]next[/\\]dist[/\\]/.test(loaderPath)) {
-                    lines.push("  (from ".concat(loaderPath, ")"));
-                }
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally{
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return != null) {
-                    _iterator.return();
-                }
-            } finally{
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
+        for (const loaderPath of loaderPaths){
+            // Don't show internal Next.js loader paths — they're noise for users
+            if (!/[/\\]next[/\\]dist[/\\]/.test(loaderPath)) {
+                lines.push(`  (from ${loaderPath})`);
             }
         }
     }
     // Remove duplicated newlines
-    lines = lines.filter(function(line, index, arr) {
-        return index === 0 || line.trim() !== '' || line.trim() !== arr[index - 1].trim();
-    });
+    lines = lines.filter((line, index, arr)=>index === 0 || line.trim() !== '' || line.trim() !== arr[index - 1].trim());
     // Reassemble the message
     message = lines.join('\n');
     return message.trim();
 }
 function formatWebpackMessages(json, verbose) {
-    var formattedErrors = json.errors.map(function(message) {
-        var isUnknownNextFontError = message.message.includes('An error occurred in `next/font`.');
+    const formattedErrors = json.errors.map((message)=>{
+        const isUnknownNextFontError = message.message.includes('An error occurred in `next/font`.');
         return formatMessage(message, isUnknownNextFontError || verbose);
     });
-    var formattedWarnings = json.warnings.map(function(message) {
+    const formattedWarnings = json.warnings.map((message)=>{
         return formatMessage(message, verbose);
     });
     // Reorder errors to put the most relevant ones first.
-    var reactServerComponentsError = -1;
-    for(var i = 0; i < formattedErrors.length; i++){
-        var error = formattedErrors[i];
+    let reactServerComponentsError = -1;
+    for(let i = 0; i < formattedErrors.length; i++){
+        const error = formattedErrors[i];
         if (error.includes('ReactServerComponentsError')) {
             reactServerComponentsError = i;
             break;
@@ -1554,13 +1468,14 @@ function formatWebpackMessages(json, verbose) {
     }
     // Move the reactServerComponentsError to the top if it exists
     if (reactServerComponentsError !== -1) {
-        var error1 = formattedErrors.splice(reactServerComponentsError, 1);
-        formattedErrors.unshift(error1[0]);
+        const error = formattedErrors.splice(reactServerComponentsError, 1);
+        formattedErrors.unshift(error[0]);
     }
-    var result = _object_spread_props._(_object_spread._({}, json), {
+    const result = {
+        ...json,
         errors: formattedErrors,
         warnings: formattedWarnings
-    });
+    };
     if (!verbose && result.errors.some(isLikelyASyntaxError)) {
         // If there are any syntax errors, show just them.
         result.errors = result.errors.filter(isLikelyASyntaxError);
@@ -1572,18 +1487,17 @@ function formatWebpackMessages(json, verbose) {
 "[project]/frontend/node_modules/next/dist/shared/lib/errors/constants.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 Object.defineProperty(exports, "MISSING_ROOT_TAGS_ERROR", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return MISSING_ROOT_TAGS_ERROR;
     }
 });
-var MISSING_ROOT_TAGS_ERROR = 'NEXT_MISSING_ROOT_TAGS';
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+const MISSING_ROOT_TAGS_ERROR = 'NEXT_MISSING_ROOT_TAGS';
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -1599,25 +1513,25 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "normalizedAssetPrefix", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return normalizedAssetPrefix;
     }
 });
 function normalizedAssetPrefix(assetPrefix) {
     // remove all leading slashes and trailing slashes
-    var escapedAssetPrefix = (assetPrefix === null || assetPrefix === void 0 ? void 0 : assetPrefix.replace(/^\/+|\/+$/g, '')) || false;
+    const escapedAssetPrefix = assetPrefix?.replace(/^\/+|\/+$/g, '') || false;
     // if an assetPrefix was '/', we return empty string
     // because it could be an unnecessary trailing slash
     if (!escapedAssetPrefix) {
         return '';
     }
     if (URL.canParse(escapedAssetPrefix)) {
-        var url = new URL(escapedAssetPrefix).toString();
+        const url = new URL(escapedAssetPrefix).toString();
         return url.endsWith('/') ? url.slice(0, -1) : url;
     }
     // assuming assetPrefix here is a pathname-style,
     // restore the leading slash
-    return "/".concat(escapedAssetPrefix);
+    return `/${escapedAssetPrefix}`;
 }
 }),
 "[project]/frontend/node_modules/next/dist/lib/is-error.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
@@ -1625,7 +1539,6 @@ function normalizedAssetPrefix(assetPrefix) {
 
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/frontend/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 "use strict";
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -1643,14 +1556,14 @@ _export(exports, {
     /**
  * Checks whether the given value is a NextError.
  * This can be used to print a more detailed error message with properties like `code` & `digest`.
- */ default: function _default() {
+ */ default: function() {
         return isError;
     },
-    getProperError: function getProperError1() {
+    getProperError: function() {
         return getProperError;
     }
 });
-var _isplainobject = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/is-plain-object.js [app-client] (ecmascript)");
+const _isplainobject = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/is-plain-object.js [app-client] (ecmascript)");
 /**
  * This is a safe stringify function that handles circular references.
  * We're using a simpler version here to avoid introducing
@@ -1658,10 +1571,10 @@ var _isplainobject = __turbopack_context__.r("[project]/frontend/node_modules/ne
  *
  * This helper is used both in development and production.
  */ function safeStringifyLite(obj) {
-    var seen = new WeakSet();
-    return JSON.stringify(obj, function(_key, value) {
+    const seen = new WeakSet();
+    return JSON.stringify(obj, (_key, value)=>{
         // If value is an object and already seen, replace with "[Circular]"
-        if ((typeof value === "undefined" ? "undefined" : _type_of._(value)) === 'object' && value !== null) {
+        if (typeof value === 'object' && value !== null) {
             if (seen.has(value)) {
                 return '[Circular]';
             }
@@ -1671,7 +1584,7 @@ var _isplainobject = __turbopack_context__.r("[project]/frontend/node_modules/ne
     });
 }
 function isError(err) {
-    return (typeof err === "undefined" ? "undefined" : _type_of._(err)) === 'object' && err !== null && 'name' in err && 'message' in err;
+    return typeof err === 'object' && err !== null && 'name' in err && 'message' in err;
 }
 function getProperError(err) {
     if (isError(err)) {
@@ -1713,18 +1626,18 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
  * the `instrumentation-client.ts` file in the project root by webpack or turbopack.
  */ "use strict";
 if ("TURBOPACK compile-time truthy", 1) {
-    var measureName = 'Client Instrumentation Hook';
-    var startTime = performance.now();
+    const measureName = 'Client Instrumentation Hook';
+    const startTime = performance.now();
     // eslint-disable-next-line @next/internal/typechecked-require -- Not a module.
     module.exports = {};
-    var endTime = performance.now();
-    var duration = endTime - startTime;
+    const endTime = performance.now();
+    const duration = endTime - startTime;
     // Using 16ms threshold as it represents one frame (1000ms/60fps)
     // This helps identify if the instrumentation hook initialization
     // could potentially cause frame drops during development.
-    var THRESHOLD = 16;
+    const THRESHOLD = 16;
     if (duration > THRESHOLD) {
-        console.log("[".concat(measureName, "] Slow execution detected: ").concat(duration.toFixed(0), "ms (Note: Code download overhead is not included in this measurement)"));
+        console.log(`[${measureName}] Slow execution detected: ${duration.toFixed(0)}ms (Note: Code download overhead is not included in this measurement)`);
     }
 } else //TURBOPACK unreachable
 ;
@@ -1732,8 +1645,6 @@ if ("TURBOPACK compile-time truthy", 1) {
 "[project]/frontend/node_modules/next/dist/lib/constants.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _object_spread = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_object_spread.cjs [app-client] (ecmascript)");
-var _object_spread_props = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_object_spread_props.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -1807,263 +1718,263 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    ACTION_SUFFIX: function ACTION_SUFFIX1() {
+    ACTION_SUFFIX: function() {
         return ACTION_SUFFIX;
     },
-    APP_DIR_ALIAS: function APP_DIR_ALIAS1() {
+    APP_DIR_ALIAS: function() {
         return APP_DIR_ALIAS;
     },
-    CACHE_ONE_YEAR_SECONDS: function CACHE_ONE_YEAR_SECONDS1() {
+    CACHE_ONE_YEAR_SECONDS: function() {
         return CACHE_ONE_YEAR_SECONDS;
     },
-    DOT_NEXT_ALIAS: function DOT_NEXT_ALIAS1() {
+    DOT_NEXT_ALIAS: function() {
         return DOT_NEXT_ALIAS;
     },
-    ESLINT_DEFAULT_DIRS: function ESLINT_DEFAULT_DIRS1() {
+    ESLINT_DEFAULT_DIRS: function() {
         return ESLINT_DEFAULT_DIRS;
     },
-    GSP_NO_RETURNED_VALUE: function GSP_NO_RETURNED_VALUE1() {
+    GSP_NO_RETURNED_VALUE: function() {
         return GSP_NO_RETURNED_VALUE;
     },
-    GSSP_COMPONENT_MEMBER_ERROR: function GSSP_COMPONENT_MEMBER_ERROR1() {
+    GSSP_COMPONENT_MEMBER_ERROR: function() {
         return GSSP_COMPONENT_MEMBER_ERROR;
     },
-    GSSP_NO_RETURNED_VALUE: function GSSP_NO_RETURNED_VALUE1() {
+    GSSP_NO_RETURNED_VALUE: function() {
         return GSSP_NO_RETURNED_VALUE;
     },
-    HTML_CONTENT_TYPE_HEADER: function HTML_CONTENT_TYPE_HEADER1() {
+    HTML_CONTENT_TYPE_HEADER: function() {
         return HTML_CONTENT_TYPE_HEADER;
     },
-    INFINITE_CACHE: function INFINITE_CACHE1() {
+    INFINITE_CACHE: function() {
         return INFINITE_CACHE;
     },
-    INSTRUMENTATION_HOOK_FILENAME: function INSTRUMENTATION_HOOK_FILENAME1() {
+    INSTRUMENTATION_HOOK_FILENAME: function() {
         return INSTRUMENTATION_HOOK_FILENAME;
     },
-    JSON_CONTENT_TYPE_HEADER: function JSON_CONTENT_TYPE_HEADER1() {
+    JSON_CONTENT_TYPE_HEADER: function() {
         return JSON_CONTENT_TYPE_HEADER;
     },
-    MATCHED_PATH_HEADER: function MATCHED_PATH_HEADER1() {
+    MATCHED_PATH_HEADER: function() {
         return MATCHED_PATH_HEADER;
     },
-    MIDDLEWARE_FILENAME: function MIDDLEWARE_FILENAME1() {
+    MIDDLEWARE_FILENAME: function() {
         return MIDDLEWARE_FILENAME;
     },
-    MIDDLEWARE_LOCATION_REGEXP: function MIDDLEWARE_LOCATION_REGEXP1() {
+    MIDDLEWARE_LOCATION_REGEXP: function() {
         return MIDDLEWARE_LOCATION_REGEXP;
     },
-    NEXT_BODY_SUFFIX: function NEXT_BODY_SUFFIX1() {
+    NEXT_BODY_SUFFIX: function() {
         return NEXT_BODY_SUFFIX;
     },
-    NEXT_CACHE_IMPLICIT_TAG_ID: function NEXT_CACHE_IMPLICIT_TAG_ID1() {
+    NEXT_CACHE_IMPLICIT_TAG_ID: function() {
         return NEXT_CACHE_IMPLICIT_TAG_ID;
     },
-    NEXT_CACHE_REVALIDATED_TAGS_HEADER: function NEXT_CACHE_REVALIDATED_TAGS_HEADER1() {
+    NEXT_CACHE_REVALIDATED_TAGS_HEADER: function() {
         return NEXT_CACHE_REVALIDATED_TAGS_HEADER;
     },
-    NEXT_CACHE_REVALIDATE_TAG_TOKEN_HEADER: function NEXT_CACHE_REVALIDATE_TAG_TOKEN_HEADER1() {
+    NEXT_CACHE_REVALIDATE_TAG_TOKEN_HEADER: function() {
         return NEXT_CACHE_REVALIDATE_TAG_TOKEN_HEADER;
     },
-    NEXT_CACHE_ROOT_PARAM_TAG_ID: function NEXT_CACHE_ROOT_PARAM_TAG_ID1() {
+    NEXT_CACHE_ROOT_PARAM_TAG_ID: function() {
         return NEXT_CACHE_ROOT_PARAM_TAG_ID;
     },
-    NEXT_CACHE_SOFT_TAG_MAX_LENGTH: function NEXT_CACHE_SOFT_TAG_MAX_LENGTH1() {
+    NEXT_CACHE_SOFT_TAG_MAX_LENGTH: function() {
         return NEXT_CACHE_SOFT_TAG_MAX_LENGTH;
     },
-    NEXT_CACHE_TAGS_HEADER: function NEXT_CACHE_TAGS_HEADER1() {
+    NEXT_CACHE_TAGS_HEADER: function() {
         return NEXT_CACHE_TAGS_HEADER;
     },
-    NEXT_CACHE_TAG_MAX_ITEMS: function NEXT_CACHE_TAG_MAX_ITEMS1() {
+    NEXT_CACHE_TAG_MAX_ITEMS: function() {
         return NEXT_CACHE_TAG_MAX_ITEMS;
     },
-    NEXT_CACHE_TAG_MAX_LENGTH: function NEXT_CACHE_TAG_MAX_LENGTH1() {
+    NEXT_CACHE_TAG_MAX_LENGTH: function() {
         return NEXT_CACHE_TAG_MAX_LENGTH;
     },
-    NEXT_DATA_SUFFIX: function NEXT_DATA_SUFFIX1() {
+    NEXT_DATA_SUFFIX: function() {
         return NEXT_DATA_SUFFIX;
     },
-    NEXT_INTERCEPTION_MARKER_PREFIX: function NEXT_INTERCEPTION_MARKER_PREFIX1() {
+    NEXT_INTERCEPTION_MARKER_PREFIX: function() {
         return NEXT_INTERCEPTION_MARKER_PREFIX;
     },
-    NEXT_META_SUFFIX: function NEXT_META_SUFFIX1() {
+    NEXT_META_SUFFIX: function() {
         return NEXT_META_SUFFIX;
     },
-    NEXT_NAV_DEPLOYMENT_ID_HEADER: function NEXT_NAV_DEPLOYMENT_ID_HEADER1() {
+    NEXT_NAV_DEPLOYMENT_ID_HEADER: function() {
         return NEXT_NAV_DEPLOYMENT_ID_HEADER;
     },
-    NEXT_QUERY_PARAM_PREFIX: function NEXT_QUERY_PARAM_PREFIX1() {
+    NEXT_QUERY_PARAM_PREFIX: function() {
         return NEXT_QUERY_PARAM_PREFIX;
     },
-    NEXT_RESUME_HEADER: function NEXT_RESUME_HEADER1() {
+    NEXT_RESUME_HEADER: function() {
         return NEXT_RESUME_HEADER;
     },
-    NEXT_RESUME_STATE_LENGTH_HEADER: function NEXT_RESUME_STATE_LENGTH_HEADER1() {
+    NEXT_RESUME_STATE_LENGTH_HEADER: function() {
         return NEXT_RESUME_STATE_LENGTH_HEADER;
     },
-    NON_STANDARD_NODE_ENV: function NON_STANDARD_NODE_ENV1() {
+    NON_STANDARD_NODE_ENV: function() {
         return NON_STANDARD_NODE_ENV;
     },
-    PAGES_DIR_ALIAS: function PAGES_DIR_ALIAS1() {
+    PAGES_DIR_ALIAS: function() {
         return PAGES_DIR_ALIAS;
     },
-    PRERENDER_REVALIDATE_HEADER: function PRERENDER_REVALIDATE_HEADER1() {
+    PRERENDER_REVALIDATE_HEADER: function() {
         return PRERENDER_REVALIDATE_HEADER;
     },
-    PRERENDER_REVALIDATE_ONLY_GENERATED_HEADER: function PRERENDER_REVALIDATE_ONLY_GENERATED_HEADER1() {
+    PRERENDER_REVALIDATE_ONLY_GENERATED_HEADER: function() {
         return PRERENDER_REVALIDATE_ONLY_GENERATED_HEADER;
     },
-    PROXY_FILENAME: function PROXY_FILENAME1() {
+    PROXY_FILENAME: function() {
         return PROXY_FILENAME;
     },
-    PROXY_LOCATION_REGEXP: function PROXY_LOCATION_REGEXP1() {
+    PROXY_LOCATION_REGEXP: function() {
         return PROXY_LOCATION_REGEXP;
     },
-    PUBLIC_DIR_MIDDLEWARE_CONFLICT: function PUBLIC_DIR_MIDDLEWARE_CONFLICT1() {
+    PUBLIC_DIR_MIDDLEWARE_CONFLICT: function() {
         return PUBLIC_DIR_MIDDLEWARE_CONFLICT;
     },
-    ROOT_DIR_ALIAS: function ROOT_DIR_ALIAS1() {
+    ROOT_DIR_ALIAS: function() {
         return ROOT_DIR_ALIAS;
     },
-    RSC_ACTION_CLIENT_WRAPPER_ALIAS: function RSC_ACTION_CLIENT_WRAPPER_ALIAS1() {
+    RSC_ACTION_CLIENT_WRAPPER_ALIAS: function() {
         return RSC_ACTION_CLIENT_WRAPPER_ALIAS;
     },
-    RSC_ACTION_ENCRYPTION_ALIAS: function RSC_ACTION_ENCRYPTION_ALIAS1() {
+    RSC_ACTION_ENCRYPTION_ALIAS: function() {
         return RSC_ACTION_ENCRYPTION_ALIAS;
     },
-    RSC_ACTION_PROXY_ALIAS: function RSC_ACTION_PROXY_ALIAS1() {
+    RSC_ACTION_PROXY_ALIAS: function() {
         return RSC_ACTION_PROXY_ALIAS;
     },
-    RSC_ACTION_VALIDATE_ALIAS: function RSC_ACTION_VALIDATE_ALIAS1() {
+    RSC_ACTION_VALIDATE_ALIAS: function() {
         return RSC_ACTION_VALIDATE_ALIAS;
     },
-    RSC_CACHE_WRAPPER_ALIAS: function RSC_CACHE_WRAPPER_ALIAS1() {
+    RSC_CACHE_WRAPPER_ALIAS: function() {
         return RSC_CACHE_WRAPPER_ALIAS;
     },
-    RSC_DYNAMIC_IMPORT_WRAPPER_ALIAS: function RSC_DYNAMIC_IMPORT_WRAPPER_ALIAS1() {
+    RSC_DYNAMIC_IMPORT_WRAPPER_ALIAS: function() {
         return RSC_DYNAMIC_IMPORT_WRAPPER_ALIAS;
     },
-    RSC_MOD_REF_PROXY_ALIAS: function RSC_MOD_REF_PROXY_ALIAS1() {
+    RSC_MOD_REF_PROXY_ALIAS: function() {
         return RSC_MOD_REF_PROXY_ALIAS;
     },
-    RSC_SEGMENTS_DIR_SUFFIX: function RSC_SEGMENTS_DIR_SUFFIX1() {
+    RSC_SEGMENTS_DIR_SUFFIX: function() {
         return RSC_SEGMENTS_DIR_SUFFIX;
     },
-    RSC_SEGMENT_SUFFIX: function RSC_SEGMENT_SUFFIX1() {
+    RSC_SEGMENT_SUFFIX: function() {
         return RSC_SEGMENT_SUFFIX;
     },
-    RSC_SUFFIX: function RSC_SUFFIX1() {
+    RSC_SUFFIX: function() {
         return RSC_SUFFIX;
     },
-    SERVER_PROPS_EXPORT_ERROR: function SERVER_PROPS_EXPORT_ERROR1() {
+    SERVER_PROPS_EXPORT_ERROR: function() {
         return SERVER_PROPS_EXPORT_ERROR;
     },
-    SERVER_PROPS_GET_INIT_PROPS_CONFLICT: function SERVER_PROPS_GET_INIT_PROPS_CONFLICT1() {
+    SERVER_PROPS_GET_INIT_PROPS_CONFLICT: function() {
         return SERVER_PROPS_GET_INIT_PROPS_CONFLICT;
     },
-    SERVER_PROPS_SSG_CONFLICT: function SERVER_PROPS_SSG_CONFLICT1() {
+    SERVER_PROPS_SSG_CONFLICT: function() {
         return SERVER_PROPS_SSG_CONFLICT;
     },
-    SERVER_RUNTIME: function SERVER_RUNTIME1() {
+    SERVER_RUNTIME: function() {
         return SERVER_RUNTIME;
     },
-    SSG_FALLBACK_EXPORT_ERROR: function SSG_FALLBACK_EXPORT_ERROR1() {
+    SSG_FALLBACK_EXPORT_ERROR: function() {
         return SSG_FALLBACK_EXPORT_ERROR;
     },
-    SSG_GET_INITIAL_PROPS_CONFLICT: function SSG_GET_INITIAL_PROPS_CONFLICT1() {
+    SSG_GET_INITIAL_PROPS_CONFLICT: function() {
         return SSG_GET_INITIAL_PROPS_CONFLICT;
     },
-    STATIC_STATUS_PAGE_GET_INITIAL_PROPS_ERROR: function STATIC_STATUS_PAGE_GET_INITIAL_PROPS_ERROR1() {
+    STATIC_STATUS_PAGE_GET_INITIAL_PROPS_ERROR: function() {
         return STATIC_STATUS_PAGE_GET_INITIAL_PROPS_ERROR;
     },
-    TEXT_PLAIN_CONTENT_TYPE_HEADER: function TEXT_PLAIN_CONTENT_TYPE_HEADER1() {
+    TEXT_PLAIN_CONTENT_TYPE_HEADER: function() {
         return TEXT_PLAIN_CONTENT_TYPE_HEADER;
     },
-    UNSTABLE_REVALIDATE_RENAME_ERROR: function UNSTABLE_REVALIDATE_RENAME_ERROR1() {
+    UNSTABLE_REVALIDATE_RENAME_ERROR: function() {
         return UNSTABLE_REVALIDATE_RENAME_ERROR;
     },
-    WEBPACK_LAYERS: function WEBPACK_LAYERS1() {
+    WEBPACK_LAYERS: function() {
         return WEBPACK_LAYERS;
     },
-    WEBPACK_RESOURCE_QUERIES: function WEBPACK_RESOURCE_QUERIES1() {
+    WEBPACK_RESOURCE_QUERIES: function() {
         return WEBPACK_RESOURCE_QUERIES;
     },
-    WEB_SOCKET_MAX_RECONNECTIONS: function WEB_SOCKET_MAX_RECONNECTIONS1() {
+    WEB_SOCKET_MAX_RECONNECTIONS: function() {
         return WEB_SOCKET_MAX_RECONNECTIONS;
     }
 });
-var TEXT_PLAIN_CONTENT_TYPE_HEADER = 'text/plain';
-var HTML_CONTENT_TYPE_HEADER = 'text/html; charset=utf-8';
-var JSON_CONTENT_TYPE_HEADER = 'application/json; charset=utf-8';
-var NEXT_QUERY_PARAM_PREFIX = 'nxtP';
-var NEXT_INTERCEPTION_MARKER_PREFIX = 'nxtI';
-var MATCHED_PATH_HEADER = 'x-matched-path';
-var PRERENDER_REVALIDATE_HEADER = 'x-prerender-revalidate';
-var PRERENDER_REVALIDATE_ONLY_GENERATED_HEADER = 'x-prerender-revalidate-if-generated';
-var RSC_SEGMENTS_DIR_SUFFIX = '.segments';
-var RSC_SEGMENT_SUFFIX = '.segment.rsc';
-var RSC_SUFFIX = '.rsc';
-var ACTION_SUFFIX = '.action';
-var NEXT_DATA_SUFFIX = '.json';
-var NEXT_META_SUFFIX = '.meta';
-var NEXT_BODY_SUFFIX = '.body';
-var NEXT_NAV_DEPLOYMENT_ID_HEADER = 'x-nextjs-deployment-id';
-var NEXT_CACHE_TAGS_HEADER = 'x-next-cache-tags';
-var NEXT_CACHE_REVALIDATED_TAGS_HEADER = 'x-next-revalidated-tags';
-var NEXT_CACHE_REVALIDATE_TAG_TOKEN_HEADER = 'x-next-revalidate-tag-token';
-var NEXT_RESUME_HEADER = 'next-resume';
-var NEXT_RESUME_STATE_LENGTH_HEADER = 'x-next-resume-state-length';
-var NEXT_CACHE_TAG_MAX_ITEMS = 128;
-var NEXT_CACHE_TAG_MAX_LENGTH = 256;
-var NEXT_CACHE_SOFT_TAG_MAX_LENGTH = 1024;
-var NEXT_CACHE_IMPLICIT_TAG_ID = '_N_T_';
-var NEXT_CACHE_ROOT_PARAM_TAG_ID = '_N_RP_';
-var CACHE_ONE_YEAR_SECONDS = 31536000;
-var INFINITE_CACHE = 0xfffffffe;
-var MIDDLEWARE_FILENAME = 'middleware';
-var MIDDLEWARE_LOCATION_REGEXP = "(?:src/)?".concat(MIDDLEWARE_FILENAME);
-var PROXY_FILENAME = 'proxy';
-var PROXY_LOCATION_REGEXP = "(?:src/)?".concat(PROXY_FILENAME);
-var INSTRUMENTATION_HOOK_FILENAME = 'instrumentation';
-var PAGES_DIR_ALIAS = 'private-next-pages';
-var DOT_NEXT_ALIAS = 'private-dot-next';
-var ROOT_DIR_ALIAS = 'private-next-root-dir';
-var APP_DIR_ALIAS = 'private-next-app-dir';
-var RSC_MOD_REF_PROXY_ALIAS = 'private-next-rsc-mod-ref-proxy';
-var RSC_ACTION_VALIDATE_ALIAS = 'private-next-rsc-action-validate';
-var RSC_ACTION_PROXY_ALIAS = 'private-next-rsc-server-reference';
-var RSC_CACHE_WRAPPER_ALIAS = 'private-next-rsc-cache-wrapper';
-var RSC_DYNAMIC_IMPORT_WRAPPER_ALIAS = 'private-next-rsc-track-dynamic-import';
-var RSC_ACTION_ENCRYPTION_ALIAS = 'private-next-rsc-action-encryption';
-var RSC_ACTION_CLIENT_WRAPPER_ALIAS = 'private-next-rsc-action-client-wrapper';
-var PUBLIC_DIR_MIDDLEWARE_CONFLICT = "You can not have a '_next' folder inside of your public folder. This conflicts with the internal '/_next' route. https://nextjs.org/docs/messages/public-next-folder-conflict";
-var SSG_GET_INITIAL_PROPS_CONFLICT = "You can not use getInitialProps with getStaticProps. To use SSG, please remove your getInitialProps";
-var SERVER_PROPS_GET_INIT_PROPS_CONFLICT = "You can not use getInitialProps with getServerSideProps. Please remove getInitialProps.";
-var SERVER_PROPS_SSG_CONFLICT = "You can not use getStaticProps or getStaticPaths with getServerSideProps. To use SSG, please remove getServerSideProps";
-var STATIC_STATUS_PAGE_GET_INITIAL_PROPS_ERROR = "can not have getInitialProps/getServerSideProps, https://nextjs.org/docs/messages/404-get-initial-props";
-var SERVER_PROPS_EXPORT_ERROR = "pages with `getServerSideProps` can not be exported. See more info here: https://nextjs.org/docs/messages/gssp-export";
-var GSP_NO_RETURNED_VALUE = 'Your `getStaticProps` function did not return an object. Did you forget to add a `return`?';
-var GSSP_NO_RETURNED_VALUE = 'Your `getServerSideProps` function did not return an object. Did you forget to add a `return`?';
-var UNSTABLE_REVALIDATE_RENAME_ERROR = 'The `unstable_revalidate` property is available for general use.\n' + 'Please use `revalidate` instead.';
-var GSSP_COMPONENT_MEMBER_ERROR = "can not be attached to a page's component and must be exported from the page. See more info here: https://nextjs.org/docs/messages/gssp-component-member";
-var NON_STANDARD_NODE_ENV = 'You are using a non-standard "NODE_ENV" value in your environment. This creates inconsistencies in the project and is strongly advised against. Read more: https://nextjs.org/docs/messages/non-standard-node-env';
-var SSG_FALLBACK_EXPORT_ERROR = "Pages with `fallback` enabled in `getStaticPaths` can not be exported. See more info here: https://nextjs.org/docs/messages/ssg-fallback-true-export";
-var ESLINT_DEFAULT_DIRS = [
+const TEXT_PLAIN_CONTENT_TYPE_HEADER = 'text/plain';
+const HTML_CONTENT_TYPE_HEADER = 'text/html; charset=utf-8';
+const JSON_CONTENT_TYPE_HEADER = 'application/json; charset=utf-8';
+const NEXT_QUERY_PARAM_PREFIX = 'nxtP';
+const NEXT_INTERCEPTION_MARKER_PREFIX = 'nxtI';
+const MATCHED_PATH_HEADER = 'x-matched-path';
+const PRERENDER_REVALIDATE_HEADER = 'x-prerender-revalidate';
+const PRERENDER_REVALIDATE_ONLY_GENERATED_HEADER = 'x-prerender-revalidate-if-generated';
+const RSC_SEGMENTS_DIR_SUFFIX = '.segments';
+const RSC_SEGMENT_SUFFIX = '.segment.rsc';
+const RSC_SUFFIX = '.rsc';
+const ACTION_SUFFIX = '.action';
+const NEXT_DATA_SUFFIX = '.json';
+const NEXT_META_SUFFIX = '.meta';
+const NEXT_BODY_SUFFIX = '.body';
+const NEXT_NAV_DEPLOYMENT_ID_HEADER = 'x-nextjs-deployment-id';
+const NEXT_CACHE_TAGS_HEADER = 'x-next-cache-tags';
+const NEXT_CACHE_REVALIDATED_TAGS_HEADER = 'x-next-revalidated-tags';
+const NEXT_CACHE_REVALIDATE_TAG_TOKEN_HEADER = 'x-next-revalidate-tag-token';
+const NEXT_RESUME_HEADER = 'next-resume';
+const NEXT_RESUME_STATE_LENGTH_HEADER = 'x-next-resume-state-length';
+const NEXT_CACHE_TAG_MAX_ITEMS = 128;
+const NEXT_CACHE_TAG_MAX_LENGTH = 256;
+const NEXT_CACHE_SOFT_TAG_MAX_LENGTH = 1024;
+const NEXT_CACHE_IMPLICIT_TAG_ID = '_N_T_';
+const NEXT_CACHE_ROOT_PARAM_TAG_ID = '_N_RP_';
+const CACHE_ONE_YEAR_SECONDS = 31536000;
+const INFINITE_CACHE = 0xfffffffe;
+const MIDDLEWARE_FILENAME = 'middleware';
+const MIDDLEWARE_LOCATION_REGEXP = `(?:src/)?${MIDDLEWARE_FILENAME}`;
+const PROXY_FILENAME = 'proxy';
+const PROXY_LOCATION_REGEXP = `(?:src/)?${PROXY_FILENAME}`;
+const INSTRUMENTATION_HOOK_FILENAME = 'instrumentation';
+const PAGES_DIR_ALIAS = 'private-next-pages';
+const DOT_NEXT_ALIAS = 'private-dot-next';
+const ROOT_DIR_ALIAS = 'private-next-root-dir';
+const APP_DIR_ALIAS = 'private-next-app-dir';
+const RSC_MOD_REF_PROXY_ALIAS = 'private-next-rsc-mod-ref-proxy';
+const RSC_ACTION_VALIDATE_ALIAS = 'private-next-rsc-action-validate';
+const RSC_ACTION_PROXY_ALIAS = 'private-next-rsc-server-reference';
+const RSC_CACHE_WRAPPER_ALIAS = 'private-next-rsc-cache-wrapper';
+const RSC_DYNAMIC_IMPORT_WRAPPER_ALIAS = 'private-next-rsc-track-dynamic-import';
+const RSC_ACTION_ENCRYPTION_ALIAS = 'private-next-rsc-action-encryption';
+const RSC_ACTION_CLIENT_WRAPPER_ALIAS = 'private-next-rsc-action-client-wrapper';
+const PUBLIC_DIR_MIDDLEWARE_CONFLICT = `You can not have a '_next' folder inside of your public folder. This conflicts with the internal '/_next' route. https://nextjs.org/docs/messages/public-next-folder-conflict`;
+const SSG_GET_INITIAL_PROPS_CONFLICT = `You can not use getInitialProps with getStaticProps. To use SSG, please remove your getInitialProps`;
+const SERVER_PROPS_GET_INIT_PROPS_CONFLICT = `You can not use getInitialProps with getServerSideProps. Please remove getInitialProps.`;
+const SERVER_PROPS_SSG_CONFLICT = `You can not use getStaticProps or getStaticPaths with getServerSideProps. To use SSG, please remove getServerSideProps`;
+const STATIC_STATUS_PAGE_GET_INITIAL_PROPS_ERROR = `can not have getInitialProps/getServerSideProps, https://nextjs.org/docs/messages/404-get-initial-props`;
+const SERVER_PROPS_EXPORT_ERROR = `pages with \`getServerSideProps\` can not be exported. See more info here: https://nextjs.org/docs/messages/gssp-export`;
+const GSP_NO_RETURNED_VALUE = 'Your `getStaticProps` function did not return an object. Did you forget to add a `return`?';
+const GSSP_NO_RETURNED_VALUE = 'Your `getServerSideProps` function did not return an object. Did you forget to add a `return`?';
+const UNSTABLE_REVALIDATE_RENAME_ERROR = 'The `unstable_revalidate` property is available for general use.\n' + 'Please use `revalidate` instead.';
+const GSSP_COMPONENT_MEMBER_ERROR = `can not be attached to a page's component and must be exported from the page. See more info here: https://nextjs.org/docs/messages/gssp-component-member`;
+const NON_STANDARD_NODE_ENV = `You are using a non-standard "NODE_ENV" value in your environment. This creates inconsistencies in the project and is strongly advised against. Read more: https://nextjs.org/docs/messages/non-standard-node-env`;
+const SSG_FALLBACK_EXPORT_ERROR = `Pages with \`fallback\` enabled in \`getStaticPaths\` can not be exported. See more info here: https://nextjs.org/docs/messages/ssg-fallback-true-export`;
+const ESLINT_DEFAULT_DIRS = [
     'app',
     'pages',
     'components',
     'lib',
     'src'
 ];
-var SERVER_RUNTIME = {
+const SERVER_RUNTIME = {
     edge: 'edge',
     experimentalEdge: 'experimental-edge',
     nodejs: 'nodejs'
 };
-var WEB_SOCKET_MAX_RECONNECTIONS = 12;
+const WEB_SOCKET_MAX_RECONNECTIONS = 12;
 /**
  * The names of the webpack layers. These layers are the primitives for the
  * webpack chunks.
- */ var WEBPACK_LAYERS_NAMES = {
+ */ const WEBPACK_LAYERS_NAMES = {
     /**
    * The layer for the shared code between the client and server bundles.
    */ shared: 'shared',
@@ -2105,7 +2016,8 @@ var WEB_SOCKET_MAX_RECONNECTIONS = 12;
    * The Node.js bundle layer for Pages directory.
    */ pagesDirNode: 'pages-dir-node'
 };
-var WEBPACK_LAYERS = _object_spread_props._(_object_spread._({}, WEBPACK_LAYERS_NAMES), {
+const WEBPACK_LAYERS = {
+    ...WEBPACK_LAYERS_NAMES,
     GROUP: {
         builtinReact: [
             WEBPACK_LAYERS_NAMES.reactServerComponents,
@@ -2143,8 +2055,8 @@ var WEBPACK_LAYERS = _object_spread_props._(_object_spread._({}, WEBPACK_LAYERS_
             WEBPACK_LAYERS_NAMES.actionBrowser
         ]
     }
-});
-var WEBPACK_RESOURCE_QUERIES = {
+};
+const WEBPACK_RESOURCE_QUERIES = {
     edgeSSREntry: '__next_edge_ssr_entry__',
     metadata: '__next_metadata__',
     metadataRoute: '__next_metadata_route__',
@@ -2170,23 +2082,23 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    METADATA_BOUNDARY_NAME: function METADATA_BOUNDARY_NAME1() {
+    METADATA_BOUNDARY_NAME: function() {
         return METADATA_BOUNDARY_NAME;
     },
-    OUTLET_BOUNDARY_NAME: function OUTLET_BOUNDARY_NAME1() {
+    OUTLET_BOUNDARY_NAME: function() {
         return OUTLET_BOUNDARY_NAME;
     },
-    ROOT_LAYOUT_BOUNDARY_NAME: function ROOT_LAYOUT_BOUNDARY_NAME1() {
+    ROOT_LAYOUT_BOUNDARY_NAME: function() {
         return ROOT_LAYOUT_BOUNDARY_NAME;
     },
-    VIEWPORT_BOUNDARY_NAME: function VIEWPORT_BOUNDARY_NAME1() {
+    VIEWPORT_BOUNDARY_NAME: function() {
         return VIEWPORT_BOUNDARY_NAME;
     }
 });
-var METADATA_BOUNDARY_NAME = '__next_metadata_boundary__';
-var VIEWPORT_BOUNDARY_NAME = '__next_viewport_boundary__';
-var OUTLET_BOUNDARY_NAME = '__next_outlet_boundary__';
-var ROOT_LAYOUT_BOUNDARY_NAME = '__next_root_layout_boundary__';
+const METADATA_BOUNDARY_NAME = '__next_metadata_boundary__';
+const VIEWPORT_BOUNDARY_NAME = '__next_viewport_boundary__';
+const OUTLET_BOUNDARY_NAME = '__next_outlet_boundary__';
+const ROOT_LAYOUT_BOUNDARY_NAME = '__next_root_layout_boundary__';
 }),
 "[project]/frontend/node_modules/next/dist/lib/scheduler.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
@@ -2209,27 +2121,27 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    atLeastOneTask: function atLeastOneTask1() {
+    atLeastOneTask: function() {
         return atLeastOneTask;
     },
-    scheduleImmediate: function scheduleImmediate1() {
+    scheduleImmediate: function() {
         return scheduleImmediate;
     },
-    scheduleOnNextTick: function scheduleOnNextTick1() {
+    scheduleOnNextTick: function() {
         return scheduleOnNextTick;
     },
-    waitAtLeastOneReactRenderTask: function waitAtLeastOneReactRenderTask1() {
+    waitAtLeastOneReactRenderTask: function() {
         return waitAtLeastOneReactRenderTask;
     }
 });
-var scheduleOnNextTick = function scheduleOnNextTick(cb) {
+const scheduleOnNextTick = (cb)=>{
     // We use Promise.resolve().then() here so that the operation is scheduled at
     // the end of the promise job queue, we then add it to the next process tick
     // to ensure it's evaluated afterwards.
     //
     // This was inspired by the implementation of the DataLoader interface: https://github.com/graphql/dataloader/blob/d336bd15282664e0be4b4a657cb796f09bafbc6b/src/index.js#L213-L255
     //
-    Promise.resolve().then(function() {
+    Promise.resolve().then(()=>{
         if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
         ;
         else {
@@ -2237,7 +2149,7 @@ var scheduleOnNextTick = function scheduleOnNextTick(cb) {
         }
     });
 };
-var scheduleImmediate = function scheduleImmediate(cb) {
+const scheduleImmediate = (cb)=>{
     if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
     ;
     else {
@@ -2245,24 +2157,19 @@ var scheduleImmediate = function scheduleImmediate(cb) {
     }
 };
 function atLeastOneTask() {
-    return new Promise(function(resolve) {
-        return scheduleImmediate(resolve);
-    });
+    return new Promise((resolve)=>scheduleImmediate(resolve));
 }
 function waitAtLeastOneReactRenderTask() {
     if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
     ;
     else {
-        return new Promise(function(r) {
-            return setImmediate(r);
-        });
+        return new Promise((r)=>setImmediate(r));
     }
 }
 }),
 "[project]/frontend/node_modules/next/dist/lib/framework/boundary-components.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _define_property = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_define_property.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -2279,49 +2186,48 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    MetadataBoundary: function MetadataBoundary1() {
+    MetadataBoundary: function() {
         return MetadataBoundary;
     },
-    OutletBoundary: function OutletBoundary1() {
+    OutletBoundary: function() {
         return OutletBoundary;
     },
-    RootLayoutBoundary: function RootLayoutBoundary1() {
+    RootLayoutBoundary: function() {
         return RootLayoutBoundary;
     },
-    ViewportBoundary: function ViewportBoundary1() {
+    ViewportBoundary: function() {
         return ViewportBoundary;
     }
 });
-var _boundaryconstants = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/lib/framework/boundary-constants.js [app-client] (ecmascript)");
-var _obj;
+const _boundaryconstants = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/lib/framework/boundary-constants.js [app-client] (ecmascript)");
 // We use a namespace object to allow us to recover the name of the function
 // at runtime even when production bundling/minification is used.
-var NameSpace = (_obj = {}, _define_property._(_obj, _boundaryconstants.METADATA_BOUNDARY_NAME, function(param) {
-    var children = param.children;
-    return children;
-}), _define_property._(_obj, _boundaryconstants.VIEWPORT_BOUNDARY_NAME, function(param) {
-    var children = param.children;
-    return children;
-}), _define_property._(_obj, _boundaryconstants.OUTLET_BOUNDARY_NAME, function(param) {
-    var children = param.children;
-    return children;
-}), _define_property._(_obj, _boundaryconstants.ROOT_LAYOUT_BOUNDARY_NAME, function(param) {
-    var children = param.children;
-    return children;
-}), _obj);
-var MetadataBoundary = // so it retains the name inferred from the namespace object
+const NameSpace = {
+    [_boundaryconstants.METADATA_BOUNDARY_NAME]: function({ children }) {
+        return children;
+    },
+    [_boundaryconstants.VIEWPORT_BOUNDARY_NAME]: function({ children }) {
+        return children;
+    },
+    [_boundaryconstants.OUTLET_BOUNDARY_NAME]: function({ children }) {
+        return children;
+    },
+    [_boundaryconstants.ROOT_LAYOUT_BOUNDARY_NAME]: function({ children }) {
+        return children;
+    }
+};
+const MetadataBoundary = // so it retains the name inferred from the namespace object
 NameSpace[_boundaryconstants.METADATA_BOUNDARY_NAME.slice(0)];
-var ViewportBoundary = // so it retains the name inferred from the namespace object
+const ViewportBoundary = // so it retains the name inferred from the namespace object
 NameSpace[_boundaryconstants.VIEWPORT_BOUNDARY_NAME.slice(0)];
-var OutletBoundary = // so it retains the name inferred from the namespace object
+const OutletBoundary = // so it retains the name inferred from the namespace object
 NameSpace[_boundaryconstants.OUTLET_BOUNDARY_NAME.slice(0)];
-var RootLayoutBoundary = // so it retains the name inferred from the namespace object
+const RootLayoutBoundary = // so it retains the name inferred from the namespace object
 NameSpace[_boundaryconstants.ROOT_LAYOUT_BOUNDARY_NAME.slice(0)];
 }),
 "[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/stitched-error.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -2339,26 +2245,26 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    coerceError: function coerceError1() {
+    coerceError: function() {
         return coerceError;
     },
-    decorateDevError: function decorateDevError1() {
+    decorateDevError: function() {
         return decorateDevError;
     },
-    getOwnerStack: function getOwnerStack1() {
+    getOwnerStack: function() {
         return getOwnerStack;
     },
-    setOwnerStack: function setOwnerStack1() {
+    setOwnerStack: function() {
         return setOwnerStack;
     },
-    setOwnerStackIfAvailable: function setOwnerStackIfAvailable1() {
+    setOwnerStackIfAvailable: function() {
         return setOwnerStackIfAvailable;
     }
 });
-var _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
-var _react = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
-var _iserror = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/lib/is-error.js [app-client] (ecmascript)"));
-var ownerStacks = new WeakMap();
+const _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
+const _react = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
+const _iserror = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/lib/is-error.js [app-client] (ecmascript)"));
+const ownerStacks = new WeakMap();
 function getOwnerStack(error) {
     return ownerStacks.get(error);
 }
@@ -2375,7 +2281,7 @@ function coerceError(value) {
 function setOwnerStackIfAvailable(error) {
     // React 18 and prod does not have `captureOwnerStack`
     if ('captureOwnerStack' in _react.default) {
-        var ownerStack = _react.default.captureOwnerStack();
+        const ownerStack = _react.default.captureOwnerStack();
         // Only set if we captured a valid owner stack, or if none exists yet.
         // This prevents overwriting a valid owner stack captured earlier
         // (e.g., in onRecoverableError) with null captured later.
@@ -2385,11 +2291,11 @@ function setOwnerStackIfAvailable(error) {
     }
 }
 function decorateDevError(thrownValue) {
-    var error = coerceError(thrownValue);
+    const error = coerceError(thrownValue);
     setOwnerStackIfAvailable(error);
     return error;
 }
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -2401,7 +2307,6 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 "use strict";
 
 // To distinguish from React error.digest, we use a different symbol here to determine if the error is from console.error or unhandled promise rejection.
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -2416,16 +2321,16 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    createConsoleError: function createConsoleError1() {
+    createConsoleError: function() {
         return createConsoleError;
     },
-    isConsoleError: function isConsoleError1() {
+    isConsoleError: function() {
         return isConsoleError;
     }
 });
-var digestSym = Symbol.for('next.console.error.digest');
+const digestSym = Symbol.for('next.console.error.digest');
 function createConsoleError(message, environmentName) {
-    var error = typeof message === 'string' ? Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
+    const error = typeof message === 'string' ? Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
         value: "E394",
         enumerable: false,
         configurable: true
@@ -2436,10 +2341,10 @@ function createConsoleError(message, environmentName) {
     }
     return error;
 }
-var isConsoleError = function isConsoleError(error) {
+const isConsoleError = (error)=>{
     return error && error[digestSym] === 'NEXT_CONSOLE_ERROR';
 };
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -2452,7 +2357,6 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/frontend/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 "use strict";
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -2467,25 +2371,25 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    getIsTerminalLoggingEnabled: function getIsTerminalLoggingEnabled1() {
+    getIsTerminalLoggingEnabled: function() {
         return getIsTerminalLoggingEnabled;
     },
-    getTerminalLoggingConfig: function getTerminalLoggingConfig1() {
+    getTerminalLoggingConfig: function() {
         return getTerminalLoggingConfig;
     }
 });
 function getTerminalLoggingConfig() {
     try {
         return JSON.parse(("TURBOPACK compile-time value", '"warn"') || 'false');
-    } catch (unused) {
+    } catch  {
         return false;
     }
 }
 function getIsTerminalLoggingEnabled() {
-    var config = getTerminalLoggingConfig();
+    const config = getTerminalLoggingConfig();
     return Boolean(config);
 }
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -2496,8 +2400,6 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 "[project]/frontend/node_modules/next/dist/next-devtools/shared/forward-logs-shared.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _to_consumable_array = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_to_consumable_array.cjs [app-client] (ecmascript)");
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -2512,26 +2414,21 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    UNDEFINED_MARKER: function UNDEFINED_MARKER1() {
+    UNDEFINED_MARKER: function() {
         return UNDEFINED_MARKER;
     },
-    patchConsoleMethod: function patchConsoleMethod1() {
+    patchConsoleMethod: function() {
         return patchConsoleMethod;
     }
 });
-var UNDEFINED_MARKER = '__next_tagged_undefined';
+const UNDEFINED_MARKER = '__next_tagged_undefined';
 function patchConsoleMethod(methodName, wrapper) {
-    var descriptor = Object.getOwnPropertyDescriptor(console, methodName);
+    const descriptor = Object.getOwnPropertyDescriptor(console, methodName);
     if (descriptor && (descriptor.configurable || descriptor.writable) && typeof descriptor.value === 'function') {
-        var originalMethod = descriptor.value;
-        var originalName = Object.getOwnPropertyDescriptor(originalMethod, 'name');
-        var wrapperMethod = function wrapperMethod() {
-            for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++){
-                args[_key] = arguments[_key];
-            }
-            wrapper.apply(void 0, [
-                methodName
-            ].concat(_to_consumable_array._(args)));
+        const originalMethod = descriptor.value;
+        const originalName = Object.getOwnPropertyDescriptor(originalMethod, 'name');
+        const wrapperMethod = function(...args) {
+            wrapper(methodName, ...args);
             originalMethod.apply(this, args);
         };
         if (originalName) {
@@ -2540,7 +2437,7 @@ function patchConsoleMethod(methodName, wrapper) {
         Object.defineProperty(console, methodName, {
             value: wrapperMethod
         });
-        return function() {
+        return ()=>{
             Object.defineProperty(console, methodName, {
                 value: originalMethod,
                 writable: descriptor.writable,
@@ -2548,9 +2445,9 @@ function patchConsoleMethod(methodName, wrapper) {
             });
         };
     }
-    return function() {};
+    return ()=>{};
 }
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -2561,7 +2458,6 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 "[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/forward-logs-utils.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -2577,113 +2473,78 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    logStringify: function logStringify1() {
+    logStringify: function() {
         return logStringify;
     },
-    preLogSerializationClone: function preLogSerializationClone1() {
+    preLogSerializationClone: function() {
         return preLogSerializationClone;
     },
-    safeStringifyWithDepth: function safeStringifyWithDepth1() {
+    safeStringifyWithDepth: function() {
         return safeStringifyWithDepth;
     }
 });
-var _safestablestringify = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/safe-stable-stringify/index.js [app-client] (ecmascript)");
-var _terminalloggingconfig = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/terminal-logging-config.js [app-client] (ecmascript)");
-var _forwardlogsshared = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/shared/forward-logs-shared.js [app-client] (ecmascript)");
-var terminalLoggingConfig = (0, _terminalloggingconfig.getTerminalLoggingConfig)();
-var PROMISE_MARKER = 'Promise {}';
-var UNAVAILABLE_MARKER = '[Unable to view]';
-var maximumDepth = (typeof terminalLoggingConfig === "undefined" ? "undefined" : _type_of._(terminalLoggingConfig)) === 'object' && terminalLoggingConfig.depthLimit ? terminalLoggingConfig.depthLimit : 5;
-var maximumBreadth = (typeof terminalLoggingConfig === "undefined" ? "undefined" : _type_of._(terminalLoggingConfig)) === 'object' && terminalLoggingConfig.edgeLimit ? terminalLoggingConfig.edgeLimit : 100;
-var safeStringifyWithDepth = (0, _safestablestringify.configure)({
-    maximumDepth: maximumDepth,
-    maximumBreadth: maximumBreadth
+const _safestablestringify = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/safe-stable-stringify/index.js [app-client] (ecmascript)");
+const _terminalloggingconfig = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/terminal-logging-config.js [app-client] (ecmascript)");
+const _forwardlogsshared = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/shared/forward-logs-shared.js [app-client] (ecmascript)");
+const terminalLoggingConfig = (0, _terminalloggingconfig.getTerminalLoggingConfig)();
+const PROMISE_MARKER = 'Promise {}';
+const UNAVAILABLE_MARKER = '[Unable to view]';
+const maximumDepth = typeof terminalLoggingConfig === 'object' && terminalLoggingConfig.depthLimit ? terminalLoggingConfig.depthLimit : 5;
+const maximumBreadth = typeof terminalLoggingConfig === 'object' && terminalLoggingConfig.edgeLimit ? terminalLoggingConfig.edgeLimit : 100;
+const safeStringifyWithDepth = (0, _safestablestringify.configure)({
+    maximumDepth,
+    maximumBreadth
 });
-function preLogSerializationClone(value) {
-    var seen = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : new WeakMap();
+function preLogSerializationClone(value, seen = new WeakMap()) {
     if (value === undefined) return _forwardlogsshared.UNDEFINED_MARKER;
-    if (value === null || (typeof value === "undefined" ? "undefined" : _type_of._(value)) !== 'object') return value;
+    if (value === null || typeof value !== 'object') return value;
     if (seen.has(value)) return seen.get(value);
     try {
         Object.keys(value);
-    } catch (unused) {
+    } catch  {
         return UNAVAILABLE_MARKER;
     }
     try {
         if (typeof value.then === 'function') return PROMISE_MARKER;
-    } catch (unused) {
+    } catch  {
         return UNAVAILABLE_MARKER;
     }
     if (Array.isArray(value)) {
-        var out = [];
+        const out = [];
         seen.set(value, out);
-        var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
-        try {
-            for(var _iterator = value[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
-                var item = _step.value;
-                try {
-                    out.push(preLogSerializationClone(item, seen));
-                } catch (unused) {
-                    out.push(UNAVAILABLE_MARKER);
-                }
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally{
+        for (const item of value){
             try {
-                if (!_iteratorNormalCompletion && _iterator.return != null) {
-                    _iterator.return();
-                }
-            } finally{
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
+                out.push(preLogSerializationClone(item, seen));
+            } catch  {
+                out.push(UNAVAILABLE_MARKER);
             }
         }
         return out;
     }
-    var proto = Object.getPrototypeOf(value);
+    const proto = Object.getPrototypeOf(value);
     if (proto === Object.prototype || proto === null) {
-        var out1 = {};
-        seen.set(value, out1);
-        var _iteratorNormalCompletion1 = true, _didIteratorError1 = false, _iteratorError1 = undefined;
-        try {
-            for(var _iterator1 = Object.keys(value)[Symbol.iterator](), _step1; !(_iteratorNormalCompletion1 = (_step1 = _iterator1.next()).done); _iteratorNormalCompletion1 = true){
-                var key = _step1.value;
-                try {
-                    out1[key] = preLogSerializationClone(value[key], seen);
-                } catch (unused) {
-                    out1[key] = UNAVAILABLE_MARKER;
-                }
-            }
-        } catch (err) {
-            _didIteratorError1 = true;
-            _iteratorError1 = err;
-        } finally{
+        const out = {};
+        seen.set(value, out);
+        for (const key of Object.keys(value)){
             try {
-                if (!_iteratorNormalCompletion1 && _iterator1.return != null) {
-                    _iterator1.return();
-                }
-            } finally{
-                if (_didIteratorError1) {
-                    throw _iteratorError1;
-                }
+                out[key] = preLogSerializationClone(value[key], seen);
+            } catch  {
+                out[key] = UNAVAILABLE_MARKER;
             }
         }
-        return out1;
+        return out;
     }
     return Object.prototype.toString.call(value);
 }
-var logStringify = function logStringify(data) {
+const logStringify = (data)=>{
     try {
-        var result = safeStringifyWithDepth(data);
-        return result !== null && result !== void 0 ? result : '"'.concat(UNAVAILABLE_MARKER, '"');
-    } catch (unused) {
-        return '"'.concat(UNAVAILABLE_MARKER, '"');
+        const result = safeStringifyWithDepth(data);
+        return result ?? `"${UNAVAILABLE_MARKER}"`;
+    } catch  {
+        return `"${UNAVAILABLE_MARKER}"`;
     }
 };
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -2696,14 +2557,6 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/frontend/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 "use strict";
-var _class_call_check = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_class_call_check.cjs [app-client] (ecmascript)");
-var _create_class = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_create_class.cjs [app-client] (ecmascript)");
-var _instanceof = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_instanceof.cjs [app-client] (ecmascript)");
-var _object_spread = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_object_spread.cjs [app-client] (ecmascript)");
-var _object_spread_props = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_object_spread_props.cjs [app-client] (ecmascript)");
-var _sliced_to_array = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_sliced_to_array.cjs [app-client] (ecmascript)");
-var _to_consumable_array = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_to_consumable_array.cjs [app-client] (ecmascript)");
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -2721,111 +2574,97 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    forwardErrorLog: function forwardErrorLog1() {
+    forwardErrorLog: function() {
         return forwardErrorLog;
     },
-    forwardUnhandledError: function forwardUnhandledError1() {
+    forwardUnhandledError: function() {
         return forwardUnhandledError;
     },
-    initializeDebugLogForwarding: function initializeDebugLogForwarding1() {
+    initializeDebugLogForwarding: function() {
         return initializeDebugLogForwarding;
     },
-    logQueue: function logQueue1() {
+    logQueue: function() {
         return logQueue;
     },
-    logUnhandledRejection: function logUnhandledRejection1() {
+    logUnhandledRejection: function() {
         return logUnhandledRejection;
     }
 });
-var _errorsource = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/error-source.js [app-client] (ecmascript)");
-var _terminalloggingconfig = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/terminal-logging-config.js [app-client] (ecmascript)");
-var _forwardlogsshared = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/shared/forward-logs-shared.js [app-client] (ecmascript)");
-var _forwardlogsutils = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/forward-logs-utils.js [app-client] (ecmascript)");
-var _stitchederror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/stitched-error.js [app-client] (ecmascript)");
+const _errorsource = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/error-source.js [app-client] (ecmascript)");
+const _terminalloggingconfig = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/terminal-logging-config.js [app-client] (ecmascript)");
+const _forwardlogsshared = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/shared/forward-logs-shared.js [app-client] (ecmascript)");
+const _forwardlogsutils = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/forward-logs-utils.js [app-client] (ecmascript)");
+const _stitchederror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/stitched-error.js [app-client] (ecmascript)");
 // Client-side file logger for browser logs
-var ClientFileLogger = /*#__PURE__*/ function() {
-    function ClientFileLogger() {
-        _class_call_check._(this, ClientFileLogger);
+class ClientFileLogger {
+    formatTimestamp() {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        const milliseconds = now.getMilliseconds().toString().padStart(3, '0');
+        return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+    }
+    log(level, args) {
+        if (isReactServerReplayedLog(args)) {
+            return;
+        }
+        // Format the args into a message string
+        const message = args.map((arg)=>{
+            if (typeof arg === 'string') return arg;
+            if (typeof arg === 'number' || typeof arg === 'boolean') return String(arg);
+            if (arg === null) return 'null';
+            if (arg === undefined) return 'undefined';
+            // Handle DOM nodes - only log the tag name to avoid React proxied elements
+            if (arg instanceof Element) {
+                return `<${arg.tagName.toLowerCase()}>`;
+            }
+            return (0, _forwardlogsutils.safeStringifyWithDepth)(arg);
+        }).join(' ');
+        const logEntry = {
+            timestamp: this.formatTimestamp(),
+            level: level.toUpperCase(),
+            message
+        };
+        this.logEntries.push(logEntry);
+        // Schedule flush when new log is added
+        scheduleLogFlush();
+    }
+    getLogs() {
+        return [
+            ...this.logEntries
+        ];
+    }
+    clear() {
         this.logEntries = [];
     }
-    _create_class._(ClientFileLogger, [
-        {
-            key: "formatTimestamp",
-            value: function formatTimestamp() {
-                var now = new Date();
-                var hours = now.getHours().toString().padStart(2, '0');
-                var minutes = now.getMinutes().toString().padStart(2, '0');
-                var seconds = now.getSeconds().toString().padStart(2, '0');
-                var milliseconds = now.getMilliseconds().toString().padStart(3, '0');
-                return "".concat(hours, ":").concat(minutes, ":").concat(seconds, ".").concat(milliseconds);
-            }
-        },
-        {
-            key: "log",
-            value: function log(level, args) {
-                if (isReactServerReplayedLog(args)) {
-                    return;
-                }
-                // Format the args into a message string
-                var message = args.map(function(arg) {
-                    if (typeof arg === 'string') return arg;
-                    if (typeof arg === 'number' || typeof arg === 'boolean') return String(arg);
-                    if (arg === null) return 'null';
-                    if (arg === undefined) return 'undefined';
-                    // Handle DOM nodes - only log the tag name to avoid React proxied elements
-                    if (_instanceof._(arg, Element)) {
-                        return "<".concat(arg.tagName.toLowerCase(), ">");
-                    }
-                    return (0, _forwardlogsutils.safeStringifyWithDepth)(arg);
-                }).join(' ');
-                var logEntry = {
-                    timestamp: this.formatTimestamp(),
-                    level: level.toUpperCase(),
-                    message: message
-                };
-                this.logEntries.push(logEntry);
-                // Schedule flush when new log is added
-                scheduleLogFlush();
-            }
-        },
-        {
-            key: "getLogs",
-            value: function getLogs() {
-                return _to_consumable_array._(this.logEntries);
-            }
-        },
-        {
-            key: "clear",
-            value: function clear() {
-                this.logEntries = [];
-            }
-        }
-    ]);
-    return ClientFileLogger;
-}();
-var clientFileLogger = new ClientFileLogger();
+    constructor(){
+        this.logEntries = [];
+    }
+}
+const clientFileLogger = new ClientFileLogger();
 // Set up flush-based sending of client file logs
-var logFlushTimeout = null;
-var heartbeatInterval = null;
-var scheduleLogFlush = function scheduleLogFlush() {
+let logFlushTimeout = null;
+let heartbeatInterval = null;
+const scheduleLogFlush = ()=>{
     if (logFlushTimeout) {
         clearTimeout(logFlushTimeout);
     }
-    logFlushTimeout = setTimeout(function() {
+    logFlushTimeout = setTimeout(()=>{
         sendClientFileLogs();
         logFlushTimeout = null;
     }, 100) // Send after 100ms (much faster with debouncing)
     ;
 };
-var cancelLogFlush = function cancelLogFlush() {
+const cancelLogFlush = ()=>{
     if (logFlushTimeout) {
         clearTimeout(logFlushTimeout);
         logFlushTimeout = null;
     }
 };
-var startHeartbeat = function startHeartbeat() {
+const startHeartbeat = ()=>{
     if (heartbeatInterval) return;
-    heartbeatInterval = setInterval(function() {
+    heartbeatInterval = setInterval(()=>{
         if (logQueue.socket && logQueue.socket.readyState === WebSocket.OPEN) {
             try {
                 // Send a ping to keep the connection alive
@@ -2842,14 +2681,14 @@ var startHeartbeat = function startHeartbeat() {
     }, 5000) // Send ping every 5 seconds
     ;
 };
-var stopHeartbeat = function stopHeartbeat() {
+const stopHeartbeat = ()=>{
     if (heartbeatInterval) {
         clearInterval(heartbeatInterval);
         heartbeatInterval = null;
     }
 };
-var isTerminalLoggingEnabled = (0, _terminalloggingconfig.getIsTerminalLoggingEnabled)();
-var methods = [
+const isTerminalLoggingEnabled = (0, _terminalloggingconfig.getIsTerminalLoggingEnabled)();
+const methods = [
     'log',
     'info',
     'warn',
@@ -2863,28 +2702,28 @@ var methods = [
     'groupEnd',
     'trace'
 ];
-var afterThisFrame = function afterThisFrame(cb) {
-    var timeout;
-    var rafId = requestAnimationFrame(function() {
-        timeout = setTimeout(function() {
+const afterThisFrame = (cb)=>{
+    let timeout;
+    const rafId = requestAnimationFrame(()=>{
+        timeout = setTimeout(()=>{
             cb();
         });
     });
-    return function() {
+    return ()=>{
         cancelAnimationFrame(rafId);
         clearTimeout(timeout);
     };
 };
-var isPatched = false;
-var serializeEntries = function serializeEntries(entries) {
-    return entries.map(function(clientEntry) {
+let isPatched = false;
+const serializeEntries = (entries)=>entries.map((clientEntry)=>{
         switch(clientEntry.kind){
             case 'any-logged-error':
             case 'console':
                 {
-                    return _object_spread_props._(_object_spread._({}, clientEntry), {
+                    return {
+                        ...clientEntry,
                         args: clientEntry.args.map(stringifyUserArg)
-                    });
+                    };
                 }
             case 'formatted-error':
                 {
@@ -2896,18 +2735,17 @@ var serializeEntries = function serializeEntries(entries) {
                 }
         }
     });
-};
 // Function to send client file logs to server
-var sendClientFileLogs = function sendClientFileLogs() {
+const sendClientFileLogs = ()=>{
     if (!logQueue.socket || logQueue.socket.readyState !== WebSocket.OPEN) {
         return;
     }
-    var logs = clientFileLogger.getLogs();
+    const logs = clientFileLogger.getLogs();
     if (logs.length === 0) {
         return;
     }
     try {
-        var payload = JSON.stringify({
+        const payload = JSON.stringify({
             event: 'client-file-logs',
             logs: logs
         });
@@ -2919,31 +2757,31 @@ var sendClientFileLogs = function sendClientFileLogs() {
         clientFileLogger.clear();
     }
 };
-var logQueue = {
+const logQueue = {
     entries: [],
     flushScheduled: false,
     cancelFlush: null,
     socket: null,
     sourceType: undefined,
     router: null,
-    scheduleLogSend: function scheduleLogSend(entry) {
+    scheduleLogSend: (entry)=>{
         logQueue.entries.push(entry);
         if (logQueue.flushScheduled) {
             return;
         }
         // safe to deref and use in setTimeout closure since we cancel on new socket
-        var socket = logQueue.socket;
+        const socket = logQueue.socket;
         if (!socket) {
             return;
         }
         // we probably dont need this
         logQueue.flushScheduled = true;
         // non blocking log flush, runs at most once per frame
-        logQueue.cancelFlush = afterThisFrame(function() {
+        logQueue.cancelFlush = afterThisFrame(()=>{
             logQueue.flushScheduled = false;
             // just incase
             try {
-                var payload = JSON.stringify({
+                const payload = JSON.stringify({
                     event: 'browser-logs',
                     entries: serializeEntries(logQueue.entries),
                     router: logQueue.router,
@@ -2955,14 +2793,12 @@ var logQueue = {
                 logQueue.sourceType = undefined;
                 // Also send client file logs
                 sendClientFileLogs();
-            } catch (unused) {
+            } catch  {
             // error (make sure u don't infinite loop)
             /* noop */ }
         });
     },
-    onSocketReady: function onSocketReady(socket) {
-        var // incase an existing timeout was going to run with a stale socket
-        _logQueue_cancelFlush;
+    onSocketReady: (socket)=>{
         // When MCP or terminal logging is enabled, we enable the socket connection,
         // otherwise it will not proceed.
         if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
@@ -2971,17 +2807,18 @@ var logQueue = {
             // invariant
             return;
         }
-        (_logQueue_cancelFlush = logQueue.cancelFlush) === null || _logQueue_cancelFlush === void 0 ? void 0 : _logQueue_cancelFlush.call(logQueue);
+        // incase an existing timeout was going to run with a stale socket
+        logQueue.cancelFlush?.();
         logQueue.socket = socket;
         // Add socket event listeners to track connection state
-        socket.addEventListener('close', function() {
+        socket.addEventListener('close', ()=>{
             cancelLogFlush();
             stopHeartbeat();
         });
         // Only send terminal logs if enabled
         if (isTerminalLoggingEnabled) {
             try {
-                var payload = JSON.stringify({
+                const payload = JSON.stringify({
                     event: 'browser-logs',
                     entries: serializeEntries(logQueue.entries),
                     router: logQueue.router,
@@ -2990,7 +2827,7 @@ var logQueue = {
                 socket.send(payload);
                 logQueue.entries = [];
                 logQueue.sourceType = undefined;
-            } catch (unused) {
+            } catch  {
             /** noop just incase */ }
         }
         // Always send client file logs when socket is ready
@@ -2999,22 +2836,23 @@ var logQueue = {
         startHeartbeat();
     }
 };
-var stringifyUserArg = function stringifyUserArg(arg) {
+const stringifyUserArg = (arg)=>{
     if (arg.kind !== 'arg') {
         return arg;
     }
-    return _object_spread_props._(_object_spread._({}, arg), {
+    return {
+        ...arg,
         data: (0, _forwardlogsutils.logStringify)(arg.data)
-    });
+    };
 };
-var createErrorArg = function createErrorArg(error) {
+const createErrorArg = (error)=>{
     return {
         kind: 'formatted-error-arg',
-        prefix: error.message ? "".concat(error.name, ": ").concat(error.message) : "".concat(error.name),
+        prefix: error.message ? `${error.name}: ${error.message}` : `${error.name}`,
         stack: getErrorStackWithOwnerStack(error)
     };
 };
-var createLogEntry = function createLogEntry(level, args) {
+const createLogEntry = (level, args)=>{
     // Always log to client file logger with args (formatting done inside log method)
     clientFileLogger.log(level, args);
     // Only forward to terminal if enabled
@@ -3023,16 +2861,16 @@ var createLogEntry = function createLogEntry(level, args) {
     }
     // do not abstract this, it implicitly relies on which functions call it. forcing the inlined implementation makes you think about callers
     // error capture stack trace maybe
-    var stack = getErrorStack(new Error());
-    var stackLines = stack === null || stack === void 0 ? void 0 : stack.split('\n');
-    var cleanStack = stackLines === null || stackLines === void 0 ? void 0 : stackLines.slice(3).join('\n') // this is probably ignored anyways
+    const stack = getErrorStack(new Error());
+    const stackLines = stack?.split('\n');
+    const cleanStack = stackLines?.slice(3).join('\n') // this is probably ignored anyways
     ;
-    var entry = {
+    const entry = {
         kind: 'console',
-        consoleMethodStack: cleanStack !== null && cleanStack !== void 0 ? cleanStack : null,
+        consoleMethodStack: cleanStack ?? null,
         method: level,
-        args: args.map(function(arg) {
-            if (_instanceof._(arg, Error)) {
+        args: args.map((arg)=>{
+            if (arg instanceof Error) {
                 return createErrorArg(arg);
             }
             return {
@@ -3043,7 +2881,7 @@ var createLogEntry = function createLogEntry(level, args) {
     };
     logQueue.scheduleLogSend(entry);
 };
-var forwardErrorLog = function forwardErrorLog(args) {
+const forwardErrorLog = (args)=>{
     // Skip React server replayed logs - they were already logged on the server
     if (isReactServerReplayedLog(args)) {
         return;
@@ -3054,12 +2892,10 @@ var forwardErrorLog = function forwardErrorLog(args) {
     if (!isTerminalLoggingEnabled) {
         return;
     }
-    var errorObjects = args.filter(function(arg) {
-        return _instanceof._(arg, Error);
-    });
-    var first = errorObjects.at(0);
+    const errorObjects = args.filter((arg)=>arg instanceof Error);
+    const first = errorObjects.at(0);
     if (first) {
-        var source = (0, _errorsource.getErrorSource)(first);
+        const source = (0, _errorsource.getErrorSource)(first);
         if (source) {
             logQueue.sourceType = source;
         }
@@ -3068,15 +2904,15 @@ var forwardErrorLog = function forwardErrorLog(args) {
    * browser shows stack regardless of type of data passed to console.error, so we should do the same
    *
    * do not abstract this, it implicitly relies on which functions call it. forcing the inlined implementation makes you think about callers
-   */ var stack = getErrorStack(new Error());
-    var stackLines = stack === null || stack === void 0 ? void 0 : stack.split('\n');
-    var cleanStack = stackLines === null || stackLines === void 0 ? void 0 : stackLines.slice(3).join('\n');
-    var entry = {
+   */ const stack = getErrorStack(new Error());
+    const stackLines = stack?.split('\n');
+    const cleanStack = stackLines?.slice(3).join('\n');
+    const entry = {
         kind: 'any-logged-error',
         method: 'error',
-        consoleErrorStack: cleanStack !== null && cleanStack !== void 0 ? cleanStack : '',
-        args: args.map(function(arg) {
-            if (_instanceof._(arg, Error)) {
+        consoleErrorStack: cleanStack ?? '',
+        args: args.map((arg)=>{
+            if (arg instanceof Error) {
                 return createErrorArg(arg);
             }
             return {
@@ -3087,55 +2923,55 @@ var forwardErrorLog = function forwardErrorLog(args) {
     };
     logQueue.scheduleLogSend(entry);
 };
-var createUncaughtErrorEntry = function createUncaughtErrorEntry(errorName, errorMessage, fullStack) {
-    var entry = {
+const createUncaughtErrorEntry = (errorName, errorMessage, fullStack)=>{
+    const entry = {
         kind: 'formatted-error',
-        prefix: "Uncaught ".concat(errorName, ": ").concat(errorMessage),
+        prefix: `Uncaught ${errorName}: ${errorMessage}`,
         stack: fullStack,
         method: 'error'
     };
     logQueue.scheduleLogSend(entry);
 };
-var getErrorStack = function getErrorStack(error) {
+const getErrorStack = (error)=>{
     return error.stack || '';
 };
 // Get error stack with owner stack appended for source mapping on the server
-var getErrorStackWithOwnerStack = function getErrorStackWithOwnerStack(error) {
-    var errorStack = getErrorStack(error);
-    var ownerStack = (0, _stitchederror.getOwnerStack)(error);
-    return ownerStack ? "".concat(errorStack, "\n").concat(ownerStack) : errorStack;
+const getErrorStackWithOwnerStack = (error)=>{
+    const errorStack = getErrorStack(error);
+    const ownerStack = (0, _stitchederror.getOwnerStack)(error);
+    return ownerStack ? `${errorStack}\n${ownerStack}` : errorStack;
 };
 function logUnhandledRejection(reason) {
     // Always log to client file logger
-    var message = _instanceof._(reason, Error) ? "".concat(reason.name, ": ").concat(reason.message) : JSON.stringify(reason);
+    const message = reason instanceof Error ? `${reason.name}: ${reason.message}` : JSON.stringify(reason);
     clientFileLogger.log('error', [
-        "unhandledRejection: ".concat(message)
+        `unhandledRejection: ${message}`
     ]);
     // Only forward to terminal if enabled
     if (!isTerminalLoggingEnabled) {
         return;
     }
-    if (_instanceof._(reason, Error)) {
+    if (reason instanceof Error) {
         createUnhandledRejectionErrorEntry(reason, getErrorStackWithOwnerStack(reason));
         return;
     }
     createUnhandledRejectionNonErrorEntry(reason);
 }
-var createUnhandledRejectionErrorEntry = function createUnhandledRejectionErrorEntry(error, fullStack) {
-    var source = (0, _errorsource.getErrorSource)(error);
+const createUnhandledRejectionErrorEntry = (error, fullStack)=>{
+    const source = (0, _errorsource.getErrorSource)(error);
     if (source) {
         logQueue.sourceType = source;
     }
-    var entry = {
+    const entry = {
         kind: 'formatted-error',
-        prefix: "⨯ unhandledRejection: ".concat(error.name, ": ").concat(error.message),
+        prefix: `⨯ unhandledRejection: ${error.name}: ${error.message}`,
         stack: fullStack,
         method: 'error'
     };
     logQueue.scheduleLogSend(entry);
 };
-var createUnhandledRejectionNonErrorEntry = function createUnhandledRejectionNonErrorEntry(reason) {
-    var entry = {
+const createUnhandledRejectionNonErrorEntry = (reason)=>{
+    const entry = {
         kind: 'any-logged-error',
         // we can't access the stack since the event is dispatched async and creating an inline error would be meaningless
         consoleErrorStack: '',
@@ -3143,7 +2979,7 @@ var createUnhandledRejectionNonErrorEntry = function createUnhandledRejectionNon
         args: [
             {
                 kind: 'arg',
-                data: "⨯ unhandledRejection:",
+                data: `⨯ unhandledRejection:`,
                 isRejectionMessage: true
             },
             {
@@ -3154,8 +2990,8 @@ var createUnhandledRejectionNonErrorEntry = function createUnhandledRejectionNon
     };
     logQueue.scheduleLogSend(entry);
 };
-var isHMR = function isHMR(args) {
-    var firstArg = args[0];
+const isHMR = (args)=>{
+    const firstArg = args[0];
     if (typeof firstArg !== 'string') {
         return false;
     }
@@ -3169,11 +3005,11 @@ var isHMR = function isHMR(args) {
 };
 /**
  * Matches the format of logs arguments React replayed from the RSC.
- */ var isReactServerReplayedLog = function isReactServerReplayedLog(args) {
+ */ const isReactServerReplayedLog = (args)=>{
     if (args.length < 3) {
         return false;
     }
-    var _args = _sliced_to_array._(args, 3), format = _args[0], styles = _args[1], label = _args[2];
+    const [format, styles, label] = args;
     if (typeof format !== 'string' || typeof styles !== 'string' || typeof label !== 'string') {
         return false;
     }
@@ -3182,7 +3018,7 @@ var isHMR = function isHMR(args) {
 function forwardUnhandledError(error) {
     // Always log to client file logger
     clientFileLogger.log('error', [
-        "uncaughtError: ".concat(error.name, ": ").concat(error.message)
+        `uncaughtError: ${error.name}: ${error.message}`
     ]);
     // Only forward to terminal if enabled
     if (!isTerminalLoggingEnabled) {
@@ -3190,7 +3026,7 @@ function forwardUnhandledError(error) {
     }
     createUncaughtErrorEntry(error.name, error.message, getErrorStackWithOwnerStack(error));
 }
-var initializeDebugLogForwarding = function initializeDebugLogForwarding(router) {
+const initializeDebugLogForwarding = (router)=>{
     // probably don't need this
     if (isPatched) {
         return;
@@ -3201,11 +3037,7 @@ var initializeDebugLogForwarding = function initializeDebugLogForwarding(router)
     }
     // better to be safe than sorry
     try {
-        methods.forEach(function(method) {
-            return (0, _forwardlogsshared.patchConsoleMethod)(method, function(_) {
-                for(var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++){
-                    args[_key - 1] = arguments[_key];
-                }
+        methods.forEach((method)=>(0, _forwardlogsshared.patchConsoleMethod)(method, (_, ...args)=>{
                 if (isHMR(args)) {
                     return;
                 }
@@ -3213,20 +3045,19 @@ var initializeDebugLogForwarding = function initializeDebugLogForwarding(router)
                     return;
                 }
                 createLogEntry(method, args);
-            });
-        });
-    } catch (unused) {}
+            }));
+    } catch  {}
     logQueue.router = router;
     isPatched = true;
     // Cleanup on page unload
-    window.addEventListener('beforeunload', function() {
+    window.addEventListener('beforeunload', ()=>{
         cancelLogFlush();
         stopHeartbeat();
         // Send any remaining logs before page unloads
         sendClientFileLogs();
     });
 };
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -3237,7 +3068,6 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 "[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/use-error-handler.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -3254,37 +3084,35 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    handleClientError: function handleClientError1() {
+    handleClientError: function() {
         return handleClientError;
     },
-    handleConsoleError: function handleConsoleError1() {
+    handleConsoleError: function() {
         return handleConsoleError;
     },
-    handleGlobalErrors: function handleGlobalErrors1() {
+    handleGlobalErrors: function() {
         return handleGlobalErrors;
     },
-    useErrorHandler: function useErrorHandler1() {
+    useErrorHandler: function() {
         return useErrorHandler;
     }
 });
-var _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
-var _react = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
-var _isnextroutererror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/is-next-router-error.js [app-client] (ecmascript)");
-var _console = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/lib/console.js [app-client] (ecmascript)");
-var _iserror = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/lib/is-error.js [app-client] (ecmascript)"));
-var _consoleerror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/shared/console-error.js [app-client] (ecmascript)");
-var _stitchederror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/stitched-error.js [app-client] (ecmascript)");
-var _forwardlogs = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/forward-logs.js [app-client] (ecmascript)");
-var queueMicroTask = globalThis.queueMicrotask || function(cb) {
-    return Promise.resolve().then(cb);
-};
-var errorQueue = [];
-var errorHandlers = [];
-var rejectionQueue = [];
-var rejectionHandlers = [];
+const _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
+const _react = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+const _isnextroutererror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/is-next-router-error.js [app-client] (ecmascript)");
+const _console = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/lib/console.js [app-client] (ecmascript)");
+const _iserror = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/lib/is-error.js [app-client] (ecmascript)"));
+const _consoleerror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/shared/console-error.js [app-client] (ecmascript)");
+const _stitchederror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/stitched-error.js [app-client] (ecmascript)");
+const _forwardlogs = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/forward-logs.js [app-client] (ecmascript)");
+const queueMicroTask = globalThis.queueMicrotask || ((cb)=>Promise.resolve().then(cb));
+const errorQueue = [];
+const errorHandlers = [];
+const rejectionQueue = [];
+const rejectionHandlers = [];
 function handleConsoleError(originError, consoleErrorArgs) {
-    var error;
-    var environmentName = (0, _console.parseConsoleArgs)(consoleErrorArgs).environmentName;
+    let error;
+    const { environmentName } = (0, _console.parseConsoleArgs)(consoleErrorArgs);
     if ((0, _iserror.default)(originError)) {
         error = (0, _consoleerror.createConsoleError)(originError, environmentName);
     } else {
@@ -3292,69 +3120,33 @@ function handleConsoleError(originError, consoleErrorArgs) {
     }
     (0, _stitchederror.setOwnerStackIfAvailable)(error);
     errorQueue.push(error);
-    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
-    try {
-        var _loop = function() {
-            var handler = _step.value;
-            // Delayed the error being passed to React Dev Overlay,
-            // avoid the state being synchronously updated in the component.
-            queueMicroTask(function() {
-                handler(error);
-            });
-        };
-        for(var _iterator = errorHandlers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true)_loop();
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally{
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-            }
-        } finally{
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
-        }
+    for (const handler of errorHandlers){
+        // Delayed the error being passed to React Dev Overlay,
+        // avoid the state being synchronously updated in the component.
+        queueMicroTask(()=>{
+            handler(error);
+        });
     }
 }
 function handleClientError(error) {
     errorQueue.push(error);
-    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
-    try {
-        var _loop = function() {
-            var handler = _step.value;
-            // Delayed the error being passed to React Dev Overlay,
-            // avoid the state being synchronously updated in the component.
-            queueMicroTask(function() {
-                handler(error);
-            });
-        };
-        for(var _iterator = errorHandlers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true)_loop();
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally{
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-            }
-        } finally{
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
-        }
+    for (const handler of errorHandlers){
+        // Delayed the error being passed to React Dev Overlay,
+        // avoid the state being synchronously updated in the component.
+        queueMicroTask(()=>{
+            handler(error);
+        });
     }
 }
 function useErrorHandler(handleOnUnhandledError, handleOnUnhandledRejection) {
-    (0, _react.useEffect)(function() {
+    (0, _react.useEffect)(()=>{
         // Handle queued errors.
         errorQueue.forEach(handleOnUnhandledError);
         rejectionQueue.forEach(handleOnUnhandledRejection);
         // Listen to new errors.
         errorHandlers.push(handleOnUnhandledError);
         rejectionHandlers.push(handleOnUnhandledRejection);
-        return function() {
+        return ()=>{
             // Remove listeners.
             errorHandlers.splice(errorHandlers.indexOf(handleOnUnhandledError), 1);
             rejectionHandlers.splice(rejectionHandlers.indexOf(handleOnUnhandledRejection), 1);
@@ -3368,7 +3160,7 @@ function useErrorHandler(handleOnUnhandledError, handleOnUnhandledRejection) {
     ]);
 }
 function onUnhandledError(event) {
-    var thrownValue = event.error;
+    const thrownValue = event.error;
     if ((0, _isnextroutererror.isNextRouterError)(thrownValue)) {
         event.preventDefault();
         return false;
@@ -3376,40 +3168,23 @@ function onUnhandledError(event) {
     // When there's an error property present, we log the error to error overlay.
     // Otherwise we don't do anything as it's not logging in the console either.
     if (thrownValue) {
-        var error = (0, _stitchederror.coerceError)(thrownValue);
+        const error = (0, _stitchederror.coerceError)(thrownValue);
         (0, _stitchederror.setOwnerStackIfAvailable)(error);
         handleClientError(error);
         (0, _forwardlogs.forwardUnhandledError)(error);
     }
 }
 function onUnhandledRejection(ev) {
-    var reason = ev === null || ev === void 0 ? void 0 : ev.reason;
+    const reason = ev?.reason;
     if ((0, _isnextroutererror.isNextRouterError)(reason)) {
         ev.preventDefault();
         return;
     }
-    var error = (0, _stitchederror.coerceError)(reason);
+    const error = (0, _stitchederror.coerceError)(reason);
     (0, _stitchederror.setOwnerStackIfAvailable)(error);
     rejectionQueue.push(error);
-    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
-    try {
-        for(var _iterator = rejectionHandlers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
-            var handler = _step.value;
-            handler(error);
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally{
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-            }
-        } finally{
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
-        }
+    for (const handler of rejectionHandlers){
+        handler(error);
     }
     (0, _forwardlogs.logUnhandledRejection)(reason);
 }
@@ -3418,12 +3193,12 @@ function handleGlobalErrors() {
         try {
             // Increase the number of stack frames on the client
             Error.stackTraceLimit = 50;
-        } catch (unused) {}
+        } catch  {}
         window.addEventListener('error', onUnhandledError);
         window.addEventListener('unhandledrejection', onUnhandledRejection);
     }
 }
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -3436,7 +3211,6 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/frontend/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 "use strict";
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -3451,33 +3225,30 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    originConsoleError: function originConsoleError1() {
+    originConsoleError: function() {
         return originConsoleError;
     },
-    patchConsoleError: function patchConsoleError1() {
+    patchConsoleError: function() {
         return patchConsoleError;
     }
 });
-var _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
-var _iserror = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/lib/is-error.js [app-client] (ecmascript)"));
-var _isnextroutererror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/is-next-router-error.js [app-client] (ecmascript)");
-var _useerrorhandler = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/use-error-handler.js [app-client] (ecmascript)");
-var _console = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/lib/console.js [app-client] (ecmascript)");
-var _forwardlogs = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/forward-logs.js [app-client] (ecmascript)");
-var originConsoleError = globalThis.console.error;
+const _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
+const _iserror = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/lib/is-error.js [app-client] (ecmascript)"));
+const _isnextroutererror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/is-next-router-error.js [app-client] (ecmascript)");
+const _useerrorhandler = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/use-error-handler.js [app-client] (ecmascript)");
+const _console = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/lib/console.js [app-client] (ecmascript)");
+const _forwardlogs = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/forward-logs.js [app-client] (ecmascript)");
+const originConsoleError = globalThis.console.error;
 function patchConsoleError() {
     // Ensure it's only patched once
     if (typeof window === 'undefined') {
         return;
     }
-    window.console.error = function error() {
-        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++){
-            args[_key] = arguments[_key];
-        }
-        var maybeError;
-        var isReplayedLog = false;
+    window.console.error = function error(...args) {
+        let maybeError;
+        let isReplayedLog = false;
         if ("TURBOPACK compile-time truthy", 1) {
-            var _ref = (0, _console.parseConsoleArgs)(args), replayedError = _ref.error, environmentName = _ref.environmentName;
+            const { error: replayedError, environmentName } = (0, _console.parseConsoleArgs)(args);
             // If environmentName is set, this is a server log replayed by React in the browser
             isReplayedLog = !!environmentName;
             if (replayedError) {
@@ -3503,7 +3274,7 @@ function patchConsoleError() {
         }
     };
 }
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -3514,17 +3285,16 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 "[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/app-dev-overlay-setup.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _interceptconsoleerror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js [app-client] (ecmascript)");
-var _useerrorhandler = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/use-error-handler.js [app-client] (ecmascript)");
-var _forwardlogs = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/forward-logs.js [app-client] (ecmascript)");
+const _interceptconsoleerror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js [app-client] (ecmascript)");
+const _useerrorhandler = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/use-error-handler.js [app-client] (ecmascript)");
+const _forwardlogs = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/forward-logs.js [app-client] (ecmascript)");
 (0, _useerrorhandler.handleGlobalErrors)();
 (0, _interceptconsoleerror.patchConsoleError)();
 (0, _forwardlogs.initializeDebugLogForwarding)('app');
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -3535,22 +3305,20 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 "[project]/frontend/node_modules/next/dist/next-devtools/userspace/use-app-dev-rendering-indicator.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _sliced_to_array = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_sliced_to_array.cjs [app-client] (ecmascript)");
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 Object.defineProperty(exports, "useAppDevRenderingIndicator", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return useAppDevRenderingIndicator;
     }
 });
-var _react = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
-var _nextdevtools = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/next-devtools/index.js (raw)");
-var useAppDevRenderingIndicator = function useAppDevRenderingIndicator() {
-    var _ref = _sliced_to_array._((0, _react.useTransition)(), 2), isPending = _ref[0], startTransition = _ref[1];
-    (0, _react.useEffect)(function() {
+const _react = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+const _nextdevtools = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/next-devtools/index.js (raw)");
+const useAppDevRenderingIndicator = ()=>{
+    const [isPending, startTransition] = (0, _react.useTransition)();
+    (0, _react.useEffect)(()=>{
         if (isPending) {
             _nextdevtools.dispatcher.renderingIndicatorShow();
         } else {
@@ -3561,7 +3329,7 @@ var useAppDevRenderingIndicator = function useAppDevRenderingIndicator() {
     ]);
     return startTransition;
 };
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -3572,7 +3340,6 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 "[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/index.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -3588,20 +3355,20 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    decorateDevError: function decorateDevError() {
+    decorateDevError: function() {
         return _stitchederror.decorateDevError;
     },
-    handleClientError: function handleClientError() {
+    handleClientError: function() {
         return _useerrorhandler.handleClientError;
     },
-    originConsoleError: function originConsoleError() {
+    originConsoleError: function() {
         return _interceptconsoleerror.originConsoleError;
     }
 });
-var _interceptconsoleerror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js [app-client] (ecmascript)");
-var _useerrorhandler = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/use-error-handler.js [app-client] (ecmascript)");
-var _stitchederror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/stitched-error.js [app-client] (ecmascript)");
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+const _interceptconsoleerror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js [app-client] (ecmascript)");
+const _useerrorhandler = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/use-error-handler.js [app-client] (ecmascript)");
+const _stitchederror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/stitched-error.js [app-client] (ecmascript)");
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -3612,8 +3379,6 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 "[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/segment-explorer-node.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _sliced_to_array = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_sliced_to_array.cjs [app-client] (ecmascript)");
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -3632,40 +3397,39 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    SEGMENT_EXPLORER_SIMULATED_ERROR_MESSAGE: function SEGMENT_EXPLORER_SIMULATED_ERROR_MESSAGE1() {
+    SEGMENT_EXPLORER_SIMULATED_ERROR_MESSAGE: function() {
         return SEGMENT_EXPLORER_SIMULATED_ERROR_MESSAGE;
     },
-    SegmentBoundaryTriggerNode: function SegmentBoundaryTriggerNode1() {
+    SegmentBoundaryTriggerNode: function() {
         return SegmentBoundaryTriggerNode;
     },
-    SegmentStateProvider: function SegmentStateProvider1() {
+    SegmentStateProvider: function() {
         return SegmentStateProvider;
     },
-    SegmentViewNode: function SegmentViewNode1() {
+    SegmentViewNode: function() {
         return SegmentViewNode;
     },
-    SegmentViewStateNode: function SegmentViewStateNode1() {
+    SegmentViewStateNode: function() {
         return SegmentViewStateNode;
     },
-    useSegmentState: function useSegmentState1() {
+    useSegmentState: function() {
         return useSegmentState;
     }
 });
-var _jsxruntime = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/jsx-runtime.js [app-client] (ecmascript)");
-var _react = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
-var _nextdevtools = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/next-devtools/index.js (raw)");
-var _approutercontextsharedruntime = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/app-router-context.shared-runtime.js [app-client] (ecmascript)");
-var _notfound = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/not-found.js [app-client] (ecmascript)");
-var SEGMENT_EXPLORER_SIMULATED_ERROR_MESSAGE = 'NEXT_DEVTOOLS_SIMULATED_ERROR';
-function SegmentTrieNode(param) {
-    var type = param.type, pagePath = param.pagePath;
-    var _useSegmentState = useSegmentState(), boundaryType = _useSegmentState.boundaryType, setBoundaryType = _useSegmentState.setBoundaryType;
-    var nodeState = (0, _react.useMemo)(function() {
+const _jsxruntime = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/jsx-runtime.js [app-client] (ecmascript)");
+const _react = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+const _nextdevtools = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/next-devtools/index.js (raw)");
+const _approutercontextsharedruntime = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/app-router-context.shared-runtime.js [app-client] (ecmascript)");
+const _notfound = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/not-found.js [app-client] (ecmascript)");
+const SEGMENT_EXPLORER_SIMULATED_ERROR_MESSAGE = 'NEXT_DEVTOOLS_SIMULATED_ERROR';
+function SegmentTrieNode({ type, pagePath }) {
+    const { boundaryType, setBoundaryType } = useSegmentState();
+    const nodeState = (0, _react.useMemo)(()=>{
         return {
-            type: type,
-            pagePath: pagePath,
-            boundaryType: boundaryType,
-            setBoundaryType: setBoundaryType
+            type,
+            pagePath,
+            boundaryType,
+            setBoundaryType
         };
     }, [
         type,
@@ -3675,9 +3439,9 @@ function SegmentTrieNode(param) {
     ]);
     // Use `useLayoutEffect` to ensure the state is updated during suspense.
     // `useEffect` won't work as the state is preserved during suspense.
-    (0, _react.useLayoutEffect)(function() {
+    (0, _react.useLayoutEffect)(()=>{
         _nextdevtools.dispatcher.segmentExplorerNodeAdd(nodeState);
-        return function() {
+        return ()=>{
             _nextdevtools.dispatcher.segmentExplorerNodeRemove(nodeState);
         };
     }, [
@@ -3695,17 +3459,16 @@ function ErrorSegmentNode() {
         configurable: true
     });
 }
-var forever = new Promise(function() {});
+const forever = new Promise(()=>{});
 function LoadingSegmentNode() {
     (0, _react.use)(forever);
     return null;
 }
-function SegmentViewStateNode(param) {
-    var page = param.page;
-    var tree = (0, _react.useContext)(_approutercontextsharedruntime.GlobalLayoutRouterContext).tree;
-    (0, _react.useLayoutEffect)(function() {
+function SegmentViewStateNode({ page }) {
+    const { tree } = (0, _react.useContext)(_approutercontextsharedruntime.GlobalLayoutRouterContext);
+    (0, _react.useLayoutEffect)(()=>{
         _nextdevtools.dispatcher.segmentExplorerUpdateRouteState(page, tree);
-        return function() {
+        return ()=>{
             _nextdevtools.dispatcher.segmentExplorerUpdateRouteState('', null);
         };
     }, [
@@ -3715,8 +3478,8 @@ function SegmentViewStateNode(param) {
     return null;
 }
 function SegmentBoundaryTriggerNode() {
-    var boundaryType = useSegmentState().boundaryType;
-    var segmentNode = null;
+    const { boundaryType } = useSegmentState();
+    let segmentNode = null;
     if (boundaryType === 'loading') {
         segmentNode = /*#__PURE__*/ (0, _jsxruntime.jsx)(LoadingSegmentNode, {});
     } else if (boundaryType === 'not-found') {
@@ -3726,9 +3489,8 @@ function SegmentBoundaryTriggerNode() {
     }
     return segmentNode;
 }
-function SegmentViewNode(param) {
-    var type = param.type, pagePath = param.pagePath, children = param.children;
-    var segmentNode = /*#__PURE__*/ (0, _jsxruntime.jsx)(SegmentTrieNode, {
+function SegmentViewNode({ type, pagePath, children }) {
+    const segmentNode = /*#__PURE__*/ (0, _jsxruntime.jsx)(SegmentTrieNode, {
         type: type,
         pagePath: pagePath
     }, type);
@@ -3739,20 +3501,15 @@ function SegmentViewNode(param) {
         ]
     });
 }
-var SegmentStateContext = /*#__PURE__*/ (0, _react.createContext)({
+const SegmentStateContext = /*#__PURE__*/ (0, _react.createContext)({
     boundaryType: null,
-    setBoundaryType: function setBoundaryType() {}
+    setBoundaryType: ()=>{}
 });
-function SegmentStateProvider(param) {
-    var children = param.children;
-    var _ref = _sliced_to_array._((0, _react.useState)(null), 2), boundaryType = _ref[0], setBoundaryType = _ref[1];
-    var _ref1 = _sliced_to_array._((0, _react.useState)(0), 2), errorBoundaryKey = _ref1[0], setErrorBoundaryKey = _ref1[1];
-    var reloadBoundary = (0, _react.useCallback)(function() {
-        return setErrorBoundaryKey(function(prev) {
-            return prev + 1;
-        });
-    }, []);
-    var setBoundaryTypeAndReload = (0, _react.useCallback)(function(type) {
+function SegmentStateProvider({ children }) {
+    const [boundaryType, setBoundaryType] = (0, _react.useState)(null);
+    const [errorBoundaryKey, setErrorBoundaryKey] = (0, _react.useState)(0);
+    const reloadBoundary = (0, _react.useCallback)(()=>setErrorBoundaryKey((prev)=>prev + 1), []);
+    const setBoundaryTypeAndReload = (0, _react.useCallback)((type)=>{
         if (type === null) {
             reloadBoundary();
         }
@@ -3762,7 +3519,7 @@ function SegmentStateProvider(param) {
     ]);
     return /*#__PURE__*/ (0, _jsxruntime.jsx)(SegmentStateContext.Provider, {
         value: {
-            boundaryType: boundaryType,
+            boundaryType,
             setBoundaryType: setBoundaryTypeAndReload
         },
         children: children
@@ -3771,7 +3528,7 @@ function SegmentStateProvider(param) {
 function useSegmentState() {
     return (0, _react.useContext)(SegmentStateContext);
 }
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -3784,34 +3541,26 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/frontend/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 "use strict";
-var _call_super = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_call_super.cjs [app-client] (ecmascript)");
-var _class_call_check = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_class_call_check.cjs [app-client] (ecmascript)");
-var _create_class = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_create_class.cjs [app-client] (ecmascript)");
-var _inherits = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_inherits.cjs [app-client] (ecmascript)");
-var _sliced_to_array = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_sliced_to_array.cjs [app-client] (ecmascript)");
-var _to_consumable_array = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_to_consumable_array.cjs [app-client] (ecmascript)");
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 Object.defineProperty(exports, "AppDevOverlayErrorBoundary", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return AppDevOverlayErrorBoundary;
     }
 });
-var _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
-var _interop_require_wildcard = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_wildcard.cjs [app-client] (ecmascript)");
-var _jsxruntime = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/jsx-runtime.js [app-client] (ecmascript)");
-var _react = /*#__PURE__*/ _interop_require_wildcard._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
-var _nextdevtools = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/next-devtools/index.js (raw)");
-var _runtimeerrorhandler = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/dev/runtime-error-handler.js [app-client] (ecmascript)");
-var _errorboundary = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/error-boundary.js [app-client] (ecmascript)");
-var _globalerror = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/builtin/global-error.js [app-client] (ecmascript)"));
-var _segmentexplorernode = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/segment-explorer-node.js [app-client] (ecmascript)");
-var _approutercontextsharedruntime = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/app-router-context.shared-runtime.js [app-client] (ecmascript)");
-function ErroredHtml(param) {
-    var _param_globalError = _sliced_to_array._(param.globalError, 2), GlobalError = _param_globalError[0], globalErrorStyles = _param_globalError[1], error = param.error, reset = param.reset, unstable_retry = param.unstable_retry;
+const _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
+const _interop_require_wildcard = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_wildcard.cjs [app-client] (ecmascript)");
+const _jsxruntime = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/jsx-runtime.js [app-client] (ecmascript)");
+const _react = /*#__PURE__*/ _interop_require_wildcard._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
+const _nextdevtools = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/next-devtools/index.js (raw)");
+const _runtimeerrorhandler = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/dev/runtime-error-handler.js [app-client] (ecmascript)");
+const _errorboundary = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/error-boundary.js [app-client] (ecmascript)");
+const _globalerror = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/builtin/global-error.js [app-client] (ecmascript)"));
+const _segmentexplorernode = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/segment-explorer-node.js [app-client] (ecmascript)");
+const _approutercontextsharedruntime = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/app-router-context.shared-runtime.js [app-client] (ecmascript)");
+function ErroredHtml({ globalError: [GlobalError, globalErrorStyles], error, reset, unstable_retry }) {
     if (!error) {
         return /*#__PURE__*/ (0, _jsxruntime.jsxs)("html", {
             children: [
@@ -3832,68 +3581,49 @@ function ErroredHtml(param) {
         ]
     });
 }
-var AppDevOverlayErrorBoundary = /*#__PURE__*/ function(_react_PureComponent) {
-    _inherits._(AppDevOverlayErrorBoundary, _react_PureComponent);
-    function AppDevOverlayErrorBoundary() {
-        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++){
-            args[_key] = arguments[_key];
+class AppDevOverlayErrorBoundary extends _react.PureComponent {
+    static{
+        this.contextType = _approutercontextsharedruntime.AppRouterContext;
+    }
+    static getDerivedStateFromError(error) {
+        _runtimeerrorhandler.RuntimeErrorHandler.hadRuntimeError = true;
+        return {
+            reactError: error
+        };
+    }
+    componentDidCatch(err) {
+        if (("TURBOPACK compile-time value", "development") === 'development' && err.message === _segmentexplorernode.SEGMENT_EXPLORER_SIMULATED_ERROR_MESSAGE) {
+            return;
         }
-        _class_call_check._(this, AppDevOverlayErrorBoundary);
-        var _this;
-        _this = _call_super._(this, AppDevOverlayErrorBoundary, _to_consumable_array._(args)), _this.state = {
+        _nextdevtools.dispatcher.openErrorOverlay();
+    }
+    render() {
+        const { children, globalError } = this.props;
+        const { reactError } = this.state;
+        const fallback = /*#__PURE__*/ (0, _jsxruntime.jsx)(ErroredHtml, {
+            globalError: globalError,
+            error: reactError,
+            reset: this.reset,
+            unstable_retry: this.unstable_retry
+        });
+        return reactError !== null ? fallback : children;
+    }
+    constructor(...args){
+        super(...args), this.state = {
             reactError: null
-        }, _this.unstable_retry = function() {
-            (0, _react.startTransition)(function() {
-                var _this_context;
-                (_this_context = _this.context) === null || _this_context === void 0 ? void 0 : _this_context.refresh();
-                _this.reset();
+        }, this.unstable_retry = ()=>{
+            (0, _react.startTransition)(()=>{
+                this.context?.refresh();
+                this.reset();
             });
-        }, _this.reset = function() {
-            _this.setState({
+        }, this.reset = ()=>{
+            this.setState({
                 reactError: null
             });
         };
-        return _this;
     }
-    _create_class._(AppDevOverlayErrorBoundary, [
-        {
-            key: "componentDidCatch",
-            value: function componentDidCatch(err) {
-                if (("TURBOPACK compile-time value", "development") === 'development' && err.message === _segmentexplorernode.SEGMENT_EXPLORER_SIMULATED_ERROR_MESSAGE) {
-                    return;
-                }
-                _nextdevtools.dispatcher.openErrorOverlay();
-            }
-        },
-        {
-            key: "render",
-            value: function render() {
-                var _this_props = this.props, children = _this_props.children, globalError = _this_props.globalError;
-                var reactError = this.state.reactError;
-                var fallback = /*#__PURE__*/ (0, _jsxruntime.jsx)(ErroredHtml, {
-                    globalError: globalError,
-                    error: reactError,
-                    reset: this.reset,
-                    unstable_retry: this.unstable_retry
-                });
-                return reactError !== null ? fallback : children;
-            }
-        }
-    ], [
-        {
-            key: "getDerivedStateFromError",
-            value: function getDerivedStateFromError(error) {
-                _runtimeerrorhandler.RuntimeErrorHandler.hadRuntimeError = true;
-                return {
-                    reactError: error
-                };
-            }
-        }
-    ]);
-    return AppDevOverlayErrorBoundary;
-}(_react.PureComponent);
-AppDevOverlayErrorBoundary.contextType = _approutercontextsharedruntime.AppRouterContext;
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+}
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -3906,30 +3636,29 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/frontend/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 "use strict";
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 Object.defineProperty(exports, "ReplaySsrOnlyErrors", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return ReplaySsrOnlyErrors;
     }
 });
-var _react = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
-var _useerrorhandler = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/use-error-handler.js [app-client] (ecmascript)");
-var _isnextroutererror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/is-next-router-error.js [app-client] (ecmascript)");
-var _constants = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/errors/constants.js [app-client] (ecmascript)");
+const _react = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+const _useerrorhandler = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/errors/use-error-handler.js [app-client] (ecmascript)");
+const _isnextroutererror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/is-next-router-error.js [app-client] (ecmascript)");
+const _constants = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/errors/constants.js [app-client] (ecmascript)");
 function readSsrError() {
     if (typeof document === 'undefined') {
         return null;
     }
-    var ssrErrorTemplateTag = document.querySelector('template[data-next-error-message]');
+    const ssrErrorTemplateTag = document.querySelector('template[data-next-error-message]');
     if (ssrErrorTemplateTag) {
-        var message = ssrErrorTemplateTag.getAttribute('data-next-error-message');
-        var stack = ssrErrorTemplateTag.getAttribute('data-next-error-stack');
-        var digest = ssrErrorTemplateTag.getAttribute('data-next-error-digest');
-        var error = Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
+        const message = ssrErrorTemplateTag.getAttribute('data-next-error-message');
+        const stack = ssrErrorTemplateTag.getAttribute('data-next-error-stack');
+        const digest = ssrErrorTemplateTag.getAttribute('data-next-error-digest');
+        const error = Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
             value: "E394",
             enumerable: false,
             configurable: true
@@ -3947,13 +3676,12 @@ function readSsrError() {
     }
     return null;
 }
-function ReplaySsrOnlyErrors(param) {
-    var onBlockingError = param.onBlockingError;
+function ReplaySsrOnlyErrors({ onBlockingError }) {
     if ("TURBOPACK compile-time truthy", 1) {
         // Need to read during render. The attributes will be gone after commit.
-        var ssrError = readSsrError();
+        const ssrError = readSsrError();
         // eslint-disable-next-line react-hooks/rules-of-hooks
-        (0, _react.useEffect)(function() {
+        (0, _react.useEffect)(()=>{
             if (ssrError !== null) {
                 // TODO(veil): Include original Owner Stack (NDX-905)
                 // TODO(veil): Mark as recoverable error
@@ -3971,7 +3699,7 @@ function ReplaySsrOnlyErrors(param) {
     }
     return null;
 }
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -3982,23 +3710,21 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 "[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/client-entry.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 Object.defineProperty(exports, "RootLevelDevOverlayElement", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return RootLevelDevOverlayElement;
     }
 });
-var _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
-var _jsxruntime = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/jsx-runtime.js [app-client] (ecmascript)");
-var _react = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
-var _globalerror = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/builtin/global-error.js [app-client] (ecmascript)"));
-var _appdevoverlayerrorboundary = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/app-dev-overlay-error-boundary.js [app-client] (ecmascript)");
-function RootLevelDevOverlayElement(param) {
-    var children = param.children;
+const _interop_require_default = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
+const _jsxruntime = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/jsx-runtime.js [app-client] (ecmascript)");
+const _react = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
+const _globalerror = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/builtin/global-error.js [app-client] (ecmascript)"));
+const _appdevoverlayerrorboundary = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/next-devtools/userspace/app/app-dev-overlay-error-boundary.js [app-client] (ecmascript)");
+function RootLevelDevOverlayElement({ children }) {
     return /*#__PURE__*/ (0, _jsxruntime.jsx)(_appdevoverlayerrorboundary.AppDevOverlayErrorBoundary, {
         globalError: [
             _globalerror.default,
@@ -4007,7 +3733,7 @@ function RootLevelDevOverlayElement(param) {
         children: children
     });
 }
-if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {
         value: true
     });
@@ -4018,9 +3744,6 @@ if ((typeof exports.default === 'function' || _type_of._(exports.default) === 'o
 "[project]/frontend/node_modules/next/dist/server/app-render/async-local-storage.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _class_call_check = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_class_call_check.cjs [app-client] (ecmascript)");
-var _create_class = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_create_class.cjs [app-client] (ecmascript)");
-var _to_consumable_array = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_to_consumable_array.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -4036,68 +3759,43 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    bindSnapshot: function bindSnapshot1() {
+    bindSnapshot: function() {
         return bindSnapshot;
     },
-    createAsyncLocalStorage: function createAsyncLocalStorage1() {
+    createAsyncLocalStorage: function() {
         return createAsyncLocalStorage;
     },
-    createSnapshot: function createSnapshot1() {
+    createSnapshot: function() {
         return createSnapshot;
     }
 });
-var sharedAsyncLocalStorageNotAvailableError = Object.defineProperty(new Error('Invariant: AsyncLocalStorage accessed in runtime where it is not available'), "__NEXT_ERROR_CODE", {
+const sharedAsyncLocalStorageNotAvailableError = Object.defineProperty(new Error('Invariant: AsyncLocalStorage accessed in runtime where it is not available'), "__NEXT_ERROR_CODE", {
     value: "E504",
     enumerable: false,
     configurable: true
 });
-var FakeAsyncLocalStorage = /*#__PURE__*/ function() {
-    function FakeAsyncLocalStorage() {
-        _class_call_check._(this, FakeAsyncLocalStorage);
+class FakeAsyncLocalStorage {
+    disable() {
+        throw sharedAsyncLocalStorageNotAvailableError;
     }
-    _create_class._(FakeAsyncLocalStorage, [
-        {
-            key: "disable",
-            value: function disable() {
-                throw sharedAsyncLocalStorageNotAvailableError;
-            }
-        },
-        {
-            key: "getStore",
-            value: function getStore() {
-                // This fake implementation of AsyncLocalStorage always returns `undefined`.
-                return undefined;
-            }
-        },
-        {
-            key: "run",
-            value: function run() {
-                throw sharedAsyncLocalStorageNotAvailableError;
-            }
-        },
-        {
-            key: "exit",
-            value: function exit() {
-                throw sharedAsyncLocalStorageNotAvailableError;
-            }
-        },
-        {
-            key: "enterWith",
-            value: function enterWith() {
-                throw sharedAsyncLocalStorageNotAvailableError;
-            }
-        }
-    ], [
-        {
-            key: "bind",
-            value: function bind(fn) {
-                return fn;
-            }
-        }
-    ]);
-    return FakeAsyncLocalStorage;
-}();
-var maybeGlobalAsyncLocalStorage = typeof globalThis !== 'undefined' && globalThis.AsyncLocalStorage;
+    getStore() {
+        // This fake implementation of AsyncLocalStorage always returns `undefined`.
+        return undefined;
+    }
+    run() {
+        throw sharedAsyncLocalStorageNotAvailableError;
+    }
+    exit() {
+        throw sharedAsyncLocalStorageNotAvailableError;
+    }
+    enterWith() {
+        throw sharedAsyncLocalStorageNotAvailableError;
+    }
+    static bind(fn) {
+        return fn;
+    }
+}
+const maybeGlobalAsyncLocalStorage = typeof globalThis !== 'undefined' && globalThis.AsyncLocalStorage;
 function createAsyncLocalStorage() {
     if (maybeGlobalAsyncLocalStorage) {
         return new maybeGlobalAsyncLocalStorage();
@@ -4114,11 +3812,8 @@ function createSnapshot() {
     if (maybeGlobalAsyncLocalStorage) {
         return maybeGlobalAsyncLocalStorage.snapshot();
     }
-    return function(fn) {
-        for(var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++){
-            args[_key - 1] = arguments[_key];
-        }
-        return fn.apply(void 0, _to_consumable_array._(args));
+    return function(fn, ...args) {
+        return fn(...args);
     };
 }
 }),
@@ -4130,18 +3825,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "workUnitAsyncStorageInstance", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return workUnitAsyncStorageInstance;
     }
 });
-var _asynclocalstorage = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/async-local-storage.js [app-client] (ecmascript)");
-var workUnitAsyncStorageInstance = (0, _asynclocalstorage.createAsyncLocalStorage)();
+const _asynclocalstorage = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/async-local-storage.js [app-client] (ecmascript)");
+const workUnitAsyncStorageInstance = (0, _asynclocalstorage.createAsyncLocalStorage)();
 }),
 "[project]/frontend/node_modules/next/dist/server/app-render/staged-rendering.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _class_call_check = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_class_call_check.cjs [app-client] (ecmascript)");
-var _create_class = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_create_class.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -4156,15 +3849,15 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    RenderStage: function RenderStage1() {
+    RenderStage: function() {
         return RenderStage;
     },
-    StagedRenderingController: function StagedRenderingController1() {
+    StagedRenderingController: function() {
         return StagedRenderingController;
     }
 });
-var _invarianterror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/invariant-error.js [app-client] (ecmascript)");
-var _promisewithresolvers = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/promise-with-resolvers.js [app-client] (ecmascript)");
+const _invarianterror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/invariant-error.js [app-client] (ecmascript)");
+const _promisewithresolvers = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/promise-with-resolvers.js [app-client] (ecmascript)");
 var RenderStage = /*#__PURE__*/ function(RenderStage) {
     RenderStage[RenderStage["Before"] = 1] = "Before";
     RenderStage[RenderStage["EarlyStatic"] = 2] = "EarlyStatic";
@@ -4175,10 +3868,8 @@ var RenderStage = /*#__PURE__*/ function(RenderStage) {
     RenderStage[RenderStage["Abandoned"] = 7] = "Abandoned";
     return RenderStage;
 }({});
-var StagedRenderingController = /*#__PURE__*/ function() {
-    function StagedRenderingController(abortSignal, abandonController, shouldTrackSyncIO) {
-        var _this = this;
-        _class_call_check._(this, StagedRenderingController);
+class StagedRenderingController {
+    constructor(abortSignal, abandonController, shouldTrackSyncIO){
         this.abortSignal = abortSignal;
         this.abandonController = abandonController;
         this.shouldTrackSyncIO = shouldTrackSyncIO;
@@ -4195,324 +3886,276 @@ var StagedRenderingController = /*#__PURE__*/ function() {
         this.runtimeStagePromise = (0, _promisewithresolvers.createPromiseWithResolvers)();
         this.dynamicStagePromise = (0, _promisewithresolvers.createPromiseWithResolvers)();
         if (abortSignal) {
-            abortSignal.addEventListener('abort', function() {
+            abortSignal.addEventListener('abort', ()=>{
                 // Reject all stage promises that haven't already been resolved.
                 // If a promise was already resolved via advanceStage, the reject
                 // is a no-op. The ignoreReject handler suppresses unhandled
                 // rejection warnings for promises that no one is awaiting.
-                var reason = abortSignal.reason;
-                _this.staticStagePromise.promise.catch(ignoreReject);
-                _this.staticStagePromise.reject(reason);
-                _this.earlyRuntimeStagePromise.promise.catch(ignoreReject);
-                _this.earlyRuntimeStagePromise.reject(reason);
-                _this.runtimeStagePromise.promise.catch(ignoreReject);
-                _this.runtimeStagePromise.reject(reason);
-                _this.dynamicStagePromise.promise.catch(ignoreReject);
-                _this.dynamicStagePromise.reject(reason);
+                const { reason } = abortSignal;
+                this.staticStagePromise.promise.catch(ignoreReject);
+                this.staticStagePromise.reject(reason);
+                this.earlyRuntimeStagePromise.promise.catch(ignoreReject);
+                this.earlyRuntimeStagePromise.reject(reason);
+                this.runtimeStagePromise.promise.catch(ignoreReject);
+                this.runtimeStagePromise.reject(reason);
+                this.dynamicStagePromise.promise.catch(ignoreReject);
+                this.dynamicStagePromise.reject(reason);
             }, {
                 once: true
             });
         }
         if (abandonController) {
-            abandonController.signal.addEventListener('abort', function() {
-                _this.abandonRender();
+            abandonController.signal.addEventListener('abort', ()=>{
+                this.abandonRender();
             }, {
                 once: true
             });
         }
     }
-    _create_class._(StagedRenderingController, [
-        {
-            key: "onStage",
-            value: function onStage(stage, callback) {
-                if (this.currentStage >= stage) {
-                    callback();
-                } else if (stage === 3) {
-                    this.staticStageListeners.push(callback);
-                } else if (stage === 4) {
-                    this.earlyRuntimeStageListeners.push(callback);
-                } else if (stage === 5) {
-                    this.runtimeStageListeners.push(callback);
-                } else if (stage === 6) {
-                    this.dynamicStageListeners.push(callback);
-                } else {
-                    // This should never happen
-                    throw Object.defineProperty(new _invarianterror.InvariantError("Invalid render stage: ".concat(stage)), "__NEXT_ERROR_CODE", {
+    onStage(stage, callback) {
+        if (this.currentStage >= stage) {
+            callback();
+        } else if (stage === 3) {
+            this.staticStageListeners.push(callback);
+        } else if (stage === 4) {
+            this.earlyRuntimeStageListeners.push(callback);
+        } else if (stage === 5) {
+            this.runtimeStageListeners.push(callback);
+        } else if (stage === 6) {
+            this.dynamicStageListeners.push(callback);
+        } else {
+            // This should never happen
+            throw Object.defineProperty(new _invarianterror.InvariantError(`Invalid render stage: ${stage}`), "__NEXT_ERROR_CODE", {
+                value: "E881",
+                enumerable: false,
+                configurable: true
+            });
+        }
+    }
+    shouldTrackSyncInterrupt() {
+        if (!this.shouldTrackSyncIO) {
+            return false;
+        }
+        switch(this.currentStage){
+            case 1:
+                // If we haven't started the render yet, it can't be interrupted.
+                return false;
+            case 2:
+            case 3:
+                return true;
+            case 4:
+                // EarlyRuntime is for runtime-prefetchable segments. Sync IO
+                // should error because it would abort a runtime prefetch.
+                return true;
+            case 5:
+                // Runtime is for non-prefetchable segments. Sync IO is fine there
+                // because in practice this segment will never be runtime prefetched
+                return false;
+            case 6:
+            case 7:
+                return false;
+            default:
+                return false;
+        }
+    }
+    syncInterruptCurrentStageWithReason(reason) {
+        if (this.currentStage === 1) {
+            return;
+        }
+        // If the render has already been abandoned, there's nothing to interrupt.
+        if (this.currentStage === 7) {
+            return;
+        }
+        // If Sync IO occurs during an abandonable render, we trigger the abandon.
+        // The abandon listener will call abandonRender which advances through
+        // stages to let caches fill before marking as Abandoned.
+        if (this.abandonController) {
+            this.abandonController.abort();
+            return;
+        }
+        if (this.abortSignal) {
+            // If this is an abortable render, we capture the interruption reason and stop advancing.
+            // We don't release any more promises.
+            // The caller is expected to abort the signal.
+            this.syncInterruptReason = reason;
+            this.currentStage = 7;
+            return;
+        }
+        // If we're in a non-abandonable & non-abortable render,
+        // we need to advance to the Dynamic stage and capture the interruption reason.
+        // (in dev, this will be the restarted render)
+        switch(this.currentStage){
+            case 2:
+            case 3:
+            case 4:
+                {
+                    // EarlyRuntime is for runtime-prefetchable segments. Sync IO here
+                    // means the prefetch would be aborted too early.
+                    this.syncInterruptReason = reason;
+                    this.advanceStage(6);
+                    return;
+                }
+            case 5:
+                {
+                    // canSyncInterrupt returns false for Runtime, so we should
+                    // never get here. Defensive no-op.
+                    return;
+                }
+            case 6:
+            default:
+        }
+    }
+    getSyncInterruptReason() {
+        return this.syncInterruptReason;
+    }
+    getStaticStageEndTime() {
+        return this.staticStageEndTime;
+    }
+    getRuntimeStageEndTime() {
+        return this.runtimeStageEndTime;
+    }
+    abandonRender() {
+        // In staged rendering, only the initial render is abandonable.
+        // We can abandon the initial render if
+        //   1. We notice a cache miss, and need to wait for caches to fill
+        //   2. A sync IO error occurs, and the render should be interrupted
+        //      (this might be a lazy intitialization of a module,
+        //       so we still want to restart in this case and see if it still occurs)
+        // In either case, we'll be doing another render after this one,
+        // so we only want to unblock the next stage, not Dynamic, because
+        // unblocking the dynamic stage would likely lead to wasted (uncached) IO.
+        const { currentStage } = this;
+        switch(currentStage){
+            case 2:
+                {
+                    this.resolveStaticStage();
+                }
+            // intentional fallthrough
+            case 3:
+                {
+                    this.resolveEarlyRuntimeStage();
+                }
+            // intentional fallthrough
+            case 4:
+                {
+                    this.resolveRuntimeStage();
+                }
+            // intentional fallthrough
+            case 5:
+                {
+                    this.currentStage = 7;
+                    return;
+                }
+            case 6:
+            case 1:
+            case 7:
+                break;
+            default:
+                {
+                    currentStage;
+                }
+        }
+    }
+    advanceStage(stage) {
+        // If we're already at the target stage or beyond, do nothing.
+        // (this can happen e.g. if sync IO advanced us to the dynamic stage)
+        if (stage <= this.currentStage) {
+            return;
+        }
+        let currentStage = this.currentStage;
+        this.currentStage = stage;
+        if (currentStage < 3 && stage >= 3) {
+            this.resolveStaticStage();
+        }
+        if (currentStage < 4 && stage >= 4) {
+            this.resolveEarlyRuntimeStage();
+        }
+        if (currentStage < 5 && stage >= 5) {
+            this.staticStageEndTime = performance.now() + performance.timeOrigin;
+            this.resolveRuntimeStage();
+        }
+        if (currentStage < 6 && stage >= 6) {
+            this.runtimeStageEndTime = performance.now() + performance.timeOrigin;
+            this.resolveDynamicStage();
+            return;
+        }
+    }
+    /** Fire the `onStage` listeners for the static stage and unblock any promises waiting for it. */ resolveStaticStage() {
+        const staticListeners = this.staticStageListeners;
+        for(let i = 0; i < staticListeners.length; i++){
+            staticListeners[i]();
+        }
+        staticListeners.length = 0;
+        this.staticStagePromise.resolve();
+    }
+    /** Fire the `onStage` listeners for the early runtime stage and unblock any promises waiting for it. */ resolveEarlyRuntimeStage() {
+        const earlyRuntimeListeners = this.earlyRuntimeStageListeners;
+        for(let i = 0; i < earlyRuntimeListeners.length; i++){
+            earlyRuntimeListeners[i]();
+        }
+        earlyRuntimeListeners.length = 0;
+        this.earlyRuntimeStagePromise.resolve();
+    }
+    /** Fire the `onStage` listeners for the runtime stage and unblock any promises waiting for it. */ resolveRuntimeStage() {
+        const runtimeListeners = this.runtimeStageListeners;
+        for(let i = 0; i < runtimeListeners.length; i++){
+            runtimeListeners[i]();
+        }
+        runtimeListeners.length = 0;
+        this.runtimeStagePromise.resolve();
+    }
+    /** Fire the `onStage` listeners for the dynamic stage and unblock any promises waiting for it. */ resolveDynamicStage() {
+        const dynamicListeners = this.dynamicStageListeners;
+        for(let i = 0; i < dynamicListeners.length; i++){
+            dynamicListeners[i]();
+        }
+        dynamicListeners.length = 0;
+        this.dynamicStagePromise.resolve();
+    }
+    getStagePromise(stage) {
+        switch(stage){
+            case 3:
+                {
+                    return this.staticStagePromise.promise;
+                }
+            case 4:
+                {
+                    return this.earlyRuntimeStagePromise.promise;
+                }
+            case 5:
+                {
+                    return this.runtimeStagePromise.promise;
+                }
+            case 6:
+                {
+                    return this.dynamicStagePromise.promise;
+                }
+            default:
+                {
+                    stage;
+                    throw Object.defineProperty(new _invarianterror.InvariantError(`Invalid render stage: ${stage}`), "__NEXT_ERROR_CODE", {
                         value: "E881",
                         enumerable: false,
                         configurable: true
                     });
                 }
-            }
-        },
-        {
-            key: "shouldTrackSyncInterrupt",
-            value: function shouldTrackSyncInterrupt() {
-                if (!this.shouldTrackSyncIO) {
-                    return false;
-                }
-                switch(this.currentStage){
-                    case 1:
-                        // If we haven't started the render yet, it can't be interrupted.
-                        return false;
-                    case 2:
-                    case 3:
-                        return true;
-                    case 4:
-                        // EarlyRuntime is for runtime-prefetchable segments. Sync IO
-                        // should error because it would abort a runtime prefetch.
-                        return true;
-                    case 5:
-                        // Runtime is for non-prefetchable segments. Sync IO is fine there
-                        // because in practice this segment will never be runtime prefetched
-                        return false;
-                    case 6:
-                    case 7:
-                        return false;
-                    default:
-                        return false;
-                }
-            }
-        },
-        {
-            key: "syncInterruptCurrentStageWithReason",
-            value: function syncInterruptCurrentStageWithReason(reason) {
-                if (this.currentStage === 1) {
-                    return;
-                }
-                // If the render has already been abandoned, there's nothing to interrupt.
-                if (this.currentStage === 7) {
-                    return;
-                }
-                // If Sync IO occurs during an abandonable render, we trigger the abandon.
-                // The abandon listener will call abandonRender which advances through
-                // stages to let caches fill before marking as Abandoned.
-                if (this.abandonController) {
-                    this.abandonController.abort();
-                    return;
-                }
-                if (this.abortSignal) {
-                    // If this is an abortable render, we capture the interruption reason and stop advancing.
-                    // We don't release any more promises.
-                    // The caller is expected to abort the signal.
-                    this.syncInterruptReason = reason;
-                    this.currentStage = 7;
-                    return;
-                }
-                // If we're in a non-abandonable & non-abortable render,
-                // we need to advance to the Dynamic stage and capture the interruption reason.
-                // (in dev, this will be the restarted render)
-                switch(this.currentStage){
-                    case 2:
-                    case 3:
-                    case 4:
-                        {
-                            // EarlyRuntime is for runtime-prefetchable segments. Sync IO here
-                            // means the prefetch would be aborted too early.
-                            this.syncInterruptReason = reason;
-                            this.advanceStage(6);
-                            return;
-                        }
-                    case 5:
-                        {
-                            // canSyncInterrupt returns false for Runtime, so we should
-                            // never get here. Defensive no-op.
-                            return;
-                        }
-                    case 6:
-                    default:
-                }
-            }
-        },
-        {
-            key: "getSyncInterruptReason",
-            value: function getSyncInterruptReason() {
-                return this.syncInterruptReason;
-            }
-        },
-        {
-            key: "getStaticStageEndTime",
-            value: function getStaticStageEndTime() {
-                return this.staticStageEndTime;
-            }
-        },
-        {
-            key: "getRuntimeStageEndTime",
-            value: function getRuntimeStageEndTime() {
-                return this.runtimeStageEndTime;
-            }
-        },
-        {
-            key: "abandonRender",
-            value: function abandonRender() {
-                // In staged rendering, only the initial render is abandonable.
-                // We can abandon the initial render if
-                //   1. We notice a cache miss, and need to wait for caches to fill
-                //   2. A sync IO error occurs, and the render should be interrupted
-                //      (this might be a lazy intitialization of a module,
-                //       so we still want to restart in this case and see if it still occurs)
-                // In either case, we'll be doing another render after this one,
-                // so we only want to unblock the next stage, not Dynamic, because
-                // unblocking the dynamic stage would likely lead to wasted (uncached) IO.
-                var currentStage = this.currentStage;
-                switch(currentStage){
-                    case 2:
-                        {
-                            this.resolveStaticStage();
-                        }
-                    // intentional fallthrough
-                    case 3:
-                        {
-                            this.resolveEarlyRuntimeStage();
-                        }
-                    // intentional fallthrough
-                    case 4:
-                        {
-                            this.resolveRuntimeStage();
-                        }
-                    // intentional fallthrough
-                    case 5:
-                        {
-                            this.currentStage = 7;
-                            return;
-                        }
-                    case 6:
-                    case 1:
-                    case 7:
-                        break;
-                    default:
-                        {
-                            currentStage;
-                        }
-                }
-            }
-        },
-        {
-            key: "advanceStage",
-            value: function advanceStage(stage) {
-                // If we're already at the target stage or beyond, do nothing.
-                // (this can happen e.g. if sync IO advanced us to the dynamic stage)
-                if (stage <= this.currentStage) {
-                    return;
-                }
-                var currentStage = this.currentStage;
-                this.currentStage = stage;
-                if (currentStage < 3 && stage >= 3) {
-                    this.resolveStaticStage();
-                }
-                if (currentStage < 4 && stage >= 4) {
-                    this.resolveEarlyRuntimeStage();
-                }
-                if (currentStage < 5 && stage >= 5) {
-                    this.staticStageEndTime = performance.now() + performance.timeOrigin;
-                    this.resolveRuntimeStage();
-                }
-                if (currentStage < 6 && stage >= 6) {
-                    this.runtimeStageEndTime = performance.now() + performance.timeOrigin;
-                    this.resolveDynamicStage();
-                    return;
-                }
-            }
-        },
-        {
-            /** Fire the `onStage` listeners for the static stage and unblock any promises waiting for it. */ key: "resolveStaticStage",
-            value: function resolveStaticStage() {
-                var staticListeners = this.staticStageListeners;
-                for(var i = 0; i < staticListeners.length; i++){
-                    staticListeners[i]();
-                }
-                staticListeners.length = 0;
-                this.staticStagePromise.resolve();
-            }
-        },
-        {
-            /** Fire the `onStage` listeners for the early runtime stage and unblock any promises waiting for it. */ key: "resolveEarlyRuntimeStage",
-            value: function resolveEarlyRuntimeStage() {
-                var earlyRuntimeListeners = this.earlyRuntimeStageListeners;
-                for(var i = 0; i < earlyRuntimeListeners.length; i++){
-                    earlyRuntimeListeners[i]();
-                }
-                earlyRuntimeListeners.length = 0;
-                this.earlyRuntimeStagePromise.resolve();
-            }
-        },
-        {
-            /** Fire the `onStage` listeners for the runtime stage and unblock any promises waiting for it. */ key: "resolveRuntimeStage",
-            value: function resolveRuntimeStage() {
-                var runtimeListeners = this.runtimeStageListeners;
-                for(var i = 0; i < runtimeListeners.length; i++){
-                    runtimeListeners[i]();
-                }
-                runtimeListeners.length = 0;
-                this.runtimeStagePromise.resolve();
-            }
-        },
-        {
-            /** Fire the `onStage` listeners for the dynamic stage and unblock any promises waiting for it. */ key: "resolveDynamicStage",
-            value: function resolveDynamicStage() {
-                var dynamicListeners = this.dynamicStageListeners;
-                for(var i = 0; i < dynamicListeners.length; i++){
-                    dynamicListeners[i]();
-                }
-                dynamicListeners.length = 0;
-                this.dynamicStagePromise.resolve();
-            }
-        },
-        {
-            key: "getStagePromise",
-            value: function getStagePromise(stage) {
-                switch(stage){
-                    case 3:
-                        {
-                            return this.staticStagePromise.promise;
-                        }
-                    case 4:
-                        {
-                            return this.earlyRuntimeStagePromise.promise;
-                        }
-                    case 5:
-                        {
-                            return this.runtimeStagePromise.promise;
-                        }
-                    case 6:
-                        {
-                            return this.dynamicStagePromise.promise;
-                        }
-                    default:
-                        {
-                            stage;
-                            throw Object.defineProperty(new _invarianterror.InvariantError("Invalid render stage: ".concat(stage)), "__NEXT_ERROR_CODE", {
-                                value: "E881",
-                                enumerable: false,
-                                configurable: true
-                            });
-                        }
-                }
-            }
-        },
-        {
-            key: "waitForStage",
-            value: function waitForStage(stage) {
-                return this.getStagePromise(stage);
-            }
-        },
-        {
-            key: "delayUntilStage",
-            value: function delayUntilStage(stage, displayName, resolvedValue) {
-                var ioTriggerPromise = this.getStagePromise(stage);
-                var promise = makeDevtoolsIOPromiseFromIOTrigger(ioTriggerPromise, displayName, resolvedValue);
-                // Analogously to `makeHangingPromise`, we might reject this promise if the signal is invoked.
-                // (e.g. in the case where we don't want want the render to proceed to the dynamic stage and abort it).
-                // We shouldn't consider this an unhandled rejection, so we attach a noop catch handler here to suppress this warning.
-                if (this.abortSignal) {
-                    promise.catch(ignoreReject);
-                }
-                return promise;
-            }
         }
-    ]);
-    return StagedRenderingController;
-}();
+    }
+    waitForStage(stage) {
+        return this.getStagePromise(stage);
+    }
+    delayUntilStage(stage, displayName, resolvedValue) {
+        const ioTriggerPromise = this.getStagePromise(stage);
+        const promise = makeDevtoolsIOPromiseFromIOTrigger(ioTriggerPromise, displayName, resolvedValue);
+        // Analogously to `makeHangingPromise`, we might reject this promise if the signal is invoked.
+        // (e.g. in the case where we don't want want the render to proceed to the dynamic stage and abort it).
+        // We shouldn't consider this an unhandled rejection, so we attach a noop catch handler here to suppress this warning.
+        if (this.abortSignal) {
+            promise.catch(ignoreReject);
+        }
+        return promise;
+    }
+}
 function ignoreReject() {}
 // TODO(restart-on-cache-miss): the layering of `delayUntilStage`,
 // `makeDevtoolsIOPromiseFromIOTrigger` and and `makeDevtoolsIOAwarePromise`
@@ -4523,7 +4166,7 @@ function makeDevtoolsIOPromiseFromIOTrigger(ioTrigger, displayName, resolvedValu
     // React Devtools will use it as the IO cause when determining "suspended by".
     // In particular, it should shadow any inner IO that resolved/rejected the promise
     // (in case of staged rendering, this will be the `setTimeout` that triggers the relevant stage)
-    var promise = new Promise(function(resolve, reject) {
+    const promise = new Promise((resolve, reject)=>{
         ioTrigger.then(resolve.bind(null, resolvedValue), reject);
     });
     if (displayName !== undefined) {
@@ -4562,56 +4205,56 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    getCacheSignal: function getCacheSignal1() {
+    getCacheSignal: function() {
         return getCacheSignal;
     },
-    getDraftModeProviderForCacheScope: function getDraftModeProviderForCacheScope1() {
+    getDraftModeProviderForCacheScope: function() {
         return getDraftModeProviderForCacheScope;
     },
-    getHmrRefreshHash: function getHmrRefreshHash1() {
+    getHmrRefreshHash: function() {
         return getHmrRefreshHash;
     },
-    getPrerenderResumeDataCache: function getPrerenderResumeDataCache1() {
+    getPrerenderResumeDataCache: function() {
         return getPrerenderResumeDataCache;
     },
-    getRenderResumeDataCache: function getRenderResumeDataCache1() {
+    getRenderResumeDataCache: function() {
         return getRenderResumeDataCache;
     },
-    getServerComponentsHmrCache: function getServerComponentsHmrCache1() {
+    getServerComponentsHmrCache: function() {
         return getServerComponentsHmrCache;
     },
-    getStagedRenderingController: function getStagedRenderingController1() {
+    getStagedRenderingController: function() {
         return getStagedRenderingController;
     },
-    isHmrRefresh: function isHmrRefresh1() {
+    isHmrRefresh: function() {
         return isHmrRefresh;
     },
-    isInEarlyRenderStage: function isInEarlyRenderStage1() {
+    isInEarlyRenderStage: function() {
         return isInEarlyRenderStage;
     },
-    throwForMissingRequestStore: function throwForMissingRequestStore1() {
+    throwForMissingRequestStore: function() {
         return throwForMissingRequestStore;
     },
-    throwInvariantForMissingStore: function throwInvariantForMissingStore1() {
+    throwInvariantForMissingStore: function() {
         return throwInvariantForMissingStore;
     },
-    workUnitAsyncStorage: function workUnitAsyncStorage() {
+    workUnitAsyncStorage: function() {
         return _workunitasyncstorageinstance.workUnitAsyncStorageInstance;
     }
 });
-var _workunitasyncstorageinstance = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/work-unit-async-storage-instance.js [app-client] (ecmascript)");
-var _approuterheaders = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/app-router-headers.js [app-client] (ecmascript)");
-var _invarianterror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/invariant-error.js [app-client] (ecmascript)");
-var _stagedrendering = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/staged-rendering.js [app-client] (ecmascript)");
+const _workunitasyncstorageinstance = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/work-unit-async-storage-instance.js [app-client] (ecmascript)");
+const _approuterheaders = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/app-router-headers.js [app-client] (ecmascript)");
+const _invarianterror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/invariant-error.js [app-client] (ecmascript)");
+const _stagedrendering = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/staged-rendering.js [app-client] (ecmascript)");
 function isInEarlyRenderStage(requestStore) {
-    var stagedRendering = requestStore.stagedRendering;
+    const stagedRendering = requestStore.stagedRendering;
     if (stagedRendering) {
         return stagedRendering.currentStage === _stagedrendering.RenderStage.EarlyStatic || stagedRendering.currentStage === _stagedrendering.RenderStage.EarlyRuntime;
     }
     return false;
 }
 function throwForMissingRequestStore(callingExpression) {
-    throw Object.defineProperty(new Error("`".concat(callingExpression, "` was called outside a request scope. Read more: https://nextjs.org/docs/messages/next-dynamic-api-wrong-context")), "__NEXT_ERROR_CODE", {
+    throw Object.defineProperty(new Error(`\`${callingExpression}\` was called outside a request scope. Read more: https://nextjs.org/docs/messages/next-dynamic-api-wrong-context`), "__NEXT_ERROR_CODE", {
         value: "E251",
         enumerable: false,
         configurable: true
@@ -4667,10 +4310,9 @@ function getRenderResumeDataCache(workUnitStore) {
             }
         // fallthrough
         case 'prerender-ppr':
-            var _workUnitStore_prerenderResumeDataCache;
             // Otherwise we return the mutable resume data cache here as an immutable
             // version of the cache as it can also be used for reading.
-            return (_workUnitStore_prerenderResumeDataCache = workUnitStore.prerenderResumeDataCache) !== null && _workUnitStore_prerenderResumeDataCache !== void 0 ? _workUnitStore_prerenderResumeDataCache : null;
+            return workUnitStore.prerenderResumeDataCache ?? null;
         case 'cache':
         case 'private-cache':
         case 'unstable-cache':
@@ -4711,8 +4353,7 @@ function isHmrRefresh(workUnitStore) {
             case 'cache':
             case 'private-cache':
             case 'request':
-                var _workUnitStore_isHmrRefresh;
-                return (_workUnitStore_isHmrRefresh = workUnitStore.isHmrRefresh) !== null && _workUnitStore_isHmrRefresh !== void 0 ? _workUnitStore_isHmrRefresh : false;
+                return workUnitStore.isHmrRefresh ?? false;
             case 'prerender':
             case 'prerender-client':
             case 'validation-client':
@@ -4776,8 +4417,7 @@ function getStagedRenderingController(workUnitStore) {
     switch(workUnitStore.type){
         case 'request':
         case 'prerender-runtime':
-            var _workUnitStore_stagedRendering;
-            return (_workUnitStore_stagedRendering = workUnitStore.stagedRendering) !== null && _workUnitStore_stagedRendering !== void 0 ? _workUnitStore_stagedRendering : null;
+            return workUnitStore.stagedRendering ?? null;
         case 'prerender':
         case 'prerender-client':
         case 'validation-client':
@@ -4827,12 +4467,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "workAsyncStorageInstance", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return workAsyncStorageInstance;
     }
 });
-var _asynclocalstorage = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/async-local-storage.js [app-client] (ecmascript)");
-var workAsyncStorageInstance = (0, _asynclocalstorage.createAsyncLocalStorage)();
+const _asynclocalstorage = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/async-local-storage.js [app-client] (ecmascript)");
+const workAsyncStorageInstance = (0, _asynclocalstorage.createAsyncLocalStorage)();
 }),
 "[project]/frontend/node_modules/next/dist/server/app-render/work-async-storage.external.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
@@ -4842,11 +4482,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "workAsyncStorage", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return _workasyncstorageinstance.workAsyncStorageInstance;
     }
 });
-var _workasyncstorageinstance = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/work-async-storage-instance.js [app-client] (ecmascript)");
+const _workasyncstorageinstance = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/work-async-storage-instance.js [app-client] (ecmascript)");
 }),
 "[project]/frontend/node_modules/next/dist/server/app-render/action-async-storage-instance.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
@@ -4856,12 +4496,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "actionAsyncStorageInstance", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return actionAsyncStorageInstance;
     }
 });
-var _asynclocalstorage = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/async-local-storage.js [app-client] (ecmascript)");
-var actionAsyncStorageInstance = (0, _asynclocalstorage.createAsyncLocalStorage)();
+const _asynclocalstorage = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/async-local-storage.js [app-client] (ecmascript)");
+const actionAsyncStorageInstance = (0, _asynclocalstorage.createAsyncLocalStorage)();
 }),
 "[project]/frontend/node_modules/next/dist/server/app-render/action-async-storage.external.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
@@ -4871,20 +4511,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "actionAsyncStorage", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return _actionasyncstorageinstance.actionAsyncStorageInstance;
     }
 });
-var _actionasyncstorageinstance = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/action-async-storage-instance.js [app-client] (ecmascript)");
+const _actionasyncstorageinstance = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/action-async-storage-instance.js [app-client] (ecmascript)");
 }),
 "[project]/frontend/node_modules/next/dist/server/dynamic-rendering-utils.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _call_super = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_call_super.cjs [app-client] (ecmascript)");
-var _class_call_check = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_class_call_check.cjs [app-client] (ecmascript)");
-var _inherits = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_inherits.cjs [app-client] (ecmascript)");
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
-var _wrap_native_super = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_wrap_native_super.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -4902,59 +4537,52 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    delayUntilRuntimeStage: function delayUntilRuntimeStage1() {
+    delayUntilRuntimeStage: function() {
         return delayUntilRuntimeStage;
     },
-    getRuntimeStage: function getRuntimeStage1() {
+    getRuntimeStage: function() {
         return getRuntimeStage;
     },
-    isHangingPromiseRejectionError: function isHangingPromiseRejectionError1() {
+    isHangingPromiseRejectionError: function() {
         return isHangingPromiseRejectionError;
     },
-    makeDevtoolsIOAwarePromise: function makeDevtoolsIOAwarePromise1() {
+    makeDevtoolsIOAwarePromise: function() {
         return makeDevtoolsIOAwarePromise;
     },
-    makeHangingPromise: function makeHangingPromise1() {
+    makeHangingPromise: function() {
         return makeHangingPromise;
     }
 });
-var _stagedrendering = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/staged-rendering.js [app-client] (ecmascript)");
+const _stagedrendering = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/staged-rendering.js [app-client] (ecmascript)");
 function isHangingPromiseRejectionError(err) {
-    if ((typeof err === "undefined" ? "undefined" : _type_of._(err)) !== 'object' || err === null || !('digest' in err)) {
+    if (typeof err !== 'object' || err === null || !('digest' in err)) {
         return false;
     }
     return err.digest === HANGING_PROMISE_REJECTION;
 }
-var HANGING_PROMISE_REJECTION = 'HANGING_PROMISE_REJECTION';
-var HangingPromiseRejectionError = /*#__PURE__*/ function(Error1) {
-    _inherits._(HangingPromiseRejectionError, Error1);
-    function HangingPromiseRejectionError(route, expression) {
-        _class_call_check._(this, HangingPromiseRejectionError);
-        var _this;
-        _this = _call_super._(this, HangingPromiseRejectionError, [
-            "During prerendering, ".concat(expression, " rejects when the prerender is complete. Typically these errors are handled by React but if you move ").concat(expression, ' to a different context by using `setTimeout`, `after`, or similar functions you may observe this error and you should handle it in that context. This occurred at route "').concat(route, '".')
-        ]), _this.route = route, _this.expression = expression, _this.digest = HANGING_PROMISE_REJECTION;
-        return _this;
+const HANGING_PROMISE_REJECTION = 'HANGING_PROMISE_REJECTION';
+class HangingPromiseRejectionError extends Error {
+    constructor(route, expression){
+        super(`During prerendering, ${expression} rejects when the prerender is complete. Typically these errors are handled by React but if you move ${expression} to a different context by using \`setTimeout\`, \`after\`, or similar functions you may observe this error and you should handle it in that context. This occurred at route "${route}".`), this.route = route, this.expression = expression, this.digest = HANGING_PROMISE_REJECTION;
     }
-    return HangingPromiseRejectionError;
-}(_wrap_native_super._(Error));
-var abortListenersBySignal = new WeakMap();
+}
+const abortListenersBySignal = new WeakMap();
 function makeHangingPromise(signal, route, expression) {
     if (signal.aborted) {
         return Promise.reject(new HangingPromiseRejectionError(route, expression));
     } else {
-        var hangingPromise = new Promise(function(_, reject) {
-            var boundRejection = reject.bind(null, new HangingPromiseRejectionError(route, expression));
-            var currentListeners = abortListenersBySignal.get(signal);
+        const hangingPromise = new Promise((_, reject)=>{
+            const boundRejection = reject.bind(null, new HangingPromiseRejectionError(route, expression));
+            let currentListeners = abortListenersBySignal.get(signal);
             if (currentListeners) {
                 currentListeners.push(boundRejection);
             } else {
-                var listeners = [
+                const listeners = [
                     boundRejection
                 ];
                 abortListenersBySignal.set(signal, listeners);
-                signal.addEventListener('abort', function() {
-                    for(var i = 0; i < listeners.length; i++){
+                signal.addEventListener('abort', ()=>{
+                    for(let i = 0; i < listeners.length; i++){
                         listeners[i]();
                     }
                 }, {
@@ -4977,9 +4605,9 @@ function makeDevtoolsIOAwarePromise(underlying, requestStore, stage) {
     }
     // in React DevTools if we resolve in a setTimeout we will observe
     // the promise resolution as something that can suspend a boundary or root.
-    return new Promise(function(resolve) {
+    return new Promise((resolve)=>{
         // Must use setTimeout to be considered IO React DevTools. setImmediate will not work.
-        setTimeout(function() {
+        setTimeout(()=>{
             resolve(underlying);
         }, 0);
     });
@@ -4991,31 +4619,28 @@ function getRuntimeStage(stagedRendering) {
     return _stagedrendering.RenderStage.Runtime;
 }
 function delayUntilRuntimeStage(prerenderStore, result) {
-    var stagedRendering = prerenderStore.stagedRendering;
+    const { stagedRendering } = prerenderStore;
     if (!stagedRendering) {
         return result;
     }
-    return stagedRendering.waitForStage(getRuntimeStage(stagedRendering)).then(function() {
-        return result;
-    });
+    return stagedRendering.waitForStage(getRuntimeStage(stagedRendering)).then(()=>result);
 }
 }),
 "[project]/frontend/node_modules/next/dist/server/lib/router-utils/is-postpone.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
 
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 Object.defineProperty(exports, "isPostpone", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return isPostpone;
     }
 });
-var REACT_POSTPONE_TYPE = Symbol.for('react.postpone');
+const REACT_POSTPONE_TYPE = Symbol.for('react.postpone');
 function isPostpone(error) {
-    return (typeof error === "undefined" ? "undefined" : _type_of._(error)) === 'object' && error !== null && error.$$typeof === REACT_POSTPONE_TYPE;
+    return typeof error === 'object' && error !== null && error.$$typeof === REACT_POSTPONE_TYPE;
 }
 }),
 "[project]/frontend/node_modules/next/dist/server/app-render/instant-validation/boundary-constants.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
@@ -5026,11 +4651,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "INSTANT_VALIDATION_BOUNDARY_NAME", {
     enumerable: true,
-    get: function get() {
+    get: function() {
         return INSTANT_VALIDATION_BOUNDARY_NAME;
     }
 });
-var INSTANT_VALIDATION_BOUNDARY_NAME = '__next_instant_validation_boundary__';
+const INSTANT_VALIDATION_BOUNDARY_NAME = '__next_instant_validation_boundary__';
 }),
 "[project]/frontend/node_modules/next/dist/server/app-render/dynamic-rendering.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
@@ -5057,9 +4682,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
  * unstable_cache should error. If you want to use some dynamic data inside unstable_cache you should
  * read that data outside the cache and pass it in as an argument to the cached function.
  */ "use strict";
-var _instanceof = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_instanceof.cjs [app-client] (ecmascript)");
-var _to_consumable_array = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_to_consumable_array.cjs [app-client] (ecmascript)");
-var _type_of = __turbopack_context__.r("[project]/frontend/node_modules/@swc/helpers/cjs/_type_of.cjs [app-client] (ecmascript)");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -5104,123 +4726,123 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    DynamicHoleKind: function DynamicHoleKind1() {
+    DynamicHoleKind: function() {
         return DynamicHoleKind;
     },
-    Postpone: function Postpone1() {
+    Postpone: function() {
         return Postpone;
     },
-    PreludeState: function PreludeState1() {
+    PreludeState: function() {
         return PreludeState;
     },
-    abortAndThrowOnSynchronousRequestDataAccess: function abortAndThrowOnSynchronousRequestDataAccess1() {
+    abortAndThrowOnSynchronousRequestDataAccess: function() {
         return abortAndThrowOnSynchronousRequestDataAccess;
     },
-    abortOnSynchronousPlatformIOAccess: function abortOnSynchronousPlatformIOAccess1() {
+    abortOnSynchronousPlatformIOAccess: function() {
         return abortOnSynchronousPlatformIOAccess;
     },
-    accessedDynamicData: function accessedDynamicData1() {
+    accessedDynamicData: function() {
         return accessedDynamicData;
     },
-    annotateDynamicAccess: function annotateDynamicAccess1() {
+    annotateDynamicAccess: function() {
         return annotateDynamicAccess;
     },
-    consumeDynamicAccess: function consumeDynamicAccess1() {
+    consumeDynamicAccess: function() {
         return consumeDynamicAccess;
     },
-    createDynamicTrackingState: function createDynamicTrackingState1() {
+    createDynamicTrackingState: function() {
         return createDynamicTrackingState;
     },
-    createDynamicValidationState: function createDynamicValidationState1() {
+    createDynamicValidationState: function() {
         return createDynamicValidationState;
     },
-    createHangingInputAbortSignal: function createHangingInputAbortSignal1() {
+    createHangingInputAbortSignal: function() {
         return createHangingInputAbortSignal;
     },
-    createInstantValidationState: function createInstantValidationState1() {
+    createInstantValidationState: function() {
         return createInstantValidationState;
     },
-    createRenderInBrowserAbortSignal: function createRenderInBrowserAbortSignal1() {
+    createRenderInBrowserAbortSignal: function() {
         return createRenderInBrowserAbortSignal;
     },
-    formatDynamicAPIAccesses: function formatDynamicAPIAccesses1() {
+    formatDynamicAPIAccesses: function() {
         return formatDynamicAPIAccesses;
     },
-    getFirstDynamicReason: function getFirstDynamicReason1() {
+    getFirstDynamicReason: function() {
         return getFirstDynamicReason;
     },
-    getNavigationDisallowedDynamicReasons: function getNavigationDisallowedDynamicReasons1() {
+    getNavigationDisallowedDynamicReasons: function() {
         return getNavigationDisallowedDynamicReasons;
     },
-    getStaticShellDisallowedDynamicReasons: function getStaticShellDisallowedDynamicReasons1() {
+    getStaticShellDisallowedDynamicReasons: function() {
         return getStaticShellDisallowedDynamicReasons;
     },
-    isDynamicPostpone: function isDynamicPostpone1() {
+    isDynamicPostpone: function() {
         return isDynamicPostpone;
     },
-    isPrerenderInterruptedError: function isPrerenderInterruptedError1() {
+    isPrerenderInterruptedError: function() {
         return isPrerenderInterruptedError;
     },
-    logDisallowedDynamicError: function logDisallowedDynamicError1() {
+    logDisallowedDynamicError: function() {
         return logDisallowedDynamicError;
     },
-    markCurrentScopeAsDynamic: function markCurrentScopeAsDynamic1() {
+    markCurrentScopeAsDynamic: function() {
         return markCurrentScopeAsDynamic;
     },
-    postponeWithTracking: function postponeWithTracking1() {
+    postponeWithTracking: function() {
         return postponeWithTracking;
     },
-    throwIfDisallowedDynamic: function throwIfDisallowedDynamic1() {
+    throwIfDisallowedDynamic: function() {
         return throwIfDisallowedDynamic;
     },
-    throwToInterruptStaticGeneration: function throwToInterruptStaticGeneration1() {
+    throwToInterruptStaticGeneration: function() {
         return throwToInterruptStaticGeneration;
     },
-    trackAllowedDynamicAccess: function trackAllowedDynamicAccess1() {
+    trackAllowedDynamicAccess: function() {
         return trackAllowedDynamicAccess;
     },
-    trackDynamicDataInDynamicRender: function trackDynamicDataInDynamicRender1() {
+    trackDynamicDataInDynamicRender: function() {
         return trackDynamicDataInDynamicRender;
     },
-    trackDynamicHoleInNavigation: function trackDynamicHoleInNavigation1() {
+    trackDynamicHoleInNavigation: function() {
         return trackDynamicHoleInNavigation;
     },
-    trackDynamicHoleInRuntimeShell: function trackDynamicHoleInRuntimeShell1() {
+    trackDynamicHoleInRuntimeShell: function() {
         return trackDynamicHoleInRuntimeShell;
     },
-    trackDynamicHoleInStaticShell: function trackDynamicHoleInStaticShell1() {
+    trackDynamicHoleInStaticShell: function() {
         return trackDynamicHoleInStaticShell;
     },
-    trackThrownErrorInNavigation: function trackThrownErrorInNavigation1() {
+    trackThrownErrorInNavigation: function() {
         return trackThrownErrorInNavigation;
     },
-    useDynamicRouteParams: function useDynamicRouteParams1() {
+    useDynamicRouteParams: function() {
         return useDynamicRouteParams;
     },
-    useDynamicSearchParams: function useDynamicSearchParams1() {
+    useDynamicSearchParams: function() {
         return useDynamicSearchParams;
     }
 });
-var _react = /*#__PURE__*/ _interop_require_default(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
-var _hooksservercontext = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/hooks-server-context.js [app-client] (ecmascript)");
-var _staticgenerationbailout = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/static-generation-bailout.js [app-client] (ecmascript)");
-var _workunitasyncstorageexternal = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/work-unit-async-storage.external.js [app-client] (ecmascript)");
-var _workasyncstorageexternal = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/work-async-storage.external.js [app-client] (ecmascript)");
-var _dynamicrenderingutils = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/dynamic-rendering-utils.js [app-client] (ecmascript)");
-var _boundaryconstants = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/lib/framework/boundary-constants.js [app-client] (ecmascript)");
-var _scheduler = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/lib/scheduler.js [app-client] (ecmascript)");
-var _bailouttocsr = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/lazy-dynamic/bailout-to-csr.js [app-client] (ecmascript)");
-var _invarianterror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/invariant-error.js [app-client] (ecmascript)");
-var _boundaryconstants1 = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/instant-validation/boundary-constants.js [app-client] (ecmascript)");
+const _react = /*#__PURE__*/ _interop_require_default(__turbopack_context__.r("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"));
+const _hooksservercontext = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/hooks-server-context.js [app-client] (ecmascript)");
+const _staticgenerationbailout = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/client/components/static-generation-bailout.js [app-client] (ecmascript)");
+const _workunitasyncstorageexternal = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/work-unit-async-storage.external.js [app-client] (ecmascript)");
+const _workasyncstorageexternal = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/work-async-storage.external.js [app-client] (ecmascript)");
+const _dynamicrenderingutils = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/dynamic-rendering-utils.js [app-client] (ecmascript)");
+const _boundaryconstants = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/lib/framework/boundary-constants.js [app-client] (ecmascript)");
+const _scheduler = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/lib/scheduler.js [app-client] (ecmascript)");
+const _bailouttocsr = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/lazy-dynamic/bailout-to-csr.js [app-client] (ecmascript)");
+const _invarianterror = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/shared/lib/invariant-error.js [app-client] (ecmascript)");
+const _boundaryconstants1 = __turbopack_context__.r("[project]/frontend/node_modules/next/dist/server/app-render/instant-validation/boundary-constants.js [app-client] (ecmascript)");
 function _interop_require_default(obj) {
     return obj && obj.__esModule ? obj : {
         default: obj
     };
 }
-var hasPostpone = typeof _react.default.unstable_postpone === 'function';
+const hasPostpone = typeof _react.default.unstable_postpone === 'function';
 function createDynamicTrackingState(isDebugDynamicAccesses) {
     return {
-        isDebugDynamicAccesses: isDebugDynamicAccesses,
+        isDebugDynamicAccesses,
         dynamicAccesses: [],
         syncDynamicErrorWithStack: null
     };
@@ -5266,7 +4888,7 @@ function markCurrentScopeAsDynamic(store, workUnitStore, expression) {
     // or it's static and it should not throw or postpone here.
     if (store.forceDynamic || store.forceStatic) return;
     if (store.dynamicShouldError) {
-        throw Object.defineProperty(new _staticgenerationbailout.StaticGenBailoutError("Route ".concat(store.route, ' with `dynamic = "error"` couldn\'t be rendered statically because it used `').concat(expression, "`. See more info here: https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic#dynamic-rendering")), "__NEXT_ERROR_CODE", {
+        throw Object.defineProperty(new _staticgenerationbailout.StaticGenBailoutError(`Route ${store.route} with \`dynamic = "error"\` couldn't be rendered statically because it used \`${expression}\`. See more info here: https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic#dynamic-rendering`), "__NEXT_ERROR_CODE", {
             value: "E553",
             enumerable: false,
             configurable: true
@@ -5280,7 +4902,7 @@ function markCurrentScopeAsDynamic(store, workUnitStore, expression) {
                 workUnitStore.revalidate = 0;
                 // We aren't prerendering, but we are generating a static page. We need
                 // to bail out of static generation.
-                var err = Object.defineProperty(new _hooksservercontext.DynamicServerError("Route ".concat(store.route, " couldn't be rendered statically because it used ").concat(expression, ". See more info here: https://nextjs.org/docs/messages/dynamic-server-error")), "__NEXT_ERROR_CODE", {
+                const err = Object.defineProperty(new _hooksservercontext.DynamicServerError(`Route ${store.route} couldn't be rendered statically because it used ${expression}. See more info here: https://nextjs.org/docs/messages/dynamic-server-error`), "__NEXT_ERROR_CODE", {
                     value: "E550",
                     enumerable: false,
                     configurable: true
@@ -5302,7 +4924,7 @@ function markCurrentScopeAsDynamic(store, workUnitStore, expression) {
 }
 function throwToInterruptStaticGeneration(expression, store, prerenderStore) {
     // We aren't prerendering but we are generating a static page. We need to bail out of static generation
-    var err = Object.defineProperty(new _hooksservercontext.DynamicServerError("Route ".concat(store.route, " couldn't be rendered statically because it used `").concat(expression, "`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error")), "__NEXT_ERROR_CODE", {
+    const err = Object.defineProperty(new _hooksservercontext.DynamicServerError(`Route ${store.route} couldn't be rendered statically because it used \`${expression}\`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error`), "__NEXT_ERROR_CODE", {
         value: "E558",
         enumerable: false,
         configurable: true
@@ -5342,21 +4964,21 @@ function trackDynamicDataInDynamicRender(workUnitStore) {
     }
 }
 function abortOnSynchronousDynamicDataAccess(route, expression, prerenderStore) {
-    var reason = "Route ".concat(route, " needs to bail out of prerendering at this point because it used ").concat(expression, ".");
-    var error = createPrerenderInterruptedError(reason);
+    const reason = `Route ${route} needs to bail out of prerendering at this point because it used ${expression}.`;
+    const error = createPrerenderInterruptedError(reason);
     prerenderStore.controller.abort(error);
-    var dynamicTracking = prerenderStore.dynamicTracking;
+    const dynamicTracking = prerenderStore.dynamicTracking;
     if (dynamicTracking) {
         dynamicTracking.dynamicAccesses.push({
             // When we aren't debugging, we don't need to create another error for the
             // stack trace.
             stack: dynamicTracking.isDebugDynamicAccesses ? new Error().stack : undefined,
-            expression: expression
+            expression
         });
     }
 }
 function abortOnSynchronousPlatformIOAccess(route, expression, errorWithStack, prerenderStore) {
-    var dynamicTracking = prerenderStore.dynamicTracking;
+    const dynamicTracking = prerenderStore.dynamicTracking;
     abortOnSynchronousDynamicDataAccess(route, expression, prerenderStore);
     // It is important that we set this tracking value after aborting. Aborts are executed
     // synchronously except for the case where you abort during render itself. By setting this
@@ -5369,7 +4991,7 @@ function abortOnSynchronousPlatformIOAccess(route, expression, errorWithStack, p
     }
 }
 function abortAndThrowOnSynchronousRequestDataAccess(route, expression, errorWithStack, prerenderStore) {
-    var prerenderSignal = prerenderStore.controller.signal;
+    const prerenderSignal = prerenderStore.controller.signal;
     if (prerenderSignal.aborted === false) {
         // TODO it would be better to move this aborted check into the callsite so we can avoid making
         // the error object when it isn't relevant to the aborting of the prerender however
@@ -5381,19 +5003,18 @@ function abortAndThrowOnSynchronousRequestDataAccess(route, expression, errorWit
         // synchronously except for the case where you abort during render itself. By setting this
         // value late we can use it to determine if any of the aborted tasks are the task that
         // called the sync IO expression in the first place.
-        var dynamicTracking = prerenderStore.dynamicTracking;
+        const dynamicTracking = prerenderStore.dynamicTracking;
         if (dynamicTracking) {
             if (dynamicTracking.syncDynamicErrorWithStack === null) {
                 dynamicTracking.syncDynamicErrorWithStack = errorWithStack;
             }
         }
     }
-    throw createPrerenderInterruptedError("Route ".concat(route, " needs to bail out of prerendering at this point because it used ").concat(expression, "."));
+    throw createPrerenderInterruptedError(`Route ${route} needs to bail out of prerendering at this point because it used ${expression}.`);
 }
-function Postpone(param) {
-    var reason = param.reason, route = param.route;
-    var prerenderStore = _workunitasyncstorageexternal.workUnitAsyncStorage.getStore();
-    var dynamicTracking = prerenderStore && prerenderStore.type === 'prerender-ppr' ? prerenderStore.dynamicTracking : null;
+function Postpone({ reason, route }) {
+    const prerenderStore = _workunitasyncstorageexternal.workUnitAsyncStorage.getStore();
+    const dynamicTracking = prerenderStore && prerenderStore.type === 'prerender-ppr' ? prerenderStore.dynamicTracking : null;
     postponeWithTracking(route, reason, dynamicTracking);
 }
 function postponeWithTracking(route, expression, dynamicTracking) {
@@ -5403,16 +5024,16 @@ function postponeWithTracking(route, expression, dynamicTracking) {
             // When we aren't debugging, we don't need to create another error for the
             // stack trace.
             stack: dynamicTracking.isDebugDynamicAccesses ? new Error().stack : undefined,
-            expression: expression
+            expression
         });
     }
     _react.default.unstable_postpone(createPostponeReason(route, expression));
 }
 function createPostponeReason(route, expression) {
-    return "Route ".concat(route, " needs to bail out of prerendering at this point because it used ").concat(expression, ". ") + "React throws this special object to indicate where. It should not be caught by " + "your own try/catch. Learn more: https://nextjs.org/docs/messages/ppr-caught-error";
+    return `Route ${route} needs to bail out of prerendering at this point because it used ${expression}. ` + `React throws this special object to indicate where. It should not be caught by ` + `your own try/catch. Learn more: https://nextjs.org/docs/messages/ppr-caught-error`;
 }
 function isDynamicPostpone(err) {
-    if ((typeof err === "undefined" ? "undefined" : _type_of._(err)) === 'object' && err !== null && typeof err.message === 'string') {
+    if (typeof err === 'object' && err !== null && typeof err.message === 'string') {
         return isDynamicPostponeReason(err.message);
     }
     return false;
@@ -5427,9 +5048,9 @@ if (isDynamicPostponeReason(createPostponeReason('%%%', '^^^')) === false) {
         configurable: true
     });
 }
-var NEXT_PRERENDER_INTERRUPTED = 'NEXT_PRERENDER_INTERRUPTED';
+const NEXT_PRERENDER_INTERRUPTED = 'NEXT_PRERENDER_INTERRUPTED';
 function createPrerenderInterruptedError(message) {
-    var error = Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
+    const error = Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
         value: "E394",
         enumerable: false,
         configurable: true
@@ -5438,28 +5059,24 @@ function createPrerenderInterruptedError(message) {
     return error;
 }
 function isPrerenderInterruptedError(error) {
-    return (typeof error === "undefined" ? "undefined" : _type_of._(error)) === 'object' && error !== null && error.digest === NEXT_PRERENDER_INTERRUPTED && 'name' in error && 'message' in error && _instanceof._(error, Error);
+    return typeof error === 'object' && error !== null && error.digest === NEXT_PRERENDER_INTERRUPTED && 'name' in error && 'message' in error && error instanceof Error;
 }
 function accessedDynamicData(dynamicAccesses) {
     return dynamicAccesses.length > 0;
 }
 function consumeDynamicAccess(serverDynamic, clientDynamic) {
-    var // We mutate because we only call this once we are no longer writing
+    // We mutate because we only call this once we are no longer writing
     // to the dynamicTrackingState and it's more efficient than creating a new
     // array.
-    _serverDynamic_dynamicAccesses;
-    (_serverDynamic_dynamicAccesses = serverDynamic.dynamicAccesses).push.apply(_serverDynamic_dynamicAccesses, _to_consumable_array._(clientDynamic.dynamicAccesses));
+    serverDynamic.dynamicAccesses.push(...clientDynamic.dynamicAccesses);
     return serverDynamic.dynamicAccesses;
 }
 function formatDynamicAPIAccesses(dynamicAccesses) {
-    return dynamicAccesses.filter(function(access) {
-        return typeof access.stack === 'string' && access.stack.length > 0;
-    }).map(function(param) {
-        var expression = param.expression, stack = param.stack;
+    return dynamicAccesses.filter((access)=>typeof access.stack === 'string' && access.stack.length > 0).map(({ expression, stack })=>{
         stack = stack.split('\n') // Remove the "Error: " prefix from the first line of the stack trace as
         // well as the first 4 lines of the stack trace which is the distance
         // from the user code and the `new Error().stack` call.
-        .slice(4).filter(function(line) {
+        .slice(4).filter((line)=>{
             // Exclude Next.js internals from the stack trace.
             if (line.includes('node_modules/next/')) {
                 return false;
@@ -5474,12 +5091,12 @@ function formatDynamicAPIAccesses(dynamicAccesses) {
             }
             return true;
         }).join('\n');
-        return "Dynamic API Usage Debug - ".concat(expression, ":\n").concat(stack);
+        return `Dynamic API Usage Debug - ${expression}:\n${stack}`;
     });
 }
 function assertPostpone() {
     if (!hasPostpone) {
-        throw Object.defineProperty(new Error("Invariant: React.unstable_postpone is not defined. This suggests the wrong version of React was loaded. This is a bug in Next.js"), "__NEXT_ERROR_CODE", {
+        throw Object.defineProperty(new Error(`Invariant: React.unstable_postpone is not defined. This suggests the wrong version of React was loaded. This is a bug in Next.js`), "__NEXT_ERROR_CODE", {
             value: "E224",
             enumerable: false,
             configurable: true
@@ -5487,7 +5104,7 @@ function assertPostpone() {
     }
 }
 function createRenderInBrowserAbortSignal() {
-    var controller = new AbortController();
+    const controller = new AbortController();
     controller.abort(Object.defineProperty(new _bailouttocsr.BailoutToCSRError('Render in Browser'), "__NEXT_ERROR_CODE", {
         value: "E721",
         enumerable: false,
@@ -5499,12 +5116,12 @@ function createHangingInputAbortSignal(workUnitStore) {
     switch(workUnitStore.type){
         case 'prerender':
         case 'prerender-runtime':
-            var controller = new AbortController();
+            const controller = new AbortController();
             if (workUnitStore.cacheSignal) {
                 // If we have a cacheSignal it means we're in a prospective render. If
                 // the input we're waiting on is coming from another cache, we do want
                 // to wait for it so that we can resolve this cache entry too.
-                workUnitStore.cacheSignal.inputReady().then(function() {
+                workUnitStore.cacheSignal.inputReady().then(()=>{
                     controller.abort();
                 });
             } else {
@@ -5521,16 +5138,10 @@ function createHangingInputAbortSignal(workUnitStore) {
                 // suspend as deeply as possible in the tree or not at all if we don't
                 // end up waiting for the input.
                 if (workUnitStore.type === 'prerender-runtime' && workUnitStore.stagedRendering) {
-                    var stagedRendering = workUnitStore.stagedRendering;
-                    stagedRendering.waitForStage((0, _dynamicrenderingutils.getRuntimeStage)(stagedRendering)).then(function() {
-                        return (0, _scheduler.scheduleOnNextTick)(function() {
-                            return controller.abort();
-                        });
-                    });
+                    const { stagedRendering } = workUnitStore;
+                    stagedRendering.waitForStage((0, _dynamicrenderingutils.getRuntimeStage)(stagedRendering)).then(()=>(0, _scheduler.scheduleOnNextTick)(()=>controller.abort()));
                 } else {
-                    (0, _scheduler.scheduleOnNextTick)(function() {
-                        return controller.abort();
-                    });
+                    (0, _scheduler.scheduleOnNextTick)(()=>controller.abort());
                 }
             }
             return controller.signal;
@@ -5549,23 +5160,23 @@ function createHangingInputAbortSignal(workUnitStore) {
     }
 }
 function annotateDynamicAccess(expression, prerenderStore) {
-    var dynamicTracking = prerenderStore.dynamicTracking;
+    const dynamicTracking = prerenderStore.dynamicTracking;
     if (dynamicTracking) {
         dynamicTracking.dynamicAccesses.push({
             stack: dynamicTracking.isDebugDynamicAccesses ? new Error().stack : undefined,
-            expression: expression
+            expression
         });
     }
 }
 function useDynamicRouteParams(expression) {
-    var workStore = _workasyncstorageexternal.workAsyncStorage.getStore();
-    var workUnitStore = _workunitasyncstorageexternal.workUnitAsyncStorage.getStore();
+    const workStore = _workasyncstorageexternal.workAsyncStorage.getStore();
+    const workUnitStore = _workunitasyncstorageexternal.workUnitAsyncStorage.getStore();
     if (workStore && workUnitStore) {
         switch(workUnitStore.type){
             case 'prerender-client':
             case 'prerender':
                 {
-                    var fallbackParams = workUnitStore.fallbackRouteParams;
+                    const fallbackParams = workUnitStore.fallbackRouteParams;
                     if (fallbackParams && fallbackParams.size > 0) {
                         // We are in a prerender with cacheComponents semantics. We are going to
                         // hang here and never resolve. This will cause the currently
@@ -5576,8 +5187,8 @@ function useDynamicRouteParams(expression) {
                 }
             case 'prerender-ppr':
                 {
-                    var fallbackParams1 = workUnitStore.fallbackRouteParams;
-                    if (fallbackParams1 && fallbackParams1.size > 0) {
+                    const fallbackParams = workUnitStore.fallbackRouteParams;
+                    if (fallbackParams && fallbackParams.size > 0) {
                         return postponeWithTracking(workStore.route, expression, workUnitStore.dynamicTracking);
                     }
                     break;
@@ -5587,20 +5198,20 @@ function useDynamicRouteParams(expression) {
                     break;
                 }
             case 'prerender-runtime':
-                throw Object.defineProperty(new _invarianterror.InvariantError("`".concat(expression, "` was called during a runtime prerender. Next.js should be preventing ").concat(expression, " from being included in server components statically, but did not in this case.")), "__NEXT_ERROR_CODE", {
+                throw Object.defineProperty(new _invarianterror.InvariantError(`\`${expression}\` was called during a runtime prerender. Next.js should be preventing ${expression} from being included in server components statically, but did not in this case.`), "__NEXT_ERROR_CODE", {
                     value: "E771",
                     enumerable: false,
                     configurable: true
                 });
             case 'cache':
             case 'private-cache':
-                throw Object.defineProperty(new _invarianterror.InvariantError("`".concat(expression, "` was called inside a cache scope. Next.js should be preventing ").concat(expression, " from being included in server components statically, but did not in this case.")), "__NEXT_ERROR_CODE", {
+                throw Object.defineProperty(new _invarianterror.InvariantError(`\`${expression}\` was called inside a cache scope. Next.js should be preventing ${expression} from being included in server components statically, but did not in this case.`), "__NEXT_ERROR_CODE", {
                     value: "E745",
                     enumerable: false,
                     configurable: true
                 });
             case 'generate-static-params':
-                throw Object.defineProperty(new _invarianterror.InvariantError("`".concat(expression, "` was called in `generateStaticParams`. Next.js should be preventing ").concat(expression, " from being included in server component files statically, but did not in this case.")), "__NEXT_ERROR_CODE", {
+                throw Object.defineProperty(new _invarianterror.InvariantError(`\`${expression}\` was called in \`generateStaticParams\`. Next.js should be preventing ${expression} from being included in server component files statically, but did not in this case.`), "__NEXT_ERROR_CODE", {
                     value: "E1130",
                     enumerable: false,
                     configurable: true
@@ -5615,8 +5226,8 @@ function useDynamicRouteParams(expression) {
     }
 }
 function useDynamicSearchParams(expression) {
-    var workStore = _workasyncstorageexternal.workAsyncStorage.getStore();
-    var workUnitStore = _workunitasyncstorageexternal.workUnitAsyncStorage.getStore();
+    const workStore = _workasyncstorageexternal.workAsyncStorage.getStore();
+    const workUnitStore = _workunitasyncstorageexternal.workUnitAsyncStorage.getStore();
     if (!workStore) {
         // We assume pages router context and just return
         return;
@@ -5648,7 +5259,7 @@ function useDynamicSearchParams(expression) {
             }
         case 'prerender':
         case 'prerender-runtime':
-            throw Object.defineProperty(new _invarianterror.InvariantError("`".concat(expression, "` was called from a Server Component. Next.js should be preventing ").concat(expression, " from being included in server components statically, but did not in this case.")), "__NEXT_ERROR_CODE", {
+            throw Object.defineProperty(new _invarianterror.InvariantError(`\`${expression}\` was called from a Server Component. Next.js should be preventing ${expression} from being included in server components statically, but did not in this case.`), "__NEXT_ERROR_CODE", {
                 value: "E795",
                 enumerable: false,
                 configurable: true
@@ -5656,13 +5267,13 @@ function useDynamicSearchParams(expression) {
         case 'cache':
         case 'unstable-cache':
         case 'private-cache':
-            throw Object.defineProperty(new _invarianterror.InvariantError("`".concat(expression, "` was called inside a cache scope. Next.js should be preventing ").concat(expression, " from being included in server components statically, but did not in this case.")), "__NEXT_ERROR_CODE", {
+            throw Object.defineProperty(new _invarianterror.InvariantError(`\`${expression}\` was called inside a cache scope. Next.js should be preventing ${expression} from being included in server components statically, but did not in this case.`), "__NEXT_ERROR_CODE", {
                 value: "E745",
                 enumerable: false,
                 configurable: true
             });
         case 'generate-static-params':
-            throw Object.defineProperty(new _invarianterror.InvariantError("`".concat(expression, "` was called in `generateStaticParams`. Next.js should be preventing ").concat(expression, " from being included in server component files statically, but did not in this case.")), "__NEXT_ERROR_CODE", {
+            throw Object.defineProperty(new _invarianterror.InvariantError(`\`${expression}\` was called in \`generateStaticParams\`. Next.js should be preventing ${expression} from being included in server component files statically, but did not in this case.`), "__NEXT_ERROR_CODE", {
                 value: "E1130",
                 enumerable: false,
                 configurable: true
@@ -5673,9 +5284,9 @@ function useDynamicSearchParams(expression) {
             workUnitStore;
     }
 }
-var hasSuspenseRegex = /\n\s+at Suspense \(<anonymous>\)/;
+const hasSuspenseRegex = /\n\s+at Suspense \(<anonymous>\)/;
 // Common implicit body tags that React will treat as body when placed directly in html
-var bodyAndImplicitTags = 'body|div|main|section|article|aside|header|footer|nav|form|p|span|h1|h2|h3|h4|h5|h6';
+const bodyAndImplicitTags = 'body|div|main|section|article|aside|header|footer|nav|form|p|span|h1|h2|h3|h4|h5|h6';
 // Detects when RootLayoutBoundary (our framework marker component) appears
 // after Suspense in the component stack, indicating the root layout is wrapped
 // within a Suspense boundary. Ensures no body/html/implicit-body components are in between.
@@ -5688,11 +5299,11 @@ var bodyAndImplicitTags = 'body|div|main|section|article|aside|header|footer|nav
 //   at Suspense (<anonymous>)
 //   at SomeComponent (<anonymous>)
 //   at __next_root_layout_boundary__ (<anonymous>)
-var hasSuspenseBeforeRootLayoutWithoutBodyOrImplicitBodyRegex = new RegExp("\\n\\s+at Suspense \\(<anonymous>\\)(?:(?!\\n\\s+at (?:".concat(bodyAndImplicitTags, ") \\(<anonymous>\\))[\\s\\S])*?\\n\\s+at ").concat(_boundaryconstants.ROOT_LAYOUT_BOUNDARY_NAME, " \\([^\\n]*\\)"));
-var hasMetadataRegex = new RegExp("\\n\\s+at ".concat(_boundaryconstants.METADATA_BOUNDARY_NAME, "[\\n\\s]"));
-var hasViewportRegex = new RegExp("\\n\\s+at ".concat(_boundaryconstants.VIEWPORT_BOUNDARY_NAME, "[\\n\\s]"));
-var hasOutletRegex = new RegExp("\\n\\s+at ".concat(_boundaryconstants.OUTLET_BOUNDARY_NAME, "[\\n\\s]"));
-var hasInstantValidationBoundaryRegex = new RegExp("\\n\\s+at ".concat(_boundaryconstants1.INSTANT_VALIDATION_BOUNDARY_NAME, "[\\n\\s]"));
+const hasSuspenseBeforeRootLayoutWithoutBodyOrImplicitBodyRegex = new RegExp(`\\n\\s+at Suspense \\(<anonymous>\\)(?:(?!\\n\\s+at (?:${bodyAndImplicitTags}) \\(<anonymous>\\))[\\s\\S])*?\\n\\s+at ${_boundaryconstants.ROOT_LAYOUT_BOUNDARY_NAME} \\([^\\n]*\\)`);
+const hasMetadataRegex = new RegExp(`\\n\\s+at ${_boundaryconstants.METADATA_BOUNDARY_NAME}[\\n\\s]`);
+const hasViewportRegex = new RegExp(`\\n\\s+at ${_boundaryconstants.VIEWPORT_BOUNDARY_NAME}[\\n\\s]`);
+const hasOutletRegex = new RegExp(`\\n\\s+at ${_boundaryconstants.OUTLET_BOUNDARY_NAME}[\\n\\s]`);
+const hasInstantValidationBoundaryRegex = new RegExp(`\\n\\s+at ${_boundaryconstants1.INSTANT_VALIDATION_BOUNDARY_NAME}[\\n\\s]`);
 function trackAllowedDynamicAccess(workStore, componentStack, dynamicValidation, clientDynamic) {
     if (hasOutletRegex.test(componentStack)) {
         // We don't need to track that this is dynamic. It is only so when something else is also dynamic.
@@ -5720,8 +5331,8 @@ function trackAllowedDynamicAccess(workStore, componentStack, dynamicValidation,
         dynamicValidation.dynamicErrors.push(clientDynamic.syncDynamicErrorWithStack);
         return;
     } else {
-        var message = 'Route "'.concat(workStore.route, '": Uncached data was accessed outside of ') + '<Suspense>. This delays the entire page from rendering, resulting in a ' + 'slow user experience. Learn more: ' + 'https://nextjs.org/docs/messages/blocking-route';
-        var error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
+        const message = `Route "${workStore.route}": Uncached data was accessed outside of ` + '<Suspense>. This delays the entire page from rendering, resulting in a ' + 'slow user experience. Learn more: ' + 'https://nextjs.org/docs/messages/blocking-route';
+        const error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
             value: "E1079",
             enumerable: false,
             configurable: true
@@ -5745,7 +5356,7 @@ function createInstantValidationState(createInstantStack) {
         dynamicErrors: [],
         validationPreventingErrors: [],
         thrownErrorsOutsideBoundary: [],
-        createInstantStack: createInstantStack
+        createInstantStack
     };
 }
 function trackDynamicHoleInNavigation(workStore, componentStack, dynamicValidation, clientDynamic, kind, boundaryState) {
@@ -5754,9 +5365,9 @@ function trackDynamicHoleInNavigation(workStore, componentStack, dynamicValidati
         return;
     }
     if (hasMetadataRegex.test(componentStack)) {
-        var usageDescription = kind === 1 ? "Runtime data such as `cookies()`, `headers()`, `params`, or `searchParams` was accessed inside `generateMetadata` or you have file-based metadata such as icons that depend on dynamic params segments." : "Uncached data or `connection()` was accessed inside `generateMetadata`.";
-        var message = 'Route "'.concat(workStore.route, '": ').concat(usageDescription, " Except for this instance, the page would have been entirely prerenderable which may have been the intended behavior. See more info here: https://nextjs.org/docs/messages/next-prerender-dynamic-metadata");
-        var error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
+        const usageDescription = kind === 1 ? `Runtime data such as \`cookies()\`, \`headers()\`, \`params\`, or \`searchParams\` was accessed inside \`generateMetadata\` or you have file-based metadata such as icons that depend on dynamic params segments.` : `Uncached data or \`connection()\` was accessed inside \`generateMetadata\`.`;
+        const message = `Route "${workStore.route}": ${usageDescription} Except for this instance, the page would have been entirely prerenderable which may have been the intended behavior. See more info here: https://nextjs.org/docs/messages/next-prerender-dynamic-metadata`;
+        const error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
             value: "E1076",
             enumerable: false,
             configurable: true
@@ -5765,17 +5376,17 @@ function trackDynamicHoleInNavigation(workStore, componentStack, dynamicValidati
         return;
     }
     if (hasViewportRegex.test(componentStack)) {
-        var usageDescription1 = kind === 1 ? "Runtime data such as `cookies()`, `headers()`, `params`, or `searchParams` was accessed inside `generateViewport`." : "Uncached data or `connection()` was accessed inside `generateViewport`.";
-        var message1 = 'Route "'.concat(workStore.route, '": ').concat(usageDescription1, " This delays the entire page from rendering, resulting in a slow user experience. Learn more: https://nextjs.org/docs/messages/next-prerender-dynamic-viewport");
-        var error1 = addErrorContext(Object.defineProperty(new Error(message1), "__NEXT_ERROR_CODE", {
+        const usageDescription = kind === 1 ? `Runtime data such as \`cookies()\`, \`headers()\`, \`params\`, or \`searchParams\` was accessed inside \`generateViewport\`.` : `Uncached data or \`connection()\` was accessed inside \`generateViewport\`.`;
+        const message = `Route "${workStore.route}": ${usageDescription} This delays the entire page from rendering, resulting in a slow user experience. Learn more: https://nextjs.org/docs/messages/next-prerender-dynamic-viewport`;
+        const error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
             value: "E1086",
             enumerable: false,
             configurable: true
         }), componentStack, dynamicValidation.createInstantStack);
-        dynamicValidation.dynamicErrors.push(error1);
+        dynamicValidation.dynamicErrors.push(error);
         return;
     }
-    var boundaryLocation = hasInstantValidationBoundaryRegex.exec(componentStack);
+    const boundaryLocation = hasInstantValidationBoundaryRegex.exec(componentStack);
     if (!boundaryLocation) {
         // We don't see the validation boundary in the component stack,
         // so this hole must be coming from a shared parent.
@@ -5794,13 +5405,13 @@ function trackDynamicHoleInNavigation(workStore, componentStack, dynamicValidati
             // If shared parents blocked us from validating, we should only log
             // the errors from the innermost (segments), i.e. omit layouts whose
             // slots managed to render (because clearly they didn't block validation)
-            var message2 = 'Route "'.concat(workStore.route, '": Could not validate `unstable_instant` because a Client Component in a parent segment prevented the page from rendering.');
-            var error2 = addErrorContext(Object.defineProperty(new Error(message2), "__NEXT_ERROR_CODE", {
+            const message = `Route "${workStore.route}": Could not validate \`unstable_instant\` because a Client Component in a parent segment prevented the page from rendering.`;
+            const error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
                 value: "E1082",
                 enumerable: false,
                 configurable: true
             }), componentStack, dynamicValidation.createInstantStack);
-            dynamicValidation.validationPreventingErrors.push(error2);
+            dynamicValidation.validationPreventingErrors.push(error);
             return;
         }
     } else {
@@ -5824,7 +5435,7 @@ function trackDynamicHoleInNavigation(workStore, componentStack, dynamicValidati
         //   ...
         //   at Suspense
         //
-        var suspenseLocation = hasSuspenseRegex.exec(componentStack);
+        const suspenseLocation = hasSuspenseRegex.exec(componentStack);
         if (suspenseLocation) {
             if (suspenseLocation.index < boundaryLocation.index) {
                 dynamicValidation.hasAllowedDynamic = true;
@@ -5836,25 +5447,25 @@ function trackDynamicHoleInNavigation(workStore, componentStack, dynamicValidati
     }
     if (clientDynamic.syncDynamicErrorWithStack) {
         // This task was the task that called the sync error.
-        var syncError = clientDynamic.syncDynamicErrorWithStack;
+        const syncError = clientDynamic.syncDynamicErrorWithStack;
         if (dynamicValidation.createInstantStack !== null && syncError.cause === undefined) {
             syncError.cause = dynamicValidation.createInstantStack();
         }
         dynamicValidation.dynamicErrors.push(syncError);
         return;
     }
-    var usageDescription2 = kind === 1 ? "Runtime data such as `cookies()`, `headers()`, `params`, or `searchParams` was accessed outside of `<Suspense>`." : "Uncached data or `connection()` was accessed outside of `<Suspense>`.";
-    var message3 = 'Route "'.concat(workStore.route, '": ').concat(usageDescription2, " This delays the entire page from rendering, resulting in a slow user experience. Learn more: https://nextjs.org/docs/messages/blocking-route");
-    var error3 = addErrorContext(Object.defineProperty(new Error(message3), "__NEXT_ERROR_CODE", {
+    const usageDescription = kind === 1 ? `Runtime data such as \`cookies()\`, \`headers()\`, \`params\`, or \`searchParams\` was accessed outside of \`<Suspense>\`.` : `Uncached data or \`connection()\` was accessed outside of \`<Suspense>\`.`;
+    const message = `Route "${workStore.route}": ${usageDescription} This delays the entire page from rendering, resulting in a slow user experience. Learn more: https://nextjs.org/docs/messages/blocking-route`;
+    const error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
         value: "E1078",
         enumerable: false,
         configurable: true
     }), componentStack, dynamicValidation.createInstantStack);
-    dynamicValidation.dynamicErrors.push(error3);
+    dynamicValidation.dynamicErrors.push(error);
     return;
 }
 function trackThrownErrorInNavigation(workStore, dynamicValidation, thrownValue, componentStack) {
-    var boundaryLocation = hasInstantValidationBoundaryRegex.exec(componentStack);
+    const boundaryLocation = hasInstantValidationBoundaryRegex.exec(componentStack);
     if (!boundaryLocation) {
         // There's no validation boundary on the component stack.
         // This error may have blocked a boundary from rendering.
@@ -5862,7 +5473,7 @@ function trackThrownErrorInNavigation(workStore, dynamicValidation, thrownValue,
         // This helps for errors from node_modules which would otherwise
         // have no useful stack information due to ignore-listing,
         // e.g. next/dynamic with `ssr: false`.
-        var error = addErrorContext(Object.defineProperty(new Error('An error occurred while attempting to validate instant UI. This error may be preventing the validation from completing.', {
+        const error = addErrorContext(Object.defineProperty(new Error('An error occurred while attempting to validate instant UI. This error may be preventing the validation from completing.', {
             cause: thrownValue
         }), "__NEXT_ERROR_CODE", {
             value: "E1118",
@@ -5875,7 +5486,7 @@ function trackThrownErrorInNavigation(workStore, dynamicValidation, thrownValue,
         // so we know this error didn't block a validation boundary from rendering.
         // However, this error might be hiding be hiding dynamic content that would
         // cause validation to fail.
-        var suspenseLocation = hasSuspenseRegex.exec(componentStack);
+        const suspenseLocation = hasSuspenseRegex.exec(componentStack);
         if (suspenseLocation) {
             if (suspenseLocation.index < boundaryLocation.index) {
                 // There's a Suspense below the validation boundary but above this error's location.
@@ -5887,8 +5498,8 @@ function trackThrownErrorInNavigation(workStore, dynamicValidation, thrownValue,
             // invalid - fallthrough
             }
         }
-        var message = 'Route "'.concat(workStore.route, '": Could not validate `unstable_instant` because an error prevented the target segment from rendering.');
-        var error1 = addErrorContext(Object.defineProperty(new Error(message, {
+        const message = `Route "${workStore.route}": Could not validate \`unstable_instant\` because an error prevented the target segment from rendering.`;
+        const error = addErrorContext(Object.defineProperty(new Error(message, {
             cause: thrownValue
         }), "__NEXT_ERROR_CODE", {
             value: "E1112",
@@ -5896,7 +5507,7 @@ function trackThrownErrorInNavigation(workStore, dynamicValidation, thrownValue,
             configurable: true
         }), componentStack, null // TODO(instant-validation-build): conflicting use of cause
         );
-        dynamicValidation.validationPreventingErrors.push(error1);
+        dynamicValidation.validationPreventingErrors.push(error);
     }
 }
 function trackDynamicHoleInRuntimeShell(workStore, componentStack, dynamicValidation, clientDynamic) {
@@ -5904,8 +5515,8 @@ function trackDynamicHoleInRuntimeShell(workStore, componentStack, dynamicValida
         // We don't need to track that this is dynamic. It is only so when something else is also dynamic.
         return;
     } else if (hasMetadataRegex.test(componentStack)) {
-        var message = 'Route "'.concat(workStore.route, '": Uncached data or `connection()` was accessed inside `generateMetadata`. Except for this instance, the page would have been entirely prerenderable which may have been the intended behavior. See more info here: https://nextjs.org/docs/messages/next-prerender-dynamic-metadata');
-        var error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
+        const message = `Route "${workStore.route}": Uncached data or \`connection()\` was accessed inside \`generateMetadata\`. Except for this instance, the page would have been entirely prerenderable which may have been the intended behavior. See more info here: https://nextjs.org/docs/messages/next-prerender-dynamic-metadata`;
+        const error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
             value: "E1080",
             enumerable: false,
             configurable: true
@@ -5916,13 +5527,13 @@ function trackDynamicHoleInRuntimeShell(workStore, componentStack, dynamicValida
         // TODO(instant-validation): If the page only has holes caused by runtime data,
         // we won't find out if there's a suspense-above-body and error for dynamic viewport
         // even if there is in fact a suspense-above-body
-        var message1 = 'Route "'.concat(workStore.route, '": Uncached data or `connection()` was accessed inside `generateViewport`. This delays the entire page from rendering, resulting in a slow user experience. Learn more: https://nextjs.org/docs/messages/next-prerender-dynamic-viewport');
-        var error1 = addErrorContext(Object.defineProperty(new Error(message1), "__NEXT_ERROR_CODE", {
+        const message = `Route "${workStore.route}": Uncached data or \`connection()\` was accessed inside \`generateViewport\`. This delays the entire page from rendering, resulting in a slow user experience. Learn more: https://nextjs.org/docs/messages/next-prerender-dynamic-viewport`;
+        const error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
             value: "E1077",
             enumerable: false,
             configurable: true
         }), componentStack, null);
-        dynamicValidation.dynamicErrors.push(error1);
+        dynamicValidation.dynamicErrors.push(error);
         return;
     } else if (hasSuspenseBeforeRootLayoutWithoutBodyOrImplicitBodyRegex.test(componentStack)) {
         // For Suspense within body, the prelude wouldn't be empty so it wouldn't violate the empty static shells rule.
@@ -5941,13 +5552,13 @@ function trackDynamicHoleInRuntimeShell(workStore, componentStack, dynamicValida
         dynamicValidation.dynamicErrors.push(clientDynamic.syncDynamicErrorWithStack);
         return;
     }
-    var message2 = 'Route "'.concat(workStore.route, '": Uncached data or `connection()` was accessed outside of `<Suspense>`. This delays the entire page from rendering, resulting in a slow user experience. Learn more: https://nextjs.org/docs/messages/blocking-route');
-    var error2 = addErrorContext(Object.defineProperty(new Error(message2), "__NEXT_ERROR_CODE", {
+    const message = `Route "${workStore.route}": Uncached data or \`connection()\` was accessed outside of \`<Suspense>\`. This delays the entire page from rendering, resulting in a slow user experience. Learn more: https://nextjs.org/docs/messages/blocking-route`;
+    const error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
         value: "E1084",
         enumerable: false,
         configurable: true
     }), componentStack, null);
-    dynamicValidation.dynamicErrors.push(error2);
+    dynamicValidation.dynamicErrors.push(error);
     return;
 }
 function trackDynamicHoleInStaticShell(workStore, componentStack, dynamicValidation, clientDynamic) {
@@ -5955,8 +5566,8 @@ function trackDynamicHoleInStaticShell(workStore, componentStack, dynamicValidat
         // We don't need to track that this is dynamic. It is only so when something else is also dynamic.
         return;
     } else if (hasMetadataRegex.test(componentStack)) {
-        var message = 'Route "'.concat(workStore.route, '": Runtime data such as `cookies()`, `headers()`, `params`, or `searchParams` was accessed inside `generateMetadata` or you have file-based metadata such as icons that depend on dynamic params segments. Except for this instance, the page would have been entirely prerenderable which may have been the intended behavior. See more info here: https://nextjs.org/docs/messages/next-prerender-dynamic-metadata');
-        var error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
+        const message = `Route "${workStore.route}": Runtime data such as \`cookies()\`, \`headers()\`, \`params\`, or \`searchParams\` was accessed inside \`generateMetadata\` or you have file-based metadata such as icons that depend on dynamic params segments. Except for this instance, the page would have been entirely prerenderable which may have been the intended behavior. See more info here: https://nextjs.org/docs/messages/next-prerender-dynamic-metadata`;
+        const error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
             value: "E1085",
             enumerable: false,
             configurable: true
@@ -5964,13 +5575,13 @@ function trackDynamicHoleInStaticShell(workStore, componentStack, dynamicValidat
         dynamicValidation.dynamicMetadata = error;
         return;
     } else if (hasViewportRegex.test(componentStack)) {
-        var message1 = 'Route "'.concat(workStore.route, '": Runtime data such as `cookies()`, `headers()`, `params`, or `searchParams` was accessed inside `generateViewport`. This delays the entire page from rendering, resulting in a slow user experience. Learn more: https://nextjs.org/docs/messages/next-prerender-dynamic-viewport');
-        var error1 = addErrorContext(Object.defineProperty(new Error(message1), "__NEXT_ERROR_CODE", {
+        const message = `Route "${workStore.route}": Runtime data such as \`cookies()\`, \`headers()\`, \`params\`, or \`searchParams\` was accessed inside \`generateViewport\`. This delays the entire page from rendering, resulting in a slow user experience. Learn more: https://nextjs.org/docs/messages/next-prerender-dynamic-viewport`;
+        const error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
             value: "E1081",
             enumerable: false,
             configurable: true
         }), componentStack, null);
-        dynamicValidation.dynamicErrors.push(error1);
+        dynamicValidation.dynamicErrors.push(error);
         return;
     } else if (hasSuspenseBeforeRootLayoutWithoutBodyOrImplicitBodyRegex.test(componentStack)) {
         // For Suspense within body, the prelude wouldn't be empty so it wouldn't violate the empty static shells rule.
@@ -5989,13 +5600,13 @@ function trackDynamicHoleInStaticShell(workStore, componentStack, dynamicValidat
         dynamicValidation.dynamicErrors.push(clientDynamic.syncDynamicErrorWithStack);
         return;
     } else {
-        var message2 = 'Route "'.concat(workStore.route, '": Runtime data such as `cookies()`, `headers()`, `params`, or `searchParams` was accessed outside of `<Suspense>`. This delays the entire page from rendering, resulting in a slow user experience. Learn more: https://nextjs.org/docs/messages/blocking-route');
-        var error2 = addErrorContext(Object.defineProperty(new Error(message2), "__NEXT_ERROR_CODE", {
+        const message = `Route "${workStore.route}": Runtime data such as \`cookies()\`, \`headers()\`, \`params\`, or \`searchParams\` was accessed outside of \`<Suspense>\`. This delays the entire page from rendering, resulting in a slow user experience. Learn more: https://nextjs.org/docs/messages/blocking-route`;
+        const error = addErrorContext(Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
             value: "E1083",
             enumerable: false,
             configurable: true
         }), componentStack, null);
-        dynamicValidation.dynamicErrors.push(error2);
+        dynamicValidation.dynamicErrors.push(error);
         return;
     }
 }
@@ -6006,7 +5617,7 @@ function trackDynamicHoleInStaticShell(workStore, componentStack, dynamicValidat
  * Accepts an already-created Error so the SWC error-code plugin can see the
  * `new Error(...)` call at each call site and auto-assign error codes.
  */ function addErrorContext(error, componentStack, createInstantStack) {
-    var ownerStack = ("TURBOPACK compile-time value", "development") !== 'production' && _react.default.captureOwnerStack ? _react.default.captureOwnerStack() : null;
+    const ownerStack = ("TURBOPACK compile-time value", "development") !== 'production' && _react.default.captureOwnerStack ? _react.default.captureOwnerStack() : null;
     if (createInstantStack !== null) {
         error.cause = createInstantStack();
     }
@@ -6043,9 +5654,9 @@ function throwIfDisallowedDynamic(workStore, prelude, dynamicValidation, serverD
         // We didn't have any sync bailouts but there may be user code which
         // blocked the root. We would have captured these during the prerender
         // and can log them here and then terminate the build/validating render
-        var dynamicErrors = dynamicValidation.dynamicErrors;
+        const dynamicErrors = dynamicValidation.dynamicErrors;
         if (dynamicErrors.length > 0) {
-            for(var i = 0; i < dynamicErrors.length; i++){
+            for(let i = 0; i < dynamicErrors.length; i++){
                 logDisallowedDynamicError(workStore, dynamicErrors[i]);
             }
             throw new _staticgenerationbailout.StaticGenBailoutError();
@@ -6055,19 +5666,19 @@ function throwIfDisallowedDynamic(workStore, prelude, dynamicValidation, serverD
         // you need to opt into that by adding a Suspense boundary above the body
         // to indicate your are ok with fully dynamic rendering.
         if (dynamicValidation.hasDynamicViewport) {
-            console.error('Route "'.concat(workStore.route, '" has a `generateViewport` that depends on Request data (`cookies()`, etc...) or uncached external data (`fetch(...)`, etc...) without explicitly allowing fully dynamic rendering. See more info here: https://nextjs.org/docs/messages/next-prerender-dynamic-viewport'));
+            console.error(`Route "${workStore.route}" has a \`generateViewport\` that depends on Request data (\`cookies()\`, etc...) or uncached external data (\`fetch(...)\`, etc...) without explicitly allowing fully dynamic rendering. See more info here: https://nextjs.org/docs/messages/next-prerender-dynamic-viewport`);
             throw new _staticgenerationbailout.StaticGenBailoutError();
         }
         if (prelude === 1) {
             // If we ever get this far then we messed up the tracking of invalid dynamic.
             // We still adhere to the constraint that you must produce a shell but invite the
             // user to report this as a bug in Next.js.
-            console.error('Route "'.concat(workStore.route, '" did not produce a static shell and Next.js was unable to determine a reason. This is a bug in Next.js.'));
+            console.error(`Route "${workStore.route}" did not produce a static shell and Next.js was unable to determine a reason. This is a bug in Next.js.`);
             throw new _staticgenerationbailout.StaticGenBailoutError();
         }
     } else {
         if (dynamicValidation.hasAllowedDynamic === false && dynamicValidation.hasDynamicMetadata) {
-            console.error('Route "'.concat(workStore.route, '" has a `generateMetadata` that depends on Request data (`cookies()`, etc...) or uncached external data (`fetch(...)`, etc...) when the rest of the route does not. See more info here: https://nextjs.org/docs/messages/next-prerender-dynamic-metadata'));
+            console.error(`Route "${workStore.route}" has a \`generateMetadata\` that depends on Request data (\`cookies()\`, etc...) or uncached external data (\`fetch(...)\`, etc...) when the rest of the route does not. See more info here: https://nextjs.org/docs/messages/next-prerender-dynamic-metadata`);
             throw new _staticgenerationbailout.StaticGenBailoutError();
         }
     }
@@ -6083,7 +5694,7 @@ function getStaticShellDisallowedDynamicReasons(workStore, prelude, dynamicValid
         // We didn't have any sync bailouts but there may be user code which
         // blocked the root. We would have captured these during the prerender
         // and can log them here and then terminate the build/validating render
-        var dynamicErrors = dynamicValidation.dynamicErrors;
+        const dynamicErrors = dynamicValidation.dynamicErrors;
         if (dynamicErrors.length > 0) {
             return dynamicErrors;
         }
@@ -6092,7 +5703,7 @@ function getStaticShellDisallowedDynamicReasons(workStore, prelude, dynamicValid
             // We still adhere to the constraint that you must produce a shell but invite the
             // user to report this as a bug in Next.js.
             return [
-                Object.defineProperty(new _invarianterror.InvariantError('Route "'.concat(workStore.route, '" did not produce a static shell and Next.js was unable to determine a reason.')), "__NEXT_ERROR_CODE", {
+                Object.defineProperty(new _invarianterror.InvariantError(`Route "${workStore.route}" did not produce a static shell and Next.js was unable to determine a reason.`), "__NEXT_ERROR_CODE", {
                     value: "E936",
                     enumerable: false,
                     configurable: true
@@ -6113,48 +5724,49 @@ function getStaticShellDisallowedDynamicReasons(workStore, prelude, dynamicValid
 function getNavigationDisallowedDynamicReasons(workStore, prelude, dynamicValidation, validationSampleTracking, boundaryState) {
     // If we have errors related to missing samples, those should take precedence over everything else.
     if (validationSampleTracking) {
-        var missingSampleErrors = validationSampleTracking.missingSampleErrors;
+        const { missingSampleErrors } = validationSampleTracking;
         if (missingSampleErrors.length > 0) {
             return missingSampleErrors;
         }
     }
-    var validationPreventingErrors = dynamicValidation.validationPreventingErrors;
+    const { validationPreventingErrors } = dynamicValidation;
     if (validationPreventingErrors.length > 0) {
         return validationPreventingErrors;
     }
     if (boundaryState.renderedIds.size < boundaryState.expectedIds.size) {
-        var thrownErrorsOutsideBoundary = dynamicValidation.thrownErrorsOutsideBoundary, createInstantStack = dynamicValidation.createInstantStack;
+        const { thrownErrorsOutsideBoundary, createInstantStack } = dynamicValidation;
         if (thrownErrorsOutsideBoundary.length === 0) {
-            var message = 'Route "'.concat(workStore.route, '": Could not validate `unstable_instant` because the target segment was prevented from rendering for an unknown reason.');
-            var error = createInstantStack !== null ? createInstantStack() : new Error();
+            const message = `Route "${workStore.route}": Could not validate \`unstable_instant\` because the target segment was prevented from rendering for an unknown reason.`;
+            const error = createInstantStack !== null ? createInstantStack() : new Error();
             error.name = 'Error';
             error.message = message;
             return [
                 error
             ];
         } else if (thrownErrorsOutsideBoundary.length === 1) {
-            var message1 = 'Route "'.concat(workStore.route, '": Could not validate `unstable_instant` because the target segment was prevented from rendering, likely due to the following error.');
-            var error1 = createInstantStack !== null ? createInstantStack() : new Error();
-            error1.name = 'Error';
-            error1.message = message1;
+            const message = `Route "${workStore.route}": Could not validate \`unstable_instant\` because the target segment was prevented from rendering, likely due to the following error.`;
+            const error = createInstantStack !== null ? createInstantStack() : new Error();
+            error.name = 'Error';
+            error.message = message;
             return [
-                error1,
+                error,
                 thrownErrorsOutsideBoundary[0]
             ];
         } else {
-            var message2 = 'Route "'.concat(workStore.route, '": Could not validate `unstable_instant` because the target segment was prevented from rendering, likely due to one of the following errors.');
-            var error2 = createInstantStack !== null ? createInstantStack() : new Error();
-            error2.name = 'Error';
-            error2.message = message2;
+            const message = `Route "${workStore.route}": Could not validate \`unstable_instant\` because the target segment was prevented from rendering, likely due to one of the following errors.`;
+            const error = createInstantStack !== null ? createInstantStack() : new Error();
+            error.name = 'Error';
+            error.message = message;
             return [
-                error2
-            ].concat(_to_consumable_array._(thrownErrorsOutsideBoundary));
+                error,
+                ...thrownErrorsOutsideBoundary
+            ];
         }
     }
     // NOTE: We don't care about Suspense above body here,
     // we're only concerned with the validation boundary
     if (prelude !== 0) {
-        var dynamicErrors = dynamicValidation.dynamicErrors;
+        const dynamicErrors = dynamicValidation.dynamicErrors;
         if (dynamicErrors.length > 0) {
             return dynamicErrors;
         }
@@ -6166,7 +5778,7 @@ function getNavigationDisallowedDynamicReasons(workStore, prelude, dynamicValida
             }
             // If we ever get this far then we messed up the tracking of invalid dynamic.
             return [
-                Object.defineProperty(new _invarianterror.InvariantError('Route "'.concat(workStore.route, '" failed to render during instant validation and Next.js was unable to determine a reason.')), "__NEXT_ERROR_CODE", {
+                Object.defineProperty(new _invarianterror.InvariantError(`Route "${workStore.route}" failed to render during instant validation and Next.js was unable to determine a reason.`), "__NEXT_ERROR_CODE", {
                     value: "E1055",
                     enumerable: false,
                     configurable: true
@@ -6174,9 +5786,9 @@ function getNavigationDisallowedDynamicReasons(workStore, prelude, dynamicValida
             ];
         }
     } else {
-        var dynamicErrors1 = dynamicValidation.dynamicErrors;
-        if (dynamicErrors1.length > 0) {
-            return dynamicErrors1;
+        const dynamicErrors = dynamicValidation.dynamicErrors;
+        if (dynamicErrors.length > 0) {
+            return dynamicErrors;
         }
         if (dynamicValidation.hasAllowedDynamic === false && dynamicValidation.dynamicMetadata) {
             return [
@@ -6205,10 +5817,10 @@ function _export(target, all) {
     });
 }
 _export(exports, {
-    HMR_MESSAGE_SENT_TO_BROWSER: function HMR_MESSAGE_SENT_TO_BROWSER1() {
+    HMR_MESSAGE_SENT_TO_BROWSER: function() {
         return HMR_MESSAGE_SENT_TO_BROWSER;
     },
-    HMR_MESSAGE_SENT_TO_SERVER: function HMR_MESSAGE_SENT_TO_SERVER1() {
+    HMR_MESSAGE_SENT_TO_SERVER: function() {
         return HMR_MESSAGE_SENT_TO_SERVER;
     }
 });

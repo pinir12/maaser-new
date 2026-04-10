@@ -1,0 +1,21 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/admin/users/[id]/route": "/api/admin/users/[id]",
+  "/api/admin/users/route": "/api/admin/users",
+  "/api/auth/login/route": "/api/auth/login",
+  "/api/auth/me/route": "/api/auth/me",
+  "/api/auth/signup/route": "/api/auth/signup",
+  "/api/cron/monthly-summary/route": "/api/cron/monthly-summary",
+  "/api/cron/recurring/route": "/api/cron/recurring",
+  "/api/currency/rates/[base]/route": "/api/currency/rates/[base]",
+  "/api/email/contact/route": "/api/email/contact",
+  "/api/transactions/[id]/route": "/api/transactions/[id]",
+  "/api/transactions/recurring/bulk-delete/route": "/api/transactions/recurring/bulk-delete",
+  "/api/transactions/recurring/bulk-update/route": "/api/transactions/recurring/bulk-update",
+  "/api/transactions/recurring/route": "/api/transactions/recurring",
+  "/api/transactions/route": "/api/transactions",
+  "/api/transactions/suggestions/route": "/api/transactions/suggestions",
+  "/api/user/settings/route": "/api/user/settings",
+  "/page": "/"
+}

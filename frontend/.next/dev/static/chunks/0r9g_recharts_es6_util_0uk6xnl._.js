@@ -12,7 +12,7 @@ __turbopack_context__.s([
 var defaultRoundPrecision = 4;
 function round(num) {
     var roundPrecision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultRoundPrecision;
-    var factor = Math.pow(10, roundPrecision);
+    var factor = 10 ** roundPrecision;
     var rounded = Math.round(num * factor) / factor;
     if (Object.is(rounded, -0)) {
         return 0;
@@ -23,7 +23,7 @@ function roundTemplateLiteral(strings) {
     for(var _len = arguments.length, values = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++){
         values[_key - 1] = arguments[_key];
     }
-    return strings.reduce(function(result, string, i) {
+    return strings.reduce((result, string, i)=>{
         var value = values[i - 1];
         if (typeof value === 'string') {
             return result + value + string;
@@ -70,13 +70,11 @@ __turbopack_context__.s([
     "upperFirst",
     ()=>upperFirst
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_instanceof.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$get$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/es-toolkit/compat/get.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$round$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/round.js [app-client] (ecmascript)");
 ;
 ;
-;
-var mathSign = function mathSign(value) {
+var mathSign = (value)=>{
     if (value === 0) {
         return 0;
     }
@@ -85,21 +83,15 @@ var mathSign = function mathSign(value) {
     }
     return -1;
 };
-var isNan = function isNan(value) {
+var isNan = (value)=>{
     // eslint-disable-next-line eqeqeq
     return typeof value == 'number' && value != +value;
 };
-var isPercent = function isPercent(value) {
-    return typeof value === 'string' && value.indexOf('%') === value.length - 1;
-};
-var isNumber = function isNumber(value) {
-    return (typeof value === 'number' || (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(value, Number)) && !isNan(value);
-};
-var isNumOrStr = function isNumOrStr(value) {
-    return isNumber(value) || typeof value === 'string';
-};
+var isPercent = (value)=>typeof value === 'string' && value.indexOf('%') === value.length - 1;
+var isNumber = (value)=>(typeof value === 'number' || value instanceof Number) && !isNan(value);
+var isNumOrStr = (value)=>isNumber(value) || typeof value === 'string';
 var idCounter = 0;
-var uniqueId = function uniqueId(prefix) {
+var uniqueId = (prefix)=>{
     var id = ++idCounter;
     return "".concat(prefix || '').concat(id);
 };
@@ -127,7 +119,7 @@ var getPercentValue = function getPercentValue(percent, totalValue) {
     }
     return value;
 };
-var hasDuplicate = function hasDuplicate(ary) {
+var hasDuplicate = (ary)=>{
     if (!Array.isArray(ary)) {
         return false;
     }
@@ -152,11 +144,9 @@ function findEntryInArray(ary, specifiedKey, specifiedValue) {
     if (!ary || !ary.length) {
         return undefined;
     }
-    return ary.find(function(entry) {
-        return entry && (typeof specifiedKey === 'function' ? specifiedKey(entry) : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$get$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(entry, specifiedKey)) === specifiedValue;
-    });
+    return ary.find((entry)=>entry && (typeof specifiedKey === 'function' ? specifiedKey(entry) : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$get$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(entry, specifiedKey)) === specifiedValue);
 }
-var getLinearRegression = function getLinearRegression(data) {
+var getLinearRegression = (data)=>{
     var len = data.length;
     var xsum = 0;
     var ysum = 0;
@@ -179,16 +169,16 @@ var getLinearRegression = function getLinearRegression(data) {
     }
     var a = len * xxsum !== xsum * xsum ? (len * xysum - xsum * ysum) / (len * xxsum - xsum * xsum) : 0;
     return {
-        xmin: xmin,
-        xmax: xmax,
-        a: a,
+        xmin,
+        xmax,
+        a,
         b: (ysum - a * xsum) / len
     };
 };
-var isNullish = function isNullish(value) {
+var isNullish = (value)=>{
     return value === null || typeof value === 'undefined';
 };
-var upperFirst = function upperFirst(value) {
+var upperFirst = (value)=>{
     if (isNullish(value)) {
         return value;
     }
@@ -279,9 +269,6 @@ __turbopack_context__.s([
     "truncateByDomain",
     ()=>truncateByDomain
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_define_property.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$sortBy$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/es-toolkit/compat/sortBy.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$get$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/es-toolkit/compat/get.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$victory$2d$vendor$2f$es$2f$d3$2d$shape$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/victory-vendor/es/d3-shape.js [app-client] (ecmascript) <locals>");
@@ -294,9 +281,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$getSliced$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/getSliced.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/isWellBehavedNumber.js [app-client] (ecmascript)");
-;
-;
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -328,14 +312,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -358,30 +342,30 @@ function getValueByDataKey(obj, dataKey, defaultValue) {
     }
     return defaultValue;
 }
-var appendOffsetOfLegend = function appendOffsetOfLegend(offset, legendSettings, legendSize) {
+var appendOffsetOfLegend = (offset, legendSettings, legendSize)=>{
     if (legendSettings && legendSize) {
-        var boxWidth = legendSize.width, boxHeight = legendSize.height;
-        var align = legendSettings.align, verticalAlign = legendSettings.verticalAlign, layout = legendSettings.layout;
+        var { width: boxWidth, height: boxHeight } = legendSize;
+        var { align, verticalAlign, layout } = legendSettings;
         if ((layout === 'vertical' || layout === 'horizontal' && verticalAlign === 'middle') && align !== 'center' && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(offset[align])) {
-            return _objectSpread(_objectSpread({}, offset), {}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, align, offset[align] + (boxWidth || 0)));
+            return _objectSpread(_objectSpread({}, offset), {}, {
+                [align]: offset[align] + (boxWidth || 0)
+            });
         }
         if ((layout === 'horizontal' || layout === 'vertical' && align === 'center') && verticalAlign !== 'middle' && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(offset[verticalAlign])) {
-            return _objectSpread(_objectSpread({}, offset), {}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, verticalAlign, offset[verticalAlign] + (boxHeight || 0)));
+            return _objectSpread(_objectSpread({}, offset), {}, {
+                [verticalAlign]: offset[verticalAlign] + (boxHeight || 0)
+            });
         }
     }
     return offset;
 };
-var isCategoricalAxis = function isCategoricalAxis(layout, axisType) {
-    return layout === 'horizontal' && axisType === 'xAxis' || layout === 'vertical' && axisType === 'yAxis' || layout === 'centric' && axisType === 'angleAxis' || layout === 'radial' && axisType === 'radiusAxis';
-};
-var getCoordinatesOfGrid = function getCoordinatesOfGrid(ticks, minValue, maxValue, syncWithTicks) {
+var isCategoricalAxis = (layout, axisType)=>layout === 'horizontal' && axisType === 'xAxis' || layout === 'vertical' && axisType === 'yAxis' || layout === 'centric' && axisType === 'angleAxis' || layout === 'radial' && axisType === 'radiusAxis';
+var getCoordinatesOfGrid = (ticks, minValue, maxValue, syncWithTicks)=>{
     if (syncWithTicks) {
-        return ticks.map(function(entry) {
-            return entry.coordinate;
-        });
+        return ticks.map((entry)=>entry.coordinate);
     }
     var hasMin, hasMax;
-    var values = ticks.map(function(entry) {
+    var values = ticks.map((entry)=>{
         if (entry.coordinate === minValue) {
             hasMin = true;
         }
@@ -398,11 +382,11 @@ var getCoordinatesOfGrid = function getCoordinatesOfGrid(ticks, minValue, maxVal
     }
     return values;
 };
-var getTicksOfAxis = function getTicksOfAxis(axis, isGrid, isAll) {
+var getTicksOfAxis = (axis, isGrid, isAll)=>{
     if (!axis) {
         return null;
     }
-    var duplicateDomain = axis.duplicateDomain, type = axis.type, range = axis.range, scale = axis.scale, realScaleType = axis.realScaleType, isCategorical = axis.isCategorical, categoricalDomain = axis.categoricalDomain, tickCount = axis.tickCount, ticks = axis.ticks, niceTicks = axis.niceTicks, axisType = axis.axisType;
+    var { duplicateDomain, type, range, scale, realScaleType, isCategorical, categoricalDomain, tickCount, ticks, niceTicks, axisType } = axis;
     if (!scale) {
         return null;
     }
@@ -411,7 +395,7 @@ var getTicksOfAxis = function getTicksOfAxis(axis, isGrid, isAll) {
     offset = axisType === 'angleAxis' && range && range.length >= 2 ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mathSign"])(range[0] - range[1]) * 2 * offset : offset;
     // The ticks set by user should only affect the ticks adjacent to axis line
     if (isGrid && (ticks || niceTicks)) {
-        var result = (ticks || niceTicks || []).map(function(entry, index) {
+        var result = (ticks || niceTicks || []).map((entry, index)=>{
             var scaleContent = duplicateDomain ? duplicateDomain.indexOf(entry) : entry;
             var scaled = scale.map(scaleContent);
             if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(scaled)) {
@@ -422,8 +406,8 @@ var getTicksOfAxis = function getTicksOfAxis(axis, isGrid, isAll) {
                 // That could be the case for example with a PointScale and a string as domain.
                 coordinate: scaled + offset,
                 value: entry,
-                offset: offset,
-                index: index
+                offset,
+                index
             };
         }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNotNil"]);
         return result;
@@ -431,7 +415,7 @@ var getTicksOfAxis = function getTicksOfAxis(axis, isGrid, isAll) {
     // When axis is a categorical axis, but the type of axis is number or the scale of axis is not "auto"
     // For type='number' with niceTicks available, skip this branch so ticks are evenly spaced (GitHub issue #4271)
     if (isCategorical && categoricalDomain) {
-        return categoricalDomain.map(function(entry, index) {
+        return categoricalDomain.map((entry, index)=>{
             var scaled = scale.map(entry);
             if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(scaled)) {
                 return null;
@@ -439,13 +423,13 @@ var getTicksOfAxis = function getTicksOfAxis(axis, isGrid, isAll) {
             return {
                 coordinate: scaled + offset,
                 value: entry,
-                index: index,
-                offset: offset
+                index,
+                offset
             };
         }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNotNil"]);
     }
     if (scale.ticks && !isAll && tickCount != null) {
-        return scale.ticks(tickCount).map(function(entry, index) {
+        return scale.ticks(tickCount).map((entry, index)=>{
             var scaled = scale.map(entry);
             if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(scaled)) {
                 return null;
@@ -453,13 +437,13 @@ var getTicksOfAxis = function getTicksOfAxis(axis, isGrid, isAll) {
             return {
                 coordinate: scaled + offset,
                 value: entry,
-                index: index,
-                offset: offset
+                index,
+                offset
             };
         }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNotNil"]);
     }
     // When axis has duplicated text, serial numbers are used to generate scale
-    return scale.domain().map(function(entry, index) {
+    return scale.domain().map((entry, index)=>{
         var scaled = scale.map(entry);
         if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(scaled)) {
             return null;
@@ -468,12 +452,12 @@ var getTicksOfAxis = function getTicksOfAxis(axis, isGrid, isAll) {
             coordinate: scaled + offset,
             // @ts-expect-error can't use Date as an index
             value: duplicateDomain ? duplicateDomain[entry] : entry,
-            index: index,
-            offset: offset
+            index,
+            offset
         };
     }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNotNil"]);
 };
-var truncateByDomain = function truncateByDomain(value, domain) {
+var truncateByDomain = (value, domain)=>{
     if (!domain || domain.length !== 2 || !(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(domain[0]) || !(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(domain[1])) {
         return value;
     }
@@ -497,7 +481,7 @@ var truncateByDomain = function truncateByDomain(value, domain) {
     }
     return result;
 };
-var offsetSign = function offsetSign(series) {
+var offsetSign = (series)=>{
     var _series$;
     var n = series.length;
     if (n <= 0) {
@@ -531,7 +515,7 @@ var offsetSign = function offsetSign(series) {
         }
     }
 };
-var offsetPositive = function offsetPositive(series) {
+var offsetPositive = (series)=>{
     var _series$2;
     var n = series.length;
     if (n <= 0) {
@@ -586,17 +570,15 @@ var offsetPositive = function offsetPositive(series) {
     wiggle: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$offset$2f$wiggle$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__stackOffsetWiggle$3e$__["stackOffsetWiggle"],
     positive: offsetPositive
 };
-var getStackedData = function getStackedData(data, dataKeys, offsetType) {
+var getStackedData = (data, dataKeys, offsetType)=>{
     var _STACK_OFFSET_MAP$off;
     var offsetAccessor = (_STACK_OFFSET_MAP$off = STACK_OFFSET_MAP[offsetType]) !== null && _STACK_OFFSET_MAP$off !== void 0 ? _STACK_OFFSET_MAP$off : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$offset$2f$none$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__stackOffsetNone$3e$__["stackOffsetNone"];
-    var stack = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$stack$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__stack$3e$__["stack"])().keys(dataKeys).value(function(d, key) {
-        return Number(getValueByDataKey(d, key, 0));
-    }).order(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$order$2f$none$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__stackOrderNone$3e$__["stackOrderNone"])// @ts-expect-error definitelytyped types are incorrect
+    var stack = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$stack$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__stack$3e$__["stack"])().keys(dataKeys).value((d, key)=>Number(getValueByDataKey(d, key, 0))).order(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$d3$2d$shape$2f$src$2f$order$2f$none$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__stackOrderNone$3e$__["stackOrderNone"])// @ts-expect-error definitelytyped types are incorrect
     .offset(offsetAccessor);
     var result = stack(data);
     // Post-process ranged data: if value is an array of two numbers, use them directly without stacking
-    result.forEach(function(series, seriesIndex) {
-        series.forEach(function(point, pointIndex) {
+    result.forEach((series, seriesIndex)=>{
+        series.forEach((point, pointIndex)=>{
             var value = getValueByDataKey(data[pointIndex], dataKeys[seriesIndex], 0);
             if (Array.isArray(value) && value.length === 2 && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(value[0]) && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(value[1])) {
                 // eslint-disable-next-line prefer-destructuring,no-param-reassign
@@ -612,7 +594,7 @@ function getNormalizedStackId(publicStackId) {
     return publicStackId == null ? undefined : String(publicStackId);
 }
 function getCateCoordinateOfLine(_ref) {
-    var axis = _ref.axis, ticks = _ref.ticks, bandSize = _ref.bandSize, entry = _ref.entry, index = _ref.index, dataKey = _ref.dataKey;
+    var { axis, ticks, bandSize, entry, index, dataKey } = _ref;
     if (axis.type === 'category') {
         // find coordinate of category axis by the value of category
         // @ts-expect-error why does this use direct object access instead of getValueByDataKey?
@@ -632,8 +614,8 @@ function getCateCoordinateOfLine(_ref) {
     }
     return scaled;
 }
-var getCateCoordinateOfBar = function getCateCoordinateOfBar(_ref2) {
-    var axis = _ref2.axis, ticks = _ref2.ticks, offset = _ref2.offset, bandSize = _ref2.bandSize, entry = _ref2.entry, index = _ref2.index;
+var getCateCoordinateOfBar = (_ref2)=>{
+    var { axis, ticks, offset, bandSize, entry, index } = _ref2;
     if (axis.type === 'category') {
         return ticks[index] ? ticks[index].coordinate + offset : null;
     }
@@ -648,8 +630,8 @@ var getCateCoordinateOfBar = function getCateCoordinateOfBar(_ref2) {
     }
     return scaled - bandSize / 2 + offset;
 };
-var getBaseValueOfBar = function getBaseValueOfBar(_ref3) {
-    var numericAxis = _ref3.numericAxis;
+var getBaseValueOfBar = (_ref3)=>{
+    var { numericAxis } = _ref3;
     var domain = numericAxis.scale.domain();
     if (numericAxis.type === 'number') {
         // @ts-expect-error type number means the domain has numbers in it but this relationship is not known to typescript
@@ -666,31 +648,30 @@ var getBaseValueOfBar = function getBaseValueOfBar(_ref3) {
     }
     return domain[0];
 };
-var getDomainOfSingle = function getDomainOfSingle(data) {
-    var _Math, _Math1;
+var getDomainOfSingle = (data)=>{
     var flat = data.flat(2).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"]);
     return [
-        (_Math = Math).min.apply(_Math, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(flat)),
-        (_Math1 = Math).max.apply(_Math1, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(flat))
+        Math.min(...flat),
+        Math.max(...flat)
     ];
 };
-var makeDomainFinite = function makeDomainFinite(domain) {
+var makeDomainFinite = (domain)=>{
     return [
         domain[0] === Infinity ? 0 : domain[0],
         domain[1] === -Infinity ? 0 : domain[1]
     ];
 };
-var getDomainOfStackGroups = function getDomainOfStackGroups(stackGroups, startIndex, endIndex) {
+var getDomainOfStackGroups = (stackGroups, startIndex, endIndex)=>{
     if (stackGroups == null) {
         return undefined;
     }
-    return makeDomainFinite(Object.keys(stackGroups).reduce(function(result, stackId) {
+    return makeDomainFinite(Object.keys(stackGroups).reduce((result, stackId)=>{
         var group = stackGroups[stackId];
         if (!group) {
             return result;
         }
-        var stackedData = group.stackedData;
-        var domain = stackedData.reduce(function(res, entry) {
+        var { stackedData } = group;
+        var domain = stackedData.reduce((res, entry)=>{
             var sliced = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$getSliced$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getSliced"])(entry, startIndex, endIndex);
             var s = getDomainOfSingle(sliced);
             if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(s[0]) || !(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(s[1])) {
@@ -715,7 +696,7 @@ var getDomainOfStackGroups = function getDomainOfStackGroups(stackGroups, startI
 };
 var MIN_VALUE_REG = /^dataMin[\s]*-[\s]*([0-9]+([.]{1}[0-9]+){0,1})$/;
 var MAX_VALUE_REG = /^dataMax[\s]*\+[\s]*([0-9]+([.]{1}[0-9]+){0,1})$/;
-var getBandSizeOfAxis = function getBandSizeOfAxis(axis, ticks, isBar) {
+var getBandSizeOfAxis = (axis, ticks, isBar)=>{
     if (axis && axis.scale && axis.scale.bandwidth) {
         var bandWidth = axis.scale.bandwidth();
         if (!isBar || bandWidth > 0) {
@@ -723,9 +704,7 @@ var getBandSizeOfAxis = function getBandSizeOfAxis(axis, ticks, isBar) {
         }
     }
     if (axis && ticks && ticks.length >= 2) {
-        var orderedTicks = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$sortBy$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(ticks, function(o) {
-            return o.coordinate;
-        });
+        var orderedTicks = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$sortBy$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(ticks, (o)=>o.coordinate);
         var bandSize = Infinity;
         for(var i = 1, len = orderedTicks.length; i < len; i++){
             var cur = orderedTicks[i];
@@ -737,12 +716,12 @@ var getBandSizeOfAxis = function getBandSizeOfAxis(axis, ticks, isBar) {
     return isBar ? undefined : 0;
 };
 function getTooltipEntry(_ref4) {
-    var tooltipEntrySettings = _ref4.tooltipEntrySettings, dataKey = _ref4.dataKey, payload = _ref4.payload, value = _ref4.value, name = _ref4.name;
+    var { tooltipEntrySettings, dataKey, payload, value, name } = _ref4;
     return _objectSpread(_objectSpread({}, tooltipEntrySettings), {}, {
-        dataKey: dataKey,
-        payload: payload,
-        value: value,
-        name: name
+        dataKey,
+        payload,
+        value,
+        name
     });
 }
 function getTooltipNameProp(nameFromItem, dataKey) {
@@ -754,7 +733,7 @@ function getTooltipNameProp(nameFromItem, dataKey) {
     }
     return undefined;
 }
-var calculateCartesianTooltipPos = function calculateCartesianTooltipPos(coordinate, layout) {
+var calculateCartesianTooltipPos = (coordinate, layout)=>{
     if (layout === 'horizontal') {
         return coordinate.relativeX;
     }
@@ -763,7 +742,7 @@ var calculateCartesianTooltipPos = function calculateCartesianTooltipPos(coordin
     }
     return undefined;
 };
-var calculatePolarTooltipPos = function calculatePolarTooltipPos(rangeObj, layout) {
+var calculatePolarTooltipPos = (rangeObj, layout)=>{
     if (layout === 'centric') {
         return rangeObj.angle;
     }
@@ -834,9 +813,7 @@ var warn = function warn(condition, format) {
                 console.warn('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
             } else {
                 var argIndex = 0;
-                console.warn(format.replace(/%s/g, function() {
-                    return args[argIndex++];
-                }));
+                console.warn(format.replace(/%s/g, ()=>args[argIndex++]));
             }
         }
     }
@@ -855,19 +832,15 @@ __turbopack_context__.s([
     "parseNumericalUserDomain",
     ()=>parseNumericalUserDomain
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/ChartUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/isWellBehavedNumber.js [app-client] (ecmascript)");
 ;
 ;
 ;
-;
-;
 function isWellFormedNumberDomain(v) {
     if (Array.isArray(v) && v.length === 2) {
-        var _v = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(v, 2), min = _v[0], max = _v[1];
+        var [min, max] = v;
         if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(min) && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(max)) {
             return true;
         }
@@ -898,7 +871,7 @@ function numericalDomainSpecifiedWithoutRequiringData(userDomain, allowDataOverf
         return undefined;
     }
     if (Array.isArray(userDomain) && userDomain.length === 2) {
-        var _userDomain = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(userDomain, 2), providedMin = _userDomain[0], providedMax = _userDomain[1];
+        var [providedMin, providedMax] = userDomain;
         var finalMin, finalMax;
         if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(providedMin)) {
             finalMin = providedMin;
@@ -937,12 +910,11 @@ function parseNumericalUserDomain(userDomain, dataDomain, allowDataOverflow) {
         /* ignore the exception and compute domain from data later */ }
     }
     if (Array.isArray(userDomain) && userDomain.length === 2) {
-        var _userDomain = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(userDomain, 2), providedMin = _userDomain[0], providedMax = _userDomain[1];
+        var [providedMin, providedMax] = userDomain;
         var finalMin, finalMax;
         if (providedMin === 'auto') {
             if (dataDomain != null) {
-                var _Math;
-                finalMin = (_Math = Math).min.apply(_Math, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(dataDomain));
+                finalMin = Math.min(...dataDomain);
             }
         } else if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(providedMin)) {
             finalMin = providedMin;
@@ -966,8 +938,7 @@ function parseNumericalUserDomain(userDomain, dataDomain, allowDataOverflow) {
         }
         if (providedMax === 'auto') {
             if (dataDomain != null) {
-                var _Math1;
-                finalMax = (_Math1 = Math).max.apply(_Math1, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(dataDomain));
+                finalMax = Math.max(...dataDomain);
             }
         } else if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(providedMax)) {
             finalMax = providedMax;
@@ -1076,8 +1047,6 @@ __turbopack_context__.s([
     "getValidInterval",
     ()=>getValidInterval
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
 /**
  * @fileOverview calculate tick values of scale
  * @author xile611, arcthur
@@ -1086,28 +1055,25 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f4
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$scale$2f$util$2f$arithmetic$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/scale/util/arithmetic.js [app-client] (ecmascript)");
 ;
 ;
-;
-;
-var getValidInterval = function getValidInterval(_ref) {
-    var _$_ref = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_ref, 2), min = _$_ref[0], max = _$_ref[1];
-    var _$_ref1 = [
+var getValidInterval = (_ref)=>{
+    var [min, max] = _ref;
+    var [validMin, validMax] = [
         min,
         max
-    ], validMin = _$_ref1[0], validMax = _$_ref1[1];
+    ];
     // exchange
     if (min > max) {
-        var ref;
-        ref = [
+        [validMin, validMax] = [
             max,
             min
-        ], validMin = ref[0], validMax = ref[1], ref;
+        ];
     }
     return [
         validMin,
         validMax
     ];
 };
-var getAdaptiveStep = function getAdaptiveStep(roughStep, allowDecimals, correctionFactor) {
+var getAdaptiveStep = (roughStep, allowDecimals, correctionFactor)=>{
     if (roughStep.lte(0)) {
         return new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](0);
     }
@@ -1122,7 +1088,7 @@ var getAdaptiveStep = function getAdaptiveStep(roughStep, allowDecimals, correct
     var formatStep = amendStepRatio.mul(digitCountValue);
     return allowDecimals ? new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](formatStep.toNumber()) : new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](Math.ceil(formatStep.toNumber()));
 };
-var getSnap125Step = function getSnap125Step(roughStep, allowDecimals, correctionFactor) {
+var getSnap125Step = (roughStep, allowDecimals, correctionFactor)=>{
     var _NICE_STEPS$niceIdx;
     if (roughStep.lte(0)) {
         return new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](0);
@@ -1139,9 +1105,7 @@ var getSnap125Step = function getSnap125Step(roughStep, allowDecimals, correctio
     // normalized is in the range [1, 10)
     var normalized = roughStep.div(magnitude).toNumber();
     // Find the smallest nice step >= normalized (ceiling)
-    var niceIdx = NICE_STEPS.findIndex(function(s) {
-        return s >= normalized - 1e-10;
-    });
+    var niceIdx = NICE_STEPS.findIndex((s)=>s >= normalized - 1e-10);
     if (niceIdx === -1) {
         // normalized > 5 (e.g. 7.3), move to next order of magnitude
         magnitude = magnitude.mul(10);
@@ -1158,7 +1122,7 @@ var getSnap125Step = function getSnap125Step(roughStep, allowDecimals, correctio
     var formatStep = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](niceStep).mul(magnitude);
     return allowDecimals ? formatStep : new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](Math.ceil(formatStep.toNumber()));
 };
-var getTickOfSingleValue = function getTickOfSingleValue(value, tickCount, allowDecimals) {
+var getTickOfSingleValue = (value, tickCount, allowDecimals)=>{
     var step = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](1);
     // calculate the middle value of ticks
     var middle = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](value);
@@ -1230,29 +1194,31 @@ var getTickOfSingleValue = function getTickOfSingleValue(value, tickCount, allow
         belowCount = max > 0 ? belowCount : belowCount + (tickCount - scaleCount);
     }
     return {
-        step: step,
+        step,
         tickMin: middle.sub(new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](belowCount).mul(step)),
         tickMax: middle.add(new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](upCount).mul(step))
     };
 };
 ;
 var getNiceTickValues = function getNiceTickValues(_ref2) {
-    var _$_ref2 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_ref2, 2), min = _$_ref2[0], max = _$_ref2[1];
+    var [min, max] = _ref2;
     var tickCount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 6;
     var allowDecimals = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
     var niceTicksMode = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'auto';
     // More than two ticks should be return
     var count = Math.max(tickCount, 2);
-    var _getValidInterval = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(getValidInterval([
+    var [cormin, cormax] = getValidInterval([
         min,
         max
-    ]), 2), cormin = _getValidInterval[0], cormax = _getValidInterval[1];
+    ]);
     if (cormin === -Infinity || cormax === Infinity) {
         var _values = cormax === Infinity ? [
-            cormin
-        ].concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(Array(tickCount - 1).fill(Infinity))) : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(Array(tickCount - 1).fill(-Infinity)).concat([
+            cormin,
+            ...Array(tickCount - 1).fill(Infinity)
+        ] : [
+            ...Array(tickCount - 1).fill(-Infinity),
             cormax
-        ]);
+        ];
         return min > max ? _values.reverse() : _values;
     }
     if (cormin === cormax) {
@@ -1260,19 +1226,19 @@ var getNiceTickValues = function getNiceTickValues(_ref2) {
     }
     var stepFn = niceTicksMode === 'snap125' ? getSnap125Step : getAdaptiveStep;
     // Get the step between two ticks
-    var _calculateStep1 = _calculateStep(cormin, cormax, count, allowDecimals, 0, stepFn), step = _calculateStep1.step, tickMin = _calculateStep1.tickMin, tickMax = _calculateStep1.tickMax;
+    var { step, tickMin, tickMax } = _calculateStep(cormin, cormax, count, allowDecimals, 0, stepFn);
     var values = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$scale$2f$util$2f$arithmetic$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["rangeStep"])(tickMin, tickMax.add(new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](0.1).mul(step)), step);
     return min > max ? values.reverse() : values;
 };
 var getTickValuesFixedDomain = function getTickValuesFixedDomain(_ref3, tickCount) {
-    var _$_ref3 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_ref3, 2), min = _$_ref3[0], max = _$_ref3[1];
+    var [min, max] = _ref3;
     var allowDecimals = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
     var niceTicksMode = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'auto';
     // More than two ticks should be return
-    var _getValidInterval = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(getValidInterval([
+    var [cormin, cormax] = getValidInterval([
         min,
         max
-    ]), 2), cormin = _getValidInterval[0], cormax = _getValidInterval[1];
+    ]);
     if (cormin === -Infinity || cormax === Infinity) {
         return [
             min,
@@ -1287,18 +1253,17 @@ var getTickValuesFixedDomain = function getTickValuesFixedDomain(_ref3, tickCoun
     var stepFn = niceTicksMode === 'snap125' ? getSnap125Step : getAdaptiveStep;
     var count = Math.max(tickCount, 2);
     var step = stepFn(new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](cormax).sub(cormin).div(count - 1), allowDecimals, 0);
-    var values = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$scale$2f$util$2f$arithmetic$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["rangeStep"])(new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](cormin), new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](cormax), step)).concat([
+    var values = [
+        ...(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$scale$2f$util$2f$arithmetic$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["rangeStep"])(new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](cormin), new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$decimal$2e$js$2d$light$2f$decimal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"](cormax), step),
         cormax
-    ]);
+    ];
     if (allowDecimals === false) {
         /*
      * allowDecimals is false means that we want to have integer ticks.
      * The step is guaranteed to be an integer in the code above which is great start
      * but when the first step is not an integer, it will start stepping from a decimal value anyway.
      * So we need to round all the values to integers after the fact.
-     */ values = values.map(function(value) {
-            return Math.round(value);
-        });
+     */ values = values.map((value)=>Math.round(value));
     }
     return min > max ? values.reverse() : values;
 };
@@ -1320,8 +1285,6 @@ __turbopack_context__.s([
     "radianToDegree",
     ()=>radianToDegree
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -1353,31 +1316,25 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
 }
 var RADIAN = Math.PI / 180;
-var degreeToRadian = function degreeToRadian(angle) {
-    return angle * Math.PI / 180;
-};
-var radianToDegree = function radianToDegree(angleInRadian) {
-    return angleInRadian * 180 / Math.PI;
-};
-var polarToCartesian = function polarToCartesian(cx, cy, radius, angle) {
-    return {
+var degreeToRadian = (angle)=>angle * Math.PI / 180;
+var radianToDegree = (angleInRadian)=>angleInRadian * 180 / Math.PI;
+var polarToCartesian = (cx, cy, radius, angle)=>({
         x: cx + Math.cos(-RADIAN * angle) * radius,
         y: cy + Math.sin(-RADIAN * angle) * radius
-    };
-};
+    });
 var getMaxRadius = function getMaxRadius(width, height) {
     var offset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
         top: 0,
@@ -1390,24 +1347,24 @@ var getMaxRadius = function getMaxRadius(width, height) {
     };
     return Math.min(Math.abs(width - (offset.left || 0) - (offset.right || 0)), Math.abs(height - (offset.top || 0) - (offset.bottom || 0))) / 2;
 };
-var distanceBetweenPoints = function distanceBetweenPoints(point, anotherPoint) {
-    var x1 = point.x, y1 = point.y;
-    var x2 = anotherPoint.x, y2 = anotherPoint.y;
-    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+var distanceBetweenPoints = (point, anotherPoint)=>{
+    var { x: x1, y: y1 } = point;
+    var { x: x2, y: y2 } = anotherPoint;
+    return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
 };
-var getAngleOfPoint = function getAngleOfPoint(_ref, _ref2) {
-    var x = _ref.x, y = _ref.y;
-    var cx = _ref2.cx, cy = _ref2.cy;
+var getAngleOfPoint = (_ref, _ref2)=>{
+    var { x, y } = _ref;
+    var { cx, cy } = _ref2;
     var radius = distanceBetweenPoints({
-        x: x,
-        y: y
+        x,
+        y
     }, {
         x: cx,
         y: cy
     });
     if (radius <= 0) {
         return {
-            radius: radius,
+            radius,
             angle: 0
         };
     }
@@ -1417,13 +1374,13 @@ var getAngleOfPoint = function getAngleOfPoint(_ref, _ref2) {
         angleInRadian = 2 * Math.PI - angleInRadian;
     }
     return {
-        radius: radius,
+        radius,
         angle: radianToDegree(angleInRadian),
-        angleInRadian: angleInRadian
+        angleInRadian
     };
 };
-var formatAngleOfSector = function formatAngleOfSector(_ref3) {
-    var startAngle = _ref3.startAngle, endAngle = _ref3.endAngle;
+var formatAngleOfSector = (_ref3)=>{
+    var { startAngle, endAngle } = _ref3;
     var startCnt = Math.floor(startAngle / 360);
     var endCnt = Math.floor(endAngle / 360);
     var min = Math.min(startCnt, endCnt);
@@ -1432,27 +1389,27 @@ var formatAngleOfSector = function formatAngleOfSector(_ref3) {
         endAngle: endAngle - min * 360
     };
 };
-var reverseFormatAngleOfSector = function reverseFormatAngleOfSector(angle, _ref4) {
-    var startAngle = _ref4.startAngle, endAngle = _ref4.endAngle;
+var reverseFormatAngleOfSector = (angle, _ref4)=>{
+    var { startAngle, endAngle } = _ref4;
     var startCnt = Math.floor(startAngle / 360);
     var endCnt = Math.floor(endAngle / 360);
     var min = Math.min(startCnt, endCnt);
     return angle + min * 360;
 };
-var inRangeOfSector = function inRangeOfSector(_ref5, viewBox) {
-    var x = _ref5.relativeX, y = _ref5.relativeY;
-    var _getAngleOfPoint = getAngleOfPoint({
-        x: x,
-        y: y
-    }, viewBox), radius = _getAngleOfPoint.radius, angle = _getAngleOfPoint.angle;
-    var innerRadius = viewBox.innerRadius, outerRadius = viewBox.outerRadius;
+var inRangeOfSector = (_ref5, viewBox)=>{
+    var { relativeX: x, relativeY: y } = _ref5;
+    var { radius, angle } = getAngleOfPoint({
+        x,
+        y
+    }, viewBox);
+    var { innerRadius, outerRadius } = viewBox;
     if (radius < innerRadius || radius > outerRadius) {
         return null;
     }
     if (radius === 0) {
         return null;
     }
-    var _formatAngleOfSector = formatAngleOfSector(viewBox), startAngle = _formatAngleOfSector.startAngle, endAngle = _formatAngleOfSector.endAngle;
+    var { startAngle, endAngle } = formatAngleOfSector(viewBox);
     var formatAngle = angle;
     var inRange;
     if (startAngle <= endAngle) {
@@ -1474,7 +1431,7 @@ var inRangeOfSector = function inRangeOfSector(_ref5, viewBox) {
     }
     if (inRange) {
         return _objectSpread(_objectSpread({}, viewBox), {}, {
-            radius: radius,
+            radius,
             angle: reverseFormatAngleOfSector(formatAngle, viewBox)
         });
     }
@@ -1533,10 +1490,7 @@ function getStackSeriesIdentifier(graphicalItem) {
     "rechartsScaleFactory",
     ()=>rechartsScaleFactory
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
-;
 function rechartsScaleFactory(d3Scale) {
-    var _Math, _Math1;
     if (d3Scale == null) {
         return undefined;
     }
@@ -1544,13 +1498,11 @@ function rechartsScaleFactory(d3Scale) {
     var bandwidthFn = d3Scale.bandwidth;
     var d3Range = d3Scale.range();
     var range = [
-        (_Math = Math).min.apply(_Math, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(d3Range)),
-        (_Math1 = Math).max.apply(_Math1, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(d3Range))
+        Math.min(...d3Range),
+        Math.max(...d3Range)
     ];
     return {
-        domain: function domain() {
-            return d3Scale.domain();
-        },
+        domain: ()=>d3Scale.domain(),
         range: function(_range) {
             function range() {
                 return _range.apply(this, arguments);
@@ -1559,27 +1511,17 @@ function rechartsScaleFactory(d3Scale) {
                 return _range.toString();
             };
             return range;
-        }(function() {
-            return range;
-        }),
-        rangeMin: function rangeMin() {
-            return range[0];
-        },
-        rangeMax: function rangeMax() {
-            return range[1];
-        },
-        isInRange: function isInRange(value) {
+        }(()=>range),
+        rangeMin: ()=>range[0],
+        rangeMax: ()=>range[1],
+        isInRange (value) {
             var first = range[0];
             var last = range[1];
             return first <= last ? value >= first && value <= last : value >= last && value <= first;
         },
-        bandwidth: bandwidthFn ? function() {
-            return bandwidthFn.call(d3Scale);
-        } : undefined,
-        ticks: ticksFn ? function(count) {
-            return ticksFn.call(d3Scale, count);
-        } : undefined,
-        map: function map(input, options) {
+        bandwidth: bandwidthFn ? ()=>bandwidthFn.call(d3Scale) : undefined,
+        ticks: ticksFn ? (count)=>ticksFn.call(d3Scale, count) : undefined,
+        map: (input, options)=>{
             var baseValue = d3Scale(input);
             if (baseValue == null) {
                 return undefined;
@@ -1641,7 +1583,7 @@ function createCategoricalInverse(scale, allDataPointsOnAxis) {
     var domain = allDataPointsOnAxis !== null && allDataPointsOnAxis !== void 0 ? allDataPointsOnAxis : scale.domain();
     // Build an array of pixel positions for each domain value
     // @ts-expect-error we're attempting to scale unknown without having guarantee that it is a Domain type
-    var pixelPositions = domain.map(function(d) {
+    var pixelPositions = domain.map((d)=>{
         var _scale;
         return (_scale = scale(d)) !== null && _scale !== void 0 ? _scale : 0;
     });
@@ -1649,7 +1591,7 @@ function createCategoricalInverse(scale, allDataPointsOnAxis) {
     if (domain.length === 0 || range.length < 2) {
         return undefined;
     }
-    return function(pixelValue) {
+    return (pixelValue)=>{
         var _pixelPositions, _pixelPositions$index;
         // Find the closest domain value using bisect
         var index = bisect(pixelPositions, pixelValue);
@@ -1683,10 +1625,8 @@ __turbopack_context__.s([
     "isInCartesianRange",
     ()=>isInCartesianRange
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/PolarUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -1718,24 +1658,22 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
 }
 ;
 ;
-var getActiveCartesianCoordinate = function getActiveCartesianCoordinate(layout, tooltipTicks, activeIndex, pointer) {
-    var entry = tooltipTicks.find(function(tick) {
-        return tick && tick.index === activeIndex;
-    });
+var getActiveCartesianCoordinate = (layout, tooltipTicks, activeIndex, pointer)=>{
+    var entry = tooltipTicks.find((tick)=>tick && tick.index === activeIndex);
     if (entry) {
         if (layout === 'horizontal') {
             return {
@@ -1755,24 +1693,22 @@ var getActiveCartesianCoordinate = function getActiveCartesianCoordinate(layout,
         y: 0
     };
 };
-var getActivePolarCoordinate = function getActivePolarCoordinate(layout, tooltipTicks, activeIndex, rangeObj) {
-    var entry = tooltipTicks.find(function(tick) {
-        return tick && tick.index === activeIndex;
-    });
+var getActivePolarCoordinate = (layout, tooltipTicks, activeIndex, rangeObj)=>{
+    var entry = tooltipTicks.find((tick)=>tick && tick.index === activeIndex);
     if (entry) {
         if (layout === 'centric') {
             var _angle = entry.coordinate;
-            var _radius = rangeObj.radius;
+            var { radius: _radius } = rangeObj;
             return _objectSpread(_objectSpread(_objectSpread({}, rangeObj), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["polarToCartesian"])(rangeObj.cx, rangeObj.cy, _radius, _angle)), {}, {
                 angle: _angle,
                 radius: _radius
             });
         }
         var radius = entry.coordinate;
-        var angle = rangeObj.angle;
+        var { angle } = rangeObj;
         return _objectSpread(_objectSpread(_objectSpread({}, rangeObj), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["polarToCartesian"])(rangeObj.cx, rangeObj.cy, radius, angle)), {}, {
-            angle: angle,
-            radius: radius
+            angle,
+            radius
         });
     }
     return {
@@ -1790,10 +1726,10 @@ var getActivePolarCoordinate = function getActivePolarCoordinate(layout, tooltip
     };
 };
 function isInCartesianRange(pointer, offset) {
-    var x = pointer.relativeX, y = pointer.relativeY;
+    var { relativeX: x, relativeY: y } = pointer;
     return x >= offset.left && x <= offset.left + offset.width && y >= offset.top && y <= offset.top + offset.height;
 }
-var calculateActiveTickIndex = function calculateActiveTickIndex(coordinate, ticks, unsortedTicks, axisType, range) {
+var calculateActiveTickIndex = (coordinate, ticks, unsortedTicks, axisType, range)=>{
     var _ticks$length;
     var len = (_ticks$length = ticks === null || ticks === void 0 ? void 0 : ticks.length) !== null && _ticks$length !== void 0 ? _ticks$length : 0;
     // if there are 1 or fewer ticks or if there is no coordinate then the active tick is at index 0
@@ -1890,8 +1826,7 @@ function getRelativeCoordinate(event) {
         scaleX = element.offsetWidth > 0 ? rect.width / element.offsetWidth : 1;
         scaleY = element.offsetHeight > 0 ? rect.height / element.offsetHeight : 1;
     }
-    var getCoordinates = function getCoordinates(clientX, clientY) {
-        return {
+    var getCoordinates = (clientX, clientY)=>({
             /*
      * Here it's important to use:
      * - event.clientX and event.clientY to get the mouse position relative to the viewport, including scroll.
@@ -1903,12 +1838,9 @@ function getRelativeCoordinate(event) {
      * - scaleX and scaleY are necessary for when the chart element is scaled using CSS `transform: scale(N)`.
      */ relativeX: Math.round((clientX - rect.left) / scaleX),
             relativeY: Math.round((clientY - rect.top) / scaleY)
-        };
-    };
-    if ('touches' in event) {
-        return Array.from(event.touches).map(function(touch) {
-            return getCoordinates(touch.clientX, touch.clientY);
         });
+    if ('touches' in event) {
+        return Array.from(event.touches).map((touch)=>getCoordinates(touch.clientX, touch.clientY));
     }
     return getCoordinates(event.clientX, event.clientY);
 }
@@ -1922,9 +1854,9 @@ __turbopack_context__.s([
 ]);
 function createEventProxy(reactEvent) {
     reactEvent.persist();
-    var currentTarget = reactEvent.currentTarget;
+    var { currentTarget } = reactEvent;
     return new Proxy(reactEvent, {
-        get: function get(target, prop) {
+        get: (target, prop)=>{
             if (prop === 'currentTarget') {
                 return currentTarget;
             }
@@ -1944,9 +1876,7 @@ __turbopack_context__.s([
     "Global",
     ()=>Global
 ]);
-var parseIsSsrByDefault = function parseIsSsrByDefault() {
-    return !(typeof window !== 'undefined' && window.document && Boolean(window.document.createElement) && window.setTimeout);
-};
+var parseIsSsrByDefault = ()=>!(typeof window !== 'undefined' && window.document && Boolean(window.document.createElement) && window.setTimeout);
 var Global = {
     devToolsEnabled: true,
     isSsr: parseIsSsrByDefault()
@@ -1959,9 +1889,7 @@ __turbopack_context__.s([
     "propsAreEqual",
     ()=>propsAreEqual
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/react-redux/dist/react-redux.mjs [app-client] (ecmascript)");
-;
 ;
 var propsToShallowCompare = new Set([
     'axisLine',
@@ -2014,39 +1942,25 @@ var propsToShallowCompare = new Set([
     return x === y;
 }
 function propsAreEqual(prevProps, nextProps) {
-    var allKeys = new Set((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(Object.keys(prevProps)).concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(Object.keys(nextProps))));
-    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
-    try {
-        for(var _iterator = allKeys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
-            var key = _step.value;
-            /*
+    var allKeys = new Set([
+        ...Object.keys(prevProps),
+        ...Object.keys(nextProps)
+    ]);
+    for (var key of allKeys){
+        /*
      * If a key is on a special allowlist, go one level deeper
      * and do a shallow comparison of the values.
      */ if (propsToShallowCompare.has(key)) {
-                if (prevProps[key] == null && nextProps[key] == null) {
-                    continue;
-                }
-                if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["shallowEqual"])(prevProps[key], nextProps[key])) {
-                    return false;
-                }
-            /*
-       * Otherwise do a simple same-value comparison (with NaN support).
-       */ } else if (!sameValueZero(prevProps[key], nextProps[key])) {
+            if (prevProps[key] == null && nextProps[key] == null) {
+                continue;
+            }
+            if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["shallowEqual"])(prevProps[key], nextProps[key])) {
                 return false;
             }
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally{
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-            }
-        } finally{
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
+        /*
+       * Otherwise do a simple same-value comparison (with NaN support).
+       */ } else if (!sameValueZero(prevProps[key], nextProps[key])) {
+            return false;
         }
     }
     return true;
@@ -2243,9 +2157,7 @@ __turbopack_context__.s([
     "svgPropertiesNoEventsFromUnknown",
     ()=>svgPropertiesNoEventsFromUnknown
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
-;
 ;
 var SVGElementPropKeys = [
     'aria-activedescendant',
@@ -2567,7 +2479,7 @@ function isDataAttribute(key) {
     return typeof key === 'string' && key.startsWith('data-');
 }
 function svgPropertiesNoEvents(obj) {
-    if ((typeof obj === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(obj)) !== 'object' || obj === null) {
+    if (typeof obj !== 'object' || obj === null) {
         return {};
     }
     var result = {};
@@ -2584,11 +2496,11 @@ function svgPropertiesNoEventsFromUnknown(input) {
     if (input == null) {
         return null;
     }
-    if (/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isValidElement"])(input) && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(input.props) === 'object' && input.props !== null) {
+    if (/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isValidElement"])(input) && typeof input.props === 'object' && input.props !== null) {
         var p = input.props;
         return svgPropertiesNoEvents(p);
     }
-    if ((typeof input === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(input)) === 'object' && !Array.isArray(input)) {
+    if (typeof input === 'object' && !Array.isArray(input)) {
         return svgPropertiesNoEvents(input);
     }
     return null;
@@ -2603,11 +2515,9 @@ __turbopack_context__.s([
     "svgPropertiesAndEventsFromUnknown",
     ()=>svgPropertiesAndEventsFromUnknown
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$excludeEventProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/excludeEventProps.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$svgPropertiesNoEvents$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/svgPropertiesNoEvents.js [app-client] (ecmascript)");
-;
 ;
 ;
 ;
@@ -2631,7 +2541,7 @@ function svgPropertiesAndEventsFromUnknown(input) {
         // @ts-expect-error we can't type this better because input can be any React element
         return svgPropertiesAndEvents(input.props);
     }
-    if ((typeof input === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(input)) === 'object' && !Array.isArray(input)) {
+    if (typeof input === 'object' && !Array.isArray(input)) {
         return svgPropertiesAndEvents(input);
     }
     return null;
@@ -2662,7 +2572,6 @@ __turbopack_context__.s([
     "useReportScale",
     ()=>useReportScale
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/hooks.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/containerSelectors.js [app-client] (ecmascript)");
@@ -2673,13 +2582,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-;
 function useReportScale() {
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null), 2), ref = _useState[0], setRef = _useState[1];
+    var [ref, setRef] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     var scale = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectContainerScale"]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "useReportScale.useEffect": function() {
+        "useReportScale.useEffect": ()=>{
             if (ref == null) {
                 return;
             }
@@ -2704,8 +2612,6 @@ __turbopack_context__.s([
     "resolveDefaultProps",
     ()=>resolveDefaultProps
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -2737,14 +2643,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -2769,7 +2675,7 @@ function resolveDefaultProps(realProps, defaultProps) {
    * Type assertions are not sound but in this case it's necessary
    * as `Object.keys` does not do what we want it to do.
    */ var keys = Object.keys(defaultProps);
-    var withDefaults = keys.reduce(function(acc, key) {
+    var withDefaults = keys.reduce((acc, key)=>{
         if (acc[key] === undefined && dp[key] !== undefined) {
             acc[key] = dp[key];
         }
@@ -2816,16 +2722,14 @@ __turbopack_context__.s([
     "isPolarCoordinate",
     ()=>isPolarCoordinate
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$excludeEventProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/excludeEventProps.js [app-client] (ecmascript)");
 ;
 ;
-;
-var isPolarCoordinate = function isPolarCoordinate(c) {
+var isPolarCoordinate = (c)=>{
     return 'radius' in c && 'startAngle' in c && 'endAngle' in c;
 };
-var adaptEventHandlers = function adaptEventHandlers(props, newHandler) {
+var adaptEventHandlers = (props, newHandler)=>{
     if (!props || typeof props === 'function' || typeof props === 'boolean') {
         return null;
     }
@@ -2833,31 +2737,27 @@ var adaptEventHandlers = function adaptEventHandlers(props, newHandler) {
     if (/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isValidElement"])(props)) {
         inputProps = props.props;
     }
-    if ((typeof inputProps === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(inputProps)) !== 'object' && typeof inputProps !== 'function') {
+    if (typeof inputProps !== 'object' && typeof inputProps !== 'function') {
         return null;
     }
     var out = {};
-    Object.keys(inputProps).forEach(function(key) {
+    Object.keys(inputProps).forEach((key)=>{
         if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$excludeEventProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isEventKey"])(key) && typeof inputProps[key] === 'function') {
-            out[key] = newHandler || function(e) {
-                return inputProps[key](inputProps, e);
-            };
+            out[key] = newHandler || ((e)=>inputProps[key](inputProps, e));
         }
     });
     return out;
 };
-var getEventHandlerOfChild = function getEventHandlerOfChild(originalHandler, data, index) {
-    return function(e) {
+var getEventHandlerOfChild = (originalHandler, data, index)=>(e)=>{
         originalHandler(data, index, e);
         return null;
     };
-};
-var adaptEventsOfChild = function adaptEventsOfChild(props, data, index) {
-    if (props === null || (typeof props === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(props)) !== 'object' && typeof props !== 'function') {
+var adaptEventsOfChild = (props, data, index)=>{
+    if (props === null || typeof props !== 'object' && typeof props !== 'function') {
         return null;
     }
     var out = null;
-    Object.keys(props).forEach(function(key) {
+    Object.keys(props).forEach((key)=>{
         var item = props[key];
         if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$excludeEventProps$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isEventKey"])(key) && typeof item === 'function') {
             if (!out) out = {};
@@ -2866,7 +2766,7 @@ var adaptEventsOfChild = function adaptEventsOfChild(props, data, index) {
     });
     return out;
 };
-var isNonEmptyArray = function isNonEmptyArray(arr) {
+var isNonEmptyArray = (arr)=>{
     return Array.isArray(arr) && arr.length > 0;
 };
 }),
@@ -2877,12 +2777,6 @@ __turbopack_context__.s([
     "LRUCache",
     ()=>LRUCache
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_class_call_check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_class_call_check.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_create_class$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_create_class.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-;
-;
-;
 function _defineProperty(e, r, t) {
     return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
         value: t,
@@ -2893,66 +2787,49 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
 }
-var LRUCache = /*#__PURE__*/ function() {
-    "use strict";
-    function LRUCache(maxSize) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_class_call_check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(this, LRUCache);
+class LRUCache {
+    constructor(maxSize){
         _defineProperty(this, "cache", new Map());
         this.maxSize = maxSize;
     }
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_create_class$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(LRUCache, [
-        {
-            key: "get",
-            value: function get(key) {
-                var value = this.cache.get(key);
-                if (value !== undefined) {
-                    this.cache.delete(key);
-                    this.cache.set(key, value);
-                }
-                return value;
-            }
-        },
-        {
-            key: "set",
-            value: function set(key, value) {
-                if (this.cache.has(key)) {
-                    this.cache.delete(key);
-                } else if (this.cache.size >= this.maxSize) {
-                    var firstKey = this.cache.keys().next().value;
-                    if (firstKey != null) {
-                        this.cache.delete(firstKey);
-                    }
-                }
-                this.cache.set(key, value);
-            }
-        },
-        {
-            key: "clear",
-            value: function clear() {
-                this.cache.clear();
-            }
-        },
-        {
-            key: "size",
-            value: function size() {
-                return this.cache.size;
+    get(key) {
+        var value = this.cache.get(key);
+        if (value !== undefined) {
+            this.cache.delete(key);
+            this.cache.set(key, value);
+        }
+        return value;
+    }
+    set(key, value) {
+        if (this.cache.has(key)) {
+            this.cache.delete(key);
+        } else if (this.cache.size >= this.maxSize) {
+            var firstKey = this.cache.keys().next().value;
+            if (firstKey != null) {
+                this.cache.delete(firstKey);
             }
         }
-    ]);
-    return LRUCache;
-}();
+        this.cache.set(key, value);
+    }
+    clear() {
+        this.cache.clear();
+    }
+    size() {
+        return this.cache.size;
+    }
+}
 }),
 "[project]/frontend/node_modules/recharts/es6/util/DOMUtils.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -2969,10 +2846,8 @@ __turbopack_context__.s([
     "getTextMeasurementConfig",
     ()=>getTextMeasurementConfig
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Global$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/Global.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$LRUCache$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/LRUCache.js [app-client] (ecmascript)");
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -3004,14 +2879,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -3049,7 +2924,7 @@ function createCacheKey(text, style) {
  * @param text - The text to measure
  * @param style - CSS style properties to apply
  * @returns The size of the text
- */ var measureTextWithDOM = function measureTextWithDOM(text, style) {
+ */ var measureTextWithDOM = (text, style)=>{
     try {
         var measurementSpan = document.getElementById(MEASUREMENT_SPAN_ID);
         if (!measurementSpan) {
@@ -3096,25 +2971,21 @@ var getStringSize = function getStringSize(text) {
     stringCache.set(cacheKey, result);
     return result;
 };
-var configureTextMeasurement = function configureTextMeasurement(config) {
+var configureTextMeasurement = (config)=>{
     var newConfig = _objectSpread(_objectSpread({}, currentConfig), config);
     if (newConfig.cacheSize !== currentConfig.cacheSize) {
         stringCache = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$LRUCache$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LRUCache"](newConfig.cacheSize);
     }
     currentConfig = newConfig;
 };
-var getTextMeasurementConfig = function getTextMeasurementConfig() {
-    return _objectSpread({}, currentConfig);
-};
-var clearStringCache = function clearStringCache() {
+var getTextMeasurementConfig = ()=>_objectSpread({}, currentConfig);
+var clearStringCache = ()=>{
     stringCache.clear();
 };
-var getStringCacheStats = function getStringCacheStats() {
-    return {
+var getStringCacheStats = ()=>({
         size: stringCache.size(),
         maxSize: currentConfig.cacheSize
-    };
-};
+    });
 }),
 "[project]/frontend/node_modules/recharts/es6/util/ReduceCSSCalc.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -3125,15 +2996,7 @@ __turbopack_context__.s([
     "safeEvaluateExpression",
     ()=>safeEvaluateExpression
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_class_call_check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_class_call_check.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_create_class$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_create_class.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
-;
-;
-;
-;
 var _DecimalCSS;
 function _defineProperty(e, r, t) {
     return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
@@ -3145,14 +3008,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -3187,10 +3050,16 @@ var STR_NAN = 'NaN';
 function convertToPx(value, unit) {
     return value * CONVERSION_RATES[unit];
 }
-var DecimalCSS = /*#__PURE__*/ function() {
-    "use strict";
-    function DecimalCSS(num, unit) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_class_call_check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(this, DecimalCSS);
+class DecimalCSS {
+    static parse(str) {
+        var _NUM_SPLIT_REGEX$exec;
+        var [, numStr, unit] = (_NUM_SPLIT_REGEX$exec = NUM_SPLIT_REGEX.exec(str)) !== null && _NUM_SPLIT_REGEX$exec !== void 0 ? _NUM_SPLIT_REGEX$exec : [];
+        if (numStr == null) {
+            return DecimalCSS.NaN;
+        }
+        return new DecimalCSS(parseFloat(numStr), unit !== null && unit !== void 0 ? unit : '');
+    }
+    constructor(num, unit){
         this.num = num;
         this.unit = unit;
         this.num = num;
@@ -3207,70 +3076,37 @@ var DecimalCSS = /*#__PURE__*/ function() {
             this.unit = 'px';
         }
     }
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_create_class$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(DecimalCSS, [
-        {
-            key: "add",
-            value: function add(other) {
-                if (this.unit !== other.unit) {
-                    return new DecimalCSS(NaN, '');
-                }
-                return new DecimalCSS(this.num + other.num, this.unit);
-            }
-        },
-        {
-            key: "subtract",
-            value: function subtract(other) {
-                if (this.unit !== other.unit) {
-                    return new DecimalCSS(NaN, '');
-                }
-                return new DecimalCSS(this.num - other.num, this.unit);
-            }
-        },
-        {
-            key: "multiply",
-            value: function multiply(other) {
-                if (this.unit !== '' && other.unit !== '' && this.unit !== other.unit) {
-                    return new DecimalCSS(NaN, '');
-                }
-                return new DecimalCSS(this.num * other.num, this.unit || other.unit);
-            }
-        },
-        {
-            key: "divide",
-            value: function divide(other) {
-                if (this.unit !== '' && other.unit !== '' && this.unit !== other.unit) {
-                    return new DecimalCSS(NaN, '');
-                }
-                return new DecimalCSS(this.num / other.num, this.unit || other.unit);
-            }
-        },
-        {
-            key: "toString",
-            value: function toString() {
-                return "".concat(this.num).concat(this.unit);
-            }
-        },
-        {
-            key: "isNaN",
-            value: function isNaN() {
-                return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNan"])(this.num);
-            }
+    add(other) {
+        if (this.unit !== other.unit) {
+            return new DecimalCSS(NaN, '');
         }
-    ], [
-        {
-            key: "parse",
-            value: function parse(str) {
-                var _NUM_SPLIT_REGEX$exec;
-                var _ref = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((_NUM_SPLIT_REGEX$exec = NUM_SPLIT_REGEX.exec(str)) !== null && _NUM_SPLIT_REGEX$exec !== void 0 ? _NUM_SPLIT_REGEX$exec : [], 3), numStr = _ref[1], unit = _ref[2];
-                if (numStr == null) {
-                    return DecimalCSS.NaN;
-                }
-                return new DecimalCSS(parseFloat(numStr), unit !== null && unit !== void 0 ? unit : '');
-            }
+        return new DecimalCSS(this.num + other.num, this.unit);
+    }
+    subtract(other) {
+        if (this.unit !== other.unit) {
+            return new DecimalCSS(NaN, '');
         }
-    ]);
-    return DecimalCSS;
-}();
+        return new DecimalCSS(this.num - other.num, this.unit);
+    }
+    multiply(other) {
+        if (this.unit !== '' && other.unit !== '' && this.unit !== other.unit) {
+            return new DecimalCSS(NaN, '');
+        }
+        return new DecimalCSS(this.num * other.num, this.unit || other.unit);
+    }
+    divide(other) {
+        if (this.unit !== '' && other.unit !== '' && this.unit !== other.unit) {
+            return new DecimalCSS(NaN, '');
+        }
+        return new DecimalCSS(this.num / other.num, this.unit || other.unit);
+    }
+    toString() {
+        return "".concat(this.num).concat(this.unit);
+    }
+    isNaN() {
+        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNan"])(this.num);
+    }
+}
 _DecimalCSS = DecimalCSS;
 _defineProperty(DecimalCSS, "NaN", new _DecimalCSS(NaN, ''));
 function calculateArithmetic(expr) {
@@ -3280,7 +3116,7 @@ function calculateArithmetic(expr) {
     var newExpr = expr;
     while(newExpr.includes('*') || newExpr.includes('/')){
         var _MULTIPLY_OR_DIVIDE_R;
-        var _ref = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((_MULTIPLY_OR_DIVIDE_R = MULTIPLY_OR_DIVIDE_REGEX.exec(newExpr)) !== null && _MULTIPLY_OR_DIVIDE_R !== void 0 ? _MULTIPLY_OR_DIVIDE_R : [], 4), leftOperand = _ref[1], operator = _ref[2], rightOperand = _ref[3];
+        var [, leftOperand, operator, rightOperand] = (_MULTIPLY_OR_DIVIDE_R = MULTIPLY_OR_DIVIDE_REGEX.exec(newExpr)) !== null && _MULTIPLY_OR_DIVIDE_R !== void 0 ? _MULTIPLY_OR_DIVIDE_R : [];
         var lTs = DecimalCSS.parse(leftOperand !== null && leftOperand !== void 0 ? leftOperand : '');
         var rTs = DecimalCSS.parse(rightOperand !== null && rightOperand !== void 0 ? rightOperand : '');
         var result = operator === '*' ? lTs.multiply(rTs) : lTs.divide(rTs);
@@ -3291,7 +3127,7 @@ function calculateArithmetic(expr) {
     }
     while(newExpr.includes('+') || /.-\d+(?:\.\d+)?/.test(newExpr)){
         var _ADD_OR_SUBTRACT_REGE;
-        var _ref1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((_ADD_OR_SUBTRACT_REGE = ADD_OR_SUBTRACT_REGEX.exec(newExpr)) !== null && _ADD_OR_SUBTRACT_REGE !== void 0 ? _ADD_OR_SUBTRACT_REGE : [], 4), _leftOperand = _ref1[1], _operator = _ref1[2], _rightOperand = _ref1[3];
+        var [, _leftOperand, _operator, _rightOperand] = (_ADD_OR_SUBTRACT_REGE = ADD_OR_SUBTRACT_REGEX.exec(newExpr)) !== null && _ADD_OR_SUBTRACT_REGE !== void 0 ? _ADD_OR_SUBTRACT_REGE : [];
         var _lTs = DecimalCSS.parse(_leftOperand !== null && _leftOperand !== void 0 ? _leftOperand : '');
         var _rTs = DecimalCSS.parse(_rightOperand !== null && _rightOperand !== void 0 ? _rightOperand : '');
         var _result = _operator === '+' ? _lTs.add(_rTs) : _lTs.subtract(_rTs);
@@ -3308,7 +3144,7 @@ function calculateParentheses(expr) {
     var match;
     // eslint-disable-next-line no-cond-assign
     while((match = PARENTHESES_REGEX.exec(newExpr)) != null){
-        var _match = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(match, 2), parentheticalExpression = _match[1];
+        var [, parentheticalExpression] = match;
         newExpr = newExpr.replace(PARENTHESES_REGEX, calculateArithmetic(parentheticalExpression));
     }
     return newExpr;
@@ -3349,12 +3185,10 @@ __turbopack_context__.s([
     "toArray",
     ()=>toArray
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$get$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/es-toolkit/compat/get.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2d$is$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/react-is/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
-;
 ;
 ;
 ;
@@ -3376,7 +3210,7 @@ var SCALE_TYPES = [
     'sequential',
     'threshold'
 ];
-var getDisplayName = function getDisplayName(Comp) {
+var getDisplayName = (Comp)=>{
     if (typeof Comp === 'string') {
         return Comp;
     }
@@ -3389,12 +3223,12 @@ var getDisplayName = function getDisplayName(Comp) {
 // so we can memoize last invocation (since reference to `children` is the same)
 var lastChildren = null;
 var lastResult = null;
-var toArray = function toArray1(children) {
+var toArray = (children)=>{
     if (children === lastChildren && Array.isArray(lastResult)) {
         return lastResult;
     }
     var result = [];
-    __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Children"].forEach(children, function(child) {
+    __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Children"].forEach(children, (child)=>{
         if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNullish"])(child)) return;
         if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2d$is$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isFragment"])(child)) {
             result = result.concat(toArray(child.props.children));
@@ -3411,15 +3245,13 @@ function findAllByType(children, type) {
     var result = [];
     var types = [];
     if (Array.isArray(type)) {
-        types = type.map(function(t) {
-            return getDisplayName(t);
-        });
+        types = type.map((t)=>getDisplayName(t));
     } else {
         types = [
             getDisplayName(type)
         ];
     }
-    toArray(children).forEach(function(child) {
+    toArray(children).forEach((child)=>{
         // @ts-expect-error toArray and lodash.get are not compatible. Let's get rid of the whole findAllByType function
         var childType = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$get$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(child, 'type.displayName') || (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$get$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(child, 'type.name');
         if (childType && types.indexOf(childType) !== -1) {
@@ -3428,8 +3260,8 @@ function findAllByType(children, type) {
     });
     return result;
 }
-var isClipDot = function isClipDot(dot) {
-    if (dot && (typeof dot === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(dot)) === 'object' && 'clipDot' in dot) {
+var isClipDot = (dot)=>{
+    if (dot && typeof dot === 'object' && 'clipDot' in dot) {
         return Boolean(dot.clipDot);
     }
     return true;
@@ -3466,19 +3298,15 @@ __turbopack_context__.s([
     "useIdFallback",
     ()=>useIdFallback
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
-;
 var _ref;
 ;
 ;
-var useIdFallback = function useIdFallback() {
-    var _React_useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.useState({
-        "useIdFallback._React_useState.useState": function() {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["uniqueId"])('uid-');
-        }
-    }["useIdFallback._React_useState.useState"]), 1), id = _React_useState[0];
+var useIdFallback = ()=>{
+    var [id] = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.useState({
+        "useIdFallback.useState": ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["uniqueId"])('uid-')
+    }["useIdFallback.useState"]);
     return id;
 };
 var useId = (_ref = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__['useId'.toString()]) !== null && _ref !== void 0 ? _ref : useIdFallback;
@@ -3515,15 +3343,13 @@ __turbopack_context__.s([
     "usePrefersReducedMotion",
     ()=>usePrefersReducedMotion
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Global$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/Global.js [app-client] (ecmascript)");
 ;
 ;
-;
 function usePrefersReducedMotion() {
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
-        "usePrefersReducedMotion._useState.useState": function() {
+    var [prefersReducedMotion, setPrefersReducedMotion] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        "usePrefersReducedMotion.useState": ()=>{
             if (__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Global$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Global"].isSsr) {
                 return false;
             }
@@ -3532,20 +3358,22 @@ function usePrefersReducedMotion() {
             }
             return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         }
-    }["usePrefersReducedMotion._useState.useState"]), 2), prefersReducedMotion = _useState[0], setPrefersReducedMotion = _useState[1];
+    }["usePrefersReducedMotion.useState"]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "usePrefersReducedMotion.useEffect": function() {
+        "usePrefersReducedMotion.useEffect": ()=>{
             if (!window.matchMedia) {
                 return;
             }
             var mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-            var handleChange = function handleChange() {
-                setPrefersReducedMotion(mediaQuery.matches);
-            };
+            var handleChange = {
+                "usePrefersReducedMotion.useEffect.handleChange": ()=>{
+                    setPrefersReducedMotion(mediaQuery.matches);
+                }
+            }["usePrefersReducedMotion.useEffect.handleChange"];
             mediaQuery.addEventListener('change', handleChange);
             // eslint-disable-next-line consistent-return
             return ({
-                "usePrefersReducedMotion.useEffect": function() {
+                "usePrefersReducedMotion.useEffect": ()=>{
                     mediaQuery.removeEventListener('change', handleChange);
                 }
             })["usePrefersReducedMotion.useEffect"];
@@ -3568,7 +3396,7 @@ function getRadiusAndStrokeWidthFromDot(dot) {
     var defaultR = 3;
     var defaultStrokeWidth = 2;
     if (props != null) {
-        var r = props.r, strokeWidth = props.strokeWidth;
+        var { r, strokeWidth } = props;
         var realR = Number(r);
         var realStrokeWidth = Number(strokeWidth);
         if (Number.isNaN(realR) || realR < 0) {
@@ -3601,9 +3429,9 @@ __turbopack_context__.s([
     "rectWithPoints",
     ()=>rectWithPoints
 ]);
-var rectWithPoints = function rectWithPoints(_ref, _ref2) {
-    var x1 = _ref.x, y1 = _ref.y;
-    var x2 = _ref2.x, y2 = _ref2.y;
+var rectWithPoints = (_ref, _ref2)=>{
+    var { x: x1, y: y1 } = _ref;
+    var { x: x2, y: y2 } = _ref2;
     return {
         x: Math.min(x1, x2),
         y: Math.min(y1, y2),
@@ -3611,8 +3439,8 @@ var rectWithPoints = function rectWithPoints(_ref, _ref2) {
         height: Math.abs(y2 - y1)
     };
 };
-var rectWithCoords = function rectWithCoords(_ref3) {
-    var x1 = _ref3.x1, y1 = _ref3.y1, x2 = _ref3.x2, y2 = _ref3.y2;
+var rectWithCoords = (_ref3)=>{
+    var { x1, y1, x2, y2 } = _ref3;
     return rectWithPoints({
         x: x1,
         y: y1
@@ -3625,7 +3453,7 @@ function normalizeAngle(angle) {
     return (angle % 180 + 180) % 180;
 }
 var getAngledRectangleWidth = function getAngledRectangleWidth(_ref4) {
-    var width = _ref4.width, height = _ref4.height;
+    var { width, height } = _ref4;
     var angle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
     // Ensure angle is >= 0 && < 180
     var normalizedAngle = normalizeAngle(angle);
@@ -3696,7 +3524,7 @@ function getAngledTickWidth(contentSize, unitSize, angle) {
 }
 function getTickBoundaries(viewBox, sign, sizeKey) {
     var isWidth = sizeKey === 'width';
-    var x = viewBox.x, y = viewBox.y, width = viewBox.width, height = viewBox.height;
+    var { x, y, width, height } = viewBox;
     if (sign === 1) {
         return {
             start: isWidth ? x : y,
@@ -3736,13 +3564,13 @@ function getNumberIntervalTicks(ticks, interval) {
     "getCalculatedYAxisWidth",
     ()=>getCalculatedYAxisWidth
 ]);
-var getCalculatedYAxisWidth = function getCalculatedYAxisWidth(_ref) {
-    var ticks = _ref.ticks, label = _ref.label, _ref_labelGapWithTick = _ref.labelGapWithTick, labelGapWithTick = _ref_labelGapWithTick === void 0 ? 5 : _ref_labelGapWithTick, _ref_tickSize = _ref.// Default gap between label and tick
-    tickSize, tickSize = _ref_tickSize === void 0 ? 0 : _ref_tickSize, _ref_tickMargin = _ref.tickMargin, tickMargin = _ref_tickMargin === void 0 ? 0 : _ref_tickMargin;
+var getCalculatedYAxisWidth = (_ref)=>{
+    var { ticks, label, labelGapWithTick = 5, // Default gap between label and tick
+    tickSize = 0, tickMargin = 0 } = _ref;
     // find the max width of the tick labels
     var maxTickWidth = 0;
     if (ticks) {
-        Array.from(ticks).forEach(function(tickNode) {
+        Array.from(ticks).forEach((tickNode)=>{
             if (tickNode) {
                 var bbox = tickNode.getBoundingClientRect();
                 if (bbox.width > maxTickWidth) {
@@ -3767,10 +3595,8 @@ __turbopack_context__.s([
     "getClassNameFromUnknown",
     ()=>getClassNameFromUnknown
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-;
 function getClassNameFromUnknown(u) {
-    if (u && (typeof u === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(u)) === 'object' && 'className' in u && typeof u.className === 'string') {
+    if (u && typeof u === 'object' && 'className' in u && typeof u.className === 'string') {
         return u.className;
     }
     return '';
@@ -3823,8 +3649,8 @@ function axisPropsAreEqual(prevProps, nextProps) {
     if (prevProps === nextProps) {
         return true;
     }
-    var prevDomain = prevProps.domain, prevRange = prevProps.range, prevRest = _objectWithoutProperties(prevProps, _excluded);
-    var nextDomain = nextProps.domain, nextRange = nextProps.range, nextRest = _objectWithoutProperties(nextProps, _excluded2);
+    var { domain: prevDomain, range: prevRange } = prevProps, prevRest = _objectWithoutProperties(prevProps, _excluded);
+    var { domain: nextDomain, range: nextRange } = nextProps, nextRest = _objectWithoutProperties(nextProps, _excluded2);
     if (!shortArraysAreEqual(prevDomain, nextDomain)) {
         return false;
     }
@@ -3847,10 +3673,8 @@ __turbopack_context__.s([
     "getTransformStyle",
     ()=>getTransformStyle
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_define_property.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/clsx/dist/clsx.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
-;
 ;
 ;
 var CSS_CLASS_PREFIX = 'recharts-tooltip-wrapper';
@@ -3858,12 +3682,16 @@ var TOOLTIP_HIDDEN = {
     visibility: 'hidden'
 };
 function getTooltipCSSClassName(_ref) {
-    var coordinate = _ref.coordinate, translateX = _ref.translateX, translateY = _ref.translateY;
-    var _obj;
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["clsx"])(CSS_CLASS_PREFIX, (_obj = {}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_obj, "".concat(CSS_CLASS_PREFIX, "-right"), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(translateX) && coordinate && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(coordinate.x) && translateX >= coordinate.x), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_obj, "".concat(CSS_CLASS_PREFIX, "-left"), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(translateX) && coordinate && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(coordinate.x) && translateX < coordinate.x), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_obj, "".concat(CSS_CLASS_PREFIX, "-bottom"), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(translateY) && coordinate && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(coordinate.y) && translateY >= coordinate.y), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_obj, "".concat(CSS_CLASS_PREFIX, "-top"), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(translateY) && coordinate && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(coordinate.y) && translateY < coordinate.y), _obj));
+    var { coordinate, translateX, translateY } = _ref;
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["clsx"])(CSS_CLASS_PREFIX, {
+        ["".concat(CSS_CLASS_PREFIX, "-right")]: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(translateX) && coordinate && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(coordinate.x) && translateX >= coordinate.x,
+        ["".concat(CSS_CLASS_PREFIX, "-left")]: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(translateX) && coordinate && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(coordinate.x) && translateX < coordinate.x,
+        ["".concat(CSS_CLASS_PREFIX, "-bottom")]: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(translateY) && coordinate && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(coordinate.y) && translateY >= coordinate.y,
+        ["".concat(CSS_CLASS_PREFIX, "-top")]: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(translateY) && coordinate && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(coordinate.y) && translateY < coordinate.y
+    });
 }
 function getTooltipTranslateXY(_ref2) {
-    var allowEscapeViewBox = _ref2.allowEscapeViewBox, coordinate = _ref2.coordinate, key = _ref2.key, offset = _ref2.offset, position = _ref2.position, reverseDirection = _ref2.reverseDirection, tooltipDimension = _ref2.tooltipDimension, viewBox = _ref2.viewBox, viewBoxDimension = _ref2.viewBoxDimension;
+    var { allowEscapeViewBox, coordinate, key, offset, position, reverseDirection, tooltipDimension, viewBox, viewBoxDimension } = _ref2;
     if (position && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(position[key])) {
         return position[key];
     }
@@ -3895,51 +3723,51 @@ function getTooltipTranslateXY(_ref2) {
     return Math.max(positive, viewBoxKey);
 }
 function getTransformStyle(_ref3) {
-    var translateX = _ref3.translateX, translateY = _ref3.translateY, useTranslate3d = _ref3.useTranslate3d;
+    var { translateX, translateY, useTranslate3d } = _ref3;
     return {
         transform: useTranslate3d ? "translate3d(".concat(translateX, "px, ").concat(translateY, "px, 0)") : "translate(".concat(translateX, "px, ").concat(translateY, "px)")
     };
 }
 function getTooltipTranslate(_ref4) {
-    var allowEscapeViewBox = _ref4.allowEscapeViewBox, coordinate = _ref4.coordinate, offsetTop = _ref4.offsetTop, offsetLeft = _ref4.offsetLeft, position = _ref4.position, reverseDirection = _ref4.reverseDirection, tooltipBox = _ref4.tooltipBox, useTranslate3d = _ref4.useTranslate3d, viewBox = _ref4.viewBox;
+    var { allowEscapeViewBox, coordinate, offsetTop, offsetLeft, position, reverseDirection, tooltipBox, useTranslate3d, viewBox } = _ref4;
     var cssProperties, translateX, translateY;
     if (tooltipBox.height > 0 && tooltipBox.width > 0 && coordinate) {
         translateX = getTooltipTranslateXY({
-            allowEscapeViewBox: allowEscapeViewBox,
-            coordinate: coordinate,
+            allowEscapeViewBox,
+            coordinate,
             key: 'x',
             offset: offsetLeft,
-            position: position,
-            reverseDirection: reverseDirection,
+            position,
+            reverseDirection,
             tooltipDimension: tooltipBox.width,
-            viewBox: viewBox,
+            viewBox,
             viewBoxDimension: viewBox.width
         });
         translateY = getTooltipTranslateXY({
-            allowEscapeViewBox: allowEscapeViewBox,
-            coordinate: coordinate,
+            allowEscapeViewBox,
+            coordinate,
             key: 'y',
             offset: offsetTop,
-            position: position,
-            reverseDirection: reverseDirection,
+            position,
+            reverseDirection,
             tooltipDimension: tooltipBox.height,
-            viewBox: viewBox,
+            viewBox,
             viewBoxDimension: viewBox.height
         });
         cssProperties = getTransformStyle({
-            translateX: translateX,
-            translateY: translateY,
-            useTranslate3d: useTranslate3d
+            translateX,
+            translateY,
+            useTranslate3d
         });
     } else {
         cssProperties = TOOLTIP_HIDDEN;
     }
     return {
-        cssProperties: cssProperties,
+        cssProperties,
         cssClasses: getTooltipCSSClassName({
-            translateX: translateX,
-            translateY: translateY,
-            coordinate: coordinate
+            translateX,
+            translateY,
+            coordinate
         })
     };
 }
@@ -3970,23 +3798,19 @@ __turbopack_context__.s([
     "useElementOffset",
     ()=>useElementOffset
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
-;
-;
 ;
 var EPS = 1;
 function useElementOffset() {
     var extraDependencies = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+    var [lastBoundingBox, setLastBoundingBox] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
         height: 0,
         left: 0,
         top: 0,
         width: 0
-    }), 2), lastBoundingBox = _useState[0], setLastBoundingBox = _useState[1];
+    });
     var updateBoundingBox = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "useElementOffset.useCallback[updateBoundingBox]": function(node) {
+        "useElementOffset.useCallback[updateBoundingBox]": (node)=>{
             if (node != null) {
                 var rect = node.getBoundingClientRect();
                 var box = {
@@ -4010,8 +3834,9 @@ function useElementOffset() {
         lastBoundingBox.width,
         lastBoundingBox.height,
         lastBoundingBox.top,
-        lastBoundingBox.left
-    ].concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(extraDependencies)));
+        lastBoundingBox.left,
+        ...extraDependencies
+    ]);
     return [
         lastBoundingBox,
         updateBoundingBox
@@ -4047,7 +3872,7 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/PolarUtils.js [app-client] (ecmascript)");
 ;
 function getRadialCursorPoints(activeCoordinate) {
-    var cx = activeCoordinate.cx, cy = activeCoordinate.cy, radius = activeCoordinate.radius, startAngle = activeCoordinate.startAngle, endAngle = activeCoordinate.endAngle;
+    var { cx, cy, radius, startAngle, endAngle } = activeCoordinate;
     var startPoint = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["polarToCartesian"])(cx, cy, radius, startAngle);
     var endPoint = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["polarToCartesian"])(cx, cy, radius, endAngle);
     return {
@@ -4055,11 +3880,11 @@ function getRadialCursorPoints(activeCoordinate) {
             startPoint,
             endPoint
         ],
-        cx: cx,
-        cy: cy,
-        radius: radius,
-        startAngle: startAngle,
-        endAngle: endAngle
+        cx,
+        cy,
+        radius,
+        startAngle,
+        endAngle
     };
 }
 }),
@@ -4103,7 +3928,7 @@ function getCursorPoints(layout, activeCoordinate, offset) {
     }
     if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$types$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isPolarCoordinate"])(activeCoordinate)) {
         if (layout === 'centric') {
-            var cx = activeCoordinate.cx, cy = activeCoordinate.cy, innerRadius = activeCoordinate.innerRadius, outerRadius = activeCoordinate.outerRadius, angle = activeCoordinate.angle;
+            var { cx, cy, innerRadius, outerRadius, angle } = activeCoordinate;
             var innerPoint = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["polarToCartesian"])(cx, cy, innerRadius, angle);
             var outerPoint = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$PolarUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["polarToCartesian"])(cx, cy, outerRadius, angle);
             return [
@@ -4131,7 +3956,6 @@ __turbopack_context__.s([
     "getPropsFromShapeOption",
     ()=>getPropsFromShapeOption
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$isPlainObject$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/es-toolkit/compat/isPlainObject.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$shape$2f$Rectangle$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/shape/Rectangle.js [app-client] (ecmascript)");
@@ -4140,7 +3964,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$container$2f$Layer$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/container/Layer.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$shape$2f$Symbols$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/shape/Symbols.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$shape$2f$Curve$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/shape/Curve.js [app-client] (ecmascript)");
-;
 var _excluded = [
     "option",
     "shapeType",
@@ -4196,14 +4019,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -4236,7 +4059,7 @@ function isSymbolsProps(shapeType, _elementProps) {
     return shapeType === 'symbols';
 }
 function ShapeSelector(_ref) {
-    var shapeType = _ref.shapeType, elementProps = _ref.elementProps;
+    var { shapeType, elementProps } = _ref;
     switch(shapeType){
         case 'rectangle':
             return /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"](__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$shape$2f$Rectangle$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Rectangle"], elementProps);
@@ -4262,7 +4085,7 @@ function getPropsFromShapeOption(option) {
     return option;
 }
 function Shape(_ref2) {
-    var option = _ref2.option, shapeType = _ref2.shapeType, _ref2_activeClassName = _ref2.activeClassName, activeClassName = _ref2_activeClassName === void 0 ? 'recharts-active-shape' : _ref2_activeClassName, _ref2_inActiveClassName = _ref2.inActiveClassName, inActiveClassName = _ref2_inActiveClassName === void 0 ? 'recharts-shape' : _ref2_inActiveClassName, props = _objectWithoutProperties(_ref2, _excluded);
+    var { option, shapeType, activeClassName = 'recharts-active-shape', inActiveClassName = 'recharts-shape' } = _ref2, props = _objectWithoutProperties(_ref2, _excluded);
     var shape;
     if (/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isValidElement"])(option)) {
         // @ts-expect-error we can't know the type of cloned element props
@@ -4301,12 +4124,10 @@ __turbopack_context__.s([
     "minPointSizeCallback",
     ()=>minPointSizeCallback
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tiny$2d$invariant$2f$dist$2f$esm$2f$tiny$2d$invariant$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/tiny-invariant/dist/esm/tiny-invariant.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ActiveShapeUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/ActiveShapeUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
-;
 function _extends() {
     return _extends = ("TURBOPACK compile-time truthy", 1) ? Object.assign.bind() : "TURBOPACK unreachable", _extends.apply(null, arguments);
 }
@@ -4323,13 +4144,13 @@ function BarRectangle(props) {
 }
 var minPointSizeCallback = function minPointSizeCallback(minPointSize) {
     var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-    return function(value, index) {
+    return (value, index)=>{
         if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(minPointSize)) return minPointSize;
         var isValueNumberOrNil = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(value) || (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNullish"])(value);
         if (isValueNumberOrNil) {
             return minPointSize(value, index);
         }
-        !isValueNumberOrNil ? ("TURBOPACK compile-time truthy", 1) ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tiny$2d$invariant$2f$dist$2f$esm$2f$tiny$2d$invariant$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(false, "minPointSize callback function received a value with type of ".concat(typeof value === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(value), ". Currently only numbers or null/undefined are supported.")) : "TURBOPACK unreachable" : void 0;
+        !isValueNumberOrNil ? ("TURBOPACK compile-time truthy", 1) ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tiny$2d$invariant$2f$dist$2f$esm$2f$tiny$2d$invariant$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(false, "minPointSize callback function received a value with type of ".concat(typeof value, ". Currently only numbers or null/undefined are supported.")) : "TURBOPACK unreachable" : void 0;
         return defaultValue;
     };
 };

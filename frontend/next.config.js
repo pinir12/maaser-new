@@ -2,7 +2,6 @@
 const nextConfig = {
   serverExternalPackages: ['bcryptjs', 'jsonwebtoken'],
   reactStrictMode: true,
-  allowedDevOrigins: ['hebrew-month-view.cluster-8.preview.emergentcf.cloud'],
   async headers() {
     return [
       {

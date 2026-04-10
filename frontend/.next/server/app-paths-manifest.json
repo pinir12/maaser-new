@@ -1,0 +1,21 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/admin/users/[id]/route": "app/api/admin/users/[id]/route.js",
+  "/api/admin/users/route": "app/api/admin/users/route.js",
+  "/api/auth/login/route": "app/api/auth/login/route.js",
+  "/api/auth/me/route": "app/api/auth/me/route.js",
+  "/api/auth/signup/route": "app/api/auth/signup/route.js",
+  "/api/cron/monthly-summary/route": "app/api/cron/monthly-summary/route.js",
+  "/api/cron/recurring/route": "app/api/cron/recurring/route.js",
+  "/api/currency/rates/[base]/route": "app/api/currency/rates/[base]/route.js",
+  "/api/email/contact/route": "app/api/email/contact/route.js",
+  "/api/transactions/[id]/route": "app/api/transactions/[id]/route.js",
+  "/api/transactions/recurring/bulk-delete/route": "app/api/transactions/recurring/bulk-delete/route.js",
+  "/api/transactions/recurring/bulk-update/route": "app/api/transactions/recurring/bulk-update/route.js",
+  "/api/transactions/recurring/route": "app/api/transactions/recurring/route.js",
+  "/api/transactions/route": "app/api/transactions/route.js",
+  "/api/transactions/suggestions/route": "app/api/transactions/suggestions/route.js",
+  "/api/user/settings/route": "app/api/user/settings/route.js",
+  "/page": "app/page.js"
+}

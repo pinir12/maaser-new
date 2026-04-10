@@ -1,0 +1,3 @@
+{
+  "/api/transactions/recurring/bulk-delete/route": "app/api/transactions/recurring/bulk-delete/route.js"
+}
