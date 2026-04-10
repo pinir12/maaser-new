@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Finance Tracker',
+  title: 'Maaser Tracker',
   description: 'Track your maaser with ease',
 };
 
