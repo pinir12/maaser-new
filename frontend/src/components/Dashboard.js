@@ -3,11 +3,13 @@ import { useAuth } from '../lib/auth-context';
 import { supabase } from '../lib/supabase';
 import { getCurrentHebrewMonth, getHebrewMonthBounds } from '../lib/hebrew-calendar';
 import { currencies, TRANSACTION_TYPES, getCurrencySymbol } from '../lib/validation';
+import { ExportButtons } from '../lib/export';
 import { DashboardStats } from './DashboardStats';
 import { TransactionList } from './TransactionList';
 import { AddTransactionModal } from './AddTransactionModal';
 import { MonthlyViewToggle } from './MonthlyViewToggle';
 import { SearchFilters } from './SearchFilters';
+import { AnalyticsCharts } from './AnalyticsCharts';
 import { 
   Plus, 
   Settings, 
@@ -15,7 +17,8 @@ import {
   Menu,
   X,
   ChevronDown,
-  RefreshCw
+  RefreshCw,
+  BarChart3
 } from 'lucide-react';
 
 const VIEW_MODES = {
@@ -37,6 +40,7 @@ export function Dashboard() {
   const [showSettings, setShowSettings] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [processingRecurring, setProcessingRecurring] = useState(false);
+  const [showCharts, setShowCharts] = useState(false);
   
   // View mode state
   const [viewMode, setViewMode] = useState(VIEW_MODES.MONTH);
@@ -669,10 +673,47 @@ export function Dashboard() {
               <Plus className="w-5 h-5" />
               Add Transaction
             </button>
+
+            {/* Toggle Charts Button */}
+            <button
+              data-testid="toggle-charts-btn"
+              onClick={() => setShowCharts(!showCharts)}
+              className={`w-full flex items-center justify-center gap-2 py-3 rounded-2xl font-medium transition-all ${
+                showCharts 
+                  ? 'bg-[#4A6E82] text-white' 
+                  : 'bg-white/70 text-[#68706B] hover:bg-white/90 border border-white/40'
+              }`}
+            >
+              <BarChart3 className="w-5 h-5" />
+              {showCharts ? 'Hide Analytics' : 'Show Analytics'}
+            </button>
+
+            {/* Export Buttons */}
+            <div className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-2xl p-4">
+              <label className="block text-xs font-bold uppercase tracking-[0.2em] text-[#68706B] mb-3">
+                Export Data
+              </label>
+              <ExportButtons
+                transactions={allTransactions}
+                stats={allTimeStats}
+                maaserBalance={maaserBalance}
+                baseCurrency={user?.base_currency || 'USD'}
+                userName={user?.name || 'User'}
+              />
+            </div>
           </div>
 
           {/* Right Column - Content */}
           <div className="lg:col-span-3 space-y-4">
+            {/* Analytics Charts (toggleable) */}
+            {showCharts && (
+              <AnalyticsCharts
+                transactions={allTransactions}
+                baseCurrency={user?.base_currency || 'USD'}
+                distributionMode={user?.distribution_mode || 'both'}
+              />
+            )}
+
             {/* Period Stats (if not all-time) */}
             {viewMode !== VIEW_MODES.ALL_TIME && (
               <div className="bg-white/70 backdrop-blur-xl border border-white/40 rounded-2xl p-4">
