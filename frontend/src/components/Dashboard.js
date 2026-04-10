@@ -348,7 +348,7 @@ export function Dashboard() {
           return (
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-slate-200/80 shadow-sm">
               <p className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-3">{label} Totals</p>
-              <div className={`grid gap-4 text-center ${isGiveOnly ? 'grid-cols-3' : 'grid-cols-2 md:grid-cols-5'}`}>
+              <div className={`grid gap-4 text-center ${isGiveOnly ? 'grid-cols-3' : 'grid-cols-1 sm:grid-cols-3'}`}>
                 <div className="p-3 bg-emerald-50/80 rounded-xl">
                   <p className="text-[10px] text-emerald-600 uppercase tracking-wider font-semibold mb-1">Income</p>
                   <p data-testid="totals-income" className="text-lg font-bold text-emerald-700">{sym}{s.totalIncome.toFixed(2)}</p>
@@ -367,20 +367,32 @@ export function Dashboard() {
                 ) : (
                   <>
                     <div className="p-3 bg-blue-50/80 rounded-xl">
-                      <p className="text-[10px] text-blue-600 uppercase tracking-wider font-semibold mb-1">Give Portion</p>
-                      <p data-testid="totals-give-portion" className="text-lg font-bold text-blue-700">{sym}{(s.totalMaaser * giveRatio).toFixed(2)}</p>
+                      <p className="text-[10px] text-blue-600 uppercase tracking-wider font-semibold mb-1">Give</p>
+                      <div className="flex items-baseline justify-center gap-2 mt-1">
+                        <div>
+                          <p className="text-[9px] text-slate-400 uppercase tracking-wider">Portion</p>
+                          <p data-testid="totals-give-portion" className="text-lg font-bold text-blue-700">{sym}{(s.totalMaaser * giveRatio).toFixed(2)}</p>
+                        </div>
+                        <div className="w-px h-8 bg-blue-200" />
+                        <div>
+                          <p className="text-[9px] text-slate-400 uppercase tracking-wider">Given</p>
+                          <p data-testid="totals-given" className="text-lg font-bold text-blue-500">{sym}{s.totalGiven.toFixed(2)}</p>
+                        </div>
+                      </div>
                     </div>
                     <div className="p-3 bg-rose-50/80 rounded-xl">
-                      <p className="text-[10px] text-rose-600 uppercase tracking-wider font-semibold mb-1">Lend Portion</p>
-                      <p data-testid="totals-lend-portion" className="text-lg font-bold text-rose-700">{sym}{(s.totalMaaser * lendRatio).toFixed(2)}</p>
-                    </div>
-                    <div className="p-3 bg-blue-50/80 rounded-xl">
-                      <p className="text-[10px] text-blue-600 uppercase tracking-wider font-semibold mb-1">Given</p>
-                      <p data-testid="totals-given" className="text-lg font-bold text-blue-700">{sym}{s.totalGiven.toFixed(2)}</p>
-                    </div>
-                    <div className="p-3 bg-rose-50/80 rounded-xl">
-                      <p className="text-[10px] text-rose-600 uppercase tracking-wider font-semibold mb-1">Lent</p>
-                      <p data-testid="totals-lent" className="text-lg font-bold text-rose-700">{sym}{s.totalLent.toFixed(2)}</p>
+                      <p className="text-[10px] text-rose-600 uppercase tracking-wider font-semibold mb-1">Lend</p>
+                      <div className="flex items-baseline justify-center gap-2 mt-1">
+                        <div>
+                          <p className="text-[9px] text-slate-400 uppercase tracking-wider">Portion</p>
+                          <p data-testid="totals-lend-portion" className="text-lg font-bold text-rose-700">{sym}{(s.totalMaaser * lendRatio).toFixed(2)}</p>
+                        </div>
+                        <div className="w-px h-8 bg-rose-200" />
+                        <div>
+                          <p className="text-[9px] text-slate-400 uppercase tracking-wider">Lent</p>
+                          <p data-testid="totals-lent" className="text-lg font-bold text-rose-500">{sym}{s.totalLent.toFixed(2)}</p>
+                        </div>
+                      </div>
                     </div>
                   </>
                 )}

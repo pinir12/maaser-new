@@ -83,6 +83,11 @@ ALTER TABLE users ADD COLUMN IF NOT EXISTS lend_ratio NUMERIC DEFAULT 50;
 UPDATE users SET is_admin = TRUE WHERE email = 'mail@pinir.co.uk';
 ```
 
+## Recent Changes (Feb 2026)
+- Top balance cards: fixed-width (not full-stretch) on desktop, right-aligned
+- Period totals (give+lend mode): combined Give Portion + Given into one card, Lend Portion + Lent into one card (3 cards total instead of 5)
+- CRON endpoints confirmed ready: POST /api/cron/recurring (daily), POST /api/cron/monthly-summary (monthly 1st)
+
 ## Next Tasks
 - Push notifications for upcoming recurring transactions
 - Budget goals and tracking feature
