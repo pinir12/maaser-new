@@ -1,3 +1,5 @@
+'use client';
+
 import { getCurrencySymbol } from '../lib/validation';
 import { HandCoins, Heart, PiggyBank } from 'lucide-react';
 

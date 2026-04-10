@@ -1,3 +1,5 @@
+'use client';
+
 import { TrendingUp, TrendingDown, Minus, Lightbulb } from 'lucide-react';
 
 function pctChange(current, previous) {

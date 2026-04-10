@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useAuth } from '../lib/auth-context';
 import { apiGetTransactions, apiCreateTransaction, apiUpdateTransaction, apiDeleteTransaction, apiProcessRecurring } from '../lib/api';

@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useMemo, useRef } from 'react';
 import { HDate, months } from '@hebcal/core';
 import { getHebrewMonths } from '../lib/hebrew-calendar';

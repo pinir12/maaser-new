@@ -1,4 +1,8 @@
-const API_BASE = process.env.REACT_APP_BACKEND_URL;
+'use client';
+
+const API_BASE = typeof window !== 'undefined'
+  ? (process.env.NEXT_PUBLIC_API_BASE || '')
+  : '';
 
 function getToken() {
   return localStorage.getItem('finance_token');
