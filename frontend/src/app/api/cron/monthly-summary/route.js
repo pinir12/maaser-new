@@ -50,7 +50,7 @@ export async function POST() {
 
       try {
         await resend.emails.send({
-          from: 'Finance Tracker <onboarding@resend.dev>',
+          from: "Maaser Tracker <mail@pinir.co.uk>",
           to: [userEmail],
           subject: `Your Maaser Summary - ${monthName}`,
           html,
