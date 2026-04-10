@@ -1,13 +1,14 @@
 # Finance Tracker - PRD
 
 ## Original Problem Statement
-Personal finance tracker with:
-- **Separate Transaction Types**: Income, Give (charity), Lend (loans)
-- **Maaser Calculation**: Auto-calculate 10% from income
-- **Currency Normalization**: Dashboard stats in base_currency
-- **Hebrew Date Logic**: @hebcal/core for Monthly View toggle
-- **Recurring Transactions**: For all transaction types
-- **Lend Cleanup**: distribution_mode === 'give_only' unmounts lend components
+Personal finance tracker for maaser (tithe) management with:
+- **Transaction Types**: Income, Give (charity), Lend (loans)
+- **Maaser Calculation**: Auto-calculate percentage from income
+- **All-Time Running Totals**: Always visible at top
+- **View Modes**: All Time, This Year, This Month
+- **Hebrew Date Support**: @hebcal/core integration
+- **Recurring Transactions**: With cron sync functionality
+- **Search & Filters**: Full search with multiple filter options
 
 ## Tech Stack
 - **Frontend**: React 19 with Tailwind CSS
@@ -18,32 +19,37 @@ Personal finance tracker with:
 ## User Flow
 1. **Add Income** → System calculates Maaser (default 10%)
 2. **Add Give** → Charity donation (reduces maaser balance)
-3. **Add Lend** → Loan to someone (reduces maaser balance, only if not give_only mode)
-4. **Track Balance** → Dashboard shows: Income, Maaser Owed, Maaser Balance, Given, Lent
-
-## Core Requirements (Static)
-- [x] Separate transaction types: Income, Give, Lend
-- [x] Maaser auto-calculation from income
-- [x] Dashboard with proper stats separation
-- [x] Currency selection with exchange rate
-- [x] Hebrew/Gregorian calendar toggle
-- [x] Monthly view navigation
-- [x] Distribution mode toggle (both/give_only)
-- [x] Recurring transactions for all types
+3. **Add Lend** → Loan to someone (reduces maaser balance)
+4. **Sync Recurring** → Generates pending recurring transactions
+5. **Track Balance** → Dashboard shows all-time running totals
 
 ## What's Been Implemented (January 2026)
-- [x] Auth system with bcrypt password hashing
-- [x] Glassmorphism UI design
-- [x] Transaction types: Income (green), Give (dark green), Lend (red)
-- [x] Maaser percentage input (default 10%)
-- [x] Real-time maaser calculation display
-- [x] Dashboard stats: Total Income, Maaser Owed, Maaser Balance, Total Given, Total Lent
-- [x] Transactions grouped by type in list view
-- [x] Hebrew date display using @hebcal/core
-- [x] give_only mode properly UNMOUNTS lend components
-- [x] Recurring transaction options: Daily, Weekly, Bi-weekly, Monthly, Yearly
-- [x] Currency normalization with exchange_rate_to_base
-- [x] Mobile responsive design
+
+### Core Features
+- [x] Separate transaction types: Income, Give, Lend
+- [x] Maaser auto-calculation from income (configurable %)
+- [x] All-time running totals (always visible)
+- [x] View modes: All Time, This Year, This Month
+- [x] Period-specific summaries (Monthly/Yearly)
+- [x] Hebrew/Gregorian calendar toggle
+- [x] Recurring transactions (Daily, Weekly, Bi-weekly, Monthly, Yearly)
+- [x] "Sync Recurring" button to generate pending transactions
+
+### Search & Filters
+- [x] Text search by description/recipient
+- [x] Filter by transaction type
+- [x] Filter by date range
+- [x] Filter by amount range
+- [x] Filter by recurring status
+- [x] Filter by recipient name
+- [x] Clear All Filters button
+
+### UI/UX
+- [x] Glassmorphism design with earthy tones
+- [x] Transactions grouped by type (Income, Gives, Lends)
+- [x] Real-time filter count badge
+- [x] Responsive mobile design
+- [x] give_only mode properly unmounts lend components
 
 ## Database Schema
 ```sql
@@ -61,11 +67,13 @@ transactions:
 ### P0 (Critical) - Done
 - [x] Income/Give/Lend separation
 - [x] Maaser calculation
-- [x] Hebrew calendar integration
-- [x] Recurring transactions
+- [x] All-time running totals
+- [x] View modes (All Time/Year/Month)
+- [x] Search & filters
+- [x] Recurring transaction sync
 
 ### P1 (High Priority) - Future
-- [ ] Recurring transaction auto-generation (cron job)
+- [ ] Automated cron job for recurring (currently manual sync)
 - [ ] Export transactions (CSV/PDF)
 - [ ] Maaser distribution suggestions
 
@@ -75,6 +83,6 @@ transactions:
 - [ ] Multi-user household support
 
 ## Next Tasks
-1. Implement cron job for recurring transaction generation
-2. Add export functionality
-3. Add charts for income/maaser trends
+1. Add visual charts for income/maaser trends
+2. Add export functionality (CSV/PDF)
+3. Set up automated cron job for recurring transactions
