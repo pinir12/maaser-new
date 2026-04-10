@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { apiSendContact } from '../lib/api';
 import { X, Send, Mail } from 'lucide-react';

@@ -1,14 +1,24 @@
 # Finance Tracker - PRD
 
 ## Tech Stack
-- **Frontend**: React 19 + Tailwind CSS (blue theme) + Recharts + @hebcal/core
-- **Backend**: FastAPI (all DB operations, JWT auth, email, currency)
+- **Frontend**: Next.js 16 (App Router) + Tailwind CSS + Recharts + @hebcal/core
+- **Backend**: Next.js API Routes (for Vercel) / FastAPI (dev environment)
 - **Database**: Supabase (PostgreSQL) — accessed server-side only
 - **Email**: Resend (admin notifications, contact form, monthly summary)
 - **Currency**: open.er-api.com (free, no key, cached 1hr)
 
 ## Architecture
-All database operations go through FastAPI backend. Frontend has NO direct database access. Authentication uses JWT tokens (30-day expiry). Supabase service role key stored only in backend .env.
+Single Next.js project deployable to Vercel. API routes handle all server-side logic (JWT auth, Supabase queries, email). Frontend components are "use client" React components. In the dev/preview environment, API calls route to the legacy FastAPI backend via ingress.
+
+### Key Files
+- `src/app/layout.js` — Root HTML layout
+- `src/app/page.js` — Client entry (AuthProvider + Dashboard/HomePage)
+- `src/app/api/` — All API route handlers (mirror of FastAPI endpoints)
+- `src/lib/supabase-server.js` — Server-side Supabase REST helpers
+- `src/lib/jwt-server.js` — Server-side JWT + auth helpers
+- `src/components/` — All UI components (unchanged, with "use client")
+- `.env.local` — All secrets (SUPABASE_URL, SUPABASE_KEY, JWT_SECRET, RESEND_API_KEY)
+- `vercel.json` — Cron job schedules
 
 ## Core Business Logic: Maaser Split
 

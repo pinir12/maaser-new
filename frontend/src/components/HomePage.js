@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { AuthPage } from './AuthPage';
 import { Heart, HandCoins, CalendarDays, TrendingUp, Shield, Mail, ChevronRight } from 'lucide-react';

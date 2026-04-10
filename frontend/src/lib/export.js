@@ -1,3 +1,5 @@
+'use client';
+
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { getCurrencySymbol, TRANSACTION_TYPES, getRecurringLabel } from '../lib/validation';

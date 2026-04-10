@@ -1,3 +1,5 @@
+'use client';
+
 import { getCurrentHebrewMonth, getHebrewMonthBounds, navigateHebrewMonth } from '../lib/hebrew-calendar';
 import { HDate } from '@hebcal/core';
 import { ChevronLeft, ChevronRight, Calendar } from 'lucide-react';

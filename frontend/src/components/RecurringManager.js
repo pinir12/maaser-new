@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, useCallback } from 'react';
 import { apiGetRecurringTransactions, apiBulkUpdateRecurring, apiBulkDeleteRecurring } from '../lib/api';
 import { getCurrencySymbol, getRecurringLabel, TRANSACTION_TYPES } from '../lib/validation';

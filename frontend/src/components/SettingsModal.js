@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { currencies } from '../lib/validation';
 import { X, User, DollarSign, Calendar, Eye, Percent, PieChart } from 'lucide-react';

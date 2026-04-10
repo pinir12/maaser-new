@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, useCallback } from 'react';
 import { apiGetAdminUsers, apiUpdateAdminUser, apiDeleteAdminUser } from '../lib/api';
 import { ArrowLeft, Users, Shield, ShieldOff, Trash2, Search, RefreshCw } from 'lucide-react';

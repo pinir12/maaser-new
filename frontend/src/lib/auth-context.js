@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useContext, useState, useEffect } from 'react';
 import { apiLogin, apiSignup, apiLogout, apiUpdateUserSettings, apiGetUserSettings } from './api';
 
