@@ -118,14 +118,27 @@ export function AddTransactionModal({
 
   const onFormSubmit = async (data) => {
     const formData = {
-      ...data,
-      type: transactionType,
+      description: data.description,
       amount: Number(data.amount),
+      currency: data.currency,
       exchange_rate_to_base: Number(data.exchange_rate_to_base),
-      maaser_percentage: transactionType === TRANSACTION_TYPES.INCOME ? Number(data.maaser_percentage) : null,
-      maaser_amount: transactionType === TRANSACTION_TYPES.INCOME ? calculatedMaaser : null,
+      date: data.date,
+      type: transactionType,
+      is_recurring: data.is_recurring || false,
+      recurring_frequency: data.is_recurring ? data.recurring_frequency : 'none',
+      recurring_end_date: data.is_recurring && data.recurring_end_date ? data.recurring_end_date : null,
       hebrew_date: hebrewDate?.displayEn || null
     };
+    
+    // Add type-specific fields
+    if (transactionType === TRANSACTION_TYPES.INCOME) {
+      formData.maaser_percentage = Number(data.maaser_percentage) || 10;
+      formData.maaser_amount = calculatedMaaser;
+    }
+    
+    if ((transactionType === TRANSACTION_TYPES.GIVE || transactionType === TRANSACTION_TYPES.LEND) && data.recipient_name) {
+      formData.recipient_name = data.recipient_name;
+    }
     
     await onSubmit(formData, editTransaction?.id);
     onClose();
