@@ -1,96 +1,88 @@
 # Finance Tracker - PRD
 
+## Problem Statement
+Personal finance tracker with Hebrew/Gregorian calendar, Income/Maaser/Give/Lend tracking, built on React + FastAPI + Supabase.
+
 ## Tech Stack
-- **Frontend**: React 19 + Tailwind CSS (blue theme)
-- **Backend**: FastAPI + Supabase (PostgreSQL)
-- **Email**: Resend (transactional emails)
-- **Charts**: Recharts
-- **Export**: jspdf + jspdf-autotable
-- **Hebrew Calendar**: @hebcal/core
-- **Currency Rates**: open.er-api.com (free, no key)
+- **Frontend**: React 19 + Tailwind CSS (blue theme) + Recharts + @hebcal/core
+- **Backend**: FastAPI (all DB operations, JWT auth, email, currency)
+- **Database**: Supabase (PostgreSQL) — accessed server-side only
+- **Email**: Resend (admin notifications, contact form, monthly summary)
+- **Currency**: open.er-api.com (free, no key, cached 1hr)
+
+## Architecture
+All database operations go through the FastAPI backend. The frontend has NO direct database access. Authentication uses JWT tokens (30-day expiry). The Supabase service role key is stored only in the backend .env.
 
 ## What's Implemented
 
+### Security (Server-Side Migration)
+- [x] All Supabase operations moved to backend FastAPI endpoints
+- [x] JWT authentication (login, signup, protected routes)
+- [x] Supabase key removed from frontend entirely
+- [x] Password hashes never exposed in API responses
+- [x] Admin-only endpoints with is_admin verification
+
 ### Core Features
-- [x] Transaction types: Income, Give, Lend
-- [x] Maaser auto-calculation (configurable % via settings)
+- [x] Transaction CRUD via API (Income, Give, Lend)
+- [x] Maaser auto-calculation (configurable % in settings, default 10%)
 - [x] Custom give/lend ratio (settings, visual bar)
-- [x] All-time running totals
+- [x] All-time running totals (updates immediately on add/delete)
 - [x] View modes: All Time, Year, Month
-- [x] Hebrew/Gregorian calendar
-- [x] Recurring transactions with cron sync
-- [x] Recurring transaction edit/delete management (dedicated section)
+- [x] Hebrew/Gregorian calendar (year view fixed)
+- [x] Recurring transactions with cron sync + dedicated management
 - [x] Search with filters
 - [x] Analytics charts (Area, Bar, Pie)
 - [x] Export (CSV, PDF)
-- [x] Accordion collapsible transaction groups (Income, Give, Lend)
-
-### User Settings (Database-Persisted)
-- [x] Base currency
-- [x] Default view (all_time/year/month)
-- [x] Calendar mode (Gregorian/Hebrew)
-- [x] Distribution mode (both/give_only)
-- [x] Default maaser percentage (configurable, default 10%)
-- [x] Give/Lend ratio (shown only in both mode)
+- [x] Accordion collapsible transaction groups
+- [x] Live currency conversion (auto-fetch rates)
+- [x] Transaction autofill/prediction
 
 ### Communication
-- [x] Admin email on new user signup (via Resend)
-- [x] Contact form modal (sends to admin via Resend)
+- [x] Admin email on new user signup (Resend)
+- [x] Contact form modal (Resend)
+- [x] Monthly maaser summary email endpoint
 
 ### Admin
 - [x] Admin panel (conditionally rendered via is_admin flag)
 - [x] User management: view, toggle admin, delete users
 
-### Transaction Enhancements
-- [x] Autofill/prediction (type description to get past transaction suggestions)
-- [x] Hebrew date picker (in Hebrew calendar mode)
-- [x] Live currency conversion (auto-fetch exchange rates)
-
 ### UI/UX
-- [x] Clean blue Tailwind theme with modern glassmorphism
-- [x] Stats cards stretch to fill width uniformly (flex-1)
-- [x] Add Transaction button at top with gradient
-- [x] Compact stats cards
-- [x] Settings modal with maaser % and give/lend ratio
-- [x] Responsive design
-- [x] Backdrop blur header
-- [x] Vercel deployment ready (verified build succeeds)
+- [x] Clean blue Tailwind theme with glassmorphism
+- [x] Stats cards flex-1 stretch uniformly
+- [x] Hebrew date picker in Hebrew calendar mode
+- [x] Vercel deployment ready
 
-## Database Schema
-```sql
-users:
-- id, email, password_hash, name
-- base_currency, distribution_mode
-- default_view, use_hebrew_calendar
-- is_admin (boolean, default false)
-- default_maaser_percentage (numeric, default 10)
-- give_ratio (numeric, default 50)
-- lend_ratio (numeric, default 50)
-
-transactions:
-- id, user_id, description, amount, currency
-- exchange_rate_to_base, type (income/give/lend)
-- maaser_percentage, maaser_amount
-- recipient_name, date, hebrew_date
-- is_recurring, recurring_frequency, recurring_end_date
+## API Endpoints
+```
+POST /api/auth/login          - Login with email/password, returns JWT
+POST /api/auth/signup         - Register new user, returns JWT
+GET  /api/transactions        - Get user's transactions (protected)
+POST /api/transactions        - Create transaction (protected)
+PUT  /api/transactions/{id}   - Update transaction (protected)
+DELETE /api/transactions/{id} - Delete transaction (protected)
+GET  /api/user/settings       - Get user settings (protected)
+PUT  /api/user/settings       - Update user settings (protected)
+GET  /api/admin/users         - List users (admin only)
+PUT  /api/admin/users/{id}    - Update user (admin only)
+DELETE /api/admin/users/{id}  - Delete user (admin only)
+GET  /api/transactions/recurring     - Get recurring templates
+PUT  /api/transactions/recurring/bulk-update  - Bulk update recurring
+DELETE /api/transactions/recurring/bulk-delete - Bulk delete recurring
+GET  /api/transactions/suggestions   - Autofill suggestions
+POST /api/email/contact       - Send contact form email
+GET  /api/currency/rates/{base}      - Live exchange rates
+POST /api/cron/recurring      - Process recurring transactions
+POST /api/cron/monthly-summary       - Send monthly maaser emails
 ```
 
-## SQL Required (Run in Supabase Dashboard)
+## SQL Required (Supabase Dashboard)
 ```sql
 ALTER TABLE users ADD COLUMN IF NOT EXISTS is_admin BOOLEAN DEFAULT FALSE;
 ALTER TABLE users ADD COLUMN IF NOT EXISTS default_maaser_percentage NUMERIC DEFAULT 10;
 ALTER TABLE users ADD COLUMN IF NOT EXISTS give_ratio NUMERIC DEFAULT 50;
 ALTER TABLE users ADD COLUMN IF NOT EXISTS lend_ratio NUMERIC DEFAULT 50;
-
--- Set your admin user:
 UPDATE users SET is_admin = TRUE WHERE email = 'mail@pinir.co.uk';
 ```
-
-## API Endpoints
-- POST /api/cron/recurring - Process recurring transactions
-- POST /api/email/signup-notification - Admin notification on signup
-- POST /api/email/contact - Contact form submission
-- GET /api/currency/rates/{base} - Live exchange rates (cached 1hr)
 
 ## Next Tasks
 - Push notifications for upcoming recurring transactions
