@@ -125,26 +125,30 @@ export function formatHebrewDate(date, locale = 'en') {
 }
 
 /**
- * Navigate to next/previous Hebrew month
- * @param {number} currentMonth - Current Hebrew month
- * @param {number} currentYear - Current Hebrew year
- * @param {number} direction - 1 for next, -1 for previous
- * @returns {Object} New month and year
+ * Navigate Hebrew months chronologically.
+ * Hebrew chronological order: Tishrei(7) -> Cheshvan(8) -> Kislev(9) -> Tevet(10)
+ * -> Shevat(11) -> Adar I(12) -> [Adar II(13)] -> Nisan(1) -> Iyar(2) -> Sivan(3)
+ * -> Tammuz(4) -> Av(5) -> Elul(6)
+ * Year increments at Tishrei(7), decrements going back past Tishrei to Elul(6).
  */
 export function navigateHebrewMonth(currentMonth, currentYear, direction) {
-  const isLeapYear = HDate.isLeapYear(currentYear);
-  const maxMonth = isLeapYear ? 13 : 12;
-  
-  let newMonth = currentMonth + direction;
-  let newYear = currentYear;
-  
-  if (newMonth > maxMonth) {
-    newMonth = 1;
-    newYear++;
-  } else if (newMonth < 1) {
-    newYear--;
-    newMonth = HDate.isLeapYear(newYear) ? 13 : 12;
+  const isLeap = HDate.isLeapYear(currentYear);
+  const order = isLeap
+    ? [7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4, 5, 6]
+    : [7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6];
+
+  const idx = order.indexOf(currentMonth);
+  if (idx === -1) return { month: currentMonth, year: currentYear };
+
+  const newIdx = idx + direction;
+
+  if (newIdx >= order.length) {
+    // Past Elul -> go to Tishrei of next year
+    return { month: 7, year: currentYear + 1 };
   }
-  
-  return { month: newMonth, year: newYear };
+  if (newIdx < 0) {
+    // Before Tishrei -> go to Elul of previous year
+    return { month: 6, year: currentYear - 1 };
+  }
+  return { month: order[newIdx], year: currentYear };
 }

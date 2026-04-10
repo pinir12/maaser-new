@@ -7,7 +7,7 @@ import { HebrewDatePicker } from './HebrewDatePicker';
 import { X, Calendar, DollarSign, User, Repeat, TrendingUp, Heart, HandCoins, Zap, RefreshCw } from 'lucide-react';
 import { apiGetSuggestions, apiGetCurrencyRates } from '../lib/api';
 
-export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction, baseCurrency, distributionMode, maaserBalance = 0, userId, useHebrewCalendar = false, defaultMaaserPercentage = 10, giveRatio = 50, lendRatio = 50 }) {
+export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction, baseCurrency, distributionMode, balances = {}, userId, useHebrewCalendar = false, defaultMaaserPercentage = 10, giveRatio = 50, lendRatio = 50 }) {
   const [txnType, setTxnType] = useState(TRANSACTION_TYPES.INCOME);
   const isGiveOnly = distributionMode === 'give_only';
   const [showHebrewPicker, setShowHebrewPicker] = useState(false);
@@ -186,11 +186,17 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
 
         {(txnType === TRANSACTION_TYPES.GIVE || txnType === TRANSACTION_TYPES.LEND) && (
           <div className="mx-4 mt-4 p-3 bg-blue-50 rounded-xl text-sm text-blue-700 space-y-1">
-            <div>Available Maaser: <strong>{getCurrencySymbol(baseCurrency)}{maaserBalance.toFixed(2)}</strong></div>
-            {!isGiveOnly && maaserBalance > 0 && (
-              <div className="text-xs text-blue-600">
-                Suggested: Give {getCurrencySymbol(baseCurrency)}{(maaserBalance * giveRatio / 100).toFixed(2)} ({giveRatio}%) / Lend {getCurrencySymbol(baseCurrency)}{(maaserBalance * lendRatio / 100).toFixed(2)} ({lendRatio}%)
-              </div>
+            {isGiveOnly ? (
+              <div>Maaser Balance: <strong>{getCurrencySymbol(baseCurrency)}{(balances.maaserBalance ?? 0).toFixed(2)}</strong></div>
+            ) : (
+              <>
+                {txnType === TRANSACTION_TYPES.GIVE && (
+                  <div>Give Balance: <strong>{getCurrencySymbol(baseCurrency)}{(balances.giveBalance ?? 0).toFixed(2)}</strong></div>
+                )}
+                {txnType === TRANSACTION_TYPES.LEND && (
+                  <div>Lend Balance: <strong>{getCurrencySymbol(baseCurrency)}{(balances.lendBalance ?? 0).toFixed(2)}</strong></div>
+                )}
+              </>
             )}
           </div>
         )}
@@ -257,11 +263,11 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
               </label>
               <input data-testid="transaction-exchange-rate-input" type="number" step="0.0001" {...register('exchange_rate_to_base', { valueAsNumber: true })} placeholder="1.0"
                 className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500" />
-              {watchAmount && watchCurrency !== baseCurrency && (
+              {Number(watchAmount) > 0 && !isNaN(Number(watch('exchange_rate_to_base'))) ? (
                 <p className="mt-1 text-xs text-blue-600">
-                  {getCurrencySymbol(watchCurrency)}{Number(watchAmount).toLocaleString()} = {getCurrencySymbol(baseCurrency)}{(Number(watchAmount) * (watch('exchange_rate_to_base') || 1)).toFixed(2)}
+                  {getCurrencySymbol(watchCurrency)}{Number(watchAmount).toLocaleString()} = {getCurrencySymbol(baseCurrency)}{(Number(watchAmount) * Number(watch('exchange_rate_to_base') || 1)).toFixed(2)}
                 </p>
-              )}
+              ) : null}
             </div>
           )}
 
@@ -271,7 +277,7 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
               <div className="flex items-center gap-3">
                 <input data-testid="maaser-percentage-input" type="number" min="0" max="100" {...register('maaser_percentage', { valueAsNumber: true })}
                   className="w-20 px-3 py-2 bg-white border border-emerald-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-emerald-500" />
-                {watchAmount && <span className="text-emerald-700 text-sm">= {getCurrencySymbol(watchCurrency)}{calcMaaser.toFixed(2)}</span>}
+                {(!isNaN(calcMaaser) && calcMaaser > 0) ? <span className="text-emerald-700 text-sm">= {getCurrencySymbol(watchCurrency)}{calcMaaser.toFixed(2)}</span> : null}
               </div>
             </div>
           )}
