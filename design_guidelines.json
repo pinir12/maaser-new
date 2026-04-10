@@ -1,0 +1,96 @@
+{
+  "theme": "light",
+  "archetype": "1 (Organic & Earthy)",
+  "rationale": "For personal finance and expense tracking, users need warmth, trust, and calm. The Organic & Earthy archetype grounds the data. We pair this with a 'Crystal Glass' glassmorphism surface strategy to fulfill the 'instant and 2025 UX standards' requirement.",
+  "colors": {
+    "background": "#F5F5F0",
+    "surface": "rgba(255, 255, 255, 0.7)",
+    "primary": "#1E3F32",
+    "secondary": "#C2574A",
+    "text": {
+      "main": "#181C1A",
+      "muted": "#68706B",
+      "inverse": "#FFFFFF"
+    },
+    "border": "rgba(255, 255, 255, 0.4)",
+    "status": {
+      "success": "#1E3F32",
+      "warning": "#C2574A",
+      "info": "#4A6E82"
+    }
+  },
+  "typography": {
+    "fontFamilies": {
+      "headings": "Manrope",
+      "body": "IBM Plex Sans"
+    },
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight",
+      "h3": "text-xl sm:text-2xl font-bold tracking-tight",
+      "h4": "text-lg sm:text-xl font-semibold",
+      "body": "text-base font-normal leading-relaxed",
+      "labels": "text-xs font-bold uppercase tracking-[0.2em]"
+    }
+  },
+  "layout": {
+    "strategy": "Control Room Grid",
+    "spacing": "Generous spacing. Tailwind scale: p-4, p-6, p-8. Dashboard cards should use dense layout but maintain breathing room with internal padding (e.g., p-6).",
+    "grid": {
+      "base": "grid-cols-1 md:grid-cols-3 lg:grid-cols-4",
+      "gap": "gap-4 md:gap-6",
+      "span_logic": {
+        "summary_widget": "col-span-1",
+        "primary_data": "col-span-2 row-span-2 or col-span-3",
+        "feed_list": "col-span-1 md:col-span-2 lg:col-span-3 row-span-2"
+      }
+    }
+  },
+  "surfaces": {
+    "primary_cards": {
+      "style": "Crystal Glass",
+      "classes": "bg-white/70 backdrop-blur-xl border border-white/40 shadow-sm rounded-2xl"
+    },
+    "interactive_elements": {
+      "buttons": "bg-[#1E3F32] text-white hover:bg-[#152e24] shadow-md transition-all rounded-xl px-4 py-2",
+      "inputs": "bg-white/50 backdrop-blur-md border border-white/40 focus:ring-2 focus:ring-[#1E3F32]/50 focus:bg-white rounded-xl transition-all"
+    }
+  },
+  "motion": {
+    "interactions": "Hover states should lift slightly (-translate-y-1) and increase shadow (shadow-lg) with smooth transition (transition-all duration-200 ease-out).",
+    "state_management": "Use React useOptimistic for the transaction list to provide an instant, frictionless feel during mutations.",
+    "accessibility": "Respect prefers-reduced-motion for all transitions."
+  },
+  "components": {
+    "libraries": [
+      "shadcn/ui (Cards, Dialogs, Select, Inputs, Tables)",
+      "@hebcal/core (Hebrew Date Logic)",
+      "lucide-react (Icons)",
+      "zod (Validation)"
+    ],
+    "specific_rules": [
+      "Card components must be heavily customized to use the Crystal Glass styles defined above instead of the default flat styles.",
+      "The 'Add Transaction' Modal form MUST use Zod for validation to ensure `give_percentage + lend_percentage <= 100%`.",
+      "Conditional Mounting: If `distribution_mode === 'give_only'`, unmount the Lend UI components entirely. Do NOT query the lends table.",
+      "Data Normalization: Calculate 'Total Owed' and 'Balance' using `exchange_rate_to_base` when transaction currencies differ from base_currency.",
+      "Calendar View: The Monthly View toggle must utilize `@hebcal/core` to correctly map the start/end bounds of a Hebrew month (e.g., 1 Nisan to 30 Nisan) when active."
+    ]
+  },
+  "testing": {
+    "requirements": "All interactive and key informational elements MUST include a `data-testid` attribute (kebab-case, role-based)."
+  },
+  "media": {
+    "images": [
+      {
+        "category": "background",
+        "url": "https://images.unsplash.com/photo-1615716038854-58e352eee1db?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMHNvZnQlMjBncmFkaWVudCUyMGJhY2tncm91bmQlMjBzYW5kJTIwcGFzdGVsJTIwZ3JlZW58ZW58MHx8fHwxNzc1Nzg0OTY2fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Abstract soft gradient background (sand and pastel green) to serve as the base behind the glassmorphism UI. Apply as a fixed background image with cover sizing."
+      },
+      {
+        "category": "avatar",
+        "url": "https://images.unsplash.com/photo-1623594675959-02360202d4d6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdCUyMHNtaWxpbmd8ZW58MHx8fHwxNzc1NzM5NTA1fDA&ixlib=rb-4.1.0&q=85",
+        "description": "User profile avatar."
+      }
+    ]
+  }
+}
