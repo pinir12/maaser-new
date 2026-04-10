@@ -45,18 +45,8 @@ __turbopack_context__.s([
     ()=>apiUpdateUserSettings
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/frontend/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_async_to_generator.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread_props.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/tslib/tslib.es6.mjs [app-client] (ecmascript) <export __generator as _>");
 'use client';
-;
-;
-;
-;
-;
-var API_BASE = ("TURBOPACK compile-time truthy", 1) ? ("TURBOPACK compile-time value", "https://hebrew-month-view.preview.emergentagent.com") || '' : "TURBOPACK unreachable";
+const API_BASE = ("TURBOPACK compile-time truthy", 1) ? ("TURBOPACK compile-time value", "https://hebrew-month-view.preview.emergentagent.com") || '' : "TURBOPACK unreachable";
 function getToken() {
     return localStorage.getItem('finance_token');
 }
@@ -66,112 +56,54 @@ function setToken(token) {
 function clearToken() {
     localStorage.removeItem('finance_token');
 }
-function request(_0) {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function(path) {
-        var options, token, headers, res, err;
-        var _arguments = arguments;
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-            switch(_state.label){
-                case 0:
-                    options = _arguments.length > 1 && _arguments[1] !== void 0 ? _arguments[1] : {};
-                    token = getToken();
-                    headers = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
-                        'Content-Type': 'application/json'
-                    }, options.headers);
-                    if (token) headers['Authorization'] = "Bearer ".concat(token);
-                    return [
-                        4,
-                        fetch("".concat(API_BASE).concat(path), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, options), {
-                            headers: headers
-                        }))
-                    ];
-                case 1:
-                    res = _state.sent();
-                    if (res.status === 401) {
-                        clearToken();
-                        localStorage.removeItem('finance_user');
-                        window.location.reload();
-                        throw new Error('Session expired');
-                    }
-                    if (!!res.ok) return [
-                        3,
-                        3
-                    ];
-                    return [
-                        4,
-                        res.json().catch(function() {
-                            return {
-                                detail: 'Request failed'
-                            };
-                        })
-                    ];
-                case 2:
-                    err = _state.sent();
-                    throw new Error(err.detail || "Error ".concat(res.status));
-                case 3:
-                    return [
-                        2,
-                        res.json()
-                    ];
-            }
-        });
-    }).apply(this, arguments);
+async function request(path, options = {}) {
+    const token = getToken();
+    const headers = {
+        'Content-Type': 'application/json',
+        ...options.headers
+    };
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+    const res = await fetch(`${API_BASE}${path}`, {
+        ...options,
+        headers
+    });
+    if (res.status === 401) {
+        clearToken();
+        localStorage.removeItem('finance_user');
+        window.location.reload();
+        throw new Error('Session expired');
+    }
+    if (!res.ok) {
+        const err = await res.json().catch(()=>({
+                detail: 'Request failed'
+            }));
+        throw new Error(err.detail || `Error ${res.status}`);
+    }
+    return res.json();
 }
-function apiLogin(email, password) {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-        var data;
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-            switch(_state.label){
-                case 0:
-                    return [
-                        4,
-                        request('/api/auth/login', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                email: email,
-                                password: password
-                            })
-                        })
-                    ];
-                case 1:
-                    data = _state.sent();
-                    setToken(data.token);
-                    return [
-                        2,
-                        data
-                    ];
-            }
-        });
-    })();
+async function apiLogin(email, password) {
+    const data = await request('/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({
+            email,
+            password
+        })
+    });
+    setToken(data.token);
+    return data;
 }
-function apiSignup(email, password, name, base_currency) {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-        var data;
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-            switch(_state.label){
-                case 0:
-                    return [
-                        4,
-                        request('/api/auth/signup', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                email: email,
-                                password: password,
-                                name: name,
-                                base_currency: base_currency
-                            })
-                        })
-                    ];
-                case 1:
-                    data = _state.sent();
-                    setToken(data.token);
-                    return [
-                        2,
-                        data
-                    ];
-            }
-        });
-    })();
+async function apiSignup(email, password, name, base_currency) {
+    const data = await request('/api/auth/signup', {
+        method: 'POST',
+        body: JSON.stringify({
+            email,
+            password,
+            name,
+            base_currency
+        })
+    });
+    setToken(data.token);
+    return data;
 }
 function apiLogout() {
     clearToken();
@@ -186,13 +118,13 @@ function apiCreateTransaction(txn) {
     });
 }
 function apiUpdateTransaction(id, txn) {
-    return request("/api/transactions/".concat(id), {
+    return request(`/api/transactions/${id}`, {
         method: 'PUT',
         body: JSON.stringify(txn)
     });
 }
 function apiDeleteTransaction(id) {
-    return request("/api/transactions/".concat(id), {
+    return request(`/api/transactions/${id}`, {
         method: 'DELETE'
     });
 }
@@ -209,13 +141,13 @@ function apiGetAdminUsers() {
     return request('/api/admin/users');
 }
 function apiUpdateAdminUser(userId, updates) {
-    return request("/api/admin/users/".concat(userId), {
+    return request(`/api/admin/users/${userId}`, {
         method: 'PUT',
         body: JSON.stringify(updates)
     });
 }
 function apiDeleteAdminUser(userId) {
-    return request("/api/admin/users/".concat(userId), {
+    return request(`/api/admin/users/${userId}`, {
         method: 'DELETE'
     });
 }
@@ -226,9 +158,9 @@ function apiBulkUpdateRecurring(description, type, updates) {
     return request('/api/transactions/recurring/bulk-update', {
         method: 'PUT',
         body: JSON.stringify({
-            description: description,
-            type: type,
-            updates: updates
+            description,
+            type,
+            updates
         })
     });
 }
@@ -236,8 +168,8 @@ function apiBulkDeleteRecurring(description, type) {
     return request('/api/transactions/recurring/bulk-delete', {
         method: 'DELETE',
         body: JSON.stringify({
-            description: description,
-            type: type
+            description,
+            type
         })
     });
 }
@@ -248,14 +180,14 @@ function apiSendContact(name, email, message) {
     return request('/api/email/contact', {
         method: 'POST',
         body: JSON.stringify({
-            name: name,
-            email: email,
-            message: message
+            name,
+            email,
+            message
         })
     });
 }
 function apiGetCurrencyRates(base) {
-    return request("/api/currency/rates/".concat(base));
+    return request(`/api/currency/rates/${base}`);
 }
 function apiProcessRecurring() {
     return request('/api/cron/recurring', {
@@ -267,7 +199,7 @@ function apiSendMonthlySummary() {
         method: 'POST'
     });
 }
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -280,32 +212,23 @@ __turbopack_context__.s([
     "useAuth",
     ()=>useAuth
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_async_to_generator.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/tslib/tslib.es6.mjs [app-client] (ecmascript) <export __generator as _>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/lib/api.js [app-client] (ecmascript)");
-;
-;
-;
-;
 ;
 var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
-var AuthContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])(null);
-function AuthProvider(param) {
-    var children = param.children;
+const AuthContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])(null);
+function AuthProvider({ children }) {
     _s();
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null), 2), user = _useState[0], setUser = _useState[1];
-    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true), 2), loading = _useState1[0], setLoading = _useState1[1];
+    const [user, setUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "AuthProvider.useEffect": function() {
-            var token = localStorage.getItem('finance_token');
-            var storedUser = localStorage.getItem('finance_user');
+        "AuthProvider.useEffect": ()=>{
+            const token = localStorage.getItem('finance_token');
+            const storedUser = localStorage.getItem('finance_user');
             if (token && storedUser) {
                 try {
                     setUser(JSON.parse(storedUser));
@@ -317,190 +240,77 @@ function AuthProvider(param) {
             setLoading(false);
         }
     }["AuthProvider.useEffect"], []);
-    var signIn = function signIn(email, password) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var data, error;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        _state.trys.push([
-                            0,
-                            2,
-                            ,
-                            3
-                        ]);
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiLogin"])(email, password)
-                        ];
-                    case 1:
-                        data = _state.sent();
-                        setUser(data.user);
-                        localStorage.setItem('finance_user', JSON.stringify(data.user));
-                        return [
-                            2,
-                            {
-                                user: data.user,
-                                error: null
-                            }
-                        ];
-                    case 2:
-                        error = _state.sent();
-                        return [
-                            2,
-                            {
-                                user: null,
-                                error: error.message
-                            }
-                        ];
-                    case 3:
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const signIn = async (email, password)=>{
+        try {
+            const data = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiLogin"])(email, password);
+            setUser(data.user);
+            localStorage.setItem('finance_user', JSON.stringify(data.user));
+            return {
+                user: data.user,
+                error: null
+            };
+        } catch (error) {
+            return {
+                user: null,
+                error: error.message
+            };
+        }
     };
-    var signUp = function signUp(email, password, name, base_currency) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var data, error;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        _state.trys.push([
-                            0,
-                            2,
-                            ,
-                            3
-                        ]);
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiSignup"])(email, password, name, base_currency)
-                        ];
-                    case 1:
-                        data = _state.sent();
-                        setUser(data.user);
-                        localStorage.setItem('finance_user', JSON.stringify(data.user));
-                        return [
-                            2,
-                            {
-                                user: data.user,
-                                error: null
-                            }
-                        ];
-                    case 2:
-                        error = _state.sent();
-                        return [
-                            2,
-                            {
-                                user: null,
-                                error: error.message
-                            }
-                        ];
-                    case 3:
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const signUp = async (email, password, name, base_currency)=>{
+        try {
+            const data = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiSignup"])(email, password, name, base_currency);
+            setUser(data.user);
+            localStorage.setItem('finance_user', JSON.stringify(data.user));
+            return {
+                user: data.user,
+                error: null
+            };
+        } catch (error) {
+            return {
+                user: null,
+                error: error.message
+            };
+        }
     };
-    var signOut = function signOut() {
+    const signOut = ()=>{
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiLogout"])();
         setUser(null);
         localStorage.removeItem('finance_user');
     };
-    var updateUser = function updateUser(updates) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var updatedUser, error;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        _state.trys.push([
-                            0,
-                            2,
-                            ,
-                            3
-                        ]);
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiUpdateUserSettings"])(updates)
-                        ];
-                    case 1:
-                        updatedUser = _state.sent();
-                        setUser(updatedUser);
-                        localStorage.setItem('finance_user', JSON.stringify(updatedUser));
-                        return [
-                            2,
-                            {
-                                user: updatedUser,
-                                error: null
-                            }
-                        ];
-                    case 2:
-                        error = _state.sent();
-                        return [
-                            2,
-                            {
-                                user: null,
-                                error: error.message
-                            }
-                        ];
-                    case 3:
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const updateUser = async (updates)=>{
+        try {
+            const updatedUser = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiUpdateUserSettings"])(updates);
+            setUser(updatedUser);
+            localStorage.setItem('finance_user', JSON.stringify(updatedUser));
+            return {
+                user: updatedUser,
+                error: null
+            };
+        } catch (error) {
+            return {
+                user: null,
+                error: error.message
+            };
+        }
     };
-    var refreshUser = function refreshUser() {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var freshUser, e;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        _state.trys.push([
-                            0,
-                            2,
-                            ,
-                            3
-                        ]);
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiGetUserSettings"])()
-                        ];
-                    case 1:
-                        freshUser = _state.sent();
-                        setUser(freshUser);
-                        localStorage.setItem('finance_user', JSON.stringify(freshUser));
-                        return [
-                            3,
-                            3
-                        ];
-                    case 2:
-                        e = _state.sent();
-                        return [
-                            3,
-                            3
-                        ];
-                    case 3:
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const refreshUser = async ()=>{
+        try {
+            const freshUser = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiGetUserSettings"])();
+            setUser(freshUser);
+            localStorage.setItem('finance_user', JSON.stringify(freshUser));
+        } catch (e) {
+        // token may be expired
+        }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(AuthContext.Provider, {
         value: {
-            user: user,
-            loading: loading,
-            signIn: signIn,
-            signUp: signUp,
-            signOut: signOut,
-            updateUser: updateUser,
-            refreshUser: refreshUser
+            user,
+            loading,
+            signIn,
+            signUp,
+            signOut,
+            updateUser,
+            refreshUser
         },
         children: children
     }, void 0, false, {
@@ -513,14 +323,14 @@ _s(AuthProvider, "NiO5z6JIqzX62LS5UWDgIqbZYyY=");
 _c = AuthProvider;
 function useAuth() {
     _s1();
-    var context = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(AuthContext);
+    const context = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(AuthContext);
     if (!context) throw new Error('useAuth must be used within AuthProvider');
     return context;
 }
 _s1(useAuth, "b9L3QQ+jgeyIrH0NfHrJ8nn7VMU=");
 var _c;
 __turbopack_context__.k.register(_c, "AuthProvider");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -553,16 +363,14 @@ __turbopack_context__.s([
     "userSettingsSchema",
     ()=>userSettingsSchema
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/zod/v3/external.js [app-client] (ecmascript) <export * as z>");
 ;
-;
-var TRANSACTION_TYPES = {
+const TRANSACTION_TYPES = {
     INCOME: 'income',
     GIVE: 'give',
     LEND: 'lend'
 };
-var RECURRING_FREQUENCIES = {
+const RECURRING_FREQUENCIES = {
     NONE: 'none',
     DAILY: 'daily',
     WEEKLY: 'weekly',
@@ -570,7 +378,7 @@ var RECURRING_FREQUENCIES = {
     MONTHLY: 'monthly',
     YEARLY: 'yearly'
 };
-var incomeSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
+const incomeSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
     description: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().min(1, 'Description is required').max(200),
     amount: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].number().positive('Amount must be positive'),
     currency: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().min(1, 'Currency is required'),
@@ -581,7 +389,7 @@ var incomeSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$n
     recurring_frequency: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default('none'),
     recurring_end_date: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().optional().nullable()
 });
-var giveSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
+const giveSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
     description: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().min(1, 'Description is required').max(200),
     amount: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].number().positive('Amount must be positive'),
     currency: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().min(1, 'Currency is required'),
@@ -592,7 +400,7 @@ var giveSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$nod
     recurring_frequency: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default('none'),
     recurring_end_date: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().optional().nullable()
 });
-var lendSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
+const lendSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
     description: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().min(1, 'Description is required').max(200),
     amount: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].number().positive('Amount must be positive'),
     currency: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().min(1, 'Currency is required'),
@@ -603,7 +411,7 @@ var lendSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$nod
     recurring_frequency: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default('none'),
     recurring_end_date: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().optional().nullable()
 });
-var userSettingsSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
+const userSettingsSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
     name: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().min(1, 'Name is required').max(100),
     base_currency: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().min(1, 'Base currency is required'),
     distribution_mode: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].enum([
@@ -612,25 +420,23 @@ var userSettingsSchema = __TURBOPACK__imported__module__$5b$project$5d2f$fronten
     ]),
     default_maaser_percentage: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].number().min(0).max(100).default(10)
 });
-var loginSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
+const loginSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
     email: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().email('Invalid email address'),
     password: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().min(6, 'Password must be at least 6 characters')
 });
-var registerSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
+const registerSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
     name: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().min(1, 'Name is required').max(100),
     email: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().email('Invalid email address'),
     password: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().min(6, 'Password must be at least 6 characters'),
     confirmPassword: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string(),
     base_currency: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().min(1, 'Base currency is required')
-}).refine(function(data) {
-    return data.password === data.confirmPassword;
-}, {
+}).refine((data)=>data.password === data.confirmPassword, {
     message: 'Passwords do not match',
     path: [
         'confirmPassword'
     ]
 });
-var currencies = [
+const currencies = [
     {
         code: 'USD',
         name: 'US Dollar',
@@ -673,17 +479,13 @@ var currencies = [
     }
 ];
 function getCurrencySymbol(code) {
-    var _currencies_find;
-    return ((_currencies_find = currencies.find(function(c) {
-        return c.code === code;
-    })) === null || _currencies_find === void 0 ? void 0 : _currencies_find.symbol) || code;
+    return currencies.find((c)=>c.code === code)?.symbol || code;
 }
-function calculateMaaser(amount) {
-    var percentage = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 10;
+function calculateMaaser(amount, percentage = 10) {
     return amount * percentage / 100;
 }
 function getRecurringLabel(frequency) {
-    var labels = {
+    const labels = {
         none: 'One-time',
         daily: 'Daily',
         weekly: 'Weekly',
@@ -693,7 +495,7 @@ function getRecurringLabel(frequency) {
     };
     return labels[frequency] || frequency;
 }
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -704,12 +506,6 @@ __turbopack_context__.s([
     "AuthPage",
     ()=>AuthPage
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_async_to_generator.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread_props.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/tslib/tslib.es6.mjs [app-client] (ecmascript) <export __generator as _>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/react-hook-form/dist/index.esm.mjs [app-client] (ecmascript)");
@@ -724,12 +520,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$dollar$2d$sign$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__DollarSign$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/dollar-sign.js [app-client] (ecmascript) <export default as DollarSign>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$left$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowLeft$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/arrow-left.js [app-client] (ecmascript) <export default as ArrowLeft>");
 ;
-;
-;
-;
-;
-;
-;
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
@@ -738,21 +528,19 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-function AuthPage(param) {
-    var _this = this;
-    var _param_defaultTab = param.defaultTab, defaultTab = _param_defaultTab === void 0 ? 'login' : _param_defaultTab, _param_onBack = param.onBack, onBack = _param_onBack === void 0 ? null : _param_onBack;
+function AuthPage({ defaultTab = 'login', onBack = null }) {
     _s();
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(defaultTab === 'login'), 2), isLogin = _useState[0], setIsLogin = _useState[1];
-    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(''), 2), error = _useState1[0], setError = _useState1[1];
-    var _useAuth = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$auth$2d$context$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"])(), signIn = _useAuth.signIn, signUp = _useAuth.signUp;
-    var loginForm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
+    const [isLogin, setIsLogin] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(defaultTab === 'login');
+    const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const { signIn, signUp } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$auth$2d$context$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"])();
+    const loginForm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
         resolver: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hookform$2f$resolvers$2f$zod$2f$dist$2f$zod$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["zodResolver"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["loginSchema"]),
         defaultValues: {
             email: '',
             password: ''
         }
     });
-    var registerForm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
+    const registerForm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
         resolver: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hookform$2f$resolvers$2f$zod$2f$dist$2f$zod$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["zodResolver"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["registerSchema"]),
         defaultValues: {
             name: '',
@@ -762,45 +550,11 @@ function AuthPage(param) {
             base_currency: 'USD'
         }
     });
-    var form = isLogin ? loginForm : registerForm;
-    var onSubmit = function onSubmit(data) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var result, _tmp;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        setError('');
-                        if (!isLogin) return [
-                            3,
-                            2
-                        ];
-                        return [
-                            4,
-                            signIn(data.email, data.password)
-                        ];
-                    case 1:
-                        _tmp = _state.sent();
-                        return [
-                            3,
-                            4
-                        ];
-                    case 2:
-                        return [
-                            4,
-                            signUp(data.email, data.password, data.name, data.base_currency)
-                        ];
-                    case 3:
-                        _tmp = _state.sent();
-                        _state.label = 4;
-                    case 4:
-                        result = _tmp;
-                        if (result.error) setError(result.error);
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const form = isLogin ? loginForm : registerForm;
+    const onSubmit = async (data)=>{
+        setError('');
+        const result = isLogin ? await signIn(data.email, data.password) : await signUp(data.email, data.password, data.name, data.base_currency);
+        if (result.error) setError(result.error);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         "data-testid": "auth-page",
@@ -860,11 +614,11 @@ function AuthPage(param) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     "data-testid": "login-tab",
-                                    onClick: function onClick() {
+                                    onClick: ()=>{
                                         setIsLogin(true);
                                         setError('');
                                     },
-                                    className: "flex-1 py-3 text-sm font-medium transition-colors ".concat(isLogin ? 'text-blue-600 bg-blue-50' : 'text-slate-500 hover:bg-slate-50'),
+                                    className: `flex-1 py-3 text-sm font-medium transition-colors ${isLogin ? 'text-blue-600 bg-blue-50' : 'text-slate-500 hover:bg-slate-50'}`,
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$log$2d$in$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__LogIn$3e$__["LogIn"], {
                                             className: "w-4 h-4 inline mr-2"
@@ -882,11 +636,11 @@ function AuthPage(param) {
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     "data-testid": "register-tab",
-                                    onClick: function onClick() {
+                                    onClick: ()=>{
                                         setIsLogin(false);
                                         setError('');
                                     },
-                                    className: "flex-1 py-3 text-sm font-medium transition-colors ".concat(!isLogin ? 'text-blue-600 bg-blue-50' : 'text-slate-500 hover:bg-slate-50'),
+                                    className: `flex-1 py-3 text-sm font-medium transition-colors ${!isLogin ? 'text-blue-600 bg-blue-50' : 'text-slate-500 hover:bg-slate-50'}`,
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2d$plus$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserPlus$3e$__["UserPlus"], {
                                             className: "w-4 h-4 inline mr-2"
@@ -941,13 +695,13 @@ function AuthPage(param) {
                                                     lineNumber: 57,
                                                     columnNumber: 19
                                                 }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     "data-testid": "register-name-input",
-                                                    type: "text"
-                                                }, registerForm.register('name')), {
+                                                    type: "text",
+                                                    ...registerForm.register('name'),
                                                     placeholder: "Your name",
                                                     className: "w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500"
-                                                }), void 0, false, {
+                                                }, void 0, false, {
                                                     fileName: "[project]/frontend/src/components/AuthPage.js",
                                                     lineNumber: 58,
                                                     columnNumber: 19
@@ -992,13 +746,13 @@ function AuthPage(param) {
                                                     lineNumber: 68,
                                                     columnNumber: 17
                                                 }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     "data-testid": isLogin ? "login-email-input" : "register-email-input",
-                                                    type: "email"
-                                                }, form.register('email')), {
+                                                    type: "email",
+                                                    ...form.register('email'),
                                                     placeholder: "you@example.com",
                                                     className: "w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500"
-                                                }), void 0, false, {
+                                                }, void 0, false, {
                                                     fileName: "[project]/frontend/src/components/AuthPage.js",
                                                     lineNumber: 69,
                                                     columnNumber: 17
@@ -1043,13 +797,13 @@ function AuthPage(param) {
                                                     lineNumber: 78,
                                                     columnNumber: 17
                                                 }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     "data-testid": isLogin ? "login-password-input" : "register-password-input",
-                                                    type: "password"
-                                                }, form.register('password')), {
+                                                    type: "password",
+                                                    ...form.register('password'),
                                                     placeholder: "••••••••",
                                                     className: "w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500"
-                                                }), void 0, false, {
+                                                }, void 0, false, {
                                                     fileName: "[project]/frontend/src/components/AuthPage.js",
                                                     lineNumber: 79,
                                                     columnNumber: 17
@@ -1096,13 +850,13 @@ function AuthPage(param) {
                                                             lineNumber: 90,
                                                             columnNumber: 21
                                                         }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                             "data-testid": "register-confirm-password-input",
-                                                            type: "password"
-                                                        }, registerForm.register('confirmPassword')), {
+                                                            type: "password",
+                                                            ...registerForm.register('confirmPassword'),
                                                             placeholder: "••••••••",
                                                             className: "w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500"
-                                                        }), void 0, false, {
+                                                        }, void 0, false, {
                                                             fileName: "[project]/frontend/src/components/AuthPage.js",
                                                             lineNumber: 91,
                                                             columnNumber: 21
@@ -1147,12 +901,11 @@ function AuthPage(param) {
                                                             lineNumber: 99,
                                                             columnNumber: 21
                                                         }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
-                                                            "data-testid": "register-currency-select"
-                                                        }, registerForm.register('base_currency')), {
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                                            "data-testid": "register-currency-select",
+                                                            ...registerForm.register('base_currency'),
                                                             className: "w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500",
-                                                            children: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["currencies"].map(function(c) {
-                                                                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                            children: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["currencies"].map((c)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                                     value: c.code,
                                                                     children: [
                                                                         c.symbol,
@@ -1163,9 +916,8 @@ function AuthPage(param) {
                                                                     fileName: "[project]/frontend/src/components/AuthPage.js",
                                                                     lineNumber: 102,
                                                                     columnNumber: 44
-                                                                }, _this);
-                                                            })
-                                                        }), void 0, false, {
+                                                                }, this))
+                                                        }, void 0, false, {
                                                             fileName: "[project]/frontend/src/components/AuthPage.js",
                                                             lineNumber: 100,
                                                             columnNumber: 21
@@ -1229,7 +981,7 @@ _s(AuthPage, "qLCvYX3wP6QsYMUCwR8VoT2SrEQ=", false, function() {
 _c = AuthPage;
 var _c;
 __turbopack_context__.k.register(_c, "AuthPage");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -1240,8 +992,6 @@ __turbopack_context__.s([
     "HomePage",
     ()=>HomePage
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$AuthPage$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/components/AuthPage.js [app-client] (ecmascript)");
@@ -1253,14 +1003,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$mail$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Mail$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/mail.js [app-client] (ecmascript) <export default as Mail>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$right$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronRight$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/chevron-right.js [app-client] (ecmascript) <export default as ChevronRight>");
 ;
-;
-;
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
 ;
-var features = [
+const features = [
     {
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$heart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Heart$3e$__["Heart"],
         title: 'Maaser Made Simple',
@@ -1305,16 +1053,13 @@ var features = [
     }
 ];
 function HomePage() {
-    var _this = this;
     _s();
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), showAuth = _useState[0], setShowAuth = _useState[1];
-    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('login'), 2), defaultTab = _useState1[0], setDefaultTab = _useState1[1];
+    const [showAuth, setShowAuth] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [defaultTab, setDefaultTab] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('login');
     if (showAuth) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$AuthPage$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AuthPage"], {
             defaultTab: defaultTab,
-            onBack: function onBack() {
-                return setShowAuth(false);
-            }
+            onBack: ()=>setShowAuth(false)
         }, void 0, false, {
             fileName: "[project]/frontend/src/components/HomePage.js",
             lineNumber: 57,
@@ -1367,7 +1112,7 @@ function HomePage() {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     "data-testid": "nav-login-btn",
-                                    onClick: function onClick() {
+                                    onClick: ()=>{
                                         setDefaultTab('login');
                                         setShowAuth(true);
                                     },
@@ -1380,7 +1125,7 @@ function HomePage() {
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     "data-testid": "nav-register-btn",
-                                    onClick: function onClick() {
+                                    onClick: ()=>{
                                         setDefaultTab('register');
                                         setShowAuth(true);
                                     },
@@ -1450,7 +1195,7 @@ function HomePage() {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 "data-testid": "hero-register-btn",
-                                onClick: function onClick() {
+                                onClick: ()=>{
                                     setDefaultTab('register');
                                     setShowAuth(true);
                                 },
@@ -1472,7 +1217,7 @@ function HomePage() {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 "data-testid": "hero-login-btn",
-                                onClick: function onClick() {
+                                onClick: ()=>{
                                     setDefaultTab('login');
                                     setShowAuth(true);
                                 },
@@ -1646,21 +1391,20 @@ function HomePage() {
                                     color: 'text-rose-600',
                                     bg: 'bg-rose-50'
                                 }
-                            ].map(function(t, i) {
-                                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            ].map((t, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "flex items-center justify-between py-2.5 px-4 bg-slate-50/80 rounded-xl",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex items-center gap-3",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: "text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md ".concat(t.bg, " ").concat(t.color),
+                                                    className: `text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md ${t.bg} ${t.color}`,
                                                     children: t.type
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/src/components/HomePage.js",
                                                     lineNumber: 136,
                                                     columnNumber: 19
-                                                }, _this),
+                                                }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     className: "text-sm text-slate-700",
                                                     children: t.desc
@@ -1668,28 +1412,27 @@ function HomePage() {
                                                     fileName: "[project]/frontend/src/components/HomePage.js",
                                                     lineNumber: 137,
                                                     columnNumber: 19
-                                                }, _this)
+                                                }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/src/components/HomePage.js",
                                             lineNumber: 135,
                                             columnNumber: 17
-                                        }, _this),
+                                        }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "text-sm font-semibold ".concat(t.color),
+                                            className: `text-sm font-semibold ${t.color}`,
                                             children: t.amount
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/src/components/HomePage.js",
                                             lineNumber: 139,
                                             columnNumber: 17
-                                        }, _this)
+                                        }, this)
                                     ]
                                 }, i, true, {
                                     fileName: "[project]/frontend/src/components/HomePage.js",
                                     lineNumber: 134,
                                     columnNumber: 15
-                                }, _this);
-                            })
+                                }, this))
                         }, void 0, false, {
                             fileName: "[project]/frontend/src/components/HomePage.js",
                             lineNumber: 128,
@@ -1719,25 +1462,24 @@ function HomePage() {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "grid sm:grid-cols-2 lg:grid-cols-3 gap-5",
-                        children: features.map(function(f, i) {
-                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                "data-testid": "feature-card-".concat(i),
+                        children: features.map((f, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                "data-testid": `feature-card-${i}`,
                                 className: "bg-white rounded-2xl p-6 border border-slate-200/60 hover:shadow-md hover:border-slate-300/80 transition-all",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "w-10 h-10 ".concat(f.bg, " rounded-xl flex items-center justify-center mb-4"),
+                                        className: `w-10 h-10 ${f.bg} rounded-xl flex items-center justify-center mb-4`,
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(f.icon, {
-                                            className: "w-5 h-5 ".concat(f.color)
+                                            className: `w-5 h-5 ${f.color}`
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/src/components/HomePage.js",
                                             lineNumber: 153,
                                             columnNumber: 17
-                                        }, _this)
+                                        }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/src/components/HomePage.js",
                                         lineNumber: 152,
                                         columnNumber: 15
-                                    }, _this),
+                                    }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                         className: "text-sm font-bold text-slate-900 mb-1.5",
                                         children: f.title
@@ -1745,7 +1487,7 @@ function HomePage() {
                                         fileName: "[project]/frontend/src/components/HomePage.js",
                                         lineNumber: 155,
                                         columnNumber: 15
-                                    }, _this),
+                                    }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-sm text-slate-500 leading-relaxed",
                                         children: f.desc
@@ -1753,14 +1495,13 @@ function HomePage() {
                                         fileName: "[project]/frontend/src/components/HomePage.js",
                                         lineNumber: 156,
                                         columnNumber: 15
-                                    }, _this)
+                                    }, this)
                                 ]
                             }, i, true, {
                                 fileName: "[project]/frontend/src/components/HomePage.js",
                                 lineNumber: 151,
                                 columnNumber: 13
-                            }, _this);
-                        })
+                            }, this))
                     }, void 0, false, {
                         fileName: "[project]/frontend/src/components/HomePage.js",
                         lineNumber: 149,
@@ -1825,7 +1566,7 @@ function HomePage() {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         "data-testid": "bottom-register-btn",
-                        onClick: function onClick() {
+                        onClick: ()=>{
                             setDefaultTab('register');
                             setShowAuth(true);
                         },
@@ -1918,7 +1659,7 @@ _s(HomePage, "OQ7kW9hBsQHEJHwCvc+HknILvO0=");
 _c = HomePage;
 var _c;
 __turbopack_context__.k.register(_c, "HomePage");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -1941,14 +1682,12 @@ __turbopack_context__.s([
     "toHebrewDate",
     ()=>toHebrewDate
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$core$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/@hebcal/core/dist/esm/index.js [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@hebcal/hdate/dist/esm/hdate.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdateBase$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@hebcal/hdate/dist/esm/hdateBase.js [app-client] (ecmascript)");
 ;
-;
 function toHebrewDate(date) {
-    var hd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](date);
+    const hd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](date);
     return {
         day: hd.getDate(),
         month: hd.getMonth(),
@@ -1961,37 +1700,37 @@ function toHebrewDate(date) {
 }
 function getHebrewMonthBounds(year, month) {
     // Get first day of the Hebrew month
-    var startHd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](1, month, year);
-    var startGregorian = startHd.greg();
+    const startHd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](1, month, year);
+    const startGregorian = startHd.greg();
     // Get the number of days in this month
-    var daysInMonth = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].daysInMonth(month, year);
+    const daysInMonth = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].daysInMonth(month, year);
     // Get last day of the Hebrew month
-    var endHd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](daysInMonth, month, year);
-    var endGregorian = endHd.greg();
+    const endHd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](daysInMonth, month, year);
+    const endGregorian = endHd.greg();
     return {
         start: startGregorian,
         end: endGregorian,
         startHebrew: startHd.render('he'),
         endHebrew: endHd.render('he'),
         monthName: startHd.getMonthName(),
-        daysInMonth: daysInMonth
+        daysInMonth
     };
 }
 function getHebrewYearBounds(hebrewYear) {
     // Hebrew year starts on 1 Tishrei and ends on 29 Elul
-    var startHd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](1, 7, hebrewYear); // Tishrei = month 7 in @hebcal/core
-    var isLeap = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].isLeapYear(hebrewYear);
-    var lastMonth = isLeap ? 13 : 12;
+    const startHd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](1, 7, hebrewYear); // Tishrei = month 7 in @hebcal/core
+    const isLeap = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].isLeapYear(hebrewYear);
+    const lastMonth = isLeap ? 13 : 12;
     // End of Elul (month 6 in the civil calendar ordering, but we need the actual last day)
     // Actually, Elul is month 6, last day is 29
-    var endHd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](29, 6, hebrewYear);
+    const endHd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](29, 6, hebrewYear);
     return {
         start: startHd.greg(),
         end: endHd.greg()
     };
 }
 function getCurrentHebrewMonth() {
-    var today = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"]();
+    const today = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"]();
     return {
         day: today.getDate(),
         month: today.getMonth(),
@@ -2000,8 +1739,8 @@ function getCurrentHebrewMonth() {
     };
 }
 function getHebrewMonths(year) {
-    var isLeapYear = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].isLeapYear(year);
-    var monthList = [
+    const isLeapYear = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].isLeapYear(year);
+    const monthList = [
         {
             value: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdateBase$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["months"].TISHREI,
             name: 'Tishrei'
@@ -2059,15 +1798,14 @@ function getHebrewMonths(year) {
     });
     return monthList;
 }
-function formatHebrewDate(date) {
-    var locale = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 'en';
-    var d = typeof date === 'string' ? new Date(date) : date;
-    var hd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](d);
+function formatHebrewDate(date, locale = 'en') {
+    const d = typeof date === 'string' ? new Date(date) : date;
+    const hd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](d);
     return hd.render(locale);
 }
 function navigateHebrewMonth(currentMonth, currentYear, direction) {
-    var isLeap = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].isLeapYear(currentYear);
-    var order = isLeap ? [
+    const isLeap = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].isLeapYear(currentYear);
+    const order = isLeap ? [
         7,
         8,
         9,
@@ -2095,12 +1833,12 @@ function navigateHebrewMonth(currentMonth, currentYear, direction) {
         5,
         6
     ];
-    var idx = order.indexOf(currentMonth);
+    const idx = order.indexOf(currentMonth);
     if (idx === -1) return {
         month: currentMonth,
         year: currentYear
     };
-    var newIdx = idx + direction;
+    const newIdx = idx + direction;
     if (newIdx >= order.length) {
         // Past Elul -> go to Tishrei of next year
         return {
@@ -2120,7 +1858,7 @@ function navigateHebrewMonth(currentMonth, currentYear, direction) {
         year: currentYear
     };
 }
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -2135,8 +1873,6 @@ __turbopack_context__.s([
     "exportToPDF",
     ()=>exportToPDF
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$jspdf$2f$dist$2f$jspdf$2e$es$2e$min$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/jspdf/dist/jspdf.es.min.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$jspdf$2d$autotable$2f$dist$2f$jspdf$2e$plugin$2e$autotable$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.mjs [app-client] (ecmascript)");
@@ -2151,13 +1887,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-;
-;
-function exportToCSV(transactions, baseCurrency) {
-    var filename = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : 'transactions';
-    var symbol = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(baseCurrency);
+function exportToCSV(transactions, baseCurrency, filename = 'transactions') {
+    const symbol = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(baseCurrency);
     // CSV Headers
-    var headers = [
+    const headers = [
         'Date',
         'Type',
         'Description',
@@ -2171,9 +1904,9 @@ function exportToCSV(transactions, baseCurrency) {
         'Hebrew Date'
     ];
     // Convert transactions to CSV rows
-    var rows = transactions.map(function(t) {
-        var normalizedAmount = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
-        var maaserAmount = t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME ? normalizedAmount * ((t.maaser_percentage || 10) / 100) : '';
+    const rows = transactions.map((t)=>{
+        const normalizedAmount = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
+        const maaserAmount = t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME ? normalizedAmount * ((t.maaser_percentage || 10) / 100) : '';
         return [
             new Date(t.date).toLocaleDateString(),
             t.type.charAt(0).toUpperCase() + t.type.slice(1),
@@ -2181,7 +1914,7 @@ function exportToCSV(transactions, baseCurrency) {
             t.amount.toFixed(2),
             t.currency,
             normalizedAmount.toFixed(2),
-            t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME ? "".concat(t.maaser_percentage || 10, "%") : '',
+            t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME ? `${t.maaser_percentage || 10}%` : '',
             maaserAmount ? maaserAmount.toFixed(2) : '',
             t.recipient_name || '',
             t.is_recurring ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getRecurringLabel"])(t.recurring_frequency) : 'One-time',
@@ -2189,28 +1922,24 @@ function exportToCSV(transactions, baseCurrency) {
         ];
     });
     // Create CSV content
-    var csvContent = [
-        headers.join(',')
-    ].concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(rows.map(function(row) {
-        return row.map(function(cell) {
-            return '"'.concat(cell, '"');
-        }).join(',');
-    }))).join('\n');
+    const csvContent = [
+        headers.join(','),
+        ...rows.map((row)=>row.map((cell)=>`"${cell}"`).join(','))
+    ].join('\n');
     // Download file
-    var blob = new Blob([
+    const blob = new Blob([
         csvContent
     ], {
         type: 'text/csv;charset=utf-8;'
     });
-    var link = document.createElement('a');
+    const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = "".concat(filename, "_").concat(new Date().toISOString().split('T')[0], ".csv");
+    link.download = `${filename}_${new Date().toISOString().split('T')[0]}.csv`;
     link.click();
 }
-function exportToPDF(transactions, stats, maaserBalance, baseCurrency, userName) {
-    var filename = arguments.length > 5 && arguments[5] !== void 0 ? arguments[5] : 'transactions';
-    var symbol = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(baseCurrency);
-    var doc = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$jspdf$2f$dist$2f$jspdf$2e$es$2e$min$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsPDF"]();
+function exportToPDF(transactions, stats, maaserBalance, baseCurrency, userName, filename = 'transactions') {
+    const symbol = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(baseCurrency);
+    const doc = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$jspdf$2f$dist$2f$jspdf$2e$es$2e$min$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsPDF"]();
     // Title
     doc.setFontSize(20);
     doc.setTextColor(30, 63, 50); // #1E3F32
@@ -2218,31 +1947,31 @@ function exportToPDF(transactions, stats, maaserBalance, baseCurrency, userName)
     // Subtitle
     doc.setFontSize(10);
     doc.setTextColor(104, 112, 107); // #68706B
-    doc.text("Generated for ".concat(userName, " on ").concat(new Date().toLocaleDateString()), 14, 30);
+    doc.text(`Generated for ${userName} on ${new Date().toLocaleDateString()}`, 14, 30);
     // Summary Section
     doc.setFontSize(14);
     doc.setTextColor(24, 28, 26); // #181C1A
     doc.text('Summary (All Time)', 14, 45);
     doc.setFontSize(10);
-    var summaryY = 52;
-    var col1 = 14;
-    var col2 = 70;
-    var col3 = 126;
+    const summaryY = 52;
+    const col1 = 14;
+    const col2 = 70;
+    const col3 = 126;
     doc.setTextColor(104, 112, 107);
     doc.text('Total Income:', col1, summaryY);
     doc.text('Maaser Owed:', col2, summaryY);
     doc.text('Maaser Balance:', col3, summaryY);
     doc.setTextColor(24, 28, 26);
     doc.setFontSize(12);
-    doc.text("".concat(symbol).concat(stats.totalIncome.toLocaleString(undefined, {
+    doc.text(`${symbol}${stats.totalIncome.toLocaleString(undefined, {
         minimumFractionDigits: 2
-    })), col1, summaryY + 6);
-    doc.text("".concat(symbol).concat(stats.totalMaaserOwed.toLocaleString(undefined, {
+    })}`, col1, summaryY + 6);
+    doc.text(`${symbol}${stats.totalMaaserOwed.toLocaleString(undefined, {
         minimumFractionDigits: 2
-    })), col2, summaryY + 6);
-    doc.text("".concat(symbol).concat(Math.abs(maaserBalance).toLocaleString(undefined, {
+    })}`, col2, summaryY + 6);
+    doc.text(`${symbol}${Math.abs(maaserBalance).toLocaleString(undefined, {
         minimumFractionDigits: 2
-    })).concat(maaserBalance < 0 ? ' (over)' : ''), col3, summaryY + 6);
+    })}${maaserBalance < 0 ? ' (over)' : ''}`, col3, summaryY + 6);
     doc.setFontSize(10);
     doc.setTextColor(104, 112, 107);
     doc.text('Total Given:', col1, summaryY + 16);
@@ -2250,26 +1979,26 @@ function exportToPDF(transactions, stats, maaserBalance, baseCurrency, userName)
     doc.text('Transactions:', col3, summaryY + 16);
     doc.setTextColor(24, 28, 26);
     doc.setFontSize(12);
-    doc.text("".concat(symbol).concat(stats.totalGiven.toLocaleString(undefined, {
+    doc.text(`${symbol}${stats.totalGiven.toLocaleString(undefined, {
         minimumFractionDigits: 2
-    })), col1, summaryY + 22);
-    doc.text("".concat(symbol).concat(stats.totalLent.toLocaleString(undefined, {
+    })}`, col1, summaryY + 22);
+    doc.text(`${symbol}${stats.totalLent.toLocaleString(undefined, {
         minimumFractionDigits: 2
-    })), col2, summaryY + 22);
-    doc.text("".concat(transactions.length), col3, summaryY + 22);
+    })}`, col2, summaryY + 22);
+    doc.text(`${transactions.length}`, col3, summaryY + 22);
     // Transactions Table
     doc.setFontSize(14);
     doc.setTextColor(24, 28, 26);
     doc.text('Transactions', 14, summaryY + 40);
     // Prepare table data
-    var tableData = transactions.map(function(t) {
-        var normalizedAmount = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
+    const tableData = transactions.map((t)=>{
+        const normalizedAmount = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
         return [
             new Date(t.date).toLocaleDateString(),
             t.type.charAt(0).toUpperCase() + t.type.slice(1),
             t.description.substring(0, 30) + (t.description.length > 30 ? '...' : ''),
-            "".concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(t.currency)).concat(t.amount.toFixed(2)),
-            "".concat(symbol).concat(normalizedAmount.toFixed(2)),
+            `${(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(t.currency)}${t.amount.toFixed(2)}`,
+            `${symbol}${normalizedAmount.toFixed(2)}`,
             t.recipient_name || '-'
         ];
     });
@@ -2328,27 +2057,26 @@ function exportToPDF(transactions, stats, maaserBalance, baseCurrency, userName)
         }
     });
     // Footer
-    var pageCount = doc.getNumberOfPages();
-    for(var i = 1; i <= pageCount; i++){
+    const pageCount = doc.getNumberOfPages();
+    for(let i = 1; i <= pageCount; i++){
         doc.setPage(i);
         doc.setFontSize(8);
         doc.setTextColor(104, 112, 107);
-        doc.text("Page ".concat(i, " of ").concat(pageCount, " | Finance Tracker"), doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, {
+        doc.text(`Page ${i} of ${pageCount} | Finance Tracker`, doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, {
             align: 'center'
         });
     }
     // Save
-    doc.save("".concat(filename, "_").concat(new Date().toISOString().split('T')[0], ".pdf"));
+    doc.save(`${filename}_${new Date().toISOString().split('T')[0]}.pdf`);
 }
 ;
 ;
-function ExportButtons(param) {
-    var transactions = param.transactions, stats = param.stats, maaserBalance = param.maaserBalance, baseCurrency = param.baseCurrency, userName = param.userName;
-    var handleExportCSV = function handleExportCSV() {
-        exportToCSV(transactions, baseCurrency, "finance_tracker_".concat(userName));
+function ExportButtons({ transactions, stats, maaserBalance, baseCurrency, userName }) {
+    const handleExportCSV = ()=>{
+        exportToCSV(transactions, baseCurrency, `finance_tracker_${userName}`);
     };
-    var handleExportPDF = function handleExportPDF() {
-        exportToPDF(transactions, stats, maaserBalance, baseCurrency, userName, "finance_tracker_".concat(userName));
+    const handleExportPDF = ()=>{
+        exportToPDF(transactions, stats, maaserBalance, baseCurrency, userName, `finance_tracker_${userName}`);
     };
     if (transactions.length === 0) {
         return null;
@@ -2404,7 +2132,7 @@ function ExportButtons(param) {
 _c = ExportButtons;
 var _c;
 __turbopack_context__.k.register(_c, "ExportButtons");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -2415,7 +2143,6 @@ __turbopack_context__.s([
     "DashboardStats",
     ()=>DashboardStats
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/lib/validation.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$hand$2d$coins$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__HandCoins$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/hand-coins.js [app-client] (ecmascript) <export default as HandCoins>");
@@ -2425,26 +2152,20 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-;
-function DashboardStats(param) {
-    var balances = param.balances, baseCurrency = param.baseCurrency, distributionMode = param.distributionMode;
-    var _balances_giveBalance, _balances_lendBalance;
-    var isGiveOnly = distributionMode === 'give_only';
-    var symbol = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(baseCurrency);
-    var fmt = function fmt(n) {
-        return Math.abs(n).toLocaleString(undefined, {
+function DashboardStats({ balances, baseCurrency, distributionMode }) {
+    const isGiveOnly = distributionMode === 'give_only';
+    const symbol = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(baseCurrency);
+    const fmt = (n)=>Math.abs(n).toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         });
-    };
     if (isGiveOnly) {
-        var _balances_maaserBalance;
-        var bal = (_balances_maaserBalance = balances.maaserBalance) !== null && _balances_maaserBalance !== void 0 ? _balances_maaserBalance : 0;
+        const bal = balances.maaserBalance ?? 0;
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             "data-testid": "dashboard-stats",
             className: "flex gap-3",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "w-48 sm:w-56 bg-white/80 backdrop-blur-sm rounded-xl p-4 border ".concat(bal < 0 ? 'border-red-300' : 'border-slate-200/80', " shadow-sm"),
+                className: `w-48 sm:w-56 bg-white/80 backdrop-blur-sm rounded-xl p-4 border ${bal < 0 ? 'border-red-300' : 'border-slate-200/80'} shadow-sm`,
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex items-center justify-between mb-1",
@@ -2458,7 +2179,7 @@ function DashboardStats(param) {
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$piggy$2d$bank$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__PiggyBank$3e$__["PiggyBank"], {
-                                className: "w-5 h-5 ".concat(bal >= 0 ? 'text-amber-500' : 'text-red-500')
+                                className: `w-5 h-5 ${bal >= 0 ? 'text-amber-500' : 'text-red-500'}`
                             }, void 0, false, {
                                 fileName: "[project]/frontend/src/components/DashboardStats.js",
                                 lineNumber: 18,
@@ -2472,7 +2193,7 @@ function DashboardStats(param) {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         "data-testid": "maaser-balance-amount",
-                        className: "text-2xl font-bold ".concat(bal >= 0 ? 'text-amber-600' : 'text-red-600'),
+                        className: `text-2xl font-bold ${bal >= 0 ? 'text-amber-600' : 'text-red-600'}`,
                         children: [
                             bal < 0 ? '-' : '',
                             symbol,
@@ -2495,14 +2216,14 @@ function DashboardStats(param) {
             columnNumber: 7
         }, this);
     }
-    var gBal = (_balances_giveBalance = balances.giveBalance) !== null && _balances_giveBalance !== void 0 ? _balances_giveBalance : 0;
-    var lBal = (_balances_lendBalance = balances.lendBalance) !== null && _balances_lendBalance !== void 0 ? _balances_lendBalance : 0;
+    const gBal = balances.giveBalance ?? 0;
+    const lBal = balances.lendBalance ?? 0;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         "data-testid": "dashboard-stats",
         className: "flex gap-3",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "w-44 sm:w-52 bg-white/80 backdrop-blur-sm rounded-xl p-4 border ".concat(gBal < 0 ? 'border-red-300' : 'border-slate-200/80', " shadow-sm"),
+                className: `w-44 sm:w-52 bg-white/80 backdrop-blur-sm rounded-xl p-4 border ${gBal < 0 ? 'border-red-300' : 'border-slate-200/80'} shadow-sm`,
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex items-center justify-between mb-1",
@@ -2516,7 +2237,7 @@ function DashboardStats(param) {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$heart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Heart$3e$__["Heart"], {
-                                className: "w-5 h-5 ".concat(gBal >= 0 ? 'text-blue-500' : 'text-red-500')
+                                className: `w-5 h-5 ${gBal >= 0 ? 'text-blue-500' : 'text-red-500'}`
                             }, void 0, false, {
                                 fileName: "[project]/frontend/src/components/DashboardStats.js",
                                 lineNumber: 36,
@@ -2530,7 +2251,7 @@ function DashboardStats(param) {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         "data-testid": "give-balance-amount",
-                        className: "text-2xl font-bold ".concat(gBal >= 0 ? 'text-blue-600' : 'text-red-600'),
+                        className: `text-2xl font-bold ${gBal >= 0 ? 'text-blue-600' : 'text-red-600'}`,
                         children: [
                             gBal < 0 ? '-' : '',
                             symbol,
@@ -2548,7 +2269,7 @@ function DashboardStats(param) {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "w-44 sm:w-52 bg-white/80 backdrop-blur-sm rounded-xl p-4 border ".concat(lBal < 0 ? 'border-red-300' : 'border-slate-200/80', " shadow-sm"),
+                className: `w-44 sm:w-52 bg-white/80 backdrop-blur-sm rounded-xl p-4 border ${lBal < 0 ? 'border-red-300' : 'border-slate-200/80'} shadow-sm`,
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex items-center justify-between mb-1",
@@ -2562,7 +2283,7 @@ function DashboardStats(param) {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$hand$2d$coins$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__HandCoins$3e$__["HandCoins"], {
-                                className: "w-5 h-5 ".concat(lBal >= 0 ? 'text-rose-500' : 'text-red-500')
+                                className: `w-5 h-5 ${lBal >= 0 ? 'text-rose-500' : 'text-red-500'}`
                             }, void 0, false, {
                                 fileName: "[project]/frontend/src/components/DashboardStats.js",
                                 lineNumber: 45,
@@ -2576,7 +2297,7 @@ function DashboardStats(param) {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         "data-testid": "lend-balance-amount",
-                        className: "text-2xl font-bold ".concat(lBal >= 0 ? 'text-rose-600' : 'text-red-600'),
+                        className: `text-2xl font-bold ${lBal >= 0 ? 'text-rose-600' : 'text-red-600'}`,
                         children: [
                             lBal < 0 ? '-' : '',
                             symbol,
@@ -2603,7 +2324,7 @@ function DashboardStats(param) {
 _c = DashboardStats;
 var _c;
 __turbopack_context__.k.register(_c, "DashboardStats");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -2614,9 +2335,6 @@ __turbopack_context__.s([
     "TransactionList",
     ()=>TransactionList
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_define_property.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/lib/hebrew-calendar.js [app-client] (ecmascript)");
@@ -2632,43 +2350,32 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$hand$2d$coins$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__HandCoins$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/hand-coins.js [app-client] (ecmascript) <export default as HandCoins>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/chevron-down.js [app-client] (ecmascript) <export default as ChevronDown>");
 ;
-;
-;
-;
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
 ;
 ;
-function AccordionSection(param) {
-    var _this = this;
-    var type = param.type, label = param.label, items = param.items, Icon = param.icon, colors = param.colors, defaultOpen = param.defaultOpen, onEdit = param.onEdit, onDelete = param.onDelete, useHebrewDates = param.useHebrewDates, baseCurrency = param.baseCurrency;
+function AccordionSection({ type, label, items, icon: Icon, colors, defaultOpen, onEdit, onDelete, useHebrewDates, baseCurrency }) {
     _s();
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(defaultOpen), 2), open = _useState[0], setOpen = _useState[1];
-    var normalize = function normalize(t) {
-        return t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
-    };
+    const [open, setOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(defaultOpen);
+    const normalize = (t)=>t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
     if (items.length === 0) return null;
-    var total = items.reduce(function(sum, t) {
-        return sum + (t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1));
-    }, 0);
+    const total = items.reduce((sum, t)=>sum + (t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1)), 0);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        "data-testid": "accordion-".concat(type),
+        "data-testid": `accordion-${type}`,
         className: "rounded-xl border border-slate-200/80 overflow-hidden bg-white/60 backdrop-blur-sm",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                "data-testid": "accordion-trigger-".concat(type),
-                onClick: function onClick() {
-                    return setOpen(!open);
-                },
+                "data-testid": `accordion-trigger-${type}`,
+                onClick: ()=>setOpen(!open),
                 className: "w-full flex items-center justify-between px-4 py-3 hover:bg-slate-50/50 transition-colors",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex items-center gap-2.5",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "p-1.5 rounded-lg ".concat(colors.badge),
+                                className: `p-1.5 rounded-lg ${colors.badge}`,
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Icon, {
                                     className: "w-4 h-4"
                                 }, void 0, false, {
@@ -2707,7 +2414,7 @@ function AccordionSection(param) {
                         className: "flex items-center gap-3",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "text-sm font-bold ".concat(colors.text),
+                                className: `text-sm font-bold ${colors.text}`,
                                 children: [
                                     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(baseCurrency),
                                     total.toLocaleString(undefined, {
@@ -2721,7 +2428,7 @@ function AccordionSection(param) {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
-                                className: "w-4 h-4 text-slate-400 transition-transform duration-300 ".concat(open ? 'rotate-180' : '')
+                                className: `w-4 h-4 text-slate-400 transition-transform duration-300 ${open ? 'rotate-180' : ''}`
                             }, void 0, false, {
                                 fileName: "[project]/frontend/src/components/TransactionList.js",
                                 lineNumber: 34,
@@ -2740,13 +2447,12 @@ function AccordionSection(param) {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "transition-all duration-300 ease-in-out overflow-hidden ".concat(open ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'),
+                className: `transition-all duration-300 ease-in-out overflow-hidden ${open ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'}`,
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "px-3 pb-3 space-y-1.5",
-                    children: items.map(function(t) {
-                        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            "data-testid": "transaction-item-".concat(t.id),
-                            className: "flex items-center justify-between p-3 rounded-xl border ".concat(colors.border, " ").concat(colors.bg, " transition-all hover:shadow-sm"),
+                    children: items.map((t)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            "data-testid": `transaction-item-${t.id}`,
+                            className: `flex items-center justify-between p-3 rounded-xl border ${colors.border} ${colors.bg} transition-all hover:shadow-sm`,
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "flex-1 min-w-0",
@@ -2755,14 +2461,14 @@ function AccordionSection(param) {
                                             className: "flex items-center gap-2",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    "data-testid": "transaction-description-".concat(t.id),
+                                                    "data-testid": `transaction-description-${t.id}`,
                                                     className: "font-medium text-slate-900 truncate text-sm",
                                                     children: t.description
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/src/components/TransactionList.js",
                                                     lineNumber: 50,
                                                     columnNumber: 19
-                                                }, _this),
+                                                }, this),
                                                 t.is_recurring && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     className: "flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-slate-200/80 text-slate-600 rounded-full",
                                                     children: [
@@ -2772,20 +2478,20 @@ function AccordionSection(param) {
                                                             fileName: "[project]/frontend/src/components/TransactionList.js",
                                                             lineNumber: 55,
                                                             columnNumber: 23
-                                                        }, _this),
+                                                        }, this),
                                                         (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getRecurringLabel"])(t.recurring_frequency)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/src/components/TransactionList.js",
                                                     lineNumber: 54,
                                                     columnNumber: 21
-                                                }, _this)
+                                                }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/src/components/TransactionList.js",
                                             lineNumber: 49,
                                             columnNumber: 17
-                                        }, _this),
+                                        }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex items-center gap-3 mt-1 text-xs text-slate-500",
                                             children: [
@@ -2798,14 +2504,14 @@ function AccordionSection(param) {
                                                             fileName: "[project]/frontend/src/components/TransactionList.js",
                                                             lineNumber: 62,
                                                             columnNumber: 21
-                                                        }, _this),
+                                                        }, this),
                                                         useHebrewDates ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["formatHebrewDate"])(t.date, 'en') : new Date(t.date).toLocaleDateString()
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/src/components/TransactionList.js",
                                                     lineNumber: 61,
                                                     columnNumber: 19
-                                                }, _this),
+                                                }, this),
                                                 t.recipient_name && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     className: "flex items-center gap-1",
                                                     children: [
@@ -2815,14 +2521,14 @@ function AccordionSection(param) {
                                                             fileName: "[project]/frontend/src/components/TransactionList.js",
                                                             lineNumber: 67,
                                                             columnNumber: 23
-                                                        }, _this),
+                                                        }, this),
                                                         t.recipient_name
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/src/components/TransactionList.js",
                                                     lineNumber: 66,
                                                     columnNumber: 21
-                                                }, _this),
+                                                }, this),
                                                 type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME && t.maaser_percentage && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     className: "text-amber-600",
                                                     children: [
@@ -2833,19 +2539,19 @@ function AccordionSection(param) {
                                                     fileName: "[project]/frontend/src/components/TransactionList.js",
                                                     lineNumber: 72,
                                                     columnNumber: 21
-                                                }, _this)
+                                                }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/src/components/TransactionList.js",
                                             lineNumber: 60,
                                             columnNumber: 17
-                                        }, _this)
+                                        }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/src/components/TransactionList.js",
                                     lineNumber: 48,
                                     columnNumber: 15
-                                }, _this),
+                                }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "flex items-center gap-3 ml-4",
                                     children: [
@@ -2853,8 +2559,8 @@ function AccordionSection(param) {
                                             className: "text-right",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    "data-testid": "transaction-amount-".concat(t.id),
-                                                    className: "font-bold text-sm ".concat(colors.text),
+                                                    "data-testid": `transaction-amount-${t.id}`,
+                                                    className: `font-bold text-sm ${colors.text}`,
                                                     children: [
                                                         type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME ? '+' : '-',
                                                         (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(t.currency),
@@ -2864,7 +2570,7 @@ function AccordionSection(param) {
                                                     fileName: "[project]/frontend/src/components/TransactionList.js",
                                                     lineNumber: 79,
                                                     columnNumber: 19
-                                                }, _this),
+                                                }, this),
                                                 t.currency !== baseCurrency && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     className: "text-[10px] text-slate-400",
                                                     children: [
@@ -2875,21 +2581,19 @@ function AccordionSection(param) {
                                                     fileName: "[project]/frontend/src/components/TransactionList.js",
                                                     lineNumber: 83,
                                                     columnNumber: 21
-                                                }, _this)
+                                                }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/src/components/TransactionList.js",
                                             lineNumber: 78,
                                             columnNumber: 17
-                                        }, _this),
+                                        }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex gap-0.5",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                    "data-testid": "edit-transaction-".concat(t.id),
-                                                    onClick: function onClick() {
-                                                        return onEdit(t);
-                                                    },
+                                                    "data-testid": `edit-transaction-${t.id}`,
+                                                    onClick: ()=>onEdit(t),
                                                     className: "p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors",
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pencil$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Pencil$3e$__["Pencil"], {
                                                         className: "w-3.5 h-3.5"
@@ -2897,17 +2601,15 @@ function AccordionSection(param) {
                                                         fileName: "[project]/frontend/src/components/TransactionList.js",
                                                         lineNumber: 93,
                                                         columnNumber: 21
-                                                    }, _this)
+                                                    }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/src/components/TransactionList.js",
                                                     lineNumber: 88,
                                                     columnNumber: 19
-                                                }, _this),
+                                                }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                    "data-testid": "delete-transaction-".concat(t.id),
-                                                    onClick: function onClick() {
-                                                        return onDelete(t.id);
-                                                    },
+                                                    "data-testid": `delete-transaction-${t.id}`,
+                                                    onClick: ()=>onDelete(t.id),
                                                     className: "p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors",
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__["Trash2"], {
                                                         className: "w-3.5 h-3.5"
@@ -2915,31 +2617,30 @@ function AccordionSection(param) {
                                                         fileName: "[project]/frontend/src/components/TransactionList.js",
                                                         lineNumber: 100,
                                                         columnNumber: 21
-                                                    }, _this)
+                                                    }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/src/components/TransactionList.js",
                                                     lineNumber: 95,
                                                     columnNumber: 19
-                                                }, _this)
+                                                }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/src/components/TransactionList.js",
                                             lineNumber: 87,
                                             columnNumber: 17
-                                        }, _this)
+                                        }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/src/components/TransactionList.js",
                                     lineNumber: 77,
                                     columnNumber: 15
-                                }, _this)
+                                }, this)
                             ]
                         }, t.id, true, {
                             fileName: "[project]/frontend/src/components/TransactionList.js",
                             lineNumber: 43,
                             columnNumber: 13
-                        }, _this);
-                    })
+                        }, this))
                 }, void 0, false, {
                     fileName: "[project]/frontend/src/components/TransactionList.js",
                     lineNumber: 41,
@@ -2959,9 +2660,7 @@ function AccordionSection(param) {
 }
 _s(AccordionSection, "pG0khZI24VrkSmCZcWM9qqrVMh4=");
 _c = AccordionSection;
-function TransactionList(param) {
-    var _this = this;
-    var transactions = param.transactions, onEdit = param.onEdit, onDelete = param.onDelete, useHebrewDates = param.useHebrewDates, baseCurrency = param.baseCurrency;
+function TransactionList({ transactions, onEdit, onDelete, useHebrewDates, baseCurrency }) {
     if (!transactions || transactions.length === 0) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             "data-testid": "empty-transactions",
@@ -2988,15 +2687,12 @@ function TransactionList(param) {
             columnNumber: 7
         }, this);
     }
-    var _obj;
-    var grouped = (_obj = {}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_obj, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME, transactions.filter(function(t) {
-        return t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME;
-    })), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_obj, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE, transactions.filter(function(t) {
-        return t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE;
-    })), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_obj, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND, transactions.filter(function(t) {
-        return t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND;
-    })), _obj);
-    var sections = [
+    const grouped = {
+        [__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME]: transactions.filter((t)=>t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME),
+        [__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE]: transactions.filter((t)=>t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE),
+        [__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND]: transactions.filter((t)=>t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND)
+    };
+    const sections = [
         {
             type: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME,
             label: 'Income',
@@ -3037,9 +2733,7 @@ function TransactionList(param) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         "data-testid": "transaction-list",
         className: "space-y-3",
-        children: sections.map(function(param) {
-            var type = param.type, label = param.label, icon = param.icon, colors = param.colors, items = param.items;
-            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(AccordionSection, {
+        children: sections.map(({ type, label, icon, colors, items })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(AccordionSection, {
                 type: type,
                 label: label,
                 icon: icon,
@@ -3054,8 +2748,7 @@ function TransactionList(param) {
                 fileName: "[project]/frontend/src/components/TransactionList.js",
                 lineNumber: 155,
                 columnNumber: 9
-            }, _this);
-        })
+            }, this))
     }, void 0, false, {
         fileName: "[project]/frontend/src/components/TransactionList.js",
         lineNumber: 153,
@@ -3066,7 +2759,7 @@ _c1 = TransactionList;
 var _c, _c1;
 __turbopack_context__.k.register(_c, "AccordionSection");
 __turbopack_context__.k.register(_c1, "TransactionList");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -3077,8 +2770,6 @@ __turbopack_context__.s([
     "HebrewDatePicker",
     ()=>HebrewDatePicker
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$core$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/@hebcal/core/dist/esm/index.js [app-client] (ecmascript) <locals>");
@@ -3087,49 +2778,43 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$he
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$left$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronLeft$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/chevron-left.js [app-client] (ecmascript) <export default as ChevronLeft>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$right$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronRight$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/chevron-right.js [app-client] (ecmascript) <export default as ChevronRight>");
 ;
-;
-;
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
 ;
 ;
-function HebrewDatePicker(param) {
-    var _this = this;
-    var value = param.value, onChange = param.onChange;
+function HebrewDatePicker({ value, onChange }) {
     _s();
-    var todayRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"]());
-    var today = todayRef.current;
-    var initial = value ? new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](new Date(value)) : today;
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initial.getFullYear()), 2), viewYear = _useState[0], setViewYear = _useState[1];
-    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initial.getMonth()), 2), viewMonth = _useState1[0], setViewMonth = _useState1[1];
-    var _useState2 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(value || null), 2), selectedDate = _useState2[0], setSelectedDate = _useState2[1];
-    var monthList = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "HebrewDatePicker.useMemo[monthList]": function() {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getHebrewMonths"])(viewYear);
-        }
+    const todayRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"]());
+    const today = todayRef.current;
+    const initial = value ? new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](new Date(value)) : today;
+    const [viewYear, setViewYear] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initial.getFullYear());
+    const [viewMonth, setViewMonth] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initial.getMonth());
+    const [selectedDate, setSelectedDate] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(value || null);
+    const monthList = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "HebrewDatePicker.useMemo[monthList]": ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getHebrewMonths"])(viewYear)
     }["HebrewDatePicker.useMemo[monthList]"], [
         viewYear
     ]);
-    var currentMonthName = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "HebrewDatePicker.useMemo[currentMonthName]": function() {
+    const currentMonthName = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "HebrewDatePicker.useMemo[currentMonthName]": ()=>{
             try {
-                var hd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](1, viewMonth, viewYear);
+                const hd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](1, viewMonth, viewYear);
                 return hd.getMonthName();
-            } catch (unused) {
-                return "Month ".concat(viewMonth);
+            } catch  {
+                return `Month ${viewMonth}`;
             }
         }
     }["HebrewDatePicker.useMemo[currentMonthName]"], [
         viewMonth,
         viewYear
     ]);
-    var daysInMonth = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "HebrewDatePicker.useMemo[daysInMonth]": function() {
+    const daysInMonth = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "HebrewDatePicker.useMemo[daysInMonth]": ()=>{
             try {
                 return __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].daysInMonth(viewMonth, viewYear);
-            } catch (unused) {
+            } catch  {
                 return 30;
             }
         }
@@ -3137,20 +2822,20 @@ function HebrewDatePicker(param) {
         viewMonth,
         viewYear
     ]);
-    var days = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "HebrewDatePicker.useMemo[days]": function() {
-            var result = [];
-            for(var d = 1; d <= daysInMonth; d++){
+    const days = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "HebrewDatePicker.useMemo[days]": ()=>{
+            const result = [];
+            for(let d = 1; d <= daysInMonth; d++){
                 try {
-                    var hd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](d, viewMonth, viewYear);
-                    var greg = hd.greg();
+                    const hd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](d, viewMonth, viewYear);
+                    const greg = hd.greg();
                     result.push({
                         hebrewDay: d,
                         gregorian: greg,
                         isoDate: greg.toISOString().split('T')[0],
                         isToday: hd.isSameDate(today)
                     });
-                } catch (unused) {
+                } catch  {
                 // skip invalid dates
                 }
             }
@@ -3163,21 +2848,21 @@ function HebrewDatePicker(param) {
         today
     ]);
     // Get day of week for the first day to align the grid
-    var firstDayOfWeek = days.length > 0 ? days[0].gregorian.getDay() : 0;
-    var handlePrevMonth = function handlePrevMonth() {
-        var isLeap = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].isLeapYear(viewYear);
-        var maxMonth = isLeap ? 13 : 12;
+    const firstDayOfWeek = days.length > 0 ? days[0].gregorian.getDay() : 0;
+    const handlePrevMonth = ()=>{
+        const isLeap = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].isLeapYear(viewYear);
+        const maxMonth = isLeap ? 13 : 12;
         if (viewMonth <= 1) {
             setViewYear(viewYear - 1);
-            var prevLeap = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].isLeapYear(viewYear - 1);
+            const prevLeap = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].isLeapYear(viewYear - 1);
             setViewMonth(prevLeap ? 13 : 12);
         } else {
             setViewMonth(viewMonth - 1);
         }
     };
-    var handleNextMonth = function handleNextMonth() {
-        var isLeap = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].isLeapYear(viewYear);
-        var maxMonth = isLeap ? 13 : 12;
+    const handleNextMonth = ()=>{
+        const isLeap = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"].isLeapYear(viewYear);
+        const maxMonth = isLeap ? 13 : 12;
         if (viewMonth >= maxMonth) {
             setViewMonth(1);
             setViewYear(viewYear + 1);
@@ -3185,11 +2870,11 @@ function HebrewDatePicker(param) {
             setViewMonth(viewMonth + 1);
         }
     };
-    var handleSelect = function handleSelect(day) {
+    const handleSelect = (day)=>{
         setSelectedDate(day.isoDate);
         onChange(day.isoDate);
     };
-    var weekDays = [
+    const weekDays = [
         'Su',
         'Mo',
         'Tu',
@@ -3272,20 +2957,16 @@ function HebrewDatePicker(param) {
                 className: "mb-3",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                     value: viewMonth,
-                    onChange: function onChange(e) {
-                        return setViewMonth(Number(e.target.value));
-                    },
+                    onChange: (e)=>setViewMonth(Number(e.target.value)),
                     className: "w-full px-2 py-1 text-xs bg-slate-50 border border-slate-200 rounded-lg text-slate-700",
-                    children: monthList.map(function(m) {
-                        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                    children: monthList.map((m)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                             value: m.value,
                             children: m.name
                         }, m.value, false, {
                             fileName: "[project]/frontend/src/components/HebrewDatePicker.js",
                             lineNumber: 119,
                             columnNumber: 13
-                        }, _this);
-                    })
+                        }, this))
                 }, void 0, false, {
                     fileName: "[project]/frontend/src/components/HebrewDatePicker.js",
                     lineNumber: 113,
@@ -3298,16 +2979,14 @@ function HebrewDatePicker(param) {
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "grid grid-cols-7 gap-0.5 mb-1",
-                children: weekDays.map(function(d) {
-                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                children: weekDays.map((d)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "text-center text-[10px] font-medium text-slate-400 py-1",
                         children: d
                     }, d, false, {
                         fileName: "[project]/frontend/src/components/HebrewDatePicker.js",
                         lineNumber: 127,
                         columnNumber: 11
-                    }, _this);
-                })
+                    }, this))
             }, void 0, false, {
                 fileName: "[project]/frontend/src/components/HebrewDatePicker.js",
                 lineNumber: 125,
@@ -3318,22 +2997,21 @@ function HebrewDatePicker(param) {
                 children: [
                     Array.from({
                         length: firstDayOfWeek
-                    }).map(function(_, i) {
-                        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {}, "empty-".concat(i), false, {
+                    }).map((_, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {}, `empty-${i}`, false, {
                             fileName: "[project]/frontend/src/components/HebrewDatePicker.js",
                             lineNumber: 135,
                             columnNumber: 11
-                        }, _this);
-                    }),
-                    days.map(function(day) {
-                        var isSelected = selectedDate === day.isoDate;
+                        }, this)),
+                    days.map((day)=>{
+                        const isSelected = selectedDate === day.isoDate;
                         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             type: "button",
-                            "data-testid": "hebrew-day-".concat(day.hebrewDay),
-                            onClick: function onClick() {
-                                return handleSelect(day);
-                            },
-                            className: "\n                relative aspect-square flex flex-col items-center justify-center rounded-lg text-xs transition-all\n                ".concat(isSelected ? 'bg-blue-600 text-white font-semibold shadow-sm' : day.isToday ? 'bg-blue-100 text-blue-700 font-medium' : 'text-slate-700 hover:bg-blue-50', "\n              "),
+                            "data-testid": `hebrew-day-${day.hebrewDay}`,
+                            onClick: ()=>handleSelect(day),
+                            className: `
+                relative aspect-square flex flex-col items-center justify-center rounded-lg text-xs transition-all
+                ${isSelected ? 'bg-blue-600 text-white font-semibold shadow-sm' : day.isToday ? 'bg-blue-100 text-blue-700 font-medium' : 'text-slate-700 hover:bg-blue-50'}
+              `,
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     className: "leading-none",
@@ -3342,9 +3020,9 @@ function HebrewDatePicker(param) {
                                     fileName: "[project]/frontend/src/components/HebrewDatePicker.js",
                                     lineNumber: 155,
                                     columnNumber: 15
-                                }, _this),
+                                }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                    className: "text-[8px] leading-none mt-0.5 ".concat(isSelected ? 'text-blue-200' : 'text-slate-400'),
+                                    className: `text-[8px] leading-none mt-0.5 ${isSelected ? 'text-blue-200' : 'text-slate-400'}`,
                                     children: [
                                         day.gregorian.getDate(),
                                         "/",
@@ -3354,13 +3032,13 @@ function HebrewDatePicker(param) {
                                     fileName: "[project]/frontend/src/components/HebrewDatePicker.js",
                                     lineNumber: 156,
                                     columnNumber: 15
-                                }, _this)
+                                }, this)
                             ]
                         }, day.hebrewDay, true, {
                             fileName: "[project]/frontend/src/components/HebrewDatePicker.js",
                             lineNumber: 140,
                             columnNumber: 13
-                        }, _this);
+                        }, this);
                     })
                 ]
             }, void 0, true, {
@@ -3379,7 +3057,7 @@ _s(HebrewDatePicker, "VAIvBM7HCDQhN6ubfAZX5FkwLIc=");
 _c = HebrewDatePicker;
 var _c;
 __turbopack_context__.k.register(_c, "HebrewDatePicker");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -3390,13 +3068,6 @@ __turbopack_context__.s([
     "AddTransactionModal",
     ()=>AddTransactionModal
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_async_to_generator.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread_props.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/tslib/tslib.es6.mjs [app-client] (ecmascript) <export __generator as _>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/react-hook-form/dist/index.esm.mjs [app-client] (ecmascript)");
@@ -3416,13 +3087,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$refresh$2d$cw$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__RefreshCw$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/refresh-cw.js [app-client] (ecmascript) <export default as RefreshCw>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/lib/api.js [app-client] (ecmascript)");
 ;
-;
-;
-;
-;
-;
-;
-;
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
@@ -3433,24 +3097,19 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-function AddTransactionModal(param) {
-    var _this = this;
-    var isOpen = param.isOpen, onClose = param.onClose, onSubmit = param.onSubmit, editTransaction = param.editTransaction, baseCurrency = param.baseCurrency, distributionMode = param.distributionMode, _param_balances = param.balances, balances = _param_balances === void 0 ? {} : _param_balances, userId = param.userId, _param_useHebrewCalendar = param.useHebrewCalendar, useHebrewCalendar = _param_useHebrewCalendar === void 0 ? false : _param_useHebrewCalendar, _param_defaultMaaserPercentage = param.defaultMaaserPercentage, defaultMaaserPercentage = _param_defaultMaaserPercentage === void 0 ? 10 : _param_defaultMaaserPercentage, _param_giveRatio = param.giveRatio, giveRatio = _param_giveRatio === void 0 ? 50 : _param_giveRatio, _param_lendRatio = param.lendRatio, lendRatio = _param_lendRatio === void 0 ? 50 : _param_lendRatio;
-    var _balances_maaserBalance, _balances_giveBalance, _balances_lendBalance;
+function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction, baseCurrency, distributionMode, balances = {}, userId, useHebrewCalendar = false, defaultMaaserPercentage = 10, giveRatio = 50, lendRatio = 50 }) {
     _s();
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME), 2), txnType = _useState[0], setTxnType = _useState[1];
-    var isGiveOnly = distributionMode === 'give_only';
-    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), showHebrewPicker = _useState1[0], setShowHebrewPicker = _useState1[1];
-    var _useState2 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]), 2), suggestions = _useState2[0], setSuggestions = _useState2[1];
-    var _useState3 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), showSuggestions = _useState3[0], setShowSuggestions = _useState3[1];
-    var _useState4 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]), 2), pastTransactions = _useState4[0], setPastTransactions = _useState4[1];
-    var _useState5 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({}), 2), ratesCache = _useState5[0], setRatesCache = _useState5[1];
-    var _useState6 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), loadingRate = _useState6[0], setLoadingRate = _useState6[1];
-    var suggestRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
-    var getSchema = function getSchema() {
-        return txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME ? __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["incomeSchema"] : txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE ? __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["giveSchema"] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["lendSchema"];
-    };
-    var _useForm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
+    const [txnType, setTxnType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME);
+    const isGiveOnly = distributionMode === 'give_only';
+    const [showHebrewPicker, setShowHebrewPicker] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [suggestions, setSuggestions] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [showSuggestions, setShowSuggestions] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [pastTransactions, setPastTransactions] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [ratesCache, setRatesCache] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({});
+    const [loadingRate, setLoadingRate] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const suggestRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const getSchema = ()=>txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME ? __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["incomeSchema"] : txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE ? __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["giveSchema"] : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["lendSchema"];
+    const { register, handleSubmit, watch, setValue, reset, formState: { errors, isSubmitting } } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
         resolver: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hookform$2f$resolvers$2f$zod$2f$dist$2f$zod$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["zodResolver"])(getSchema()),
         defaultValues: {
             description: '',
@@ -3464,23 +3123,23 @@ function AddTransactionModal(param) {
             recurring_frequency: 'none',
             recurring_end_date: ''
         }
-    }), register = _useForm.register, handleSubmit = _useForm.handleSubmit, watch = _useForm.watch, setValue = _useForm.setValue, reset = _useForm.reset, _useForm_formState = _useForm.formState, errors = _useForm_formState.errors, isSubmitting = _useForm_formState.isSubmitting;
-    var watchCurrency = watch('currency');
-    var watchDate = watch('date');
-    var watchAmount = watch('amount');
-    var watchMaaserPct = watch('maaser_percentage');
-    var watchRecurring = watch('is_recurring');
-    var watchDescription = watch('description');
+    });
+    const watchCurrency = watch('currency');
+    const watchDate = watch('date');
+    const watchAmount = watch('amount');
+    const watchMaaserPct = watch('maaser_percentage');
+    const watchRecurring = watch('is_recurring');
+    const watchDescription = watch('description');
     // Fetch past transactions for autofill
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "AddTransactionModal.useEffect": function() {
+        "AddTransactionModal.useEffect": ()=>{
             if (isOpen && userId) {
                 (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiGetSuggestions"])().then({
-                    "AddTransactionModal.useEffect": function(data) {
+                    "AddTransactionModal.useEffect": (data)=>{
                         if (data) setPastTransactions(data);
                     }
                 }["AddTransactionModal.useEffect"]).catch({
-                    "AddTransactionModal.useEffect": function() {}
+                    "AddTransactionModal.useEffect": ()=>{}
                 }["AddTransactionModal.useEffect"]);
             }
         }
@@ -3489,81 +3148,41 @@ function AddTransactionModal(param) {
         userId
     ]);
     // Live currency conversion
-    var fetchRate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "AddTransactionModal.useCallback[fetchRate]": function(from, to) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
-                "AddTransactionModal.useCallback[fetchRate]": function() {
-                    var cacheKey, _data_rates, data, rate, newCache, err;
-                    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, {
-                        "AddTransactionModal.useCallback[fetchRate]": function(_state) {
-                            switch(_state.label){
-                                case 0:
-                                    cacheKey = "".concat(from, "_").concat(to);
-                                    if (ratesCache[cacheKey]) {
-                                        setValue('exchange_rate_to_base', ratesCache[cacheKey]);
-                                        return [
-                                            2
-                                        ];
-                                    }
-                                    setLoadingRate(true);
-                                    _state.label = 1;
-                                case 1:
-                                    _state.trys.push([
-                                        1,
-                                        3,
-                                        4,
-                                        5
-                                    ]);
-                                    return [
-                                        4,
-                                        (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiGetCurrencyRates"])(from)
-                                    ];
-                                case 2:
-                                    data = _state.sent();
-                                    rate = (_data_rates = data.rates) === null || _data_rates === void 0 ? void 0 : _data_rates[to];
-                                    if (rate) {
-                                        newCache = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, ratesCache);
-                                        Object.entries(data.rates).forEach({
-                                            "AddTransactionModal.useCallback[fetchRate]": function(param) {
-                                                var _param = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(param, 2), code = _param[0], r = _param[1];
-                                                newCache["".concat(from, "_").concat(code)] = r;
-                                            }
-                                        }["AddTransactionModal.useCallback[fetchRate]"]);
-                                        setRatesCache(newCache);
-                                        setValue('exchange_rate_to_base', Number(rate.toFixed(4)));
-                                    }
-                                    return [
-                                        3,
-                                        5
-                                    ];
-                                case 3:
-                                    err = _state.sent();
-                                    console.error('Rate fetch error:', err);
-                                    return [
-                                        3,
-                                        5
-                                    ];
-                                case 4:
-                                    setLoadingRate(false);
-                                    return [
-                                        7
-                                    ];
-                                case 5:
-                                    return [
-                                        2
-                                    ];
-                            }
+    const fetchRate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "AddTransactionModal.useCallback[fetchRate]": async (from, to)=>{
+            const cacheKey = `${from}_${to}`;
+            if (ratesCache[cacheKey]) {
+                setValue('exchange_rate_to_base', ratesCache[cacheKey]);
+                return;
+            }
+            setLoadingRate(true);
+            try {
+                const data = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiGetCurrencyRates"])(from);
+                const rate = data.rates?.[to];
+                if (rate) {
+                    const newCache = {
+                        ...ratesCache
+                    };
+                    Object.entries(data.rates).forEach({
+                        "AddTransactionModal.useCallback[fetchRate]": ([code, r])=>{
+                            newCache[`${from}_${code}`] = r;
                         }
                     }["AddTransactionModal.useCallback[fetchRate]"]);
+                    setRatesCache(newCache);
+                    setValue('exchange_rate_to_base', Number(rate.toFixed(4)));
                 }
-            }["AddTransactionModal.useCallback[fetchRate]"])();
+            } catch (err) {
+                console.error('Rate fetch error:', err);
+            } finally{
+                setLoadingRate(false);
+            }
         }
     }["AddTransactionModal.useCallback[fetchRate]"], [
         ratesCache,
         setValue
     ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "AddTransactionModal.useEffect": function() {
+        "AddTransactionModal.useEffect": ()=>{
             if (watchCurrency && watchCurrency !== baseCurrency) {
                 fetchRate(watchCurrency, baseCurrency);
             } else if (watchCurrency === baseCurrency) {
@@ -3578,14 +3197,11 @@ function AddTransactionModal(param) {
     ]);
     // Description autofill
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "AddTransactionModal.useEffect": function() {
+        "AddTransactionModal.useEffect": ()=>{
             if (watchDescription && watchDescription.length >= 2 && !editTransaction) {
-                var q = watchDescription.toLowerCase();
-                var matches = pastTransactions.filter({
-                    "AddTransactionModal.useEffect.matches": function(t) {
-                        var _t_description;
-                        return (_t_description = t.description) === null || _t_description === void 0 ? void 0 : _t_description.toLowerCase().includes(q);
-                    }
+                const q = watchDescription.toLowerCase();
+                const matches = pastTransactions.filter({
+                    "AddTransactionModal.useEffect.matches": (t)=>t.description?.toLowerCase().includes(q)
                 }["AddTransactionModal.useEffect.matches"]).slice(0, 5);
                 setSuggestions(matches);
                 setShowSuggestions(matches.length > 0);
@@ -3600,21 +3216,21 @@ function AddTransactionModal(param) {
     ]);
     // Close suggestions on outside click
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "AddTransactionModal.useEffect": function() {
-            var handler = function handler(e) {
-                if (suggestRef.current && !suggestRef.current.contains(e.target)) {
-                    setShowSuggestions(false);
+        "AddTransactionModal.useEffect": ()=>{
+            const handler = {
+                "AddTransactionModal.useEffect.handler": (e)=>{
+                    if (suggestRef.current && !suggestRef.current.contains(e.target)) {
+                        setShowSuggestions(false);
+                    }
                 }
-            };
+            }["AddTransactionModal.useEffect.handler"];
             document.addEventListener('mousedown', handler);
             return ({
-                "AddTransactionModal.useEffect": function() {
-                    return document.removeEventListener('mousedown', handler);
-                }
+                "AddTransactionModal.useEffect": ()=>document.removeEventListener('mousedown', handler)
             })["AddTransactionModal.useEffect"];
         }
     }["AddTransactionModal.useEffect"], []);
-    var applySuggestion = function applySuggestion(t) {
+    const applySuggestion = (t)=>{
         setValue('description', t.description);
         if (t.amount) setValue('amount', t.amount);
         if (t.currency) setValue('currency', t.currency);
@@ -3624,17 +3240,16 @@ function AddTransactionModal(param) {
         setShowSuggestions(false);
     };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "AddTransactionModal.useEffect": function() {
+        "AddTransactionModal.useEffect": ()=>{
             if (isOpen) {
                 if (editTransaction) {
-                    var _editTransaction_date;
                     setTxnType(editTransaction.type);
                     reset({
                         description: editTransaction.description,
                         amount: editTransaction.amount,
                         currency: editTransaction.currency,
                         exchange_rate_to_base: editTransaction.exchange_rate_to_base,
-                        date: ((_editTransaction_date = editTransaction.date) === null || _editTransaction_date === void 0 ? void 0 : _editTransaction_date.split('T')[0]) || new Date().toISOString().split('T')[0],
+                        date: editTransaction.date?.split('T')[0] || new Date().toISOString().split('T')[0],
                         maaser_percentage: editTransaction.maaser_percentage || 10,
                         recipient_name: editTransaction.recipient_name || '',
                         is_recurring: editTransaction.is_recurring || false,
@@ -3664,47 +3279,31 @@ function AddTransactionModal(param) {
         reset,
         baseCurrency
     ]);
-    var hebrewDate = watchDate ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toHebrewDate"])(new Date(watchDate)) : null;
-    var calcMaaser = txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME && watchAmount && !isNaN(Number(watchAmount)) ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["calculateMaaser"])(Number(watchAmount), Number(watchMaaserPct) || 10) : 0;
-    var onFormSubmit = function onFormSubmit(data) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var formData;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        formData = {
-                            description: data.description,
-                            amount: Number(data.amount),
-                            currency: data.currency,
-                            exchange_rate_to_base: Number(data.exchange_rate_to_base),
-                            date: data.date,
-                            type: txnType,
-                            is_recurring: data.is_recurring || false,
-                            recurring_frequency: data.is_recurring ? data.recurring_frequency : 'none',
-                            recurring_end_date: data.is_recurring && data.recurring_end_date ? data.recurring_end_date : null,
-                            hebrew_date: (hebrewDate === null || hebrewDate === void 0 ? void 0 : hebrewDate.displayEn) || null
-                        };
-                        if (txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME) {
-                            formData.maaser_percentage = Number(data.maaser_percentage) || 10;
-                            formData.maaser_amount = calcMaaser;
-                        }
-                        if ((txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE || txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND) && data.recipient_name) formData.recipient_name = data.recipient_name;
-                        return [
-                            4,
-                            onSubmit(formData, editTransaction === null || editTransaction === void 0 ? void 0 : editTransaction.id)
-                        ];
-                    case 1:
-                        _state.sent();
-                        onClose();
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const hebrewDate = watchDate ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toHebrewDate"])(new Date(watchDate)) : null;
+    const calcMaaser = txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME && watchAmount && !isNaN(Number(watchAmount)) ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["calculateMaaser"])(Number(watchAmount), Number(watchMaaserPct) || 10) : 0;
+    const onFormSubmit = async (data)=>{
+        const formData = {
+            description: data.description,
+            amount: Number(data.amount),
+            currency: data.currency,
+            exchange_rate_to_base: Number(data.exchange_rate_to_base),
+            date: data.date,
+            type: txnType,
+            is_recurring: data.is_recurring || false,
+            recurring_frequency: data.is_recurring ? data.recurring_frequency : 'none',
+            recurring_end_date: data.is_recurring && data.recurring_end_date ? data.recurring_end_date : null,
+            hebrew_date: hebrewDate?.displayEn || null
+        };
+        if (txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME) {
+            formData.maaser_percentage = Number(data.maaser_percentage) || 10;
+            formData.maaser_amount = calcMaaser;
+        }
+        if ((txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE || txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND) && data.recipient_name) formData.recipient_name = data.recipient_name;
+        await onSubmit(formData, editTransaction?.id);
+        onClose();
     };
     if (!isOpen) return null;
-    var types = [
+    const types = [
         {
             type: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME,
             label: 'Income',
@@ -3716,15 +3315,16 @@ function AddTransactionModal(param) {
             label: 'Give',
             Icon: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$heart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Heart$3e$__["Heart"],
             color: 'bg-blue-500'
-        }
-    ].concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(!isGiveOnly ? [
-        {
-            type: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND,
-            label: 'Lend',
-            Icon: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$hand$2d$coins$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__HandCoins$3e$__["HandCoins"],
-            color: 'bg-rose-500'
-        }
-    ] : []));
+        },
+        ...!isGiveOnly ? [
+            {
+                type: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND,
+                label: 'Lend',
+                Icon: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$hand$2d$coins$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__HandCoins$3e$__["HandCoins"],
+                color: 'bg-rose-500'
+            }
+        ] : []
+    ];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         "data-testid": "add-transaction-modal",
         className: "fixed inset-0 z-50 flex items-center justify-center p-4",
@@ -3778,14 +3378,10 @@ function AddTransactionModal(param) {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex gap-2 p-4 border-b border-slate-200",
-                        children: types.map(function(param) {
-                            var type = param.type, label = param.label, Icon = param.Icon, color = param.color;
-                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                "data-testid": "type-".concat(type, "-btn"),
-                                onClick: function onClick() {
-                                    return setTxnType(type);
-                                },
-                                className: "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl font-medium transition-colors ".concat(txnType === type ? "".concat(color, " text-white") : 'bg-slate-100 text-slate-600 hover:bg-slate-200'),
+                        children: types.map(({ type, label, Icon, color })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                "data-testid": `type-${type}-btn`,
+                                onClick: ()=>setTxnType(type),
+                                className: `flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl font-medium transition-colors ${txnType === type ? `${color} text-white` : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`,
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Icon, {
                                         className: "w-4 h-4"
@@ -3793,15 +3389,14 @@ function AddTransactionModal(param) {
                                         fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                         lineNumber: 184,
                                         columnNumber: 15
-                                    }, _this),
+                                    }, this),
                                     label
                                 ]
                             }, type, true, {
                                 fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                 lineNumber: 182,
                                 columnNumber: 13
-                            }, _this);
-                        })
+                            }, this))
                     }, void 0, false, {
                         fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                         lineNumber: 180,
@@ -3815,7 +3410,7 @@ function AddTransactionModal(param) {
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
                                     children: [
                                         (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(baseCurrency),
-                                        ((_balances_maaserBalance = balances.maaserBalance) !== null && _balances_maaserBalance !== void 0 ? _balances_maaserBalance : 0).toFixed(2)
+                                        (balances.maaserBalance ?? 0).toFixed(2)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/src/components/AddTransactionModal.js",
@@ -3835,7 +3430,7 @@ function AddTransactionModal(param) {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
                                             children: [
                                                 (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(baseCurrency),
-                                                ((_balances_giveBalance = balances.giveBalance) !== null && _balances_giveBalance !== void 0 ? _balances_giveBalance : 0).toFixed(2)
+                                                (balances.giveBalance ?? 0).toFixed(2)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/src/components/AddTransactionModal.js",
@@ -3854,7 +3449,7 @@ function AddTransactionModal(param) {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
                                             children: [
                                                 (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(baseCurrency),
-                                                ((_balances_lendBalance = balances.lendBalance) !== null && _balances_lendBalance !== void 0 ? _balances_lendBalance : 0).toFixed(2)
+                                                (balances.lendBalance ?? 0).toFixed(2)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/src/components/AddTransactionModal.js",
@@ -3900,14 +3495,14 @@ function AddTransactionModal(param) {
                                         lineNumber: 209,
                                         columnNumber: 13
                                     }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         "data-testid": "transaction-description-input",
-                                        type: "text"
-                                    }, register('description')), {
+                                        type: "text",
+                                        ...register('description'),
                                         placeholder: txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME ? 'e.g., Salary' : txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE ? 'e.g., Charity' : 'e.g., Loan',
                                         className: "w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500",
                                         autoComplete: "off"
-                                    }), void 0, false, {
+                                    }, void 0, false, {
                                         fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                         lineNumber: 213,
                                         columnNumber: 13
@@ -3923,13 +3518,10 @@ function AddTransactionModal(param) {
                                     showSuggestions && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         "data-testid": "autofill-suggestions",
                                         className: "absolute z-10 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden",
-                                        children: suggestions.map(function(s, i) {
-                                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        children: suggestions.map((s, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 type: "button",
-                                                "data-testid": "suggestion-".concat(i),
-                                                onClick: function onClick() {
-                                                    return applySuggestion(s);
-                                                },
+                                                "data-testid": `suggestion-${i}`,
+                                                onClick: ()=>applySuggestion(s),
                                                 className: "w-full px-3 py-2 text-left hover:bg-blue-50 transition-colors flex items-center justify-between text-sm border-b border-slate-50 last:border-0",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3941,7 +3533,7 @@ function AddTransactionModal(param) {
                                                                 fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                                 lineNumber: 231,
                                                                 columnNumber: 23
-                                                            }, _this),
+                                                            }, this),
                                                             s.recipient_name && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                 className: "text-slate-400 ml-2",
                                                                 children: [
@@ -3953,13 +3545,13 @@ function AddTransactionModal(param) {
                                                                 fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                                 lineNumber: 232,
                                                                 columnNumber: 44
-                                                            }, _this)
+                                                            }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                         lineNumber: 230,
                                                         columnNumber: 21
-                                                    }, _this),
+                                                    }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: "text-slate-500 text-xs",
                                                         children: [
@@ -3970,14 +3562,13 @@ function AddTransactionModal(param) {
                                                         fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                         lineNumber: 234,
                                                         columnNumber: 21
-                                                    }, _this)
+                                                    }, this)
                                                 ]
                                             }, i, true, {
                                                 fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                 lineNumber: 223,
                                                 columnNumber: 19
-                                            }, _this);
-                                        })
+                                            }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                         lineNumber: 221,
@@ -4012,16 +3603,16 @@ function AddTransactionModal(param) {
                                                         lineNumber: 245,
                                                         columnNumber: 17
                                                     }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                         "data-testid": "transaction-amount-input",
                                                         type: "number",
-                                                        step: "0.01"
-                                                    }, register('amount', {
-                                                        valueAsNumber: true
-                                                    })), {
+                                                        step: "0.01",
+                                                        ...register('amount', {
+                                                            valueAsNumber: true
+                                                        }),
                                                         placeholder: "0.00",
                                                         className: "w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500"
-                                                    }), void 0, false, {
+                                                    }, void 0, false, {
                                                         fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                         lineNumber: 246,
                                                         columnNumber: 17
@@ -4056,12 +3647,11 @@ function AddTransactionModal(param) {
                                                 lineNumber: 252,
                                                 columnNumber: 15
                                             }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
-                                                "data-testid": "transaction-currency-select"
-                                            }, register('currency')), {
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                                "data-testid": "transaction-currency-select",
+                                                ...register('currency'),
                                                 className: "w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500",
-                                                children: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["currencies"].map(function(c) {
-                                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                children: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["currencies"].map((c)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         value: c.code,
                                                         children: [
                                                             c.symbol,
@@ -4072,9 +3662,8 @@ function AddTransactionModal(param) {
                                                         fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                         lineNumber: 254,
                                                         columnNumber: 38
-                                                    }, _this);
-                                                })
-                                            }), void 0, false, {
+                                                    }, this))
+                                            }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                 lineNumber: 253,
                                                 columnNumber: 15
@@ -4119,16 +3708,16 @@ function AddTransactionModal(param) {
                                         lineNumber: 261,
                                         columnNumber: 15
                                     }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         "data-testid": "transaction-exchange-rate-input",
                                         type: "number",
-                                        step: "0.0001"
-                                    }, register('exchange_rate_to_base', {
-                                        valueAsNumber: true
-                                    })), {
+                                        step: "0.0001",
+                                        ...register('exchange_rate_to_base', {
+                                            valueAsNumber: true
+                                        }),
                                         placeholder: "1.0",
                                         className: "w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500"
-                                    }), void 0, false, {
+                                    }, void 0, false, {
                                         fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                         lineNumber: 266,
                                         columnNumber: 15
@@ -4167,16 +3756,16 @@ function AddTransactionModal(param) {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "flex items-center gap-3",
                                         children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                 "data-testid": "maaser-percentage-input",
                                                 type: "number",
                                                 min: "0",
-                                                max: "100"
-                                            }, register('maaser_percentage', {
-                                                valueAsNumber: true
-                                            })), {
+                                                max: "100",
+                                                ...register('maaser_percentage', {
+                                                    valueAsNumber: true
+                                                }),
                                                 className: "w-20 px-3 py-2 bg-white border border-emerald-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-emerald-500"
-                                            }), void 0, false, {
+                                            }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                 lineNumber: 280,
                                                 columnNumber: 17
@@ -4225,13 +3814,13 @@ function AddTransactionModal(param) {
                                                 lineNumber: 291,
                                                 columnNumber: 17
                                             }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                 "data-testid": "recipient-name-input",
-                                                type: "text"
-                                            }, register('recipient_name')), {
+                                                type: "text",
+                                                ...register('recipient_name'),
                                                 placeholder: txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE ? 'e.g., Charity org' : 'e.g., John',
                                                 className: "w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500"
-                                            }), void 0, false, {
+                                            }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                 lineNumber: 292,
                                                 columnNumber: 17
@@ -4257,10 +3846,8 @@ function AddTransactionModal(param) {
                                             useHebrewCalendar && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 type: "button",
                                                 "data-testid": "toggle-hebrew-picker-btn",
-                                                onClick: function onClick() {
-                                                    return setShowHebrewPicker(!showHebrewPicker);
-                                                },
-                                                className: "px-2 py-0.5 text-[10px] rounded-full font-medium transition-colors ".concat(showHebrewPicker ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-700 hover:bg-blue-200'),
+                                                onClick: ()=>setShowHebrewPicker(!showHebrewPicker),
+                                                className: `px-2 py-0.5 text-[10px] rounded-full font-medium transition-colors ${showHebrewPicker ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-700 hover:bg-blue-200'}`,
                                                 children: showHebrewPicker ? 'Hebrew' : 'Switch to Hebrew'
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/AddTransactionModal.js",
@@ -4275,9 +3862,7 @@ function AddTransactionModal(param) {
                                     }, this),
                                     showHebrewPicker && useHebrewCalendar ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$HebrewDatePicker$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HebrewDatePicker"], {
                                         value: watchDate,
-                                        onChange: function onChange(isoDate) {
-                                            return setValue('date', isoDate);
-                                        }
+                                        onChange: (isoDate)=>setValue('date', isoDate)
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                         lineNumber: 317,
@@ -4292,12 +3877,12 @@ function AddTransactionModal(param) {
                                                 lineNumber: 323,
                                                 columnNumber: 17
                                             }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                 "data-testid": "transaction-date-input",
-                                                type: "date"
-                                            }, register('date')), {
+                                                type: "date",
+                                                ...register('date'),
                                                 className: "w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500"
-                                            }), void 0, false, {
+                                            }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                 lineNumber: 324,
                                                 columnNumber: 17
@@ -4329,12 +3914,12 @@ function AddTransactionModal(param) {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "flex items-center gap-2 cursor-pointer",
                                         children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                 "data-testid": "is-recurring-checkbox",
-                                                type: "checkbox"
-                                            }, register('is_recurring')), {
+                                                type: "checkbox",
+                                                ...register('is_recurring'),
                                                 className: "w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
-                                            }), void 0, false, {
+                                            }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                 lineNumber: 332,
                                                 columnNumber: 15
@@ -4373,25 +3958,19 @@ function AddTransactionModal(param) {
                                                         lineNumber: 339,
                                                         columnNumber: 19
                                                     }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
-                                                        "data-testid": "recurring-frequency-select"
-                                                    }, register('recurring_frequency')), {
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                                        "data-testid": "recurring-frequency-select",
+                                                        ...register('recurring_frequency'),
                                                         className: "w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-900 text-sm",
-                                                        children: Object.entries(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RECURRING_FREQUENCIES"]).filter(function(param) {
-                                                            var _param = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(param, 1), k = _param[0];
-                                                            return k !== 'NONE';
-                                                        }).map(function(param) {
-                                                            var _param = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(param, 2), v = _param[1];
-                                                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                        children: Object.entries(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RECURRING_FREQUENCIES"]).filter(([k])=>k !== 'NONE').map(([, v])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                                 value: v,
                                                                 children: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getRecurringLabel"])(v)
                                                             }, v, false, {
                                                                 fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                                 lineNumber: 341,
                                                                 columnNumber: 105
-                                                            }, _this);
-                                                        })
-                                                    }), void 0, false, {
+                                                            }, this))
+                                                    }, void 0, false, {
                                                         fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                         lineNumber: 340,
                                                         columnNumber: 19
@@ -4412,12 +3991,12 @@ function AddTransactionModal(param) {
                                                         lineNumber: 345,
                                                         columnNumber: 19
                                                     }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                         "data-testid": "recurring-end-date-input",
-                                                        type: "date"
-                                                    }, register('recurring_end_date')), {
+                                                        type: "date",
+                                                        ...register('recurring_end_date'),
                                                         className: "w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-900 text-sm"
-                                                    }), void 0, false, {
+                                                    }, void 0, false, {
                                                         fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                                         lineNumber: 346,
                                                         columnNumber: 19
@@ -4444,8 +4023,8 @@ function AddTransactionModal(param) {
                                 "data-testid": "submit-transaction-btn",
                                 type: "submit",
                                 disabled: isSubmitting,
-                                className: "w-full py-3 text-white font-semibold rounded-xl shadow-lg transition-all disabled:opacity-50 ".concat(txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME ? 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/25' : txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE ? 'bg-blue-500 hover:bg-blue-600 shadow-blue-500/25' : 'bg-rose-500 hover:bg-rose-600 shadow-rose-500/25'),
-                                children: isSubmitting ? 'Saving...' : editTransaction ? 'Update' : "Add ".concat(txnType.charAt(0).toUpperCase() + txnType.slice(1))
+                                className: `w-full py-3 text-white font-semibold rounded-xl shadow-lg transition-all disabled:opacity-50 ${txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME ? 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/25' : txnType === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE ? 'bg-blue-500 hover:bg-blue-600 shadow-blue-500/25' : 'bg-rose-500 hover:bg-rose-600 shadow-rose-500/25'}`,
+                                children: isSubmitting ? 'Saving...' : editTransaction ? 'Update' : `Add ${txnType.charAt(0).toUpperCase() + txnType.slice(1)}`
                             }, void 0, false, {
                                 fileName: "[project]/frontend/src/components/AddTransactionModal.js",
                                 lineNumber: 352,
@@ -4478,7 +4057,7 @@ _s(AddTransactionModal, "Sojc/+x0NJsvNayDYxnuFSYJAN0=", false, function() {
 _c = AddTransactionModal;
 var _c;
 __turbopack_context__.k.register(_c, "AddTransactionModal");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -4489,7 +4068,6 @@ __turbopack_context__.s([
     "MonthlyViewToggle",
     ()=>MonthlyViewToggle
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/lib/hebrew-calendar.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$core$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/@hebcal/core/dist/esm/index.js [app-client] (ecmascript) <locals>");
@@ -4502,37 +4080,35 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-;
-function MonthlyViewToggle(param) {
-    var useHebrewDates = param.useHebrewDates, onToggle = param.onToggle, selectedMonth = param.selectedMonth, selectedYear = param.selectedYear, onMonthChange = param.onMonthChange, _param_showMonthNav = param.showMonthNav, showMonthNav = _param_showMonthNav === void 0 ? true : _param_showMonthNav;
-    var currentHebrew = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrentHebrewMonth"])();
-    var handlePrev = function handlePrev() {
+function MonthlyViewToggle({ useHebrewDates, onToggle, selectedMonth, selectedYear, onMonthChange, showMonthNav = true }) {
+    const currentHebrew = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrentHebrewMonth"])();
+    const handlePrev = ()=>{
         if (useHebrewDates) {
-            var _navigateHebrewMonth = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["navigateHebrewMonth"])(selectedMonth || currentHebrew.month, selectedYear || currentHebrew.year, -1), month = _navigateHebrewMonth.month, year = _navigateHebrewMonth.year;
+            const { month, year } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["navigateHebrewMonth"])(selectedMonth || currentHebrew.month, selectedYear || currentHebrew.year, -1);
             onMonthChange(month, year);
         } else {
-            var d = new Date(selectedYear, selectedMonth - 1, 1);
+            const d = new Date(selectedYear, selectedMonth - 1, 1);
             d.setMonth(d.getMonth() - 1);
             onMonthChange(d.getMonth() + 1, d.getFullYear());
         }
     };
-    var handleNext = function handleNext() {
+    const handleNext = ()=>{
         if (useHebrewDates) {
-            var _navigateHebrewMonth = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["navigateHebrewMonth"])(selectedMonth || currentHebrew.month, selectedYear || currentHebrew.year, 1), month = _navigateHebrewMonth.month, year = _navigateHebrewMonth.year;
+            const { month, year } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["navigateHebrewMonth"])(selectedMonth || currentHebrew.month, selectedYear || currentHebrew.year, 1);
             onMonthChange(month, year);
         } else {
-            var d = new Date(selectedYear, selectedMonth - 1, 1);
+            const d = new Date(selectedYear, selectedMonth - 1, 1);
             d.setMonth(d.getMonth() + 1);
             onMonthChange(d.getMonth() + 1, d.getFullYear());
         }
     };
-    var getDisplay = function getDisplay() {
+    const getDisplay = ()=>{
         if (useHebrewDates) {
             try {
-                var hd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](1, selectedMonth, selectedYear);
-                return "".concat(hd.getMonthName(), " ").concat(selectedYear);
-            } catch (unused) {
-                return "".concat(selectedMonth, "/").concat(selectedYear);
+                const hd = new __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$hebcal$2f$hdate$2f$dist$2f$esm$2f$hdate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HDate"](1, selectedMonth, selectedYear);
+                return `${hd.getMonthName()} ${selectedYear}`;
+            } catch  {
+                return `${selectedMonth}/${selectedYear}`;
             }
         }
         return new Date(selectedYear, selectedMonth - 1, 1).toLocaleDateString('en-US', {
@@ -4605,9 +4181,7 @@ function MonthlyViewToggle(param) {
                 className: "flex items-center gap-2",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: function onClick() {
-                            return onMonthChange(selectedMonth, selectedYear - 1);
-                        },
+                        onClick: ()=>onMonthChange(selectedMonth, selectedYear - 1),
                         className: "p-1 text-slate-400 hover:text-slate-600 rounded",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$left$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronLeft$3e$__["ChevronLeft"], {
                             className: "w-4 h-4"
@@ -4630,9 +4204,7 @@ function MonthlyViewToggle(param) {
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: function onClick() {
-                            return onMonthChange(selectedMonth, selectedYear + 1);
-                        },
+                        onClick: ()=>onMonthChange(selectedMonth, selectedYear + 1),
                         className: "p-1 text-slate-400 hover:text-slate-600 rounded",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$right$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronRight$3e$__["ChevronRight"], {
                             className: "w-4 h-4"
@@ -4655,7 +4227,7 @@ function MonthlyViewToggle(param) {
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 "data-testid": "calendar-toggle-btn",
                 onClick: onToggle,
-                className: "ml-2 px-2 py-1 text-xs font-medium rounded-lg transition-colors ".concat(useHebrewDates ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'),
+                className: `ml-2 px-2 py-1 text-xs font-medium rounded-lg transition-colors ${useHebrewDates ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'}`,
                 children: useHebrewDates ? 'HEB' : 'GRE'
             }, void 0, false, {
                 fileName: "[project]/frontend/src/components/MonthlyViewToggle.js",
@@ -4672,7 +4244,7 @@ function MonthlyViewToggle(param) {
 _c = MonthlyViewToggle;
 var _c;
 __turbopack_context__.k.register(_c, "MonthlyViewToggle");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -4683,11 +4255,6 @@ __turbopack_context__.s([
     "SearchFilters",
     ()=>SearchFilters
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread_props.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/search.js [app-client] (ecmascript) <export default as Search>");
@@ -4697,23 +4264,16 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$up$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronUp$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/chevron-up.js [app-client] (ecmascript) <export default as ChevronUp>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/lib/validation.js [app-client] (ecmascript)");
 ;
-;
-;
-;
-;
-;
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
 ;
-function SearchFilters(param) {
-    var _this = this;
-    var searchQuery = param.searchQuery, onSearchChange = param.onSearchChange, filters = param.filters, onFiltersChange = param.onFiltersChange, distributionMode = param.distributionMode;
+function SearchFilters({ searchQuery, onSearchChange, filters, onFiltersChange, distributionMode }) {
     _s();
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), showFilters = _useState[0], setShowFilters = _useState[1];
-    var isGiveOnly = distributionMode === 'give_only';
-    var activeCount = [
+    const [showFilters, setShowFilters] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const isGiveOnly = distributionMode === 'give_only';
+    const activeCount = [
         filters.types.length > 0,
         filters.dateFrom,
         filters.dateTo,
@@ -4722,17 +4282,17 @@ function SearchFilters(param) {
         filters.isRecurring !== null,
         filters.recipient
     ].filter(Boolean).length;
-    var handleTypeToggle = function handleTypeToggle(type) {
-        var newTypes = filters.types.includes(type) ? filters.types.filter(function(t) {
-            return t !== type;
-        }) : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(filters.types).concat([
+    const handleTypeToggle = (type)=>{
+        const newTypes = filters.types.includes(type) ? filters.types.filter((t)=>t !== type) : [
+            ...filters.types,
             type
-        ]);
-        onFiltersChange((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, filters), {
+        ];
+        onFiltersChange({
+            ...filters,
             types: newTypes
-        }));
+        });
     };
-    var handleClear = function handleClear() {
+    const handleClear = ()=>{
         onFiltersChange({
             types: [],
             dateFrom: '',
@@ -4744,7 +4304,7 @@ function SearchFilters(param) {
         });
         onSearchChange('');
     };
-    var types = [
+    const types = [
         {
             type: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME,
             label: 'Income',
@@ -4754,14 +4314,15 @@ function SearchFilters(param) {
             type: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE,
             label: 'Give',
             color: 'bg-blue-500'
-        }
-    ].concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(!isGiveOnly ? [
-        {
-            type: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND,
-            label: 'Lend',
-            color: 'bg-rose-500'
-        }
-    ] : []));
+        },
+        ...!isGiveOnly ? [
+            {
+                type: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND,
+                label: 'Lend',
+                color: 'bg-rose-500'
+            }
+        ] : []
+    ];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "bg-white rounded-xl border border-slate-200 shadow-sm p-4 space-y-4",
         children: [
@@ -4782,9 +4343,7 @@ function SearchFilters(param) {
                                 "data-testid": "search-input",
                                 type: "text",
                                 value: searchQuery,
-                                onChange: function onChange(e) {
-                                    return onSearchChange(e.target.value);
-                                },
+                                onChange: (e)=>onSearchChange(e.target.value),
                                 placeholder: "Search transactions...",
                                 className: "w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             }, void 0, false, {
@@ -4793,9 +4352,7 @@ function SearchFilters(param) {
                                 columnNumber: 11
                             }, this),
                             searchQuery && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: function onClick() {
-                                    return onSearchChange('');
-                                },
+                                onClick: ()=>onSearchChange(''),
                                 className: "absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$x$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__X$3e$__["X"], {
                                     className: "w-4 h-4"
@@ -4817,10 +4374,8 @@ function SearchFilters(param) {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         "data-testid": "toggle-filters-btn",
-                        onClick: function onClick() {
-                            return setShowFilters(!showFilters);
-                        },
-                        className: "flex items-center gap-2 px-4 py-2 rounded-xl transition-colors ".concat(showFilters || activeCount > 0 ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'),
+                        onClick: ()=>setShowFilters(!showFilters),
+                        className: `flex items-center gap-2 px-4 py-2 rounded-xl transition-colors ${showFilters || activeCount > 0 ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`,
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$funnel$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Filter$3e$__["Filter"], {
                                 className: "w-4 h-4"
@@ -4877,21 +4432,16 @@ function SearchFilters(param) {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex flex-wrap gap-2",
-                                children: types.map(function(param) {
-                                    var type = param.type, label = param.label, color = param.color;
-                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                        "data-testid": "filter-type-".concat(type),
-                                        onClick: function onClick() {
-                                            return handleTypeToggle(type);
-                                        },
-                                        className: "px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ".concat(filters.types.includes(type) ? "".concat(color, " text-white") : 'bg-slate-100 text-slate-600 hover:bg-slate-200'),
+                                children: types.map(({ type, label, color })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        "data-testid": `filter-type-${type}`,
+                                        onClick: ()=>handleTypeToggle(type),
+                                        className: `px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${filters.types.includes(type) ? `${color} text-white` : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`,
                                         children: label
                                     }, type, false, {
                                         fileName: "[project]/frontend/src/components/SearchFilters.js",
                                         lineNumber: 73,
                                         columnNumber: 17
-                                    }, _this);
-                                })
+                                    }, this))
                             }, void 0, false, {
                                 fileName: "[project]/frontend/src/components/SearchFilters.js",
                                 lineNumber: 71,
@@ -4920,11 +4470,10 @@ function SearchFilters(param) {
                                         "data-testid": "filter-date-from",
                                         type: "date",
                                         value: filters.dateFrom,
-                                        onChange: function onChange(e) {
-                                            return onFiltersChange((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, filters), {
+                                        onChange: (e)=>onFiltersChange({
+                                                ...filters,
                                                 dateFrom: e.target.value
-                                            }));
-                                        },
+                                            }),
                                         className: "w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900"
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/src/components/SearchFilters.js",
@@ -4951,11 +4500,10 @@ function SearchFilters(param) {
                                         "data-testid": "filter-date-to",
                                         type: "date",
                                         value: filters.dateTo,
-                                        onChange: function onChange(e) {
-                                            return onFiltersChange((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, filters), {
+                                        onChange: (e)=>onFiltersChange({
+                                                ...filters,
                                                 dateTo: e.target.value
-                                            }));
-                                        },
+                                            }),
                                         className: "w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900"
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/src/components/SearchFilters.js",
@@ -4991,11 +4539,10 @@ function SearchFilters(param) {
                                         "data-testid": "filter-amount-min",
                                         type: "number",
                                         value: filters.amountMin,
-                                        onChange: function onChange(e) {
-                                            return onFiltersChange((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, filters), {
+                                        onChange: (e)=>onFiltersChange({
+                                                ...filters,
                                                 amountMin: e.target.value
-                                            }));
-                                        },
+                                            }),
                                         placeholder: "0",
                                         className: "w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900"
                                     }, void 0, false, {
@@ -5023,11 +4570,10 @@ function SearchFilters(param) {
                                         "data-testid": "filter-amount-max",
                                         type: "number",
                                         value: filters.amountMax,
-                                        onChange: function onChange(e) {
-                                            return onFiltersChange((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, filters), {
+                                        onChange: (e)=>onFiltersChange({
+                                                ...filters,
                                                 amountMax: e.target.value
-                                            }));
-                                        },
+                                            }),
                                         placeholder: "∞",
                                         className: "w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900"
                                     }, void 0, false, {
@@ -5072,23 +4618,19 @@ function SearchFilters(param) {
                                         value: false,
                                         label: 'One-time'
                                     }
-                                ].map(function(param) {
-                                    var value = param.value, label = param.label;
-                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                        "data-testid": "filter-recurring-".concat(value),
-                                        onClick: function onClick() {
-                                            return onFiltersChange((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, filters), {
+                                ].map(({ value, label })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        "data-testid": `filter-recurring-${value}`,
+                                        onClick: ()=>onFiltersChange({
+                                                ...filters,
                                                 isRecurring: value
-                                            }));
-                                        },
-                                        className: "px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ".concat(filters.isRecurring === value ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'),
+                                            }),
+                                        className: `px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${filters.isRecurring === value ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`,
                                         children: label
                                     }, String(value), false, {
                                         fileName: "[project]/frontend/src/components/SearchFilters.js",
                                         lineNumber: 139,
                                         columnNumber: 17
-                                    }, _this);
-                                })
+                                    }, this))
                             }, void 0, false, {
                                 fileName: "[project]/frontend/src/components/SearchFilters.js",
                                 lineNumber: 137,
@@ -5127,7 +4669,7 @@ _s(SearchFilters, "oJ1PYJsWFrwlzYtlEiE9hrxrFU0=");
 _c = SearchFilters;
 var _c;
 __turbopack_context__.k.register(_c, "SearchFilters");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -5138,8 +4680,6 @@ __turbopack_context__.s([
     "AnalyticsCharts",
     ()=>AnalyticsCharts
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$chart$2f$AreaChart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/chart/AreaChart.js [app-client] (ecmascript)");
@@ -5160,47 +4700,43 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chart$2d$pie$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__PieChart$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/chart-pie.js [app-client] (ecmascript) <export default as PieChart>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trending$2d$up$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__TrendingUp$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/trending-up.js [app-client] (ecmascript) <export default as TrendingUp>");
 ;
-;
-;
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
 ;
 ;
-var COLORS = {
+const COLORS = {
     income: '#10b981',
     maaser: '#f59e0b',
     given: '#3b82f6',
     lent: '#f43f5e'
 };
-function AnalyticsCharts(param) {
-    var _this = this;
-    var transactions = param.transactions, baseCurrency = param.baseCurrency, distributionMode = param.distributionMode;
+function AnalyticsCharts({ transactions, baseCurrency, distributionMode }) {
     _s();
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('area'), 2), chartType = _useState[0], setChartType = _useState[1];
-    var isGiveOnly = distributionMode === 'give_only';
-    var symbol = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(baseCurrency);
-    var monthlyData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "AnalyticsCharts.useMemo[monthlyData]": function() {
-            var map = {};
+    const [chartType, setChartType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('area');
+    const isGiveOnly = distributionMode === 'give_only';
+    const symbol = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(baseCurrency);
+    const monthlyData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "AnalyticsCharts.useMemo[monthlyData]": ()=>{
+            const map = {};
             transactions.forEach({
-                "AnalyticsCharts.useMemo[monthlyData]": function(t) {
-                    var d = new Date(t.date);
-                    var key = "".concat(d.getFullYear(), "-").concat(String(d.getMonth() + 1).padStart(2, '0'));
-                    var label = d.toLocaleDateString('en-US', {
+                "AnalyticsCharts.useMemo[monthlyData]": (t)=>{
+                    const d = new Date(t.date);
+                    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+                    const label = d.toLocaleDateString('en-US', {
                         month: 'short',
                         year: '2-digit'
                     });
                     if (!map[key]) map[key] = {
                         month: label,
-                        key: key,
+                        key,
                         income: 0,
                         maaser: 0,
                         given: 0,
                         lent: 0
                     };
-                    var norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
+                    const norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
                     if (t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME) {
                         map[key].income += norm;
                         map[key].maaser += norm * ((t.maaser_percentage || 10) / 100);
@@ -5209,20 +4745,18 @@ function AnalyticsCharts(param) {
                 }
             }["AnalyticsCharts.useMemo[monthlyData]"]);
             return Object.values(map).sort({
-                "AnalyticsCharts.useMemo[monthlyData]": function(a, b) {
-                    return a.key.localeCompare(b.key);
-                }
+                "AnalyticsCharts.useMemo[monthlyData]": (a, b)=>a.key.localeCompare(b.key)
             }["AnalyticsCharts.useMemo[monthlyData]"]).slice(-12);
         }
     }["AnalyticsCharts.useMemo[monthlyData]"], [
         transactions,
         baseCurrency
     ]);
-    var pieData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "AnalyticsCharts.useMemo[pieData]": function() {
-            var totals = transactions.reduce({
-                "AnalyticsCharts.useMemo[pieData].totals": function(acc, t) {
-                    var norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
+    const pieData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "AnalyticsCharts.useMemo[pieData]": ()=>{
+            const totals = transactions.reduce({
+                "AnalyticsCharts.useMemo[pieData].totals": (acc, t)=>{
+                    const norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
                     if (t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE) acc.given += norm;
                     else if (t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND && !isGiveOnly) acc.lent += norm;
                     return acc;
@@ -5231,7 +4765,7 @@ function AnalyticsCharts(param) {
                 given: 0,
                 lent: 0
             });
-            var data = [
+            const data = [
                 {
                     name: 'Given',
                     value: totals.given,
@@ -5250,14 +4784,11 @@ function AnalyticsCharts(param) {
         baseCurrency,
         isGiveOnly
     ]);
-    var fmt = function fmt(v) {
-        return "".concat(symbol).concat(v.toLocaleString(undefined, {
+    const fmt = (v)=>`${symbol}${v.toLocaleString(undefined, {
             maximumFractionDigits: 0
-        }));
-    };
-    var CustomTooltip = function CustomTooltip(param) {
-        var active = param.active, payload = param.payload, label = param.label;
-        if (!active || !(payload === null || payload === void 0 ? void 0 : payload.length)) return null;
+        })}`;
+    const CustomTooltip = ({ active, payload, label })=>{
+        if (!active || !payload?.length) return null;
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "bg-white border border-slate-200 rounded-lg p-2 shadow-lg text-sm",
             children: [
@@ -5268,9 +4799,8 @@ function AnalyticsCharts(param) {
                     fileName: "[project]/frontend/src/components/AnalyticsCharts.js",
                     lineNumber: 50,
                     columnNumber: 9
-                }, _this),
-                payload.map(function(e, i) {
-                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                }, this),
+                payload.map((e, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         style: {
                             color: e.color
                         },
@@ -5283,14 +4813,13 @@ function AnalyticsCharts(param) {
                         fileName: "[project]/frontend/src/components/AnalyticsCharts.js",
                         lineNumber: 51,
                         columnNumber: 32
-                    }, _this);
-                })
+                    }, this))
             ]
         }, void 0, true, {
             fileName: "[project]/frontend/src/components/AnalyticsCharts.js",
             lineNumber: 49,
             columnNumber: 7
-        }, _this);
+        }, this);
     };
     if (monthlyData.length === 0) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5347,27 +4876,22 @@ function AnalyticsCharts(param) {
                                 type: 'pie',
                                 Icon: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chart$2d$pie$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__PieChart$3e$__["PieChart"]
                             }
-                        ].map(function(param) {
-                            var type = param.type, Icon = param.Icon;
-                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                "data-testid": "chart-type-".concat(type),
-                                onClick: function onClick() {
-                                    return setChartType(type);
-                                },
-                                className: "p-2 rounded-md transition-colors ".concat(chartType === type ? 'bg-blue-600 text-white' : 'text-slate-500 hover:bg-slate-200'),
+                        ].map(({ type, Icon })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                "data-testid": `chart-type-${type}`,
+                                onClick: ()=>setChartType(type),
+                                className: `p-2 rounded-md transition-colors ${chartType === type ? 'bg-blue-600 text-white' : 'text-slate-500 hover:bg-slate-200'}`,
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Icon, {
                                     className: "w-4 h-4"
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/src/components/AnalyticsCharts.js",
                                     lineNumber: 77,
                                     columnNumber: 15
-                                }, _this)
+                                }, this)
                             }, type, false, {
                                 fileName: "[project]/frontend/src/components/AnalyticsCharts.js",
                                 lineNumber: 71,
                                 columnNumber: 13
-                            }, _this);
-                        })
+                            }, this))
                     }, void 0, false, {
                         fileName: "[project]/frontend/src/components/AnalyticsCharts.js",
                         lineNumber: 69,
@@ -5730,21 +5254,16 @@ function AnalyticsCharts(param) {
                                     cx: "50%",
                                     cy: "50%",
                                     labelLine: false,
-                                    label: function label(param) {
-                                        var name = param.name, value = param.value, percent = param.percent;
-                                        return "".concat(name, ": ").concat(fmt(value), " (").concat((percent * 100).toFixed(0), "%)");
-                                    },
+                                    label: ({ name, value, percent })=>`${name}: ${fmt(value)} (${(percent * 100).toFixed(0)}%)`,
                                     outerRadius: 80,
                                     dataKey: "value",
-                                    children: pieData.map(function(e, i) {
-                                        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Cell$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Cell"], {
+                                    children: pieData.map((e, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Cell$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Cell"], {
                                             fill: e.color
                                         }, i, false, {
                                             fileName: "[project]/frontend/src/components/AnalyticsCharts.js",
                                             lineNumber: 122,
                                             columnNumber: 40
-                                        }, _this);
-                                    })
+                                        }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/src/components/AnalyticsCharts.js",
                                     lineNumber: 121,
@@ -5793,9 +5312,7 @@ function AnalyticsCharts(param) {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "font-bold text-emerald-600",
-                                children: fmt(monthlyData.reduce(function(s, m) {
-                                    return s + m.income;
-                                }, 0) / Math.max(monthlyData.length, 1))
+                                children: fmt(monthlyData.reduce((s, m)=>s + m.income, 0) / Math.max(monthlyData.length, 1))
                             }, void 0, false, {
                                 fileName: "[project]/frontend/src/components/AnalyticsCharts.js",
                                 lineNumber: 131,
@@ -5819,9 +5336,7 @@ function AnalyticsCharts(param) {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "font-bold text-amber-600",
-                                children: fmt(monthlyData.reduce(function(s, m) {
-                                    return s + m.maaser;
-                                }, 0) / Math.max(monthlyData.length, 1))
+                                children: fmt(monthlyData.reduce((s, m)=>s + m.maaser, 0) / Math.max(monthlyData.length, 1))
                             }, void 0, false, {
                                 fileName: "[project]/frontend/src/components/AnalyticsCharts.js",
                                 lineNumber: 132,
@@ -5845,9 +5360,7 @@ function AnalyticsCharts(param) {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "font-bold text-blue-600",
-                                children: fmt(monthlyData.reduce(function(s, m) {
-                                    return s + m.given;
-                                }, 0) / Math.max(monthlyData.length, 1))
+                                children: fmt(monthlyData.reduce((s, m)=>s + m.given, 0) / Math.max(monthlyData.length, 1))
                             }, void 0, false, {
                                 fileName: "[project]/frontend/src/components/AnalyticsCharts.js",
                                 lineNumber: 133,
@@ -5900,7 +5413,7 @@ _s(AnalyticsCharts, "EN1bmQ08Y2KXKYsnJnIrFN3Kxug=");
 _c = AnalyticsCharts;
 var _c;
 __turbopack_context__.k.register(_c, "AnalyticsCharts");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -5911,11 +5424,6 @@ __turbopack_context__.s([
     "SettingsModal",
     ()=>SettingsModal
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_async_to_generator.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_define_property.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/tslib/tslib.es6.mjs [app-client] (ecmascript) <export __generator as _>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/lib/validation.js [app-client] (ecmascript)");
@@ -5927,93 +5435,42 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$percent$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Percent$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/percent.js [app-client] (ecmascript) <export default as Percent>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chart$2d$pie$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__PieChart$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/chart-pie.js [app-client] (ecmascript) <export default as PieChart>");
 ;
-;
-;
-;
-;
-;
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
 ;
-function SettingsModal(param) {
-    var _this = this;
-    var isOpen = param.isOpen, onClose = param.onClose, user = param.user, updateUser = param.updateUser;
-    var _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+function SettingsModal({ isOpen, onClose, user, updateUser }) {
     _s();
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), saving = _useState[0], setSaving = _useState[1];
-    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((_ref = user === null || user === void 0 ? void 0 : user.default_maaser_percentage) !== null && _ref !== void 0 ? _ref : 10), 2), maaserPct = _useState1[0], setMaaserPct = _useState1[1];
-    var _useState2 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((_ref1 = user === null || user === void 0 ? void 0 : user.give_ratio) !== null && _ref1 !== void 0 ? _ref1 : 50), 2), giveRatio = _useState2[0], setGiveRatio = _useState2[1];
-    var _useState3 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((_ref2 = user === null || user === void 0 ? void 0 : user.lend_ratio) !== null && _ref2 !== void 0 ? _ref2 : 50), 2), lendRatio = _useState3[0], setLendRatio = _useState3[1];
+    const [saving, setSaving] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [maaserPct, setMaaserPct] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(user?.default_maaser_percentage ?? 10);
+    const [giveRatio, setGiveRatio] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(user?.give_ratio ?? 50);
+    const [lendRatio, setLendRatio] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(user?.lend_ratio ?? 50);
     if (!isOpen) return null;
-    var handleUpdate = function handleUpdate(key, value) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        setSaving(true);
-                        return [
-                            4,
-                            updateUser((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, key, value))
-                        ];
-                    case 1:
-                        _state.sent();
-                        setSaving(false);
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const handleUpdate = async (key, value)=>{
+        setSaving(true);
+        await updateUser({
+            [key]: value
+        });
+        setSaving(false);
     };
-    var handleMaaserSave = function handleMaaserSave() {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        setSaving(true);
-                        return [
-                            4,
-                            updateUser({
-                                default_maaser_percentage: Number(maaserPct)
-                            })
-                        ];
-                    case 1:
-                        _state.sent();
-                        setSaving(false);
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const handleMaaserSave = async ()=>{
+        setSaving(true);
+        await updateUser({
+            default_maaser_percentage: Number(maaserPct)
+        });
+        setSaving(false);
     };
-    var handleRatioSave = function handleRatioSave() {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        setSaving(true);
-                        return [
-                            4,
-                            updateUser({
-                                give_ratio: Number(giveRatio),
-                                lend_ratio: Number(lendRatio)
-                            })
-                        ];
-                    case 1:
-                        _state.sent();
-                        setSaving(false);
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const handleRatioSave = async ()=>{
+        setSaving(true);
+        await updateUser({
+            give_ratio: Number(giveRatio),
+            lend_ratio: Number(lendRatio)
+        });
+        setSaving(false);
     };
-    var handleGiveRatioChange = function handleGiveRatioChange(val) {
-        var v = Math.min(100, Math.max(0, Number(val)));
+    const handleGiveRatioChange = (val)=>{
+        const v = Math.min(100, Math.max(0, Number(val)));
         setGiveRatio(v);
         setLendRatio(100 - v);
     };
@@ -6088,7 +5545,7 @@ function SettingsModal(param) {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                 className: "font-medium text-slate-900",
-                                                children: user === null || user === void 0 ? void 0 : user.name
+                                                children: user?.name
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/SettingsModal.js",
                                                 lineNumber: 58,
@@ -6096,7 +5553,7 @@ function SettingsModal(param) {
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                 className: "text-sm text-slate-500",
-                                                children: user === null || user === void 0 ? void 0 : user.email
+                                                children: user?.email
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/SettingsModal.js",
                                                 lineNumber: 59,
@@ -6135,14 +5592,11 @@ function SettingsModal(param) {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                         "data-testid": "settings-base-currency",
-                                        value: (user === null || user === void 0 ? void 0 : user.base_currency) || 'USD',
-                                        onChange: function onChange(e) {
-                                            return handleUpdate('base_currency', e.target.value);
-                                        },
+                                        value: user?.base_currency || 'USD',
+                                        onChange: (e)=>handleUpdate('base_currency', e.target.value),
                                         disabled: saving,
                                         className: "w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
-                                        children: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["currencies"].map(function(c) {
-                                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                        children: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["currencies"].map((c)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                 value: c.code,
                                                 children: [
                                                     c.symbol,
@@ -6153,8 +5607,7 @@ function SettingsModal(param) {
                                                 fileName: "[project]/frontend/src/components/SettingsModal.js",
                                                 lineNumber: 77,
                                                 columnNumber: 17
-                                            }, _this);
-                                        })
+                                            }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/src/components/SettingsModal.js",
                                         lineNumber: 69,
@@ -6195,9 +5648,7 @@ function SettingsModal(param) {
                                                 max: "100",
                                                 step: "0.5",
                                                 value: maaserPct,
-                                                onChange: function onChange(e) {
-                                                    return setMaaserPct(e.target.value);
-                                                },
+                                                onChange: (e)=>setMaaserPct(e.target.value),
                                                 className: "w-24 px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500 text-center"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/SettingsModal.js",
@@ -6215,7 +5666,7 @@ function SettingsModal(param) {
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 "data-testid": "settings-maaser-save-btn",
                                                 onClick: handleMaaserSave,
-                                                disabled: saving || Number(maaserPct) === ((_ref3 = user === null || user === void 0 ? void 0 : user.default_maaser_percentage) !== null && _ref3 !== void 0 ? _ref3 : 10),
+                                                disabled: saving || Number(maaserPct) === (user?.default_maaser_percentage ?? 10),
                                                 className: "ml-auto px-3 py-2 text-sm bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-40 transition-colors",
                                                 children: "Save"
                                             }, void 0, false, {
@@ -6243,7 +5694,7 @@ function SettingsModal(param) {
                                 lineNumber: 83,
                                 columnNumber: 11
                             }, this),
-                            (user === null || user === void 0 ? void 0 : user.distribution_mode) === 'both' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            user?.distribution_mode === 'both' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "flex items-center gap-2 text-sm font-medium text-slate-700 mb-2",
@@ -6288,9 +5739,7 @@ function SettingsModal(param) {
                                                                         min: "0",
                                                                         max: "100",
                                                                         value: giveRatio,
-                                                                        onChange: function onChange(e) {
-                                                                            return handleGiveRatioChange(e.target.value);
-                                                                        },
+                                                                        onChange: (e)=>handleGiveRatioChange(e.target.value),
                                                                         className: "w-16 px-2 py-1.5 bg-white border border-slate-200 rounded-lg text-sm text-center"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/frontend/src/components/SettingsModal.js",
@@ -6345,8 +5794,8 @@ function SettingsModal(param) {
                                                                         min: "0",
                                                                         max: "100",
                                                                         value: lendRatio,
-                                                                        onChange: function onChange(e) {
-                                                                            var v = Math.min(100, Math.max(0, Number(e.target.value)));
+                                                                        onChange: (e)=>{
+                                                                            const v = Math.min(100, Math.max(0, Number(e.target.value)));
                                                                             setLendRatio(v);
                                                                             setGiveRatio(100 - v);
                                                                         },
@@ -6388,7 +5837,7 @@ function SettingsModal(param) {
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: "bg-blue-500 transition-all duration-300",
                                                         style: {
-                                                            width: "".concat(giveRatio, "%")
+                                                            width: `${giveRatio}%`
                                                         }
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/src/components/SettingsModal.js",
@@ -6398,7 +5847,7 @@ function SettingsModal(param) {
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: "bg-rose-500 transition-all duration-300",
                                                         style: {
-                                                            width: "".concat(lendRatio, "%")
+                                                            width: `${lendRatio}%`
                                                         }
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/src/components/SettingsModal.js",
@@ -6445,7 +5894,7 @@ function SettingsModal(param) {
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 "data-testid": "settings-ratio-save-btn",
                                                 onClick: handleRatioSave,
-                                                disabled: saving || Number(giveRatio) === ((_ref4 = user === null || user === void 0 ? void 0 : user.give_ratio) !== null && _ref4 !== void 0 ? _ref4 : 50) && Number(lendRatio) === ((_ref5 = user === null || user === void 0 ? void 0 : user.lend_ratio) !== null && _ref5 !== void 0 ? _ref5 : 50),
+                                                disabled: saving || Number(giveRatio) === (user?.give_ratio ?? 50) && Number(lendRatio) === (user?.lend_ratio ?? 50),
                                                 className: "w-full py-2 text-sm bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-40 transition-colors",
                                                 children: "Save Ratio"
                                             }, void 0, false, {
@@ -6494,10 +5943,8 @@ function SettingsModal(param) {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                         "data-testid": "settings-default-view",
-                                        value: (user === null || user === void 0 ? void 0 : user.default_view) || 'month',
-                                        onChange: function onChange(e) {
-                                            return handleUpdate('default_view', e.target.value);
-                                        },
+                                        value: user?.default_view || 'month',
+                                        onChange: (e)=>handleUpdate('default_view', e.target.value),
                                         disabled: saving,
                                         className: "w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
                                         children: [
@@ -6561,11 +6008,9 @@ function SettingsModal(param) {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 "data-testid": "settings-calendar-gregorian",
-                                                onClick: function onClick() {
-                                                    return handleUpdate('use_hebrew_calendar', false);
-                                                },
+                                                onClick: ()=>handleUpdate('use_hebrew_calendar', false),
                                                 disabled: saving,
-                                                className: "flex-1 py-2 rounded-xl font-medium transition-colors ".concat(!(user === null || user === void 0 ? void 0 : user.use_hebrew_calendar) ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'),
+                                                className: `flex-1 py-2 rounded-xl font-medium transition-colors ${!user?.use_hebrew_calendar ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`,
                                                 children: "Gregorian"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/SettingsModal.js",
@@ -6574,11 +6019,9 @@ function SettingsModal(param) {
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 "data-testid": "settings-calendar-hebrew",
-                                                onClick: function onClick() {
-                                                    return handleUpdate('use_hebrew_calendar', true);
-                                                },
+                                                onClick: ()=>handleUpdate('use_hebrew_calendar', true),
                                                 disabled: saving,
-                                                className: "flex-1 py-2 rounded-xl font-medium transition-colors ".concat((user === null || user === void 0 ? void 0 : user.use_hebrew_calendar) ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'),
+                                                className: `flex-1 py-2 rounded-xl font-medium transition-colors ${user?.use_hebrew_calendar ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`,
                                                 children: "Hebrew"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/SettingsModal.js",
@@ -6612,11 +6055,9 @@ function SettingsModal(param) {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 "data-testid": "settings-mode-both",
-                                                onClick: function onClick() {
-                                                    return handleUpdate('distribution_mode', 'both');
-                                                },
+                                                onClick: ()=>handleUpdate('distribution_mode', 'both'),
                                                 disabled: saving,
-                                                className: "flex-1 py-2 rounded-xl font-medium transition-colors ".concat((user === null || user === void 0 ? void 0 : user.distribution_mode) === 'both' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'),
+                                                className: `flex-1 py-2 rounded-xl font-medium transition-colors ${user?.distribution_mode === 'both' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`,
                                                 children: "Give & Lend"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/SettingsModal.js",
@@ -6625,11 +6066,9 @@ function SettingsModal(param) {
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 "data-testid": "settings-mode-give",
-                                                onClick: function onClick() {
-                                                    return handleUpdate('distribution_mode', 'give_only');
-                                                },
+                                                onClick: ()=>handleUpdate('distribution_mode', 'give_only'),
                                                 disabled: saving,
-                                                className: "flex-1 py-2 rounded-xl font-medium transition-colors ".concat((user === null || user === void 0 ? void 0 : user.distribution_mode) === 'give_only' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'),
+                                                className: `flex-1 py-2 rounded-xl font-medium transition-colors ${user?.distribution_mode === 'give_only' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`,
                                                 children: "Give Only"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/SettingsModal.js",
@@ -6644,7 +6083,7 @@ function SettingsModal(param) {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-xs text-slate-500 mt-2",
-                                        children: (user === null || user === void 0 ? void 0 : user.distribution_mode) === 'give_only' ? 'Lend tracking is hidden' : 'Track both gives and lends'
+                                        children: user?.distribution_mode === 'give_only' ? 'Lend tracking is hidden' : 'Track both gives and lends'
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/src/components/SettingsModal.js",
                                         lineNumber: 263,
@@ -6679,7 +6118,7 @@ _s(SettingsModal, "2C8ofAC3ezNgnjAESUA6Dm3mf60=");
 _c = SettingsModal;
 var _c;
 __turbopack_context__.k.register(_c, "SettingsModal");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -6690,10 +6129,6 @@ __turbopack_context__.s([
     "ContactModal",
     ()=>ContactModal
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_async_to_generator.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/tslib/tslib.es6.mjs [app-client] (ecmascript) <export __generator as _>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/lib/api.js [app-client] (ecmascript)");
@@ -6701,79 +6136,37 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$send$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Send$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/send.js [app-client] (ecmascript) <export default as Send>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$mail$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Mail$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/mail.js [app-client] (ecmascript) <export default as Mail>");
 ;
-;
-;
-;
-;
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
 ;
-function ContactModal(param) {
-    var isOpen = param.isOpen, onClose = param.onClose, userName = param.userName, userEmail = param.userEmail;
+function ContactModal({ isOpen, onClose, userName, userEmail }) {
     _s();
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(userName || ''), 2), name = _useState[0], setName = _useState[1];
-    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(userEmail || ''), 2), email = _useState1[0], setEmail = _useState1[1];
-    var _useState2 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(''), 2), message = _useState2[0], setMessage = _useState2[1];
-    var _useState3 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), sending = _useState3[0], setSending = _useState3[1];
-    var _useState4 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), sent = _useState4[0], setSent = _useState4[1];
-    var _useState5 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(''), 2), error = _useState5[0], setError = _useState5[1];
-    var handleSubmit = function handleSubmit(e) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var err;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        e.preventDefault();
-                        if (!name.trim() || !email.trim() || !message.trim()) return [
-                            2
-                        ];
-                        setSending(true);
-                        setError('');
-                        _state.label = 1;
-                    case 1:
-                        _state.trys.push([
-                            1,
-                            3,
-                            4,
-                            5
-                        ]);
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiSendContact"])(name.trim(), email.trim(), message.trim())
-                        ];
-                    case 2:
-                        _state.sent();
-                        setSent(true);
-                        setTimeout(function() {
-                            onClose();
-                            setSent(false);
-                            setMessage('');
-                        }, 2000);
-                        return [
-                            3,
-                            5
-                        ];
-                    case 3:
-                        err = _state.sent();
-                        setError('Failed to send message. Please try again.');
-                        return [
-                            3,
-                            5
-                        ];
-                    case 4:
-                        setSending(false);
-                        return [
-                            7
-                        ];
-                    case 5:
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const [name, setName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(userName || '');
+    const [email, setEmail] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(userEmail || '');
+    const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const [sending, setSending] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [sent, setSent] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const handleSubmit = async (e)=>{
+        e.preventDefault();
+        if (!name.trim() || !email.trim() || !message.trim()) return;
+        setSending(true);
+        setError('');
+        try {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiSendContact"])(name.trim(), email.trim(), message.trim());
+            setSent(true);
+            setTimeout(()=>{
+                onClose();
+                setSent(false);
+                setMessage('');
+            }, 2000);
+        } catch (err) {
+            setError('Failed to send message. Please try again.');
+        } finally{
+            setSending(false);
+        }
     };
     if (!isOpen) return null;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6904,9 +6297,7 @@ function ContactModal(param) {
                                         "data-testid": "contact-name-input",
                                         type: "text",
                                         value: name,
-                                        onChange: function onChange(e) {
-                                            return setName(e.target.value);
-                                        },
+                                        onChange: (e)=>setName(e.target.value),
                                         className: "w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500",
                                         required: true
                                     }, void 0, false, {
@@ -6934,9 +6325,7 @@ function ContactModal(param) {
                                         "data-testid": "contact-email-input",
                                         type: "email",
                                         value: email,
-                                        onChange: function onChange(e) {
-                                            return setEmail(e.target.value);
-                                        },
+                                        onChange: (e)=>setEmail(e.target.value),
                                         className: "w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500",
                                         required: true
                                     }, void 0, false, {
@@ -6963,9 +6352,7 @@ function ContactModal(param) {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
                                         "data-testid": "contact-message-input",
                                         value: message,
-                                        onChange: function onChange(e) {
-                                            return setMessage(e.target.value);
-                                        },
+                                        onChange: (e)=>setMessage(e.target.value),
                                         rows: 4,
                                         className: "w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:ring-2 focus:ring-blue-500 resize-none",
                                         placeholder: "How can we help?",
@@ -7024,7 +6411,7 @@ _s(ContactModal, "qTqE7zB+IVvhu/vf/OYqq29YeCc=");
 _c = ContactModal;
 var _c;
 __turbopack_context__.k.register(_c, "ContactModal");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -7035,12 +6422,6 @@ __turbopack_context__.s([
     "AdminPanel",
     ()=>AdminPanel
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_async_to_generator.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread_props.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/tslib/tslib.es6.mjs [app-client] (ecmascript) <export __generator as _>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/lib/api.js [app-client] (ecmascript)");
@@ -7052,195 +6433,66 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/search.js [app-client] (ecmascript) <export default as Search>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$refresh$2d$cw$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__RefreshCw$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/refresh-cw.js [app-client] (ecmascript) <export default as RefreshCw>");
 ;
-;
-;
-;
-;
-;
-;
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
 ;
-function AdminPanel(param) {
-    var _this = this;
-    var onBack = param.onBack;
+function AdminPanel({ onBack }) {
     _s();
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]), 2), users = _useState[0], setUsers = _useState[1];
-    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true), 2), loading = _useState1[0], setLoading = _useState1[1];
-    var _useState2 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(''), 2), search = _useState2[0], setSearch = _useState2[1];
-    var _useState3 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null), 2), actionLoading = _useState3[0], setActionLoading = _useState3[1];
-    var fetchUsers = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "AdminPanel.useCallback[fetchUsers]": function() {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
-                "AdminPanel.useCallback[fetchUsers]": function() {
-                    var data, err;
-                    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, {
-                        "AdminPanel.useCallback[fetchUsers]": function(_state) {
-                            switch(_state.label){
-                                case 0:
-                                    setLoading(true);
-                                    _state.label = 1;
-                                case 1:
-                                    _state.trys.push([
-                                        1,
-                                        3,
-                                        4,
-                                        5
-                                    ]);
-                                    return [
-                                        4,
-                                        (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiGetAdminUsers"])()
-                                    ];
-                                case 2:
-                                    data = _state.sent();
-                                    setUsers(data || []);
-                                    return [
-                                        3,
-                                        5
-                                    ];
-                                case 3:
-                                    err = _state.sent();
-                                    console.error('Error fetching users:', err);
-                                    return [
-                                        3,
-                                        5
-                                    ];
-                                case 4:
-                                    setLoading(false);
-                                    return [
-                                        7
-                                    ];
-                                case 5:
-                                    return [
-                                        2
-                                    ];
-                            }
-                        }
-                    }["AdminPanel.useCallback[fetchUsers]"]);
-                }
-            }["AdminPanel.useCallback[fetchUsers]"])();
+    const [users, setUsers] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
+    const [search, setSearch] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const [actionLoading, setActionLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const fetchUsers = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "AdminPanel.useCallback[fetchUsers]": async ()=>{
+            setLoading(true);
+            try {
+                const data = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiGetAdminUsers"])();
+                setUsers(data || []);
+            } catch (err) {
+                console.error('Error fetching users:', err);
+            } finally{
+                setLoading(false);
+            }
         }
     }["AdminPanel.useCallback[fetchUsers]"], []);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "AdminPanel.useEffect": function() {
+        "AdminPanel.useEffect": ()=>{
             fetchUsers();
         }
     }["AdminPanel.useEffect"], [
         fetchUsers
     ]);
-    var toggleAdmin = function toggleAdmin(userId, currentStatus) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var err;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        setActionLoading(userId);
-                        _state.label = 1;
-                    case 1:
-                        _state.trys.push([
-                            1,
-                            3,
-                            4,
-                            5
-                        ]);
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiUpdateAdminUser"])(userId, {
-                                is_admin: !currentStatus
-                            })
-                        ];
-                    case 2:
-                        _state.sent();
-                        setUsers(function(prev) {
-                            return prev.map(function(u) {
-                                return u.id === userId ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, u), {
-                                    is_admin: !currentStatus
-                                }) : u;
-                            });
-                        });
-                        return [
-                            3,
-                            5
-                        ];
-                    case 3:
-                        err = _state.sent();
-                        console.error('Error toggling admin:', err);
-                        return [
-                            3,
-                            5
-                        ];
-                    case 4:
-                        setActionLoading(null);
-                        return [
-                            7
-                        ];
-                    case 5:
-                        return [
-                            2
-                        ];
-                }
+    const toggleAdmin = async (userId, currentStatus)=>{
+        setActionLoading(userId);
+        try {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiUpdateAdminUser"])(userId, {
+                is_admin: !currentStatus
             });
-        })();
+            setUsers((prev)=>prev.map((u)=>u.id === userId ? {
+                        ...u,
+                        is_admin: !currentStatus
+                    } : u));
+        } catch (err) {
+            console.error('Error toggling admin:', err);
+        } finally{
+            setActionLoading(null);
+        }
     };
-    var deleteUser = function deleteUser(userId, email) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var err;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        if (!window.confirm("Delete user ".concat(email, "? This cannot be undone."))) return [
-                            2
-                        ];
-                        setActionLoading(userId);
-                        _state.label = 1;
-                    case 1:
-                        _state.trys.push([
-                            1,
-                            3,
-                            4,
-                            5
-                        ]);
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiDeleteAdminUser"])(userId)
-                        ];
-                    case 2:
-                        _state.sent();
-                        setUsers(function(prev) {
-                            return prev.filter(function(u) {
-                                return u.id !== userId;
-                            });
-                        });
-                        return [
-                            3,
-                            5
-                        ];
-                    case 3:
-                        err = _state.sent();
-                        console.error('Error deleting user:', err);
-                        return [
-                            3,
-                            5
-                        ];
-                    case 4:
-                        setActionLoading(null);
-                        return [
-                            7
-                        ];
-                    case 5:
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const deleteUser = async (userId, email)=>{
+        if (!window.confirm(`Delete user ${email}? This cannot be undone.`)) return;
+        setActionLoading(userId);
+        try {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiDeleteAdminUser"])(userId);
+            setUsers((prev)=>prev.filter((u)=>u.id !== userId));
+        } catch (err) {
+            console.error('Error deleting user:', err);
+        } finally{
+            setActionLoading(null);
+        }
     };
-    var filtered = users.filter(function(u) {
-        var _u_name, _u_email;
-        return ((_u_name = u.name) === null || _u_name === void 0 ? void 0 : _u_name.toLowerCase().includes(search.toLowerCase())) || ((_u_email = u.email) === null || _u_email === void 0 ? void 0 : _u_email.toLowerCase().includes(search.toLowerCase()));
-    });
+    const filtered = users.filter((u)=>u.name?.toLowerCase().includes(search.toLowerCase()) || u.email?.toLowerCase().includes(search.toLowerCase()));
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         "data-testid": "admin-panel",
         className: "min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50",
@@ -7362,9 +6614,7 @@ function AdminPanel(param) {
                                 "data-testid": "admin-search-input",
                                 type: "text",
                                 value: search,
-                                onChange: function onChange(e) {
-                                    return setSearch(e.target.value);
-                                },
+                                onChange: (e)=>setSearch(e.target.value),
                                 placeholder: "Search users by name or email...",
                                 className: "w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500 shadow-sm"
                             }, void 0, false, {
@@ -7455,9 +6705,8 @@ function AdminPanel(param) {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
                                         children: [
-                                            filtered.map(function(u) {
-                                                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
-                                                    "data-testid": "admin-user-row-".concat(u.id),
+                                            filtered.map((u)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                                    "data-testid": `admin-user-row-${u.id}`,
                                                     className: "border-b border-slate-50 hover:bg-blue-50/30 transition-colors",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -7470,7 +6719,7 @@ function AdminPanel(param) {
                                                                     fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                                     lineNumber: 106,
                                                                     columnNumber: 25
-                                                                }, _this),
+                                                                }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                                     className: "text-xs text-slate-500",
                                                                     children: u.email
@@ -7478,13 +6727,13 @@ function AdminPanel(param) {
                                                                     fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                                     lineNumber: 107,
                                                                     columnNumber: 25
-                                                                }, _this)
+                                                                }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                             lineNumber: 105,
                                                             columnNumber: 23
-                                                        }, _this),
+                                                        }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                             className: "px-4 py-3",
                                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -7494,12 +6743,12 @@ function AdminPanel(param) {
                                                                 fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                                 lineNumber: 109,
                                                                 columnNumber: 49
-                                                            }, _this)
+                                                            }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                             lineNumber: 109,
                                                             columnNumber: 23
-                                                        }, _this),
+                                                        }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                             className: "px-4 py-3 text-sm text-slate-500",
                                                             children: u.created_at ? new Date(u.created_at).toLocaleDateString() : '—'
@@ -7507,7 +6756,7 @@ function AdminPanel(param) {
                                                             fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                             lineNumber: 110,
                                                             columnNumber: 23
-                                                        }, _this),
+                                                        }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                             className: "px-4 py-3",
                                                             children: u.is_admin ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -7519,38 +6768,36 @@ function AdminPanel(param) {
                                                                         fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                                         lineNumber: 113,
                                                                         columnNumber: 147
-                                                                    }, _this),
+                                                                    }, this),
                                                                     " Admin"
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                                 lineNumber: 113,
                                                                 columnNumber: 27
-                                                            }, _this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                 className: "text-xs text-slate-400",
                                                                 children: "User"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                                 lineNumber: 114,
                                                                 columnNumber: 30
-                                                            }, _this)
+                                                            }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                             lineNumber: 111,
                                                             columnNumber: 23
-                                                        }, _this),
+                                                        }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                             className: "px-4 py-3",
                                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                 className: "flex items-center justify-end gap-1",
                                                                 children: [
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                                        "data-testid": "toggle-admin-".concat(u.id),
-                                                                        onClick: function onClick() {
-                                                                            return toggleAdmin(u.id, u.is_admin);
-                                                                        },
+                                                                        "data-testid": `toggle-admin-${u.id}`,
+                                                                        onClick: ()=>toggleAdmin(u.id, u.is_admin),
                                                                         disabled: actionLoading === u.id,
-                                                                        className: "p-1.5 rounded-lg transition-colors disabled:opacity-50 ".concat(u.is_admin ? 'text-blue-600 hover:bg-blue-50' : 'text-slate-400 hover:text-blue-600 hover:bg-blue-50'),
+                                                                        className: `p-1.5 rounded-lg transition-colors disabled:opacity-50 ${u.is_admin ? 'text-blue-600 hover:bg-blue-50' : 'text-slate-400 hover:text-blue-600 hover:bg-blue-50'}`,
                                                                         title: u.is_admin ? 'Remove admin' : 'Make admin',
                                                                         children: u.is_admin ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shield$2d$off$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ShieldOff$3e$__["ShieldOff"], {
                                                                             className: "w-4 h-4"
@@ -7558,23 +6805,21 @@ function AdminPanel(param) {
                                                                             fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                                             lineNumber: 121,
                                                                             columnNumber: 43
-                                                                        }, _this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shield$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Shield$3e$__["Shield"], {
+                                                                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shield$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Shield$3e$__["Shield"], {
                                                                             className: "w-4 h-4"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                                             lineNumber: 121,
                                                                             columnNumber: 79
-                                                                        }, _this)
+                                                                        }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                                         lineNumber: 118,
                                                                         columnNumber: 27
-                                                                    }, _this),
+                                                                    }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                                        "data-testid": "delete-user-".concat(u.id),
-                                                                        onClick: function onClick() {
-                                                                            return deleteUser(u.id, u.email);
-                                                                        },
+                                                                        "data-testid": `delete-user-${u.id}`,
+                                                                        onClick: ()=>deleteUser(u.id, u.email),
                                                                         disabled: actionLoading === u.id,
                                                                         className: "p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50",
                                                                         title: "Delete user",
@@ -7584,30 +6829,29 @@ function AdminPanel(param) {
                                                                             fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                                             lineNumber: 125,
                                                                             columnNumber: 29
-                                                                        }, _this)
+                                                                        }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                                         lineNumber: 123,
                                                                         columnNumber: 27
-                                                                    }, _this)
+                                                                    }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                                 lineNumber: 117,
                                                                 columnNumber: 25
-                                                            }, _this)
+                                                            }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                             lineNumber: 116,
                                                             columnNumber: 23
-                                                        }, _this)
+                                                        }, this)
                                                     ]
                                                 }, u.id, true, {
                                                     fileName: "[project]/frontend/src/components/AdminPanel.js",
                                                     lineNumber: 104,
                                                     columnNumber: 21
-                                                }, _this);
-                                            }),
+                                                }, this)),
                                             filtered.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                     colSpan: 5,
@@ -7671,7 +6915,7 @@ _s(AdminPanel, "arsdOtD8yx1MyoEYQzLILFHw2oY=");
 _c = AdminPanel;
 var _c;
 __turbopack_context__.k.register(_c, "AdminPanel");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -7682,13 +6926,6 @@ __turbopack_context__.s([
     "RecurringManager",
     ()=>RecurringManager
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_async_to_generator.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread_props.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/tslib/tslib.es6.mjs [app-client] (ecmascript) <export __generator as _>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/lib/api.js [app-client] (ecmascript)");
@@ -7703,100 +6940,52 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$save$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Save$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/save.js [app-client] (ecmascript) <export default as Save>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$x$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__X$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/x.js [app-client] (ecmascript) <export default as X>");
 ;
-;
-;
-;
-;
-;
-;
-;
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
 ;
 ;
-function RecurringManager(param) {
-    var _this = this;
-    var baseCurrency = param.baseCurrency, onBack = param.onBack;
+function RecurringManager({ baseCurrency, onBack }) {
     _s();
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]), 2), recurring = _useState[0], setRecurring = _useState[1];
-    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true), 2), loading = _useState1[0], setLoading = _useState1[1];
-    var _useState2 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null), 2), editingId = _useState2[0], setEditingId = _useState2[1];
-    var _useState3 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({}), 2), editForm = _useState3[0], setEditForm = _useState3[1];
-    var fetchRecurring = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "RecurringManager.useCallback[fetchRecurring]": function() {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
-                "RecurringManager.useCallback[fetchRecurring]": function() {
-                    var data, uniqueMap, sorted, err;
-                    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, {
-                        "RecurringManager.useCallback[fetchRecurring]": function(_state) {
-                            switch(_state.label){
-                                case 0:
-                                    setLoading(true);
-                                    _state.label = 1;
-                                case 1:
-                                    _state.trys.push([
-                                        1,
-                                        3,
-                                        4,
-                                        5
-                                    ]);
-                                    return [
-                                        4,
-                                        (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiGetRecurringTransactions"])()
-                                    ];
-                                case 2:
-                                    data = _state.sent();
-                                    // Deduplicate: keep earliest entry per description+type+frequency
-                                    uniqueMap = new Map();
-                                    sorted = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(data || []).sort({
-                                        "RecurringManager.useCallback[fetchRecurring]": function(a, b) {
-                                            return new Date(a.date) - new Date(b.date);
-                                        }
-                                    }["RecurringManager.useCallback[fetchRecurring]"]);
-                                    sorted.forEach({
-                                        "RecurringManager.useCallback[fetchRecurring]": function(t) {
-                                            var key = "".concat(t.description, "|").concat(t.type, "|").concat(t.recurring_frequency);
-                                            if (!uniqueMap.has(key)) uniqueMap.set(key, t);
-                                        }
-                                    }["RecurringManager.useCallback[fetchRecurring]"]);
-                                    setRecurring(Array.from(uniqueMap.values()));
-                                    return [
-                                        3,
-                                        5
-                                    ];
-                                case 3:
-                                    err = _state.sent();
-                                    console.error('Error:', err);
-                                    return [
-                                        3,
-                                        5
-                                    ];
-                                case 4:
-                                    setLoading(false);
-                                    return [
-                                        7
-                                    ];
-                                case 5:
-                                    return [
-                                        2
-                                    ];
-                            }
-                        }
-                    }["RecurringManager.useCallback[fetchRecurring]"]);
-                }
-            }["RecurringManager.useCallback[fetchRecurring]"])();
+    const [recurring, setRecurring] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
+    const [editingId, setEditingId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [editForm, setEditForm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({});
+    const fetchRecurring = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "RecurringManager.useCallback[fetchRecurring]": async ()=>{
+            setLoading(true);
+            try {
+                const data = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiGetRecurringTransactions"])();
+                // Deduplicate: keep earliest entry per description+type+frequency
+                const uniqueMap = new Map();
+                const sorted = [
+                    ...data || []
+                ].sort({
+                    "RecurringManager.useCallback[fetchRecurring].sorted": (a, b)=>new Date(a.date) - new Date(b.date)
+                }["RecurringManager.useCallback[fetchRecurring].sorted"]);
+                sorted.forEach({
+                    "RecurringManager.useCallback[fetchRecurring]": (t)=>{
+                        const key = `${t.description}|${t.type}|${t.recurring_frequency}`;
+                        if (!uniqueMap.has(key)) uniqueMap.set(key, t);
+                    }
+                }["RecurringManager.useCallback[fetchRecurring]"]);
+                setRecurring(Array.from(uniqueMap.values()));
+            } catch (err) {
+                console.error('Error:', err);
+            } finally{
+                setLoading(false);
+            }
         }
     }["RecurringManager.useCallback[fetchRecurring]"], []);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "RecurringManager.useEffect": function() {
+        "RecurringManager.useEffect": ()=>{
             fetchRecurring();
         }
     }["RecurringManager.useEffect"], [
         fetchRecurring
     ]);
-    var startEdit = function startEdit(t) {
+    const startEdit = (t)=>{
         setEditingId(t.id);
         setEditForm({
             description: t.description,
@@ -7806,173 +6995,64 @@ function RecurringManager(param) {
             recipient_name: t.recipient_name || ''
         });
     };
-    var saveEdit = function saveEdit(t) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var err;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        _state.trys.push([
-                            0,
-                            3,
-                            ,
-                            4
-                        ]);
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiBulkUpdateRecurring"])(t.description, t.type, {
-                                description: editForm.description,
-                                amount: Number(editForm.amount),
-                                recurring_frequency: editForm.recurring_frequency,
-                                recurring_end_date: editForm.recurring_end_date || null,
-                                recipient_name: editForm.recipient_name || null
-                            })
-                        ];
-                    case 1:
-                        _state.sent();
-                        setEditingId(null);
-                        return [
-                            4,
-                            fetchRecurring()
-                        ];
-                    case 2:
-                        _state.sent();
-                        return [
-                            3,
-                            4
-                        ];
-                    case 3:
-                        err = _state.sent();
-                        console.error('Error:', err);
-                        return [
-                            3,
-                            4
-                        ];
-                    case 4:
-                        return [
-                            2
-                        ];
-                }
+    const saveEdit = async (t)=>{
+        try {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiBulkUpdateRecurring"])(t.description, t.type, {
+                description: editForm.description,
+                amount: Number(editForm.amount),
+                recurring_frequency: editForm.recurring_frequency,
+                recurring_end_date: editForm.recurring_end_date || null,
+                recipient_name: editForm.recipient_name || null
             });
-        })();
+            setEditingId(null);
+            await fetchRecurring();
+        } catch (err) {
+            console.error('Error:', err);
+        }
     };
-    var deleteRecurring = function deleteRecurring(t) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var err;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        if (!window.confirm('Delete ALL instances of "'.concat(t.description, '" (').concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getRecurringLabel"])(t.recurring_frequency), ")?\n\nThis removes all past and future entries."))) return [
-                            2
-                        ];
-                        _state.label = 1;
-                    case 1:
-                        _state.trys.push([
-                            1,
-                            4,
-                            ,
-                            5
-                        ]);
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiBulkDeleteRecurring"])(t.description, t.type)
-                        ];
-                    case 2:
-                        _state.sent();
-                        return [
-                            4,
-                            fetchRecurring()
-                        ];
-                    case 3:
-                        _state.sent();
-                        return [
-                            3,
-                            5
-                        ];
-                    case 4:
-                        err = _state.sent();
-                        console.error('Error:', err);
-                        return [
-                            3,
-                            5
-                        ];
-                    case 5:
-                        return [
-                            2
-                        ];
-                }
+    const deleteRecurring = async (t)=>{
+        if (!window.confirm(`Delete ALL instances of "${t.description}" (${(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getRecurringLabel"])(t.recurring_frequency)})?\n\nThis removes all past and future entries.`)) return;
+        try {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiBulkDeleteRecurring"])(t.description, t.type);
+            await fetchRecurring();
+        } catch (err) {
+            console.error('Error:', err);
+        }
+    };
+    const stopRecurring = async (t)=>{
+        try {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiBulkUpdateRecurring"])(t.description, t.type, {
+                recurring_end_date: new Date().toISOString().split('T')[0]
             });
-        })();
+            await fetchRecurring();
+        } catch (err) {
+            console.error('Error:', err);
+        }
     };
-    var stopRecurring = function stopRecurring(t) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var err;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        _state.trys.push([
-                            0,
-                            3,
-                            ,
-                            4
-                        ]);
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiBulkUpdateRecurring"])(t.description, t.type, {
-                                recurring_end_date: new Date().toISOString().split('T')[0]
-                            })
-                        ];
-                    case 1:
-                        _state.sent();
-                        return [
-                            4,
-                            fetchRecurring()
-                        ];
-                    case 2:
-                        _state.sent();
-                        return [
-                            3,
-                            4
-                        ];
-                    case 3:
-                        err = _state.sent();
-                        console.error('Error:', err);
-                        return [
-                            3,
-                            4
-                        ];
-                    case 4:
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
-    };
-    var getIcon = function getIcon(type) {
+    const getIcon = (type)=>{
         if (type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trending$2d$up$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__TrendingUp$3e$__["TrendingUp"], {
             className: "w-4 h-4"
         }, void 0, false, {
             fileName: "[project]/frontend/src/components/RecurringManager.js",
             lineNumber: 83,
             columnNumber: 51
-        }, _this);
+        }, this);
         if (type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$heart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Heart$3e$__["Heart"], {
             className: "w-4 h-4"
         }, void 0, false, {
             fileName: "[project]/frontend/src/components/RecurringManager.js",
             lineNumber: 84,
             columnNumber: 49
-        }, _this);
+        }, this);
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$hand$2d$coins$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__HandCoins$3e$__["HandCoins"], {
             className: "w-4 h-4"
         }, void 0, false, {
             fileName: "[project]/frontend/src/components/RecurringManager.js",
             lineNumber: 85,
             columnNumber: 12
-        }, _this);
+        }, this);
     };
-    var getColor = function getColor(type) {
+    const getColor = (type)=>{
         if (type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME) return {
             bg: 'bg-emerald-50',
             text: 'text-emerald-600',
@@ -7992,9 +7072,7 @@ function RecurringManager(param) {
             badge: 'bg-rose-100 text-rose-700'
         };
     };
-    var isExpired = function isExpired(t) {
-        return t.recurring_end_date && new Date(t.recurring_end_date) < new Date();
-    };
+    const isExpired = (t)=>t.recurring_end_date && new Date(t.recurring_end_date) < new Date();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         "data-testid": "recurring-manager",
         className: "space-y-4",
@@ -8044,14 +7122,13 @@ function RecurringManager(param) {
             columnNumber: 9
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "space-y-3",
-            children: recurring.map(function(t) {
-                var _t_amount;
-                var colors = getColor(t.type);
-                var expired = isExpired(t);
-                var editing = editingId === t.id;
+            children: recurring.map((t)=>{
+                const colors = getColor(t.type);
+                const expired = isExpired(t);
+                const editing = editingId === t.id;
                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    "data-testid": "recurring-item-".concat(t.id),
-                    className: "rounded-xl border ".concat(colors.border, " ").concat(colors.bg, " p-4 transition-all ").concat(expired ? 'opacity-60' : ''),
+                    "data-testid": `recurring-item-${t.id}`,
+                    className: `rounded-xl border ${colors.border} ${colors.bg} p-4 transition-all ${expired ? 'opacity-60' : ''}`,
                     children: editing ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "space-y-3",
                         children: [
@@ -8067,29 +7144,26 @@ function RecurringManager(param) {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 119,
                                                 columnNumber: 25
-                                            }, _this),
+                                            }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                 type: "text",
                                                 value: editForm.description,
-                                                onChange: function onChange(e) {
-                                                    return setEditForm(function(prev) {
-                                                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, prev), {
+                                                onChange: (e)=>setEditForm((prev)=>({
+                                                            ...prev,
                                                             description: e.target.value
-                                                        });
-                                                    });
-                                                },
+                                                        })),
                                                 className: "w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 120,
                                                 columnNumber: 25
-                                            }, _this)
+                                            }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                         lineNumber: 118,
                                         columnNumber: 23
-                                    }, _this),
+                                    }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -8099,36 +7173,33 @@ function RecurringManager(param) {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 123,
                                                 columnNumber: 25
-                                            }, _this),
+                                            }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                 type: "number",
                                                 step: "0.01",
                                                 value: editForm.amount,
-                                                onChange: function onChange(e) {
-                                                    return setEditForm(function(prev) {
-                                                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, prev), {
+                                                onChange: (e)=>setEditForm((prev)=>({
+                                                            ...prev,
                                                             amount: e.target.value
-                                                        });
-                                                    });
-                                                },
+                                                        })),
                                                 className: "w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 124,
                                                 columnNumber: 25
-                                            }, _this)
+                                            }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                         lineNumber: 122,
                                         columnNumber: 23
-                                    }, _this)
+                                    }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                 lineNumber: 117,
                                 columnNumber: 21
-                            }, _this),
+                            }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "grid grid-cols-3 gap-3",
                                 children: [
@@ -8141,16 +7212,13 @@ function RecurringManager(param) {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 129,
                                                 columnNumber: 25
-                                            }, _this),
+                                            }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                                 value: editForm.recurring_frequency,
-                                                onChange: function onChange(e) {
-                                                    return setEditForm(function(prev) {
-                                                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, prev), {
+                                                onChange: (e)=>setEditForm((prev)=>({
+                                                            ...prev,
                                                             recurring_frequency: e.target.value
-                                                        });
-                                                    });
-                                                },
+                                                        })),
                                                 className: "w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -8160,7 +7228,7 @@ function RecurringManager(param) {
                                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                         lineNumber: 131,
                                                         columnNumber: 27
-                                                    }, _this),
+                                                    }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         value: "weekly",
                                                         children: "Weekly"
@@ -8168,7 +7236,7 @@ function RecurringManager(param) {
                                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                         lineNumber: 131,
                                                         columnNumber: 63
-                                                    }, _this),
+                                                    }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         value: "biweekly",
                                                         children: "Bi-weekly"
@@ -8176,7 +7244,7 @@ function RecurringManager(param) {
                                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                         lineNumber: 131,
                                                         columnNumber: 101
-                                                    }, _this),
+                                                    }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         value: "monthly",
                                                         children: "Monthly"
@@ -8184,7 +7252,7 @@ function RecurringManager(param) {
                                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                         lineNumber: 131,
                                                         columnNumber: 144
-                                                    }, _this),
+                                                    }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         value: "yearly",
                                                         children: "Yearly"
@@ -8192,19 +7260,19 @@ function RecurringManager(param) {
                                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                         lineNumber: 131,
                                                         columnNumber: 184
-                                                    }, _this)
+                                                    }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 130,
                                                 columnNumber: 25
-                                            }, _this)
+                                            }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                         lineNumber: 128,
                                         columnNumber: 23
-                                    }, _this),
+                                    }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -8214,29 +7282,26 @@ function RecurringManager(param) {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 135,
                                                 columnNumber: 25
-                                            }, _this),
+                                            }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                 type: "date",
                                                 value: editForm.recurring_end_date,
-                                                onChange: function onChange(e) {
-                                                    return setEditForm(function(prev) {
-                                                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, prev), {
+                                                onChange: (e)=>setEditForm((prev)=>({
+                                                            ...prev,
                                                             recurring_end_date: e.target.value
-                                                        });
-                                                    });
-                                                },
+                                                        })),
                                                 className: "w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 136,
                                                 columnNumber: 25
-                                            }, _this)
+                                            }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                         lineNumber: 134,
                                         columnNumber: 23
-                                    }, _this),
+                                    }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -8246,42 +7311,37 @@ function RecurringManager(param) {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 139,
                                                 columnNumber: 25
-                                            }, _this),
+                                            }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                 type: "text",
                                                 value: editForm.recipient_name,
-                                                onChange: function onChange(e) {
-                                                    return setEditForm(function(prev) {
-                                                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, prev), {
+                                                onChange: (e)=>setEditForm((prev)=>({
+                                                            ...prev,
                                                             recipient_name: e.target.value
-                                                        });
-                                                    });
-                                                },
+                                                        })),
                                                 className: "w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 140,
                                                 columnNumber: 25
-                                            }, _this)
+                                            }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                         lineNumber: 138,
                                         columnNumber: 23
-                                    }, _this)
+                                    }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                 lineNumber: 127,
                                 columnNumber: 21
-                            }, _this),
+                            }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex gap-2 justify-end",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                        onClick: function onClick() {
-                                            return setEditingId(null);
-                                        },
+                                        onClick: ()=>setEditingId(null),
                                         className: "px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg transition-colors flex items-center gap-1",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$x$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__X$3e$__["X"], {
@@ -8290,18 +7350,16 @@ function RecurringManager(param) {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 144,
                                                 columnNumber: 185
-                                            }, _this),
+                                            }, this),
                                             " Cancel"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                         lineNumber: 144,
                                         columnNumber: 23
-                                    }, _this),
+                                    }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                        onClick: function onClick() {
-                                            return saveEdit(t);
-                                        },
+                                        onClick: ()=>saveEdit(t),
                                         className: "px-3 py-1.5 text-sm bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors flex items-center gap-1",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$save$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Save$3e$__["Save"], {
@@ -8310,39 +7368,39 @@ function RecurringManager(param) {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 145,
                                                 columnNumber: 185
-                                            }, _this),
+                                            }, this),
                                             " Save"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                         lineNumber: 145,
                                         columnNumber: 23
-                                    }, _this)
+                                    }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                 lineNumber: 143,
                                 columnNumber: 21
-                            }, _this)
+                            }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                         lineNumber: 116,
                         columnNumber: 19
-                    }, _this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex items-center justify-between",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex items-center gap-3",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "p-2 rounded-lg ".concat(colors.badge),
+                                        className: `p-2 rounded-lg ${colors.badge}`,
                                         children: getIcon(t.type)
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                         lineNumber: 151,
                                         columnNumber: 23
-                                    }, _this),
+                                    }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -8355,21 +7413,21 @@ function RecurringManager(param) {
                                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                         lineNumber: 154,
                                                         columnNumber: 27
-                                                    }, _this),
+                                                    }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "text-xs font-medium px-2 py-0.5 rounded-full ".concat(colors.badge),
+                                                        className: `text-xs font-medium px-2 py-0.5 rounded-full ${colors.badge}`,
                                                         children: t.type
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                         lineNumber: 155,
                                                         columnNumber: 27
-                                                    }, _this)
+                                                    }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 153,
                                                 columnNumber: 25
-                                            }, _this),
+                                            }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "flex items-center gap-3 mt-1 text-xs text-slate-500",
                                                 children: [
@@ -8382,14 +7440,14 @@ function RecurringManager(param) {
                                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                                 lineNumber: 158,
                                                                 columnNumber: 69
-                                                            }, _this),
+                                                            }, this),
                                                             (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getRecurringLabel"])(t.recurring_frequency)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                         lineNumber: 158,
                                                         columnNumber: 27
-                                                    }, _this),
+                                                    }, this),
                                                     t.recipient_name && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         children: [
                                                             "To: ",
@@ -8399,7 +7457,7 @@ function RecurringManager(param) {
                                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                         lineNumber: 159,
                                                         columnNumber: 48
-                                                    }, _this),
+                                                    }, this),
                                                     t.recurring_end_date && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: "flex items-center gap-1",
                                                         children: [
@@ -8409,7 +7467,7 @@ function RecurringManager(param) {
                                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                                 lineNumber: 160,
                                                                 columnNumber: 94
-                                                            }, _this),
+                                                            }, this),
                                                             "Ends: ",
                                                             new Date(t.recurring_end_date).toLocaleDateString()
                                                         ]
@@ -8417,7 +7475,7 @@ function RecurringManager(param) {
                                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                         lineNumber: 160,
                                                         columnNumber: 52
-                                                    }, _this),
+                                                    }, this),
                                                     expired && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: "text-amber-600 font-medium",
                                                         children: "Expired"
@@ -8425,47 +7483,45 @@ function RecurringManager(param) {
                                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                         lineNumber: 161,
                                                         columnNumber: 39
-                                                    }, _this)
+                                                    }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 157,
                                                 columnNumber: 25
-                                            }, _this)
+                                            }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                         lineNumber: 152,
                                         columnNumber: 23
-                                    }, _this)
+                                    }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                 lineNumber: 150,
                                 columnNumber: 21
-                            }, _this),
+                            }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex items-center gap-3",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                        className: "font-bold ".concat(colors.text, " text-lg"),
+                                        className: `font-bold ${colors.text} text-lg`,
                                         children: [
                                             (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(t.currency || baseCurrency),
-                                            (_t_amount = t.amount) === null || _t_amount === void 0 ? void 0 : _t_amount.toLocaleString()
+                                            t.amount?.toLocaleString()
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                         lineNumber: 166,
                                         columnNumber: 23
-                                    }, _this),
+                                    }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "flex gap-1",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                "data-testid": "edit-recurring-".concat(t.id),
-                                                onClick: function onClick() {
-                                                    return startEdit(t);
-                                                },
+                                                "data-testid": `edit-recurring-${t.id}`,
+                                                onClick: ()=>startEdit(t),
                                                 className: "p-1.5 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition-colors",
                                                 title: "Edit",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pencil$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Pencil$3e$__["Pencil"], {
@@ -8474,17 +7530,15 @@ function RecurringManager(param) {
                                                     fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                     lineNumber: 168,
                                                     columnNumber: 211
-                                                }, _this)
+                                                }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 168,
                                                 columnNumber: 25
-                                            }, _this),
+                                            }, this),
                                             !expired && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                "data-testid": "stop-recurring-".concat(t.id),
-                                                onClick: function onClick() {
-                                                    return stopRecurring(t);
-                                                },
+                                                "data-testid": `stop-recurring-${t.id}`,
+                                                onClick: ()=>stopRecurring(t),
                                                 className: "p-1.5 text-slate-400 hover:text-amber-600 hover:bg-white rounded-lg transition-colors",
                                                 title: "Stop",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$x$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__X$3e$__["X"], {
@@ -8493,17 +7547,15 @@ function RecurringManager(param) {
                                                     fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                     lineNumber: 169,
                                                     columnNumber: 229
-                                                }, _this)
+                                                }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 169,
                                                 columnNumber: 38
-                                            }, _this),
+                                            }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                "data-testid": "delete-recurring-".concat(t.id),
-                                                onClick: function onClick() {
-                                                    return deleteRecurring(t);
-                                                },
+                                                "data-testid": `delete-recurring-${t.id}`,
+                                                onClick: ()=>deleteRecurring(t),
                                                 className: "p-1.5 text-slate-400 hover:text-red-600 hover:bg-white rounded-lg transition-colors",
                                                 title: "Delete all",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__["Trash2"], {
@@ -8512,35 +7564,35 @@ function RecurringManager(param) {
                                                     fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                     lineNumber: 170,
                                                     columnNumber: 224
-                                                }, _this)
+                                                }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                                 lineNumber: 170,
                                                 columnNumber: 25
-                                            }, _this)
+                                            }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                                         lineNumber: 167,
                                         columnNumber: 23
-                                    }, _this)
+                                    }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/frontend/src/components/RecurringManager.js",
                                 lineNumber: 165,
                                 columnNumber: 21
-                            }, _this)
+                            }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/src/components/RecurringManager.js",
                         lineNumber: 149,
                         columnNumber: 19
-                    }, _this)
+                    }, this)
                 }, t.id, false, {
                     fileName: "[project]/frontend/src/components/RecurringManager.js",
                     lineNumber: 114,
                     columnNumber: 15
-                }, _this);
+                }, this);
             })
         }, void 0, false, {
             fileName: "[project]/frontend/src/components/RecurringManager.js",
@@ -8557,7 +7609,7 @@ _s(RecurringManager, "voLSBhUneJ1VOW56inYJx5nZ1cg=");
 _c = RecurringManager;
 var _c;
 __turbopack_context__.k.register(_c, "RecurringManager");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -8568,7 +7620,6 @@ __turbopack_context__.s([
     "Insights",
     ()=>Insights
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trending$2d$up$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__TrendingUp$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/trending-up.js [app-client] (ecmascript) <export default as TrendingUp>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trending$2d$down$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__TrendingDown$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/trending-down.js [app-client] (ecmascript) <export default as TrendingDown>");
@@ -8577,13 +7628,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 'use client';
 ;
 ;
-;
 function pctChange(current, previous) {
     if (previous === 0) return current > 0 ? 100 : 0;
     return (current - previous) / previous * 100;
 }
-function TrendBadge(param) {
-    var value = param.value, _param_invert = param.invert, invert = _param_invert === void 0 ? false : _param_invert;
+function TrendBadge({ value, invert = false }) {
     if (Math.abs(value) < 0.5) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
         className: "inline-flex items-center gap-0.5 text-[11px] text-slate-400 font-medium",
         children: [
@@ -8601,10 +7650,10 @@ function TrendBadge(param) {
         lineNumber: 11,
         columnNumber: 37
     }, this);
-    var up = value > 0;
-    var positive = invert ? !up : up;
+    const up = value > 0;
+    const positive = invert ? !up : up;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-        className: "inline-flex items-center gap-0.5 text-[11px] font-semibold ".concat(positive ? 'text-emerald-600' : 'text-red-500'),
+        className: `inline-flex items-center gap-0.5 text-[11px] font-semibold ${positive ? 'text-emerald-600' : 'text-red-500'}`,
         children: [
             up ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trending$2d$up$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__TrendingUp$3e$__["TrendingUp"], {
                 className: "w-3 h-3"
@@ -8629,33 +7678,31 @@ function TrendBadge(param) {
     }, this);
 }
 _c = TrendBadge;
-function Insights(param) {
-    var _this = this;
-    var currentStats = param.currentStats, previousStats = param.previousStats, isGiveOnly = param.isGiveOnly, periodLabel = param.periodLabel, hasCurrentData = param.hasCurrentData, hasPreviousData = param.hasPreviousData, isAllTime = param.isAllTime;
+function Insights({ currentStats, previousStats, isGiveOnly, periodLabel, hasCurrentData, hasPreviousData, isAllTime }) {
     if (isAllTime) return null;
     if (!hasPreviousData && !hasCurrentData) return null;
     if (!hasPreviousData) return null; // first period — nothing to compare
-    var insights = [];
-    var cur = currentStats;
-    var prev = previousStats;
+    const insights = [];
+    const cur = currentStats;
+    const prev = previousStats;
     // Income insight
     if (prev.totalIncome > 0 || cur.totalIncome > 0) {
-        var change = pctChange(cur.totalIncome, prev.totalIncome);
+        const change = pctChange(cur.totalIncome, prev.totalIncome);
         if (!hasCurrentData) {
             insights.push({
-                text: "No income recorded yet this ".concat(periodLabel.toLowerCase()),
+                text: `No income recorded yet this ${periodLabel.toLowerCase()}`,
                 trend: null,
                 key: 'income-quiet'
             });
         } else if (prev.totalIncome === 0) {
             insights.push({
-                text: "First ".concat(periodLabel.toLowerCase(), " with income tracked"),
+                text: `First ${periodLabel.toLowerCase()} with income tracked`,
                 trend: null,
                 key: 'income-first'
             });
         } else {
-            var dir = change > 1 ? 'up' : change < -1 ? 'down' : 'steady';
-            var msg = dir === 'up' ? "Income is up vs last ".concat(periodLabel.toLowerCase()) : dir === 'down' ? "Income is down vs last ".concat(periodLabel.toLowerCase()) : "Income is holding steady";
+            const dir = change > 1 ? 'up' : change < -1 ? 'down' : 'steady';
+            const msg = dir === 'up' ? `Income is up vs last ${periodLabel.toLowerCase()}` : dir === 'down' ? `Income is down vs last ${periodLabel.toLowerCase()}` : `Income is holding steady`;
             insights.push({
                 text: msg,
                 trend: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(TrendBadge, {
@@ -8671,14 +7718,14 @@ function Insights(param) {
     }
     // Giving insight
     if (prev.totalGiven > 0 || cur.totalGiven > 0) {
-        var change1 = pctChange(cur.totalGiven, prev.totalGiven);
+        const change = pctChange(cur.totalGiven, prev.totalGiven);
         if (hasCurrentData && cur.totalGiven > 0 && prev.totalGiven > 0) {
-            var dir1 = change1 > 1 ? 'up' : change1 < -1 ? 'down' : 'steady';
-            var msg1 = dir1 === 'up' ? 'Giving has increased' : dir1 === 'down' ? 'Giving has decreased' : 'Giving is consistent';
+            const dir = change > 1 ? 'up' : change < -1 ? 'down' : 'steady';
+            const msg = dir === 'up' ? 'Giving has increased' : dir === 'down' ? 'Giving has decreased' : 'Giving is consistent';
             insights.push({
-                text: msg1,
+                text: msg,
                 trend: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(TrendBadge, {
-                    value: change1
+                    value: change
                 }, void 0, false, {
                     fileName: "[project]/frontend/src/components/Insights.js",
                     lineNumber: 56,
@@ -8694,7 +7741,7 @@ function Insights(param) {
             });
         } else if (hasCurrentData && cur.totalGiven === 0 && prev.totalGiven > 0) {
             insights.push({
-                text: "No giving yet — last ".concat(periodLabel.toLowerCase(), " you gave"),
+                text: `No giving yet — last ${periodLabel.toLowerCase()} you gave`,
                 trend: null,
                 key: 'give-none'
             });
@@ -8702,14 +7749,14 @@ function Insights(param) {
     }
     // Lending insight (give+lend mode only)
     if (!isGiveOnly && (prev.totalLent > 0 || cur.totalLent > 0)) {
-        var change2 = pctChange(cur.totalLent, prev.totalLent);
+        const change = pctChange(cur.totalLent, prev.totalLent);
         if (hasCurrentData && cur.totalLent > 0 && prev.totalLent > 0) {
-            var dir2 = change2 > 1 ? 'up' : change2 < -1 ? 'down' : 'steady';
-            var msg2 = dir2 === 'up' ? 'Lending has increased' : dir2 === 'down' ? 'Lending has decreased' : 'Lending is consistent';
+            const dir = change > 1 ? 'up' : change < -1 ? 'down' : 'steady';
+            const msg = dir === 'up' ? 'Lending has increased' : dir === 'down' ? 'Lending has decreased' : 'Lending is consistent';
             insights.push({
-                text: msg2,
+                text: msg,
                 trend: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(TrendBadge, {
-                    value: change2
+                    value: change
                 }, void 0, false, {
                     fileName: "[project]/frontend/src/components/Insights.js",
                     lineNumber: 72,
@@ -8727,16 +7774,16 @@ function Insights(param) {
     }
     // Maaser fulfillment insight
     if (hasCurrentData && cur.totalMaaser > 0) {
-        var fulfilled = (cur.totalGiven + (isGiveOnly ? 0 : cur.totalLent)) / cur.totalMaaser * 100;
+        const fulfilled = (cur.totalGiven + (isGiveOnly ? 0 : cur.totalLent)) / cur.totalMaaser * 100;
         if (fulfilled >= 100) {
             insights.push({
-                text: "Maaser fully covered this ".concat(periodLabel.toLowerCase()),
+                text: `Maaser fully covered this ${periodLabel.toLowerCase()}`,
                 trend: null,
                 key: 'maaser-done'
             });
         } else if (fulfilled >= 50) {
             insights.push({
-                text: "".concat(fulfilled.toFixed(0), "% of this ").concat(periodLabel.toLowerCase(), "'s maaser distributed"),
+                text: `${fulfilled.toFixed(0)}% of this ${periodLabel.toLowerCase()}'s maaser distributed`,
                 trend: null,
                 key: 'maaser-partial'
             });
@@ -8745,7 +7792,7 @@ function Insights(param) {
     // Quiet period fallback
     if (!hasCurrentData && hasPreviousData) {
         insights.push({
-            text: "Quiet ".concat(periodLabel.toLowerCase(), " so far — last ").concat(periodLabel.toLowerCase(), " had activity"),
+            text: `Quiet ${periodLabel.toLowerCase()} so far — last ${periodLabel.toLowerCase()} had activity`,
             trend: null,
             key: 'quiet'
         });
@@ -8781,8 +7828,7 @@ function Insights(param) {
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex flex-wrap gap-x-6 gap-y-2",
-                children: insights.map(function(i) {
-                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                children: insights.map((i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex items-center gap-2 text-sm text-slate-600",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -8791,15 +7837,14 @@ function Insights(param) {
                                 fileName: "[project]/frontend/src/components/Insights.js",
                                 lineNumber: 104,
                                 columnNumber: 13
-                            }, _this),
+                            }, this),
                             i.trend
                         ]
                     }, i.key, true, {
                         fileName: "[project]/frontend/src/components/Insights.js",
                         lineNumber: 103,
                         columnNumber: 11
-                    }, _this);
-                })
+                    }, this))
             }, void 0, false, {
                 fileName: "[project]/frontend/src/components/Insights.js",
                 lineNumber: 101,
@@ -8816,7 +7861,7 @@ _c1 = Insights;
 var _c, _c1;
 __turbopack_context__.k.register(_c, "TrendBadge");
 __turbopack_context__.k.register(_c1, "Insights");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -8827,13 +7872,6 @@ __turbopack_context__.s([
     "Dashboard",
     ()=>Dashboard
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_async_to_generator.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_object_spread_props.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/tslib/tslib.es6.mjs [app-client] (ecmascript) <export __generator as _>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$auth$2d$context$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/lib/auth-context.js [app-client] (ecmascript)");
@@ -8861,13 +7899,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shield$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Shield$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/shield.js [app-client] (ecmascript) <export default as Shield>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$repeat$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Repeat$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/lucide-react/dist/esm/icons/repeat.js [app-client] (ecmascript) <export default as Repeat>");
 ;
-;
-;
-;
-;
-;
-;
-;
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
@@ -8888,43 +7919,41 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-var VIEW_MODES = {
+const VIEW_MODES = {
     ALL_TIME: 'all_time',
     YEAR: 'year',
     MONTH: 'month'
 };
 // Timezone-safe: format Date to "YYYY-MM-DD" using local time
 function dateToStr(d) {
-    return "".concat(d.getFullYear(), "-").concat(String(d.getMonth() + 1).padStart(2, '0'), "-").concat(String(d.getDate()).padStart(2, '0'));
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 // Get transaction date as "YYYY-MM-DD" string
 function txnDateStr(t) {
     return (t.date || '').split('T')[0];
 }
 function Dashboard() {
-    var _this = this;
-    var _ref, _ref1, _ref2, _ref3, _ref4;
     _s();
-    var _useAuth = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$auth$2d$context$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"])(), user = _useAuth.user, signOut = _useAuth.signOut, updateUser = _useAuth.updateUser;
-    var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]), 2), allTransactions = _useState[0], setAllTransactions = _useState[1];
-    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]), 2), filteredTransactions = _useState1[0], setFilteredTransactions = _useState1[1];
-    var _useState2 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true), 2), loading = _useState2[0], setLoading = _useState2[1];
-    var _useState3 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), showModal = _useState3[0], setShowModal = _useState3[1];
-    var _useState4 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null), 2), editTransaction = _useState4[0], setEditTransaction = _useState4[1];
-    var _useState5 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), showSettings = _useState5[0], setShowSettings = _useState5[1];
-    var _useState6 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), processingRecurring = _useState6[0], setProcessingRecurring = _useState6[1];
-    var _useState7 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), showCharts = _useState7[0], setShowCharts = _useState7[1];
-    var _useState8 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), showContact = _useState8[0], setShowContact = _useState8[1];
-    var _useState9 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), showAdmin = _useState9[0], setShowAdmin = _useState9[1];
-    var _useState10 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), showRecurring = _useState10[0], setShowRecurring = _useState10[1];
-    var _useState11 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((user === null || user === void 0 ? void 0 : user.default_view) || VIEW_MODES.MONTH), 2), viewMode = _useState11[0], setViewMode = _useState11[1];
-    var _useState12 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((user === null || user === void 0 ? void 0 : user.use_hebrew_calendar) || false), 2), useHebrewDates = _useState12[0], setUseHebrewDates = _useState12[1];
-    var currentHebrew = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrentHebrewMonth"])();
-    var currentGregorian = new Date();
-    var _useState13 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(useHebrewDates ? currentHebrew.month : currentGregorian.getMonth() + 1), 2), selectedMonth = _useState13[0], setSelectedMonth = _useState13[1];
-    var _useState14 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(useHebrewDates ? currentHebrew.year : currentGregorian.getFullYear()), 2), selectedYear = _useState14[0], setSelectedYear = _useState14[1];
-    var _useState15 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(''), 2), searchQuery = _useState15[0], setSearchQuery = _useState15[1];
-    var _useState16 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+    const { user, signOut, updateUser } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$auth$2d$context$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"])();
+    const [allTransactions, setAllTransactions] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [filteredTransactions, setFilteredTransactions] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
+    const [showModal, setShowModal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [editTransaction, setEditTransaction] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [showSettings, setShowSettings] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [processingRecurring, setProcessingRecurring] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [showCharts, setShowCharts] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [showContact, setShowContact] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [showAdmin, setShowAdmin] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [showRecurring, setShowRecurring] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [viewMode, setViewMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(user?.default_view || VIEW_MODES.MONTH);
+    const [useHebrewDates, setUseHebrewDates] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(user?.use_hebrew_calendar || false);
+    const currentHebrew = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrentHebrewMonth"])();
+    const currentGregorian = new Date();
+    const [selectedMonth, setSelectedMonth] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(useHebrewDates ? currentHebrew.month : currentGregorian.getMonth() + 1);
+    const [selectedYear, setSelectedYear] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(useHebrewDates ? currentHebrew.year : currentGregorian.getFullYear());
+    const [searchQuery, setSearchQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const [filters, setFilters] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
         types: [],
         dateFrom: '',
         dateTo: '',
@@ -8932,45 +7961,48 @@ function Dashboard() {
         amountMax: '',
         isRecurring: null,
         recipient: ''
-    }), 2), filters = _useState16[0], setFilters = _useState16[1];
+    });
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "Dashboard.useEffect": function() {
+        "Dashboard.useEffect": ()=>{
             if (user) {
                 setViewMode(user.default_view || VIEW_MODES.MONTH);
                 setUseHebrewDates(user.use_hebrew_calendar || false);
             }
         }
     }["Dashboard.useEffect"], [
-        user === null || user === void 0 ? void 0 : user.default_view,
-        user === null || user === void 0 ? void 0 : user.use_hebrew_calendar
+        user?.default_view,
+        user?.use_hebrew_calendar
     ]);
     // --- Stats calculations with new Give/Lend split ---
-    var isGiveOnly = (user === null || user === void 0 ? void 0 : user.distribution_mode) === 'give_only';
-    var giveRatio = ((_ref = user === null || user === void 0 ? void 0 : user.give_ratio) !== null && _ref !== void 0 ? _ref : 50) / 100;
-    var lendRatio = ((_ref1 = user === null || user === void 0 ? void 0 : user.lend_ratio) !== null && _ref1 !== void 0 ? _ref1 : 50) / 100;
-    var allTimeStats = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "Dashboard.useMemo[allTimeStats]": function() {
-            var baseCurrency = (user === null || user === void 0 ? void 0 : user.base_currency) || 'USD';
+    const isGiveOnly = user?.distribution_mode === 'give_only';
+    const giveRatio = (user?.give_ratio ?? 50) / 100;
+    const lendRatio = (user?.lend_ratio ?? 50) / 100;
+    const allTimeStats = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "Dashboard.useMemo[allTimeStats]": ()=>{
+            const baseCurrency = user?.base_currency || 'USD';
             return allTransactions.reduce({
-                "Dashboard.useMemo[allTimeStats]": function(acc, t) {
-                    var norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
+                "Dashboard.useMemo[allTimeStats]": (acc, t)=>{
+                    const norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
                     if (t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME) {
-                        var maaser = norm * ((t.maaser_percentage || 10) / 100);
-                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, acc), {
+                        const maaser = norm * ((t.maaser_percentage || 10) / 100);
+                        return {
+                            ...acc,
                             totalIncome: acc.totalIncome + norm,
                             totalMaaser: acc.totalMaaser + maaser,
                             incomeCount: acc.incomeCount + 1
-                        });
+                        };
                     } else if (t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE) {
-                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, acc), {
+                        return {
+                            ...acc,
                             totalGiven: acc.totalGiven + norm,
                             giveCount: acc.giveCount + 1
-                        });
+                        };
                     } else if (t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND) {
-                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, acc), {
+                        return {
+                            ...acc,
                             totalLent: acc.totalLent + norm,
                             lendCount: acc.lendCount + 1
-                        });
+                        };
                     }
                     return acc;
                 }
@@ -8986,11 +8018,11 @@ function Dashboard() {
         }
     }["Dashboard.useMemo[allTimeStats]"], [
         allTransactions,
-        user === null || user === void 0 ? void 0 : user.base_currency
+        user?.base_currency
     ]);
     // Balances depend on mode
-    var balances = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "Dashboard.useMemo[balances]": function() {
+    const balances = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "Dashboard.useMemo[balances]": ()=>{
             if (isGiveOnly) {
                 // Single maaser balance: maaser - given
                 return {
@@ -9009,150 +8041,93 @@ function Dashboard() {
         giveRatio,
         lendRatio
     ]);
-    var fetchAllTransactions = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "Dashboard.useCallback[fetchAllTransactions]": function() {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
-                "Dashboard.useCallback[fetchAllTransactions]": function() {
-                    var data, error;
-                    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, {
-                        "Dashboard.useCallback[fetchAllTransactions]": function(_state) {
-                            switch(_state.label){
-                                case 0:
-                                    if (!user) return [
-                                        2
-                                    ];
-                                    setLoading(true);
-                                    _state.label = 1;
-                                case 1:
-                                    _state.trys.push([
-                                        1,
-                                        3,
-                                        4,
-                                        5
-                                    ]);
-                                    return [
-                                        4,
-                                        (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiGetTransactions"])()
-                                    ];
-                                case 2:
-                                    data = _state.sent();
-                                    setAllTransactions(data || []);
-                                    return [
-                                        3,
-                                        5
-                                    ];
-                                case 3:
-                                    error = _state.sent();
-                                    console.error('Error fetching transactions:', error);
-                                    return [
-                                        3,
-                                        5
-                                    ];
-                                case 4:
-                                    setLoading(false);
-                                    return [
-                                        7
-                                    ];
-                                case 5:
-                                    return [
-                                        2
-                                    ];
-                            }
-                        }
-                    }["Dashboard.useCallback[fetchAllTransactions]"]);
-                }
-            }["Dashboard.useCallback[fetchAllTransactions]"])();
+    const fetchAllTransactions = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "Dashboard.useCallback[fetchAllTransactions]": async ()=>{
+            if (!user) return;
+            setLoading(true);
+            try {
+                const data = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiGetTransactions"])();
+                setAllTransactions(data || []);
+            } catch (error) {
+                console.error('Error fetching transactions:', error);
+            } finally{
+                setLoading(false);
+            }
         }
     }["Dashboard.useCallback[fetchAllTransactions]"], [
         user
     ]);
     // --- TIMEZONE-SAFE date filtering using string comparison ---
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "Dashboard.useEffect": function() {
-            var filtered = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(allTransactions);
+        "Dashboard.useEffect": ()=>{
+            let filtered = [
+                ...allTransactions
+            ];
             if (viewMode === VIEW_MODES.MONTH) {
-                var startStr, endStr;
+                let startStr, endStr;
                 if (useHebrewDates) {
-                    var bounds = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getHebrewMonthBounds"])(selectedYear, selectedMonth);
+                    const bounds = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getHebrewMonthBounds"])(selectedYear, selectedMonth);
                     startStr = dateToStr(bounds.start);
                     endStr = dateToStr(bounds.end);
                 } else {
-                    startStr = "".concat(selectedYear, "-").concat(String(selectedMonth).padStart(2, '0'), "-01");
-                    var lastDay = new Date(selectedYear, selectedMonth, 0).getDate();
-                    endStr = "".concat(selectedYear, "-").concat(String(selectedMonth).padStart(2, '0'), "-").concat(String(lastDay).padStart(2, '0'));
+                    startStr = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-01`;
+                    const lastDay = new Date(selectedYear, selectedMonth, 0).getDate();
+                    endStr = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
                 }
                 filtered = filtered.filter({
-                    "Dashboard.useEffect": function(t) {
-                        var ds = txnDateStr(t);
+                    "Dashboard.useEffect": (t)=>{
+                        const ds = txnDateStr(t);
                         return ds >= startStr && ds <= endStr;
                     }
                 }["Dashboard.useEffect"]);
             } else if (viewMode === VIEW_MODES.YEAR) {
                 if (useHebrewDates) {
-                    var yearBounds = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getHebrewYearBounds"])(selectedYear);
-                    var startStr1 = dateToStr(yearBounds.start);
-                    var endStr1 = dateToStr(yearBounds.end);
+                    const yearBounds = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getHebrewYearBounds"])(selectedYear);
+                    const startStr = dateToStr(yearBounds.start);
+                    const endStr = dateToStr(yearBounds.end);
                     filtered = filtered.filter({
-                        "Dashboard.useEffect": function(t) {
-                            var ds = txnDateStr(t);
-                            return ds >= startStr1 && ds <= endStr1;
+                        "Dashboard.useEffect": (t)=>{
+                            const ds = txnDateStr(t);
+                            return ds >= startStr && ds <= endStr;
                         }
                     }["Dashboard.useEffect"]);
                 } else {
-                    var startStr2 = "".concat(selectedYear, "-01-01");
-                    var endStr2 = "".concat(selectedYear, "-12-31");
+                    const startStr = `${selectedYear}-01-01`;
+                    const endStr = `${selectedYear}-12-31`;
                     filtered = filtered.filter({
-                        "Dashboard.useEffect": function(t) {
-                            var ds = txnDateStr(t);
-                            return ds >= startStr2 && ds <= endStr2;
+                        "Dashboard.useEffect": (t)=>{
+                            const ds = txnDateStr(t);
+                            return ds >= startStr && ds <= endStr;
                         }
                     }["Dashboard.useEffect"]);
                 }
             }
             if (searchQuery.trim()) {
-                var q = searchQuery.toLowerCase();
+                const q = searchQuery.toLowerCase();
                 filtered = filtered.filter({
-                    "Dashboard.useEffect": function(t) {
-                        var _t_description, _t_recipient_name;
-                        return ((_t_description = t.description) === null || _t_description === void 0 ? void 0 : _t_description.toLowerCase().includes(q)) || ((_t_recipient_name = t.recipient_name) === null || _t_recipient_name === void 0 ? void 0 : _t_recipient_name.toLowerCase().includes(q));
-                    }
+                    "Dashboard.useEffect": (t)=>t.description?.toLowerCase().includes(q) || t.recipient_name?.toLowerCase().includes(q)
                 }["Dashboard.useEffect"]);
             }
             if (filters.types.length > 0) filtered = filtered.filter({
-                "Dashboard.useEffect": function(t) {
-                    return filters.types.includes(t.type);
-                }
+                "Dashboard.useEffect": (t)=>filters.types.includes(t.type)
             }["Dashboard.useEffect"]);
             if (filters.dateFrom) filtered = filtered.filter({
-                "Dashboard.useEffect": function(t) {
-                    return txnDateStr(t) >= filters.dateFrom;
-                }
+                "Dashboard.useEffect": (t)=>txnDateStr(t) >= filters.dateFrom
             }["Dashboard.useEffect"]);
             if (filters.dateTo) filtered = filtered.filter({
-                "Dashboard.useEffect": function(t) {
-                    return txnDateStr(t) <= filters.dateTo;
-                }
+                "Dashboard.useEffect": (t)=>txnDateStr(t) <= filters.dateTo
             }["Dashboard.useEffect"]);
             if (filters.amountMin) filtered = filtered.filter({
-                "Dashboard.useEffect": function(t) {
-                    return t.amount >= Number(filters.amountMin);
-                }
+                "Dashboard.useEffect": (t)=>t.amount >= Number(filters.amountMin)
             }["Dashboard.useEffect"]);
             if (filters.amountMax) filtered = filtered.filter({
-                "Dashboard.useEffect": function(t) {
-                    return t.amount <= Number(filters.amountMax);
-                }
+                "Dashboard.useEffect": (t)=>t.amount <= Number(filters.amountMax)
             }["Dashboard.useEffect"]);
             if (filters.isRecurring !== null) filtered = filtered.filter({
-                "Dashboard.useEffect": function(t) {
-                    return t.is_recurring === filters.isRecurring;
-                }
+                "Dashboard.useEffect": (t)=>t.is_recurring === filters.isRecurring
             }["Dashboard.useEffect"]);
             if (filters.recipient.trim()) filtered = filtered.filter({
-                "Dashboard.useEffect": function(t) {
-                    var _t_recipient_name;
-                    return (_t_recipient_name = t.recipient_name) === null || _t_recipient_name === void 0 ? void 0 : _t_recipient_name.toLowerCase().includes(filters.recipient.toLowerCase());
-                }
+                "Dashboard.useEffect": (t)=>t.recipient_name?.toLowerCase().includes(filters.recipient.toLowerCase())
             }["Dashboard.useEffect"]);
             setFilteredTransactions(filtered);
         }
@@ -9166,256 +8141,97 @@ function Dashboard() {
         filters
     ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "Dashboard.useEffect": function() {
+        "Dashboard.useEffect": ()=>{
             fetchAllTransactions();
         }
     }["Dashboard.useEffect"], [
         fetchAllTransactions
     ]);
-    var processRecurringTransactions = function processRecurringTransactions() {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var result, error;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        setProcessingRecurring(true);
-                        _state.label = 1;
-                    case 1:
-                        _state.trys.push([
-                            1,
-                            6,
-                            7,
-                            8
-                        ]);
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiProcessRecurring"])()
-                        ];
-                    case 2:
-                        result = _state.sent();
-                        if (!(result.created > 0)) return [
-                            3,
-                            4
-                        ];
-                        return [
-                            4,
-                            fetchAllTransactions()
-                        ];
-                    case 3:
-                        _state.sent();
-                        alert("Created ".concat(result.created, " recurring transaction(s)"));
-                        return [
-                            3,
-                            5
-                        ];
-                    case 4:
-                        alert('No new recurring transactions');
-                        _state.label = 5;
-                    case 5:
-                        return [
-                            3,
-                            8
-                        ];
-                    case 6:
-                        error = _state.sent();
-                        console.error('Error:', error);
-                        return [
-                            3,
-                            8
-                        ];
-                    case 7:
-                        setProcessingRecurring(false);
-                        return [
-                            7
-                        ];
-                    case 8:
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const processRecurringTransactions = async ()=>{
+        setProcessingRecurring(true);
+        try {
+            const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiProcessRecurring"])();
+            if (result.created > 0) {
+                await fetchAllTransactions();
+                alert(`Created ${result.created} recurring transaction(s)`);
+            } else {
+                alert('No new recurring transactions');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        } finally{
+            setProcessingRecurring(false);
+        }
     };
-    var handleAddTransaction = function handleAddTransaction(data, editId) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var error;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        _state.trys.push([
-                            0,
-                            6,
-                            ,
-                            7
-                        ]);
-                        if (!editId) return [
-                            3,
-                            2
-                        ];
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiUpdateTransaction"])(editId, data)
-                        ];
-                    case 1:
-                        _state.sent();
-                        return [
-                            3,
-                            4
-                        ];
-                    case 2:
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiCreateTransaction"])(data)
-                        ];
-                    case 3:
-                        _state.sent();
-                        _state.label = 4;
-                    case 4:
-                        return [
-                            4,
-                            fetchAllTransactions()
-                        ];
-                    case 5:
-                        _state.sent();
-                        return [
-                            3,
-                            7
-                        ];
-                    case 6:
-                        error = _state.sent();
-                        console.error('Error:', error);
-                        return [
-                            3,
-                            7
-                        ];
-                    case 7:
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const handleAddTransaction = async (data, editId)=>{
+        try {
+            if (editId) {
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiUpdateTransaction"])(editId, data);
+            } else {
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiCreateTransaction"])(data);
+            }
+            await fetchAllTransactions();
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
-    var handleDeleteTransaction = function handleDeleteTransaction(id) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var error;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        _state.trys.push([
-                            0,
-                            3,
-                            ,
-                            4
-                        ]);
-                        return [
-                            4,
-                            (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiDeleteTransaction"])(id)
-                        ];
-                    case 1:
-                        _state.sent();
-                        return [
-                            4,
-                            fetchAllTransactions()
-                        ];
-                    case 2:
-                        _state.sent();
-                        return [
-                            3,
-                            4
-                        ];
-                    case 3:
-                        error = _state.sent();
-                        console.error('Error:', error);
-                        return [
-                            3,
-                            4
-                        ];
-                    case 4:
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const handleDeleteTransaction = async (id)=>{
+        try {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$api$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["apiDeleteTransaction"])(id);
+            await fetchAllTransactions();
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
-    var handleMonthChange = function handleMonthChange(month, year) {
+    const handleMonthChange = (month, year)=>{
         setSelectedMonth(month);
         setSelectedYear(year);
     };
-    var handleCalendarToggle = function handleCalendarToggle() {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            var newVal, heb, now;
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        newVal = !useHebrewDates;
-                        setUseHebrewDates(newVal);
-                        return [
-                            4,
-                            updateUser({
-                                use_hebrew_calendar: newVal
-                            })
-                        ];
-                    case 1:
-                        _state.sent();
-                        if (newVal) {
-                            heb = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrentHebrewMonth"])();
-                            setSelectedMonth(heb.month);
-                            setSelectedYear(heb.year);
-                        } else {
-                            now = new Date();
-                            setSelectedMonth(now.getMonth() + 1);
-                            setSelectedYear(now.getFullYear());
-                        }
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const handleCalendarToggle = async ()=>{
+        const newVal = !useHebrewDates;
+        setUseHebrewDates(newVal);
+        await updateUser({
+            use_hebrew_calendar: newVal
+        });
+        if (newVal) {
+            const heb = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrentHebrewMonth"])();
+            setSelectedMonth(heb.month);
+            setSelectedYear(heb.year);
+        } else {
+            const now = new Date();
+            setSelectedMonth(now.getMonth() + 1);
+            setSelectedYear(now.getFullYear());
+        }
     };
-    var handleViewModeChange = function handleViewModeChange(mode) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_async_to_generator$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(function() {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$tslib$2f$tslib$2e$es6$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$5f$_generator__as__$5f3e$__["_"])(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        setViewMode(mode);
-                        return [
-                            4,
-                            updateUser({
-                                default_view: mode
-                            })
-                        ];
-                    case 1:
-                        _state.sent();
-                        return [
-                            2
-                        ];
-                }
-            });
-        })();
+    const handleViewModeChange = async (mode)=>{
+        setViewMode(mode);
+        await updateUser({
+            default_view: mode
+        });
     };
-    var periodStats = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "Dashboard.useMemo[periodStats]": function() {
-            var baseCurrency = (user === null || user === void 0 ? void 0 : user.base_currency) || 'USD';
+    const periodStats = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "Dashboard.useMemo[periodStats]": ()=>{
+            const baseCurrency = user?.base_currency || 'USD';
             return filteredTransactions.reduce({
-                "Dashboard.useMemo[periodStats]": function(acc, t) {
-                    var norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
+                "Dashboard.useMemo[periodStats]": (acc, t)=>{
+                    const norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
                     if (t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME) {
-                        var maaser = norm * ((t.maaser_percentage || 10) / 100);
-                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, acc), {
+                        const maaser = norm * ((t.maaser_percentage || 10) / 100);
+                        return {
+                            ...acc,
                             totalIncome: acc.totalIncome + norm,
                             totalMaaser: acc.totalMaaser + maaser
-                        });
+                        };
                     } else if (t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE) {
-                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, acc), {
+                        return {
+                            ...acc,
                             totalGiven: acc.totalGiven + norm
-                        });
+                        };
                     } else if (t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND) {
-                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, acc), {
+                        return {
+                            ...acc,
                             totalLent: acc.totalLent + norm
-                        });
+                        };
                     }
                     return acc;
                 }
@@ -9428,26 +8244,26 @@ function Dashboard() {
         }
     }["Dashboard.useMemo[periodStats]"], [
         filteredTransactions,
-        user === null || user === void 0 ? void 0 : user.base_currency
+        user?.base_currency
     ]);
     // Previous period stats for Insights comparison
-    var previousPeriodStats = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "Dashboard.useMemo[previousPeriodStats]": function() {
+    const previousPeriodStats = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "Dashboard.useMemo[previousPeriodStats]": ()=>{
             if (viewMode === VIEW_MODES.ALL_TIME) return null;
-            var baseCurrency = (user === null || user === void 0 ? void 0 : user.base_currency) || 'USD';
-            var startStr, endStr;
+            const baseCurrency = user?.base_currency || 'USD';
+            let startStr, endStr;
             if (viewMode === VIEW_MODES.MONTH) {
-                var pm = selectedMonth - 1, py = selectedYear;
+                let pm = selectedMonth - 1, py = selectedYear;
                 if (useHebrewDates) {
                     if (pm < 1) {
                         pm = 13;
                         py -= 1;
                     }
                     try {
-                        var bounds = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getHebrewMonthBounds"])(py, pm);
+                        const bounds = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getHebrewMonthBounds"])(py, pm);
                         startStr = dateToStr(bounds.start);
                         endStr = dateToStr(bounds.end);
-                    } catch (unused) {
+                    } catch  {
                         return null;
                     }
                 } else {
@@ -9455,47 +8271,50 @@ function Dashboard() {
                         pm = 12;
                         py -= 1;
                     }
-                    startStr = "".concat(py, "-").concat(String(pm).padStart(2, '0'), "-01");
-                    var lastDay = new Date(py, pm, 0).getDate();
-                    endStr = "".concat(py, "-").concat(String(pm).padStart(2, '0'), "-").concat(String(lastDay).padStart(2, '0'));
+                    startStr = `${py}-${String(pm).padStart(2, '0')}-01`;
+                    const lastDay = new Date(py, pm, 0).getDate();
+                    endStr = `${py}-${String(pm).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
                 }
             } else {
-                var py1 = selectedYear - 1;
+                const py = selectedYear - 1;
                 if (useHebrewDates) {
                     try {
-                        var bounds1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getHebrewYearBounds"])(py1);
-                        startStr = dateToStr(bounds1.start);
-                        endStr = dateToStr(bounds1.end);
-                    } catch (unused) {
+                        const bounds = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$hebrew$2d$calendar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getHebrewYearBounds"])(py);
+                        startStr = dateToStr(bounds.start);
+                        endStr = dateToStr(bounds.end);
+                    } catch  {
                         return null;
                     }
                 } else {
-                    startStr = "".concat(py1, "-01-01");
-                    endStr = "".concat(py1, "-12-31");
+                    startStr = `${py}-01-01`;
+                    endStr = `${py}-12-31`;
                 }
             }
             return allTransactions.filter({
-                "Dashboard.useMemo[previousPeriodStats]": function(t) {
-                    var ds = txnDateStr(t);
+                "Dashboard.useMemo[previousPeriodStats]": (t)=>{
+                    const ds = txnDateStr(t);
                     return ds >= startStr && ds <= endStr;
                 }
             }["Dashboard.useMemo[previousPeriodStats]"]).reduce({
-                "Dashboard.useMemo[previousPeriodStats]": function(acc, t) {
-                    var norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
+                "Dashboard.useMemo[previousPeriodStats]": (acc, t)=>{
+                    const norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
                     if (t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].INCOME) {
-                        var maaser = norm * ((t.maaser_percentage || 10) / 100);
-                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, acc), {
+                        const maaser = norm * ((t.maaser_percentage || 10) / 100);
+                        return {
+                            ...acc,
                             totalIncome: acc.totalIncome + norm,
                             totalMaaser: acc.totalMaaser + maaser
-                        });
+                        };
                     } else if (t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].GIVE) {
-                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, acc), {
+                        return {
+                            ...acc,
                             totalGiven: acc.totalGiven + norm
-                        });
+                        };
                     } else if (t.type === __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TRANSACTION_TYPES"].LEND) {
-                        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread_props$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_object_spread$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, acc), {
+                        return {
+                            ...acc,
                             totalLent: acc.totalLent + norm
-                        });
+                        };
                     }
                     return acc;
                 }
@@ -9512,18 +8331,16 @@ function Dashboard() {
         selectedMonth,
         selectedYear,
         useHebrewDates,
-        user === null || user === void 0 ? void 0 : user.base_currency
+        user?.base_currency
     ]);
     if (showAdmin) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$AdminPanel$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AdminPanel"], {
-        onBack: function onBack() {
-            return setShowAdmin(false);
-        }
+        onBack: ()=>setShowAdmin(false)
     }, void 0, false, {
         fileName: "[project]/frontend/src/components/Dashboard.js",
         lineNumber: 306,
         columnNumber: 25
     }, this);
-    var sym = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])((user === null || user === void 0 ? void 0 : user.base_currency) || 'USD');
+    const sym = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$validation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getCurrencySymbol"])(user?.base_currency || 'USD');
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         "data-testid": "dashboard",
         className: "min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50",
@@ -9570,9 +8387,7 @@ function Dashboard() {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     "data-testid": "contact-btn",
-                                    onClick: function onClick() {
-                                        return setShowContact(true);
-                                    },
+                                    onClick: ()=>setShowContact(true),
                                     className: "p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all",
                                     title: "Contact",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$mail$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Mail$3e$__["Mail"], {
@@ -9589,10 +8404,8 @@ function Dashboard() {
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     "data-testid": "recurring-manager-btn",
-                                    onClick: function onClick() {
-                                        return setShowRecurring(!showRecurring);
-                                    },
-                                    className: "p-2 rounded-lg transition-all ".concat(showRecurring ? 'text-blue-600 bg-blue-50' : 'text-slate-400 hover:text-blue-600 hover:bg-blue-50'),
+                                    onClick: ()=>setShowRecurring(!showRecurring),
+                                    className: `p-2 rounded-lg transition-all ${showRecurring ? 'text-blue-600 bg-blue-50' : 'text-slate-400 hover:text-blue-600 hover:bg-blue-50'}`,
                                     title: "Recurring",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$repeat$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Repeat$3e$__["Repeat"], {
                                         className: "w-[18px] h-[18px]"
@@ -9613,7 +8426,7 @@ function Dashboard() {
                                     className: "p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all disabled:opacity-50",
                                     title: "Sync Recurring",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$refresh$2d$cw$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__RefreshCw$3e$__["RefreshCw"], {
-                                        className: "w-[18px] h-[18px] ".concat(processingRecurring ? 'animate-spin' : '')
+                                        className: `w-[18px] h-[18px] ${processingRecurring ? 'animate-spin' : ''}`
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/src/components/Dashboard.js",
                                         lineNumber: 330,
@@ -9626,9 +8439,7 @@ function Dashboard() {
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     "data-testid": "settings-btn",
-                                    onClick: function onClick() {
-                                        return setShowSettings(true);
-                                    },
+                                    onClick: ()=>setShowSettings(true),
                                     className: "p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$settings$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Settings$3e$__["Settings"], {
                                         className: "w-[18px] h-[18px]"
@@ -9642,11 +8453,9 @@ function Dashboard() {
                                     lineNumber: 332,
                                     columnNumber: 13
                                 }, this),
-                                (user === null || user === void 0 ? void 0 : user.is_admin) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                user?.is_admin && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     "data-testid": "admin-btn",
-                                    onClick: function onClick() {
-                                        return setShowAdmin(true);
-                                    },
+                                    onClick: ()=>setShowAdmin(true),
                                     className: "p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all",
                                     title: "Admin",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shield$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Shield$3e$__["Shield"], {
@@ -9709,7 +8518,7 @@ function Dashboard() {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 "data-testid": "add-transaction-btn",
-                                onClick: function onClick() {
+                                onClick: ()=>{
                                     setEditTransaction(null);
                                     setShowModal(true);
                                 },
@@ -9733,8 +8542,8 @@ function Dashboard() {
                                 className: "flex-1",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$DashboardStats$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DashboardStats"], {
                                     balances: balances,
-                                    baseCurrency: (user === null || user === void 0 ? void 0 : user.base_currency) || 'USD',
-                                    distributionMode: (user === null || user === void 0 ? void 0 : user.distribution_mode) || 'both'
+                                    baseCurrency: user?.base_currency || 'USD',
+                                    distributionMode: user?.distribution_mode || 'both'
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                     lineNumber: 355,
@@ -9782,9 +8591,7 @@ function Dashboard() {
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                        onClick: function onClick() {
-                                            return setShowRecurring(false);
-                                        },
+                                        onClick: ()=>setShowRecurring(false),
                                         className: "text-xs text-slate-400 hover:text-slate-600 transition-colors",
                                         children: "Close"
                                     }, void 0, false, {
@@ -9801,10 +8608,8 @@ function Dashboard() {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "p-4",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$RecurringManager$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RecurringManager"], {
-                                    baseCurrency: (user === null || user === void 0 ? void 0 : user.base_currency) || 'USD',
-                                    onBack: function onBack() {
-                                        return setShowRecurring(false);
-                                    }
+                                    baseCurrency: user?.base_currency || 'USD',
+                                    onBack: ()=>setShowRecurring(false)
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                     lineNumber: 369,
@@ -9839,21 +8644,16 @@ function Dashboard() {
                                         value: VIEW_MODES.MONTH,
                                         label: 'Month'
                                     }
-                                ].map(function(param) {
-                                    var value = param.value, label = param.label;
-                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                        "data-testid": "view-mode-".concat(value),
-                                        onClick: function onClick() {
-                                            return handleViewModeChange(value);
-                                        },
-                                        className: "px-4 py-2 text-sm font-medium rounded-lg transition-all ".concat(viewMode === value ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm' : 'text-slate-500 hover:bg-slate-50'),
+                                ].map(({ value, label })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        "data-testid": `view-mode-${value}`,
+                                        onClick: ()=>handleViewModeChange(value),
+                                        className: `px-4 py-2 text-sm font-medium rounded-lg transition-all ${viewMode === value ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm' : 'text-slate-500 hover:bg-slate-50'}`,
                                         children: label
                                     }, value, false, {
                                         fileName: "[project]/frontend/src/components/Dashboard.js",
                                         lineNumber: 376,
                                         columnNumber: 15
-                                    }, _this);
-                                })
+                                    }, this))
                             }, void 0, false, {
                                 fileName: "[project]/frontend/src/components/Dashboard.js",
                                 lineNumber: 374,
@@ -9873,10 +8673,8 @@ function Dashboard() {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 "data-testid": "toggle-charts-btn",
-                                onClick: function onClick() {
-                                    return setShowCharts(!showCharts);
-                                },
-                                className: "flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ".concat(showCharts ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm' : 'bg-white/80 text-slate-500 hover:bg-slate-50 border border-slate-200/80'),
+                                onClick: ()=>setShowCharts(!showCharts),
+                                className: `flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${showCharts ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm' : 'bg-white/80 text-slate-500 hover:bg-slate-50 border border-slate-200/80'}`,
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chart$2d$column$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__BarChart3$3e$__["BarChart3"], {
                                         className: "w-4 h-4"
@@ -9896,8 +8694,8 @@ function Dashboard() {
                                 transactions: allTransactions,
                                 stats: allTimeStats,
                                 maaserBalance: isGiveOnly ? balances.maaserBalance : 0,
-                                baseCurrency: (user === null || user === void 0 ? void 0 : user.base_currency) || 'USD',
-                                userName: (user === null || user === void 0 ? void 0 : user.name) || 'User'
+                                baseCurrency: user?.base_currency || 'USD',
+                                userName: user?.name || 'User'
                             }, void 0, false, {
                                 fileName: "[project]/frontend/src/components/Dashboard.js",
                                 lineNumber: 394,
@@ -9909,10 +8707,10 @@ function Dashboard() {
                         lineNumber: 373,
                         columnNumber: 9
                     }, this),
-                    function() {
-                        var isAllTime = viewMode === VIEW_MODES.ALL_TIME;
-                        var s = isAllTime ? allTimeStats : periodStats;
-                        var label = isAllTime ? 'All Time' : viewMode === VIEW_MODES.YEAR ? 'Year' : 'Month';
+                    (()=>{
+                        const isAllTime = viewMode === VIEW_MODES.ALL_TIME;
+                        const s = isAllTime ? allTimeStats : periodStats;
+                        const label = isAllTime ? 'All Time' : viewMode === VIEW_MODES.YEAR ? 'Year' : 'Month';
                         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-slate-200/80 shadow-sm",
                             children: [
@@ -9926,9 +8724,9 @@ function Dashboard() {
                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                     lineNumber: 405,
                                     columnNumber: 15
-                                }, _this),
+                                }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "grid gap-4 text-center ".concat(isGiveOnly ? 'grid-cols-3' : 'grid-cols-1 sm:grid-cols-3'),
+                                    className: `grid gap-4 text-center ${isGiveOnly ? 'grid-cols-3' : 'grid-cols-1 sm:grid-cols-3'}`,
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "p-3 bg-emerald-50/80 rounded-xl",
@@ -9940,7 +8738,7 @@ function Dashboard() {
                                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                                     lineNumber: 408,
                                                     columnNumber: 19
-                                                }, _this),
+                                                }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     "data-testid": "totals-income",
                                                     className: "text-lg font-bold text-emerald-700",
@@ -9952,13 +8750,13 @@ function Dashboard() {
                                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                                     lineNumber: 409,
                                                     columnNumber: 19
-                                                }, _this)
+                                                }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                             lineNumber: 407,
                                             columnNumber: 17
-                                        }, _this),
+                                        }, this),
                                         isGiveOnly ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -9971,7 +8769,7 @@ function Dashboard() {
                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                             lineNumber: 414,
                                                             columnNumber: 23
-                                                        }, _this),
+                                                        }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                             "data-testid": "totals-maaser",
                                                             className: "text-lg font-bold text-amber-700",
@@ -9983,13 +8781,13 @@ function Dashboard() {
                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                             lineNumber: 415,
                                                             columnNumber: 23
-                                                        }, _this)
+                                                        }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                                     lineNumber: 413,
                                                     columnNumber: 21
-                                                }, _this),
+                                                }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "p-3 bg-blue-50/80 rounded-xl",
                                                     children: [
@@ -10000,7 +8798,7 @@ function Dashboard() {
                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                             lineNumber: 418,
                                                             columnNumber: 23
-                                                        }, _this),
+                                                        }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                             "data-testid": "totals-given",
                                                             className: "text-lg font-bold text-blue-700",
@@ -10012,13 +8810,13 @@ function Dashboard() {
                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                             lineNumber: 419,
                                                             columnNumber: 23
-                                                        }, _this)
+                                                        }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                                     lineNumber: 417,
                                                     columnNumber: 21
-                                                }, _this)
+                                                }, this)
                                             ]
                                         }, void 0, true) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                                             children: [
@@ -10032,7 +8830,7 @@ function Dashboard() {
                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                             lineNumber: 425,
                                                             columnNumber: 23
-                                                        }, _this),
+                                                        }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "flex items-baseline justify-center gap-2 mt-1",
                                                             children: [
@@ -10045,7 +8843,7 @@ function Dashboard() {
                                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                             lineNumber: 428,
                                                                             columnNumber: 27
-                                                                        }, _this),
+                                                                        }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                                             "data-testid": "totals-give-portion",
                                                                             className: "text-lg font-bold text-blue-700",
@@ -10057,20 +8855,20 @@ function Dashboard() {
                                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                             lineNumber: 429,
                                                                             columnNumber: 27
-                                                                        }, _this)
+                                                                        }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                     lineNumber: 427,
                                                                     columnNumber: 25
-                                                                }, _this),
+                                                                }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                     className: "w-px h-8 bg-blue-200"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                     lineNumber: 431,
                                                                     columnNumber: 25
-                                                                }, _this),
+                                                                }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                     children: [
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -10080,7 +8878,7 @@ function Dashboard() {
                                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                             lineNumber: 433,
                                                                             columnNumber: 27
-                                                                        }, _this),
+                                                                        }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                                             "data-testid": "totals-given",
                                                                             className: "text-lg font-bold text-blue-500",
@@ -10092,25 +8890,25 @@ function Dashboard() {
                                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                             lineNumber: 434,
                                                                             columnNumber: 27
-                                                                        }, _this)
+                                                                        }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                     lineNumber: 432,
                                                                     columnNumber: 25
-                                                                }, _this)
+                                                                }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                             lineNumber: 426,
                                                             columnNumber: 23
-                                                        }, _this)
+                                                        }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                                     lineNumber: 424,
                                                     columnNumber: 21
-                                                }, _this),
+                                                }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "p-3 bg-rose-50/80 rounded-xl",
                                                     children: [
@@ -10121,7 +8919,7 @@ function Dashboard() {
                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                             lineNumber: 439,
                                                             columnNumber: 23
-                                                        }, _this),
+                                                        }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "flex items-baseline justify-center gap-2 mt-1",
                                                             children: [
@@ -10134,7 +8932,7 @@ function Dashboard() {
                                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                             lineNumber: 442,
                                                                             columnNumber: 27
-                                                                        }, _this),
+                                                                        }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                                             "data-testid": "totals-lend-portion",
                                                                             className: "text-lg font-bold text-rose-700",
@@ -10146,20 +8944,20 @@ function Dashboard() {
                                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                             lineNumber: 443,
                                                                             columnNumber: 27
-                                                                        }, _this)
+                                                                        }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                     lineNumber: 441,
                                                                     columnNumber: 25
-                                                                }, _this),
+                                                                }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                     className: "w-px h-8 bg-rose-200"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                     lineNumber: 445,
                                                                     columnNumber: 25
-                                                                }, _this),
+                                                                }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                     children: [
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -10169,7 +8967,7 @@ function Dashboard() {
                                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                             lineNumber: 447,
                                                                             columnNumber: 27
-                                                                        }, _this),
+                                                                        }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                                             "data-testid": "totals-lent",
                                                                             className: "text-lg font-bold text-rose-500",
@@ -10181,25 +8979,25 @@ function Dashboard() {
                                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                             lineNumber: 448,
                                                                             columnNumber: 27
-                                                                        }, _this)
+                                                                        }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                                                     lineNumber: 446,
                                                                     columnNumber: 25
-                                                                }, _this)
+                                                                }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/frontend/src/components/Dashboard.js",
                                                             lineNumber: 440,
                                                             columnNumber: 23
-                                                        }, _this)
+                                                        }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                                     lineNumber: 438,
                                                     columnNumber: 21
-                                                }, _this)
+                                                }, this)
                                             ]
                                         }, void 0, true)
                                     ]
@@ -10207,14 +9005,14 @@ function Dashboard() {
                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                     lineNumber: 406,
                                     columnNumber: 15
-                                }, _this)
+                                }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/src/components/Dashboard.js",
                             lineNumber: 404,
                             columnNumber: 13
-                        }, _this);
-                    }(),
+                        }, this);
+                    })(),
                     previousPeriodStats && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$Insights$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Insights"], {
                         currentStats: viewMode === VIEW_MODES.ALL_TIME ? allTimeStats : periodStats,
                         previousStats: previousPeriodStats,
@@ -10230,8 +9028,8 @@ function Dashboard() {
                     }, this),
                     showCharts && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$AnalyticsCharts$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnalyticsCharts"], {
                         transactions: allTransactions,
-                        baseCurrency: (user === null || user === void 0 ? void 0 : user.base_currency) || 'USD',
-                        distributionMode: (user === null || user === void 0 ? void 0 : user.distribution_mode) || 'both'
+                        baseCurrency: user?.base_currency || 'USD',
+                        distributionMode: user?.distribution_mode || 'both'
                     }, void 0, false, {
                         fileName: "[project]/frontend/src/components/Dashboard.js",
                         lineNumber: 471,
@@ -10242,7 +9040,7 @@ function Dashboard() {
                         onSearchChange: setSearchQuery,
                         filters: filters,
                         onFiltersChange: setFilters,
-                        distributionMode: (user === null || user === void 0 ? void 0 : user.distribution_mode) || 'both'
+                        distributionMode: user?.distribution_mode || 'both'
                     }, void 0, false, {
                         fileName: "[project]/frontend/src/components/Dashboard.js",
                         lineNumber: 473,
@@ -10296,13 +9094,13 @@ function Dashboard() {
                                     columnNumber: 15
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$TransactionList$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TransactionList"], {
                                     transactions: filteredTransactions,
-                                    onEdit: function onEdit(t) {
+                                    onEdit: (t)=>{
                                         setEditTransaction(t);
                                         setShowModal(true);
                                     },
                                     onDelete: handleDeleteTransaction,
                                     useHebrewDates: useHebrewDates,
-                                    baseCurrency: (user === null || user === void 0 ? void 0 : user.base_currency) || 'USD'
+                                    baseCurrency: user?.base_currency || 'USD'
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/src/components/Dashboard.js",
                                     lineNumber: 484,
@@ -10327,20 +9125,20 @@ function Dashboard() {
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$AddTransactionModal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AddTransactionModal"], {
                 isOpen: showModal,
-                onClose: function onClose() {
+                onClose: ()=>{
                     setShowModal(false);
                     setEditTransaction(null);
                 },
                 onSubmit: handleAddTransaction,
                 editTransaction: editTransaction,
-                baseCurrency: (user === null || user === void 0 ? void 0 : user.base_currency) || 'USD',
-                distributionMode: (user === null || user === void 0 ? void 0 : user.distribution_mode) || 'both',
+                baseCurrency: user?.base_currency || 'USD',
+                distributionMode: user?.distribution_mode || 'both',
                 balances: balances,
-                userId: user === null || user === void 0 ? void 0 : user.id,
-                useHebrewCalendar: (user === null || user === void 0 ? void 0 : user.use_hebrew_calendar) || false,
-                defaultMaaserPercentage: (_ref2 = user === null || user === void 0 ? void 0 : user.default_maaser_percentage) !== null && _ref2 !== void 0 ? _ref2 : 10,
-                giveRatio: (_ref3 = user === null || user === void 0 ? void 0 : user.give_ratio) !== null && _ref3 !== void 0 ? _ref3 : 50,
-                lendRatio: (_ref4 = user === null || user === void 0 ? void 0 : user.lend_ratio) !== null && _ref4 !== void 0 ? _ref4 : 50
+                userId: user?.id,
+                useHebrewCalendar: user?.use_hebrew_calendar || false,
+                defaultMaaserPercentage: user?.default_maaser_percentage ?? 10,
+                giveRatio: user?.give_ratio ?? 50,
+                lendRatio: user?.lend_ratio ?? 50
             }, void 0, false, {
                 fileName: "[project]/frontend/src/components/Dashboard.js",
                 lineNumber: 491,
@@ -10348,9 +9146,7 @@ function Dashboard() {
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$SettingsModal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SettingsModal"], {
                 isOpen: showSettings,
-                onClose: function onClose() {
-                    return setShowSettings(false);
-                },
+                onClose: ()=>setShowSettings(false),
                 user: user,
                 updateUser: updateUser
             }, void 0, false, {
@@ -10360,11 +9156,9 @@ function Dashboard() {
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$ContactModal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ContactModal"], {
                 isOpen: showContact,
-                onClose: function onClose() {
-                    return setShowContact(false);
-                },
-                userName: user === null || user === void 0 ? void 0 : user.name,
-                userEmail: user === null || user === void 0 ? void 0 : user.email
+                onClose: ()=>setShowContact(false),
+                userName: user?.name,
+                userEmail: user?.email
             }, void 0, false, {
                 fileName: "[project]/frontend/src/components/Dashboard.js",
                 lineNumber: 499,
@@ -10385,7 +9179,7 @@ _s(Dashboard, "JBUxr0LxgzJofMjOgKMtksYBgik=", false, function() {
 _c = Dashboard;
 var _c;
 __turbopack_context__.k.register(_c, "Dashboard");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),
@@ -10396,12 +9190,10 @@ __turbopack_context__.s([
     "default",
     ()=>Page
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$auth$2d$context$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/lib/auth-context.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$HomePage$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/components/HomePage.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$Dashboard$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/components/Dashboard.js [app-client] (ecmascript)");
-;
 ;
 var _s = __turbopack_context__.k.signature();
 'use client';
@@ -10410,7 +9202,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 function AppContent() {
     _s();
-    var _useAuth = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$auth$2d$context$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"])(), user = _useAuth.user, loading = _useAuth.loading;
+    const { user, loading } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$lib$2f$auth$2d$context$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"])();
     if (loading) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "min-h-screen flex items-center justify-center bg-[#fafaf8]",
@@ -10477,7 +9269,7 @@ _c1 = Page;
 var _c, _c1;
 __turbopack_context__.k.register(_c, "AppContent");
 __turbopack_context__.k.register(_c1, "Page");
-if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
 }),

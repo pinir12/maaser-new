@@ -6,19 +6,9 @@ __turbopack_context__.s([
     "default",
     ()=>purify
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_construct$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_construct.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_instanceof.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-;
-;
-;
-;
-;
-/*! @license DOMPurify 3.3.3 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.3.3/LICENSE */ var entries = Object.entries, setPrototypeOf = Object.setPrototypeOf, isFrozen = Object.isFrozen, getPrototypeOf = Object.getPrototypeOf, getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-var freeze = Object.freeze, seal = Object.seal, create = Object.create; // eslint-disable-line import/no-mutable-exports
-var _ref = typeof Reflect !== 'undefined' && Reflect, apply = _ref.apply, construct = _ref.construct;
+/*! @license DOMPurify 3.3.3 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.3.3/LICENSE */ const { entries, setPrototypeOf, isFrozen, getPrototypeOf, getOwnPropertyDescriptor } = Object;
+let { freeze, seal, create } = Object; // eslint-disable-line import/no-mutable-exports
+let { apply, construct } = typeof Reflect !== 'undefined' && Reflect;
 if (!freeze) {
     freeze = function freeze(x) {
         return x;
@@ -42,23 +32,23 @@ if (!construct) {
         for(var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++){
             args[_key2 - 1] = arguments[_key2];
         }
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_construct$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(Func, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(args));
+        return new Func(...args);
     };
 }
-var arrayForEach = unapply(Array.prototype.forEach);
-var arrayLastIndexOf = unapply(Array.prototype.lastIndexOf);
-var arrayPop = unapply(Array.prototype.pop);
-var arrayPush = unapply(Array.prototype.push);
-var arraySplice = unapply(Array.prototype.splice);
-var stringToLowerCase = unapply(String.prototype.toLowerCase);
-var stringToString = unapply(String.prototype.toString);
-var stringMatch = unapply(String.prototype.match);
-var stringReplace = unapply(String.prototype.replace);
-var stringIndexOf = unapply(String.prototype.indexOf);
-var stringTrim = unapply(String.prototype.trim);
-var objectHasOwnProperty = unapply(Object.prototype.hasOwnProperty);
-var regExpTest = unapply(RegExp.prototype.test);
-var typeErrorCreate = unconstruct(TypeError);
+const arrayForEach = unapply(Array.prototype.forEach);
+const arrayLastIndexOf = unapply(Array.prototype.lastIndexOf);
+const arrayPop = unapply(Array.prototype.pop);
+const arrayPush = unapply(Array.prototype.push);
+const arraySplice = unapply(Array.prototype.splice);
+const stringToLowerCase = unapply(String.prototype.toLowerCase);
+const stringToString = unapply(String.prototype.toString);
+const stringMatch = unapply(String.prototype.match);
+const stringReplace = unapply(String.prototype.replace);
+const stringIndexOf = unapply(String.prototype.indexOf);
+const stringTrim = unapply(String.prototype.trim);
+const objectHasOwnProperty = unapply(Object.prototype.hasOwnProperty);
+const regExpTest = unapply(RegExp.prototype.test);
+const typeErrorCreate = unconstruct(TypeError);
 /**
  * Creates a new function that calls the given function with a specified thisArg and arguments.
  *
@@ -66,7 +56,7 @@ var typeErrorCreate = unconstruct(TypeError);
  * @returns A new function that calls the given function with a specified thisArg and arguments.
  */ function unapply(func) {
     return function(thisArg) {
-        if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(thisArg, RegExp)) {
+        if (thisArg instanceof RegExp) {
             thisArg.lastIndex = 0;
         }
         for(var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++){
@@ -96,18 +86,18 @@ var typeErrorCreate = unconstruct(TypeError);
  * @param transformCaseFunc - An optional function to transform the case of each element before adding to the set.
  * @returns The modified set with added elements.
  */ function addToSet(set, array) {
-    var transformCaseFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : stringToLowerCase;
+    let transformCaseFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : stringToLowerCase;
     if (setPrototypeOf) {
         // Make 'in' and truthy checks like Boolean(set.constructor)
         // independent of any properties defined on Object.prototype.
         // Prevent prototype setters from intercepting set as a this value.
         setPrototypeOf(set, null);
     }
-    var l = array.length;
+    let l = array.length;
     while(l--){
-        var element = array[l];
+        let element = array[l];
         if (typeof element === 'string') {
-            var lcElement = transformCaseFunc(element);
+            const lcElement = transformCaseFunc(element);
             if (lcElement !== element) {
                 // Config presets (e.g. tags.js, attrs.js) are immutable.
                 if (!isFrozen(array)) {
@@ -126,8 +116,8 @@ var typeErrorCreate = unconstruct(TypeError);
  * @param array - The array to be cleaned.
  * @returns The cleaned version of the array
  */ function cleanArray(array) {
-    for(var index = 0; index < array.length; index++){
-        var isPropertyExist = objectHasOwnProperty(array, index);
+    for(let index = 0; index < array.length; index++){
+        const isPropertyExist = objectHasOwnProperty(array, index);
         if (!isPropertyExist) {
             array[index] = null;
         }
@@ -140,33 +130,16 @@ var typeErrorCreate = unconstruct(TypeError);
  * @param object - The object to be cloned.
  * @returns A new object that copies the original.
  */ function clone(object) {
-    var newObject = create(null);
-    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
-    try {
-        for(var _iterator = entries(object)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
-            var _step_value = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_step.value, 2), property = _step_value[0], value = _step_value[1];
-            var isPropertyExist = objectHasOwnProperty(object, property);
-            if (isPropertyExist) {
-                if (Array.isArray(value)) {
-                    newObject[property] = cleanArray(value);
-                } else if (value && (typeof value === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(value)) === 'object' && value.constructor === Object) {
-                    newObject[property] = clone(value);
-                } else {
-                    newObject[property] = value;
-                }
-            }
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally{
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-            }
-        } finally{
-            if (_didIteratorError) {
-                throw _iteratorError;
+    const newObject = create(null);
+    for (const [property, value] of entries(object)){
+        const isPropertyExist = objectHasOwnProperty(object, property);
+        if (isPropertyExist) {
+            if (Array.isArray(value)) {
+                newObject[property] = cleanArray(value);
+            } else if (value && typeof value === 'object' && value.constructor === Object) {
+                newObject[property] = clone(value);
+            } else {
+                newObject[property] = value;
             }
         }
     }
@@ -180,7 +153,7 @@ var typeErrorCreate = unconstruct(TypeError);
  * @returns The getter function found in the prototype chain or a fallback function.
  */ function lookupGetter(object, prop) {
     while(object !== null){
-        var desc = getOwnPropertyDescriptor(object, prop);
+        const desc = getOwnPropertyDescriptor(object, prop);
         if (desc) {
             if (desc.get) {
                 return unapply(desc.get);
@@ -196,7 +169,7 @@ var typeErrorCreate = unconstruct(TypeError);
     }
     return fallbackValue;
 }
-var html$1 = freeze([
+const html$1 = freeze([
     'a',
     'abbr',
     'acronym',
@@ -317,7 +290,7 @@ var html$1 = freeze([
     'video',
     'wbr'
 ]);
-var svg$1 = freeze([
+const svg$1 = freeze([
     'svg',
     'a',
     'altglyph',
@@ -366,7 +339,7 @@ var svg$1 = freeze([
     'view',
     'vkern'
 ]);
-var svgFilters = freeze([
+const svgFilters = freeze([
     'feBlend',
     'feColorMatrix',
     'feComponentTransfer',
@@ -397,7 +370,7 @@ var svgFilters = freeze([
 // We still need to know them so that we can do namespace
 // checks properly in case one wants to add them to
 // allow-list.
-var svgDisallowed = freeze([
+const svgDisallowed = freeze([
     'animate',
     'color-profile',
     'cursor',
@@ -421,7 +394,7 @@ var svgDisallowed = freeze([
     'unknown',
     'use'
 ]);
-var mathMl$1 = freeze([
+const mathMl$1 = freeze([
     'math',
     'menclose',
     'merror',
@@ -455,7 +428,7 @@ var mathMl$1 = freeze([
 ]);
 // Similarly to SVG, we want to know all MathML elements,
 // even those that we disallow by default.
-var mathMlDisallowed = freeze([
+const mathMlDisallowed = freeze([
     'maction',
     'maligngroup',
     'malignmark',
@@ -472,10 +445,10 @@ var mathMlDisallowed = freeze([
     'mprescripts',
     'none'
 ]);
-var text = freeze([
+const text = freeze([
     '#text'
 ]);
-var html = freeze([
+const html = freeze([
     'accept',
     'action',
     'align',
@@ -594,7 +567,7 @@ var html = freeze([
     'xmlns',
     'slot'
 ]);
-var svg = freeze([
+const svg = freeze([
     'accent-height',
     'accumulate',
     'additive',
@@ -784,7 +757,7 @@ var svg = freeze([
     'z',
     'zoomandpan'
 ]);
-var mathMl = freeze([
+const mathMl = freeze([
     'accent',
     'accentunder',
     'align',
@@ -839,7 +812,7 @@ var mathMl = freeze([
     'width',
     'xmlns'
 ]);
-var xml = freeze([
+const xml = freeze([
     'xlink:href',
     'xml:id',
     'xlink:title',
@@ -847,18 +820,18 @@ var xml = freeze([
     'xmlns:xlink'
 ]);
 // eslint-disable-next-line unicorn/better-regex
-var MUSTACHE_EXPR = seal(/\{\{[\w\W]*|[\w\W]*\}\}/gm); // Specify template detection regex for SAFE_FOR_TEMPLATES mode
-var ERB_EXPR = seal(/<%[\w\W]*|[\w\W]*%>/gm);
-var TMPLIT_EXPR = seal(/\$\{[\w\W]*/gm); // eslint-disable-line unicorn/better-regex
-var DATA_ATTR = seal(/^data-[\-\w.\u00B7-\uFFFF]+$/); // eslint-disable-line no-useless-escape
-var ARIA_ATTR = seal(/^aria-[\-\w]+$/); // eslint-disable-line no-useless-escape
-var IS_ALLOWED_URI = seal(/^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|matrix):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i // eslint-disable-line no-useless-escape
+const MUSTACHE_EXPR = seal(/\{\{[\w\W]*|[\w\W]*\}\}/gm); // Specify template detection regex for SAFE_FOR_TEMPLATES mode
+const ERB_EXPR = seal(/<%[\w\W]*|[\w\W]*%>/gm);
+const TMPLIT_EXPR = seal(/\$\{[\w\W]*/gm); // eslint-disable-line unicorn/better-regex
+const DATA_ATTR = seal(/^data-[\-\w.\u00B7-\uFFFF]+$/); // eslint-disable-line no-useless-escape
+const ARIA_ATTR = seal(/^aria-[\-\w]+$/); // eslint-disable-line no-useless-escape
+const IS_ALLOWED_URI = seal(/^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|matrix):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i // eslint-disable-line no-useless-escape
 );
-var IS_SCRIPT_OR_DATA = seal(/^(?:\w+script|data):/i);
-var ATTR_WHITESPACE = seal(/[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205F\u3000]/g // eslint-disable-line no-control-regex
+const IS_SCRIPT_OR_DATA = seal(/^(?:\w+script|data):/i);
+const ATTR_WHITESPACE = seal(/[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205F\u3000]/g // eslint-disable-line no-control-regex
 );
-var DOCTYPE_NAME = seal(/^html$/i);
-var CUSTOM_ELEMENT = seal(/^[a-z][.\w]*(-[.\w]+)+$/i);
+const DOCTYPE_NAME = seal(/^html$/i);
+const CUSTOM_ELEMENT = seal(/^[a-z][.\w]*(-[.\w]+)+$/i);
 var EXPRESSIONS = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     ARIA_ATTR: ARIA_ATTR,
@@ -873,7 +846,7 @@ var EXPRESSIONS = /*#__PURE__*/ Object.freeze({
     TMPLIT_EXPR: TMPLIT_EXPR
 });
 /* eslint-disable @typescript-eslint/indent */ // https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
-var NODE_TYPE = {
+const NODE_TYPE = {
     element: 1,
     attribute: 2,
     text: 3,
@@ -889,7 +862,7 @@ var NODE_TYPE = {
     documentFragment: 11,
     notation: 12 // Deprecated
 };
-var getGlobal = function getGlobal() {
+const getGlobal = function getGlobal() {
     return typeof window === 'undefined' ? null : window;
 };
 /**
@@ -899,25 +872,25 @@ var getGlobal = function getGlobal() {
  * @param purifyHostElement The Script element used to load DOMPurify (to determine policy name suffix).
  * @return The policy created (or null, if Trusted Types
  * are not supported or creating the policy failed).
- */ var _createTrustedTypesPolicy = function _createTrustedTypesPolicy(trustedTypes, purifyHostElement) {
-    if ((typeof trustedTypes === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(trustedTypes)) !== 'object' || typeof trustedTypes.createPolicy !== 'function') {
+ */ const _createTrustedTypesPolicy = function _createTrustedTypesPolicy(trustedTypes, purifyHostElement) {
+    if (typeof trustedTypes !== 'object' || typeof trustedTypes.createPolicy !== 'function') {
         return null;
     }
     // Allow the callers to control the unique policy name
     // by adding a data-tt-policy-suffix to the script element with the DOMPurify.
     // Policy creation with duplicate names throws in Trusted Types.
-    var suffix = null;
-    var ATTR_NAME = 'data-tt-policy-suffix';
+    let suffix = null;
+    const ATTR_NAME = 'data-tt-policy-suffix';
     if (purifyHostElement && purifyHostElement.hasAttribute(ATTR_NAME)) {
         suffix = purifyHostElement.getAttribute(ATTR_NAME);
     }
-    var policyName = 'dompurify' + (suffix ? '#' + suffix : '');
+    const policyName = 'dompurify' + (suffix ? '#' + suffix : '');
     try {
         return trustedTypes.createPolicy(policyName, {
-            createHTML: function createHTML(html) {
+            createHTML (html) {
                 return html;
             },
-            createScriptURL: function createScriptURL(scriptUrl) {
+            createScriptURL (scriptUrl) {
                 return scriptUrl;
             }
         });
@@ -929,7 +902,7 @@ var getGlobal = function getGlobal() {
         return null;
     }
 };
-var _createHooksMap = function _createHooksMap() {
+const _createHooksMap = function _createHooksMap() {
     return {
         afterSanitizeAttributes: [],
         afterSanitizeElements: [],
@@ -943,10 +916,8 @@ var _createHooksMap = function _createHooksMap() {
     };
 };
 function createDOMPurify() {
-    var window1 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : getGlobal();
-    var DOMPurify = function DOMPurify(root) {
-        return createDOMPurify(root);
-    };
+    let window1 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : getGlobal();
+    const DOMPurify = (root)=>createDOMPurify(root);
     DOMPurify.version = '3.3.3';
     DOMPurify.removed = [];
     if (!window1 || !window1.document || window1.document.nodeType !== NODE_TYPE.document || !window1.Element) {
@@ -955,16 +926,16 @@ function createDOMPurify() {
         DOMPurify.isSupported = false;
         return DOMPurify;
     }
-    var document = window1.document;
-    var originalDocument = document;
-    var currentScript = originalDocument.currentScript;
-    var DocumentFragment = window1.DocumentFragment, HTMLTemplateElement = window1.HTMLTemplateElement, Node = window1.Node, Element = window1.Element, NodeFilter = window1.NodeFilter, _window_NamedNodeMap = window1.NamedNodeMap, NamedNodeMap = _window_NamedNodeMap === void 0 ? window1.NamedNodeMap || window1.MozNamedAttrMap : _window_NamedNodeMap, HTMLFormElement = window1.HTMLFormElement, DOMParser = window1.DOMParser, trustedTypes = window1.trustedTypes;
-    var ElementPrototype = Element.prototype;
-    var cloneNode = lookupGetter(ElementPrototype, 'cloneNode');
-    var remove = lookupGetter(ElementPrototype, 'remove');
-    var getNextSibling = lookupGetter(ElementPrototype, 'nextSibling');
-    var getChildNodes = lookupGetter(ElementPrototype, 'childNodes');
-    var getParentNode = lookupGetter(ElementPrototype, 'parentNode');
+    let { document } = window1;
+    const originalDocument = document;
+    const currentScript = originalDocument.currentScript;
+    const { DocumentFragment, HTMLTemplateElement, Node, Element, NodeFilter, NamedNodeMap = window1.NamedNodeMap || window1.MozNamedAttrMap, HTMLFormElement, DOMParser, trustedTypes } = window1;
+    const ElementPrototype = Element.prototype;
+    const cloneNode = lookupGetter(ElementPrototype, 'cloneNode');
+    const remove = lookupGetter(ElementPrototype, 'remove');
+    const getNextSibling = lookupGetter(ElementPrototype, 'nextSibling');
+    const getChildNodes = lookupGetter(ElementPrototype, 'childNodes');
+    const getParentNode = lookupGetter(ElementPrototype, 'parentNode');
     // As per issue #47, the web-components registry is inherited by a
     // new document created via createHTMLDocument. As per the spec
     // (http://w3c.github.io/webcomponents/spec/custom/#creating-and-passing-registries)
@@ -972,34 +943,45 @@ function createDOMPurify() {
     // document, so we use that as our parent document to ensure nothing
     // is inherited.
     if (typeof HTMLTemplateElement === 'function') {
-        var template = document.createElement('template');
+        const template = document.createElement('template');
         if (template.content && template.content.ownerDocument) {
             document = template.content.ownerDocument;
         }
     }
-    var trustedTypesPolicy;
-    var emptyHTML = '';
-    var implementation = document.implementation, createNodeIterator = document.createNodeIterator, createDocumentFragment = document.createDocumentFragment, getElementsByTagName = document.getElementsByTagName;
-    var importNode = originalDocument.importNode;
-    var hooks = _createHooksMap();
+    let trustedTypesPolicy;
+    let emptyHTML = '';
+    const { implementation, createNodeIterator, createDocumentFragment, getElementsByTagName } = document;
+    const { importNode } = originalDocument;
+    let hooks = _createHooksMap();
     /**
    * Expose whether this browser supports running the full DOMPurify.
    */ DOMPurify.isSupported = typeof entries === 'function' && typeof getParentNode === 'function' && implementation && implementation.createHTMLDocument !== undefined;
-    var MUSTACHE_EXPR = EXPRESSIONS.MUSTACHE_EXPR, ERB_EXPR = EXPRESSIONS.ERB_EXPR, TMPLIT_EXPR = EXPRESSIONS.TMPLIT_EXPR, DATA_ATTR = EXPRESSIONS.DATA_ATTR, ARIA_ATTR = EXPRESSIONS.ARIA_ATTR, IS_SCRIPT_OR_DATA = EXPRESSIONS.IS_SCRIPT_OR_DATA, ATTR_WHITESPACE = EXPRESSIONS.ATTR_WHITESPACE, CUSTOM_ELEMENT = EXPRESSIONS.CUSTOM_ELEMENT;
-    var IS_ALLOWED_URI$1 = EXPRESSIONS.IS_ALLOWED_URI;
+    const { MUSTACHE_EXPR, ERB_EXPR, TMPLIT_EXPR, DATA_ATTR, ARIA_ATTR, IS_SCRIPT_OR_DATA, ATTR_WHITESPACE, CUSTOM_ELEMENT } = EXPRESSIONS;
+    let { IS_ALLOWED_URI: IS_ALLOWED_URI$1 } = EXPRESSIONS;
     /**
    * We consider the elements and attributes below to be safe. Ideally
    * don't add any new ones but feel free to remove unwanted ones.
-   */ /* allowed element names */ var ALLOWED_TAGS = null;
-    var DEFAULT_ALLOWED_TAGS = addToSet({}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(html$1).concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(svg$1), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(svgFilters), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(mathMl$1), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(text)));
-    /* Allowed attribute names */ var ALLOWED_ATTR = null;
-    var DEFAULT_ALLOWED_ATTR = addToSet({}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(html).concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(svg), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(mathMl), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(xml)));
+   */ /* allowed element names */ let ALLOWED_TAGS = null;
+    const DEFAULT_ALLOWED_TAGS = addToSet({}, [
+        ...html$1,
+        ...svg$1,
+        ...svgFilters,
+        ...mathMl$1,
+        ...text
+    ]);
+    /* Allowed attribute names */ let ALLOWED_ATTR = null;
+    const DEFAULT_ALLOWED_ATTR = addToSet({}, [
+        ...html,
+        ...svg,
+        ...mathMl,
+        ...xml
+    ]);
     /*
    * Configure how DOMPurify should handle custom elements and their attributes as well as customized built-in elements.
    * @property {RegExp|Function|null} tagNameCheck one of [null, regexPattern, predicate]. Default: `null` (disallow any custom elements)
    * @property {RegExp|Function|null} attributeNameCheck one of [null, regexPattern, predicate]. Default: `null` (disallow any attributes not on the allow list)
    * @property {boolean} allowCustomizedBuiltInElements allow custom elements derived from built-ins if they pass CUSTOM_ELEMENT_HANDLING.tagNameCheck. Default: `false`.
-   */ var CUSTOM_ELEMENT_HANDLING = Object.seal(create(null, {
+   */ let CUSTOM_ELEMENT_HANDLING = Object.seal(create(null, {
         tagNameCheck: {
             writable: true,
             configurable: false,
@@ -1019,9 +1001,9 @@ function createDOMPurify() {
             value: false
         }
     }));
-    /* Explicitly forbidden tags (overrides ALLOWED_TAGS/ADD_TAGS) */ var FORBID_TAGS = null;
-    /* Explicitly forbidden attributes (overrides ALLOWED_ATTR/ADD_ATTR) */ var FORBID_ATTR = null;
-    /* Config object to store ADD_TAGS/ADD_ATTR functions (when used as functions) */ var EXTRA_ELEMENT_HANDLING = Object.seal(create(null, {
+    /* Explicitly forbidden tags (overrides ALLOWED_TAGS/ADD_TAGS) */ let FORBID_TAGS = null;
+    /* Explicitly forbidden attributes (overrides ALLOWED_ATTR/ADD_ATTR) */ let FORBID_ATTR = null;
+    /* Config object to store ADD_TAGS/ADD_ATTR functions (when used as functions) */ const EXTRA_ELEMENT_HANDLING = Object.seal(create(null, {
         tagCheck: {
             writable: true,
             configurable: false,
@@ -1035,32 +1017,32 @@ function createDOMPurify() {
             value: null
         }
     }));
-    /* Decide if ARIA attributes are okay */ var ALLOW_ARIA_ATTR = true;
-    /* Decide if custom data attributes are okay */ var ALLOW_DATA_ATTR = true;
-    /* Decide if unknown protocols are okay */ var ALLOW_UNKNOWN_PROTOCOLS = false;
+    /* Decide if ARIA attributes are okay */ let ALLOW_ARIA_ATTR = true;
+    /* Decide if custom data attributes are okay */ let ALLOW_DATA_ATTR = true;
+    /* Decide if unknown protocols are okay */ let ALLOW_UNKNOWN_PROTOCOLS = false;
     /* Decide if self-closing tags in attributes are allowed.
-   * Usually removed due to a mXSS issue in jQuery 3.0 */ var ALLOW_SELF_CLOSE_IN_ATTR = true;
+   * Usually removed due to a mXSS issue in jQuery 3.0 */ let ALLOW_SELF_CLOSE_IN_ATTR = true;
     /* Output should be safe for common template engines.
    * This means, DOMPurify removes data attributes, mustaches and ERB
-   */ var SAFE_FOR_TEMPLATES = false;
+   */ let SAFE_FOR_TEMPLATES = false;
     /* Output should be safe even for XML used within HTML and alike.
    * This means, DOMPurify removes comments when containing risky content.
-   */ var SAFE_FOR_XML = true;
-    /* Decide if document with <html>... should be returned */ var WHOLE_DOCUMENT = false;
-    /* Track whether config is already set on this instance of DOMPurify. */ var SET_CONFIG = false;
+   */ let SAFE_FOR_XML = true;
+    /* Decide if document with <html>... should be returned */ let WHOLE_DOCUMENT = false;
+    /* Track whether config is already set on this instance of DOMPurify. */ let SET_CONFIG = false;
     /* Decide if all elements (e.g. style, script) must be children of
-   * document.body. By default, browsers might move them to document.head */ var FORCE_BODY = false;
+   * document.body. By default, browsers might move them to document.head */ let FORCE_BODY = false;
     /* Decide if a DOM `HTMLBodyElement` should be returned, instead of a html
    * string (or a TrustedHTML object if Trusted Types are supported).
    * If `WHOLE_DOCUMENT` is enabled a `HTMLHtmlElement` will be returned instead
-   */ var RETURN_DOM = false;
+   */ let RETURN_DOM = false;
     /* Decide if a DOM `DocumentFragment` should be returned, instead of a html
-   * string  (or a TrustedHTML object if Trusted Types are supported) */ var RETURN_DOM_FRAGMENT = false;
+   * string  (or a TrustedHTML object if Trusted Types are supported) */ let RETURN_DOM_FRAGMENT = false;
     /* Try to return a Trusted Type object instead of a string, return a string in
-   * case Trusted Types are not supported  */ var RETURN_TRUSTED_TYPE = false;
+   * case Trusted Types are not supported  */ let RETURN_TRUSTED_TYPE = false;
     /* Output should be free from DOM clobbering attacks?
    * This sanitizes markups named with colliding, clobberable built-in DOM APIs.
-   */ var SANITIZE_DOM = true;
+   */ let SANITIZE_DOM = true;
     /* Achieve full DOM Clobbering protection by isolating the namespace of named
    * properties and JS variables, mitigating attacks that abuse the HTML/DOM spec rules.
    *
@@ -1073,14 +1055,14 @@ function createDOMPurify() {
    *
    * Namespace isolation is implemented by prefixing `id` and `name` attributes
    * with a constant string, i.e., `user-content-`
-   */ var SANITIZE_NAMED_PROPS = false;
-    var SANITIZE_NAMED_PROPS_PREFIX = 'user-content-';
-    /* Keep element content when removing element? */ var KEEP_CONTENT = true;
+   */ let SANITIZE_NAMED_PROPS = false;
+    const SANITIZE_NAMED_PROPS_PREFIX = 'user-content-';
+    /* Keep element content when removing element? */ let KEEP_CONTENT = true;
     /* If a `Node` is passed to sanitize(), then performs sanitization in-place instead
-   * of importing it into a new Document and returning a sanitized copy */ var IN_PLACE = false;
-    /* Allow usage of profiles like html, svg and mathMl */ var USE_PROFILES = {};
-    /* Tags to ignore content of when KEEP_CONTENT is true */ var FORBID_CONTENTS = null;
-    var DEFAULT_FORBID_CONTENTS = addToSet({}, [
+   * of importing it into a new Document and returning a sanitized copy */ let IN_PLACE = false;
+    /* Allow usage of profiles like html, svg and mathMl */ let USE_PROFILES = {};
+    /* Tags to ignore content of when KEEP_CONTENT is true */ let FORBID_CONTENTS = null;
+    const DEFAULT_FORBID_CONTENTS = addToSet({}, [
         'annotation-xml',
         'audio',
         'colgroup',
@@ -1107,8 +1089,8 @@ function createDOMPurify() {
         'video',
         'xmp'
     ]);
-    /* Tags that are safe for data: URIs */ var DATA_URI_TAGS = null;
-    var DEFAULT_DATA_URI_TAGS = addToSet({}, [
+    /* Tags that are safe for data: URIs */ let DATA_URI_TAGS = null;
+    const DEFAULT_DATA_URI_TAGS = addToSet({}, [
         'audio',
         'video',
         'img',
@@ -1116,8 +1098,8 @@ function createDOMPurify() {
         'image',
         'track'
     ]);
-    /* Attributes safe for values like "javascript:" */ var URI_SAFE_ATTRIBUTES = null;
-    var DEFAULT_URI_SAFE_ATTRIBUTES = addToSet({}, [
+    /* Attributes safe for values like "javascript:" */ let URI_SAFE_ATTRIBUTES = null;
+    const DEFAULT_URI_SAFE_ATTRIBUTES = addToSet({}, [
         'alt',
         'class',
         'for',
@@ -1133,61 +1115,61 @@ function createDOMPurify() {
         'style',
         'xmlns'
     ]);
-    var MATHML_NAMESPACE = 'http://www.w3.org/1998/Math/MathML';
-    var SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
-    var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
-    /* Document namespace */ var NAMESPACE = HTML_NAMESPACE;
-    var IS_EMPTY_INPUT = false;
-    /* Allowed XHTML+XML namespaces */ var ALLOWED_NAMESPACES = null;
-    var DEFAULT_ALLOWED_NAMESPACES = addToSet({}, [
+    const MATHML_NAMESPACE = 'http://www.w3.org/1998/Math/MathML';
+    const SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
+    const HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
+    /* Document namespace */ let NAMESPACE = HTML_NAMESPACE;
+    let IS_EMPTY_INPUT = false;
+    /* Allowed XHTML+XML namespaces */ let ALLOWED_NAMESPACES = null;
+    const DEFAULT_ALLOWED_NAMESPACES = addToSet({}, [
         MATHML_NAMESPACE,
         SVG_NAMESPACE,
         HTML_NAMESPACE
     ], stringToString);
-    var MATHML_TEXT_INTEGRATION_POINTS = addToSet({}, [
+    let MATHML_TEXT_INTEGRATION_POINTS = addToSet({}, [
         'mi',
         'mo',
         'mn',
         'ms',
         'mtext'
     ]);
-    var HTML_INTEGRATION_POINTS = addToSet({}, [
+    let HTML_INTEGRATION_POINTS = addToSet({}, [
         'annotation-xml'
     ]);
     // Certain elements are allowed in both SVG and HTML
     // namespace. We need to specify them explicitly
     // so that they don't get erroneously deleted from
     // HTML namespace.
-    var COMMON_SVG_AND_HTML_ELEMENTS = addToSet({}, [
+    const COMMON_SVG_AND_HTML_ELEMENTS = addToSet({}, [
         'title',
         'style',
         'font',
         'a',
         'script'
     ]);
-    /* Parsing of strict XHTML documents */ var PARSER_MEDIA_TYPE = null;
-    var SUPPORTED_PARSER_MEDIA_TYPES = [
+    /* Parsing of strict XHTML documents */ let PARSER_MEDIA_TYPE = null;
+    const SUPPORTED_PARSER_MEDIA_TYPES = [
         'application/xhtml+xml',
         'text/html'
     ];
-    var DEFAULT_PARSER_MEDIA_TYPE = 'text/html';
-    var transformCaseFunc = null;
-    /* Keep a reference to config to pass to hooks */ var CONFIG = null;
-    /* Ideally, do not touch anything below this line */ /* ______________________________________________ */ var formElement = document.createElement('form');
-    var isRegexOrFunction = function isRegexOrFunction(testValue) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(testValue, RegExp) || (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(testValue, Function);
+    const DEFAULT_PARSER_MEDIA_TYPE = 'text/html';
+    let transformCaseFunc = null;
+    /* Keep a reference to config to pass to hooks */ let CONFIG = null;
+    /* Ideally, do not touch anything below this line */ /* ______________________________________________ */ const formElement = document.createElement('form');
+    const isRegexOrFunction = function isRegexOrFunction(testValue) {
+        return testValue instanceof RegExp || testValue instanceof Function;
     };
     /**
    * _parseConfig
    *
    * @param cfg optional config literal
    */ // eslint-disable-next-line complexity
-    var _parseConfig = function _parseConfig() {
-        var cfg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    const _parseConfig = function _parseConfig() {
+        let cfg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         if (CONFIG && CONFIG === cfg) {
             return;
         }
-        /* Shield configuration object from tampering */ if (!cfg || (typeof cfg === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(cfg)) !== 'object') {
+        /* Shield configuration object from tampering */ if (!cfg || typeof cfg !== 'object') {
             cfg = {};
         }
         /* Shield configuration object from prototype pollution */ cfg = clone(cfg);
@@ -1349,15 +1331,22 @@ function createDOMPurify() {
     };
     /* Keep track of all possible SVG and MathML tags
    * so that we can perform the namespace checks
-   * correctly. */ var ALL_SVG_TAGS = addToSet({}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(svg$1).concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(svgFilters), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(svgDisallowed)));
-    var ALL_MATHML_TAGS = addToSet({}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(mathMl$1).concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(mathMlDisallowed)));
+   * correctly. */ const ALL_SVG_TAGS = addToSet({}, [
+        ...svg$1,
+        ...svgFilters,
+        ...svgDisallowed
+    ]);
+    const ALL_MATHML_TAGS = addToSet({}, [
+        ...mathMl$1,
+        ...mathMlDisallowed
+    ]);
     /**
    * @param element a DOM element whose namespace is being checked
    * @returns Return false if the element has a
    *  namespace that a spec-compliant parser would never
    *  return. Return true otherwise.
-   */ var _checkValidNamespace = function _checkValidNamespace(element) {
-        var parent = getParentNode(element);
+   */ const _checkValidNamespace = function _checkValidNamespace(element) {
+        let parent = getParentNode(element);
         // In JSDOM, if we're inside shadow DOM, then parentNode
         // can be null. We just simulate parent in this case.
         if (!parent || !parent.tagName) {
@@ -1366,8 +1355,8 @@ function createDOMPurify() {
                 tagName: 'template'
             };
         }
-        var tagName = stringToLowerCase(element.tagName);
-        var parentTagName = stringToLowerCase(parent.tagName);
+        const tagName = stringToLowerCase(element.tagName);
+        const parentTagName = stringToLowerCase(parent.tagName);
         if (!ALLOWED_NAMESPACES[element.namespaceURI]) {
             return false;
         }
@@ -1432,7 +1421,7 @@ function createDOMPurify() {
    * _forceRemove
    *
    * @param node a DOM node
-   */ var _forceRemove = function _forceRemove(node) {
+   */ const _forceRemove = function _forceRemove(node) {
         arrayPush(DOMPurify.removed, {
             element: node
         });
@@ -1448,7 +1437,7 @@ function createDOMPurify() {
    *
    * @param name an Attribute name
    * @param element a DOM node
-   */ var _removeAttribute = function _removeAttribute(name, element) {
+   */ const _removeAttribute = function _removeAttribute(name, element) {
         try {
             arrayPush(DOMPurify.removed, {
                 attribute: element.getAttributeNode(name),
@@ -1479,20 +1468,20 @@ function createDOMPurify() {
    *
    * @param dirty - a string of dirty markup
    * @return a DOM, filled with the dirty markup
-   */ var _initDocument = function _initDocument(dirty) {
-        /* Create a HTML document */ var doc = null;
-        var leadingWhitespace = null;
+   */ const _initDocument = function _initDocument(dirty) {
+        /* Create a HTML document */ let doc = null;
+        let leadingWhitespace = null;
         if (FORCE_BODY) {
             dirty = '<remove></remove>' + dirty;
         } else {
-            /* If FORCE_BODY isn't used, leading whitespace needs to be preserved manually */ var matches = stringMatch(dirty, /^[\r\n\t ]+/);
+            /* If FORCE_BODY isn't used, leading whitespace needs to be preserved manually */ const matches = stringMatch(dirty, /^[\r\n\t ]+/);
             leadingWhitespace = matches && matches[0];
         }
         if (PARSER_MEDIA_TYPE === 'application/xhtml+xml' && NAMESPACE === HTML_NAMESPACE) {
             // Root of XHTML doc must contain xmlns declaration (see https://www.w3.org/TR/xhtml1/normative.html#strict)
             dirty = '<html xmlns="http://www.w3.org/1999/xhtml"><head></head><body>' + dirty + '</body></html>';
         }
-        var dirtyPayload = trustedTypesPolicy ? trustedTypesPolicy.createHTML(dirty) : dirty;
+        const dirtyPayload = trustedTypesPolicy ? trustedTypesPolicy.createHTML(dirty) : dirty;
         /*
      * Use the DOMParser API by default, fallback later if needs be
      * DOMParser not work for svg when has multiple root element.
@@ -1509,7 +1498,7 @@ function createDOMPurify() {
             // Syntax error if dirtyPayload is invalid xml
             }
         }
-        var body = doc.body || doc.documentElement;
+        const body = doc.body || doc.documentElement;
         if (dirty && leadingWhitespace) {
             body.insertBefore(document.createTextNode(leadingWhitespace), body.childNodes[0] || null);
         }
@@ -1523,7 +1512,7 @@ function createDOMPurify() {
    *
    * @param root The root element or node to start traversing on.
    * @return The created NodeIterator
-   */ var _createNodeIterator = function _createNodeIterator(root) {
+   */ const _createNodeIterator = function _createNodeIterator(root) {
         return createNodeIterator.call(root.ownerDocument || root, root, // eslint-disable-next-line no-bitwise
         NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_COMMENT | NodeFilter.SHOW_TEXT | NodeFilter.SHOW_PROCESSING_INSTRUCTION | NodeFilter.SHOW_CDATA_SECTION, null);
     };
@@ -1532,19 +1521,19 @@ function createDOMPurify() {
    *
    * @param element element to check for clobbering attacks
    * @return true if clobbered, false if safe
-   */ var _isClobbered = function _isClobbered(element) {
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(element, HTMLFormElement) && (typeof element.nodeName !== 'string' || typeof element.textContent !== 'string' || typeof element.removeChild !== 'function' || !(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(element.attributes, NamedNodeMap) || typeof element.removeAttribute !== 'function' || typeof element.setAttribute !== 'function' || typeof element.namespaceURI !== 'string' || typeof element.insertBefore !== 'function' || typeof element.hasChildNodes !== 'function');
+   */ const _isClobbered = function _isClobbered(element) {
+        return element instanceof HTMLFormElement && (typeof element.nodeName !== 'string' || typeof element.textContent !== 'string' || typeof element.removeChild !== 'function' || !(element.attributes instanceof NamedNodeMap) || typeof element.removeAttribute !== 'function' || typeof element.setAttribute !== 'function' || typeof element.namespaceURI !== 'string' || typeof element.insertBefore !== 'function' || typeof element.hasChildNodes !== 'function');
     };
     /**
    * Checks whether the given object is a DOM node.
    *
    * @param value object to check whether it's a DOM node
    * @return true is object is a DOM node
-   */ var _isNode = function _isNode(value) {
-        return typeof Node === 'function' && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(value, Node);
+   */ const _isNode = function _isNode(value) {
+        return typeof Node === 'function' && value instanceof Node;
     };
     function _executeHooks(hooks, currentNode, data) {
-        arrayForEach(hooks, function(hook) {
+        arrayForEach(hooks, (hook)=>{
             hook.call(DOMPurify, currentNode, data, CONFIG);
         });
     }
@@ -1556,16 +1545,16 @@ function createDOMPurify() {
    * @protect removeChild
    * @param currentNode to check for permission to exist
    * @return true if node was killed, false if left alive
-   */ var _sanitizeElements = function _sanitizeElements(currentNode) {
-        var content = null;
+   */ const _sanitizeElements = function _sanitizeElements(currentNode) {
+        let content = null;
         /* Execute a hook if present */ _executeHooks(hooks.beforeSanitizeElements, currentNode, null);
         /* Check if element is clobbered or can clobber */ if (_isClobbered(currentNode)) {
             _forceRemove(currentNode);
             return true;
         }
-        /* Now let's check the element's type and name */ var tagName = transformCaseFunc(currentNode.nodeName);
+        /* Now let's check the element's type and name */ const tagName = transformCaseFunc(currentNode.nodeName);
         /* Execute a hook if present */ _executeHooks(hooks.uponSanitizeElement, currentNode, {
-            tagName: tagName,
+            tagName,
             allowedTags: ALLOWED_TAGS
         });
         /* Detect mXSS attempts abusing namespace confusion */ if (SAFE_FOR_XML && currentNode.hasChildNodes() && !_isNode(currentNode.firstElementChild) && regExpTest(/<[/\w!]/g, currentNode.innerHTML) && regExpTest(/<[/\w!]/g, currentNode.textContent)) {
@@ -1580,22 +1569,22 @@ function createDOMPurify() {
             _forceRemove(currentNode);
             return true;
         }
-        /* Remove element if anything forbids its presence */ if (!((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(EXTRA_ELEMENT_HANDLING.tagCheck, Function) && EXTRA_ELEMENT_HANDLING.tagCheck(tagName)) && (!ALLOWED_TAGS[tagName] || FORBID_TAGS[tagName])) {
+        /* Remove element if anything forbids its presence */ if (!(EXTRA_ELEMENT_HANDLING.tagCheck instanceof Function && EXTRA_ELEMENT_HANDLING.tagCheck(tagName)) && (!ALLOWED_TAGS[tagName] || FORBID_TAGS[tagName])) {
             /* Check if we have a custom element to handle */ if (!FORBID_TAGS[tagName] && _isBasicCustomElement(tagName)) {
-                if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(CUSTOM_ELEMENT_HANDLING.tagNameCheck, RegExp) && regExpTest(CUSTOM_ELEMENT_HANDLING.tagNameCheck, tagName)) {
+                if (CUSTOM_ELEMENT_HANDLING.tagNameCheck instanceof RegExp && regExpTest(CUSTOM_ELEMENT_HANDLING.tagNameCheck, tagName)) {
                     return false;
                 }
-                if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(CUSTOM_ELEMENT_HANDLING.tagNameCheck, Function) && CUSTOM_ELEMENT_HANDLING.tagNameCheck(tagName)) {
+                if (CUSTOM_ELEMENT_HANDLING.tagNameCheck instanceof Function && CUSTOM_ELEMENT_HANDLING.tagNameCheck(tagName)) {
                     return false;
                 }
             }
             /* Keep content except for bad-listed elements */ if (KEEP_CONTENT && !FORBID_CONTENTS[tagName]) {
-                var parentNode = getParentNode(currentNode) || currentNode.parentNode;
-                var childNodes = getChildNodes(currentNode) || currentNode.childNodes;
+                const parentNode = getParentNode(currentNode) || currentNode.parentNode;
+                const childNodes = getChildNodes(currentNode) || currentNode.childNodes;
                 if (childNodes && parentNode) {
-                    var childCount = childNodes.length;
-                    for(var i = childCount - 1; i >= 0; --i){
-                        var childClone = cloneNode(childNodes[i], true);
+                    const childCount = childNodes.length;
+                    for(let i = childCount - 1; i >= 0; --i){
+                        const childClone = cloneNode(childNodes[i], true);
                         childClone.__removalCount = (currentNode.__removalCount || 0) + 1;
                         parentNode.insertBefore(childClone, getNextSibling(currentNode));
                     }
@@ -1604,7 +1593,7 @@ function createDOMPurify() {
             _forceRemove(currentNode);
             return true;
         }
-        /* Check whether element has a valid namespace */ if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(currentNode, Element) && !_checkValidNamespace(currentNode)) {
+        /* Check whether element has a valid namespace */ if (currentNode instanceof Element && !_checkValidNamespace(currentNode)) {
             _forceRemove(currentNode);
             return true;
         }
@@ -1618,7 +1607,7 @@ function createDOMPurify() {
                 MUSTACHE_EXPR,
                 ERB_EXPR,
                 TMPLIT_EXPR
-            ], function(expr) {
+            ], (expr)=>{
                 content = stringReplace(content, expr, ' ');
             });
             if (currentNode.textContent !== content) {
@@ -1639,7 +1628,7 @@ function createDOMPurify() {
    * @param value Attribute value.
    * @return Returns true if `value` is valid, otherwise false.
    */ // eslint-disable-next-line complexity
-    var _isValidAttribute = function _isValidAttribute(lcTag, lcName, value) {
+    const _isValidAttribute = function _isValidAttribute(lcTag, lcName, value) {
         /* FORBID_ATTR must always win, even if ADD_ATTR predicate would allow it */ if (FORBID_ATTR[lcName]) {
             return false;
         }
@@ -1651,14 +1640,14 @@ function createDOMPurify() {
         XML-compatible (https://html.spec.whatwg.org/multipage/infrastructure.html#xml-compatible and http://www.w3.org/TR/xml/#d0e804)
         We don't need to check the value; it's always URI safe. */ if (ALLOW_DATA_ATTR && !FORBID_ATTR[lcName] && regExpTest(DATA_ATTR, lcName)) ;
         else if (ALLOW_ARIA_ATTR && regExpTest(ARIA_ATTR, lcName)) ;
-        else if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(EXTRA_ELEMENT_HANDLING.attributeCheck, Function) && EXTRA_ELEMENT_HANDLING.attributeCheck(lcName, lcTag)) ;
+        else if (EXTRA_ELEMENT_HANDLING.attributeCheck instanceof Function && EXTRA_ELEMENT_HANDLING.attributeCheck(lcName, lcTag)) ;
         else if (!ALLOWED_ATTR[lcName] || FORBID_ATTR[lcName]) {
             if (// First condition does a very basic check if a) it's basically a valid custom element tagname AND
             // b) if the tagName passes whatever the user has configured for CUSTOM_ELEMENT_HANDLING.tagNameCheck
             // and c) if the attribute name passes whatever the user has configured for CUSTOM_ELEMENT_HANDLING.attributeNameCheck
-            _isBasicCustomElement(lcTag) && ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(CUSTOM_ELEMENT_HANDLING.tagNameCheck, RegExp) && regExpTest(CUSTOM_ELEMENT_HANDLING.tagNameCheck, lcTag) || (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(CUSTOM_ELEMENT_HANDLING.tagNameCheck, Function) && CUSTOM_ELEMENT_HANDLING.tagNameCheck(lcTag)) && ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(CUSTOM_ELEMENT_HANDLING.attributeNameCheck, RegExp) && regExpTest(CUSTOM_ELEMENT_HANDLING.attributeNameCheck, lcName) || (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(CUSTOM_ELEMENT_HANDLING.attributeNameCheck, Function) && CUSTOM_ELEMENT_HANDLING.attributeNameCheck(lcName, lcTag)) || // Alternative, second condition checks if it's an `is`-attribute, AND
+            _isBasicCustomElement(lcTag) && (CUSTOM_ELEMENT_HANDLING.tagNameCheck instanceof RegExp && regExpTest(CUSTOM_ELEMENT_HANDLING.tagNameCheck, lcTag) || CUSTOM_ELEMENT_HANDLING.tagNameCheck instanceof Function && CUSTOM_ELEMENT_HANDLING.tagNameCheck(lcTag)) && (CUSTOM_ELEMENT_HANDLING.attributeNameCheck instanceof RegExp && regExpTest(CUSTOM_ELEMENT_HANDLING.attributeNameCheck, lcName) || CUSTOM_ELEMENT_HANDLING.attributeNameCheck instanceof Function && CUSTOM_ELEMENT_HANDLING.attributeNameCheck(lcName, lcTag)) || // Alternative, second condition checks if it's an `is`-attribute, AND
             // the value passes whatever the user has configured for CUSTOM_ELEMENT_HANDLING.tagNameCheck
-            lcName === 'is' && CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements && ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(CUSTOM_ELEMENT_HANDLING.tagNameCheck, RegExp) && regExpTest(CUSTOM_ELEMENT_HANDLING.tagNameCheck, value) || (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(CUSTOM_ELEMENT_HANDLING.tagNameCheck, Function) && CUSTOM_ELEMENT_HANDLING.tagNameCheck(value))) ;
+            lcName === 'is' && CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements && (CUSTOM_ELEMENT_HANDLING.tagNameCheck instanceof RegExp && regExpTest(CUSTOM_ELEMENT_HANDLING.tagNameCheck, value) || CUSTOM_ELEMENT_HANDLING.tagNameCheck instanceof Function && CUSTOM_ELEMENT_HANDLING.tagNameCheck(value))) ;
             else {
                 return false;
             }
@@ -1678,7 +1667,7 @@ function createDOMPurify() {
    *
    * @param tagName name of the tag of the node to sanitize
    * @returns Returns true if the tag name meets the basic criteria for a custom element, otherwise false.
-   */ var _isBasicCustomElement = function _isBasicCustomElement(tagName) {
+   */ const _isBasicCustomElement = function _isBasicCustomElement(tagName) {
         return tagName !== 'annotation-xml' && stringMatch(tagName, CUSTOM_ELEMENT);
     };
     /**
@@ -1690,13 +1679,26 @@ function createDOMPurify() {
    * @protect setAttribute
    *
    * @param currentNode to sanitize
-   */ var _sanitizeAttributes = function _sanitizeAttributes(currentNode) {
-        var _loop = function() {
-            var attr = attributes[l];
-            var name = attr.name, namespaceURI = attr.namespaceURI, attrValue = attr.value;
-            var lcName = transformCaseFunc(name);
-            var initValue = attrValue;
-            var value = name === 'value' ? initValue : stringTrim(initValue);
+   */ const _sanitizeAttributes = function _sanitizeAttributes(currentNode) {
+        /* Execute a hook if present */ _executeHooks(hooks.beforeSanitizeAttributes, currentNode, null);
+        const { attributes } = currentNode;
+        /* Check if we have attributes; if not we might have a text node */ if (!attributes || _isClobbered(currentNode)) {
+            return;
+        }
+        const hookEvent = {
+            attrName: '',
+            attrValue: '',
+            keepAttr: true,
+            allowedAttributes: ALLOWED_ATTR,
+            forceKeepAttr: undefined
+        };
+        let l = attributes.length;
+        /* Go backwards over all attributes; safely remove bad ones */ while(l--){
+            const attr = attributes[l];
+            const { name, namespaceURI, value: attrValue } = attr;
+            const lcName = transformCaseFunc(name);
+            const initValue = attrValue;
+            let value = name === 'value' ? initValue : stringTrim(initValue);
             /* Execute a hook if present */ hookEvent.attrName = lcName;
             hookEvent.attrValue = value;
             hookEvent.keepAttr = true;
@@ -1713,38 +1715,38 @@ function createDOMPurify() {
             }
             /* Work around a security issue with comments inside attributes */ if (SAFE_FOR_XML && regExpTest(/((--!?|])>)|<\/(style|script|title|xmp|textarea|noscript|iframe|noembed|noframes)/i, value)) {
                 _removeAttribute(name, currentNode);
-                return "continue";
+                continue;
             }
             /* Make sure we cannot easily use animated hrefs, even if animations are allowed */ if (lcName === 'attributename' && stringMatch(value, 'href')) {
                 _removeAttribute(name, currentNode);
-                return "continue";
+                continue;
             }
             /* Did the hooks approve of the attribute? */ if (hookEvent.forceKeepAttr) {
-                return "continue";
+                continue;
             }
             /* Did the hooks approve of the attribute? */ if (!hookEvent.keepAttr) {
                 _removeAttribute(name, currentNode);
-                return "continue";
+                continue;
             }
             /* Work around a security issue in jQuery 3.0 */ if (!ALLOW_SELF_CLOSE_IN_ATTR && regExpTest(/\/>/i, value)) {
                 _removeAttribute(name, currentNode);
-                return "continue";
+                continue;
             }
             /* Sanitize attribute content to be template-safe */ if (SAFE_FOR_TEMPLATES) {
                 arrayForEach([
                     MUSTACHE_EXPR,
                     ERB_EXPR,
                     TMPLIT_EXPR
-                ], function(expr) {
+                ], (expr)=>{
                     value = stringReplace(value, expr, ' ');
                 });
             }
-            /* Is `value` valid for this attribute? */ var lcTag = transformCaseFunc(currentNode.nodeName);
+            /* Is `value` valid for this attribute? */ const lcTag = transformCaseFunc(currentNode.nodeName);
             if (!_isValidAttribute(lcTag, lcName, value)) {
                 _removeAttribute(name, currentNode);
-                return "continue";
+                continue;
             }
-            /* Handle attributes that require Trusted Types */ if (trustedTypesPolicy && (typeof trustedTypes === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(trustedTypes)) === 'object' && typeof trustedTypes.getAttributeType === 'function') {
+            /* Handle attributes that require Trusted Types */ if (trustedTypesPolicy && typeof trustedTypes === 'object' && typeof trustedTypes.getAttributeType === 'function') {
                 if (namespaceURI) ;
                 else {
                     switch(trustedTypes.getAttributeType(lcTag, lcName)){
@@ -1777,36 +1779,22 @@ function createDOMPurify() {
                     _removeAttribute(name, currentNode);
                 }
             }
-        };
-        /* Execute a hook if present */ _executeHooks(hooks.beforeSanitizeAttributes, currentNode, null);
-        var attributes = currentNode.attributes;
-        /* Check if we have attributes; if not we might have a text node */ if (!attributes || _isClobbered(currentNode)) {
-            return;
         }
-        var hookEvent = {
-            attrName: '',
-            attrValue: '',
-            keepAttr: true,
-            allowedAttributes: ALLOWED_ATTR,
-            forceKeepAttr: undefined
-        };
-        var l = attributes.length;
-        /* Go backwards over all attributes; safely remove bad ones */ while(l--)_loop();
         /* Execute a hook if present */ _executeHooks(hooks.afterSanitizeAttributes, currentNode, null);
     };
     /**
    * _sanitizeShadowDOM
    *
    * @param fragment to iterate over recursively
-   */ var _sanitizeShadowDOM = function _sanitizeShadowDOM(fragment) {
-        var shadowNode = null;
-        var shadowIterator = _createNodeIterator(fragment);
+   */ const _sanitizeShadowDOM = function _sanitizeShadowDOM(fragment) {
+        let shadowNode = null;
+        const shadowIterator = _createNodeIterator(fragment);
         /* Execute a hook if present */ _executeHooks(hooks.beforeSanitizeShadowDOM, fragment, null);
         while(shadowNode = shadowIterator.nextNode()){
             /* Execute a hook if present */ _executeHooks(hooks.uponSanitizeShadowNode, shadowNode, null);
             /* Sanitize tags and elements */ _sanitizeElements(shadowNode);
             /* Check attributes next */ _sanitizeAttributes(shadowNode);
-            /* Deep shadow DOM detected */ if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(shadowNode.content, DocumentFragment)) {
+            /* Deep shadow DOM detected */ if (shadowNode.content instanceof DocumentFragment) {
                 _sanitizeShadowDOM(shadowNode.content);
             }
         }
@@ -1814,11 +1802,11 @@ function createDOMPurify() {
     };
     // eslint-disable-next-line complexity
     DOMPurify.sanitize = function(dirty) {
-        var cfg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-        var body = null;
-        var importedNode = null;
-        var currentNode = null;
-        var returnNode = null;
+        let cfg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        let body = null;
+        let importedNode = null;
+        let currentNode = null;
+        let returnNode = null;
         /* Make sure we have a string to sanitize.
       DO NOT return early, as this will return the wrong type if
       the user has requested a DOM object rather than a string */ IS_EMPTY_INPUT = !dirty;
@@ -1847,12 +1835,12 @@ function createDOMPurify() {
         }
         if (IN_PLACE) {
             /* Do some early pre-sanitization to avoid unsafe root nodes */ if (dirty.nodeName) {
-                var tagName = transformCaseFunc(dirty.nodeName);
+                const tagName = transformCaseFunc(dirty.nodeName);
                 if (!ALLOWED_TAGS[tagName] || FORBID_TAGS[tagName]) {
                     throw typeErrorCreate('root node is forbidden and cannot be sanitized in-place');
                 }
             }
-        } else if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(dirty, Node)) {
+        } else if (dirty instanceof Node) {
             /* If dirty is a DOM element, append to an empty document to avoid
          elements being stripped by the parser */ body = _initDocument('<!---->');
             importedNode = body.ownerDocument.importNode(dirty, true);
@@ -1877,11 +1865,11 @@ function createDOMPurify() {
         /* Remove first element node (ours) if FORCE_BODY is set */ if (body && FORCE_BODY) {
             _forceRemove(body.firstChild);
         }
-        /* Get node iterator */ var nodeIterator = _createNodeIterator(IN_PLACE ? dirty : body);
+        /* Get node iterator */ const nodeIterator = _createNodeIterator(IN_PLACE ? dirty : body);
         /* Now start iterating over the created document */ while(currentNode = nodeIterator.nextNode()){
             /* Sanitize tags and elements */ _sanitizeElements(currentNode);
             /* Check attributes next */ _sanitizeAttributes(currentNode);
-            /* Shadow DOM detected, sanitize it */ if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(currentNode.content, DocumentFragment)) {
+            /* Shadow DOM detected, sanitize it */ if (currentNode.content instanceof DocumentFragment) {
                 _sanitizeShadowDOM(currentNode.content);
             }
         }
@@ -1909,7 +1897,7 @@ function createDOMPurify() {
             }
             return returnNode;
         }
-        var serializedHTML = WHOLE_DOCUMENT ? body.outerHTML : body.innerHTML;
+        let serializedHTML = WHOLE_DOCUMENT ? body.outerHTML : body.innerHTML;
         /* Serialize doctype if allowed */ if (WHOLE_DOCUMENT && ALLOWED_TAGS['!doctype'] && body.ownerDocument && body.ownerDocument.doctype && body.ownerDocument.doctype.name && regExpTest(DOCTYPE_NAME, body.ownerDocument.doctype.name)) {
             serializedHTML = '<!DOCTYPE ' + body.ownerDocument.doctype.name + '>\n' + serializedHTML;
         }
@@ -1918,14 +1906,14 @@ function createDOMPurify() {
                 MUSTACHE_EXPR,
                 ERB_EXPR,
                 TMPLIT_EXPR
-            ], function(expr) {
+            ], (expr)=>{
                 serializedHTML = stringReplace(serializedHTML, expr, ' ');
             });
         }
         return trustedTypesPolicy && RETURN_TRUSTED_TYPE ? trustedTypesPolicy.createHTML(serializedHTML) : serializedHTML;
     };
     DOMPurify.setConfig = function() {
-        var cfg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        let cfg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         _parseConfig(cfg);
         SET_CONFIG = true;
     };
@@ -1937,8 +1925,8 @@ function createDOMPurify() {
         /* Initialize shared config vars if necessary. */ if (!CONFIG) {
             _parseConfig({});
         }
-        var lcTag = transformCaseFunc(tag);
-        var lcName = transformCaseFunc(attr);
+        const lcTag = transformCaseFunc(tag);
+        const lcName = transformCaseFunc(attr);
         return _isValidAttribute(lcTag, lcName, value);
     };
     DOMPurify.addHook = function(entryPoint, hookFunction) {
@@ -1949,7 +1937,7 @@ function createDOMPurify() {
     };
     DOMPurify.removeHook = function(entryPoint, hookFunction) {
         if (hookFunction !== undefined) {
-            var index = arrayLastIndexOf(hooks[entryPoint], hookFunction);
+            const index = arrayLastIndexOf(hooks[entryPoint], hookFunction);
             return index === -1 ? undefined : arraySplice(hooks[entryPoint], index, 1)[0];
         }
         return arrayPop(hooks[entryPoint]);

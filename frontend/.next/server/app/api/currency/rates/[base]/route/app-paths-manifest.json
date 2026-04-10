@@ -1,0 +1,3 @@
+{
+  "/api/currency/rates/[base]/route": "app/api/currency/rates/[base]/route.js"
+}

@@ -2,7 +2,13 @@
 const nextConfig = {
   serverExternalPackages: ['bcryptjs', 'jsonwebtoken'],
   reactStrictMode: true,
-  allowedDevOrigins: ['hebrew-month-view.cluster-8.preview.emergentcf.cloud'],
+  allowedDevOrigins: [
+    'hebrew-month-view.preview.emergentagent.com',
+    'hebrew-month-view.cluster-8.preview.emergentcf.cloud',
+  ],
+  turbopack: {
+    root: '/app',
+  },
   async headers() {
     return [
       {

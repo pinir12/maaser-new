@@ -14,7 +14,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f4
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
 ;
 ;
-var arrayTooltipSearcher = function arrayTooltipSearcher(data, strIndex) {
+var arrayTooltipSearcher = (data, strIndex)=>{
     if (!strIndex) return undefined;
     if (!Array.isArray(data)) return undefined;
     var numIndex = Number.parseInt(strIndex, 10);
@@ -25,17 +25,15 @@ var arrayTooltipSearcher = function arrayTooltipSearcher(data, strIndex) {
 };
 var initialState = {
     chartName: '',
-    tooltipPayloadSearcher: function tooltipPayloadSearcher() {
-        return undefined;
-    },
+    tooltipPayloadSearcher: ()=>undefined,
     eventEmitter: undefined,
     defaultTooltipEventType: 'axis'
 };
 var optionsSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'options',
-    initialState: initialState,
+    initialState,
     reducers: {
-        createEventEmitter: function createEventEmitter(state) {
+        createEventEmitter: (state)=>{
             if (state.eventEmitter == null) {
                 state.eventEmitter = Symbol('rechartsEventEmitter');
             }
@@ -43,7 +41,7 @@ var optionsSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$
     }
 });
 var optionsReducer = optionsSlice.reducer;
-var createEventEmitter = optionsSlice.actions.createEventEmitter;
+var { createEventEmitter } = optionsSlice.actions;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/tooltipSlice.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -128,17 +126,17 @@ var initialState = {
  * with the whole chart, not with a specific graphical item.
  */ var tooltipSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'tooltip',
-    initialState: initialState,
+    initialState,
     reducers: {
         addTooltipEntrySettings: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 state.tooltipItemPayloads.push((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload));
             },
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         replaceTooltipEntrySettings: {
-            reducer: function reducer(state, action) {
-                var _action_payload = action.payload, prev = _action_payload.prev, next = _action_payload.next;
+            reducer (state, action) {
+                var { prev, next } = action.payload;
                 var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).tooltipItemPayloads.indexOf((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(prev));
                 if (index > -1) {
                     state.tooltipItemPayloads[index] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(next);
@@ -147,7 +145,7 @@ var initialState = {
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         removeTooltipEntrySettings: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).tooltipItemPayloads.indexOf((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload));
                 if (index > -1) {
                     state.tooltipItemPayloads.splice(index, 1);
@@ -155,10 +153,10 @@ var initialState = {
             },
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
-        setTooltipSettingsState: function setTooltipSettingsState(state, action) {
+        setTooltipSettingsState (state, action) {
             state.settings = action.payload;
         },
-        setActiveMouseOverItemIndex: function setActiveMouseOverItemIndex(state, action) {
+        setActiveMouseOverItemIndex (state, action) {
             state.syncInteraction.active = false;
             state.syncInteraction.sourceViewBox = undefined;
             state.keyboardInteraction.active = false;
@@ -168,7 +166,7 @@ var initialState = {
             state.itemInteraction.hover.graphicalItemId = action.payload.activeGraphicalItemId;
             state.itemInteraction.hover.coordinate = action.payload.activeCoordinate;
         },
-        mouseLeaveChart: function mouseLeaveChart(state) {
+        mouseLeaveChart (state) {
             /*
        * Clear only the active flags. Why?
        * 1. Keep Coordinate to preserve animation - next time the Tooltip appears, we want to render it from
@@ -178,10 +176,10 @@ var initialState = {
        */ state.itemInteraction.hover.active = false;
             state.axisInteraction.hover.active = false;
         },
-        mouseLeaveItem: function mouseLeaveItem(state) {
+        mouseLeaveItem (state) {
             state.itemInteraction.hover.active = false;
         },
-        setActiveClickItemIndex: function setActiveClickItemIndex(state, action) {
+        setActiveClickItemIndex (state, action) {
             state.syncInteraction.active = false;
             state.syncInteraction.sourceViewBox = undefined;
             state.itemInteraction.click.active = true;
@@ -191,7 +189,7 @@ var initialState = {
             state.itemInteraction.click.graphicalItemId = action.payload.activeGraphicalItemId;
             state.itemInteraction.click.coordinate = action.payload.activeCoordinate;
         },
-        setMouseOverAxisIndex: function setMouseOverAxisIndex(state, action) {
+        setMouseOverAxisIndex (state, action) {
             state.syncInteraction.active = false;
             state.syncInteraction.sourceViewBox = undefined;
             state.axisInteraction.hover.active = true;
@@ -200,7 +198,7 @@ var initialState = {
             state.axisInteraction.hover.dataKey = action.payload.activeDataKey;
             state.axisInteraction.hover.coordinate = action.payload.activeCoordinate;
         },
-        setMouseClickAxisIndex: function setMouseClickAxisIndex(state, action) {
+        setMouseClickAxisIndex (state, action) {
             state.syncInteraction.active = false;
             state.syncInteraction.sourceViewBox = undefined;
             state.keyboardInteraction.active = false;
@@ -209,18 +207,17 @@ var initialState = {
             state.axisInteraction.click.dataKey = action.payload.activeDataKey;
             state.axisInteraction.click.coordinate = action.payload.activeCoordinate;
         },
-        setSyncInteraction: function setSyncInteraction(state, action) {
+        setSyncInteraction (state, action) {
             state.syncInteraction = action.payload;
         },
-        setKeyboardInteraction: function setKeyboardInteraction(state, action) {
+        setKeyboardInteraction (state, action) {
             state.keyboardInteraction.active = action.payload.active;
             state.keyboardInteraction.index = action.payload.activeIndex;
             state.keyboardInteraction.coordinate = action.payload.activeCoordinate;
         }
     }
 });
-var _tooltipSlice_actions = tooltipSlice.actions;
-var addTooltipEntrySettings = _tooltipSlice_actions.addTooltipEntrySettings, replaceTooltipEntrySettings = _tooltipSlice_actions.replaceTooltipEntrySettings, removeTooltipEntrySettings = _tooltipSlice_actions.removeTooltipEntrySettings, setTooltipSettingsState = _tooltipSlice_actions.setTooltipSettingsState, setActiveMouseOverItemIndex = _tooltipSlice_actions.setActiveMouseOverItemIndex, mouseLeaveItem = _tooltipSlice_actions.mouseLeaveItem, mouseLeaveChart = _tooltipSlice_actions.mouseLeaveChart, setActiveClickItemIndex = _tooltipSlice_actions.setActiveClickItemIndex, setMouseOverAxisIndex = _tooltipSlice_actions.setMouseOverAxisIndex, setMouseClickAxisIndex = _tooltipSlice_actions.setMouseClickAxisIndex, setSyncInteraction = _tooltipSlice_actions.setSyncInteraction, setKeyboardInteraction = _tooltipSlice_actions.setKeyboardInteraction;
+var { addTooltipEntrySettings, replaceTooltipEntrySettings, removeTooltipEntrySettings, setTooltipSettingsState, setActiveMouseOverItemIndex, mouseLeaveItem, mouseLeaveChart, setActiveClickItemIndex, setMouseOverAxisIndex, setMouseClickAxisIndex, setSyncInteraction, setKeyboardInteraction } = tooltipSlice.actions;
 var tooltipReducer = tooltipSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/chartDataSlice.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -252,7 +249,7 @@ var chartDataSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fronten
     name: 'chartData',
     initialState: initialChartDataState,
     reducers: {
-        setChartData: function setChartData(state, action) {
+        setChartData (state, action) {
             state.chartData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload);
             if (action.payload == null) {
                 state.dataStartIndex = 0;
@@ -263,11 +260,11 @@ var chartDataSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fronten
                 state.dataEndIndex = action.payload.length - 1;
             }
         },
-        setComputedData: function setComputedData(state, action) {
+        setComputedData (state, action) {
             state.computedData = action.payload;
         },
-        setDataStartEndIndexes: function setDataStartEndIndexes(state, action) {
-            var _action_payload = action.payload, startIndex = _action_payload.startIndex, endIndex = _action_payload.endIndex;
+        setDataStartEndIndexes (state, action) {
+            var { startIndex, endIndex } = action.payload;
             if (startIndex != null) {
                 state.dataStartIndex = startIndex;
             }
@@ -277,8 +274,7 @@ var chartDataSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fronten
         }
     }
 });
-var _chartDataSlice_actions = chartDataSlice.actions;
-var setChartData = _chartDataSlice_actions.setChartData, setDataStartEndIndexes = _chartDataSlice_actions.setDataStartEndIndexes, setComputedData = _chartDataSlice_actions.setComputedData;
+var { setChartData, setDataStartEndIndexes, setComputedData } = chartDataSlice.actions;
 var chartDataReducer = chartDataSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/layoutSlice.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -312,29 +308,28 @@ var initialState = {
 };
 var chartLayoutSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'chartLayout',
-    initialState: initialState,
+    initialState,
     reducers: {
-        setLayout: function setLayout(state, action) {
+        setLayout (state, action) {
             state.layoutType = action.payload;
         },
-        setChartSize: function setChartSize(state, action) {
+        setChartSize (state, action) {
             state.width = action.payload.width;
             state.height = action.payload.height;
         },
-        setMargin: function setMargin(state, action) {
+        setMargin (state, action) {
             var _action$payload$top, _action$payload$right, _action$payload$botto, _action$payload$left;
             state.margin.top = (_action$payload$top = action.payload.top) !== null && _action$payload$top !== void 0 ? _action$payload$top : 0;
             state.margin.right = (_action$payload$right = action.payload.right) !== null && _action$payload$right !== void 0 ? _action$payload$right : 0;
             state.margin.bottom = (_action$payload$botto = action.payload.bottom) !== null && _action$payload$botto !== void 0 ? _action$payload$botto : 0;
             state.margin.left = (_action$payload$left = action.payload.left) !== null && _action$payload$left !== void 0 ? _action$payload$left : 0;
         },
-        setScale: function setScale(state, action) {
+        setScale (state, action) {
             state.scale = action.payload;
         }
     }
 });
-var _chartLayoutSlice_actions = chartLayoutSlice.actions;
-var setMargin = _chartLayoutSlice_actions.setMargin, setLayout = _chartLayoutSlice_actions.setLayout, setChartSize = _chartLayoutSlice_actions.setChartSize, setScale = _chartLayoutSlice_actions.setScale;
+var { setMargin, setLayout, setChartSize, setScale } = chartLayoutSlice.actions;
 var chartLayoutReducer = chartLayoutSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/RechartsReduxContext.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -363,32 +358,26 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-var noopDispatch = function noopDispatch(a) {
-    return a;
-};
-var useAppDispatch = function useAppDispatch() {
+var noopDispatch = (a)=>a;
+var useAppDispatch = ()=>{
     var context = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$RechartsReduxContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RechartsReduxContext"]);
     if (context) {
         return context.store.dispatch;
     }
     return noopDispatch;
 };
-var noop = function noop() {};
-var addNestedSubNoop = function addNestedSubNoop() {
-    return noop;
-};
-var refEquality = function refEquality(a, b) {
-    return a === b;
-};
+var noop = ()=>{};
+var addNestedSubNoop = ()=>noop;
+var refEquality = (a, b)=>a === b;
 function useAppSelector(selector) {
     var context = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$RechartsReduxContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RechartsReduxContext"]);
     var outOfContextSelector = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "useAppSelector.useMemo[outOfContextSelector]": function() {
+        "useAppSelector.useMemo[outOfContextSelector]": ()=>{
             if (!context) {
                 return noop;
             }
             return ({
-                "useAppSelector.useMemo[outOfContextSelector]": function(state) {
+                "useAppSelector.useMemo[outOfContextSelector]": (state)=>{
                     if (state == null) {
                         return undefined;
                     }
@@ -418,20 +407,14 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$sortBy$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/es-toolkit/compat/sortBy.js [app-client] (ecmascript)");
 ;
 ;
-var selectLegendSettings = function selectLegendSettings(state) {
-    return state.legend.settings;
-};
-var selectLegendSize = function selectLegendSize(state) {
-    return state.legend.size;
-};
-var selectAllLegendPayload2DArray = function selectAllLegendPayload2DArray(state) {
-    return state.legend.payload;
-};
+var selectLegendSettings = (state)=>state.legend.settings;
+var selectLegendSize = (state)=>state.legend.size;
+var selectAllLegendPayload2DArray = (state)=>state.legend.payload;
 var selectLegendPayload = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectAllLegendPayload2DArray,
     selectLegendSettings
-], function(payloads, _ref) {
-    var itemSorter = _ref.itemSorter;
+], (payloads, _ref)=>{
+    var { itemSorter } = _ref;
     var flat = payloads.flat(1);
     return itemSorter ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$sortBy$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(flat, itemSorter) : flat;
 });
@@ -449,18 +432,10 @@ __turbopack_context__.s([
     "selectMargin",
     ()=>selectMargin
 ]);
-var selectChartWidth = function selectChartWidth(state) {
-    return state.layout.width;
-};
-var selectChartHeight = function selectChartHeight(state) {
-    return state.layout.height;
-};
-var selectContainerScale = function selectContainerScale(state) {
-    return state.layout.scale;
-};
-var selectMargin = function selectMargin(state) {
-    return state.layout.margin;
-};
+var selectChartWidth = (state)=>state.layout.width;
+var selectChartHeight = (state)=>state.layout.height;
+var selectContainerScale = (state)=>state.layout.scale;
+var selectMargin = (state)=>state.layout.margin;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/selectors/selectAllAxes.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -473,14 +448,10 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/reselect/dist/reselect.mjs [app-client] (ecmascript)");
 ;
-var selectAllXAxes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(function(state) {
-    return state.cartesianAxis.xAxis;
-}, function(xAxisMap) {
+var selectAllXAxes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])((state)=>state.cartesianAxis.xAxis, (xAxisMap)=>{
     return Object.values(xAxisMap);
 });
-var selectAllYAxes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(function(state) {
-    return state.cartesianAxis.yAxis;
-}, function(yAxisMap) {
+var selectAllYAxes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])((state)=>state.cartesianAxis.yAxis, (yAxisMap)=>{
     return Object.values(yAxisMap);
 });
 }),
@@ -497,14 +468,12 @@ __turbopack_context__.s([
     "selectChartViewBox",
     ()=>selectChartViewBox
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/reselect/dist/reselect.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$legendSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/legendSelectors.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/ChartUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/containerSelectors.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectAllAxes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/selectAllAxes.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Constants$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/Constants.js [app-client] (ecmascript)");
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -536,14 +505,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -554,12 +523,10 @@ function _toPrimitive(t, r) {
 ;
 ;
 ;
-var selectBrushHeight = function selectBrushHeight(state) {
-    return state.brush.height;
-};
+var selectBrushHeight = (state)=>state.brush.height;
 function selectLeftAxesOffset(state) {
     var yAxes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectAllAxes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAllYAxes"])(state);
-    return yAxes.reduce(function(result, entry) {
+    return yAxes.reduce((result, entry)=>{
         if (entry.orientation === 'left' && !entry.mirror && !entry.hide) {
             var width = typeof entry.width === 'number' ? entry.width : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Constants$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DEFAULT_Y_AXIS_WIDTH"];
             return result + width;
@@ -569,7 +536,7 @@ function selectLeftAxesOffset(state) {
 }
 function selectRightAxesOffset(state) {
     var yAxes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectAllAxes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAllYAxes"])(state);
-    return yAxes.reduce(function(result, entry) {
+    return yAxes.reduce((result, entry)=>{
         if (entry.orientation === 'right' && !entry.mirror && !entry.hide) {
             var width = typeof entry.width === 'number' ? entry.width : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Constants$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DEFAULT_Y_AXIS_WIDTH"];
             return result + width;
@@ -579,7 +546,7 @@ function selectRightAxesOffset(state) {
 }
 function selectTopAxesOffset(state) {
     var xAxes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectAllAxes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAllXAxes"])(state);
-    return xAxes.reduce(function(result, entry) {
+    return xAxes.reduce((result, entry)=>{
         if (entry.orientation === 'top' && !entry.mirror && !entry.hide) {
             return result + entry.height;
         }
@@ -588,7 +555,7 @@ function selectTopAxesOffset(state) {
 }
 function selectBottomAxesOffset(state) {
     var xAxes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectAllAxes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAllXAxes"])(state);
-    return xAxes.reduce(function(result, entry) {
+    return xAxes.reduce((result, entry)=>{
         if (entry.orientation === 'bottom' && !entry.mirror && !entry.hide) {
             return result + entry.height;
         }
@@ -606,7 +573,7 @@ var selectChartOffsetInternal = (0, __TURBOPACK__imported__module__$5b$project$5
     selectBottomAxesOffset,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$legendSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectLegendSettings"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$legendSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectLegendSize"]
-], function(chartWidth, chartHeight, margin, brushHeight, leftAxesOffset, rightAxesOffset, topAxesOffset, bottomAxesOffset, legendSettings, legendSize) {
+], (chartWidth, chartHeight, margin, brushHeight, leftAxesOffset, rightAxesOffset, topAxesOffset, bottomAxesOffset, legendSettings, legendSize)=>{
     var offsetH = {
         left: (margin.left || 0) + leftAxesOffset,
         right: (margin.right || 0) + rightAxesOffset
@@ -622,29 +589,25 @@ var selectChartOffsetInternal = (0, __TURBOPACK__imported__module__$5b$project$5
     var offsetWidth = chartWidth - offset.left - offset.right;
     var offsetHeight = chartHeight - offset.top - offset.bottom;
     return _objectSpread(_objectSpread({
-        brushBottom: brushBottom
+        brushBottom
     }, offset), {}, {
         // never return negative values for height and width
         width: Math.max(offsetWidth, 0),
         height: Math.max(offsetHeight, 0)
     });
 });
-var selectChartViewBox = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectChartOffsetInternal, function(offset) {
-    return {
+var selectChartViewBox = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectChartOffsetInternal, (offset)=>({
         x: offset.left,
         y: offset.top,
         width: offset.width,
         height: offset.height
-    };
-});
-var selectAxisViewBox = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartWidth"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartHeight"], function(width, height) {
-    return {
+    }));
+var selectAxisViewBox = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartWidth"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartHeight"], (width, height)=>({
         x: 0,
         y: 0,
-        width: width,
-        height: height
-    };
-});
+        width,
+        height
+    }));
 }),
 "[project]/frontend/node_modules/recharts/es6/state/selectors/brushSelectors.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -663,21 +626,17 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-var selectBrushSettings = function selectBrushSettings(state) {
-    return state.brush;
-};
+var selectBrushSettings = (state)=>state.brush;
 var selectBrushDimensions = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectBrushSettings,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectMargin"]
-], function(brushSettings, offset, margin) {
-    return {
+], (brushSettings, offset, margin)=>({
         height: brushSettings.height,
         x: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(brushSettings.x) ? brushSettings.x : offset.left,
         y: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(brushSettings.y) ? brushSettings.y : offset.top + offset.height + offset.brushBottom - ((margin === null || margin === void 0 ? void 0 : margin.bottom) || 0),
         width: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumber"])(brushSettings.width) ? brushSettings.width : offset.width
-    };
-});
+    }));
 }),
 "[project]/frontend/node_modules/recharts/es6/state/selectors/dataSelectors.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -700,27 +659,25 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/reselect/dist/reselect.mjs [app-client] (ecmascript)");
 ;
-var selectChartDataWithIndexes = function selectChartDataWithIndexes(state) {
-    return state.chartData;
-};
+var selectChartDataWithIndexes = (state)=>state.chartData;
 var selectChartDataAndAlwaysIgnoreIndexes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectChartDataWithIndexes
-], function(dataState) {
+], (dataState)=>{
     var dataEndIndex = dataState.chartData != null ? dataState.chartData.length - 1 : 0;
     return {
         chartData: dataState.chartData,
         computedData: dataState.computedData,
-        dataEndIndex: dataEndIndex,
+        dataEndIndex,
         dataStartIndex: 0
     };
 });
-var selectChartDataWithIndexesIfNotInPanoramaPosition4 = function selectChartDataWithIndexesIfNotInPanoramaPosition4(state, _unused1, _unused2, isPanorama) {
+var selectChartDataWithIndexesIfNotInPanoramaPosition4 = (state, _unused1, _unused2, isPanorama)=>{
     if (isPanorama) {
         return selectChartDataAndAlwaysIgnoreIndexes(state);
     }
     return selectChartDataWithIndexes(state);
 };
-var selectChartDataWithIndexesIfNotInPanoramaPosition3 = function selectChartDataWithIndexesIfNotInPanoramaPosition3(state, _unused1, isPanorama) {
+var selectChartDataWithIndexesIfNotInPanoramaPosition3 = (state, _unused1, isPanorama)=>{
     if (isPanorama) {
         return selectChartDataAndAlwaysIgnoreIndexes(state);
     }
@@ -728,20 +685,20 @@ var selectChartDataWithIndexesIfNotInPanoramaPosition3 = function selectChartDat
 };
 var selectChartDataSliceIfNotInPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectChartDataWithIndexesIfNotInPanoramaPosition4
-], function(_ref) {
-    var chartData = _ref.chartData, dataStartIndex = _ref.dataStartIndex, dataEndIndex = _ref.dataEndIndex;
+], (_ref)=>{
+    var { chartData, dataStartIndex, dataEndIndex } = _ref;
     return chartData != null ? chartData.slice(dataStartIndex, dataEndIndex + 1) : [];
 });
 var selectChartDataSliceIgnoringIndexes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectChartDataAndAlwaysIgnoreIndexes
-], function(_ref2) {
-    var chartData = _ref2.chartData, dataStartIndex = _ref2.dataStartIndex, dataEndIndex = _ref2.dataEndIndex;
+], (_ref2)=>{
+    var { chartData, dataStartIndex, dataEndIndex } = _ref2;
     return chartData != null ? chartData.slice(dataStartIndex, dataEndIndex + 1) : [];
 });
 var selectChartDataSliceWithIndexes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectChartDataWithIndexes
-], function(_ref3) {
-    var chartData = _ref3.chartData, dataStartIndex = _ref3.dataStartIndex, dataEndIndex = _ref3.dataEndIndex;
+], (_ref3)=>{
+    var { chartData, dataStartIndex, dataEndIndex } = _ref3;
     return chartData != null ? chartData.slice(dataStartIndex, dataEndIndex + 1) : [];
 });
 }),
@@ -772,39 +729,17 @@ __turbopack_context__.s([
     "selectSyncMethod",
     ()=>selectSyncMethod
 ]);
-var selectRootMaxBarSize = function selectRootMaxBarSize(state) {
-    return state.rootProps.maxBarSize;
-};
-var selectBarGap = function selectBarGap(state) {
-    return state.rootProps.barGap;
-};
-var selectBarCategoryGap = function selectBarCategoryGap(state) {
-    return state.rootProps.barCategoryGap;
-};
-var selectRootBarSize = function selectRootBarSize(state) {
-    return state.rootProps.barSize;
-};
-var selectStackOffsetType = function selectStackOffsetType(state) {
-    return state.rootProps.stackOffset;
-};
-var selectReverseStackOrder = function selectReverseStackOrder(state) {
-    return state.rootProps.reverseStackOrder;
-};
-var selectChartName = function selectChartName(state) {
-    return state.options.chartName;
-};
-var selectSyncId = function selectSyncId(state) {
-    return state.rootProps.syncId;
-};
-var selectSyncMethod = function selectSyncMethod(state) {
-    return state.rootProps.syncMethod;
-};
-var selectEventEmitter = function selectEventEmitter(state) {
-    return state.options.eventEmitter;
-};
-var selectChartBaseValue = function selectChartBaseValue(state) {
-    return state.rootProps.baseValue;
-};
+var selectRootMaxBarSize = (state)=>state.rootProps.maxBarSize;
+var selectBarGap = (state)=>state.rootProps.barGap;
+var selectBarCategoryGap = (state)=>state.rootProps.barCategoryGap;
+var selectRootBarSize = (state)=>state.rootProps.barSize;
+var selectStackOffsetType = (state)=>state.rootProps.stackOffset;
+var selectReverseStackOrder = (state)=>state.rootProps.reverseStackOrder;
+var selectChartName = (state)=>state.options.chartName;
+var selectSyncId = (state)=>state.rootProps.syncId;
+var selectSyncMethod = (state)=>state.rootProps.syncMethod;
+var selectEventEmitter = (state)=>state.options.eventEmitter;
+var selectChartBaseValue = (state)=>state.rootProps.baseValue;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/selectors/combiners/combineAxisRangeWithReverse.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -813,7 +748,7 @@ __turbopack_context__.s([
     "combineAxisRangeWithReverse",
     ()=>combineAxisRangeWithReverse
 ]);
-var combineAxisRangeWithReverse = function combineAxisRangeWithReverse(axisSettings, axisRange) {
+var combineAxisRangeWithReverse = (axisSettings, axisRange)=>{
     if (!axisSettings || !axisRange) {
         return undefined;
     }
@@ -855,7 +790,6 @@ __turbopack_context__.s([
     "selectRadiusAxisRangeWithReversed",
     ()=>selectRadiusAxisRangeWithReversed
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/reselect/dist/reselect.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/containerSelectors.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/selectChartOffsetInternal.js [app-client] (ecmascript)");
@@ -866,7 +800,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$combiners$2f$combineAxisRangeWithReverse$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/combiners/combineAxisRangeWithReverse.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/context/chartLayoutContext.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$getAxisTypeBasedOnLayout$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/getAxisTypeBasedOnLayout.js [app-client] (ecmascript)");
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -898,14 +831,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -957,7 +890,7 @@ var implicitRadiusAxis = {
     unit: undefined,
     niceTicks: 'auto'
 };
-var selectAngleAxisNoDefaults = function selectAngleAxisNoDefaults(state, angleAxisId) {
+var selectAngleAxisNoDefaults = (state, angleAxisId)=>{
     if (angleAxisId == null) {
         return undefined;
     }
@@ -966,7 +899,7 @@ var selectAngleAxisNoDefaults = function selectAngleAxisNoDefaults(state, angleA
 var selectAngleAxis = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectAngleAxisNoDefaults,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectPolarChartLayout"]
-], function(angleAxisSettings, layout) {
+], (angleAxisSettings, layout)=>{
     var _getAxisTypeBasedOnLa;
     if (angleAxisSettings != null) {
         return angleAxisSettings;
@@ -976,13 +909,13 @@ var selectAngleAxis = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fronte
         type: evaluatedType
     });
 });
-var selectRadiusAxisNoDefaults = function selectRadiusAxisNoDefaults(state, radiusAxisId) {
+var selectRadiusAxisNoDefaults = (state, radiusAxisId)=>{
     return state.polarAxis.radiusAxis[radiusAxisId];
 };
 var selectRadiusAxis = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectRadiusAxisNoDefaults,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectPolarChartLayout"]
-], function(radiusAxisSettings, layout) {
+], (radiusAxisSettings, layout)=>{
     var _getAxisTypeBasedOnLa2;
     if (radiusAxisSettings != null) {
         return radiusAxisSettings;
@@ -992,9 +925,7 @@ var selectRadiusAxis = (0, __TURBOPACK__imported__module__$5b$project$5d2f$front
         type: evaluatedType
     });
 });
-var selectPolarOptions = function selectPolarOptions(state) {
-    return state.polarOptions;
-};
+var selectPolarOptions = (state)=>state.polarOptions;
 var selectMaxRadius = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartWidth"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartHeight"],
@@ -1003,7 +934,7 @@ var selectMaxRadius = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fronte
 var selectInnerRadius = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectPolarOptions,
     selectMaxRadius
-], function(polarChartOptions, maxRadius) {
+], (polarChartOptions, maxRadius)=>{
     if (polarChartOptions == null) {
         return undefined;
     }
@@ -1012,20 +943,20 @@ var selectInnerRadius = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fron
 var selectOuterRadius = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectPolarOptions,
     selectMaxRadius
-], function(polarChartOptions, maxRadius) {
+], (polarChartOptions, maxRadius)=>{
     if (polarChartOptions == null) {
         return undefined;
     }
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getPercentValue"])(polarChartOptions.outerRadius, maxRadius, maxRadius * 0.8);
 });
-var combineAngleAxisRange = function combineAngleAxisRange(polarOptions) {
+var combineAngleAxisRange = (polarOptions)=>{
     if (polarOptions == null) {
         return [
             0,
             0
         ];
     }
-    var startAngle = polarOptions.startAngle, endAngle = polarOptions.endAngle;
+    var { startAngle, endAngle } = polarOptions;
     return [
         startAngle,
         endAngle
@@ -1042,7 +973,7 @@ var selectRadiusAxisRange = (0, __TURBOPACK__imported__module__$5b$project$5d2f$
     selectMaxRadius,
     selectInnerRadius,
     selectOuterRadius
-], function(maxRadius, innerRadius, outerRadius) {
+], (maxRadius, innerRadius, outerRadius)=>{
     if (maxRadius == null || innerRadius == null || outerRadius == null) {
         return undefined;
     }
@@ -1062,18 +993,18 @@ var selectPolarViewBox = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fro
     selectOuterRadius,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartWidth"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartHeight"]
-], function(layout, polarOptions, innerRadius, outerRadius, width, height) {
+], (layout, polarOptions, innerRadius, outerRadius, width, height)=>{
     if (layout !== 'centric' && layout !== 'radial' || polarOptions == null || innerRadius == null || outerRadius == null) {
         return undefined;
     }
-    var cx = polarOptions.cx, cy = polarOptions.cy, startAngle = polarOptions.startAngle, endAngle = polarOptions.endAngle;
+    var { cx, cy, startAngle, endAngle } = polarOptions;
     return {
         cx: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getPercentValue"])(cx, width, width / 2),
         cy: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getPercentValue"])(cy, height, height / 2),
-        innerRadius: innerRadius,
-        outerRadius: outerRadius,
-        startAngle: startAngle,
-        endAngle: endAngle,
+        innerRadius,
+        outerRadius,
+        startAngle,
+        endAngle,
         clockWise: false // this property look useful, why not use it?
     };
 });
@@ -1085,9 +1016,7 @@ __turbopack_context__.s([
     "pickAxisType",
     ()=>pickAxisType
 ]);
-var pickAxisType = function pickAxisType(_state, axisType) {
-    return axisType;
-};
+var pickAxisType = (_state, axisType)=>axisType;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/selectors/pickAxisId.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -1096,9 +1025,7 @@ __turbopack_context__.s([
     "pickAxisId",
     ()=>pickAxisId
 ]);
-var pickAxisId = function pickAxisId(_state, _axisType, axisId) {
-    return axisId;
-};
+var pickAxisId = (_state, _axisType, axisId)=>axisId;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/selectors/combiners/combineDisplayedStackedData.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -1107,18 +1034,16 @@ __turbopack_context__.s([
     "combineDisplayedStackedData",
     ()=>combineDisplayedStackedData
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_define_property.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$stacks$2f$getStackSeriesIdentifier$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/stacks/getStackSeriesIdentifier.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/ChartUtils.js [app-client] (ecmascript)");
 ;
 ;
-;
 function combineDisplayedStackedData(stackedGraphicalItems, _ref, tooltipAxisSettings) {
-    var _ref_chartData = _ref.chartData, chartData = _ref_chartData === void 0 ? [] : _ref_chartData;
-    var allowDuplicatedCategory = tooltipAxisSettings.allowDuplicatedCategory, tooltipDataKey = tooltipAxisSettings.dataKey;
+    var { chartData = [] } = _ref;
+    var { allowDuplicatedCategory, dataKey: tooltipDataKey } = tooltipAxisSettings;
     // A map of tooltip data keys to the stacked data points
     var knownItemsByDataKey = new Map();
-    stackedGraphicalItems.forEach(function(item) {
+    stackedGraphicalItems.forEach((item)=>{
         var _item$data;
         // If there is no data on the individual item then we use the root chart data
         var resolvedData = (_item$data = item.data) !== null && _item$data !== void 0 ? _item$data : chartData;
@@ -1127,7 +1052,7 @@ function combineDisplayedStackedData(stackedGraphicalItems, _ref, tooltipAxisSet
             return;
         }
         var stackIdentifier = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$stacks$2f$getStackSeriesIdentifier$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getStackSeriesIdentifier"])(item);
-        resolvedData.forEach(function(entry, index) {
+        resolvedData.forEach((entry, index)=>{
             var tooltipValue = tooltipDataKey == null || allowDuplicatedCategory ? index : String((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(entry, tooltipDataKey, null));
             var numericValue = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(entry, item.dataKey, 0);
             var curr;
@@ -1136,7 +1061,9 @@ function combineDisplayedStackedData(stackedGraphicalItems, _ref, tooltipAxisSet
             } else {
                 curr = {};
             }
-            Object.assign(curr, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, stackIdentifier, numericValue));
+            Object.assign(curr, {
+                [stackIdentifier]: numericValue
+            });
             knownItemsByDataKey.set(tooltipValue, curr);
         });
     });
@@ -1168,7 +1095,7 @@ __turbopack_context__.s([
     "numberDomainEqualityCheck",
     ()=>numberDomainEqualityCheck
 ]);
-var numberDomainEqualityCheck = function numberDomainEqualityCheck(a, b) {
+var numberDomainEqualityCheck = (a, b)=>{
     if (a === b) {
         return true;
     }
@@ -1220,7 +1147,7 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/context/chartLayoutContext.js [app-client] (ecmascript)");
 ;
-var selectTooltipAxisType = function selectTooltipAxisType(state) {
+var selectTooltipAxisType = (state)=>{
     var layout = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"])(state);
     if (layout === 'horizontal') {
         return 'xAxis';
@@ -1241,9 +1168,7 @@ __turbopack_context__.s([
     "selectTooltipAxisId",
     ()=>selectTooltipAxisId
 ]);
-var selectTooltipAxisId = function selectTooltipAxisId(state) {
-    return state.tooltip.settings.axisId;
-};
+var selectTooltipAxisId = (state)=>state.tooltip.settings.axisId;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/selectors/combiners/combineCheckedDomain.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -1256,7 +1181,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/isWellBehavedNumber.js [app-client] (ecmascript)");
 ;
 ;
-var combineCheckedDomain = function combineCheckedDomain(realScaleType, axisDomain) {
+var combineCheckedDomain = (realScaleType, axisDomain)=>{
     if (axisDomain == null) {
         return undefined;
     }
@@ -1363,11 +1288,11 @@ function getD3ScaleName(name) {
 function isSupportedScaleName(name) {
     return getD3ScaleName(name) in __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$victory$2d$vendor$2f$es$2f$d3$2d$scale$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__;
 }
-var combineRealScaleType = function combineRealScaleType(axisConfig, hasBar, chartType) {
+var combineRealScaleType = (axisConfig, hasBar, chartType)=>{
     if (axisConfig == null) {
         return undefined;
     }
-    var scale = axisConfig.scale, type = axisConfig.type;
+    var { scale, type } = axisConfig;
     if (scale === 'auto') {
         if (type === 'category' && chartType && (chartType.indexOf('LineChart') >= 0 || chartType.indexOf('AreaChart') >= 0 || chartType.indexOf('ComposedChart') >= 0 && !hasBar)) {
             return 'point';
@@ -1595,10 +1520,6 @@ __turbopack_context__.s([
     "selectZAxisWithScale",
     ()=>selectZAxisWithScale
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_instanceof.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/reselect/dist/reselect.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$range$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/es-toolkit/compat/range.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/context/chartLayoutContext.js [app-client] (ecmascript)");
@@ -1631,10 +1552,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$combiners$2f$combineRealScaleType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/combiners/combineRealScaleType.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$scale$2f$createCategoricalInverse$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/scale/createCategoricalInverse.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$combiners$2f$combineInverseScaleFunction$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/combiners/combineInverseScaleFunction.js [app-client] (ecmascript)");
-;
-;
-;
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -1666,14 +1583,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -1744,10 +1661,10 @@ var implicitXAxis = {
     unit: undefined,
     niceTicks: 'auto'
 };
-var selectXAxisSettingsNoDefaults = function selectXAxisSettingsNoDefaults(state, axisId) {
+var selectXAxisSettingsNoDefaults = (state, axisId)=>{
     return state.cartesianAxis.xAxis[axisId];
 };
-var selectXAxisSettings = function selectXAxisSettings(state, axisId) {
+var selectXAxisSettings = (state, axisId)=>{
     var axis = selectXAxisSettingsNoDefaults(state, axisId);
     if (axis == null) {
         return implicitXAxis;
@@ -1784,10 +1701,10 @@ var implicitYAxis = {
     niceTicks: 'auto',
     width: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Constants$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DEFAULT_Y_AXIS_WIDTH"]
 };
-var selectYAxisSettingsNoDefaults = function selectYAxisSettingsNoDefaults(state, axisId) {
+var selectYAxisSettingsNoDefaults = (state, axisId)=>{
     return state.cartesianAxis.yAxis[axisId];
 };
-var selectYAxisSettings = function selectYAxisSettings(state, axisId) {
+var selectYAxisSettings = (state, axisId)=>{
     var axis = selectYAxisSettingsNoDefaults(state, axisId);
     if (axis == null) {
         return implicitYAxis;
@@ -1814,14 +1731,14 @@ var implicitZAxis = {
     type: 'number',
     unit: ''
 };
-var selectZAxisSettings = function selectZAxisSettings(state, axisId) {
+var selectZAxisSettings = (state, axisId)=>{
     var axis = state.cartesianAxis.zAxis[axisId];
     if (axis == null) {
         return implicitZAxis;
     }
     return axis;
 };
-var selectBaseAxis = function selectBaseAxis(state, axisType, axisId) {
+var selectBaseAxis = (state, axisType, axisId)=>{
     switch(axisType){
         case 'xAxis':
             {
@@ -1847,7 +1764,7 @@ var selectBaseAxis = function selectBaseAxis(state, axisType, axisId) {
             throw new Error("Unexpected axis type: ".concat(axisType));
     }
 };
-var selectCartesianAxisSettings = function selectCartesianAxisSettings(state, axisType, axisId) {
+var selectCartesianAxisSettings = (state, axisType, axisId)=>{
     switch(axisType){
         case 'xAxis':
             {
@@ -1861,7 +1778,7 @@ var selectCartesianAxisSettings = function selectCartesianAxisSettings(state, ax
             throw new Error("Unexpected axis type: ".concat(axisType));
     }
 };
-var selectRenderableAxisSettings = function selectRenderableAxisSettings(state, axisType, axisId) {
+var selectRenderableAxisSettings = (state, axisType, axisId)=>{
     switch(axisType){
         case 'xAxis':
             {
@@ -1883,15 +1800,9 @@ var selectRenderableAxisSettings = function selectRenderableAxisSettings(state, 
             throw new Error("Unexpected axis type: ".concat(axisType));
     }
 };
-var selectHasBar = function selectHasBar(state) {
-    return state.graphicalItems.cartesianItems.some(function(item) {
-        return item.type === 'bar';
-    }) || state.graphicalItems.polarItems.some(function(item) {
-        return item.type === 'radialBar';
-    });
-};
+var selectHasBar = (state)=>state.graphicalItems.cartesianItems.some((item)=>item.type === 'bar') || state.graphicalItems.polarItems.some((item)=>item.type === 'radialBar');
 function itemAxisPredicate(axisType, axisId) {
-    return function(item) {
+    return (item)=>{
         switch(axisType){
             case 'xAxis':
                 // This is sensitive to the data type, as 0 !== '0'. I wonder if we should be more flexible. How does 2.x branch behave? TODO write test for that
@@ -1909,21 +1820,17 @@ function itemAxisPredicate(axisType, axisId) {
         }
     };
 }
-var selectUnfilteredCartesianItems = function selectUnfilteredCartesianItems(state) {
-    return state.graphicalItems.cartesianItems;
-};
+var selectUnfilteredCartesianItems = (state)=>state.graphicalItems.cartesianItems;
 var selectAxisPredicate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisType"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisId$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisId"]
 ], itemAxisPredicate);
-var combineGraphicalItemsSettings = function combineGraphicalItemsSettings(graphicalItems, axisSettings, axisPredicate) {
-    return graphicalItems.filter(axisPredicate).filter(function(item) {
+var combineGraphicalItemsSettings = (graphicalItems, axisSettings, axisPredicate)=>graphicalItems.filter(axisPredicate).filter((item)=>{
         if ((axisSettings === null || axisSettings === void 0 ? void 0 : axisSettings.includeHidden) === true) {
             return true;
         }
         return !item.hide;
     });
-};
 var selectCartesianItemsSettings = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectUnfilteredCartesianItems,
     selectBaseAxis,
@@ -1935,31 +1842,17 @@ var selectCartesianItemsSettings = (0, __TURBOPACK__imported__module__$5b$projec
 });
 var selectStackedCartesianItemsSettings = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectCartesianItemsSettings
-], function(cartesianItems) {
-    return cartesianItems.filter(function(item) {
-        return item.type === 'area' || item.type === 'bar';
-    }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$types$2f$StackedGraphicalItem$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isStacked"]);
+], (cartesianItems)=>{
+    return cartesianItems.filter((item)=>item.type === 'area' || item.type === 'bar').filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$types$2f$StackedGraphicalItem$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isStacked"]);
 });
-var filterGraphicalNotStackedItems = function filterGraphicalNotStackedItems(cartesianItems) {
-    return cartesianItems.filter(function(item) {
-        return !('stackId' in item) || item.stackId === undefined;
-    });
-};
+var filterGraphicalNotStackedItems = (cartesianItems)=>cartesianItems.filter((item)=>!('stackId' in item) || item.stackId === undefined);
 var selectCartesianItemsSettingsExceptStacked = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectCartesianItemsSettings
 ], filterGraphicalNotStackedItems);
-var combineGraphicalItemsData = function combineGraphicalItemsData(cartesianItems) {
-    return cartesianItems.map(function(item) {
-        return item.data;
-    }).filter(Boolean).flat(1);
-};
+var combineGraphicalItemsData = (cartesianItems)=>cartesianItems.map((item)=>item.data).filter(Boolean).flat(1);
 var selectAnyCartesianItemsUsesChartData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectCartesianItemsSettings
-], function(items) {
-    return items.some(function(item) {
-        return !item.data;
-    });
-});
+], (items)=>items.some((item)=>!item.data));
 var selectCartesianGraphicalItemsData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectCartesianItemsSettings
 ], combineGraphicalItemsData, {
@@ -1967,8 +1860,8 @@ var selectCartesianGraphicalItemsData = (0, __TURBOPACK__imported__module__$5b$p
         resultEqualityCheck: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$arrayEqualityCheck$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["emptyArraysAreEqualCheck"]
     }
 });
-var combineDisplayedData = function combineDisplayedData(graphicalItemsData, _ref) {
-    var _ref_chartData = _ref.chartData, chartData = _ref_chartData === void 0 ? [] : _ref_chartData, dataStartIndex = _ref.dataStartIndex, dataEndIndex = _ref.dataEndIndex;
+var combineDisplayedData = (graphicalItemsData, _ref)=>{
+    var { chartData = [], dataStartIndex, dataEndIndex } = _ref;
     if (graphicalItemsData.length > 0) {
         /*
      * There is no slicing when data is defined on graphical items. Why?
@@ -1992,44 +1885,33 @@ var selectDisplayedData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
     selectCartesianGraphicalItemsData,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$dataSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartDataWithIndexesIfNotInPanoramaPosition4"]
 ], combineDisplayedData);
-var combineAppliedValues = function combineAppliedValues(data, axisSettings, items) {
+var combineAppliedValues = (data, axisSettings, items)=>{
     if ((axisSettings === null || axisSettings === void 0 ? void 0 : axisSettings.dataKey) != null) {
-        return data.map(function(item) {
-            return {
+        return data.map((item)=>({
                 value: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(item, axisSettings.dataKey)
-            };
-        });
+            }));
     }
     if (items.length > 0) {
-        return items.map(function(item) {
-            return item.dataKey;
-        }).flatMap(function(dataKey) {
-            return data.map(function(entry) {
-                return {
+        return items.map((item)=>item.dataKey).flatMap((dataKey)=>data.map((entry)=>({
                     value: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(entry, dataKey)
-                };
-            });
-        });
+                })));
     }
-    return data.map(function(entry) {
-        return {
+    return data.map((entry)=>({
             value: entry
-        };
-    });
+        }));
 };
-var combineAllAppliedValues = function combineAllAppliedValues(displayedData, axisSettings, items, _ref2, anyItemUsesChartData, graphicalItemsData) {
-    var _ref2_chartData = _ref2.chartData, chartData = _ref2_chartData === void 0 ? [] : _ref2_chartData, dataStartIndex = _ref2.dataStartIndex, dataEndIndex = _ref2.dataEndIndex;
+var combineAllAppliedValues = (displayedData, axisSettings, items, _ref2, anyItemUsesChartData, graphicalItemsData)=>{
+    var { chartData = [], dataStartIndex, dataEndIndex } = _ref2;
     var appliedValues = combineAppliedValues(displayedData, axisSettings, items);
     if (anyItemUsesChartData && (axisSettings === null || axisSettings === void 0 ? void 0 : axisSettings.dataKey) != null && graphicalItemsData.length > 0) {
         var chartDataSlice = chartData.slice(dataStartIndex, dataEndIndex + 1);
-        var chartAppliedValues = chartDataSlice.map(function(item) {
-            return {
+        var chartAppliedValues = chartDataSlice.map((item)=>({
                 value: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(item, axisSettings.dataKey)
-            };
-        }).filter(function(av) {
-            return av.value != null;
-        });
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(chartAppliedValues).concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(appliedValues));
+            })).filter((av)=>av.value != null);
+        return [
+            ...chartAppliedValues,
+            ...appliedValues
+        ];
     }
     return appliedValues;
 };
@@ -2042,7 +1924,7 @@ var selectAllAppliedValues = (0, __TURBOPACK__imported__module__$5b$project$5d2f
     selectCartesianGraphicalItemsData
 ], combineAllAppliedValues);
 function makeNumber(val) {
-    if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumOrStr"])(val) || (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(val, Date)) {
+    if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumOrStr"])(val) || val instanceof Date) {
         var n = Number(val);
         if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(n)) {
             return n;
@@ -2089,10 +1971,8 @@ function sortBy(a, b) {
 }
 var selectSortedDataPoints = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectAllAppliedValues
-], function(appliedData) {
-    return appliedData === null || appliedData === void 0 ? void 0 : appliedData.map(function(item) {
-        return item.value;
-    }).sort(sortBy);
+], (appliedData)=>{
+    return appliedData === null || appliedData === void 0 ? void 0 : appliedData.map((item)=>item.value).sort(sortBy);
 });
 function isErrorBarRelevantForAxisType(axisType, errorBar) {
     switch(axisType){
@@ -2117,19 +1997,17 @@ function getErrorDomainByDataKey(entry, appliedValue, relevantErrorBars) {
     } else if (Array.isArray(appliedValue)) {
         var numericRangeValues = onlyAllowNumbers(appliedValue);
         if (numericRangeValues.length > 0) {
-            var _Math;
-            appliedNumericValue = (_Math = Math).max.apply(_Math, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(numericRangeValues));
+            appliedNumericValue = Math.max(...numericRangeValues);
         }
     }
     if (appliedNumericValue == null) {
         return [];
     }
-    return onlyAllowNumbers(relevantErrorBars.flatMap(function(eb) {
+    return onlyAllowNumbers(relevantErrorBars.flatMap((eb)=>{
         var errorValue = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(entry, eb.dataKey);
         var lowBound, highBound;
         if (Array.isArray(errorValue)) {
-            var ref;
-            ref = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(errorValue, 2), lowBound = ref[0], highBound = ref[1], ref;
+            [lowBound, highBound] = errorValue;
         } else {
             lowBound = highBound = errorValue;
         }
@@ -2142,24 +2020,22 @@ function getErrorDomainByDataKey(entry, appliedValue, relevantErrorBars) {
         ];
     }));
 }
-var selectTooltipAxis = function selectTooltipAxis(state) {
+var selectTooltipAxis = (state)=>{
     var axisType = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisType"])(state);
     var axisId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipAxisId$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisId"])(state);
     return selectRenderableAxisSettings(state, axisType, axisId);
 };
 var selectTooltipAxisDataKey = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectTooltipAxis
-], function(axis) {
-    return axis === null || axis === void 0 ? void 0 : axis.dataKey;
-});
+], (axis)=>axis === null || axis === void 0 ? void 0 : axis.dataKey);
 var selectDisplayedStackedData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectStackedCartesianItemsSettings,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$dataSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartDataWithIndexesIfNotInPanoramaPosition4"],
     selectTooltipAxis
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$combiners$2f$combineDisplayedStackedData$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineDisplayedStackedData"]);
-var combineStackGroups = function combineStackGroups(displayedData, items, stackOffsetType, reverseStackOrder) {
+var combineStackGroups = (displayedData, items, stackOffsetType, reverseStackOrder)=>{
     var initialItemsGroups = {};
-    var itemsGroup = items.reduce(function(acc, item) {
+    var itemsGroup = items.reduce((acc, item)=>{
         if (item.stackId == null) {
             return acc;
         }
@@ -2171,9 +2047,11 @@ var combineStackGroups = function combineStackGroups(displayedData, items, stack
         acc[item.stackId] = stack;
         return acc;
     }, initialItemsGroups);
-    return Object.fromEntries(Object.entries(itemsGroup).map(function(_ref3) {
-        var _$_ref3 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_ref3, 2), stackId = _$_ref3[0], graphicalItems = _$_ref3[1];
-        var orderedGraphicalItems = reverseStackOrder ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(graphicalItems).reverse() : graphicalItems;
+    return Object.fromEntries(Object.entries(itemsGroup).map((_ref3)=>{
+        var [stackId, graphicalItems] = _ref3;
+        var orderedGraphicalItems = reverseStackOrder ? [
+            ...graphicalItems
+        ].reverse() : graphicalItems;
         var dataKeys = orderedGraphicalItems.map(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$stacks$2f$getStackSeriesIdentifier$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getStackSeriesIdentifier"]);
         return [
             stackId,
@@ -2191,8 +2069,8 @@ var selectStackGroups = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fron
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectStackOffsetType"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectReverseStackOrder"]
 ], combineStackGroups);
-var combineDomainOfStackGroups = function combineDomainOfStackGroups(stackGroups, _ref4, axisType, domainFromUserPreference) {
-    var dataStartIndex = _ref4.dataStartIndex, dataEndIndex = _ref4.dataEndIndex;
+var combineDomainOfStackGroups = (stackGroups, _ref4, axisType, domainFromUserPreference)=>{
+    var { dataStartIndex, dataEndIndex } = _ref4;
     if (domainFromUserPreference != null) {
         // User has specified a domain, so we respect that and we can skip computing anything else
         return undefined;
@@ -2209,10 +2087,8 @@ var combineDomainOfStackGroups = function combineDomainOfStackGroups(stackGroups
 };
 var selectAllowsDataOverflow = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectBaseAxis
-], function(axisSettings) {
-    return axisSettings.allowDataOverflow;
-});
-var getDomainDefinition = function getDomainDefinition(axisSettings) {
+], (axisSettings)=>axisSettings.allowDataOverflow);
+var getDomainDefinition = (axisSettings)=>{
     var _axisSettings$domain;
     if (axisSettings == null || !('domain' in axisSettings)) {
         return defaultNumericDomain;
@@ -2222,11 +2098,10 @@ var getDomainDefinition = function getDomainDefinition(axisSettings) {
     }
     if ('ticks' in axisSettings && axisSettings.ticks != null) {
         if (axisSettings.type === 'number') {
-            var _Math, _Math1;
             var allValues = onlyAllowNumbers(axisSettings.ticks);
             return [
-                (_Math = Math).min.apply(_Math, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(allValues)),
-                (_Math1 = Math).max.apply(_Math1, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(allValues))
+                Math.min(...allValues),
+                Math.max(...allValues)
             ];
         }
         if (axisSettings.type === 'category') {
@@ -2252,18 +2127,15 @@ var selectDomainOfStackGroups = (0, __TURBOPACK__imported__module__$5b$project$5
         resultEqualityCheck: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$numberDomainEqualityCheck$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["numberDomainEqualityCheck"]
     }
 });
-var selectAllErrorBarSettings = function selectAllErrorBarSettings(state) {
-    return state.errorBars;
-};
-var combineRelevantErrorBarSettings = function combineRelevantErrorBarSettings(cartesianItemsSettings, allErrorBarSettings, axisType) {
-    return cartesianItemsSettings.flatMap(function(item) {
+var selectAllErrorBarSettings = (state)=>state.errorBars;
+var combineRelevantErrorBarSettings = (cartesianItemsSettings, allErrorBarSettings, axisType)=>{
+    return cartesianItemsSettings.flatMap((item)=>{
         return allErrorBarSettings[item.id];
-    }).filter(Boolean).filter(function(e) {
+    }).filter(Boolean).filter((e)=>{
         return isErrorBarRelevantForAxisType(axisType, e);
     });
 };
 var mergeDomains = function mergeDomains() {
-    var _Math, _Math1;
     for(var _len = arguments.length, domains = new Array(_len), _key = 0; _key < _len; _key++){
         domains[_key] = arguments[_key];
     }
@@ -2272,8 +2144,8 @@ var mergeDomains = function mergeDomains() {
         return undefined;
     }
     var allValues = allDomains.flat();
-    var min = (_Math = Math).min.apply(_Math, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(allValues));
-    var max = (_Math1 = Math).max.apply(_Math1, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(allValues));
+    var min = Math.min(...allValues);
+    var max = Math.max(...allValues);
     return [
         min,
         max
@@ -2289,20 +2161,19 @@ var combineDomainOfAllAppliedNumericalValuesIncludingErrorValues = function comb
      * This ensures that mixing items with and without own data (e.g. Bar reading
      * chart-level data alongside a Scatter with its own outlier data) produces a
      * domain that covers all values from all sources.
-     */ items.forEach(function(item) {
+     */ items.forEach((item)=>{
             var _errorBars$item$id;
-            var itemData = item.data != null ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(item.data) : chartDataSlice;
-            var relevantErrorBars = (_errorBars$item$id = errorBars[item.id]) === null || _errorBars$item$id === void 0 ? void 0 : _errorBars$item$id.filter(function(errorBar) {
-                return isErrorBarRelevantForAxisType(axisType, errorBar);
-            });
-            itemData.forEach(function(entry) {
+            var itemData = item.data != null ? [
+                ...item.data
+            ] : chartDataSlice;
+            var relevantErrorBars = (_errorBars$item$id = errorBars[item.id]) === null || _errorBars$item$id === void 0 ? void 0 : _errorBars$item$id.filter((errorBar)=>isErrorBarRelevantForAxisType(axisType, errorBar));
+            itemData.forEach((entry)=>{
                 var _axisSettings$dataKey;
                 var valueByDataKey = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(entry, (_axisSettings$dataKey = axisSettings.dataKey) !== null && _axisSettings$dataKey !== void 0 ? _axisSettings$dataKey : item.dataKey);
                 var errorDomain = getErrorDomainByDataKey(entry, valueByDataKey, relevantErrorBars);
                 if (errorDomain.length >= 2) {
-                    var _Math, _Math1;
-                    var localLower = (_Math = Math).min.apply(_Math, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(errorDomain));
-                    var localUpper = (_Math1 = Math).max.apply(_Math1, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(errorDomain));
+                    var localLower = Math.min(...errorDomain);
+                    var localUpper = Math.max(...errorDomain);
                     if (lowerEnd == null || localLower < lowerEnd) {
                         lowerEnd = localLower;
                     }
@@ -2320,7 +2191,7 @@ var combineDomainOfAllAppliedNumericalValuesIncludingErrorValues = function comb
     }
     if ((axisSettings === null || axisSettings === void 0 ? void 0 : axisSettings.dataKey) != null && items.length === 0) {
         // When there are no items, fall back to the displayed data (chart-level or graphical item data).
-        displayedData.forEach(function(item) {
+        displayedData.forEach((item)=>{
             var dataValueDomain = makeDomain((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(item, axisSettings.dataKey));
             if (dataValueDomain != null) {
                 lowerEnd = lowerEnd == null ? dataValueDomain[0] : Math.min(lowerEnd, dataValueDomain[0]);
@@ -2349,16 +2220,14 @@ var selectDomainOfAllAppliedNumericalValuesIncludingErrorValues = (0, __TURBOPAC
     }
 });
 function onlyAllowNumbersAndStringsAndDates(item) {
-    var value = item.value;
-    if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumOrStr"])(value) || (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(value, Date)) {
+    var { value } = item;
+    if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNumOrStr"])(value) || value instanceof Date) {
         return value;
     }
     return undefined;
 }
-var computeDomainOfTypeCategory = function computeDomainOfTypeCategory(allDataSquished, axisSettings, isCategorical) {
-    var categoricalDomain = allDataSquished.map(onlyAllowNumbersAndStringsAndDates).filter(function(v) {
-        return v != null;
-    });
+var computeDomainOfTypeCategory = (allDataSquished, axisSettings, isCategorical)=>{
+    var categoricalDomain = allDataSquished.map(onlyAllowNumbersAndStringsAndDates).filter((v)=>v != null);
     if (isCategorical && (axisSettings.dataKey == null || axisSettings.allowDuplicatedCategory && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["hasDuplicate"])(categoricalDomain))) {
         /*
      * 1. In an absence of dataKey, Recharts will use array indexes as its categorical domain
@@ -2370,13 +2239,9 @@ var computeDomainOfTypeCategory = function computeDomainOfTypeCategory(allDataSq
     }
     return Array.from(new Set(categoricalDomain));
 };
-var selectReferenceDots = function selectReferenceDots(state) {
-    return state.referenceElements.dots;
-};
-var filterReferenceElements = function filterReferenceElements(elements, axisType, axisId) {
-    return elements.filter(function(el) {
-        return el.ifOverflow === 'extendDomain';
-    }).filter(function(el) {
+var selectReferenceDots = (state)=>state.referenceElements.dots;
+var filterReferenceElements = (elements, axisType, axisId)=>{
+    return elements.filter((el)=>el.ifOverflow === 'extendDomain').filter((el)=>{
         if (axisType === 'xAxis') {
             return el.xAxisId === axisId;
         }
@@ -2388,56 +2253,46 @@ var selectReferenceDotsByAxis = (0, __TURBOPACK__imported__module__$5b$project$5
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisType"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisId$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisId"]
 ], filterReferenceElements);
-var selectReferenceAreas = function selectReferenceAreas(state) {
-    return state.referenceElements.areas;
-};
+var selectReferenceAreas = (state)=>state.referenceElements.areas;
 var selectReferenceAreasByAxis = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectReferenceAreas,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisType"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisId$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisId"]
 ], filterReferenceElements);
-var selectReferenceLines = function selectReferenceLines(state) {
-    return state.referenceElements.lines;
-};
+var selectReferenceLines = (state)=>state.referenceElements.lines;
 var selectReferenceLinesByAxis = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectReferenceLines,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisType"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisId$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisId"]
 ], filterReferenceElements);
-var combineDotsDomain = function combineDotsDomain(dots, axisType) {
-    var _Math, _Math1;
+var combineDotsDomain = (dots, axisType)=>{
     if (dots == null) {
         return undefined;
     }
-    var allCoords = onlyAllowNumbers(dots.map(function(dot) {
-        return axisType === 'xAxis' ? dot.x : dot.y;
-    }));
+    var allCoords = onlyAllowNumbers(dots.map((dot)=>axisType === 'xAxis' ? dot.x : dot.y));
     if (allCoords.length === 0) {
         return undefined;
     }
     return [
-        (_Math = Math).min.apply(_Math, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(allCoords)),
-        (_Math1 = Math).max.apply(_Math1, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(allCoords))
+        Math.min(...allCoords),
+        Math.max(...allCoords)
     ];
 };
 var selectReferenceDotsDomain = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectReferenceDotsByAxis, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisType"], combineDotsDomain);
-var combineAreasDomain = function combineAreasDomain(areas, axisType) {
-    var _Math, _Math1;
+var combineAreasDomain = (areas, axisType)=>{
     if (areas == null) {
         return undefined;
     }
-    var allCoords = onlyAllowNumbers(areas.flatMap(function(area) {
-        return [
+    var allCoords = onlyAllowNumbers(areas.flatMap((area)=>[
             axisType === 'xAxis' ? area.x1 : area.y1,
             axisType === 'xAxis' ? area.x2 : area.y2
-        ];
-    }));
+        ]));
     if (allCoords.length === 0) {
         return undefined;
     }
     return [
-        (_Math = Math).min.apply(_Math, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(allCoords)),
-        (_Math1 = Math).max.apply(_Math1, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(allCoords))
+        Math.min(...allCoords),
+        Math.max(...allCoords)
     ];
 };
 var selectReferenceAreasDomain = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
@@ -2451,9 +2306,7 @@ function extractXCoordinates(line) {
             line.x
         ]);
     }
-    var segmentCoordinates = (_line$segment = line.segment) === null || _line$segment === void 0 ? void 0 : _line$segment.map(function(s) {
-        return s.x;
-    });
+    var segmentCoordinates = (_line$segment = line.segment) === null || _line$segment === void 0 ? void 0 : _line$segment.map((s)=>s.x);
     if (segmentCoordinates == null || segmentCoordinates.length === 0) {
         return [];
     }
@@ -2466,38 +2319,33 @@ function extractYCoordinates(line) {
             line.y
         ]);
     }
-    var segmentCoordinates = (_line$segment2 = line.segment) === null || _line$segment2 === void 0 ? void 0 : _line$segment2.map(function(s) {
-        return s.y;
-    });
+    var segmentCoordinates = (_line$segment2 = line.segment) === null || _line$segment2 === void 0 ? void 0 : _line$segment2.map((s)=>s.y);
     if (segmentCoordinates == null || segmentCoordinates.length === 0) {
         return [];
     }
     return onlyAllowNumbers(segmentCoordinates);
 }
-var combineLinesDomain = function combineLinesDomain(lines, axisType) {
-    var _Math, _Math1;
+var combineLinesDomain = (lines, axisType)=>{
     if (lines == null) {
         return undefined;
     }
-    var allCoords = lines.flatMap(function(line) {
-        return axisType === 'xAxis' ? extractXCoordinates(line) : extractYCoordinates(line);
-    });
+    var allCoords = lines.flatMap((line)=>axisType === 'xAxis' ? extractXCoordinates(line) : extractYCoordinates(line));
     if (allCoords.length === 0) {
         return undefined;
     }
     return [
-        (_Math = Math).min.apply(_Math, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(allCoords)),
-        (_Math1 = Math).max.apply(_Math1, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(allCoords))
+        Math.min(...allCoords),
+        Math.max(...allCoords)
     ];
 };
 var selectReferenceLinesDomain = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectReferenceLinesByAxis,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisType"]
 ], combineLinesDomain);
-var selectReferenceElementsDomain = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectReferenceDotsDomain, selectReferenceLinesDomain, selectReferenceAreasDomain, function(dotsDomain, linesDomain, areasDomain) {
+var selectReferenceElementsDomain = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectReferenceDotsDomain, selectReferenceLinesDomain, selectReferenceAreasDomain, (dotsDomain, linesDomain, areasDomain)=>{
     return mergeDomains(dotsDomain, areasDomain, linesDomain);
 });
-var combineNumericalDomain = function combineNumericalDomain(axisSettings, domainDefinition, domainFromUserPreference, domainOfStackGroups, dataAndErrorBarsDomain, referenceElementsDomain, layout, axisType) {
+var combineNumericalDomain = (axisSettings, domainDefinition, domainFromUserPreference, domainOfStackGroups, dataAndErrorBarsDomain, referenceElementsDomain, layout, axisType)=>{
     if (domainFromUserPreference != null) {
         // We're done! No need to compute anything else.
         return domainFromUserPreference;
@@ -2528,11 +2376,11 @@ var selectNumericalDomain = (0, __TURBOPACK__imported__module__$5b$project$5d2f$
     0,
     1
 ];
-var combineAxisDomain = function combineAxisDomain(axisSettings, layout, displayedData, allAppliedValues, stackOffsetType, axisType, numericalDomain) {
+var combineAxisDomain = (axisSettings, layout, displayedData, allAppliedValues, stackOffsetType, axisType, numericalDomain)=>{
     if ((axisSettings == null || displayedData == null || displayedData.length === 0) && numericalDomain === undefined) {
         return undefined;
     }
-    var dataKey = axisSettings.dataKey, type = axisSettings.type;
+    var { dataKey, type } = axisSettings;
     var isCategorical = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isCategoricalAxis"])(layout, axisType);
     if (isCategorical && dataKey == null) {
         var _displayedData$length;
@@ -2560,8 +2408,8 @@ var selectRealScaleType = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
     selectHasBar,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartName"]
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$combiners$2f$combineRealScaleType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineRealScaleType"]);
-var combineNiceTicks = function combineNiceTicks(axisDomain, axisSettings, realScaleType) {
-    var niceTicks = axisSettings.niceTicks;
+var combineNiceTicks = (axisDomain, axisSettings, realScaleType)=>{
+    var { niceTicks } = axisSettings;
     if (niceTicks === 'none') {
         return undefined;
     }
@@ -2593,7 +2441,7 @@ var selectNiceTicks = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fronte
     selectRenderableAxisSettings,
     selectRealScaleType
 ], combineNiceTicks);
-var combineAxisDomainWithNiceTicks = function combineAxisDomainWithNiceTicks(axisSettings, domain, niceTicks, axisType) {
+var combineAxisDomainWithNiceTicks = (axisSettings, domain, niceTicks, axisType)=>{
     if (/*
    * Angle axis for some reason uses nice ticks when rendering axis tick labels,
    * but doesn't use nice ticks for extending domain like all the other axes do.
@@ -2618,16 +2466,12 @@ var selectAxisDomainIncludingNiceTicks = (0, __TURBOPACK__imported__module__$5b$
     selectNiceTicks,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisType"]
 ], combineAxisDomainWithNiceTicks);
-var selectSmallestDistanceBetweenValues = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectAllAppliedValues, selectBaseAxis, function(allDataSquished, axisSettings) {
+var selectSmallestDistanceBetweenValues = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectAllAppliedValues, selectBaseAxis, (allDataSquished, axisSettings)=>{
     if (!axisSettings || axisSettings.type !== 'number') {
         return undefined;
     }
     var smallestDistanceBetweenValues = Infinity;
-    var sortedValues = Array.from(onlyAllowNumbers(allDataSquished.map(function(d) {
-        return d.value;
-    }))).sort(function(a, b) {
-        return a - b;
-    });
+    var sortedValues = Array.from(onlyAllowNumbers(allDataSquished.map((d)=>d.value))).sort((a, b)=>a - b);
     var first = sortedValues[0];
     var last = sortedValues[sortedValues.length - 1];
     if (first == null || last == null) {
@@ -2649,9 +2493,7 @@ var selectSmallestDistanceBetweenValues = (0, __TURBOPACK__imported__module__$5b
     }
     return smallestDistanceBetweenValues / diff;
 });
-var selectCalculatedPadding = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectSmallestDistanceBetweenValues, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectBarCategoryGap"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"], function(_1, _2, _3, _4, padding) {
-    return padding;
-}, function(smallestDistanceInPercent, layout, barCategoryGap, offset, padding) {
+var selectCalculatedPadding = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectSmallestDistanceBetweenValues, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectBarCategoryGap"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"], (_1, _2, _3, _4, padding)=>padding, (smallestDistanceInPercent, layout, barCategoryGap, offset, padding)=>{
     if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(smallestDistanceInPercent)) {
         return 0;
     }
@@ -2666,21 +2508,21 @@ var selectCalculatedPadding = (0, __TURBOPACK__imported__module__$5b$project$5d2
     }
     return 0;
 });
-var selectCalculatedXAxisPadding = function selectCalculatedXAxisPadding(state, axisId, isPanorama) {
+var selectCalculatedXAxisPadding = (state, axisId, isPanorama)=>{
     var xAxisSettings = selectXAxisSettings(state, axisId);
     if (xAxisSettings == null || typeof xAxisSettings.padding !== 'string') {
         return 0;
     }
     return selectCalculatedPadding(state, 'xAxis', axisId, isPanorama, xAxisSettings.padding);
 };
-var selectCalculatedYAxisPadding = function selectCalculatedYAxisPadding(state, axisId, isPanorama) {
+var selectCalculatedYAxisPadding = (state, axisId, isPanorama)=>{
     var yAxisSettings = selectYAxisSettings(state, axisId);
     if (yAxisSettings == null || typeof yAxisSettings.padding !== 'string') {
         return 0;
     }
     return selectCalculatedPadding(state, 'yAxis', axisId, isPanorama, yAxisSettings.padding);
 };
-var selectXAxisPadding = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectXAxisSettings, selectCalculatedXAxisPadding, function(xAxisSettings, calculated) {
+var selectXAxisPadding = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectXAxisSettings, selectCalculatedXAxisPadding, (xAxisSettings, calculated)=>{
     var _padding$left, _padding$right;
     if (xAxisSettings == null) {
         return {
@@ -2688,7 +2530,7 @@ var selectXAxisPadding = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fro
             right: 0
         };
     }
-    var padding = xAxisSettings.padding;
+    var { padding } = xAxisSettings;
     if (typeof padding === 'string') {
         return {
             left: calculated,
@@ -2700,7 +2542,7 @@ var selectXAxisPadding = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fro
         right: ((_padding$right = padding.right) !== null && _padding$right !== void 0 ? _padding$right : 0) + calculated
     };
 });
-var selectYAxisPadding = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectYAxisSettings, selectCalculatedYAxisPadding, function(yAxisSettings, calculated) {
+var selectYAxisPadding = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectYAxisSettings, selectCalculatedYAxisPadding, (yAxisSettings, calculated)=>{
     var _padding$top, _padding$bottom;
     if (yAxisSettings == null) {
         return {
@@ -2708,7 +2550,7 @@ var selectYAxisPadding = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fro
             bottom: 0
         };
     }
-    var padding = yAxisSettings.padding;
+    var { padding } = yAxisSettings;
     if (typeof padding === 'string') {
         return {
             top: calculated,
@@ -2725,11 +2567,9 @@ var selectXAxisRange = (0, __TURBOPACK__imported__module__$5b$project$5d2f$front
     selectXAxisPadding,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$brushSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectBrushDimensions"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$brushSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectBrushSettings"],
-    function(_state, _axisId, isPanorama) {
-        return isPanorama;
-    }
-], function(offset, padding, brushDimensions, _ref5, isPanorama) {
-    var brushPadding = _ref5.padding;
+    (_state, _axisId, isPanorama)=>isPanorama
+], (offset, padding, brushDimensions, _ref5, isPanorama)=>{
+    var { padding: brushPadding } = _ref5;
     if (isPanorama) {
         return [
             brushPadding.left,
@@ -2747,11 +2587,9 @@ var selectYAxisRange = (0, __TURBOPACK__imported__module__$5b$project$5d2f$front
     selectYAxisPadding,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$brushSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectBrushDimensions"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$brushSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectBrushSettings"],
-    function(_state, _axisId, isPanorama) {
-        return isPanorama;
-    }
-], function(offset, layout, padding, brushDimensions, _ref6, isPanorama) {
-    var brushPadding = _ref6.padding;
+    (_state, _axisId, isPanorama)=>isPanorama
+], (offset, layout, padding, brushDimensions, _ref6, isPanorama)=>{
+    var { padding: brushPadding } = _ref6;
     if (isPanorama) {
         return [
             brushDimensions.height - brushPadding.bottom,
@@ -2769,7 +2607,7 @@ var selectYAxisRange = (0, __TURBOPACK__imported__module__$5b$project$5d2f$front
         offset.top + offset.height - padding.bottom
     ];
 });
-var selectAxisRange = function selectAxisRange(state, axisType, axisId, isPanorama) {
+var selectAxisRange = (state, axisType, axisId, isPanorama)=>{
     var _selectZAxisSettings;
     switch(axisType){
         case 'xAxis':
@@ -2800,16 +2638,14 @@ var selectConfiguredScale = (0, __TURBOPACK__imported__module__$5b$project$5d2f$
     selectCheckedAxisDomain,
     selectAxisRangeWithReverse
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$combiners$2f$combineConfiguredScale$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineConfiguredScale"]);
-var combineCategoricalDomain = function combineCategoricalDomain(layout, appliedValues, axis, axisType) {
+var combineCategoricalDomain = (layout, appliedValues, axis, axisType)=>{
     if (axis == null || axis.dataKey == null) {
         return undefined;
     }
-    var type = axis.type, scale = axis.scale;
+    var { type, scale } = axis;
     var isCategorical = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isCategoricalAxis"])(layout, axisType);
     if (isCategorical && (type === 'number' || scale !== 'auto')) {
-        return appliedValues.map(function(d) {
-            return d.value;
-        });
+        return appliedValues.map((d)=>d.value);
     }
     return undefined;
 };
@@ -2843,41 +2679,25 @@ function compareIds(a, b) {
     }
     return 0;
 }
-var pickAxisOrientation = function pickAxisOrientation(_state, orientation) {
-    return orientation;
-};
-var pickMirror = function pickMirror(_state, _orientation, mirror) {
-    return mirror;
-};
-var selectAllXAxesWithOffsetType = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectAllAxes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAllXAxes"], pickAxisOrientation, pickMirror, function(allAxes, orientation, mirror) {
-    return allAxes.filter(function(axis) {
-        return axis.orientation === orientation;
-    }).filter(function(axis) {
-        return axis.mirror === mirror;
-    }).sort(compareIds);
-});
-var selectAllYAxesWithOffsetType = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectAllAxes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAllYAxes"], pickAxisOrientation, pickMirror, function(allAxes, orientation, mirror) {
-    return allAxes.filter(function(axis) {
-        return axis.orientation === orientation;
-    }).filter(function(axis) {
-        return axis.mirror === mirror;
-    }).sort(compareIds);
-});
-var getXAxisSize = function getXAxisSize(offset, axisSettings) {
+var pickAxisOrientation = (_state, orientation)=>orientation;
+var pickMirror = (_state, _orientation, mirror)=>mirror;
+var selectAllXAxesWithOffsetType = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectAllAxes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAllXAxes"], pickAxisOrientation, pickMirror, (allAxes, orientation, mirror)=>allAxes.filter((axis)=>axis.orientation === orientation).filter((axis)=>axis.mirror === mirror).sort(compareIds));
+var selectAllYAxesWithOffsetType = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectAllAxes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAllYAxes"], pickAxisOrientation, pickMirror, (allAxes, orientation, mirror)=>allAxes.filter((axis)=>axis.orientation === orientation).filter((axis)=>axis.mirror === mirror).sort(compareIds));
+var getXAxisSize = (offset, axisSettings)=>{
     return {
         width: offset.width,
         height: axisSettings.height
     };
 };
-var getYAxisSize = function getYAxisSize(offset, axisSettings) {
+var getYAxisSize = (offset, axisSettings)=>{
     var width = typeof axisSettings.width === 'number' ? axisSettings.width : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Constants$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DEFAULT_Y_AXIS_WIDTH"];
     return {
-        width: width,
+        width,
         height: offset.height
     };
 };
 var selectXAxisSize = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"], selectXAxisSettings, getXAxisSize);
-var combineXAxisPositionStartingPoint = function combineXAxisPositionStartingPoint(offset, orientation, chartHeight) {
+var combineXAxisPositionStartingPoint = (offset, orientation, chartHeight)=>{
     switch(orientation){
         case 'top':
             return offset.top;
@@ -2887,7 +2707,7 @@ var combineXAxisPositionStartingPoint = function combineXAxisPositionStartingPoi
             return 0;
     }
 };
-var combineYAxisPositionStartingPoint = function combineYAxisPositionStartingPoint(offset, orientation, chartWidth) {
+var combineYAxisPositionStartingPoint = (offset, orientation, chartWidth)=>{
     switch(orientation){
         case 'left':
             return offset.left;
@@ -2897,10 +2717,10 @@ var combineYAxisPositionStartingPoint = function combineYAxisPositionStartingPoi
             return 0;
     }
 };
-var selectAllXAxesOffsetSteps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartHeight"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"], selectAllXAxesWithOffsetType, pickAxisOrientation, pickMirror, function(chartHeight, offset, allAxesWithSameOffsetType, orientation, mirror) {
+var selectAllXAxesOffsetSteps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartHeight"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"], selectAllXAxesWithOffsetType, pickAxisOrientation, pickMirror, (chartHeight, offset, allAxesWithSameOffsetType, orientation, mirror)=>{
     var steps = {};
     var position;
-    allAxesWithSameOffsetType.forEach(function(axis) {
+    allAxesWithSameOffsetType.forEach((axis)=>{
         var axisSize = getXAxisSize(offset, axis);
         if (position == null) {
             position = combineXAxisPositionStartingPoint(offset, orientation, chartHeight);
@@ -2911,10 +2731,10 @@ var selectAllXAxesOffsetSteps = (0, __TURBOPACK__imported__module__$5b$project$5
     });
     return steps;
 });
-var selectAllYAxesOffsetSteps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartWidth"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"], selectAllYAxesWithOffsetType, pickAxisOrientation, pickMirror, function(chartWidth, offset, allAxesWithSameOffsetType, orientation, mirror) {
+var selectAllYAxesOffsetSteps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartWidth"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"], selectAllYAxesWithOffsetType, pickAxisOrientation, pickMirror, (chartWidth, offset, allAxesWithSameOffsetType, orientation, mirror)=>{
     var steps = {};
     var position;
-    allAxesWithSameOffsetType.forEach(function(axis) {
+    allAxesWithSameOffsetType.forEach((axis)=>{
         var axisSize = getYAxisSize(offset, axis);
         if (position == null) {
             position = combineYAxisPositionStartingPoint(offset, orientation, chartWidth);
@@ -2925,7 +2745,7 @@ var selectAllYAxesOffsetSteps = (0, __TURBOPACK__imported__module__$5b$project$5
     });
     return steps;
 });
-var selectXAxisOffsetSteps = function selectXAxisOffsetSteps(state, axisId) {
+var selectXAxisOffsetSteps = (state, axisId)=>{
     var axisSettings = selectXAxisSettings(state, axisId);
     if (axisSettings == null) {
         return undefined;
@@ -2936,10 +2756,8 @@ var selectXAxisPosition = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"],
     selectXAxisSettings,
     selectXAxisOffsetSteps,
-    function(_, axisId) {
-        return axisId;
-    }
-], function(offset, axisSettings, allSteps, axisId) {
+    (_, axisId)=>axisId
+], (offset, axisSettings, allSteps, axisId)=>{
     if (axisSettings == null) {
         return undefined;
     }
@@ -2955,7 +2773,7 @@ var selectXAxisPosition = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
         y: stepOfThisAxis
     };
 });
-var selectYAxisOffsetSteps = function selectYAxisOffsetSteps(state, axisId) {
+var selectYAxisOffsetSteps = (state, axisId)=>{
     var axisSettings = selectYAxisSettings(state, axisId);
     if (axisSettings == null) {
         return undefined;
@@ -2966,10 +2784,8 @@ var selectYAxisPosition = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"],
     selectYAxisSettings,
     selectYAxisOffsetSteps,
-    function(_, axisId) {
-        return axisId;
-    }
-], function(offset, axisSettings, allSteps, axisId) {
+    (_, axisId)=>axisId
+], (offset, axisSettings, allSteps, axisId)=>{
     if (axisSettings == null) {
         return undefined;
     }
@@ -2985,14 +2801,14 @@ var selectYAxisPosition = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
         y: offset.top
     };
 });
-var selectYAxisSize = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"], selectYAxisSettings, function(offset, axisSettings) {
+var selectYAxisSize = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"], selectYAxisSettings, (offset, axisSettings)=>{
     var width = typeof axisSettings.width === 'number' ? axisSettings.width : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Constants$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DEFAULT_Y_AXIS_WIDTH"];
     return {
-        width: width,
+        width,
         height: offset.height
     };
 });
-var selectCartesianAxisSize = function selectCartesianAxisSize(state, axisType, axisId) {
+var selectCartesianAxisSize = (state, axisType, axisId)=>{
     switch(axisType){
         case 'xAxis':
             {
@@ -3008,18 +2824,14 @@ var selectCartesianAxisSize = function selectCartesianAxisSize(state, axisType, 
             }
     }
 };
-var combineDuplicateDomain = function combineDuplicateDomain(chartLayout, appliedValues, axis, axisType) {
+var combineDuplicateDomain = (chartLayout, appliedValues, axis, axisType)=>{
     if (axis == null) {
         return undefined;
     }
-    var allowDuplicatedCategory = axis.allowDuplicatedCategory, type = axis.type, dataKey = axis.dataKey;
+    var { allowDuplicatedCategory, type, dataKey } = axis;
     var isCategorical = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isCategoricalAxis"])(chartLayout, axisType);
-    var allData = appliedValues.map(function(av) {
-        return av.value;
-    });
-    var validData = allData.filter(function(v) {
-        return v != null;
-    });
+    var allData = appliedValues.map((av)=>av.value);
+    var validData = allData.filter((v)=>v != null);
     if (dataKey && isCategorical && type === 'category' && allowDuplicatedCategory && (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["hasDuplicate"])(validData)) {
         return allData;
     }
@@ -3041,7 +2853,7 @@ var selectAxisPropsNeededForCartesianGridTicksGenerator = (0, __TURBOPACK__impor
     selectAxisRange,
     selectNiceTicks,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisType"]
-], function(layout, axis, realScaleType, scale, duplicateDomain, categoricalDomain, axisRange, niceTicks, axisType) {
+], (layout, axis, realScaleType, scale, duplicateDomain, categoricalDomain, axisRange, niceTicks, axisType)=>{
     if (axis == null) {
         return undefined;
     }
@@ -3057,22 +2869,22 @@ var selectAxisPropsNeededForCartesianGridTicksGenerator = (0, __TURBOPACK__impor
         ticks: axis.ticks,
         type: axis.type,
         unit: axis.unit,
-        axisType: axisType,
-        categoricalDomain: categoricalDomain,
-        duplicateDomain: duplicateDomain,
-        isCategorical: isCategorical,
-        niceTicks: niceTicks,
+        axisType,
+        categoricalDomain,
+        duplicateDomain,
+        isCategorical,
+        niceTicks,
         range: axisRange,
-        realScaleType: realScaleType,
-        scale: scale
+        realScaleType,
+        scale
     };
 });
-var combineAxisTicks = function combineAxisTicks(layout, axis, realScaleType, scale, niceTicks, axisRange, duplicateDomain, categoricalDomain, axisType) {
+var combineAxisTicks = (layout, axis, realScaleType, scale, niceTicks, axisRange, duplicateDomain, categoricalDomain, axisType)=>{
     if (axis == null || scale == null) {
         return undefined;
     }
     var isCategorical = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isCategoricalAxis"])(layout, axisType);
-    var type = axis.type, ticks = axis.ticks, tickCount = axis.tickCount;
+    var { type, ticks, tickCount } = axis;
     var offsetForBand = // @ts-expect-error This is testing for `scaleBand` but for band axis the type is reported as `band` so this looks like a dead code with a workaround elsewhere?
     realScaleType === 'scaleBand' && typeof scale.bandwidth === 'function' ? scale.bandwidth() / 2 : 2;
     var offset = type === 'category' && scale.bandwidth ? scale.bandwidth() / offsetForBand : 0;
@@ -3080,17 +2892,17 @@ var combineAxisTicks = function combineAxisTicks(layout, axis, realScaleType, sc
     // The ticks set by user should only affect the ticks adjacent to axis line
     var ticksOrNiceTicks = ticks || niceTicks;
     if (ticksOrNiceTicks) {
-        return ticksOrNiceTicks.map(function(entry, index) {
+        return ticksOrNiceTicks.map((entry, index)=>{
             var scaleContent = duplicateDomain ? duplicateDomain.indexOf(entry) : entry;
             var scaled = scale.map(scaleContent);
             if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(scaled)) {
                 return null;
             }
             return {
-                index: index,
+                index,
                 coordinate: scaled + offset,
                 value: entry,
-                offset: offset
+                offset
             };
         }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNotNil"]);
     }
@@ -3098,7 +2910,7 @@ var combineAxisTicks = function combineAxisTicks(layout, axis, realScaleType, sc
     // For type='number' with linear scale (where niceTicks are available), skip this branch
     // so ticks are evenly spaced instead of placed at data positions (GitHub issue #4271)
     if (isCategorical && categoricalDomain) {
-        return categoricalDomain.map(function(entry, index) {
+        return categoricalDomain.map((entry, index)=>{
             var scaled = scale.map(entry);
             if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(scaled)) {
                 return null;
@@ -3106,13 +2918,13 @@ var combineAxisTicks = function combineAxisTicks(layout, axis, realScaleType, sc
             return {
                 coordinate: scaled + offset,
                 value: entry,
-                index: index,
-                offset: offset
+                index,
+                offset
             };
         }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNotNil"]);
     }
     if (scale.ticks) {
-        return scale.ticks(tickCount).map(function(entry, index) {
+        return scale.ticks(tickCount).map((entry, index)=>{
             var scaled = scale.map(entry);
             if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(scaled)) {
                 return null;
@@ -3120,13 +2932,13 @@ var combineAxisTicks = function combineAxisTicks(layout, axis, realScaleType, sc
             return {
                 coordinate: scaled + offset,
                 value: entry,
-                index: index,
-                offset: offset
+                index,
+                offset
             };
         }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNotNil"]);
     }
     // When axis has duplicated text, serial numbers are used to generate scale
-    return scale.domain().map(function(entry, index) {
+    return scale.domain().map((entry, index)=>{
         var scaled = scale.map(entry);
         if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(scaled)) {
             return null;
@@ -3135,8 +2947,8 @@ var combineAxisTicks = function combineAxisTicks(layout, axis, realScaleType, sc
             coordinate: scaled + offset,
             // @ts-expect-error can't use Date as index
             value: duplicateDomain ? duplicateDomain[entry] : entry,
-            index: index,
-            offset: offset
+            index,
+            offset
         };
     }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNotNil"]);
 };
@@ -3151,17 +2963,17 @@ var selectTicksOfAxis = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fron
     selectCategoricalDomain,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisType"]
 ], combineAxisTicks);
-var combineGraphicalItemTicks = function combineGraphicalItemTicks(layout, axis, scale, axisRange, duplicateDomain, categoricalDomain, axisType) {
+var combineGraphicalItemTicks = (layout, axis, scale, axisRange, duplicateDomain, categoricalDomain, axisType)=>{
     if (axis == null || scale == null || axisRange == null || axisRange[0] === axisRange[1]) {
         return undefined;
     }
     var isCategorical = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isCategoricalAxis"])(layout, axisType);
-    var tickCount = axis.tickCount;
+    var { tickCount } = axis;
     var offset = 0;
     offset = axisType === 'angleAxis' && (axisRange === null || axisRange === void 0 ? void 0 : axisRange.length) >= 2 ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mathSign"])(axisRange[0] - axisRange[1]) * 2 * offset : offset;
     // When axis is a categorical axis, but the type of axis is number or the scale of axis is not "auto"
     if (isCategorical && categoricalDomain) {
-        return categoricalDomain.map(function(entry, index) {
+        return categoricalDomain.map((entry, index)=>{
             var scaled = scale.map(entry);
             if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(scaled)) {
                 return null;
@@ -3169,13 +2981,13 @@ var combineGraphicalItemTicks = function combineGraphicalItemTicks(layout, axis,
             return {
                 coordinate: scaled + offset,
                 value: entry,
-                index: index,
-                offset: offset
+                index,
+                offset
             };
         }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNotNil"]);
     }
     if (scale.ticks) {
-        return scale.ticks(tickCount).map(function(entry, index) {
+        return scale.ticks(tickCount).map((entry, index)=>{
             var scaled = scale.map(entry);
             if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(scaled)) {
                 return null;
@@ -3183,13 +2995,13 @@ var combineGraphicalItemTicks = function combineGraphicalItemTicks(layout, axis,
             return {
                 coordinate: scaled + offset,
                 value: entry,
-                index: index,
-                offset: offset
+                index,
+                offset
             };
         }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNotNil"]);
     }
     // When axis has duplicated text, serial numbers are used to generate scale
-    return scale.domain().map(function(entry, index) {
+    return scale.domain().map((entry, index)=>{
         var scaled = scale.map(entry);
         if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(scaled)) {
             return null;
@@ -3198,8 +3010,8 @@ var combineGraphicalItemTicks = function combineGraphicalItemTicks(layout, axis,
             coordinate: scaled + offset,
             // @ts-expect-error can't use unknown as index
             value: duplicateDomain ? duplicateDomain[entry] : entry,
-            index: index,
-            offset: offset
+            index,
+            offset
         };
     }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNotNil"]);
 };
@@ -3212,12 +3024,12 @@ var selectTicksOfGraphicalItem = (0, __TURBOPACK__imported__module__$5b$project$
     selectCategoricalDomain,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisType"]
 ], combineGraphicalItemTicks);
-var selectAxisWithScale = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectBaseAxis, selectAxisScale, function(axis, scale) {
+var selectAxisWithScale = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(selectBaseAxis, selectAxisScale, (axis, scale)=>{
     if (axis == null || scale == null) {
         return undefined;
     }
     return _objectSpread(_objectSpread({}, axis), {}, {
-        scale: scale
+        scale
     });
 });
 var selectZAxisConfiguredScale = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
@@ -3229,33 +3041,27 @@ var selectZAxisConfiguredScale = (0, __TURBOPACK__imported__module__$5b$project$
 var selectZAxisScale = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectZAxisConfiguredScale
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$scale$2f$RechartsScale$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["rechartsScaleFactory"]);
-var selectZAxisWithScale = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(function(state, _axisType, axisId) {
-    return selectZAxisSettings(state, axisId);
-}, selectZAxisScale, function(axis, scale) {
+var selectZAxisWithScale = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])((state, _axisType, axisId)=>selectZAxisSettings(state, axisId), selectZAxisScale, (axis, scale)=>{
     if (axis == null || scale == null) {
         return undefined;
     }
     return _objectSpread(_objectSpread({}, axis), {}, {
-        scale: scale
+        scale
     });
 });
 var selectChartDirection = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectAllAxes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAllXAxes"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectAllAxes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAllYAxes"]
-], function(layout, allXAxes, allYAxes) {
+], (layout, allXAxes, allYAxes)=>{
     switch(layout){
         case 'horizontal':
             {
-                return allXAxes.some(function(axis) {
-                    return axis.reversed;
-                }) ? 'right-to-left' : 'left-to-right';
+                return allXAxes.some((axis)=>axis.reversed) ? 'right-to-left' : 'left-to-right';
             }
         case 'vertical':
             {
-                return allYAxes.some(function(axis) {
-                    return axis.reversed;
-                }) ? 'bottom-to-top' : 'top-to-bottom';
+                return allYAxes.some((axis)=>axis.reversed) ? 'bottom-to-top' : 'top-to-bottom';
             }
         // TODO: make this better. For now, right arrow triggers "forward", left arrow "back"
         // however, the tooltip moves an unintuitive direction because of how the indices are rendered
@@ -3270,43 +3076,26 @@ var selectChartDirection = (0, __TURBOPACK__imported__module__$5b$project$5d2f$f
             }
     }
 });
-var selectRenderedTicksOfAxis = function selectRenderedTicksOfAxis(state, axisType, axisId) {
+var selectRenderedTicksOfAxis = (state, axisType, axisId)=>{
     var _state$renderedTicks$;
     return (_state$renderedTicks$ = state.renderedTicks[axisType]) === null || _state$renderedTicks$ === void 0 ? void 0 : _state$renderedTicks$[axisId];
 };
 var selectAxisInverseTickSnapScale = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectRenderedTicksOfAxis
-], function(ticks) {
+], (ticks)=>{
     if (!ticks || ticks.length === 0) {
         return undefined;
     }
-    return function(pixelValue) {
+    return (pixelValue)=>{
         var _closestTick;
         // Find the tick with the closest coordinate to pixelValue
         var minDistance = Infinity;
         var closestTick = ticks[0];
-        var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
-        try {
-            for(var _iterator = ticks[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
-                var tick = _step.value;
-                var distance = Math.abs(tick.coordinate - pixelValue);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    closestTick = tick;
-                }
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally{
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return != null) {
-                    _iterator.return();
-                }
-            } finally{
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
+        for (var tick of ticks){
+            var distance = Math.abs(tick.coordinate - pixelValue);
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestTick = tick;
             }
         }
         return (_closestTick = closestTick) === null || _closestTick === void 0 ? void 0 : _closestTick.value;
@@ -3330,12 +3119,8 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/hooks.js [app-client] (ecmascript)");
 ;
-var selectDefaultTooltipEventType = function selectDefaultTooltipEventType(state) {
-    return state.options.defaultTooltipEventType;
-};
-var selectValidateTooltipEventTypes = function selectValidateTooltipEventTypes(state) {
-    return state.options.validateTooltipEventTypes;
-};
+var selectDefaultTooltipEventType = (state)=>state.options.defaultTooltipEventType;
+var selectValidateTooltipEventTypes = (state)=>state.options.validateTooltipEventTypes;
 function combineTooltipEventType(shared, defaultTooltipEventType, validateTooltipEventTypes) {
     if (shared == null) {
         return defaultTooltipEventType;
@@ -3353,9 +3138,7 @@ function selectTooltipEventType(state, shared) {
 }
 function useTooltipEventType(shared) {
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
-        "useTooltipEventType.useAppSelector": function(state) {
-            return selectTooltipEventType(state, shared);
-        }
+        "useTooltipEventType.useAppSelector": (state)=>selectTooltipEventType(state, shared)
     }["useTooltipEventType.useAppSelector"]);
 }
 }),
@@ -3368,7 +3151,7 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
 ;
-var combineActiveLabel = function combineActiveLabel(tooltipTicks, activeIndex) {
+var combineActiveLabel = (tooltipTicks, activeIndex)=>{
     var _tooltipTicks$n;
     var n = Number(activeIndex);
     if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNan"])(n) || activeIndex == null) {
@@ -3384,9 +3167,7 @@ __turbopack_context__.s([
     "selectTooltipSettings",
     ()=>selectTooltipSettings
 ]);
-var selectTooltipSettings = function selectTooltipSettings(state) {
-    return state.tooltip.settings;
-};
+var selectTooltipSettings = (state)=>state.tooltip.settings;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/selectors/combiners/combineTooltipInteractionState.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -3395,9 +3176,7 @@ __turbopack_context__.s([
     "combineTooltipInteractionState",
     ()=>combineTooltipInteractionState
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/tooltipSlice.js [app-client] (ecmascript)");
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -3429,14 +3208,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -3457,7 +3236,7 @@ function chooseAppropriateMouseInteraction(tooltipState, tooltipEventType, trigg
 function hasBeenActivePreviously(tooltipInteractionState) {
     return tooltipInteractionState.index != null;
 }
-var combineTooltipInteractionState = function combineTooltipInteractionState(tooltipState, tooltipEventType, trigger, defaultIndex) {
+var combineTooltipInteractionState = (tooltipState, tooltipEventType, trigger, defaultIndex)=>{
     if (tooltipEventType == null) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["noInteraction"];
     }
@@ -3502,11 +3281,9 @@ __turbopack_context__.s([
     "combineActiveTooltipIndex",
     ()=>combineActiveTooltipIndex
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_instanceof.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/isWellBehavedNumber.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/ChartUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isDomainSpecifiedByUser$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/isDomainSpecifiedByUser.js [app-client] (ecmascript)");
-;
 ;
 ;
 ;
@@ -3514,7 +3291,7 @@ function toFiniteNumber(value) {
     if (typeof value === 'number') {
         return Number.isFinite(value) ? value : undefined;
     }
-    if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(value, Date)) {
+    if (value instanceof Date) {
         var numericValue = value.valueOf();
         return Number.isFinite(numericValue) ? numericValue : undefined;
     }
@@ -3545,7 +3322,7 @@ function isValueWithinDomain(entry, axisDataKey, domain) {
     }
     return isValueWithinNumberDomain(value, domain);
 }
-var combineActiveTooltipIndex = function combineActiveTooltipIndex(tooltipInteraction, chartData, axisDataKey, domain) {
+var combineActiveTooltipIndex = (tooltipInteraction, chartData, axisDataKey, domain)=>{
     var desiredIndex = tooltipInteraction === null || tooltipInteraction === void 0 ? void 0 : tooltipInteraction.index;
     if (desiredIndex == null) {
         return null;
@@ -3582,7 +3359,7 @@ __turbopack_context__.s([
     "combineCoordinateForDefaultIndex",
     ()=>combineCoordinateForDefaultIndex
 ]);
-var combineCoordinateForDefaultIndex = function combineCoordinateForDefaultIndex(width, height, layout, offset, tooltipTicks, defaultIndex, tooltipConfigurations) {
+var combineCoordinateForDefaultIndex = (width, height, layout, offset, tooltipTicks, defaultIndex, tooltipConfigurations)=>{
     if (defaultIndex == null) {
         return undefined;
     }
@@ -3625,7 +3402,7 @@ __turbopack_context__.s([
     "combineTooltipPayloadConfigurations",
     ()=>combineTooltipPayloadConfigurations
 ]);
-var combineTooltipPayloadConfigurations = function combineTooltipPayloadConfigurations(tooltipState, tooltipEventType, trigger, defaultIndex) {
+var combineTooltipPayloadConfigurations = (tooltipState, tooltipEventType, trigger, defaultIndex)=>{
     // if tooltip reacts to axis interaction, then we display all items at the same time.
     if (tooltipEventType === 'axis') {
         return tooltipState.tooltipItemPayloads;
@@ -3664,7 +3441,7 @@ var combineTooltipPayloadConfigurations = function combineTooltipPayloadConfigur
         }
         return [];
     }
-    return tooltipState.tooltipItemPayloads.filter(function(tpc) {
+    return tooltipState.tooltipItemPayloads.filter((tpc)=>{
         var _tpc$settings;
         return ((_tpc$settings = tpc.settings) === null || _tpc$settings === void 0 ? void 0 : _tpc$settings.graphicalItemId) === filterByGraphicalItemId;
     });
@@ -3677,9 +3454,7 @@ __turbopack_context__.s([
     "selectTooltipPayloadSearcher",
     ()=>selectTooltipPayloadSearcher
 ]);
-var selectTooltipPayloadSearcher = function selectTooltipPayloadSearcher(state) {
-    return state.options.tooltipPayloadSearcher;
-};
+var selectTooltipPayloadSearcher = (state)=>state.options.tooltipPayloadSearcher;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/selectors/selectTooltipState.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -3688,9 +3463,7 @@ __turbopack_context__.s([
     "selectTooltipState",
     ()=>selectTooltipState
 ]);
-var selectTooltipState = function selectTooltipState(state) {
-    return state.tooltip;
-};
+var selectTooltipState = (state)=>state.tooltip;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/selectors/combiners/combineTooltipPayload.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -3699,11 +3472,9 @@ __turbopack_context__.s([
     "combineTooltipPayload",
     ()=>combineTooltipPayload
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/ChartUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$getSliced$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/getSliced.js [app-client] (ecmascript)");
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -3735,14 +3506,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -3767,9 +3538,7 @@ function parseDataKey(value) {
         return value;
     }
     if (typeof value === 'function') {
-        return function(obj) {
-            return value(obj);
-        };
+        return (obj)=>value(obj);
     }
     return undefined;
 }
@@ -3780,7 +3549,7 @@ function parseColor(value) {
     return undefined;
 }
 function parseTooltipPayloadItem(item) {
-    if (item == null || (typeof item === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(item)) !== 'object') {
+    if (item == null || typeof item !== 'object') {
         return undefined;
     }
     var name = 'name' in item ? parseName(item.name) : undefined;
@@ -3790,12 +3559,12 @@ function parseTooltipPayloadItem(item) {
     var color = 'color' in item ? parseColor(item.color) : undefined;
     var fill = 'fill' in item ? parseColor(item.fill) : undefined;
     return {
-        name: name,
-        unit: unit,
-        dataKey: dataKey,
-        payload: payload,
-        color: color,
-        fill: fill
+        name,
+        unit,
+        dataKey,
+        payload,
+        color,
+        fill
     };
 }
 function selectFinalData(dataDefinedOnItem, dataDefinedOnChart) {
@@ -3807,15 +3576,15 @@ function selectFinalData(dataDefinedOnItem, dataDefinedOnChart) {
     }
     return dataDefinedOnChart;
 }
-var combineTooltipPayload = function combineTooltipPayload(tooltipPayloadConfigurations, activeIndex, chartDataState, tooltipAxisDataKey, activeLabel, tooltipPayloadSearcher, tooltipEventType) {
+var combineTooltipPayload = (tooltipPayloadConfigurations, activeIndex, chartDataState, tooltipAxisDataKey, activeLabel, tooltipPayloadSearcher, tooltipEventType)=>{
     if (activeIndex == null || tooltipPayloadSearcher == null) {
         return undefined;
     }
-    var chartData = chartDataState.chartData, computedData = chartDataState.computedData, dataStartIndex = chartDataState.dataStartIndex, dataEndIndex = chartDataState.dataEndIndex;
+    var { chartData, computedData, dataStartIndex, dataEndIndex } = chartDataState;
     var init = [];
-    return tooltipPayloadConfigurations.reduce(function(agg, _ref) {
+    return tooltipPayloadConfigurations.reduce((agg, _ref)=>{
         var _settings$dataKey;
-        var dataDefinedOnItem = _ref.dataDefinedOnItem, settings = _ref.settings;
+        var { dataDefinedOnItem, settings } = _ref;
         var finalData = selectFinalData(dataDefinedOnItem, chartData);
         var sliced = Array.isArray(finalData) ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$getSliced$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getSliced"])(finalData, dataStartIndex, dataEndIndex) : finalData;
         var finalDataKey = (_settings$dataKey = settings === null || settings === void 0 ? void 0 : settings.dataKey) !== null && _settings$dataKey !== void 0 ? _settings$dataKey : tooltipAxisDataKey;
@@ -3852,7 +3621,7 @@ var combineTooltipPayload = function combineTooltipPayload(tooltipPayloadConfigu
        */ tooltipPayload = tooltipPayloadSearcher(sliced, activeIndex, computedData, finalNameKey);
         }
         if (Array.isArray(tooltipPayload)) {
-            tooltipPayload.forEach(function(item) {
+            tooltipPayload.forEach((item)=>{
                 var _parsedItem$color, _parsedItem$fill;
                 var parsedItem = parseTooltipPayloadItem(item);
                 var itemName = parsedItem === null || parsedItem === void 0 ? void 0 : parsedItem.name;
@@ -3933,7 +3702,6 @@ __turbopack_context__.s([
     "selectTooltipGraphicalItemsData",
     ()=>selectTooltipGraphicalItemsData
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/reselect/dist/reselect.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/axisSelectors.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/context/chartLayoutContext.js [app-client] (ecmascript)");
@@ -3996,22 +3764,18 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-;
 var selectTooltipAxisRealScaleType = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxis"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectHasBar"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartName"]
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$combiners$2f$combineRealScaleType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineRealScaleType"]);
 var selectAllUnfilteredGraphicalItems = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
-    function(state) {
-        return state.graphicalItems.cartesianItems;
-    },
-    function(state) {
-        return state.graphicalItems.polarItems;
-    }
-], function(cartesianItems, polarItems) {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(cartesianItems).concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(polarItems));
-});
+    (state)=>state.graphicalItems.cartesianItems,
+    (state)=>state.graphicalItems.polarItems
+], (cartesianItems, polarItems)=>[
+        ...cartesianItems,
+        ...polarItems
+    ]);
 var selectTooltipAxisPredicate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisType"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipAxisId$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisId"]
@@ -4027,9 +3791,7 @@ var selectAllGraphicalItemsSettings = (0, __TURBOPACK__imported__module__$5b$pro
 });
 var selectAllStackedGraphicalItemsSettings = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectAllGraphicalItemsSettings
-], function(graphicalItems) {
-    return graphicalItems.filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$types$2f$StackedGraphicalItem$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isStacked"]);
-});
+], (graphicalItems)=>graphicalItems.filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$types$2f$StackedGraphicalItem$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isStacked"]));
 var selectTooltipGraphicalItemsData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectAllGraphicalItemsSettings
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineGraphicalItemsData"], {
@@ -4039,11 +3801,7 @@ var selectTooltipGraphicalItemsData = (0, __TURBOPACK__imported__module__$5b$pro
 });
 var selectAnyTooltipItemUsesChartData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectAllGraphicalItemsSettings
-], function(items) {
-    return items.some(function(item) {
-        return !item.data;
-    });
-});
+], (items)=>items.some((item)=>!item.data));
 var selectTooltipDisplayedData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectTooltipGraphicalItemsData,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$dataSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartDataWithIndexes"]
@@ -4066,18 +3824,14 @@ var selectTooltipAxisDomainDefinition = (0, __TURBOPACK__imported__module__$5b$p
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDomainDefinition"]);
 var selectTooltipDataOverflow = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxis"]
-], function(axisSettings) {
-    return axisSettings.allowDataOverflow;
-});
+], (axisSettings)=>axisSettings.allowDataOverflow);
 var selectTooltipDomainFromUserPreferences = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectTooltipAxisDomainDefinition,
     selectTooltipDataOverflow
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isDomainSpecifiedByUser$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["numericalDomainSpecifiedWithoutRequiringData"]);
 var selectAllStackedGraphicalItems = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectAllGraphicalItemsSettings
-], function(graphicalItems) {
-    return graphicalItems.filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$types$2f$StackedGraphicalItem$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isStacked"]);
-});
+], (graphicalItems)=>graphicalItems.filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$types$2f$StackedGraphicalItem$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isStacked"]));
 var selectTooltipStackGroups = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectTooltipStackedData,
     selectAllStackedGraphicalItems,
@@ -4167,7 +3921,7 @@ var selectTooltipAxisDomainIncludingNiceTicks = (0, __TURBOPACK__imported__modul
     selectTooltipNiceTicks,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisType"]
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineAxisDomainWithNiceTicks"]);
-var selectTooltipAxisRange = function selectTooltipAxisRange(state) {
+var selectTooltipAxisRange = (state)=>{
     var axisType = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisType"])(state);
     var axisId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipAxisId$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisId"])(state);
     var isPanorama = false; // Tooltip never displays in panorama so this is safe to assume
@@ -4198,11 +3952,11 @@ var selectTooltipCategoricalDomain = (0, __TURBOPACK__imported__module__$5b$proj
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxis"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisType"]
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineCategoricalDomain"]);
-var combineTicksOfTooltipAxis = function combineTicksOfTooltipAxis(layout, axis, realScaleType, scale, range, duplicateDomain, categoricalDomain, axisType) {
+var combineTicksOfTooltipAxis = (layout, axis, realScaleType, scale, range, duplicateDomain, categoricalDomain, axisType)=>{
     if (!axis) {
         return undefined;
     }
-    var type = axis.type;
+    var { type } = axis;
     var isCategorical = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isCategoricalAxis"])(layout, axisType);
     if (!scale) {
         return undefined;
@@ -4212,7 +3966,7 @@ var combineTicksOfTooltipAxis = function combineTicksOfTooltipAxis(layout, axis,
     offset = axisType === 'angleAxis' && range != null && (range === null || range === void 0 ? void 0 : range.length) >= 2 ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mathSign"])(range[0] - range[1]) * 2 * offset : offset;
     // When axis is a categorical axis, but the type of axis is number or the scale of axis is not "auto"
     if (isCategorical && categoricalDomain) {
-        return categoricalDomain.map(function(entry, index) {
+        return categoricalDomain.map((entry, index)=>{
             var scaled = scale.map(entry);
             if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(scaled)) {
                 return null;
@@ -4220,13 +3974,13 @@ var combineTicksOfTooltipAxis = function combineTicksOfTooltipAxis(layout, axis,
             return {
                 coordinate: scaled + offset,
                 value: entry,
-                index: index,
-                offset: offset
+                index,
+                offset
             };
         }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNotNil"]);
     }
     // When axis has duplicated text, serial numbers are used to generate scale
-    return scale.domain().map(function(entry, index) {
+    return scale.domain().map((entry, index)=>{
         var scaled = scale.map(entry);
         if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(scaled)) {
             return null;
@@ -4235,8 +3989,8 @@ var combineTicksOfTooltipAxis = function combineTicksOfTooltipAxis(layout, axis,
             coordinate: scaled + offset,
             // @ts-expect-error can't use Date as an index
             value: duplicateDomain ? duplicateDomain[entry] : entry,
-            index: index,
-            offset: offset
+            index,
+            offset
         };
     }).filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNotNil"]);
 };
@@ -4254,15 +4008,9 @@ var selectTooltipEventType = (0, __TURBOPACK__imported__module__$5b$project$5d2f
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipEventType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectDefaultTooltipEventType"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipEventType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectValidateTooltipEventTypes"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipSettings$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipSettings"]
-], function(defaultTooltipEventType, validateTooltipEventType, settings) {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipEventType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineTooltipEventType"])(settings.shared, defaultTooltipEventType, validateTooltipEventType);
-});
-var selectTooltipTrigger = function selectTooltipTrigger(state) {
-    return state.tooltip.settings.trigger;
-};
-var selectDefaultIndex = function selectDefaultIndex(state) {
-    return state.tooltip.settings.defaultIndex;
-};
+], (defaultTooltipEventType, validateTooltipEventType, settings)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipEventType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineTooltipEventType"])(settings.shared, defaultTooltipEventType, validateTooltipEventType));
+var selectTooltipTrigger = (state)=>state.tooltip.settings.trigger;
+var selectDefaultIndex = (state)=>state.tooltip.settings.defaultIndex;
 var selectTooltipInteractionState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipState$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipState"],
     selectTooltipEventType,
@@ -4281,7 +4029,7 @@ var selectActiveLabel = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fron
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$combiners$2f$combineActiveLabel$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineActiveLabel"]);
 var selectActiveTooltipDataKey = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectTooltipInteractionState
-], function(tooltipInteraction) {
+], (tooltipInteraction)=>{
     if (!tooltipInteraction) {
         return undefined;
     }
@@ -4289,7 +4037,7 @@ var selectActiveTooltipDataKey = (0, __TURBOPACK__imported__module__$5b$project$
 });
 var selectActiveTooltipGraphicalItemId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectTooltipInteractionState
-], function(tooltipInteraction) {
+], (tooltipInteraction)=>{
     if (!tooltipInteraction) {
         return undefined;
     }
@@ -4313,7 +4061,7 @@ var selectTooltipCoordinateForDefaultIndex = (0, __TURBOPACK__imported__module__
 var selectActiveTooltipCoordinate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectTooltipInteractionState,
     selectTooltipCoordinateForDefaultIndex
-], function(tooltipInteractionState, defaultIndexCoordinate) {
+], (tooltipInteractionState, defaultIndexCoordinate)=>{
     if (tooltipInteractionState !== null && tooltipInteractionState !== void 0 && tooltipInteractionState.coordinate) {
         return tooltipInteractionState.coordinate;
     }
@@ -4321,7 +4069,7 @@ var selectActiveTooltipCoordinate = (0, __TURBOPACK__imported__module__$5b$proje
 });
 var selectIsTooltipActive = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectTooltipInteractionState
-], function(tooltipInteractionState) {
+], (tooltipInteractionState)=>{
     var _tooltipInteractionSt;
     return (_tooltipInteractionSt = tooltipInteractionState === null || tooltipInteractionState === void 0 ? void 0 : tooltipInteractionState.active) !== null && _tooltipInteractionSt !== void 0 ? _tooltipInteractionSt : false;
 });
@@ -4336,15 +4084,11 @@ var selectActiveTooltipPayload = (0, __TURBOPACK__imported__module__$5b$project$
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$combiners$2f$combineTooltipPayload$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineTooltipPayload"]);
 var selectActiveTooltipDataPoints = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectActiveTooltipPayload
-], function(payload) {
+], (payload)=>{
     if (payload == null) {
         return undefined;
     }
-    var dataPoints = payload.map(function(p) {
-        return p.payload;
-    }).filter(function(p) {
-        return p != null;
-    });
+    var dataPoints = payload.map((p)=>p.payload).filter((p)=>p != null);
     return Array.from(new Set(dataPoints));
 });
 }),
@@ -4419,23 +4163,13 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-var useChartName = function useChartName() {
+var useChartName = ()=>{
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartName"]);
 };
-var pickTooltipEventType = function pickTooltipEventType(_state, tooltipEventType) {
-    return tooltipEventType;
-};
-var pickTrigger = function pickTrigger(_state, _tooltipEventType, trigger) {
-    return trigger;
-};
-var pickDefaultIndex = function pickDefaultIndex(_state, _tooltipEventType, _trigger, defaultIndex) {
-    return defaultIndex;
-};
-var selectOrderedTooltipTicks = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisTicks"], function(ticks) {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$sortBy$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(ticks, function(o) {
-        return o.coordinate;
-    });
-});
+var pickTooltipEventType = (_state, tooltipEventType)=>tooltipEventType;
+var pickTrigger = (_state, _tooltipEventType, trigger)=>trigger;
+var pickDefaultIndex = (_state, _tooltipEventType, _trigger, defaultIndex)=>defaultIndex;
+var selectOrderedTooltipTicks = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisTicks"], (ticks)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$es$2d$toolkit$2f$compat$2f$sortBy$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(ticks, (o)=>o.coordinate));
 var selectTooltipInteractionState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipState$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipState"],
     pickTooltipEventType,
@@ -4448,7 +4182,7 @@ var selectActiveIndex = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fron
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisDataKey"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisDomain"]
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$combiners$2f$combineActiveTooltipIndex$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineActiveTooltipIndex"]);
-var selectTooltipDataKey = function selectTooltipDataKey(state, tooltipEventType, trigger) {
+var selectTooltipDataKey = (state, tooltipEventType, trigger)=>{
     if (tooltipEventType == null) {
         return undefined;
     }
@@ -4482,7 +4216,7 @@ var selectCoordinateForDefaultIndex = (0, __TURBOPACK__imported__module__$5b$pro
 var selectActiveCoordinate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectTooltipInteractionState,
     selectCoordinateForDefaultIndex
-], function(tooltipInteractionState, defaultIndexCoordinate) {
+], (tooltipInteractionState, defaultIndexCoordinate)=>{
     var _tooltipInteractionSt;
     return (_tooltipInteractionSt = tooltipInteractionState.coordinate) !== null && _tooltipInteractionSt !== void 0 ? _tooltipInteractionSt : defaultIndexCoordinate;
 });
@@ -4502,13 +4236,13 @@ var selectTooltipPayload = (0, __TURBOPACK__imported__module__$5b$project$5d2f$f
 var selectIsTooltipActive = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectTooltipInteractionState,
     selectActiveIndex
-], function(tooltipInteractionState, activeIndex) {
+], (tooltipInteractionState, activeIndex)=>{
     return {
         isActive: tooltipInteractionState.active && activeIndex != null,
-        activeIndex: activeIndex
+        activeIndex
     };
 });
-var combineActiveCartesianProps = function combineActiveCartesianProps(chartEvent, layout, tooltipAxisType, tooltipAxisRange, tooltipTicks, orderedTooltipTicks, offset) {
+var combineActiveCartesianProps = (chartEvent, layout, tooltipAxisType, tooltipAxisRange, tooltipTicks, orderedTooltipTicks, offset)=>{
     if (!chartEvent || !tooltipAxisType || !tooltipAxisRange || !tooltipTicks) {
         return undefined;
     }
@@ -4520,10 +4254,10 @@ var combineActiveCartesianProps = function combineActiveCartesianProps(chartEven
     var activeCoordinate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$getActiveCoordinate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getActiveCartesianCoordinate"])(layout, tooltipTicks, activeIndex, chartEvent);
     return {
         activeIndex: String(activeIndex),
-        activeCoordinate: activeCoordinate
+        activeCoordinate
     };
 };
-var combineActivePolarProps = function combineActivePolarProps(chartEvent, layout, polarViewBox, tooltipAxisType, tooltipAxisRange, tooltipTicks, orderedTooltipTicks) {
+var combineActivePolarProps = (chartEvent, layout, polarViewBox, tooltipAxisType, tooltipAxisRange, tooltipTicks, orderedTooltipTicks)=>{
     if (!chartEvent || !tooltipAxisType || !tooltipAxisRange || !tooltipTicks || !polarViewBox) {
         return undefined;
     }
@@ -4536,10 +4270,10 @@ var combineActivePolarProps = function combineActivePolarProps(chartEvent, layou
     var activeCoordinate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$getActiveCoordinate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getActivePolarCoordinate"])(layout, tooltipTicks, activeIndex, rangeObj);
     return {
         activeIndex: String(activeIndex),
-        activeCoordinate: activeCoordinate
+        activeCoordinate
     };
 };
-var combineActiveProps = function combineActiveProps(chartEvent, layout, polarViewBox, tooltipAxisType, tooltipAxisRange, tooltipTicks, orderedTooltipTicks, offset) {
+var combineActiveProps = (chartEvent, layout, polarViewBox, tooltipAxisType, tooltipAxisRange, tooltipTicks, orderedTooltipTicks, offset)=>{
     if (!chartEvent || !layout || !tooltipAxisType || !tooltipAxisRange || !tooltipTicks) {
         return undefined;
     }
@@ -4570,9 +4304,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-var pickChartPointer = function pickChartPointer(_state, chartPointer) {
-    return chartPointer;
-};
+var pickChartPointer = (_state, chartPointer)=>chartPointer;
 var selectActivePropsFromChartPointer = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     pickChartPointer,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"],
@@ -4612,7 +4344,7 @@ var mouseClickMiddleware = (0, __TURBOPACK__imported__module__$5b$project$5d2f$f
 // TODO: there's a bug here when you click the chart the activeIndex resets to zero
 mouseClickMiddleware.startListening({
     actionCreator: mouseClickAction,
-    effect: function effect(action, listenerApi) {
+    effect: (action, listenerApi)=>{
         var mousePointer = action.payload;
         var activeProps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectActivePropsFromChartPointer$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectActivePropsFromChartPointer"])(listenerApi.getState(), (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$getRelativeCoordinate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getRelativeCoordinate"])(mousePointer));
         if ((activeProps === null || activeProps === void 0 ? void 0 : activeProps.activeIndex) != null) {
@@ -4638,10 +4370,10 @@ var timeoutId = null;
 var latestChartPointer = null;
 mouseMoveMiddleware.startListening({
     actionCreator: mouseMoveAction,
-    effect: function effect(action, listenerApi) {
+    effect: (action, listenerApi)=>{
         var mousePointer = action.payload;
         var state = listenerApi.getState();
-        var _state_eventSettings = state.eventSettings, throttleDelay = _state_eventSettings.throttleDelay, throttledEvents = _state_eventSettings.throttledEvents;
+        var { throttleDelay, throttledEvents } = state.eventSettings;
         var isThrottled = throttledEvents === 'all' || (throttledEvents === null || throttledEvents === void 0 ? void 0 : throttledEvents.includes('mousemove'));
         // Cancel any pending execution
         if (rafId !== null) {
@@ -4657,7 +4389,7 @@ mouseMoveMiddleware.startListening({
      * because once we leave the current event loop, the mousePointer event object will lose
      * reference to currentTarget which getRelativeCoordinate uses.
      */ latestChartPointer = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$getRelativeCoordinate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getRelativeCoordinate"])(mousePointer);
-        var callback = function callback() {
+        var callback = ()=>{
             /*
        * Here we read a fresh state again inside the callback to ensure we have the latest state values
        * after any potential actions that may have been dispatched between the original event and this callback.
@@ -4708,18 +4440,14 @@ __turbopack_context__.s([
     "reduxDevtoolsJsonStringifyReplacer",
     ()=>reduxDevtoolsJsonStringifyReplacer
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_instanceof.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
-;
-;
 function reduxDevtoolsJsonStringifyReplacer(key, value) {
-    if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_instanceof$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(value, HTMLElement)) {
+    if (value instanceof HTMLElement) {
         return "HTMLElement <".concat(value.tagName, " class=\"").concat(value.className, "\">");
     }
     if (value === window) {
         return 'global.window';
     }
-    if (key === 'children' && (typeof value === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(value)) === 'object' && value !== null) {
+    if (key === 'children' && typeof value === 'object' && value !== null) {
         return '<<CHILDREN>>';
     }
     return value;
@@ -4754,12 +4482,8 @@ __turbopack_context__.s([
     "updateYAxisWidth",
     ()=>updateYAxisWidth
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/@reduxjs/toolkit/dist/redux-toolkit.modern.mjs [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/immer/dist/immer.mjs [app-client] (ecmascript)");
-;
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -4791,14 +4515,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -4854,17 +4578,17 @@ var defaultAxisId = 0;
  * Prefer to use this one instead of axisSlice.
  */ var cartesianAxisSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'cartesianAxis',
-    initialState: initialState,
+    initialState,
     reducers: {
         addXAxis: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 state.xAxis[action.payload.id] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload);
             },
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         replaceXAxis: {
-            reducer: function reducer(state, action) {
-                var _action_payload = action.payload, prev = _action_payload.prev, next = _action_payload.next;
+            reducer (state, action) {
+                var { prev, next } = action.payload;
                 if (state.xAxis[prev.id] !== undefined) {
                     if (prev.id !== next.id) {
                         delete state.xAxis[prev.id];
@@ -4875,20 +4599,20 @@ var defaultAxisId = 0;
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         removeXAxis: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 delete state.xAxis[action.payload.id];
             },
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         addYAxis: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 state.yAxis[action.payload.id] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload);
             },
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         replaceYAxis: {
-            reducer: function reducer(state, action) {
-                var _action_payload = action.payload, prev = _action_payload.prev, next = _action_payload.next;
+            reducer (state, action) {
+                var { prev, next } = action.payload;
                 if (state.yAxis[prev.id] !== undefined) {
                     if (prev.id !== next.id) {
                         delete state.yAxis[prev.id];
@@ -4899,20 +4623,20 @@ var defaultAxisId = 0;
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         removeYAxis: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 delete state.yAxis[action.payload.id];
             },
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         addZAxis: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 state.zAxis[action.payload.id] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload);
             },
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         replaceZAxis: {
-            reducer: function reducer(state, action) {
-                var _action_payload = action.payload, prev = _action_payload.prev, next = _action_payload.next;
+            reducer (state, action) {
+                var { prev, next } = action.payload;
                 if (state.zAxis[prev.id] !== undefined) {
                     if (prev.id !== next.id) {
                         delete state.zAxis[prev.id];
@@ -4923,13 +4647,13 @@ var defaultAxisId = 0;
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         removeZAxis: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 delete state.zAxis[action.payload.id];
             },
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
-        updateYAxisWidth: function updateYAxisWidth(state, action) {
-            var _action_payload = action.payload, id = _action_payload.id, width = _action_payload.width;
+        updateYAxisWidth (state, action) {
+            var { id, width } = action.payload;
             var axis = state.yAxis[id];
             if (axis) {
                 var _history$;
@@ -4939,19 +4663,19 @@ var defaultAxisId = 0;
                 if (history.length === 3 && history[0] === history[2] && width === history[1] && width !== axis.width && Math.abs(width - ((_history$ = history[0]) !== null && _history$ !== void 0 ? _history$ : 0)) <= 1) {
                     return;
                 }
-                var newHistory = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(history).concat([
+                var newHistory = [
+                    ...history,
                     width
-                ]).slice(-3);
+                ].slice(-3);
                 state.yAxis[id] = _objectSpread(_objectSpread({}, axis), {}, {
-                    width: width,
+                    width,
                     widthHistory: newHistory
                 });
             }
         }
     }
 });
-var _cartesianAxisSlice_actions = cartesianAxisSlice.actions;
-var addXAxis = _cartesianAxisSlice_actions.addXAxis, replaceXAxis = _cartesianAxisSlice_actions.replaceXAxis, removeXAxis = _cartesianAxisSlice_actions.removeXAxis, addYAxis = _cartesianAxisSlice_actions.addYAxis, replaceYAxis = _cartesianAxisSlice_actions.replaceYAxis, removeYAxis = _cartesianAxisSlice_actions.removeYAxis, addZAxis = _cartesianAxisSlice_actions.addZAxis, replaceZAxis = _cartesianAxisSlice_actions.replaceZAxis, removeZAxis = _cartesianAxisSlice_actions.removeZAxis, updateYAxisWidth = _cartesianAxisSlice_actions.updateYAxisWidth;
+var { addXAxis, replaceXAxis, removeXAxis, addYAxis, replaceYAxis, removeYAxis, addZAxis, replaceZAxis, removeZAxis, updateYAxisWidth } = cartesianAxisSlice.actions;
 var cartesianAxisReducer = cartesianAxisSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/graphicalItemsSlice.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -4988,17 +4712,17 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 };
 var graphicalItemsSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'graphicalItems',
-    initialState: initialState,
+    initialState,
     reducers: {
         addCartesianGraphicalItem: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 state.cartesianItems.push((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload));
             },
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         replaceCartesianGraphicalItem: {
-            reducer: function reducer(state, action) {
-                var _action_payload = action.payload, prev = _action_payload.prev, next = _action_payload.next;
+            reducer (state, action) {
+                var { prev, next } = action.payload;
                 var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).cartesianItems.indexOf((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(prev));
                 if (index > -1) {
                     state.cartesianItems[index] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(next);
@@ -5007,7 +4731,7 @@ var graphicalItemsSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         removeCartesianGraphicalItem: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).cartesianItems.indexOf((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload));
                 if (index > -1) {
                     state.cartesianItems.splice(index, 1);
@@ -5016,13 +4740,13 @@ var graphicalItemsSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         addPolarGraphicalItem: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 state.polarItems.push((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload));
             },
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         removePolarGraphicalItem: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).polarItems.indexOf((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload));
                 if (index > -1) {
                     state.polarItems.splice(index, 1);
@@ -5031,8 +4755,8 @@ var graphicalItemsSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         replacePolarGraphicalItem: {
-            reducer: function reducer(state, action) {
-                var _action_payload = action.payload, prev = _action_payload.prev, next = _action_payload.next;
+            reducer (state, action) {
+                var { prev, next } = action.payload;
                 var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).polarItems.indexOf((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(prev));
                 if (index > -1) {
                     state.polarItems[index] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(next);
@@ -5042,8 +4766,7 @@ var graphicalItemsSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
         }
     }
 });
-var _graphicalItemsSlice_actions = graphicalItemsSlice.actions;
-var addCartesianGraphicalItem = _graphicalItemsSlice_actions.addCartesianGraphicalItem, replaceCartesianGraphicalItem = _graphicalItemsSlice_actions.replaceCartesianGraphicalItem, removeCartesianGraphicalItem = _graphicalItemsSlice_actions.removeCartesianGraphicalItem, addPolarGraphicalItem = _graphicalItemsSlice_actions.addPolarGraphicalItem, removePolarGraphicalItem = _graphicalItemsSlice_actions.removePolarGraphicalItem, replacePolarGraphicalItem = _graphicalItemsSlice_actions.replacePolarGraphicalItem;
+var { addCartesianGraphicalItem, replaceCartesianGraphicalItem, removeCartesianGraphicalItem, addPolarGraphicalItem, removePolarGraphicalItem, replacePolarGraphicalItem } = graphicalItemsSlice.actions;
 var graphicalItemsReducer = graphicalItemsSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/referenceElementsSlice.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -5079,45 +4802,38 @@ var initialState = {
 };
 var referenceElementsSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'referenceElements',
-    initialState: initialState,
+    initialState,
     reducers: {
-        addDot: function addDot(state, action) {
+        addDot: (state, action)=>{
             state.dots.push(action.payload);
         },
-        removeDot: function removeDot(state, action) {
-            var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).dots.findIndex(function(dot) {
-                return dot === action.payload;
-            });
+        removeDot: (state, action)=>{
+            var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).dots.findIndex((dot)=>dot === action.payload);
             if (index !== -1) {
                 state.dots.splice(index, 1);
             }
         },
-        addArea: function addArea(state, action) {
+        addArea: (state, action)=>{
             state.areas.push(action.payload);
         },
-        removeArea: function removeArea(state, action) {
-            var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).areas.findIndex(function(area) {
-                return area === action.payload;
-            });
+        removeArea: (state, action)=>{
+            var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).areas.findIndex((area)=>area === action.payload);
             if (index !== -1) {
                 state.areas.splice(index, 1);
             }
         },
-        addLine: function addLine(state, action) {
+        addLine: (state, action)=>{
             state.lines.push((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload));
         },
-        removeLine: function removeLine(state, action) {
-            var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).lines.findIndex(function(line) {
-                return line === action.payload;
-            });
+        removeLine: (state, action)=>{
+            var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).lines.findIndex((line)=>line === action.payload);
             if (index !== -1) {
                 state.lines.splice(index, 1);
             }
         }
     }
 });
-var _referenceElementsSlice_actions = referenceElementsSlice.actions;
-var addDot = _referenceElementsSlice_actions.addDot, removeDot = _referenceElementsSlice_actions.removeDot, addArea = _referenceElementsSlice_actions.addArea, removeArea = _referenceElementsSlice_actions.removeArea, addLine = _referenceElementsSlice_actions.addLine, removeLine = _referenceElementsSlice_actions.removeLine;
+var { addDot, removeDot, addArea, removeArea, addLine, removeLine } = referenceElementsSlice.actions;
 var referenceElementsReducer = referenceElementsSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/brushSlice.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -5150,9 +4866,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f4
 };
 var brushSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'brush',
-    initialState: initialState,
+    initialState,
     reducers: {
-        setBrushSettings: function setBrushSettings(_state, action) {
+        setBrushSettings (_state, action) {
             if (action.payload == null) {
                 return initialState;
             }
@@ -5160,7 +4876,7 @@ var brushSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f
         }
     }
 });
-var setBrushSettings = brushSlice.actions.setBrushSettings;
+var { setBrushSettings } = brushSlice.actions;
 var brushReducer = brushSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/legendSlice.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -5206,27 +4922,27 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 };
 var legendSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'legend',
-    initialState: initialState,
+    initialState,
     reducers: {
-        setLegendSize: function setLegendSize(state, action) {
+        setLegendSize (state, action) {
             state.size.width = action.payload.width;
             state.size.height = action.payload.height;
         },
-        setLegendSettings: function setLegendSettings(state, action) {
+        setLegendSettings (state, action) {
             state.settings.align = action.payload.align;
             state.settings.layout = action.payload.layout;
             state.settings.verticalAlign = action.payload.verticalAlign;
             state.settings.itemSorter = action.payload.itemSorter;
         },
         addLegendPayload: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 state.payload.push((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload));
             },
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         replaceLegendPayload: {
-            reducer: function reducer(state, action) {
-                var _action_payload = action.payload, prev = _action_payload.prev, next = _action_payload.next;
+            reducer (state, action) {
+                var { prev, next } = action.payload;
                 var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).payload.indexOf((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(prev));
                 if (index > -1) {
                     state.payload[index] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(next);
@@ -5235,7 +4951,7 @@ var legendSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         removeLegendPayload: {
-            reducer: function reducer(state, action) {
+            reducer (state, action) {
                 var index = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["current"])(state).payload.indexOf((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload));
                 if (index > -1) {
                     state.payload.splice(index, 1);
@@ -5245,8 +4961,7 @@ var legendSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2
         }
     }
 });
-var _legendSlice_actions = legendSlice.actions;
-var setLegendSize = _legendSlice_actions.setLegendSize, setLegendSettings = _legendSlice_actions.setLegendSettings, addLegendPayload = _legendSlice_actions.addLegendPayload, replaceLegendPayload = _legendSlice_actions.replaceLegendPayload, removeLegendPayload = _legendSlice_actions.removeLegendPayload;
+var { setLegendSize, setLegendSettings, addLegendPayload, replaceLegendPayload, removeLegendPayload } = legendSlice.actions;
 var legendReducer = legendSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/rootPropsSlice.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -5277,9 +4992,9 @@ var initialState = {
 };
 var rootPropsSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'rootProps',
-    initialState: initialState,
+    initialState,
     reducers: {
-        updateOptions: function updateOptions(state, action) {
+        updateOptions: (state, action)=>{
             var _action$payload$barGa;
             state.accessibilityLayer = action.payload.accessibilityLayer;
             state.barCategoryGap = action.payload.barCategoryGap;
@@ -5296,7 +5011,7 @@ var rootPropsSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fronten
     }
 });
 var rootPropsReducer = rootPropsSlice.reducer;
-var updateOptions = rootPropsSlice.actions.updateOptions;
+var { updateOptions } = rootPropsSlice.actions;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/polarAxisSlice.js [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -5323,24 +5038,23 @@ var initialState = {
 };
 var polarAxisSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'polarAxis',
-    initialState: initialState,
+    initialState,
     reducers: {
-        addRadiusAxis: function addRadiusAxis(state, action) {
+        addRadiusAxis (state, action) {
             state.radiusAxis[action.payload.id] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload);
         },
-        removeRadiusAxis: function removeRadiusAxis(state, action) {
+        removeRadiusAxis (state, action) {
             delete state.radiusAxis[action.payload.id];
         },
-        addAngleAxis: function addAngleAxis(state, action) {
+        addAngleAxis (state, action) {
             state.angleAxis[action.payload.id] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(action.payload);
         },
-        removeAngleAxis: function removeAngleAxis(state, action) {
+        removeAngleAxis (state, action) {
             delete state.angleAxis[action.payload.id];
         }
     }
 });
-var _polarAxisSlice_actions = polarAxisSlice.actions;
-var addRadiusAxis = _polarAxisSlice_actions.addRadiusAxis, removeRadiusAxis = _polarAxisSlice_actions.removeRadiusAxis, addAngleAxis = _polarAxisSlice_actions.addAngleAxis, removeAngleAxis = _polarAxisSlice_actions.removeAngleAxis;
+var { addRadiusAxis, removeRadiusAxis, addAngleAxis, removeAngleAxis } = polarAxisSlice.actions;
 var polarAxisReducer = polarAxisSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/polarOptionsSlice.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -5356,7 +5070,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f4
 ;
 var initialState = null;
 var reducers = {
-    updatePolarOptions: function updatePolarOptions(state, action) {
+    updatePolarOptions: (state, action)=>{
         if (state === null) {
             return action.payload;
         }
@@ -5371,10 +5085,10 @@ var reducers = {
 };
 var polarOptionsSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'polarOptions',
-    initialState: initialState,
-    reducers: reducers
+    initialState,
+    reducers
 });
-var updatePolarOptions = polarOptionsSlice.actions.updatePolarOptions;
+var { updatePolarOptions } = polarOptionsSlice.actions;
 var polarOptionsReducer = polarOptionsSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/keyboardEventsMiddleware.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -5413,27 +5127,27 @@ var timeoutId = null;
 var latestKeyboardActionPayload = null;
 keyboardEventsMiddleware.startListening({
     actionCreator: keyDownAction,
-    effect: function effect(action, listenerApi) {
+    effect: (action, listenerApi)=>{
         latestKeyboardActionPayload = action.payload;
         if (rafId !== null) {
             cancelAnimationFrame(rafId);
             rafId = null;
         }
         var state = listenerApi.getState();
-        var _state_eventSettings = state.eventSettings, throttleDelay = _state_eventSettings.throttleDelay, throttledEvents = _state_eventSettings.throttledEvents;
+        var { throttleDelay, throttledEvents } = state.eventSettings;
         var isThrottled = throttledEvents === 'all' || throttledEvents.includes('keydown');
         if (timeoutId !== null && (typeof throttleDelay !== 'number' || !isThrottled)) {
             clearTimeout(timeoutId);
             timeoutId = null;
         }
-        var callback = function callback() {
+        var callback = ()=>{
             try {
                 var currentState = listenerApi.getState();
                 var accessibilityLayerIsActive = currentState.rootProps.accessibilityLayer !== false;
                 if (!accessibilityLayerIsActive) {
                     return;
                 }
-                var keyboardInteraction = currentState.tooltip.keyboardInteraction;
+                var { keyboardInteraction } = currentState.tooltip;
                 var key = latestKeyboardActionPayload;
                 if (key !== 'ArrowRight' && key !== 'ArrowLeft' && key !== 'Enter') {
                     return;
@@ -5466,15 +5180,13 @@ keyboardEventsMiddleware.startListening({
                     var domain = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipAxisDomain"])(currentState);
                     var effectiveMovement = movement * directionMultiplier;
                     // Build a minimal TooltipInteractionState for the candidate-index check.
-                    var mkInteraction = function mkInteraction(i) {
-                        return {
+                    var mkInteraction = (i)=>({
                             active: false,
                             index: String(i),
                             dataKey: undefined,
                             graphicalItemId: undefined,
                             coordinate: undefined
-                        };
-                    };
+                        });
                     nextIndex = -1;
                     if (effectiveMovement > 0) {
                         for(var i = 0; i < displayedData.length; i++){
@@ -5522,7 +5234,7 @@ keyboardEventsMiddleware.startListening({
             if (timeoutId === null) {
                 callback();
                 latestKeyboardActionPayload = null;
-                timeoutId = setTimeout(function() {
+                timeoutId = setTimeout(()=>{
                     if (latestKeyboardActionPayload) {
                         callback();
                     } else {
@@ -5536,13 +5248,13 @@ keyboardEventsMiddleware.startListening({
 });
 keyboardEventsMiddleware.startListening({
     actionCreator: focusAction,
-    effect: function effect(_action, listenerApi) {
+    effect: (_action, listenerApi)=>{
         var state = listenerApi.getState();
         var accessibilityLayerIsActive = state.rootProps.accessibilityLayer !== false;
         if (!accessibilityLayerIsActive) {
             return;
         }
-        var keyboardInteraction = state.tooltip.keyboardInteraction;
+        var { keyboardInteraction } = state.tooltip;
         if (keyboardInteraction.active) {
             return;
         }
@@ -5560,13 +5272,13 @@ keyboardEventsMiddleware.startListening({
 });
 keyboardEventsMiddleware.startListening({
     actionCreator: blurAction,
-    effect: function effect(_action, listenerApi) {
+    effect: (_action, listenerApi)=>{
         var state = listenerApi.getState();
         var accessibilityLayerIsActive = state.rootProps.accessibilityLayer !== false;
         if (!accessibilityLayerIsActive) {
             return;
         }
-        var keyboardInteraction = state.tooltip.keyboardInteraction;
+        var { keyboardInteraction } = state.tooltip;
         if (keyboardInteraction.active) {
             listenerApi.dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setKeyboardInteraction"])({
                 active: false,
@@ -5605,15 +5317,15 @@ var timeoutIdMap = new Map();
 var latestEventMap = new Map();
 externalEventsMiddleware.startListening({
     actionCreator: externalEventAction,
-    effect: function effect(action, listenerApi) {
-        var _action_payload = action.payload, handler = _action_payload.handler, reactEvent = _action_payload.reactEvent;
+    effect: (action, listenerApi)=>{
+        var { handler, reactEvent } = action.payload;
         if (handler == null) {
             return;
         }
         var eventType = reactEvent.type;
         var eventProxy = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$createEventProxy$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createEventProxy"])(reactEvent);
         latestEventMap.set(eventType, {
-            handler: handler,
+            handler,
             reactEvent: eventProxy
         });
         // Cancel any pending execution for this event type
@@ -5623,7 +5335,7 @@ externalEventsMiddleware.startListening({
             rafIdMap.delete(eventType);
         }
         var state = listenerApi.getState();
-        var _state_eventSettings = state.eventSettings, throttleDelay = _state_eventSettings.throttleDelay, throttledEvents = _state_eventSettings.throttledEvents;
+        var { throttleDelay, throttledEvents } = state.eventSettings;
         /*
      * reactEvent.type gives us the event type as a string, e.g., 'click', 'mousemove', etc.
      * which is the same as the names used in throttledEvents array
@@ -5641,14 +5353,14 @@ externalEventsMiddleware.startListening({
             clearTimeout(existingTimeoutId);
             timeoutIdMap.delete(eventType);
         }
-        var callback = function callback() {
+        var callback = ()=>{
             var latestAction = latestEventMap.get(eventType);
             try {
                 if (!latestAction) {
                     // This happens if the event was consumed by the leading edge and no new event came in
                     return;
                 }
-                var latestHandler = latestAction.handler, latestEvent = latestAction.reactEvent;
+                var { handler: latestHandler, reactEvent: latestEvent } = latestAction;
                 var currentState = listenerApi.getState();
                 var nextState = {
                     activeCoordinate: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectActiveTooltipCoordinate"])(currentState),
@@ -5705,28 +5417,22 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 var selectAllTooltipPayloadConfiguration = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectTooltipState$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipState"]
-], function(tooltipState) {
-    return tooltipState.tooltipItemPayloads;
-});
+], (tooltipState)=>tooltipState.tooltipItemPayloads);
 var selectTooltipCoordinate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectAllTooltipPayloadConfiguration,
-    function(_state, tooltipIndex) {
-        return tooltipIndex;
-    },
-    function(_state, _tooltipIndex, graphicalItemId) {
-        return graphicalItemId;
-    }
-], function(allTooltipConfigurations, tooltipIndex, graphicalItemId) {
+    (_state, tooltipIndex)=>tooltipIndex,
+    (_state, _tooltipIndex, graphicalItemId)=>graphicalItemId
+], (allTooltipConfigurations, tooltipIndex, graphicalItemId)=>{
     if (tooltipIndex == null) {
         return undefined;
     }
-    var mostRelevantTooltipConfiguration = allTooltipConfigurations.find(function(tooltipConfiguration) {
+    var mostRelevantTooltipConfiguration = allTooltipConfigurations.find((tooltipConfiguration)=>{
         return tooltipConfiguration.settings.graphicalItemId === graphicalItemId;
     });
     if (mostRelevantTooltipConfiguration == null) {
         return undefined;
     }
-    var getPosition = mostRelevantTooltipConfiguration.getPosition;
+    var { getPosition } = mostRelevantTooltipConfiguration;
     if (getPosition == null) {
         return undefined;
     }
@@ -5768,14 +5474,14 @@ var latestChartPointers = null;
 var latestTouchEvent = null;
 touchEventMiddleware.startListening({
     actionCreator: touchEventAction,
-    effect: function effect(action, listenerApi) {
+    effect: (action, listenerApi)=>{
         var touchEvent = action.payload;
         if (touchEvent.touches == null || touchEvent.touches.length === 0) {
             return;
         }
         latestTouchEvent = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$createEventProxy$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createEventProxy"])(touchEvent);
         var state = listenerApi.getState();
-        var _state_eventSettings = state.eventSettings, throttleDelay = _state_eventSettings.throttleDelay, throttledEvents = _state_eventSettings.throttledEvents;
+        var { throttleDelay, throttledEvents } = state.eventSettings;
         var isThrottled = throttledEvents === 'all' || throttledEvents.includes('touchmove');
         if (rafId !== null) {
             cancelAnimationFrame(rafId);
@@ -5785,14 +5491,12 @@ touchEventMiddleware.startListening({
             clearTimeout(timeoutId);
             timeoutId = null;
         }
-        latestChartPointers = Array.from(touchEvent.touches).map(function(touch) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$getRelativeCoordinate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getRelativeCoordinate"])({
+        latestChartPointers = Array.from(touchEvent.touches).map((touch)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$getRelativeCoordinate$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getRelativeCoordinate"])({
                 clientX: touch.clientX,
                 clientY: touch.clientY,
                 currentTarget: touchEvent.currentTarget
-            });
-        });
-        var callback = function callback() {
+            }));
+        var callback = ()=>{
             if (latestTouchEvent == null) {
                 return;
             }
@@ -5826,13 +5530,11 @@ touchEventMiddleware.startListening({
                 }
                 var itemIndex = target.getAttribute(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Constants$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DATA_ITEM_INDEX_ATTRIBUTE_NAME"]);
                 var graphicalItemId = (_target$getAttribute = target.getAttribute(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$Constants$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DATA_ITEM_GRAPHICAL_ITEM_ID_ATTRIBUTE_NAME"])) !== null && _target$getAttribute !== void 0 ? _target$getAttribute : undefined;
-                var settings = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAllGraphicalItemsSettings"])(currentState).find(function(item) {
-                    return item.id === graphicalItemId;
-                });
+                var settings = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$tooltipSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAllGraphicalItemsSettings"])(currentState).find((item)=>item.id === graphicalItemId);
                 if (itemIndex == null || settings == null || graphicalItemId == null) {
                     return;
                 }
-                var dataKey = settings.dataKey;
+                var { dataKey } = settings;
                 var coordinate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$touchSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTooltipCoordinate"])(currentState, itemIndex, graphicalItemId);
                 listenerApi.dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setActiveMouseOverItemIndex"])({
                     activeDataKey: dataKey,
@@ -5854,7 +5556,7 @@ touchEventMiddleware.startListening({
             if (timeoutId === null) {
                 callback();
                 latestTouchEvent = null;
-                timeoutId = setTimeout(function() {
+                timeoutId = setTimeout(()=>{
                     if (latestTouchEvent) {
                         callback();
                     } else {
@@ -5889,35 +5591,30 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f4
  */ var initialState = {};
 var errorBarSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'errorBars',
-    initialState: initialState,
+    initialState,
     reducers: {
-        addErrorBar: function addErrorBar(state, action) {
-            var _action_payload = action.payload, itemId = _action_payload.itemId, errorBar = _action_payload.errorBar;
+        addErrorBar: (state, action)=>{
+            var { itemId, errorBar } = action.payload;
             if (!state[itemId]) {
                 state[itemId] = [];
             }
             state[itemId].push(errorBar);
         },
-        replaceErrorBar: function replaceErrorBar(state, action) {
-            var _action_payload = action.payload, itemId = _action_payload.itemId, prev = _action_payload.prev, next = _action_payload.next;
+        replaceErrorBar: (state, action)=>{
+            var { itemId, prev, next } = action.payload;
             if (state[itemId]) {
-                state[itemId] = state[itemId].map(function(e) {
-                    return e.dataKey === prev.dataKey && e.direction === prev.direction ? next : e;
-                });
+                state[itemId] = state[itemId].map((e)=>e.dataKey === prev.dataKey && e.direction === prev.direction ? next : e);
             }
         },
-        removeErrorBar: function removeErrorBar(state, action) {
-            var _action_payload = action.payload, itemId = _action_payload.itemId, errorBar = _action_payload.errorBar;
+        removeErrorBar: (state, action)=>{
+            var { itemId, errorBar } = action.payload;
             if (state[itemId]) {
-                state[itemId] = state[itemId].filter(function(e) {
-                    return e.dataKey !== errorBar.dataKey || e.direction !== errorBar.direction;
-                });
+                state[itemId] = state[itemId].filter((e)=>e.dataKey !== errorBar.dataKey || e.direction !== errorBar.direction);
             }
         }
     }
 });
-var _errorBarSlice_actions = errorBarSlice.actions;
-var addErrorBar = _errorBarSlice_actions.addErrorBar, replaceErrorBar = _errorBarSlice_actions.replaceErrorBar, removeErrorBar = _errorBarSlice_actions.removeErrorBar;
+var { addErrorBar, replaceErrorBar, removeErrorBar } = errorBarSlice.actions;
 var errorBarReducer = errorBarSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/zIndexSlice.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -5935,16 +5632,12 @@ __turbopack_context__.s([
     "zIndexReducer",
     ()=>zIndexReducer
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_define_property.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 /**
  * This slice contains a registry of z-index values for various components.
  * The state is a map from z-index numbers to element references.
  */ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/frontend/node_modules/@reduxjs/toolkit/dist/redux-toolkit.modern.mjs [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/immer/dist/immer.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$zIndex$2f$DefaultZIndexes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/zIndex/DefaultZIndexes.js [app-client] (ecmascript)");
-;
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -5976,14 +5669,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -5993,13 +5686,13 @@ function _toPrimitive(t, r) {
 ;
 var seed = {};
 var initialState = {
-    zIndexMap: Object.values(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$zIndex$2f$DefaultZIndexes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DefaultZIndexes"]).reduce(function(acc, current) {
-        return _objectSpread(_objectSpread({}, acc), {}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({}, current, {
-            element: undefined,
-            panoramaElement: undefined,
-            consumers: 0
-        }));
-    }, seed)
+    zIndexMap: Object.values(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$zIndex$2f$DefaultZIndexes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DefaultZIndexes"]).reduce((acc, current)=>_objectSpread(_objectSpread({}, acc), {}, {
+            [current]: {
+                element: undefined,
+                panoramaElement: undefined,
+                consumers: 0
+            }
+        }), seed)
 };
 var defaultZIndexSet = new Set(Object.values(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$zIndex$2f$DefaultZIndexes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DefaultZIndexes"]));
 function isDefaultZIndex(zIndex) {
@@ -6007,11 +5700,11 @@ function isDefaultZIndex(zIndex) {
 }
 var zIndexSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'zIndex',
-    initialState: initialState,
+    initialState,
     reducers: {
         registerZIndexPortal: {
-            reducer: function reducer(state, action) {
-                var zIndex = action.payload.zIndex;
+            reducer: (state, action)=>{
+                var { zIndex } = action.payload;
                 if (state.zIndexMap[zIndex]) {
                     state.zIndexMap[zIndex].consumers += 1;
                 } else {
@@ -6025,8 +5718,8 @@ var zIndexSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         unregisterZIndexPortal: {
-            reducer: function reducer(state, action) {
-                var zIndex = action.payload.zIndex;
+            reducer: (state, action)=>{
+                var { zIndex } = action.payload;
                 if (state.zIndexMap[zIndex]) {
                     state.zIndexMap[zIndex].consumers -= 1;
                     /*
@@ -6043,8 +5736,8 @@ var zIndexSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         registerZIndexPortalElement: {
-            reducer: function reducer(state, action) {
-                var _action_payload = action.payload, zIndex = _action_payload.zIndex, element = _action_payload.element, isPanorama = _action_payload.isPanorama;
+            reducer: (state, action)=>{
+                var { zIndex, element, isPanorama } = action.payload;
                 if (state.zIndexMap[zIndex]) {
                     if (isPanorama) {
                         state.zIndexMap[zIndex].panoramaElement = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(element);
@@ -6062,8 +5755,8 @@ var zIndexSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2
             prepare: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["prepareAutoBatched"])()
         },
         unregisterZIndexPortalElement: {
-            reducer: function reducer(state, action) {
-                var zIndex = action.payload.zIndex;
+            reducer: (state, action)=>{
+                var { zIndex } = action.payload;
                 if (state.zIndexMap[zIndex]) {
                     if (action.payload.isPanorama) {
                         state.zIndexMap[zIndex].panoramaElement = undefined;
@@ -6076,8 +5769,7 @@ var zIndexSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2
         }
     }
 });
-var _zIndexSlice_actions = zIndexSlice.actions;
-var registerZIndexPortal = _zIndexSlice_actions.registerZIndexPortal, unregisterZIndexPortal = _zIndexSlice_actions.unregisterZIndexPortal, registerZIndexPortalElement = _zIndexSlice_actions.registerZIndexPortalElement, unregisterZIndexPortalElement = _zIndexSlice_actions.unregisterZIndexPortalElement;
+var { registerZIndexPortal, unregisterZIndexPortal, registerZIndexPortalElement, unregisterZIndexPortalElement } = zIndexSlice.actions;
 var zIndexReducer = zIndexSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/eventSettingsSlice.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -6109,7 +5801,7 @@ var eventSettingsSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fro
     name: 'eventSettings',
     initialState: initialEventSettingsState,
     reducers: {
-        setEventSettings: function setEventSettings(state, action) {
+        setEventSettings: (state, action)=>{
             if (action.payload.throttleDelay != null) {
                 state.throttleDelay = action.payload.throttleDelay;
             }
@@ -6119,7 +5811,7 @@ var eventSettingsSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fro
         }
     }
 });
-var setEventSettings = eventSettingsSlice.actions.setEventSettings;
+var { setEventSettings } = eventSettingsSlice.actions;
 var eventSettingsReducer = eventSettingsSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/renderedTicksSlice.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -6153,20 +5845,19 @@ var initialState = {
 };
 var renderedTicksSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'renderedTicks',
-    initialState: initialState,
+    initialState,
     reducers: {
-        setRenderedTicks: function setRenderedTicks(state, action) {
-            var _action_payload = action.payload, axisType = _action_payload.axisType, axisId = _action_payload.axisId, ticks = _action_payload.ticks;
+        setRenderedTicks: (state, action)=>{
+            var { axisType, axisId, ticks } = action.payload;
             state[axisType][axisId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$immer$2f$dist$2f$immer$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["castDraft"])(ticks);
         },
-        removeRenderedTicks: function removeRenderedTicks(state, action) {
-            var _action_payload = action.payload, axisType = _action_payload.axisType, axisId = _action_payload.axisId;
+        removeRenderedTicks: (state, action)=>{
+            var { axisType, axisId } = action.payload;
             delete state[axisType][axisId];
         }
     }
 });
-var _renderedTicksSlice_actions = renderedTicksSlice.actions;
-var setRenderedTicks = _renderedTicksSlice_actions.setRenderedTicks, removeRenderedTicks = _renderedTicksSlice_actions.removeRenderedTicks;
+var { setRenderedTicks, removeRenderedTicks } = renderedTicksSlice.actions;
 var renderedTicksReducer = renderedTicksSlice.reducer;
 }),
 "[project]/frontend/node_modules/recharts/es6/state/store.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -6248,7 +5939,7 @@ var createRechartsStore = function createRechartsStore(preloadedState) {
         // redux-toolkit v1 types are unhappy with the preloadedState type. Remove the `as any` when bumping to v2
         preloadedState: preloadedState,
         // @ts-expect-error redux-toolkit v1 types are unhappy with the middleware array. Remove this comment when bumping to v2
-        middleware: function middleware(getDefaultMiddleware) {
+        middleware: (getDefaultMiddleware)=>{
             var _process$env$NODE_ENV;
             return getDefaultMiddleware({
                 serializableCheck: false,
@@ -6272,7 +5963,7 @@ var createRechartsStore = function createRechartsStore(preloadedState) {
      * Looks like it's badly inferred generics, but it won't allow me to provide the correct type manually either.
      * So let's just ignore the error for now.
      */ // @ts-expect-error mismatched generics
-        enhancers: function enhancers(getDefaultEnhancers) {
+        enhancers: (getDefaultEnhancers)=>{
             var enhancers = getDefaultEnhancers;
             if (typeof getDefaultEnhancers === 'function') {
                 /*
@@ -6315,7 +6006,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 function RechartsStoreProvider(_ref) {
-    var preloadedState = _ref.preloadedState, children = _ref.children, reduxStoreName = _ref.reduxStoreName;
+    var { preloadedState, children, reduxStoreName } = _ref;
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     /*
    * Why the ref? Redux official documentation recommends to use store as a singleton,
@@ -6369,7 +6060,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
  * "Main" props are props that are only accepted on the main chart,
  * as opposed to the small panorama chart inside a Brush.
  */ function ReportMainChartPropsImpl(_ref) {
-    var layout = _ref.layout, margin = _ref.margin;
+    var { layout, margin } = _ref;
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     /*
    * Skip dispatching properties in panorama chart for two reasons:
@@ -6383,7 +6074,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
    *
    * Reported in https://github.com/recharts/recharts/issues/5514
    */ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "ReportMainChartPropsImpl.useEffect": function() {
+        "ReportMainChartPropsImpl.useEffect": ()=>{
             if (!isPanorama) {
                 dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$layoutSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setLayout"])(layout));
                 dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$layoutSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setMargin"])(margin));
@@ -6415,7 +6106,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 function ReportChartProps(props) {
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "ReportChartProps.useEffect": function() {
+        "ReportChartProps.useEffect": ()=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$rootPropsSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateOptions"])(props));
         }
     }["ReportChartProps.useEffect"], [
@@ -6440,10 +6131,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-var ReportEventSettingsImpl = function ReportEventSettingsImpl(props) {
+var ReportEventSettingsImpl = (props)=>{
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "ReportEventSettingsImpl.useEffect": function() {
+        "ReportEventSettingsImpl.useEffect": ()=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$eventSettingsSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setEventSettings"])(props));
         }
     }["ReportEventSettingsImpl.useEffect"], [
@@ -6467,7 +6158,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 var selectChartOffset = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"]
-], function(offsetInternal) {
+], (offsetInternal)=>{
     return {
         top: offsetInternal.top,
         bottom: offsetInternal.bottom,
@@ -6493,7 +6184,7 @@ var selectPlotArea = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fronten
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffset$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffset"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartWidth"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$containerSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartHeight"]
-], function(offset, chartWidth, chartHeight) {
+], (offset, chartWidth, chartHeight)=>{
     if (!offset || chartWidth == null || chartHeight == null) {
         return undefined;
     }
@@ -6521,12 +6212,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 function SetTooltipEntrySettings(_ref) {
-    var tooltipEntrySettings = _ref.tooltipEntrySettings;
+    var { tooltipEntrySettings } = _ref;
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     var prevSettingsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "SetTooltipEntrySettings.useLayoutEffect": function() {
+        "SetTooltipEntrySettings.useLayoutEffect": ()=>{
             if (isPanorama) {
                 // Panorama graphical items should never contribute to Tooltip payload.
                 return;
@@ -6547,9 +6238,9 @@ function SetTooltipEntrySettings(_ref) {
         isPanorama
     ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "SetTooltipEntrySettings.useLayoutEffect": function() {
+        "SetTooltipEntrySettings.useLayoutEffect": ()=>{
             return ({
-                "SetTooltipEntrySettings.useLayoutEffect": function() {
+                "SetTooltipEntrySettings.useLayoutEffect": ()=>{
                     if (prevSettingsRef.current) {
                         dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$tooltipSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["removeTooltipEntrySettings"])(prevSettingsRef.current));
                         prevSettingsRef.current = null;
@@ -6576,15 +6267,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 function selectXAxisIdFromGraphicalItemId(state, id) {
     var _state$graphicalItems, _state$graphicalItems2;
-    return (_state$graphicalItems = (_state$graphicalItems2 = state.graphicalItems.cartesianItems.find(function(item) {
-        return item.id === id;
-    })) === null || _state$graphicalItems2 === void 0 ? void 0 : _state$graphicalItems2.xAxisId) !== null && _state$graphicalItems !== void 0 ? _state$graphicalItems : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
+    return (_state$graphicalItems = (_state$graphicalItems2 = state.graphicalItems.cartesianItems.find((item)=>item.id === id)) === null || _state$graphicalItems2 === void 0 ? void 0 : _state$graphicalItems2.xAxisId) !== null && _state$graphicalItems !== void 0 ? _state$graphicalItems : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
 }
 function selectYAxisIdFromGraphicalItemId(state, id) {
     var _state$graphicalItems3, _state$graphicalItems4;
-    return (_state$graphicalItems3 = (_state$graphicalItems4 = state.graphicalItems.cartesianItems.find(function(item) {
-        return item.id === id;
-    })) === null || _state$graphicalItems4 === void 0 ? void 0 : _state$graphicalItems4.yAxisId) !== null && _state$graphicalItems3 !== void 0 ? _state$graphicalItems3 : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
+    return (_state$graphicalItems3 = (_state$graphicalItems4 = state.graphicalItems.cartesianItems.find((item)=>item.id === id)) === null || _state$graphicalItems4 === void 0 ? void 0 : _state$graphicalItems4.yAxisId) !== null && _state$graphicalItems3 !== void 0 ? _state$graphicalItems3 : __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$cartesianAxisSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultAxisId"];
 }
 }),
 "[project]/frontend/node_modules/recharts/es6/state/selectors/areaSelectors.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -6614,33 +6301,23 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-var selectXAxisWithScale = function selectXAxisWithScale(state, graphicalItemId, isPanorama) {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisWithScale"])(state, 'xAxis', (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectXAxisIdFromGraphicalItemId"])(state, graphicalItemId), isPanorama);
-};
-var selectXAxisTicks = function selectXAxisTicks(state, graphicalItemId, isPanorama) {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTicksOfGraphicalItem"])(state, 'xAxis', (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectXAxisIdFromGraphicalItemId"])(state, graphicalItemId), isPanorama);
-};
-var selectYAxisWithScale = function selectYAxisWithScale(state, graphicalItemId, isPanorama) {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisWithScale"])(state, 'yAxis', (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectYAxisIdFromGraphicalItemId"])(state, graphicalItemId), isPanorama);
-};
-var selectYAxisTicks = function selectYAxisTicks(state, graphicalItemId, isPanorama) {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTicksOfGraphicalItem"])(state, 'yAxis', (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectYAxisIdFromGraphicalItemId"])(state, graphicalItemId), isPanorama);
-};
+var selectXAxisWithScale = (state, graphicalItemId, isPanorama)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisWithScale"])(state, 'xAxis', (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectXAxisIdFromGraphicalItemId"])(state, graphicalItemId), isPanorama);
+var selectXAxisTicks = (state, graphicalItemId, isPanorama)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTicksOfGraphicalItem"])(state, 'xAxis', (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectXAxisIdFromGraphicalItemId"])(state, graphicalItemId), isPanorama);
+var selectYAxisWithScale = (state, graphicalItemId, isPanorama)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisWithScale"])(state, 'yAxis', (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectYAxisIdFromGraphicalItemId"])(state, graphicalItemId), isPanorama);
+var selectYAxisTicks = (state, graphicalItemId, isPanorama)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTicksOfGraphicalItem"])(state, 'yAxis', (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectYAxisIdFromGraphicalItemId"])(state, graphicalItemId), isPanorama);
 var selectBandSize = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"],
     selectXAxisWithScale,
     selectYAxisWithScale,
     selectXAxisTicks,
     selectYAxisTicks
-], function(layout, xAxis, yAxis, xAxisTicks, yAxisTicks) {
+], (layout, xAxis, yAxis, xAxisTicks, yAxisTicks)=>{
     if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isCategoricalAxis"])(layout, 'xAxis')) {
         return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getBandSizeOfAxis"])(xAxis, xAxisTicks, false);
     }
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getBandSizeOfAxis"])(yAxis, yAxisTicks, false);
 });
-var pickAreaId = function pickAreaId(_state, id) {
-    return id;
-};
+var pickAreaId = (_state, id)=>id;
 /*
  * There is a race condition problem because we read some data from props and some from the state.
  * The state is updated through a dispatch and is one render behind,
@@ -6652,54 +6329,42 @@ var pickAreaId = function pickAreaId(_state, id) {
  */ var selectSynchronisedAreaSettings = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectUnfilteredCartesianItems"],
     pickAreaId
-], function(graphicalItems, id) {
-    return graphicalItems.filter(function(item) {
-        return item.type === 'area';
-    }).find(function(item) {
-        return item.id === id;
-    });
-});
-var selectNumericalAxisType = function selectNumericalAxisType(state) {
+], (graphicalItems, id)=>graphicalItems.filter((item)=>item.type === 'area').find((item)=>item.id === id));
+var selectNumericalAxisType = (state)=>{
     var layout = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"])(state);
     var isXAxisCategorical = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isCategoricalAxis"])(layout, 'xAxis');
     return isXAxisCategorical ? 'yAxis' : 'xAxis';
 };
-var selectNumericalAxisIdFromGraphicalItemId = function selectNumericalAxisIdFromGraphicalItemId(state, graphicalItemId) {
+var selectNumericalAxisIdFromGraphicalItemId = (state, graphicalItemId)=>{
     var axisType = selectNumericalAxisType(state);
     if (axisType === 'yAxis') {
         return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectYAxisIdFromGraphicalItemId"])(state, graphicalItemId);
     }
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectXAxisIdFromGraphicalItemId"])(state, graphicalItemId);
 };
-var selectNumericalAxisStackGroups = function selectNumericalAxisStackGroups(state, graphicalItemId, isPanorama) {
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectStackGroups"])(state, selectNumericalAxisType(state), selectNumericalAxisIdFromGraphicalItemId(state, graphicalItemId), isPanorama);
-};
+var selectNumericalAxisStackGroups = (state, graphicalItemId, isPanorama)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectStackGroups"])(state, selectNumericalAxisType(state), selectNumericalAxisIdFromGraphicalItemId(state, graphicalItemId), isPanorama);
 var selectGraphicalItemStackedData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectSynchronisedAreaSettings,
     selectNumericalAxisStackGroups
-], function(areaSettings, stackGroups) {
+], (areaSettings, stackGroups)=>{
     var _stackGroups$stackId;
     if (areaSettings == null || stackGroups == null) {
         return undefined;
     }
-    var stackId = areaSettings.stackId;
+    var { stackId } = areaSettings;
     var stackSeriesIdentifier = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$stacks$2f$getStackSeriesIdentifier$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getStackSeriesIdentifier"])(areaSettings);
     if (stackId == null || stackSeriesIdentifier == null) {
         return undefined;
     }
     var groups = (_stackGroups$stackId = stackGroups[stackId]) === null || _stackGroups$stackId === void 0 ? void 0 : _stackGroups$stackId.stackedData;
-    var found = groups === null || groups === void 0 ? void 0 : groups.find(function(v) {
-        return v.key === stackSeriesIdentifier;
-    });
+    var found = groups === null || groups === void 0 ? void 0 : groups.find((v)=>v.key === stackSeriesIdentifier);
     if (found == null) {
         return undefined;
     }
-    return found.map(function(item) {
-        return [
+    return found.map((item)=>[
             item[0],
             item[1]
-        ];
-    });
+        ]);
 });
 var selectArea = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"],
@@ -6712,12 +6377,12 @@ var selectArea = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f
     selectBandSize,
     selectSynchronisedAreaSettings,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartBaseValue"]
-], function(layout, xAxis, yAxis, xAxisTicks, yAxisTicks, stackedData, _ref, bandSize, areaSettings, chartBaseValue) {
-    var chartData = _ref.chartData, dataStartIndex = _ref.dataStartIndex, dataEndIndex = _ref.dataEndIndex;
+], (layout, xAxis, yAxis, xAxisTicks, yAxisTicks, stackedData, _ref, bandSize, areaSettings, chartBaseValue)=>{
+    var { chartData, dataStartIndex, dataEndIndex } = _ref;
     if (areaSettings == null || layout !== 'horizontal' && layout !== 'vertical' || xAxis == null || yAxis == null || xAxisTicks == null || yAxisTicks == null || xAxisTicks.length === 0 || yAxisTicks.length === 0 || bandSize == null) {
         return undefined;
     }
-    var data = areaSettings.data;
+    var { data } = areaSettings;
     var displayedData;
     if (data && data.length > 0) {
         displayedData = data;
@@ -6728,17 +6393,17 @@ var selectArea = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f
         return undefined;
     }
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$Area$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["computeArea"])({
-        layout: layout,
-        xAxis: xAxis,
-        yAxis: yAxis,
-        xAxisTicks: xAxisTicks,
-        yAxisTicks: yAxisTicks,
-        dataStartIndex: dataStartIndex,
-        areaSettings: areaSettings,
-        stackedData: stackedData,
-        displayedData: displayedData,
-        chartBaseValue: chartBaseValue,
-        bandSize: bandSize
+        layout,
+        xAxis,
+        yAxis,
+        xAxisTicks,
+        yAxisTicks,
+        dataStartIndex,
+        areaSettings,
+        stackedData,
+        displayedData,
+        chartBaseValue,
+        bandSize
     });
 });
 }),
@@ -6762,12 +6427,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 function SetLegendPayload(_ref) {
-    var legendPayload = _ref.legendPayload;
+    var { legendPayload } = _ref;
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     var isPanorama = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$PanoramaContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsPanorama"])();
     var prevPayloadRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "SetLegendPayload.useLayoutEffect": function() {
+        "SetLegendPayload.useLayoutEffect": ()=>{
             if (isPanorama) {
                 return;
             }
@@ -6787,9 +6452,9 @@ function SetLegendPayload(_ref) {
         legendPayload
     ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "SetLegendPayload.useLayoutEffect": function() {
+        "SetLegendPayload.useLayoutEffect": ()=>{
             return ({
-                "SetLegendPayload.useLayoutEffect": function() {
+                "SetLegendPayload.useLayoutEffect": ()=>{
                     if (prevPayloadRef.current) {
                         dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$legendSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["removeLegendPayload"])(prevPayloadRef.current));
                         prevPayloadRef.current = null;
@@ -6803,12 +6468,12 @@ function SetLegendPayload(_ref) {
     return null;
 }
 function SetPolarLegendPayload(_ref2) {
-    var legendPayload = _ref2.legendPayload;
+    var { legendPayload } = _ref2;
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     var layout = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"]);
     var prevPayloadRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "SetPolarLegendPayload.useLayoutEffect": function() {
+        "SetPolarLegendPayload.useLayoutEffect": ()=>{
             if (layout !== 'centric' && layout !== 'radial') {
                 return;
             }
@@ -6828,9 +6493,9 @@ function SetPolarLegendPayload(_ref2) {
         legendPayload
     ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "SetPolarLegendPayload.useLayoutEffect": function() {
+        "SetPolarLegendPayload.useLayoutEffect": ()=>{
             return ({
-                "SetPolarLegendPayload.useLayoutEffect": function() {
+                "SetPolarLegendPayload.useLayoutEffect": ()=>{
                     if (prevPayloadRef.current) {
                         dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$legendSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["removeLegendPayload"])(prevPayloadRef.current));
                         prevPayloadRef.current = null;
@@ -6859,11 +6524,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-var SetCartesianGraphicalItemImpl = function SetCartesianGraphicalItemImpl(props) {
+var SetCartesianGraphicalItemImpl = (props)=>{
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     var prevPropsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "SetCartesianGraphicalItemImpl.useLayoutEffect": function() {
+        "SetCartesianGraphicalItemImpl.useLayoutEffect": ()=>{
             if (prevPropsRef.current === null) {
                 dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$graphicalItemsSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["addCartesianGraphicalItem"])(props));
             } else if (prevPropsRef.current !== props) {
@@ -6879,9 +6544,9 @@ var SetCartesianGraphicalItemImpl = function SetCartesianGraphicalItemImpl(props
         props
     ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "SetCartesianGraphicalItemImpl.useLayoutEffect": function() {
+        "SetCartesianGraphicalItemImpl.useLayoutEffect": ()=>{
             return ({
-                "SetCartesianGraphicalItemImpl.useLayoutEffect": function() {
+                "SetCartesianGraphicalItemImpl.useLayoutEffect": ()=>{
                     if (prevPropsRef.current) {
                         dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$graphicalItemsSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["removeCartesianGraphicalItem"])(prevPropsRef.current));
                         /*
@@ -6907,11 +6572,11 @@ var SetCartesianGraphicalItemImpl = function SetCartesianGraphicalItemImpl(props
     return null;
 };
 var SetCartesianGraphicalItem = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["memo"])(SetCartesianGraphicalItemImpl);
-var SetPolarGraphicalItemImpl = function SetPolarGraphicalItemImpl(props) {
+var SetPolarGraphicalItemImpl = (props)=>{
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     var prevPropsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "SetPolarGraphicalItemImpl.useLayoutEffect": function() {
+        "SetPolarGraphicalItemImpl.useLayoutEffect": ()=>{
             if (prevPropsRef.current === null) {
                 dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$graphicalItemsSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["addPolarGraphicalItem"])(props));
             } else if (prevPropsRef.current !== props) {
@@ -6927,9 +6592,9 @@ var SetPolarGraphicalItemImpl = function SetPolarGraphicalItemImpl(props) {
         props
     ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "SetPolarGraphicalItemImpl.useLayoutEffect": function() {
+        "SetPolarGraphicalItemImpl.useLayoutEffect": ()=>{
             return ({
-                "SetPolarGraphicalItemImpl.useLayoutEffect": function() {
+                "SetPolarGraphicalItemImpl.useLayoutEffect": ()=>{
                     if (prevPropsRef.current) {
                         dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$graphicalItemsSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["removePolarGraphicalItem"])(prevPropsRef.current));
                         prevPropsRef.current = null;
@@ -6951,28 +6616,22 @@ __turbopack_context__.s([
     "combineBarSizeList",
     ()=>combineBarSizeList
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_sliced_to_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$types$2f$StackedGraphicalItem$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/types/StackedGraphicalItem.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
 ;
 ;
-;
-;
-var getBarSize = function getBarSize(globalSize, totalSize, selfSize) {
+var getBarSize = (globalSize, totalSize, selfSize)=>{
     var barSize = selfSize !== null && selfSize !== void 0 ? selfSize : globalSize;
     if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNullish"])(barSize)) {
         return undefined;
     }
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getPercentValue"])(barSize, totalSize, 0);
 };
-var combineBarSizeList = function combineBarSizeList(allBars, globalSize, totalSize) {
+var combineBarSizeList = (allBars, globalSize, totalSize)=>{
     var initialValue = {};
     var stackedBars = allBars.filter(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$types$2f$StackedGraphicalItem$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isStacked"]);
-    var unstackedBars = allBars.filter(function(b) {
-        return b.stackId == null;
-    });
-    var groupByStack = stackedBars.reduce(function(acc, bar) {
+    var unstackedBars = allBars.filter((b)=>b.stackId == null);
+    var groupByStack = stackedBars.reduce((acc, bar)=>{
         var s = acc[bar.stackId];
         if (s == null) {
             s = [];
@@ -6981,33 +6640,32 @@ var combineBarSizeList = function combineBarSizeList(allBars, globalSize, totalS
         acc[bar.stackId] = s;
         return acc;
     }, initialValue);
-    var stackedSizeList = Object.entries(groupByStack).map(function(_ref) {
+    var stackedSizeList = Object.entries(groupByStack).map((_ref)=>{
         var _bars$;
-        var _$_ref = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(_ref, 2), stackId = _$_ref[0], bars = _$_ref[1];
-        var dataKeys = bars.map(function(b) {
-            return b.dataKey;
-        });
+        var [stackId, bars] = _ref;
+        var dataKeys = bars.map((b)=>b.dataKey);
         var barSize = getBarSize(globalSize, totalSize, (_bars$ = bars[0]) === null || _bars$ === void 0 ? void 0 : _bars$.barSize);
         return {
-            stackId: stackId,
-            dataKeys: dataKeys,
-            barSize: barSize
+            stackId,
+            dataKeys,
+            barSize
         };
     });
-    var unstackedSizeList = unstackedBars.map(function(b) {
+    var unstackedSizeList = unstackedBars.map((b)=>{
         var dataKeys = [
             b.dataKey
-        ].filter(function(dk) {
-            return dk != null;
-        });
+        ].filter((dk)=>dk != null);
         var barSize = getBarSize(globalSize, totalSize, b.barSize);
         return {
             stackId: undefined,
-            dataKeys: dataKeys,
-            barSize: barSize
+            dataKeys,
+            barSize
         };
     });
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(stackedSizeList).concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(unstackedSizeList));
+    return [
+        ...stackedSizeList,
+        ...unstackedSizeList
+    ];
 };
 }),
 "[project]/frontend/node_modules/recharts/es6/state/selectors/combiners/combineAllBarPositions.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -7017,12 +6675,8 @@ __turbopack_context__.s([
     "combineAllBarPositions",
     ()=>combineAllBarPositions
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_to_consumable_array.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/DataUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/isWellBehavedNumber.js [app-client] (ecmascript)");
-;
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -7054,14 +6708,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -7082,9 +6736,7 @@ function getBarPositions(barGap, barCategoryGap, bandSize, sizeList, maxBarSize)
     if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])((_sizeList$ = sizeList[0]) === null || _sizeList$ === void 0 ? void 0 : _sizeList$.barSize)) {
         var useFull = false;
         var fullBarSize = bandSize / len;
-        var sum = sizeList.reduce(function(res, entry) {
-            return res + (entry.barSize || 0);
-        }, 0);
+        var sum = sizeList.reduce((res, entry)=>res + (entry.barSize || 0), 0);
         sum += (len - 1) * realBarGap;
         if (sum >= bandSize) {
             sum -= (len - 1) * realBarGap;
@@ -7100,7 +6752,7 @@ function getBarPositions(barGap, barCategoryGap, bandSize, sizeList, maxBarSize)
             offset: offset - realBarGap,
             size: 0
         };
-        result = sizeList.reduce(function(res, entry) {
+        result = sizeList.reduce((res, entry)=>{
             var _entry$barSize;
             var newPosition = {
                 stackId: entry.stackId,
@@ -7110,9 +6762,10 @@ function getBarPositions(barGap, barCategoryGap, bandSize, sizeList, maxBarSize)
                     size: useFull ? fullBarSize : (_entry$barSize = entry.barSize) !== null && _entry$barSize !== void 0 ? _entry$barSize : 0
                 }
             };
-            var newRes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(res).concat([
+            var newRes = [
+                ...res,
                 newPosition
-            ]);
+            ];
             prev = newPosition.position;
             return newRes;
         }, initialValue);
@@ -7126,32 +6779,29 @@ function getBarPositions(barGap, barCategoryGap, bandSize, sizeList, maxBarSize)
             originalSize >>= 0;
         }
         var size = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$isWellBehavedNumber$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isWellBehavedNumber"])(maxBarSize) ? Math.min(originalSize, maxBarSize) : originalSize;
-        result = sizeList.reduce(function(res, entry, i) {
-            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(res).concat([
+        result = sizeList.reduce((res, entry, i)=>[
+                ...res,
                 {
                     stackId: entry.stackId,
                     dataKeys: entry.dataKeys,
                     position: {
                         offset: _offset + (originalSize + realBarGap) * i + (originalSize - size) / 2,
-                        size: size
+                        size
                     }
                 }
-            ]);
-        }, initialValue);
+            ], initialValue);
     }
     return result;
 }
-var combineAllBarPositions = function combineAllBarPositions(sizeList, globalMaxBarSize, barGap, barCategoryGap, barBandSize, bandSize, childMaxBarSize) {
+var combineAllBarPositions = (sizeList, globalMaxBarSize, barGap, barCategoryGap, barBandSize, bandSize, childMaxBarSize)=>{
     var maxBarSize = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNullish"])(childMaxBarSize) ? globalMaxBarSize : childMaxBarSize;
     var allBarPositions = getBarPositions(barGap, barCategoryGap, barBandSize !== bandSize ? barBandSize : bandSize, sizeList, maxBarSize);
     if (barBandSize !== bandSize && allBarPositions != null) {
-        allBarPositions = allBarPositions.map(function(pos) {
-            return _objectSpread(_objectSpread({}, pos), {}, {
+        allBarPositions = allBarPositions.map((pos)=>_objectSpread(_objectSpread({}, pos), {}, {
                 position: _objectSpread(_objectSpread({}, pos.position), {}, {
                     offset: pos.position.offset - barBandSize / 2
                 })
-            });
-        });
+            }));
     }
     return allBarPositions;
 };
@@ -7165,12 +6815,12 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$stacks$2f$getStackSeriesIdentifier$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/stacks/getStackSeriesIdentifier.js [app-client] (ecmascript)");
 ;
-var combineStackedData = function combineStackedData(stackGroups, barSettings) {
+var combineStackedData = (stackGroups, barSettings)=>{
     var stackSeriesIdentifier = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$stacks$2f$getStackSeriesIdentifier$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getStackSeriesIdentifier"])(barSettings);
     if (!stackGroups || stackSeriesIdentifier == null || barSettings == null) {
         return undefined;
     }
-    var stackId = barSettings.stackId;
+    var { stackId } = barSettings;
     if (stackId == null) {
         return undefined;
     }
@@ -7178,13 +6828,11 @@ var combineStackedData = function combineStackedData(stackGroups, barSettings) {
     if (!stackGroup) {
         return undefined;
     }
-    var stackedData = stackGroup.stackedData;
+    var { stackedData } = stackGroup;
     if (!stackedData) {
         return undefined;
     }
-    return stackedData.find(function(sd) {
-        return sd.key === stackSeriesIdentifier;
-    });
+    return stackedData.find((sd)=>sd.key === stackSeriesIdentifier);
 };
 }),
 "[project]/frontend/node_modules/recharts/es6/state/selectors/combiners/combineBarPosition.js [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -7194,13 +6842,11 @@ __turbopack_context__.s([
     "combineBarPosition",
     ()=>combineBarPosition
 ]);
-var combineBarPosition = function combineBarPosition(allBarPositions, barSettings) {
+var combineBarPosition = (allBarPositions, barSettings)=>{
     if (allBarPositions == null || barSettings == null) {
         return undefined;
     }
-    var position = allBarPositions.find(function(p) {
-        return p.stackId === barSettings.stackId && barSettings.dataKey != null && p.dataKeys.includes(barSettings.dataKey);
-    });
+    var position = allBarPositions.find((p)=>p.stackId === barSettings.stackId && barSettings.dataKey != null && p.dataKeys.includes(barSettings.dataKey));
     if (position == null) {
         return undefined;
     }
@@ -7260,51 +6906,29 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-var pickIsPanorama = function pickIsPanorama(_state, _id, isPanorama) {
-    return isPanorama;
-};
-var pickBarId = function pickBarId(_state, id) {
-    return id;
-};
+var pickIsPanorama = (_state, _id, isPanorama)=>isPanorama;
+var pickBarId = (_state, id)=>id;
 var selectSynchronisedBarSettings = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectUnfilteredCartesianItems"],
     pickBarId
-], function(graphicalItems, id) {
-    return graphicalItems.filter(function(item) {
-        return item.type === 'bar';
-    }).find(function(item) {
-        return item.id === id;
-    });
-});
+], (graphicalItems, id)=>graphicalItems.filter((item)=>item.type === 'bar').find((item)=>item.id === id));
 var selectMaxBarSize = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectSynchronisedBarSettings
-], function(barSettings) {
-    return barSettings === null || barSettings === void 0 ? void 0 : barSettings.maxBarSize;
-});
-var pickCells = function pickCells(_state, _id, _isPanorama, cells) {
-    return cells;
-};
+], (barSettings)=>barSettings === null || barSettings === void 0 ? void 0 : barSettings.maxBarSize);
+var pickCells = (_state, _id, _isPanorama, cells)=>cells;
 var selectAllVisibleBars = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectUnfilteredCartesianItems"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectXAxisIdFromGraphicalItemId"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectYAxisIdFromGraphicalItemId"],
     pickIsPanorama
-], function(layout, allItems, xAxisId, yAxisId, isPanorama) {
-    return allItems.filter(function(i) {
+], (layout, allItems, xAxisId, yAxisId, isPanorama)=>allItems.filter((i)=>{
         if (layout === 'horizontal') {
             return i.xAxisId === xAxisId;
         }
         return i.yAxisId === yAxisId;
-    }).filter(function(i) {
-        return i.isPanorama === isPanorama;
-    }).filter(function(i) {
-        return i.hide === false;
-    }).filter(function(i) {
-        return i.type === 'bar';
-    });
-});
-var selectBarStackGroups = function selectBarStackGroups(state, id, isPanorama) {
+    }).filter((i)=>i.isPanorama === isPanorama).filter((i)=>i.hide === false).filter((i)=>i.type === 'bar'));
+var selectBarStackGroups = (state, id, isPanorama)=>{
     var layout = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"])(state);
     var xAxisId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectXAxisIdFromGraphicalItemId"])(state, id);
     var yAxisId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectYAxisIdFromGraphicalItemId"])(state, id);
@@ -7316,7 +6940,7 @@ var selectBarStackGroups = function selectBarStackGroups(state, id, isPanorama) 
     }
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectStackGroups"])(state, 'xAxis', xAxisId, isPanorama);
 };
-var selectBarCartesianAxisSize = function selectBarCartesianAxisSize(state, id) {
+var selectBarCartesianAxisSize = (state, id)=>{
     var layout = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"])(state);
     var xAxisId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectXAxisIdFromGraphicalItemId"])(state, id);
     var yAxisId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectYAxisIdFromGraphicalItemId"])(state, id);
@@ -7333,7 +6957,7 @@ var selectBarSizeList = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fron
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectRootBarSize"],
     selectBarCartesianAxisSize
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$combiners$2f$combineBarSizeList$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineBarSizeList"]);
-var selectBarBandSize = function selectBarBandSize(state, id, isPanorama) {
+var selectBarBandSize = (state, id, isPanorama)=>{
     var _ref, _getBandSizeOfAxis;
     var barSettings = selectSynchronisedBarSettings(state, id);
     if (barSettings == null) {
@@ -7346,7 +6970,7 @@ var selectBarBandSize = function selectBarBandSize(state, id, isPanorama) {
     }
     var layout = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"])(state);
     var globalMaxBarSize = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$rootPropsSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectRootMaxBarSize"])(state);
-    var childMaxBarSize = barSettings.maxBarSize;
+    var { maxBarSize: childMaxBarSize } = barSettings;
     var maxBarSize = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$DataUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isNullish"])(childMaxBarSize) ? globalMaxBarSize : childMaxBarSize;
     var axis, ticks;
     if (layout === 'horizontal') {
@@ -7358,7 +6982,7 @@ var selectBarBandSize = function selectBarBandSize(state, id, isPanorama) {
     }
     return (_ref = (_getBandSizeOfAxis = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getBandSizeOfAxis"])(axis, ticks, true)) !== null && _getBandSizeOfAxis !== void 0 ? _getBandSizeOfAxis : maxBarSize) !== null && _ref !== void 0 ? _ref : 0;
 };
-var selectAxisBandSize = function selectAxisBandSize(state, id, isPanorama) {
+var selectAxisBandSize = (state, id, isPanorama)=>{
     var layout = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$context$2f$chartLayoutContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartLayout"])(state);
     var xAxisId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectXAxisIdFromGraphicalItemId"])(state, id);
     var yAxisId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectYAxisIdFromGraphicalItemId"])(state, id);
@@ -7384,28 +7008,28 @@ var selectAllBarPositions = (0, __TURBOPACK__imported__module__$5b$project$5d2f$
     selectAxisBandSize,
     selectMaxBarSize
 ], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$combiners$2f$combineAllBarPositions$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["combineAllBarPositions"]);
-var selectXAxisWithScale = function selectXAxisWithScale(state, id, isPanorama) {
+var selectXAxisWithScale = (state, id, isPanorama)=>{
     var xAxisId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectXAxisIdFromGraphicalItemId"])(state, id);
     if (xAxisId == null) {
         return undefined;
     }
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisWithScale"])(state, 'xAxis', xAxisId, isPanorama);
 };
-var selectYAxisWithScale = function selectYAxisWithScale(state, id, isPanorama) {
+var selectYAxisWithScale = (state, id, isPanorama)=>{
     var yAxisId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectYAxisIdFromGraphicalItemId"])(state, id);
     if (yAxisId == null) {
         return undefined;
     }
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectAxisWithScale"])(state, 'yAxis', yAxisId, isPanorama);
 };
-var selectXAxisTicks = function selectXAxisTicks(state, id, isPanorama) {
+var selectXAxisTicks = (state, id, isPanorama)=>{
     var xAxisId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectXAxisIdFromGraphicalItemId"])(state, id);
     if (xAxisId == null) {
         return undefined;
     }
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectTicksOfGraphicalItem"])(state, 'xAxis', xAxisId, isPanorama);
 };
-var selectYAxisTicks = function selectYAxisTicks(state, id, isPanorama) {
+var selectYAxisTicks = (state, id, isPanorama)=>{
     var yAxisId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$graphicalItemSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectYAxisIdFromGraphicalItemId"])(state, id);
     if (yAxisId == null) {
         return undefined;
@@ -7434,12 +7058,12 @@ var selectBarRectangles = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
     selectStackedDataOfItem,
     selectSynchronisedBarSettings,
     pickCells
-], function(offset, axisViewBox, xAxis, yAxis, xAxisTicks, yAxisTicks, pos, layout, _ref2, bandSize, stackedData, barSettings, cells) {
-    var chartData = _ref2.chartData, dataStartIndex = _ref2.dataStartIndex, dataEndIndex = _ref2.dataEndIndex;
+], (offset, axisViewBox, xAxis, yAxis, xAxisTicks, yAxisTicks, pos, layout, _ref2, bandSize, stackedData, barSettings, cells)=>{
+    var { chartData, dataStartIndex, dataEndIndex } = _ref2;
     if (barSettings == null || pos == null || axisViewBox == null || layout !== 'horizontal' && layout !== 'vertical' || xAxis == null || yAxis == null || xAxisTicks == null || yAxisTicks == null || bandSize == null) {
         return undefined;
     }
-    var data = barSettings.data;
+    var { data } = barSettings;
     var displayedData;
     if (data != null && data.length > 0) {
         displayedData = data;
@@ -7450,20 +7074,20 @@ var selectBarRectangles = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
         return undefined;
     }
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$Bar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["computeBarRectangles"])({
-        layout: layout,
-        barSettings: barSettings,
-        pos: pos,
+        layout,
+        barSettings,
+        pos,
         parentViewBox: axisViewBox,
-        bandSize: bandSize,
-        xAxis: xAxis,
-        yAxis: yAxis,
-        xAxisTicks: xAxisTicks,
-        yAxisTicks: yAxisTicks,
-        stackedData: stackedData,
-        displayedData: displayedData,
-        offset: offset,
-        cells: cells,
-        dataStartIndex: dataStartIndex
+        bandSize,
+        xAxis,
+        yAxis,
+        xAxisTicks,
+        yAxisTicks,
+        stackedData,
+        displayedData,
+        offset,
+        cells,
+        dataStartIndex
     });
 });
 }),
@@ -7484,35 +7108,21 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-var pickStackId = function pickStackId(state, stackId) {
-    return stackId;
-};
-var pickIsPanorama = function pickIsPanorama(state, stackId, isPanorama) {
-    return isPanorama;
-};
+var pickStackId = (state, stackId)=>stackId;
+var pickIsPanorama = (state, stackId, isPanorama)=>isPanorama;
 var selectAllBarsInStack = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     pickStackId,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectUnfilteredCartesianItems"],
     pickIsPanorama
-], function(stackId, allItems, isPanorama) {
-    return allItems.filter(function(i) {
-        return i.type === 'bar';
-    }).filter(function(i) {
-        return i.stackId === stackId;
-    }).filter(function(i) {
-        return i.isPanorama === isPanorama;
-    }).filter(function(i) {
-        return !i.hide;
-    });
+], (stackId, allItems, isPanorama)=>{
+    return allItems.filter((i)=>i.type === 'bar').filter((i)=>i.stackId === stackId).filter((i)=>i.isPanorama === isPanorama).filter((i)=>!i.hide);
 });
 var selectAllBarIdsInStack = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectAllBarsInStack
-], function(allBars) {
-    return allBars.map(function(bar) {
-        return bar.id;
-    });
+], (allBars)=>{
+    return allBars.map((bar)=>bar.id);
 });
-var expandRectangle = function expandRectangle(rect1, rect2) {
+var expandRectangle = (rect1, rect2)=>{
     if (!rect1) {
         return rect2;
     }
@@ -7526,18 +7136,18 @@ var expandRectangle = function expandRectangle(rect1, rect2) {
     var width = maxX - x;
     var height = maxY - y;
     return {
-        x: x,
-        y: y,
-        width: width,
-        height: height
+        x,
+        y,
+        width,
+        height
     };
 };
-var combineStackRects = function combineStackRects(state, stackId, isPanorama) {
+var combineStackRects = (state, stackId, isPanorama)=>{
     var allBarIds = selectAllBarIdsInStack(state, stackId, isPanorama);
     var stackRects = [];
-    allBarIds.forEach(function(barId) {
+    allBarIds.forEach((barId)=>{
         var rectangles = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$barSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectBarRectangles"])(state, barId, isPanorama, undefined);
-        rectangles === null || rectangles === void 0 || rectangles.forEach(function(rect) {
+        rectangles === null || rectangles === void 0 || rectangles.forEach((rect)=>{
             var rectIndex = rect.originalDataIndex;
             stackRects[rectIndex] = expandRectangle(stackRects[rectIndex], rect);
         });
@@ -7545,9 +7155,7 @@ var combineStackRects = function combineStackRects(state, stackId, isPanorama) {
     return stackRects;
 };
 var selectStackRects = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
-    function(state) {
-        return state;
-    },
+    (state)=>state,
     pickStackId,
     pickIsPanorama
 ], combineStackRects);
@@ -7568,7 +7176,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 function ReportPolarOptions(props) {
     var dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$hooks$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "ReportPolarOptions.useEffect": function() {
+        "ReportPolarOptions.useEffect": ()=>{
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$polarOptionsSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updatePolarOptions"])(props));
         }
     }["ReportPolarOptions.useEffect"], [
@@ -7619,9 +7227,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 ;
 ;
-var selectUnfilteredPolarItems = function selectUnfilteredPolarItems(state) {
-    return state.graphicalItems.polarItems;
-};
+var selectUnfilteredPolarItems = (state)=>state.graphicalItems.polarItems;
 var selectAxisPredicate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisType$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisType"],
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$pickAxisId$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["pickAxisId"]
@@ -7647,10 +7253,10 @@ var selectAllPolarAppliedNumericalValues = (0, __TURBOPACK__imported__module__$5
     selectPolarDisplayedData,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectBaseAxis"],
     selectPolarItemsSettings
-], function(data, axisSettings, items) {
+], (data, axisSettings, items)=>{
     if (items.length > 0) {
-        return data.flatMap(function(entry) {
-            return items.flatMap(function(item) {
+        return data.flatMap((entry)=>{
+            return items.flatMap((item)=>{
                 var _axisSettings$dataKey;
                 var valueByDataKey = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(entry, (_axisSettings$dataKey = axisSettings.dataKey) !== null && _axisSettings$dataKey !== void 0 ? _axisSettings$dataKey : item.dataKey);
                 return {
@@ -7661,23 +7267,17 @@ var selectAllPolarAppliedNumericalValues = (0, __TURBOPACK__imported__module__$5
         }).filter(Boolean);
     }
     if ((axisSettings === null || axisSettings === void 0 ? void 0 : axisSettings.dataKey) != null) {
-        return data.map(function(item) {
-            return {
+        return data.map((item)=>({
                 value: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(item, axisSettings.dataKey),
                 errorDomain: []
-            };
-        });
+            }));
     }
-    return data.map(function(entry) {
-        return {
+    return data.map((entry)=>({
             value: entry,
             errorDomain: []
-        };
-    });
+        }));
 });
-var unsupportedInPolarChart = function unsupportedInPolarChart() {
-    return undefined;
-};
+var unsupportedInPolarChart = ()=>undefined;
 var selectDomainOfAllPolarAppliedNumericalValues = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     selectPolarDisplayedData,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$axisSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectBaseAxis"],
@@ -7732,14 +7332,12 @@ __turbopack_context__.s([
     "selectPieSectors",
     ()=>selectPieSectors
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/reselect/dist/reselect.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$polar$2f$Pie$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/polar/Pie.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$dataSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/dataSelectors.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/selectChartOffsetInternal.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/util/ChartUtils.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$polarSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/recharts/es6/state/selectors/polarSelectors.js [app-client] (ecmascript)");
-;
 function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -7771,14 +7369,14 @@ function _defineProperty(e, r, t) {
 }
 function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i)) ? i : i + "";
+    return "symbol" == typeof i ? i : i + "";
 }
 function _toPrimitive(t, r) {
-    if ("object" != (typeof t === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(t)) || !t) return t;
+    if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != (typeof i === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(i))) return i;
+        if ("object" != typeof i) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
     }
     return ("string" === r ? String : Number)(t);
@@ -7789,22 +7387,14 @@ function _toPrimitive(t, r) {
 ;
 ;
 ;
-var pickId = function pickId(_state, id) {
-    return id;
-};
+var pickId = (_state, id)=>id;
 var selectSynchronisedPieSettings = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$reselect$2f$dist$2f$reselect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSelector"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$polarSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectUnfilteredPolarItems"],
     pickId
-], function(graphicalItems, id) {
-    return graphicalItems.filter(function(item) {
-        return item.type === 'pie';
-    }).find(function(item) {
-        return item.id === id;
-    });
-});
+], (graphicalItems, id)=>graphicalItems.filter((item)=>item.type === 'pie').find((item)=>item.id === id));
 // Keep stable reference to an empty array to prevent re-renders
 var emptyArray = [];
-var pickCells = function pickCells(_state, _id, cells) {
+var pickCells = (_state, _id, cells)=>{
     if ((cells === null || cells === void 0 ? void 0 : cells.length) === 0) {
         return emptyArray;
     }
@@ -7814,8 +7404,8 @@ var selectDisplayedData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$dataSelectors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartDataAndAlwaysIgnoreIndexes"],
     selectSynchronisedPieSettings,
     pickCells
-], function(_ref, pieSettings, cells) {
-    var chartData = _ref.chartData;
+], (_ref, pieSettings, cells)=>{
+    var { chartData } = _ref;
     if (pieSettings == null) {
         return undefined;
     }
@@ -7826,9 +7416,7 @@ var selectDisplayedData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fr
         displayedData = chartData;
     }
     if ((!displayedData || !displayedData.length) && cells != null) {
-        displayedData = cells.map(function(cell) {
-            return _objectSpread(_objectSpread({}, pieSettings.presentationProps), cell.props);
-        });
+        displayedData = cells.map((cell)=>_objectSpread(_objectSpread({}, pieSettings.presentationProps), cell.props));
     }
     if (displayedData == null) {
         return undefined;
@@ -7839,24 +7427,24 @@ var selectPieLegend = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fronte
     selectDisplayedData,
     selectSynchronisedPieSettings,
     pickCells
-], function(displayedData, pieSettings, cells) {
+], (displayedData, pieSettings, cells)=>{
     if (displayedData == null || pieSettings == null) {
         return undefined;
     }
-    return displayedData.map(function(entry, i) {
+    return displayedData.map((entry, i)=>{
         var _cells$i;
         var name = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getValueByDataKey"])(entry, pieSettings.nameKey, pieSettings.name);
         var color;
         if (cells !== null && cells !== void 0 && (_cells$i = cells[i]) !== null && _cells$i !== void 0 && (_cells$i = _cells$i.props) !== null && _cells$i !== void 0 && _cells$i.fill) {
             color = cells[i].props.fill;
-        } else if ((typeof entry === "undefined" ? "undefined" : (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(entry)) === 'object' && entry != null && 'fill' in entry) {
+        } else if (typeof entry === 'object' && entry != null && 'fill' in entry) {
             color = entry.fill;
         } else {
             color = pieSettings.fill;
         }
         return {
             value: (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$util$2f$ChartUtils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getTooltipNameProp"])(name, pieSettings.dataKey),
-            color: color,
+            color,
             // @ts-expect-error Legend payload.payload says it wants objects but our data can be unknown
             payload: entry,
             type: pieSettings.legendType
@@ -7868,15 +7456,15 @@ var selectPieSectors = (0, __TURBOPACK__imported__module__$5b$project$5d2f$front
     selectSynchronisedPieSettings,
     pickCells,
     __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$state$2f$selectors$2f$selectChartOffsetInternal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["selectChartOffsetInternal"]
-], function(displayedData, pieSettings, cells, offset) {
+], (displayedData, pieSettings, cells, offset)=>{
     if (pieSettings == null || displayedData == null) {
         return undefined;
     }
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$recharts$2f$es6$2f$polar$2f$Pie$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["computePieSectors"])({
-        offset: offset,
-        pieSettings: pieSettings,
-        displayedData: displayedData,
-        cells: cells
+        offset,
+        pieSettings,
+        displayedData,
+        cells
     });
 });
 }),

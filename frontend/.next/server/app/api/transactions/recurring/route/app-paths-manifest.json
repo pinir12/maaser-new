@@ -1,0 +1,3 @@
+{
+  "/api/transactions/recurring/route": "app/api/transactions/recurring/route.js"
+}

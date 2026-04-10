@@ -25,7 +25,7 @@ __turbopack_context__.v((parentImport) => {
 
 __turbopack_context__.v((parentImport) => {
     return Promise.all([
-  "static/chunks/0r9g_0_tx77f._.js",
+  "static/chunks/0r9g_0mb2qfg._.js",
   "static/chunks/0r9g_canvg_lib_index_es_11hm22q.js"
 ].map((chunk) => __turbopack_context__.l(chunk))).then(() => {
         return parentImport("[project]/frontend/node_modules/canvg/lib/index.es.js [app-client] (ecmascript)");
