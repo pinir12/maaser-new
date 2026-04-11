@@ -5,7 +5,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { getCurrencySymbol, TRANSACTION_TYPES } from '../lib/validation';
 import { BarChart3, PieChart as PieChartIcon, TrendingUp } from 'lucide-react';
 
-const COLORS = { income: '#10b981', maaser: '#f59e0b', given: '#3b82f6', lent: '#f43f5e' };
+const COLORS = { income: '#10b981', maaser: '#f59e0b', given: '#3b82f6', lent: '#8b5cf6' };
 
 export function AnalyticsCharts({ transactions, baseCurrency, distributionMode }) {
   const [chartType, setChartType] = useState('area');

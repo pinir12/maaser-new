@@ -1,5 +1,6 @@
 import { getCurrentUser, jsonError } from '@/lib/jwt-server';
 import { supaGet, supaPost } from '@/lib/supabase-server';
+import { encryptTransaction, decryptTransaction } from '@/lib/encryption';
 
 export async function GET(request) {
   const auth = await getCurrentUser(request);
@@ -7,7 +8,7 @@ export async function GET(request) {
 
   try {
     const txns = await supaGet('transactions', { user_id: `eq.${auth.userId}`, select: '*', order: 'date.desc' });
-    return Response.json(txns);
+    return Response.json(txns.map(decryptTransaction));
   } catch {
     return jsonError('Failed to fetch transactions', 500);
   }
@@ -22,9 +23,13 @@ export async function POST(request) {
   data.created_at = new Date().toISOString();
   if (data.maaser_percentage != null) data.maaser_percentage = Math.round(data.maaser_percentage);
 
+  // Encrypt sensitive fields
+  const encrypted = encryptTransaction(data);
+
   try {
-    const result = await supaPost('transactions', data);
-    return Response.json(Array.isArray(result) ? result[0] : result);
+    const result = await supaPost('transactions', encrypted);
+    const created = Array.isArray(result) ? result[0] : result;
+    return Response.json(decryptTransaction(created));
   } catch (e) {
     return jsonError(`Failed to create transaction: ${e.message}`, 500);
   }

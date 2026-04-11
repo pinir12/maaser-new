@@ -1,14 +1,16 @@
-import { supaGet, supaPost, supaHeaders } from '@/lib/supabase-server';
+import { supaGet, supaPost } from '@/lib/supabase-server';
+import { encryptTransaction, decryptTransaction } from '@/lib/encryption';
 
 export async function POST() {
   const today = new Date();
-  const todayStr = today.toISOString().split('T')[0];
   let createdCount = 0;
 
   try {
     const allRecurring = await supaGet('transactions', { is_recurring: 'eq.true', select: '*' });
 
-    for (const txn of allRecurring) {
+    for (const rawTxn of allRecurring) {
+      const txn = decryptTransaction(rawTxn);
+
       if (txn.recurring_end_date) {
         try {
           if (new Date(txn.recurring_end_date) < today) continue;
@@ -33,7 +35,7 @@ export async function POST() {
         if (nextDate > today) break;
 
         const ds = nextDate.toISOString().split('T')[0];
-        // Check if already exists
+        // Check if already exists (idempotent — safe to call multiple times)
         const check = await supaGet('transactions', {
           user_id: `eq.${txn.user_id}`,
           description: `eq.${txn.description}`,
@@ -42,7 +44,7 @@ export async function POST() {
         });
 
         if (!check.length) {
-          const newTxn = {
+          const newTxn = encryptTransaction({
             user_id: txn.user_id,
             description: txn.description,
             amount: txn.amount,
@@ -57,7 +59,7 @@ export async function POST() {
             recurring_frequency: freq,
             recurring_end_date: txn.recurring_end_date,
             created_at: new Date().toISOString(),
-          };
+          });
           try {
             await supaPost('transactions', newTxn);
             createdCount++;

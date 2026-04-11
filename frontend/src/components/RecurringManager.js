@@ -88,7 +88,7 @@ export function RecurringManager({ baseCurrency, onBack }) {
   const getColor = (type) => {
     if (type === TRANSACTION_TYPES.INCOME) return { bg: 'bg-emerald-50', text: 'text-emerald-600', border: 'border-emerald-200', badge: 'bg-emerald-100 text-emerald-700' };
     if (type === TRANSACTION_TYPES.GIVE) return { bg: 'bg-blue-50', text: 'text-blue-600', border: 'border-blue-200', badge: 'bg-blue-100 text-blue-700' };
-    return { bg: 'bg-rose-50', text: 'text-rose-600', border: 'border-rose-200', badge: 'bg-rose-100 text-rose-700' };
+    return { bg: 'bg-violet-50', text: 'text-violet-600', border: 'border-violet-200', badge: 'bg-violet-100 text-violet-700' };
   };
 
   const isExpired = (t) => t.recurring_end_date && new Date(t.recurring_end_date) < new Date();

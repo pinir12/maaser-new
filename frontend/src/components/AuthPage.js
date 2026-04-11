@@ -19,7 +19,11 @@ export function AuthPage({ defaultTab = 'login', onBack = null }) {
   const onSubmit = async (data) => {
     setError('');
     const result = isLogin ? await signIn(data.email, data.password) : await signUp(data.email, data.password, data.name, data.base_currency);
-    if (result.error) setError(result.error);
+    if (result.error) {
+      setError(result.error);
+      // Re-focus the form so user stays on the auth page
+      return;
+    }
   };
 
   return (

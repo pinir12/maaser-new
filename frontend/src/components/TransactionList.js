@@ -77,7 +77,7 @@ function AccordionSection({ type, label, items, icon: Icon, colors, defaultOpen,
               <div className="flex items-center gap-3 ml-4">
                 <div className="text-right">
                   <p data-testid={`transaction-amount-${t.id}`} className={`font-bold text-sm ${colors.text}`}>
-                    {type === TRANSACTION_TYPES.INCOME ? '+' : '-'}{getCurrencySymbol(t.currency)}{t.amount.toLocaleString()}
+                    {type === TRANSACTION_TYPES.INCOME ? '+' : '-'}{getCurrencySymbol(t.currency)}{t.amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </p>
                   {t.currency !== baseCurrency && (
                     <p className="text-[10px] text-slate-400">{getCurrencySymbol(baseCurrency)}{normalize(t).toFixed(2)}</p>
@@ -144,7 +144,7 @@ export function TransactionList({ transactions, onEdit, onDelete, useHebrewDates
       type: TRANSACTION_TYPES.LEND,
       label: 'Lends',
       icon: HandCoins,
-      colors: { bg: 'bg-rose-50/80', text: 'text-rose-600', border: 'border-rose-200/80', badge: 'bg-rose-100 text-rose-600' },
+      colors: { bg: 'bg-violet-50/80', text: 'text-violet-600', border: 'border-violet-200/80', badge: 'bg-violet-100 text-violet-600' },
       items: grouped[TRANSACTION_TYPES.LEND]
     }
   ];
