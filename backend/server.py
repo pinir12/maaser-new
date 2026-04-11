@@ -77,12 +77,16 @@ def decrypt_value(text):
     return aesgcm.decrypt(nonce, ct, None).decode('utf-8')
 
 SENSITIVE_FIELDS = ['description', 'recipient_name']
+NUMERIC_ENCRYPTED_FIELDS = ['amount', 'maaser_amount']  # stored in separate _encrypted columns
 
 def encrypt_transaction(data: dict) -> dict:
     enc = dict(data)
     for f in SENSITIVE_FIELDS:
         if f in enc and enc[f] is not None and not str(enc[f]).startswith('enc:'):
             enc[f] = encrypt_value(str(enc[f]))
+    for f in NUMERIC_ENCRYPTED_FIELDS:
+        if f in enc and enc[f] is not None:
+            enc[f'{f}_encrypted'] = encrypt_value(str(enc[f]))
     return enc
 
 def decrypt_transaction(data: dict) -> dict:
@@ -90,6 +94,14 @@ def decrypt_transaction(data: dict) -> dict:
     for f in SENSITIVE_FIELDS:
         if f in dec and dec[f] and str(dec[f]).startswith('enc:'):
             dec[f] = decrypt_value(dec[f])
+    for f in NUMERIC_ENCRYPTED_FIELDS:
+        ef = f'{f}_encrypted'
+        if ef in dec and dec[ef]:
+            try:
+                dec[f] = float(decrypt_value(dec[ef]))
+            except (ValueError, TypeError):
+                pass
+            del dec[ef]
     return dec
 
 app = FastAPI()

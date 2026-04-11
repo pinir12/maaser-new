@@ -315,9 +315,9 @@ export function Dashboard() {
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center shadow-sm">
-              <span className="text-white font-bold text-sm">F</span>
+              <span className="text-white font-bold text-sm">M</span>
             </div>
-            <h1 className="text-lg font-bold text-slate-900 tracking-tight">Finance Tracker</h1>
+            <h1 className="text-lg font-bold text-slate-900 tracking-tight">Maaser Tracker</h1>
           </div>
           <div className="flex items-center gap-1">
             <button data-testid="contact-btn" onClick={() => setShowContact(true)} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all" title="Contact">
@@ -351,8 +351,8 @@ export function Dashboard() {
               <Plus className="w-5 h-5" />Add Transaction
             </button>
             <button data-testid="csv-import-open-btn" onClick={() => setShowCSVImport(true)}
-              className="flex items-center justify-center gap-2 px-4 py-3 bg-white hover:bg-slate-50 text-slate-600 font-medium rounded-xl border border-slate-200 shadow-sm transition-all hover:-translate-y-0.5" title="Import CSV">
-              <FileSpreadsheet className="w-5 h-5" /><span className="hidden sm:inline">Import CSV</span>
+              className="p-3 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl border border-slate-200 transition-all" title="Import from CSV">
+              <FileSpreadsheet className="w-5 h-5" />
             </button>
           </div>
           <div className="flex-1">

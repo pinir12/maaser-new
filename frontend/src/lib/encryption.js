@@ -12,7 +12,7 @@ function getKey() {
 export function encrypt(text) {
   if (text == null || text === '') return text;
   const str = String(text);
-  if (str.startsWith('enc:')) return str; // Already encrypted
+  if (str.startsWith('enc:')) return str;
   const key = getKey();
   const iv = crypto.randomBytes(IV_LENGTH);
   const cipher = crypto.createCipheriv(ALGORITHM, key, iv);
@@ -26,7 +26,7 @@ export function encrypt(text) {
 export function decrypt(text) {
   if (text == null || text === '') return text;
   const str = String(text);
-  if (!str.startsWith('enc:')) return str; // Not encrypted
+  if (!str.startsWith('enc:')) return str;
   const parts = str.split(':');
   if (parts.length !== 3) return str;
   const [, ivB64, combinedB64] = parts;
@@ -42,26 +42,41 @@ export function decrypt(text) {
   return decrypted.toString('utf8');
 }
 
-// Encrypt sensitive text fields in-place (description, recipient_name)
-// Numeric fields (amount, maaser_amount) remain as-is for DB calculations
+// Text fields encrypted in-place
 const SENSITIVE_FIELDS = ['description', 'recipient_name'];
+// Numeric fields get separate _encrypted columns (originals zeroed out)
+const NUMERIC_ENCRYPTED_FIELDS = ['amount', 'maaser_amount'];
 
 export function encryptTransaction(txn) {
-  const encrypted = { ...txn };
+  const enc = { ...txn };
   for (const f of SENSITIVE_FIELDS) {
-    if (encrypted[f] != null && !String(encrypted[f]).startsWith('enc:')) {
-      encrypted[f] = encrypt(String(encrypted[f]));
+    if (enc[f] != null && !String(enc[f]).startsWith('enc:')) {
+      enc[f] = encrypt(String(enc[f]));
     }
   }
-  return encrypted;
+  for (const f of NUMERIC_ENCRYPTED_FIELDS) {
+    if (enc[f] != null) {
+      enc[`${f}_encrypted`] = encrypt(String(enc[f]));
+    }
+  }
+  return enc;
 }
 
 export function decryptTransaction(txn) {
-  const decrypted = { ...txn };
+  const dec = { ...txn };
   for (const f of SENSITIVE_FIELDS) {
-    if (decrypted[f] && String(decrypted[f]).startsWith('enc:')) {
-      decrypted[f] = decrypt(decrypted[f]);
+    if (dec[f] && String(dec[f]).startsWith('enc:')) {
+      dec[f] = decrypt(dec[f]);
     }
   }
-  return decrypted;
+  for (const f of NUMERIC_ENCRYPTED_FIELDS) {
+    const ef = `${f}_encrypted`;
+    if (dec[ef]) {
+      try {
+        dec[f] = parseFloat(decrypt(dec[ef]));
+      } catch {}
+      delete dec[ef];
+    }
+  }
+  return dec;
 }
