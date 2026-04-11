@@ -164,7 +164,7 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
   const types = [
     { type: TRANSACTION_TYPES.INCOME, label: 'Income', Icon: TrendingUp, color: 'bg-emerald-500' },
     { type: TRANSACTION_TYPES.GIVE, label: 'Give', Icon: Heart, color: 'bg-blue-500' },
-    ...(!isGiveOnly ? [{ type: TRANSACTION_TYPES.LEND, label: 'Lend', Icon: HandCoins, color: 'bg-rose-500' }] : [])
+    ...(!isGiveOnly ? [{ type: TRANSACTION_TYPES.LEND, label: 'Lend', Icon: HandCoins, color: 'bg-violet-500' }] : [])
   ];
 
   return (
@@ -353,7 +353,7 @@ export function AddTransactionModal({ isOpen, onClose, onSubmit, editTransaction
             className={`w-full py-3 text-white font-semibold rounded-xl shadow-lg transition-all disabled:opacity-50 ${
               txnType === TRANSACTION_TYPES.INCOME ? 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/25' :
               txnType === TRANSACTION_TYPES.GIVE ? 'bg-blue-500 hover:bg-blue-600 shadow-blue-500/25' :
-              'bg-rose-500 hover:bg-rose-600 shadow-rose-500/25'
+              'bg-violet-500 hover:bg-violet-600 shadow-violet-500/25'
             }`}>
             {isSubmitting ? 'Saving...' : editTransaction ? 'Update' : `Add ${txnType.charAt(0).toUpperCase() + txnType.slice(1)}`}
           </button>

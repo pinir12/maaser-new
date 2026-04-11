@@ -3,67 +3,65 @@ import crypto from 'crypto';
 
 const ALGORITHM = 'aes-256-gcm';
 const IV_LENGTH = 12;
-const TAG_LENGTH = 16;
 
 function getKey() {
   const secret = process.env.ENCRYPTION_KEY || process.env.JWT_SECRET;
-  // Derive a 32-byte key from the secret
   return crypto.createHash('sha256').update(secret).digest();
 }
 
 export function encrypt(text) {
   if (text == null || text === '') return text;
   const str = String(text);
+  if (str.startsWith('enc:')) return str; // Already encrypted
   const key = getKey();
   const iv = crypto.randomBytes(IV_LENGTH);
   const cipher = crypto.createCipheriv(ALGORITHM, key, iv);
-  let encrypted = cipher.update(str, 'utf8', 'base64');
-  encrypted += cipher.final('base64');
+  let encrypted = cipher.update(str, 'utf8');
+  encrypted = Buffer.concat([encrypted, cipher.final()]);
   const tag = cipher.getAuthTag();
-  // Store as: iv:tag:ciphertext (all base64)
-  return `enc:${iv.toString('base64')}:${tag.toString('base64')}:${encrypted}`;
+  const combined = Buffer.concat([tag, encrypted]);
+  return `enc:${iv.toString('base64')}:${combined.toString('base64')}`;
 }
 
 export function decrypt(text) {
   if (text == null || text === '') return text;
   const str = String(text);
-  if (!str.startsWith('enc:')) return str; // Not encrypted, return as-is
+  if (!str.startsWith('enc:')) return str; // Not encrypted
   const parts = str.split(':');
-  if (parts.length !== 4) return str;
-  const [, ivB64, tagB64, ciphertext] = parts;
+  if (parts.length !== 3) return str;
+  const [, ivB64, combinedB64] = parts;
   const key = getKey();
   const iv = Buffer.from(ivB64, 'base64');
-  const tag = Buffer.from(tagB64, 'base64');
+  const combined = Buffer.from(combinedB64, 'base64');
+  const tag = combined.subarray(0, 16);
+  const ciphertext = combined.subarray(16);
   const decipher = crypto.createDecipheriv(ALGORITHM, key, iv);
   decipher.setAuthTag(tag);
-  let decrypted = decipher.update(ciphertext, 'base64', 'utf8');
-  decrypted += decipher.final('utf8');
-  return decrypted;
+  let decrypted = decipher.update(ciphertext);
+  decrypted = Buffer.concat([decrypted, decipher.final()]);
+  return decrypted.toString('utf8');
 }
 
-// Encrypt sensitive fields of a transaction before storing
+// Encrypt sensitive text fields in-place (description, recipient_name)
+// Numeric fields (amount, maaser_amount) remain as-is for DB calculations
+const SENSITIVE_FIELDS = ['description', 'recipient_name'];
+
 export function encryptTransaction(txn) {
   const encrypted = { ...txn };
-  if (encrypted.amount != null) encrypted.amount_encrypted = encrypt(String(encrypted.amount));
-  if (encrypted.description) encrypted.description_encrypted = encrypt(encrypted.description);
-  if (encrypted.recipient_name) encrypted.recipient_name_encrypted = encrypt(encrypted.recipient_name);
+  for (const f of SENSITIVE_FIELDS) {
+    if (encrypted[f] != null && !String(encrypted[f]).startsWith('enc:')) {
+      encrypted[f] = encrypt(String(encrypted[f]));
+    }
+  }
   return encrypted;
 }
 
-// Decrypt sensitive fields after reading
 export function decryptTransaction(txn) {
   const decrypted = { ...txn };
-  if (decrypted.amount_encrypted) {
-    decrypted.amount = parseFloat(decrypt(decrypted.amount_encrypted));
-    delete decrypted.amount_encrypted;
-  }
-  if (decrypted.description_encrypted) {
-    decrypted.description = decrypt(decrypted.description_encrypted);
-    delete decrypted.description_encrypted;
-  }
-  if (decrypted.recipient_name_encrypted) {
-    decrypted.recipient_name = decrypt(decrypted.recipient_name_encrypted);
-    delete decrypted.recipient_name_encrypted;
+  for (const f of SENSITIVE_FIELDS) {
+    if (decrypted[f] && String(decrypted[f]).startsWith('enc:')) {
+      decrypted[f] = decrypt(decrypted[f]);
+    }
   }
   return decrypted;
 }

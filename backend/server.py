@@ -15,6 +15,9 @@ import httpx
 import resend
 import jwt
 import bcrypt
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+import hashlib
+import base64
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -45,6 +48,49 @@ logger = logging.getLogger(__name__)
 _rates_cache = {}
 _rates_cache_time = {}
 CACHE_TTL = 3600
+
+# --- Encryption ---
+ENCRYPTION_KEY = os.environ.get('ENCRYPTION_KEY', JWT_SECRET)
+_enc_key = hashlib.sha256(ENCRYPTION_KEY.encode()).digest()  # 32 bytes for AES-256
+
+def encrypt_value(text):
+    if text is None or text == '':
+        return text
+    s = str(text)
+    aesgcm = AESGCM(_enc_key)
+    nonce = os.urandom(12)
+    ct = aesgcm.encrypt(nonce, s.encode('utf-8'), None)
+    return f"enc:{base64.b64encode(nonce).decode()}:{base64.b64encode(ct).decode()}"
+
+def decrypt_value(text):
+    if text is None or text == '':
+        return text
+    s = str(text)
+    if not s.startswith('enc:'):
+        return s
+    parts = s.split(':', 2)
+    if len(parts) != 3:
+        return s
+    nonce = base64.b64decode(parts[1])
+    ct = base64.b64decode(parts[2])
+    aesgcm = AESGCM(_enc_key)
+    return aesgcm.decrypt(nonce, ct, None).decode('utf-8')
+
+SENSITIVE_FIELDS = ['description', 'recipient_name']
+
+def encrypt_transaction(data: dict) -> dict:
+    enc = dict(data)
+    for f in SENSITIVE_FIELDS:
+        if f in enc and enc[f] is not None and not str(enc[f]).startswith('enc:'):
+            enc[f] = encrypt_value(str(enc[f]))
+    return enc
+
+def decrypt_transaction(data: dict) -> dict:
+    dec = dict(data)
+    for f in SENSITIVE_FIELDS:
+        if f in dec and dec[f] and str(dec[f]).startswith('enc:'):
+            dec[f] = decrypt_value(dec[f])
+    return dec
 
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
@@ -282,7 +328,7 @@ async def get_transactions(user_id: str = Depends(get_current_user)):
         )
     if r.status_code != 200:
         raise HTTPException(status_code=500, detail="Failed to fetch transactions")
-    return r.json()
+    return [decrypt_transaction(t) for t in r.json()]
 
 
 @api_router.post("/transactions")
@@ -290,9 +336,10 @@ async def create_transaction(txn: TransactionCreate, user_id: str = Depends(get_
     data = txn.model_dump(exclude_none=True)
     data['user_id'] = user_id
     data['created_at'] = datetime.now(timezone.utc).isoformat()
-    # Convert maaser_percentage to int for Supabase (column is integer type)
     if 'maaser_percentage' in data and data['maaser_percentage'] is not None:
         data['maaser_percentage'] = int(data['maaser_percentage'])
+
+    data = encrypt_transaction(data)
 
     async with httpx.AsyncClient() as c:
         r = await c.post(
@@ -303,16 +350,18 @@ async def create_transaction(txn: TransactionCreate, user_id: str = Depends(get_
     if r.status_code not in [200, 201]:
         raise HTTPException(status_code=500, detail=f"Failed to create transaction: {r.text}")
     result = r.json()
-    return result[0] if isinstance(result, list) else result
+    raw = result[0] if isinstance(result, list) else result
+    return decrypt_transaction(raw)
 
 
 @api_router.put("/transactions/{txn_id}")
 async def update_transaction(txn_id: str, txn: TransactionUpdate, user_id: str = Depends(get_current_user)):
     data = txn.model_dump(exclude_none=True)
     data['updated_at'] = datetime.now(timezone.utc).isoformat()
-    # Convert maaser_percentage to int for Supabase (column is integer type)
     if 'maaser_percentage' in data and data['maaser_percentage'] is not None:
         data['maaser_percentage'] = int(data['maaser_percentage'])
+
+    data = encrypt_transaction(data)
 
     async with httpx.AsyncClient() as c:
         r = await c.patch(
@@ -443,7 +492,7 @@ async def get_recurring_transactions(user_id: str = Depends(get_current_user)):
         )
     if r.status_code != 200:
         raise HTTPException(status_code=500, detail="Failed to fetch recurring")
-    return r.json()
+    return [decrypt_transaction(t) for t in r.json()]
 
 
 @api_router.put("/transactions/recurring/bulk-update")
@@ -516,7 +565,7 @@ async def get_suggestions(user_id: str = Depends(get_current_user)):
         )
     if r.status_code != 200:
         return []
-    data = r.json()
+    data = [decrypt_transaction(t) for t in r.json()]
     seen = {}
     for t in data:
         key = (t.get('description') or '').lower()
@@ -599,7 +648,8 @@ async def process_recurring_transactions():
         if r.status_code != 200:
             raise HTTPException(status_code=500, detail="Failed to fetch recurring")
 
-        for txn in r.json():
+        for raw_txn in r.json():
+            txn = decrypt_transaction(raw_txn)
             if txn.get('recurring_end_date'):
                 try:
                     if datetime.fromisoformat(txn['recurring_end_date']).date() < today:
@@ -631,7 +681,7 @@ async def process_recurring_transactions():
                     headers=headers
                 )
                 if check.status_code == 200 and not check.json():
-                    new_txn = {
+                    new_txn = encrypt_transaction({
                         'user_id': txn['user_id'], 'description': txn['description'],
                         'amount': txn['amount'], 'currency': txn['currency'],
                         'exchange_rate_to_base': txn.get('exchange_rate_to_base', 1),
@@ -640,7 +690,7 @@ async def process_recurring_transactions():
                         'date': ds, 'is_recurring': True, 'recurring_frequency': freq,
                         'recurring_end_date': txn.get('recurring_end_date'),
                         'created_at': datetime.now(timezone.utc).isoformat()
-                    }
+                    })
                     ins = await c.post(f'{SUPABASE_URL}/rest/v1/transactions', json=new_txn, headers=headers)
                     if ins.status_code in [200, 201]: created_count += 1
 
@@ -690,7 +740,7 @@ async def send_monthly_summary():
                 f'{SUPABASE_URL}/rest/v1/transactions?user_id=eq.{user["id"]}&date=gte.{prev_start.date().isoformat()}&date=lte.{prev_end.date().isoformat()}&select=*',
                 headers=headers
             )
-            txns = tr.json() if tr.status_code == 200 else []
+            txns = [decrypt_transaction(t) for t in tr.json()] if tr.status_code == 200 else []
 
             income = 0
             maaser_gen = 0

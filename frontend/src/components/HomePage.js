@@ -111,18 +111,18 @@ export function HomePage() {
             <div className="w-3 h-3 rounded-full bg-emerald-400" />
             <span className="ml-3 text-xs text-slate-400 font-medium">Dashboard Preview</span>
           </div>
-          <div className="grid grid-cols-3 gap-4 mb-5">
-            <div className="p-4 bg-emerald-50 rounded-xl text-center">
-              <p className="text-[10px] text-emerald-600 uppercase tracking-wider font-semibold mb-1">Income</p>
-              <p className="text-xl font-bold text-emerald-700">$12,450.00</p>
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-5">
+            <div className="p-2 sm:p-4 bg-emerald-50 rounded-xl text-center">
+              <p className="text-[9px] sm:text-[10px] text-emerald-600 uppercase tracking-wider font-semibold mb-1">Income</p>
+              <p className="text-sm sm:text-xl font-bold text-emerald-700">$12,450</p>
             </div>
-            <div className="p-4 bg-blue-50 rounded-xl text-center">
-              <p className="text-[10px] text-blue-600 uppercase tracking-wider font-semibold mb-1">Give Balance</p>
-              <p className="text-xl font-bold text-blue-700">$245.00</p>
+            <div className="p-2 sm:p-4 bg-blue-50 rounded-xl text-center">
+              <p className="text-[9px] sm:text-[10px] text-blue-600 uppercase tracking-wider font-semibold mb-1">Give</p>
+              <p className="text-sm sm:text-xl font-bold text-blue-700">$245.00</p>
             </div>
-            <div className="p-4 bg-violet-50 rounded-xl text-center">
-              <p className="text-[10px] text-violet-600 uppercase tracking-wider font-semibold mb-1">Lend Balance</p>
-              <p className="text-xl font-bold text-violet-700">$380.00</p>
+            <div className="p-2 sm:p-4 bg-violet-50 rounded-xl text-center">
+              <p className="text-[9px] sm:text-[10px] text-violet-600 uppercase tracking-wider font-semibold mb-1">Lend</p>
+              <p className="text-sm sm:text-xl font-bold text-violet-700">$380.00</p>
             </div>
           </div>
           <div className="space-y-2">
@@ -131,12 +131,12 @@ export function HomePage() {
               { type: 'Give', desc: 'Keren HaTorah', amount: '-$260', color: 'text-blue-600', bg: 'bg-blue-50' },
               { type: 'Lend', desc: 'Gemach contribution', amount: '-$500', color: 'text-violet-600', bg: 'bg-violet-50' },
             ].map((t, i) => (
-              <div key={i} className="flex items-center justify-between py-2.5 px-4 bg-slate-50/80 rounded-xl">
-                <div className="flex items-center gap-3">
-                  <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md ${t.bg} ${t.color}`}>{t.type}</span>
-                  <span className="text-sm text-slate-700">{t.desc}</span>
+              <div key={i} className="flex items-center justify-between py-2 sm:py-2.5 px-3 sm:px-4 bg-slate-50/80 rounded-xl gap-2">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                  <span className={`text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-1.5 sm:px-2 py-0.5 rounded-md shrink-0 ${t.bg} ${t.color}`}>{t.type}</span>
+                  <span className="text-xs sm:text-sm text-slate-700 truncate">{t.desc}</span>
                 </div>
-                <span className={`text-sm font-semibold ${t.color}`}>{t.amount}</span>
+                <span className={`text-xs sm:text-sm font-semibold shrink-0 ${t.color}`}>{t.amount}</span>
               </div>
             ))}
           </div>

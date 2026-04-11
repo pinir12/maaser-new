@@ -9,7 +9,7 @@ export async function GET(request) {
   try {
     const data = await supaGet('transactions', {
       user_id: `eq.${auth.userId}`,
-      select: 'description,amount,currency,recipient_name,type,maaser_percentage,description_encrypted,amount_encrypted,recipient_name_encrypted',
+      select: 'description,amount,currency,recipient_name,type,maaser_percentage',
       order: 'created_at.desc',
       limit: '200',
     });
