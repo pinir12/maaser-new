@@ -165,3 +165,12 @@ export function apiProcessRecurring() {
 export function apiSendMonthlySummary() {
   return request('/api/cron/monthly-summary', { method: 'POST' });
 }
+
+// CSV Import
+export function apiImportTransactions(transactions) {
+  return request('/api/transactions/import', {
+    method: 'POST',
+    body: JSON.stringify({ transactions })
+  });
+}
+

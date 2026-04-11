@@ -389,6 +389,44 @@ async def delete_transaction(txn_id: str, user_id: str = Depends(get_current_use
     return {"success": True}
 
 
+
+@api_router.post("/transactions/import")
+async def import_transactions(request: Request, user_id: str = Depends(get_current_user)):
+    body = await request.json()
+    txns = body.get('transactions', [])
+    if not txns:
+        raise HTTPException(status_code=400, detail="No transactions to import")
+
+    imported = 0
+    errors = []
+    async with httpx.AsyncClient() as c:
+        for txn in txns:
+            data = encrypt_transaction({
+                'user_id': user_id,
+                'description': txn.get('description', ''),
+                'amount': float(txn.get('amount', 0)),
+                'currency': txn.get('currency', 'GBP'),
+                'exchange_rate_to_base': txn.get('exchange_rate_to_base', 1),
+                'type': txn.get('type', 'income'),
+                'recipient_name': txn.get('recipient_name', ''),
+                'date': txn.get('date'),
+                'maaser_percentage': int(txn.get('maaser_percentage', 10)),
+                'is_recurring': False,
+                'recurring_frequency': 'none',
+                'created_at': datetime.now(timezone.utc).isoformat(),
+            })
+            try:
+                r = await c.post(f'{SUPABASE_URL}/rest/v1/transactions', json=data, headers=supa_headers())
+                if r.status_code in [200, 201]:
+                    imported += 1
+                else:
+                    errors.append({'description': txn.get('description'), 'error': r.text})
+            except Exception as e:
+                errors.append({'description': txn.get('description'), 'error': str(e)})
+
+    return {'imported': imported, 'errors': errors, 'total': len(txns)}
+
+
 # ============ USER SETTINGS ============
 
 @api_router.get("/user/settings")

@@ -11,6 +11,7 @@
   "/api/currency/rates/[base]/route": "app/api/currency/rates/[base]/route.js",
   "/api/email/contact/route": "app/api/email/contact/route.js",
   "/api/transactions/[id]/route": "app/api/transactions/[id]/route.js",
+  "/api/transactions/import/route": "app/api/transactions/import/route.js",
   "/api/transactions/recurring/bulk-delete/route": "app/api/transactions/recurring/bulk-delete/route.js",
   "/api/transactions/recurring/bulk-update/route": "app/api/transactions/recurring/bulk-update/route.js",
   "/api/transactions/recurring/route": "app/api/transactions/recurring/route.js",

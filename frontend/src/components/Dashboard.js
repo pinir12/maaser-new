@@ -17,7 +17,8 @@ import { ContactModal } from './ContactModal';
 import { AdminPanel } from './AdminPanel';
 import { RecurringManager } from './RecurringManager';
 import { Insights } from './Insights';
-import { Plus, Settings, LogOut, RefreshCw, BarChart3, Mail, Shield, Repeat } from 'lucide-react';
+import { CSVImportModal } from './CSVImportModal';
+import { Plus, Settings, LogOut, RefreshCw, BarChart3, Mail, Shield, Repeat, FileSpreadsheet } from 'lucide-react';
 
 const VIEW_MODES = { ALL_TIME: 'all_time', YEAR: 'year', MONTH: 'month' };
 
@@ -44,6 +45,7 @@ export function Dashboard() {
   const [showContact, setShowContact] = useState(false);
   const [showAdmin, setShowAdmin] = useState(false);
   const [showRecurring, setShowRecurring] = useState(false);
+  const [showCSVImport, setShowCSVImport] = useState(false);
 
   const [viewMode, setViewMode] = useState(user?.default_view || VIEW_MODES.MONTH);
   const [useHebrewDates, setUseHebrewDates] = useState(user?.use_hebrew_calendar || false);
@@ -343,10 +345,16 @@ export function Dashboard() {
 
       <main className="max-w-6xl mx-auto px-4 py-6 space-y-5">
         <div className="flex flex-col sm:flex-row gap-4">
-          <button data-testid="add-transaction-btn" onClick={() => { setEditTransaction(null); setShowModal(true); }}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/30 active:translate-y-0">
-            <Plus className="w-5 h-5" />Add Transaction
-          </button>
+          <div className="flex gap-2">
+            <button data-testid="add-transaction-btn" onClick={() => { setEditTransaction(null); setShowModal(true); }}
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/30 active:translate-y-0">
+              <Plus className="w-5 h-5" />Add Transaction
+            </button>
+            <button data-testid="csv-import-open-btn" onClick={() => setShowCSVImport(true)}
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-white hover:bg-slate-50 text-slate-600 font-medium rounded-xl border border-slate-200 shadow-sm transition-all hover:-translate-y-0.5" title="Import CSV">
+              <FileSpreadsheet className="w-5 h-5" /><span className="hidden sm:inline">Import CSV</span>
+            </button>
+          </div>
           <div className="flex-1">
             <DashboardStats
               balances={balances}
@@ -499,6 +507,9 @@ export function Dashboard() {
 
       <SettingsModal isOpen={showSettings} onClose={() => setShowSettings(false)} user={user} updateUser={updateUser} />
       <ContactModal isOpen={showContact} onClose={() => setShowContact(false)} userName={user?.name} userEmail={user?.email} />
+      <CSVImportModal isOpen={showCSVImport} onClose={() => setShowCSVImport(false)}
+        onImported={fetchAllTransactions} baseCurrency={user?.base_currency || 'GBP'}
+        pastTransactions={allTransactions} defaultMaaserPercentage={user?.default_maaser_percentage ?? 10} />
     </div>
   );
 }

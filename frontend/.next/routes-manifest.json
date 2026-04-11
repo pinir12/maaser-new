@@ -138,6 +138,12 @@
       "namedRegex": "^/api/transactions(?:/)?$"
     },
     {
+      "page": "/api/transactions/import",
+      "regex": "^/api/transactions/import(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/transactions/import(?:/)?$"
+    },
+    {
       "page": "/api/transactions/recurring",
       "regex": "^/api/transactions/recurring(?:/)?$",
       "routeKeys": {},
