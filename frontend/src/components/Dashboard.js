@@ -325,10 +325,6 @@ export function Dashboard() {
               className={`p-2 rounded-lg transition-all ${showRecurring ? 'text-blue-600 bg-blue-50' : 'text-slate-400 hover:text-blue-600 hover:bg-blue-50'}`} title="Recurring">
               <Repeat className="w-[18px] h-[18px]" />
             </button>
-            <button data-testid="process-recurring-btn" onClick={processRecurringTransactions} disabled={processingRecurring}
-              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all disabled:opacity-50" title="Sync Recurring">
-              <RefreshCw className={`w-[18px] h-[18px] ${processingRecurring ? 'animate-spin' : ''}`} />
-            </button>
             <button data-testid="settings-btn" onClick={() => setShowSettings(true)} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all">
               <Settings className="w-[18px] h-[18px]" />
             </button>
@@ -364,7 +360,13 @@ export function Dashboard() {
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
             <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
               <div className="flex items-center gap-2"><Repeat className="w-4 h-4 text-blue-600" /><h3 className="font-semibold text-slate-900">Recurring Transactions</h3></div>
-              <button onClick={() => setShowRecurring(false)} className="text-xs text-slate-400 hover:text-slate-600 transition-colors">Close</button>
+              <div className="flex items-center gap-2">
+                <button data-testid="process-recurring-btn" onClick={processRecurringTransactions} disabled={processingRecurring}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors disabled:opacity-50">
+                  <RefreshCw className={`w-3.5 h-3.5 ${processingRecurring ? 'animate-spin' : ''}`} />Sync Now
+                </button>
+                <button onClick={() => setShowRecurring(false)} className="text-xs text-slate-400 hover:text-slate-600 transition-colors">Close</button>
+              </div>
             </div>
             <div className="p-4"><RecurringManager baseCurrency={user?.base_currency || 'USD'} onBack={() => setShowRecurring(false)} /></div>
           </div>
@@ -435,17 +437,17 @@ export function Dashboard() {
                         </div>
                       </div>
                     </div>
-                    <div className="p-3 bg-rose-50/80 rounded-xl">
-                      <p className="text-[10px] text-rose-600 uppercase tracking-wider font-semibold mb-1">Lend</p>
+                    <div className="p-3 bg-violet-50/80 rounded-xl">
+                      <p className="text-[10px] text-violet-600 uppercase tracking-wider font-semibold mb-1">Lend</p>
                       <div className="flex items-baseline justify-center gap-2 mt-1">
                         <div>
                           <p className="text-[9px] text-slate-400 uppercase tracking-wider">Portion</p>
-                          <p data-testid="totals-lend-portion" className="text-lg font-bold text-rose-700">{sym}{(s.totalMaaser * lendRatio).toFixed(2)}</p>
+                          <p data-testid="totals-lend-portion" className="text-lg font-bold text-violet-700">{sym}{(s.totalMaaser * lendRatio).toFixed(2)}</p>
                         </div>
-                        <div className="w-px h-8 bg-rose-200" />
+                        <div className="w-px h-8 bg-violet-200" />
                         <div>
                           <p className="text-[9px] text-slate-400 uppercase tracking-wider">Lent</p>
-                          <p data-testid="totals-lent" className="text-lg font-bold text-rose-500">{sym}{s.totalLent.toFixed(2)}</p>
+                          <p data-testid="totals-lent" className="text-lg font-bold text-violet-500">{sym}{s.totalLent.toFixed(2)}</p>
                         </div>
                       </div>
                     </div>

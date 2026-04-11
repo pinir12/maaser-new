@@ -42,9 +42,9 @@ export function DashboardStats({ balances, baseCurrency, distributionMode }) {
       <div className={`w-44 sm:w-52 bg-white/80 backdrop-blur-sm rounded-xl p-4 border ${lBal < 0 ? 'border-red-300' : 'border-slate-200/80'} shadow-sm`}>
         <div className="flex items-center justify-between mb-1">
           <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Lend Balance</span>
-          <HandCoins className={`w-5 h-5 ${lBal >= 0 ? 'text-rose-500' : 'text-red-500'}`} />
+          <HandCoins className={`w-5 h-5 ${lBal >= 0 ? 'text-violet-500' : 'text-red-500'}`} />
         </div>
-        <p data-testid="lend-balance-amount" className={`text-2xl font-bold ${lBal >= 0 ? 'text-rose-600' : 'text-red-600'}`}>
+        <p data-testid="lend-balance-amount" className={`text-2xl font-bold ${lBal >= 0 ? 'text-violet-600' : 'text-red-600'}`}>
           {lBal < 0 ? '-' : ''}{symbol}{fmt(lBal)}
         </p>
       </div>

@@ -24,10 +24,14 @@ async function request(path, options = {}) {
   const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
 
   if (res.status === 401) {
-    clearToken();
-    localStorage.removeItem('finance_user');
-    window.location.reload();
-    throw new Error('Session expired');
+    // Only force-reload for authenticated endpoints, not login/signup
+    const isAuthEndpoint = path.includes('/auth/login') || path.includes('/auth/signup');
+    if (!isAuthEndpoint) {
+      clearToken();
+      localStorage.removeItem('finance_user');
+      window.location.reload();
+      throw new Error('Session expired');
+    }
   }
 
   if (!res.ok) {

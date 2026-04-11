@@ -1,5 +1,6 @@
 import { getCurrentUser, jsonError } from '@/lib/jwt-server';
 import { supaPatch, supaDelete } from '@/lib/supabase-server';
+import { encryptTransaction, decryptTransaction } from '@/lib/encryption';
 
 export async function PUT(request, { params }) {
   const auth = await getCurrentUser(request);
@@ -10,9 +11,13 @@ export async function PUT(request, { params }) {
   data.updated_at = new Date().toISOString();
   if (data.maaser_percentage != null) data.maaser_percentage = Math.round(data.maaser_percentage);
 
+  // Encrypt sensitive fields
+  const encrypted = encryptTransaction(data);
+
   try {
-    const result = await supaPatch('transactions', { id: `eq.${id}`, user_id: `eq.${auth.userId}` }, data);
-    return Response.json(Array.isArray(result) && result.length ? result[0] : { success: true });
+    const result = await supaPatch('transactions', { id: `eq.${id}`, user_id: `eq.${auth.userId}` }, encrypted);
+    if (Array.isArray(result) && result.length) return Response.json(decryptTransaction(result[0]));
+    return Response.json({ success: true });
   } catch {
     return jsonError('Failed to update transaction', 500);
   }

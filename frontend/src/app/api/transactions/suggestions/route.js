@@ -1,5 +1,6 @@
 import { getCurrentUser, jsonError } from '@/lib/jwt-server';
 import { supaGet } from '@/lib/supabase-server';
+import { decryptTransaction } from '@/lib/encryption';
 
 export async function GET(request) {
   const auth = await getCurrentUser(request);
@@ -8,13 +9,14 @@ export async function GET(request) {
   try {
     const data = await supaGet('transactions', {
       user_id: `eq.${auth.userId}`,
-      select: 'description,amount,currency,recipient_name,type,maaser_percentage',
+      select: 'description,amount,currency,recipient_name,type,maaser_percentage,description_encrypted,amount_encrypted,recipient_name_encrypted',
       order: 'created_at.desc',
       limit: '200',
     });
 
+    const decrypted = data.map(decryptTransaction);
     const seen = {};
-    for (const t of data) {
+    for (const t of decrypted) {
       const key = (t.description || '').toLowerCase();
       if (key && !seen[key]) seen[key] = t;
     }

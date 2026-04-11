@@ -1,5 +1,6 @@
 import { Resend } from 'resend';
 import { supaGet } from '@/lib/supabase-server';
+import { decryptTransaction } from '@/lib/encryption';
 
 export async function POST() {
   const apiKey = process.env.RESEND_API_KEY;
@@ -29,7 +30,7 @@ export async function POST() {
           `${process.env.SUPABASE_URL}/rest/v1/transactions?user_id=eq.${user.id}&date=gte.${prevStartStr}&date=lte.${prevEndStr}&select=*`,
           { headers: { apikey: process.env.SUPABASE_KEY, Authorization: `Bearer ${process.env.SUPABASE_KEY}`, 'Content-Type': 'application/json' } }
         );
-        if (res.ok) txns = await res.json();
+        if (res.ok) txns = (await res.json()).map(decryptTransaction);
       } catch {}
 
       let income = 0, maaserGen = 0, given = 0, lent = 0;

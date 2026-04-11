@@ -120,16 +120,16 @@ export function HomePage() {
               <p className="text-[10px] text-blue-600 uppercase tracking-wider font-semibold mb-1">Give Balance</p>
               <p className="text-xl font-bold text-blue-700">$245.00</p>
             </div>
-            <div className="p-4 bg-rose-50 rounded-xl text-center">
-              <p className="text-[10px] text-rose-600 uppercase tracking-wider font-semibold mb-1">Lend Balance</p>
-              <p className="text-xl font-bold text-rose-700">$380.00</p>
+            <div className="p-4 bg-violet-50 rounded-xl text-center">
+              <p className="text-[10px] text-violet-600 uppercase tracking-wider font-semibold mb-1">Lend Balance</p>
+              <p className="text-xl font-bold text-violet-700">$380.00</p>
             </div>
           </div>
           <div className="space-y-2">
             {[
               { type: 'Income', desc: 'Monthly salary', amount: '+$5,200', color: 'text-emerald-600', bg: 'bg-emerald-50' },
               { type: 'Give', desc: 'Keren HaTorah', amount: '-$260', color: 'text-blue-600', bg: 'bg-blue-50' },
-              { type: 'Lend', desc: 'Gemach contribution', amount: '-$500', color: 'text-rose-600', bg: 'bg-rose-50' },
+              { type: 'Lend', desc: 'Gemach contribution', amount: '-$500', color: 'text-violet-600', bg: 'bg-violet-50' },
             ].map((t, i) => (
               <div key={i} className="flex items-center justify-between py-2.5 px-4 bg-slate-50/80 rounded-xl">
                 <div className="flex items-center gap-3">
