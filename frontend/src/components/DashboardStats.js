@@ -1,7 +1,7 @@
 'use client';
 
 import { getCurrencySymbol } from '../lib/validation';
-import { HandCoins, Heart, PiggyBank } from 'lucide-react';
+import { HandCoins, Heart, Coins } from 'lucide-react';
 
 export function DashboardStats({ balances, baseCurrency, distributionMode }) {
   const isGiveOnly = distributionMode === 'give_only';
@@ -15,7 +15,7 @@ export function DashboardStats({ balances, baseCurrency, distributionMode }) {
         <div className={`w-48 sm:w-56 bg-white/80 backdrop-blur-sm rounded-xl p-4 border ${bal < 0 ? 'border-red-300' : 'border-slate-200/80'} shadow-sm`}>
           <div className="flex items-center justify-between mb-1">
             <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Maaser Balance</span>
-            <PiggyBank className={`w-5 h-5 ${bal >= 0 ? 'text-amber-500' : 'text-red-500'}`} />
+            <Coins className={`w-5 h-5 ${bal >= 0 ? 'text-amber-500' : 'text-red-500'}`} />
           </div>
           <p data-testid="maaser-balance-amount" className={`text-2xl font-bold ${bal >= 0 ? 'text-amber-600' : 'text-red-600'}`}>
             {bal < 0 ? '-' : ''}{symbol}{fmt(bal)}
