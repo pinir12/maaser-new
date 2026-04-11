@@ -1,10 +1,10 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Maaser Tracker - Track Your Maaser, Tzedakah & Gemach | Free Finance Tool',
+  title: 'Maaser Tracker',
   description: 'The simplest way to track maaser, tzedakah, and gemach loans. Auto-calculate maaser from income, log donations, track balances — with full Hebrew calendar support. Free for the frum community.',
   keywords: ['maaser', 'maaser tracker', 'maaser calculator', 'maaser manager', 'maser', 'maser tracker', 'tzedakah tracker', 'gemach tracker', 'jewish finance', 'maaser obligation', 'tithing calculator', 'frum finance', 'hebrew calendar finance', 'charity tracker'],
-  authors: [{ name: 'Finance Tracker' }],
+  authors: [{ name: 'Maaser Tracker' }],
   openGraph: {
     title: 'Maaser Tracker - Know Exactly Where You Stand With Your Maaser',
     description: 'Track income, auto-calculate maaser, log every tzedakah and gemach. Full Hebrew calendar support. Free for the frum community.',
