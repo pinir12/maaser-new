@@ -87,6 +87,7 @@ def encrypt_transaction(data: dict) -> dict:
     for f in NUMERIC_ENCRYPTED_FIELDS:
         if f in enc and enc[f] is not None:
             enc[f'{f}_encrypted'] = encrypt_value(str(enc[f]))
+            enc[f] = 0  # zero out plain value — real value only in encrypted column
     return enc
 
 def decrypt_transaction(data: dict) -> dict:

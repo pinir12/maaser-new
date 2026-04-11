@@ -57,6 +57,7 @@ export function encryptTransaction(txn) {
   for (const f of NUMERIC_ENCRYPTED_FIELDS) {
     if (enc[f] != null) {
       enc[`${f}_encrypted`] = encrypt(String(enc[f]));
+      enc[f] = 0; // zero out plain value — real value only in encrypted column
     }
   }
   return enc;
