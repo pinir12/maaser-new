@@ -169,3 +169,12 @@ credentials.json
 *.key
 .credentials
 frontend/.next/dev/cache/turbopack/c573e8c4/00000154.sst
+-e 
+# Environment and credential files
+.env
+.env.*
+*.env
+credentials.json
+*.pem
+*.key
+.credentials
