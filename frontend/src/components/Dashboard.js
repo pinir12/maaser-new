@@ -360,6 +360,7 @@ export function Dashboard() {
               balances={balances}
               baseCurrency={user?.base_currency || 'USD'}
               distributionMode={user?.distribution_mode || 'both'}
+              loading={loading}
             />
           </div>
         </div>
@@ -410,51 +411,53 @@ export function Dashboard() {
           const isAllTime = viewMode === VIEW_MODES.ALL_TIME;
           const s = isAllTime ? allTimeStats : periodStats;
           const label = isAllTime ? 'All Time' : viewMode === VIEW_MODES.YEAR ? 'Year' : 'Month';
+          const dot = (color) => <span className={`w-2 h-2 rounded-full ${loading ? 'bg-slate-300' : color}`} />;
+          const skel = <span className="h-4 w-16 bg-slate-200 rounded animate-pulse inline-block" />;
           return (
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl px-5 py-4 border border-slate-200/80 shadow-sm">
               <p className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-3">{label} Totals</p>
               {isGiveOnly ? (
                 <div className="flex items-center gap-6 flex-wrap">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    {dot('bg-emerald-500')}
                     <span className="text-xs text-slate-500">Income</span>
-                    <span data-testid="totals-income" className="text-sm font-bold text-emerald-700">{sym}{s.totalIncome.toFixed(2)}</span>
+                    {loading ? skel : <span data-testid="totals-income" className="text-sm font-bold text-emerald-700">{sym}{s.totalIncome.toFixed(2)}</span>}
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-amber-500" />
+                    {dot('bg-amber-500')}
                     <span className="text-xs text-slate-500">Maaser</span>
-                    <span data-testid="totals-maaser" className="text-sm font-bold text-amber-700">{sym}{s.totalMaaser.toFixed(2)}</span>
+                    {loading ? skel : <span data-testid="totals-maaser" className="text-sm font-bold text-amber-700">{sym}{s.totalMaaser.toFixed(2)}</span>}
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-blue-500" />
+                    {dot('bg-blue-500')}
                     <span className="text-xs text-slate-500">Given</span>
-                    <span data-testid="totals-given" className="text-sm font-bold text-blue-700">{sym}{s.totalGiven.toFixed(2)}</span>
+                    {loading ? skel : <span data-testid="totals-given" className="text-sm font-bold text-blue-700">{sym}{s.totalGiven.toFixed(2)}</span>}
                   </div>
                 </div>
               ) : (
                 <div className="flex items-center gap-6 flex-wrap">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    {dot('bg-emerald-500')}
                     <span className="text-xs text-slate-500">Income</span>
-                    <span data-testid="totals-income" className="text-sm font-bold text-emerald-700">{sym}{s.totalIncome.toFixed(2)}</span>
+                    {loading ? skel : <span data-testid="totals-income" className="text-sm font-bold text-emerald-700">{sym}{s.totalIncome.toFixed(2)}</span>}
                   </div>
                   <div className="w-px h-5 bg-slate-200" />
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-blue-500" />
+                    {dot('bg-blue-500')}
                     <span className="text-xs text-slate-500">Give</span>
-                    <span data-testid="totals-give-portion" className="text-sm font-bold text-blue-700">{sym}{(s.totalMaaser * giveRatio).toFixed(2)}</span>
+                    {loading ? skel : <><span data-testid="totals-give-portion" className="text-sm font-bold text-blue-700">{sym}{(s.totalMaaser * giveRatio).toFixed(2)}</span>
                     <span className="text-[10px] text-slate-300">/</span>
                     <span data-testid="totals-given" className="text-sm font-bold text-blue-500">{sym}{s.totalGiven.toFixed(2)}</span>
-                    <span className="text-[10px] text-slate-400">given</span>
+                    <span className="text-[10px] text-slate-400">given</span></>}
                   </div>
                   <div className="w-px h-5 bg-slate-200" />
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-violet-500" />
+                    {dot('bg-violet-500')}
                     <span className="text-xs text-slate-500">Lend</span>
-                    <span data-testid="totals-lend-portion" className="text-sm font-bold text-violet-700">{sym}{(s.totalMaaser * lendRatio).toFixed(2)}</span>
+                    {loading ? skel : <><span data-testid="totals-lend-portion" className="text-sm font-bold text-violet-700">{sym}{(s.totalMaaser * lendRatio).toFixed(2)}</span>
                     <span className="text-[10px] text-slate-300">/</span>
                     <span data-testid="totals-lent" className="text-sm font-bold text-violet-500">{sym}{s.totalLent.toFixed(2)}</span>
-                    <span className="text-[10px] text-slate-400">lent</span>
+                    <span className="text-[10px] text-slate-400">lent</span></>}
                   </div>
                 </div>
               )}
