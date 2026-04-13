@@ -2,13 +2,19 @@
 
 import { useState } from 'react';
 import { currencies } from '../lib/validation';
-import { X, User, DollarSign, Calendar, Eye, Percent, PieChart } from 'lucide-react';
+import { apiSetPassword } from '../lib/api';
+import { X, User, DollarSign, Calendar, Eye, Percent, PieChart, Lock, CheckCircle2 } from 'lucide-react';
 
 export function SettingsModal({ isOpen, onClose, user, updateUser }) {
   const [saving, setSaving] = useState(false);
   const [maaserPct, setMaaserPct] = useState(user?.default_maaser_percentage ?? 10);
   const [giveRatio, setGiveRatio] = useState(user?.give_ratio ?? 50);
   const [lendRatio, setLendRatio] = useState(user?.lend_ratio ?? 50);
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPw, setConfirmPw] = useState('');
+  const [pwError, setPwError] = useState('');
+  const [pwSuccess, setPwSuccess] = useState(false);
+  const [pwSaving, setPwSaving] = useState(false);
 
   if (!isOpen) return null;
 
@@ -263,6 +269,48 @@ export function SettingsModal({ isOpen, onClose, user, updateUser }) {
             <p className="text-xs text-slate-500 mt-2">
               {user?.distribution_mode === 'give_only' ? 'Lend tracking is hidden' : 'Track both gives and lends'}
             </p>
+          </div>
+
+          {/* Set Password (for passwordless users or change password) */}
+          <div>
+            <label className="flex items-center gap-2 text-sm font-medium text-slate-700 mb-2">
+              <Lock className="w-4 h-4" />
+              {user?.has_password ? 'Change Password' : 'Set a Password'}
+            </label>
+            {!user?.has_password && (
+              <p className="text-xs text-slate-400 mb-2">You signed up without a password. Set one to enable password login.</p>
+            )}
+            {pwSuccess ? (
+              <div className="flex items-center gap-2 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-600 text-sm">
+                <CheckCircle2 className="w-4 h-4" />Password {user?.has_password ? 'changed' : 'set'} successfully!
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {pwError && <p className="text-xs text-red-500">{pwError}</p>}
+                <input data-testid="settings-new-password" type="password" value={newPassword}
+                  onChange={e => setNewPassword(e.target.value)} placeholder="New password"
+                  className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500 text-sm" />
+                <input data-testid="settings-confirm-password" type="password" value={confirmPw}
+                  onChange={e => setConfirmPw(e.target.value)} placeholder="Confirm password"
+                  className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500 text-sm" />
+                <button data-testid="settings-save-password-btn" disabled={pwSaving || !newPassword}
+                  onClick={async () => {
+                    setPwError('');
+                    if (newPassword.length < 6) { setPwError('At least 6 characters'); return; }
+                    if (newPassword !== confirmPw) { setPwError('Passwords do not match'); return; }
+                    setPwSaving(true);
+                    try {
+                      await apiSetPassword(newPassword);
+                      setPwSuccess(true);
+                      setNewPassword(''); setConfirmPw('');
+                    } catch (e) { setPwError(e.message); }
+                    finally { setPwSaving(false); }
+                  }}
+                  className="w-full py-2 text-sm bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-40 transition-colors">
+                  {pwSaving ? 'Saving...' : user?.has_password ? 'Change Password' : 'Set Password'}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -14,6 +14,11 @@ export async function POST(request) {
     const valid = await bcrypt.compare(password, dbUser.password_hash || '');
     if (!valid) return jsonError('Invalid email or password', 401);
 
+    // Block login if email not verified
+    if (dbUser.email_verified === false) {
+      return Response.json({ needsVerification: true, email: dbUser.email }, { status: 403 });
+    }
+
     const token = createToken(String(dbUser.id));
     return Response.json({ token, user: stripPassword(dbUser) });
   } catch (e) {

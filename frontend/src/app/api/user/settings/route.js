@@ -19,6 +19,23 @@ export async function PUT(request) {
   if (auth.error) return jsonError(auth.error, auth.status);
 
   const updates = await request.json();
+
+  // Handle password setting separately
+  if (updates.new_password) {
+    if (updates.new_password.length < 6) return jsonError('Password must be at least 6 characters');
+    const bcrypt = (await import('bcryptjs')).default;
+    const hash = await bcrypt.hash(updates.new_password, 10);
+    try {
+      await supaPatch('users', { id: `eq.${auth.userId}` }, { password_hash: hash });
+      // Return fresh user
+      const users = await supaGet('users', { id: `eq.${auth.userId}`, select: '*' });
+      if (users.length) return Response.json(stripPassword(users[0]));
+      return Response.json({ success: true });
+    } catch {
+      return jsonError('Failed to set password', 500);
+    }
+  }
+
   const allowed = new Set(['base_currency', 'distribution_mode', 'default_view', 'use_hebrew_calendar', 'default_maaser_percentage', 'give_ratio', 'lend_ratio', 'name']);
   const safe = {};
   for (const [k, v] of Object.entries(updates)) {

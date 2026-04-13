@@ -44,10 +44,17 @@ async function request(path, options = {}) {
 
 // Auth
 export async function apiLogin(email, password) {
-  const data = await request('/api/auth/login', {
+  const res = await fetch(`${API_BASE}/api/auth/login`, {
     method: 'POST',
-    body: JSON.stringify({ email, password })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password }),
   });
+  const data = await res.json();
+  // Handle needsVerification from both FastAPI (200) and Next.js (403)
+  if (data.needsVerification) {
+    return { needsVerification: true, email: data.email };
+  }
+  if (!res.ok) throw new Error(data.detail || 'Login failed');
   setToken(data.token);
   return data;
 }
@@ -57,8 +64,68 @@ export async function apiSignup(email, password, name, base_currency) {
     method: 'POST',
     body: JSON.stringify({ email, password, name, base_currency })
   });
-  setToken(data.token);
+  // New flow: signup returns { needsVerification, email } instead of token
+  if (data.needsVerification) return data;
+  if (data.token) setToken(data.token);
   return data;
+}
+
+export async function apiVerifyEmail(email, code, token) {
+  const body = token ? { token } : { email, code };
+  const data = await request('/api/auth/verify-email', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+  if (data.token) setToken(data.token);
+  return data;
+}
+
+export async function apiResendVerification(email) {
+  return request('/api/auth/resend-verification', {
+    method: 'POST',
+    body: JSON.stringify({ email }),
+  });
+}
+
+export async function apiForgotPassword(email) {
+  return request('/api/auth/forgot-password', {
+    method: 'POST',
+    body: JSON.stringify({ email }),
+  });
+}
+
+export async function apiResetPassword(email, code, token, newPassword) {
+  const body = token ? { token, newPassword } : { email, code, newPassword };
+  const data = await request('/api/auth/reset-password', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+  if (data.token) setToken(data.token);
+  return data;
+}
+
+export async function apiRequestMagicLogin(email) {
+  return request('/api/auth/magic-login', {
+    method: 'POST',
+    body: JSON.stringify({ email }),
+  });
+}
+
+export async function apiVerifyMagicLogin(email, code, token) {
+  const body = token ? { token } : { email, code };
+  const data = await request('/api/auth/verify-magic-login', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+  if (data.token) setToken(data.token);
+  return data;
+}
+
+export async function apiSetPassword(newPassword) {
+  return request('/api/user/settings', {
+    method: 'PUT',
+    body: JSON.stringify({ new_password: newPassword }),
+  });
 }
 
 export function apiLogout() {

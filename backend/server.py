@@ -18,6 +18,8 @@ import bcrypt
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 import hashlib
 import base64
+import random
+from disposable_email_domains import blocklist
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -164,7 +166,8 @@ async def get_current_admin(credentials: HTTPAuthorizationCredentials = Depends(
 
 
 def strip_password(user: dict) -> dict:
-    u = {k: v for k, v in user.items() if k != 'password_hash'}
+    u = {k: v for k, v in user.items() if k not in ('password_hash', 'verification_code', 'verification_expires')}
+    u['has_password'] = bool(user.get('password_hash') and len(user.get('password_hash', '')) > 0)
     return u
 
 
@@ -175,7 +178,7 @@ class LoginRequest(BaseModel):
 
 class SignupRequest(BaseModel):
     email: str
-    password: str
+    password: Optional[str] = None
     name: str
     base_currency: str = 'USD'
 
@@ -209,6 +212,31 @@ class TransactionUpdate(BaseModel):
     recurring_end_date: Optional[str] = None
     hebrew_date: Optional[str] = None
 
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+class ResetPasswordRequest(BaseModel):
+    email: Optional[str] = None
+    code: Optional[str] = None
+    token: Optional[str] = None
+    newPassword: str
+
+class MagicLoginRequest(BaseModel):
+    email: str
+
+class VerifyMagicLoginRequest(BaseModel):
+    email: Optional[str] = None
+    code: Optional[str] = None
+    token: Optional[str] = None
+
+class VerifyEmailRequest(BaseModel):
+    email: Optional[str] = None
+    code: Optional[str] = None
+    token: Optional[str] = None
+
+class ResendVerificationRequest(BaseModel):
+    email: str
+
 class ContactRequest(BaseModel):
     name: str
     email: str
@@ -231,6 +259,62 @@ class StatusCheck(BaseModel):
 
 # ============ AUTH ============
 
+def _generate_verification_code(user_id: str, purpose: str = 'email_verify'):
+    code = str(random.randint(100000, 999999))
+    expires = (datetime.now(timezone.utc) + timedelta(hours=1)).isoformat()
+    token = jwt.encode(
+        {'user_id': user_id, 'code': code, 'purpose': purpose,
+         'exp': datetime.now(timezone.utc) + timedelta(hours=1)},
+        JWT_SECRET, algorithm=JWT_ALGORITHM
+    )
+    return code, expires, token
+
+def _is_disposable_email(email: str) -> bool:
+    domain = email.split('@')[-1].lower()
+    return domain in blocklist
+
+def _build_verification_email_html(name, code, token, app_url):
+    verify_url = f"{app_url}?verify={token}"
+    return f"""<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f1f5f9;padding:40px 16px;">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.06);">
+        <tr><td style="background:linear-gradient(135deg,#2563eb 0%,#4f46e5 100%);padding:32px 32px 28px;text-align:center;">
+          <div style="width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px;">
+            <span style="color:#ffffff;font-size:24px;font-weight:800;line-height:48px;">M</span>
+          </div>
+          <h1 style="color:#ffffff;font-size:22px;font-weight:700;margin:0;">Verify your email</h1>
+          <p style="color:rgba(255,255,255,0.8);font-size:14px;margin:8px 0 0;">Welcome to Maaser Tracker, {name or 'there'}!</p>
+        </td></tr>
+        <tr><td style="padding:32px;">
+          <p style="color:#334155;font-size:15px;line-height:1.6;margin:0 0 24px;">Enter this code in the app to verify your email address:</p>
+          <div style="background:#f8fafc;border:2px dashed #cbd5e1;border-radius:12px;padding:24px;text-align:center;margin:0 0 24px;">
+            <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:36px;font-weight:800;letter-spacing:8px;color:#1e293b;">{code}</span>
+            <p style="color:#94a3b8;font-size:12px;margin:12px 0 0;font-weight:500;">Expires in 1 hour</p>
+          </div>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">
+            <tr><td style="border-bottom:1px solid #e2e8f0;width:42%;"></td>
+            <td style="text-align:center;padding:0 12px;color:#94a3b8;font-size:12px;font-weight:600;">OR</td>
+            <td style="border-bottom:1px solid #e2e8f0;width:42%;"></td></tr>
+          </table>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+            <tr><td align="center">
+              <a href="{verify_url}" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#2563eb,#4f46e5);color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;padding:14px 40px;border-radius:12px;box-shadow:0 4px 12px rgba(37,99,235,0.3);">Verify Email Address</a>
+            </td></tr>
+          </table>
+          <p style="color:#94a3b8;font-size:12px;line-height:1.5;margin:24px 0 0;text-align:center;">If you didn't create an account, you can safely ignore this email.</p>
+        </td></tr>
+        <tr><td style="background:#f8fafc;padding:20px 32px;border-top:1px solid #f1f5f9;text-align:center;">
+          <p style="color:#94a3b8;font-size:11px;margin:0;">Maaser Tracker &mdash; Track your maaser with ease</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>"""
+
+
 @api_router.post("/auth/login")
 async def login(req: LoginRequest):
     async with httpx.AsyncClient() as c:
@@ -250,27 +334,37 @@ async def login(req: LoginRequest):
     if not stored_hash or not bcrypt.checkpw(req.password.encode('utf-8'), stored_hash.encode('utf-8')):
         raise HTTPException(status_code=401, detail="Invalid email or password")
 
+    # Block login if email not verified
+    if db_user.get('email_verified') is False:
+        return {"needsVerification": True, "email": db_user['email']}
+
     token = create_token(str(db_user['id']))
     return {"token": token, "user": strip_password(db_user)}
 
 
 @api_router.post("/auth/signup")
 async def signup(req: SignupRequest):
+    lower_email = req.email.lower().strip()
+
+    # Check for disposable/temp email
+    if _is_disposable_email(lower_email):
+        raise HTTPException(status_code=400, detail="Temporary or disposable email addresses are not allowed. Please use a real email.")
+
     async with httpx.AsyncClient() as c:
         # Check existing
         r = await c.get(
             f'{SUPABASE_URL}/rest/v1/users',
-            params={'email': f'eq.{req.email.lower()}', 'select': 'id', 'limit': '1'},
+            params={'email': f'eq.{lower_email}', 'select': 'id', 'limit': '1'},
             headers=supa_headers()
         )
         if r.status_code == 200 and r.json():
             raise HTTPException(status_code=409, detail="Email already registered")
 
-        # Hash password
-        pw_hash = bcrypt.hashpw(req.password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        # Hash password (optional for passwordless)
+        pw_hash = bcrypt.hashpw(req.password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8') if req.password else ''
 
         new_user = {
-            'email': req.email.lower(),
+            'email': lower_email,
             'password_hash': pw_hash,
             'name': req.name,
             'base_currency': req.base_currency,
@@ -281,6 +375,7 @@ async def signup(req: SignupRequest):
             'give_ratio': 50,
             'lend_ratio': 50,
             'is_admin': False,
+            'email_verified': False,
             'created_at': datetime.now(timezone.utc).isoformat()
         }
 
@@ -294,16 +389,173 @@ async def signup(req: SignupRequest):
 
         created = r.json()
         created_user = created[0] if isinstance(created, list) else created
-        token = create_token(str(created_user['id']))
 
-        # Admin notification (fire and forget)
+        # Generate verification code and send email
+        code, expires, verify_token = _generate_verification_code(str(created_user['id']))
+
+        # Update user with verification code
+        await c.patch(
+            f'{SUPABASE_URL}/rest/v1/users',
+            params={'id': f'eq.{created_user["id"]}'},
+            json={'verification_code': code, 'verification_expires': expires},
+            headers=supa_headers()
+        )
+
+        # Send verification email
         try:
             if RESEND_API_KEY:
-                _send_signup_email(req.name, req.email.lower())
-        except Exception:
-            pass
+                app_url = os.environ.get('REACT_APP_BACKEND_URL', '')
+                html = _build_verification_email_html(req.name, code, verify_token, app_url)
+                await asyncio.to_thread(resend.Emails.send, {
+                    "from": "Maaser Tracker <onboarding@resend.dev>",
+                    "to": [lower_email],
+                    "subject": f"{code} is your Maaser Tracker verification code",
+                    "html": html
+                })
+                # Also notify admin
+                _send_signup_email(req.name, lower_email)
+        except Exception as e:
+            logger.error(f"Failed to send verification email: {e}")
 
-        return {"token": token, "user": strip_password(created_user)}
+        return {"needsVerification": True, "email": lower_email}
+
+
+@api_router.post("/auth/verify-email")
+async def verify_email(req: VerifyEmailRequest):
+    # Magic link token verification
+    if req.token:
+        try:
+            payload = jwt.decode(req.token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+            if payload.get('purpose') != 'email_verify':
+                raise HTTPException(status_code=400, detail="Invalid verification token")
+
+            async with httpx.AsyncClient() as c:
+                r = await c.get(
+                    f'{SUPABASE_URL}/rest/v1/users',
+                    params={'id': f'eq.{payload["user_id"]}', 'select': '*', 'limit': '1'},
+                    headers=supa_headers()
+                )
+                users = r.json() if r.status_code == 200 else []
+                if not users:
+                    raise HTTPException(status_code=404, detail="User not found")
+                user = users[0]
+
+                if user.get('email_verified'):
+                    token = create_token(str(user['id']))
+                    return {"token": token, "user": strip_password(user)}
+
+                if user.get('verification_code') != payload.get('code'):
+                    raise HTTPException(status_code=400, detail="Verification code expired. Please request a new one.")
+
+                await c.patch(
+                    f'{SUPABASE_URL}/rest/v1/users',
+                    params={'id': f'eq.{user["id"]}'},
+                    json={'email_verified': True, 'verification_code': None, 'verification_expires': None},
+                    headers=supa_headers()
+                )
+
+                token = create_token(str(user['id']))
+                user['email_verified'] = True
+                return {"token": token, "user": strip_password(user)}
+
+        except jwt.ExpiredSignatureError:
+            raise HTTPException(status_code=400, detail="Verification link expired. Please request a new one.")
+        except jwt.InvalidTokenError:
+            raise HTTPException(status_code=400, detail="Invalid verification token")
+
+    # Code-based verification
+    if not req.email or not req.code:
+        raise HTTPException(status_code=400, detail="Email and verification code required")
+
+    async with httpx.AsyncClient() as c:
+        r = await c.get(
+            f'{SUPABASE_URL}/rest/v1/users',
+            params={'email': f'eq.{req.email.lower()}', 'select': '*', 'limit': '1'},
+            headers=supa_headers()
+        )
+        users = r.json() if r.status_code == 200 else []
+        if not users:
+            raise HTTPException(status_code=404, detail="User not found")
+        user = users[0]
+
+        if user.get('email_verified'):
+            token = create_token(str(user['id']))
+            return {"token": token, "user": strip_password(user)}
+
+        if not user.get('verification_code') or not user.get('verification_expires'):
+            raise HTTPException(status_code=400, detail="No verification code found. Please request a new one.")
+
+        if datetime.fromisoformat(user['verification_expires'].replace('Z', '+00:00')) < datetime.now(timezone.utc):
+            raise HTTPException(status_code=400, detail="Verification code expired. Please request a new one.")
+
+        if user['verification_code'] != req.code.strip():
+            raise HTTPException(status_code=400, detail="Invalid verification code")
+
+        await c.patch(
+            f'{SUPABASE_URL}/rest/v1/users',
+            params={'id': f'eq.{user["id"]}'},
+            json={'email_verified': True, 'verification_code': None, 'verification_expires': None},
+            headers=supa_headers()
+        )
+
+        token = create_token(str(user['id']))
+        user['email_verified'] = True
+        return {"token": token, "user": strip_password(user)}
+
+
+@api_router.post("/auth/resend-verification")
+async def resend_verification(req: ResendVerificationRequest):
+    if not req.email:
+        raise HTTPException(status_code=400, detail="Email is required")
+
+    async with httpx.AsyncClient() as c:
+        r = await c.get(
+            f'{SUPABASE_URL}/rest/v1/users',
+            params={'email': f'eq.{req.email.lower()}', 'select': '*', 'limit': '1'},
+            headers=supa_headers()
+        )
+        users = r.json() if r.status_code == 200 else []
+        if not users:
+            raise HTTPException(status_code=404, detail="User not found")
+        user = users[0]
+
+        if user.get('email_verified'):
+            return {"message": "Email already verified"}
+
+        # Rate limit: 1 minute between resends
+        if user.get('verification_expires'):
+            try:
+                exp = datetime.fromisoformat(user['verification_expires'].replace('Z', '+00:00'))
+                created_at = exp - timedelta(hours=1)
+                if datetime.now(timezone.utc) < created_at + timedelta(minutes=1):
+                    raise HTTPException(status_code=429, detail="Please wait at least 1 minute before requesting a new code")
+            except (ValueError, TypeError):
+                pass
+
+        code, expires, verify_token = _generate_verification_code(str(user['id']))
+
+        await c.patch(
+            f'{SUPABASE_URL}/rest/v1/users',
+            params={'id': f'eq.{user["id"]}'},
+            json={'verification_code': code, 'verification_expires': expires},
+            headers=supa_headers()
+        )
+
+        if RESEND_API_KEY:
+            app_url = os.environ.get('REACT_APP_BACKEND_URL', '')
+            html = _build_verification_email_html(user.get('name', ''), code, verify_token, app_url)
+            try:
+                await asyncio.to_thread(resend.Emails.send, {
+                    "from": "Maaser Tracker <onboarding@resend.dev>",
+                    "to": [user['email']],
+                    "subject": f"{code} is your Maaser Tracker verification code",
+                    "html": html
+                })
+            except Exception as e:
+                logger.error(f"Failed to resend verification: {e}")
+                raise HTTPException(status_code=500, detail="Failed to send email")
+
+        return {"message": "Verification email sent"}
 
 
 def _send_signup_email(name, email):
@@ -327,6 +579,180 @@ def _send_signup_email(name, email):
         })
     except Exception as e:
         logger.error(f"Signup email failed: {e}")
+
+
+
+@api_router.post("/auth/forgot-password")
+async def forgot_password(req: ForgotPasswordRequest):
+    async with httpx.AsyncClient() as c:
+        r = await c.get(f'{SUPABASE_URL}/rest/v1/users', params={'email': f'eq.{req.email.lower()}', 'select': '*', 'limit': '1'}, headers=supa_headers())
+        users = r.json() if r.status_code == 200 else []
+        if not users:
+            return {"message": "If that email exists, a reset link has been sent."}
+        user = users[0]
+
+        # Rate limit
+        if user.get('verification_expires'):
+            try:
+                exp = datetime.fromisoformat(user['verification_expires'].replace('Z', '+00:00'))
+                created_at = exp - timedelta(hours=1)
+                if datetime.now(timezone.utc) < created_at + timedelta(minutes=1):
+                    raise HTTPException(status_code=429, detail="Please wait at least 1 minute before requesting another reset")
+            except (ValueError, TypeError):
+                pass
+
+        code, expires, verify_token = _generate_verification_code(str(user['id']), 'password_reset')
+        await c.patch(f'{SUPABASE_URL}/rest/v1/users', params={'id': f'eq.{user["id"]}'}, json={'verification_code': code, 'verification_expires': expires}, headers=supa_headers())
+
+        if RESEND_API_KEY:
+            app_url = os.environ.get('REACT_APP_BACKEND_URL', '')
+            reset_url = f"{app_url}?reset={verify_token}"
+            html = _build_verification_email_html(user.get('name', ''), code, verify_token, app_url).replace('Verify your email', 'Reset your password').replace('verify=', 'reset=').replace('Verify Email Address', 'Reset Password')
+            try:
+                await asyncio.to_thread(resend.Emails.send, {
+                    "from": "Maaser Tracker <onboarding@resend.dev>",
+                    "to": [user['email']],
+                    "subject": f"{code} — Reset your Maaser Tracker password",
+                    "html": html
+                })
+            except Exception as e:
+                logger.error(f"Failed to send reset email: {e}")
+
+        return {"message": "If that email exists, a reset link has been sent."}
+
+
+@api_router.post("/auth/reset-password")
+async def reset_password(req: ResetPasswordRequest):
+    if not req.newPassword or len(req.newPassword) < 6:
+        raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
+
+    user_id = None
+    if req.token:
+        try:
+            payload = jwt.decode(req.token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+            if payload.get('purpose') != 'password_reset':
+                raise HTTPException(status_code=400, detail="Invalid reset token")
+            user_id = payload['user_id']
+            async with httpx.AsyncClient() as c:
+                r = await c.get(f'{SUPABASE_URL}/rest/v1/users', params={'id': f'eq.{user_id}', 'select': '*', 'limit': '1'}, headers=supa_headers())
+                users = r.json() if r.status_code == 200 else []
+                if not users:
+                    raise HTTPException(status_code=404, detail="User not found")
+                if users[0].get('verification_code') != payload.get('code'):
+                    raise HTTPException(status_code=400, detail="Reset link expired. Please request a new one.")
+        except jwt.ExpiredSignatureError:
+            raise HTTPException(status_code=400, detail="Reset link expired. Please request a new one.")
+        except jwt.InvalidTokenError:
+            raise HTTPException(status_code=400, detail="Invalid reset token")
+    elif req.email and req.code:
+        async with httpx.AsyncClient() as c:
+            r = await c.get(f'{SUPABASE_URL}/rest/v1/users', params={'email': f'eq.{req.email.lower()}', 'select': '*', 'limit': '1'}, headers=supa_headers())
+            users = r.json() if r.status_code == 200 else []
+            if not users:
+                raise HTTPException(status_code=404, detail="User not found")
+            user = users[0]
+            if not user.get('verification_code') or not user.get('verification_expires'):
+                raise HTTPException(status_code=400, detail="No reset code found. Please request a new one.")
+            if datetime.fromisoformat(user['verification_expires'].replace('Z', '+00:00')) < datetime.now(timezone.utc):
+                raise HTTPException(status_code=400, detail="Reset code expired. Please request a new one.")
+            if user['verification_code'] != req.code.strip():
+                raise HTTPException(status_code=400, detail="Invalid reset code")
+            user_id = user['id']
+    else:
+        raise HTTPException(status_code=400, detail="Email+code or token required")
+
+    pw_hash = bcrypt.hashpw(req.newPassword.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+    async with httpx.AsyncClient() as c:
+        await c.patch(f'{SUPABASE_URL}/rest/v1/users', params={'id': f'eq.{user_id}'}, json={'password_hash': pw_hash, 'verification_code': None, 'verification_expires': None, 'email_verified': True}, headers=supa_headers())
+        r = await c.get(f'{SUPABASE_URL}/rest/v1/users', params={'id': f'eq.{user_id}', 'select': '*'}, headers=supa_headers())
+        user = r.json()[0] if r.status_code == 200 and r.json() else {}
+
+    token = create_token(str(user_id))
+    return {"token": token, "user": strip_password(user)}
+
+
+@api_router.post("/auth/magic-login")
+async def magic_login(req: MagicLoginRequest):
+    async with httpx.AsyncClient() as c:
+        r = await c.get(f'{SUPABASE_URL}/rest/v1/users', params={'email': f'eq.{req.email.lower()}', 'select': '*', 'limit': '1'}, headers=supa_headers())
+        users = r.json() if r.status_code == 200 else []
+        if not users:
+            return {"message": "If that email exists, a login link has been sent.", "sent": True}
+        user = users[0]
+
+        # Rate limit
+        if user.get('verification_expires'):
+            try:
+                exp = datetime.fromisoformat(user['verification_expires'].replace('Z', '+00:00'))
+                created_at = exp - timedelta(hours=1)
+                if datetime.now(timezone.utc) < created_at + timedelta(minutes=1):
+                    raise HTTPException(status_code=429, detail="Please wait at least 1 minute before requesting another link")
+            except (ValueError, TypeError):
+                pass
+
+        code, expires, verify_token = _generate_verification_code(str(user['id']), 'magic_login')
+        await c.patch(f'{SUPABASE_URL}/rest/v1/users', params={'id': f'eq.{user["id"]}'}, json={'verification_code': code, 'verification_expires': expires}, headers=supa_headers())
+
+        if RESEND_API_KEY:
+            app_url = os.environ.get('REACT_APP_BACKEND_URL', '')
+            login_url = f"{app_url}?login={verify_token}"
+            html = _build_verification_email_html(user.get('name', ''), code, verify_token, app_url).replace('Verify your email', 'Sign in to Maaser Tracker').replace('verify=', 'login=').replace('Verify Email Address', 'Sign In Now')
+            try:
+                await asyncio.to_thread(resend.Emails.send, {
+                    "from": "Maaser Tracker <onboarding@resend.dev>",
+                    "to": [user['email']],
+                    "subject": f"{code} — Sign in to Maaser Tracker",
+                    "html": html
+                })
+            except Exception as e:
+                logger.error(f"Failed to send magic login: {e}")
+
+        return {"message": "If that email exists, a login link has been sent.", "sent": True}
+
+
+@api_router.post("/auth/verify-magic-login")
+async def verify_magic_login(req: VerifyMagicLoginRequest):
+    if req.token:
+        try:
+            payload = jwt.decode(req.token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+            if payload.get('purpose') != 'magic_login':
+                raise HTTPException(status_code=400, detail="Invalid login token")
+            async with httpx.AsyncClient() as c:
+                r = await c.get(f'{SUPABASE_URL}/rest/v1/users', params={'id': f'eq.{payload["user_id"]}', 'select': '*', 'limit': '1'}, headers=supa_headers())
+                users = r.json() if r.status_code == 200 else []
+                if not users:
+                    raise HTTPException(status_code=404, detail="User not found")
+                user = users[0]
+                if user.get('verification_code') != payload.get('code'):
+                    raise HTTPException(status_code=400, detail="Login link expired. Please request a new one.")
+                await c.patch(f'{SUPABASE_URL}/rest/v1/users', params={'id': f'eq.{user["id"]}'}, json={'email_verified': True, 'verification_code': None, 'verification_expires': None}, headers=supa_headers())
+                token = create_token(str(user['id']))
+                user['email_verified'] = True
+                return {"token": token, "user": strip_password(user)}
+        except jwt.ExpiredSignatureError:
+            raise HTTPException(status_code=400, detail="Login link expired. Please request a new one.")
+        except jwt.InvalidTokenError:
+            raise HTTPException(status_code=400, detail="Invalid login token")
+
+    if not req.email or not req.code:
+        raise HTTPException(status_code=400, detail="Email and code required")
+
+    async with httpx.AsyncClient() as c:
+        r = await c.get(f'{SUPABASE_URL}/rest/v1/users', params={'email': f'eq.{req.email.lower()}', 'select': '*', 'limit': '1'}, headers=supa_headers())
+        users = r.json() if r.status_code == 200 else []
+        if not users:
+            raise HTTPException(status_code=400, detail="Invalid code")
+        user = users[0]
+        if not user.get('verification_code') or not user.get('verification_expires'):
+            raise HTTPException(status_code=400, detail="No login code found. Please request a new one.")
+        if datetime.fromisoformat(user['verification_expires'].replace('Z', '+00:00')) < datetime.now(timezone.utc):
+            raise HTTPException(status_code=400, detail="Login code expired. Please request a new one.")
+        if user['verification_code'] != req.code.strip():
+            raise HTTPException(status_code=400, detail="Invalid code")
+        await c.patch(f'{SUPABASE_URL}/rest/v1/users', params={'id': f'eq.{user["id"]}'}, json={'email_verified': True, 'verification_code': None, 'verification_expires': None}, headers=supa_headers())
+        token = create_token(str(user['id']))
+        user['email_verified'] = True
+        return {"token": token, "user": strip_password(user)}
 
 
 # ============ TRANSACTIONS ============
@@ -458,6 +884,20 @@ async def get_user_settings(user_id: str = Depends(get_current_user)):
 @api_router.put("/user/settings")
 async def update_user_settings(request: Request, user_id: str = Depends(get_current_user)):
     updates = await request.json()
+
+    # Handle password setting
+    if 'new_password' in updates:
+        pw = updates['new_password']
+        if not pw or len(pw) < 6:
+            raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
+        pw_hash = bcrypt.hashpw(pw.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        async with httpx.AsyncClient() as c:
+            await c.patch(f'{SUPABASE_URL}/rest/v1/users', params={'id': f'eq.{user_id}'}, json={'password_hash': pw_hash}, headers=supa_headers())
+            r = await c.get(f'{SUPABASE_URL}/rest/v1/users', params={'id': f'eq.{user_id}', 'select': '*'}, headers=supa_headers())
+            if r.status_code == 200 and r.json():
+                return strip_password(r.json()[0])
+        return {"success": True}
+
     # Only allow safe fields
     allowed = {'base_currency', 'distribution_mode', 'default_view', 'use_hebrew_calendar',
                'default_maaser_percentage', 'give_ratio', 'lend_ratio', 'name'}
