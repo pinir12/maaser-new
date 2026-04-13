@@ -259,11 +259,11 @@ class StatusCheck(BaseModel):
 
 # ============ AUTH ============
 
-def _generate_verification_code(user_id: str):
+def _generate_verification_code(user_id: str, purpose: str = 'email_verify'):
     code = str(random.randint(100000, 999999))
     expires = (datetime.now(timezone.utc) + timedelta(hours=1)).isoformat()
     token = jwt.encode(
-        {'user_id': user_id, 'code': code, 'purpose': 'email_verify',
+        {'user_id': user_id, 'code': code, 'purpose': purpose,
          'exp': datetime.now(timezone.utc) + timedelta(hours=1)},
         JWT_SECRET, algorithm=JWT_ALGORITHM
     )
@@ -601,7 +601,7 @@ async def forgot_password(req: ForgotPasswordRequest):
             except (ValueError, TypeError):
                 pass
 
-        code, expires, verify_token = _generate_verification_code(str(user['id']))
+        code, expires, verify_token = _generate_verification_code(str(user['id']), 'password_reset')
         await c.patch(f'{SUPABASE_URL}/rest/v1/users', params={'id': f'eq.{user["id"]}'}, json={'verification_code': code, 'verification_expires': expires}, headers=supa_headers())
 
         if RESEND_API_KEY:
@@ -690,7 +690,7 @@ async def magic_login(req: MagicLoginRequest):
             except (ValueError, TypeError):
                 pass
 
-        code, expires, verify_token = _generate_verification_code(str(user['id']))
+        code, expires, verify_token = _generate_verification_code(str(user['id']), 'magic_login')
         await c.patch(f'{SUPABASE_URL}/rest/v1/users', params={'id': f'eq.{user["id"]}'}, json={'verification_code': code, 'verification_expires': expires}, headers=supa_headers())
 
         if RESEND_API_KEY:
