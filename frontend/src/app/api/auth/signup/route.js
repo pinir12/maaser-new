@@ -6,7 +6,7 @@ import { generateVerificationCode, isDisposableEmail, buildVerificationEmail } f
 
 export async function POST(request) {
   const { email, password, name, base_currency = 'USD' } = await request.json();
-  if (!email || !password || !name) return jsonError('All fields required');
+  if (!email || !name) return jsonError('Name and email are required');
 
   const lowerEmail = email.toLowerCase().trim();
 
@@ -20,8 +20,7 @@ export async function POST(request) {
     const existing = await supaGet('users', { email: `eq.${lowerEmail}`, select: 'id', limit: '1' });
     if (existing.length) return jsonError('Email already registered', 409);
 
-    const hash = await bcrypt.hash(password, 10);
-    const { code, expires, token } = generateVerificationCode('pending');
+    const hash = password ? await bcrypt.hash(password, 10) : '';
 
     const newUser = {
       email: lowerEmail,
@@ -36,19 +35,11 @@ export async function POST(request) {
       lend_ratio: 50,
       is_admin: false,
       email_verified: false,
-      verification_code: code,
-      verification_expires: expires,
       created_at: new Date().toISOString(),
     };
 
     const created = await supaPost('users', newUser);
     const createdUser = Array.isArray(created) ? created[0] : created;
-
-    // Re-generate token with actual user ID
-    const { code: _, expires: __, token: verifyToken } = generateVerificationCode(String(createdUser.id));
-    // Update the verification code to match the new token
-    // Actually the code is the same, we just need the token with real user_id
-    const finalToken = verifyToken;
 
     // Send verification email
     try {
@@ -57,9 +48,7 @@ export async function POST(request) {
         const resend = new Resend(apiKey);
         const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || '';
         
-        // Generate new code+token with real user ID
         const verify = generateVerificationCode(String(createdUser.id));
-        // Update user with the new code (since we regenerated)
         const { supaPatch } = await import('@/lib/supabase-server');
         await supaPatch('users', { id: `eq.${createdUser.id}` }, {
           verification_code: verify.code,
@@ -80,7 +69,7 @@ export async function POST(request) {
           from: 'Finance Tracker <onboarding@resend.dev>',
           to: [adminEmail],
           subject: `New Signup: ${name}`,
-          html: `<div style="font-family:-apple-system,sans-serif;max-width:500px;margin:0 auto"><div style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);padding:24px;border-radius:12px 12px 0 0;color:white"><h2 style="margin:0">New User Registration</h2></div><div style="background:#f8fafc;padding:24px;border:1px solid #e2e8f0;border-radius:0 0 12px 12px"><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${lowerEmail}</p><p><strong>Time:</strong> ${new Date().toISOString()}</p></div></div>`,
+          html: `<div style="font-family:-apple-system,sans-serif;max-width:500px;margin:0 auto"><div style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);padding:24px;border-radius:12px 12px 0 0;color:white"><h2 style="margin:0">New User Registration</h2></div><div style="background:#f8fafc;padding:24px;border:1px solid #e2e8f0;border-radius:0 0 12px 12px"><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${lowerEmail}</p><p><strong>Type:</strong> ${password ? 'Password' : 'Passwordless'}</p><p><strong>Time:</strong> ${new Date().toISOString()}</p></div></div>`,
         }).catch(() => {});
       }
     } catch (emailErr) {

@@ -87,6 +87,47 @@ export async function apiResendVerification(email) {
   });
 }
 
+export async function apiForgotPassword(email) {
+  return request('/api/auth/forgot-password', {
+    method: 'POST',
+    body: JSON.stringify({ email }),
+  });
+}
+
+export async function apiResetPassword(email, code, token, newPassword) {
+  const body = token ? { token, newPassword } : { email, code, newPassword };
+  const data = await request('/api/auth/reset-password', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+  if (data.token) setToken(data.token);
+  return data;
+}
+
+export async function apiRequestMagicLogin(email) {
+  return request('/api/auth/magic-login', {
+    method: 'POST',
+    body: JSON.stringify({ email }),
+  });
+}
+
+export async function apiVerifyMagicLogin(email, code, token) {
+  const body = token ? { token } : { email, code };
+  const data = await request('/api/auth/verify-magic-login', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+  if (data.token) setToken(data.token);
+  return data;
+}
+
+export async function apiSetPassword(newPassword) {
+  return request('/api/user/settings', {
+    method: 'PUT',
+    body: JSON.stringify({ new_password: newPassword }),
+  });
+}
+
 export function apiLogout() {
   clearToken();
 }

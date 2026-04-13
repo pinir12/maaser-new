@@ -5,12 +5,12 @@ const JWT_SECRET = process.env.JWT_SECRET;
 /**
  * Generate a 6-digit verification code + signed JWT token for magic link
  */
-export function generateVerificationCode(userId) {
+export function generateVerificationCode(userId, purpose = 'email_verify') {
   const code = String(Math.floor(100000 + Math.random() * 900000));
   const expires = new Date(Date.now() + 60 * 60 * 1000).toISOString(); // 1 hour
 
   const token = jwt.sign(
-    { user_id: userId, code, purpose: 'email_verify' },
+    { user_id: userId, code, purpose },
     JWT_SECRET,
     { expiresIn: '1h' }
   );

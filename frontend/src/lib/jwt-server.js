@@ -18,8 +18,8 @@ export function verifyToken(token) {
 }
 
 export function stripPassword(user) {
-  const { password_hash, ...rest } = user;
-  return rest;
+  const { password_hash, verification_code, verification_expires, ...rest } = user;
+  return { ...rest, has_password: !!password_hash && password_hash.length > 0 };
 }
 
 // Extract and verify user from Authorization header
