@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect } from 'react';
-import { apiLogin, apiSignup, apiLogout, apiUpdateUserSettings, apiGetUserSettings } from './api';
+import { apiLogin, apiSignup, apiLogout, apiUpdateUserSettings, apiGetUserSettings, apiVerifyEmail } from './api';
 
 const AuthContext = createContext(null);
 
@@ -26,6 +26,9 @@ export function AuthProvider({ children }) {
   const signIn = async (email, password) => {
     try {
       const data = await apiLogin(email, password);
+      if (data.needsVerification) {
+        return { user: null, error: null, needsVerification: true, email: data.email };
+      }
       setUser(data.user);
       localStorage.setItem('finance_user', JSON.stringify(data.user));
       return { user: data.user, error: null };
@@ -37,8 +40,24 @@ export function AuthProvider({ children }) {
   const signUp = async (email, password, name, base_currency) => {
     try {
       const data = await apiSignup(email, password, name, base_currency);
+      if (data.needsVerification) {
+        return { user: null, error: null, needsVerification: true, email: data.email };
+      }
       setUser(data.user);
       localStorage.setItem('finance_user', JSON.stringify(data.user));
+      return { user: data.user, error: null };
+    } catch (error) {
+      return { user: null, error: error.message };
+    }
+  };
+
+  const verifyEmail = async (email, code, token) => {
+    try {
+      const data = await apiVerifyEmail(email, code, token);
+      if (data.user) {
+        setUser(data.user);
+        localStorage.setItem('finance_user', JSON.stringify(data.user));
+      }
       return { user: data.user, error: null };
     } catch (error) {
       return { user: null, error: error.message };
@@ -73,7 +92,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, updateUser, refreshUser }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, updateUser, refreshUser, verifyEmail }}>
       {children}
     </AuthContext.Provider>
   );

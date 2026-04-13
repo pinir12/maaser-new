@@ -5,12 +5,14 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, registerSchema, currencies } from '../lib/validation';
 import { useAuth } from '../lib/auth-context';
+import { EmailVerification } from './EmailVerification';
 import { LogIn, UserPlus, Mail, Lock, User, DollarSign, ArrowLeft } from 'lucide-react';
 
 export function AuthPage({ defaultTab = 'login', onBack = null }) {
   const [isLogin, setIsLogin] = useState(defaultTab === 'login');
   const [error, setError] = useState('');
-  const { signIn, signUp } = useAuth();
+  const [verificationEmail, setVerificationEmail] = useState(null);
+  const { signIn, signUp, verifyEmail } = useAuth();
 
   const loginForm = useForm({ resolver: zodResolver(loginSchema), defaultValues: { email: '', password: '' } });
   const registerForm = useForm({ resolver: zodResolver(registerSchema), defaultValues: { name: '', email: '', password: '', confirmPassword: '', base_currency: 'USD' } });
@@ -19,12 +21,35 @@ export function AuthPage({ defaultTab = 'login', onBack = null }) {
   const onSubmit = async (data) => {
     setError('');
     const result = isLogin ? await signIn(data.email, data.password) : await signUp(data.email, data.password, data.name, data.base_currency);
+    if (result.needsVerification) {
+      setVerificationEmail(result.email);
+      return;
+    }
     if (result.error) {
       setError(result.error);
-      // Re-focus the form so user stays on the auth page
       return;
     }
   };
+
+  const handleVerified = (data) => {
+    // data contains { token, user } — auth-context handles setting user
+    if (data.token && data.user) {
+      localStorage.setItem('finance_token', data.token);
+      localStorage.setItem('finance_user', JSON.stringify(data.user));
+      window.location.reload();
+    }
+  };
+
+  // Show verification screen
+  if (verificationEmail) {
+    return (
+      <EmailVerification
+        email={verificationEmail}
+        onVerified={handleVerified}
+        onBack={() => { setVerificationEmail(null); setIsLogin(true); }}
+      />
+    );
+  }
 
   return (
     <div data-testid="auth-page" className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
