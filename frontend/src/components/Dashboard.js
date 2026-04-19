@@ -507,7 +507,7 @@ export function Dashboard() {
 
         <SearchFilters searchQuery={searchQuery} onSearchChange={setSearchQuery} filters={filters} onFiltersChange={setFilters} distributionMode={user?.distribution_mode || 'both'} />
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-sm">
           <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
             <h3 className="font-semibold text-slate-900">Transactions</h3>
             <div className="flex items-center gap-2">
