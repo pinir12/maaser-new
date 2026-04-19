@@ -69,11 +69,11 @@ export function MonthlyViewToggle({ useHebrewDates, onToggle, selectedMonth, sel
       <button
         data-testid="calendar-toggle-btn"
         onClick={onToggle}
-        className={`ml-2 px-2 py-1 text-xs font-medium rounded-lg transition-colors ${
+        className={`ml-2 px-2.5 py-1 text-xs font-medium rounded-full transition-colors ${
           useHebrewDates ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'
         }`}
       >
-        {useHebrewDates ? 'HEB' : 'GRE'}
+        {useHebrewDates ? 'HEB' : 'ENG'}
       </button>
     </div>
   );

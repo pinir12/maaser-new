@@ -1,5 +1,5 @@
 import { getCurrentUser, jsonError } from '@/lib/jwt-server';
-import { supaDelete } from '@/lib/supabase-server';
+import { supaDeleteUser } from '@/lib/supabase-server';
 
 export async function DELETE(request) {
   const auth = await getCurrentUser(request);
@@ -9,12 +9,12 @@ export async function DELETE(request) {
   if (!description || !type) return jsonError('Missing required fields');
 
   try {
-    await supaDelete('transactions', {
+    await supaDeleteUser('transactions', {
       user_id: `eq.${auth.userId}`,
       description: `eq.${description}`,
       type: `eq.${type}`,
       is_recurring: 'eq.true',
-    });
+    }, auth.userId);
     return Response.json({ success: true });
   } catch {
     return jsonError('Failed to bulk delete', 500);

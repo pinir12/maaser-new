@@ -231,9 +231,8 @@ export function Dashboard() {
     }
   };
 
-  const handleViewModeChange = async (mode) => {
+  const handleViewModeChange = (mode) => {
     setViewMode(mode);
-    await updateUser({ default_view: mode });
   };
 
   const periodStats = useMemo(() => {
@@ -382,10 +381,10 @@ export function Dashboard() {
         )}
 
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex bg-white/80 backdrop-blur-sm rounded-xl p-1 shadow-sm border border-slate-200/80">
+          <div className="flex bg-white/80 backdrop-blur-sm rounded-full p-1 shadow-sm border border-slate-200/80">
             {[{ value: VIEW_MODES.ALL_TIME, label: 'All' }, { value: VIEW_MODES.YEAR, label: 'Year' }, { value: VIEW_MODES.MONTH, label: 'Month' }].map(({ value, label }) => (
               <button key={value} data-testid={`view-mode-${value}`} onClick={() => handleViewModeChange(value)}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${viewMode === value ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm' : 'text-slate-500 hover:bg-slate-50'}`}>
+                className={`px-4 py-2 text-sm font-medium rounded-full transition-all ${viewMode === value ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm' : 'text-slate-500 hover:bg-slate-50'}`}>
                 {label}
               </button>
             ))}

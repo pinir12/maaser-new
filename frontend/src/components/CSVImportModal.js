@@ -57,12 +57,12 @@ function autoDetectColumns(headers) {
 
 function parseCSV(text) {
   const lines = text.split(/\r?\n/).filter(l => l.trim());
-  if (!lines.length) return { headers: [], rows: [] };
+  if (!lines.length) return { headers: [], rows: [], allLines: [] };
 
   // Detect separator
   const sep = lines[0].includes('\t') ? '\t' : ',';
-  const headers = lines[0].split(sep).map(h => h.replace(/^["']|["']$/g, '').trim());
-  const rows = lines.slice(1).map(line => {
+
+  const parseLine = (line) => {
     const cols = [];
     let inQuote = false, current = '';
     for (const ch of line) {
@@ -72,9 +72,13 @@ function parseCSV(text) {
     }
     cols.push(current.trim());
     return cols;
-  }).filter(r => r.some(c => c));
+  };
 
-  return { headers, rows };
+  const allLines = lines.map(parseLine).filter(r => r.some(c => c));
+  const headers = allLines[0].map(h => h.replace(/^["']|["']$/g, '').trim());
+  const rows = allLines.slice(1);
+
+  return { headers, rows, allLines };
 }
 
 // Smart match against user's existing transactions
@@ -118,6 +122,7 @@ export function CSVImportModal({ isOpen, onClose, onImported, baseCurrency, past
   const [importing, setImporting] = useState(false);
   const [result, setResult] = useState(null);
   const [editingIdx, setEditingIdx] = useState(null);
+  const [firstRowIsData, setFirstRowIsData] = useState(false);
   const fileRef = useRef(null);
 
   const sym = getCurrencySymbol(baseCurrency || 'GBP');
@@ -131,6 +136,7 @@ export function CSVImportModal({ isOpen, onClose, onImported, baseCurrency, past
     setImporting(false);
     setResult(null);
     setEditingIdx(null);
+    setFirstRowIsData(false);
   }, []);
 
   const handleClose = () => { resetState(); onClose(); };
@@ -141,14 +147,52 @@ export function CSVImportModal({ isOpen, onClose, onImported, baseCurrency, past
     const reader = new FileReader();
     reader.onload = (ev) => {
       const text = ev.target.result;
-      const { headers, rows } = parseCSV(text);
-      if (!headers.length || !rows.length) return;
-      const detected = autoDetectColumns(headers);
-      setRawData({ headers, rows });
-      setColMap(detected);
+      const { headers, rows, allLines } = parseCSV(text);
+      if (!allLines || allLines.length === 0) return;
+
+      // Auto-detect if first row looks like headers
+      const looksLikeHeaders = headers.some(h => /(date|desc|amount|credit|debit|narr|memo|value|type|balance)/i.test(h));
+
+      if (looksLikeHeaders) {
+        setFirstRowIsData(false);
+        setRawData({ headers, rows });
+        setColMap(autoDetectColumns(headers));
+      } else {
+        // First row doesn't look like headers — treat as data
+        setFirstRowIsData(true);
+        const genericHeaders = allLines[0].map((_, i) => `Column ${i + 1}`);
+        setRawData({ headers: genericHeaders, rows: allLines, firstRowSample: allLines[0] });
+        setColMap({ date: -1, description: -1, amount: -1, credit: -1, debit: -1 });
+      }
       setStep(STEPS.MAP);
     };
     reader.readAsText(file);
+  };
+
+  const handleToggleFirstRowIsData = () => {
+    if (!rawData) return;
+    setFirstRowIsData(prev => {
+      const next = !prev;
+      if (next) {
+        // Switch to "first row is data": use generic headers, put first row back as data
+        const allRows = rawData.rows;
+        const headerRow = rawData.headers;
+        // If headers were real headers, prepend them back as data row
+        const genericHeaders = (allRows[0] || headerRow).map((_, i) => `Column ${i + 1}`);
+        const newRows = headerRow.every((h, i) => h === `Column ${i + 1}`) ? allRows : [headerRow, ...allRows];
+        setRawData({ headers: genericHeaders, rows: newRows, firstRowSample: newRows[0] });
+        setColMap({ date: -1, description: -1, amount: -1, credit: -1, debit: -1 });
+      } else {
+        // Switch to "first row is headers": use first data row as headers
+        const rows = rawData.rows;
+        if (rows.length < 2) return prev;
+        const headers = rows[0].map(h => String(h).trim());
+        const dataRows = rows.slice(1);
+        setRawData({ headers, rows: dataRows });
+        setColMap(autoDetectColumns(headers));
+      }
+      return next;
+    });
   };
 
   const processRows = useCallback(() => {
@@ -308,7 +352,20 @@ export function CSVImportModal({ isOpen, onClose, onImported, baseCurrency, past
           {/* Step 1: Column Mapping */}
           {step === STEPS.MAP && rawData && (
             <div>
-              <p className="text-sm text-slate-600 mb-4">We auto-detected your columns. Adjust if needed, or skip to continue.</p>
+              <p className="text-sm text-slate-600 mb-3">We auto-detected your columns. Adjust if needed.</p>
+
+              {/* First row toggle */}
+              <div className="flex items-center gap-3 mb-4 p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <label className="flex items-center gap-2 cursor-pointer text-sm">
+                  <input data-testid="csv-first-row-toggle" type="checkbox" checked={firstRowIsData} onChange={handleToggleFirstRowIsData}
+                    className="w-4 h-4 rounded border-slate-300 text-blue-600" />
+                  <span className="font-medium text-slate-700">First row is data (no headers)</span>
+                </label>
+                {firstRowIsData && rawData.firstRowSample && (
+                  <span className="text-xs text-slate-400 truncate">Row 1: {rawData.firstRowSample.slice(0, 3).join(' | ')}...</span>
+                )}
+              </div>
+
               <div className="grid grid-cols-2 gap-3 mb-4">
                 {[
                   { key: 'date', label: 'Date' },
@@ -324,7 +381,11 @@ export function CSVImportModal({ isOpen, onClose, onImported, baseCurrency, past
                       onChange={e => setColMap(prev => ({ ...prev, [key]: parseInt(e.target.value) }))}
                       className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-sm text-slate-900">
                       <option value={-1}>— Not used —</option>
-                      {rawData.headers.map((h, i) => <option key={i} value={i}>{h}</option>)}
+                      {rawData.headers.map((h, i) => (
+                        <option key={i} value={i}>
+                          {h}{firstRowIsData && rawData.rows[0] ? ` (e.g. ${rawData.rows[0][i] || '—'})` : ''}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 ))}
