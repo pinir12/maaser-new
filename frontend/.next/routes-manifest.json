@@ -204,6 +204,12 @@
       "namedRegex": "^/api/transactions/suggestions(?:/)?$"
     },
     {
+      "page": "/api/transactions/totals",
+      "regex": "^/api/transactions/totals(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/transactions/totals(?:/)?$"
+    },
+    {
       "page": "/api/user/settings",
       "regex": "^/api/user/settings(?:/)?$",
       "routeKeys": {},

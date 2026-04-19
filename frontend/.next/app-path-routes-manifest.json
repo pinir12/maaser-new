@@ -23,6 +23,7 @@
   "/api/transactions/recurring/route": "/api/transactions/recurring",
   "/api/transactions/route": "/api/transactions",
   "/api/transactions/suggestions/route": "/api/transactions/suggestions",
+  "/api/transactions/totals/route": "/api/transactions/totals",
   "/api/user/settings/route": "/api/user/settings",
   "/page": "/"
 }

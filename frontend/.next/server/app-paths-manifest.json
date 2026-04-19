@@ -23,6 +23,7 @@
   "/api/transactions/recurring/route": "app/api/transactions/recurring/route.js",
   "/api/transactions/route": "app/api/transactions/route.js",
   "/api/transactions/suggestions/route": "app/api/transactions/suggestions/route.js",
+  "/api/transactions/totals/route": "app/api/transactions/totals/route.js",
   "/api/user/settings/route": "app/api/user/settings/route.js",
   "/page": "app/page.js"
 }
