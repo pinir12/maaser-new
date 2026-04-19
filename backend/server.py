@@ -572,7 +572,7 @@ def _send_signup_email(name, email):
     </div>"""
     try:
         resend.Emails.send({
-            "from": "Finance Tracker <onboarding@resend.dev>",
+            "from": "Maaser Tracker <mail@pinir.co.uk>",
             "to": [ADMIN_EMAIL],
             "subject": f"New Signup: {name}",
             "html": html
@@ -1087,7 +1087,7 @@ async def send_contact_email(data: ContactRequest):
 
     try:
         email = await asyncio.to_thread(resend.Emails.send, {
-            "from": "Finance Tracker <onboarding@resend.dev>",
+            "from": "Maaser Tracker <mail@pinir.co.uk>",
             "to": [ADMIN_EMAIL],
             "subject": f"Contact: {data.name}",
             "html": html
@@ -1288,7 +1288,7 @@ async def send_monthly_summary():
 
             try:
                 await asyncio.to_thread(resend.Emails.send, {
-                    "from": "Finance Tracker <onboarding@resend.dev>",
+                    "from": "Maaser Tracker <mail@pinir.co.uk>",
                     "to": [user_email],
                     "subject": f"Your Maaser Summary - {month_name}",
                     "html": html

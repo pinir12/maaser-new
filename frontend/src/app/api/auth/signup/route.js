@@ -25,7 +25,7 @@ export async function POST(request) {
       password_hash: hash,
       name,
       base_currency,
-      distribution_mode: 'both',
+      distribution_mode: 'give_only',
       default_view: 'month',
       use_hebrew_calendar: false,
       default_maaser_percentage: 10,
@@ -49,22 +49,14 @@ export async function POST(request) {
         verification_expires: verify.expires,
       });
 
-      const { html, subject } = buildVerificationEmail(name, verify.code, verify.token, appUrl);
-      await sendEmail({
-        from: 'Maaser Tracker <onboarding@resend.dev>',
-        to: [lowerEmail],
-        subject,
-        html,
-      });
-
-      // Notify admin (fire and forget)
-      const adminEmail = process.env.ADMIN_EMAIL || 'mail@pinir.co.uk';
-      sendEmail({
-        from: 'Finance Tracker <onboarding@resend.dev>',
-        to: [adminEmail],
-        subject: `New Signup: ${name}`,
-        html: `<div style="font-family:-apple-system,sans-serif;max-width:500px;margin:0 auto"><div style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);padding:24px;border-radius:12px 12px 0 0;color:white"><h2 style="margin:0">New User Registration</h2></div><div style="background:#f8fafc;padding:24px;border:1px solid #e2e8f0;border-radius:0 0 12px 12px"><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${lowerEmail}</p><p><strong>Type:</strong> ${password ? 'Password' : 'Passwordless'}</p><p><strong>Time:</strong> ${new Date().toISOString()}</p></div></div>`,
-      }).catch(() => {});
+        const { html, subject } = buildVerificationEmail(name, verify.code, verify.token, appUrl);
+        await resend.emails.send({
+          from: 'Maaser Tracker <mail@pinir.co.uk>',
+          to: [adminEmail],
+          subject: `New Signup: ${name}`,
+          html: `<div style="font-family:-apple-system,sans-serif;max-width:500px;margin:0 auto"><div style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);padding:24px;border-radius:12px 12px 0 0;color:white"><h2 style="margin:0">New User Registration</h2></div><div style="background:#f8fafc;padding:24px;border:1px solid #e2e8f0;border-radius:0 0 12px 12px"><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${lowerEmail}</p><p><strong>Type:</strong> ${password ? 'Password' : 'Passwordless'}</p><p><strong>Time:</strong> ${new Date().toISOString()}</p></div></div>`,
+        }).catch(() => {});
+      }
     } catch (emailErr) {
       console.error('[SIGNUP] Email send failed:', emailErr.message);
     }
