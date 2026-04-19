@@ -56,12 +56,15 @@ export async function POST(request) {
         });
 
         const { html, subject } = buildVerificationEmail(name, verify.code, verify.token, appUrl);
-        await resend.emails.send({
+        const emailResult = await resend.emails.send({
           from: 'Maaser Tracker <onboarding@resend.dev>',
           to: [lowerEmail],
           subject,
           html,
         });
+        if (emailResult.error) {
+          console.error('[SIGNUP] Resend error:', emailResult.error.message);
+        }
 
         // Also notify admin (fire and forget)
         const adminEmail = process.env.ADMIN_EMAIL || 'mail@pinir.co.uk';
@@ -73,7 +76,7 @@ export async function POST(request) {
         }).catch(() => {});
       }
     } catch (emailErr) {
-      console.error('Failed to send verification email:', emailErr);
+      console.error('[SIGNUP] Failed to send verification email:', emailErr);
     }
 
     return Response.json({ needsVerification: true, email: lowerEmail });
