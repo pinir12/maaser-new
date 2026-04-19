@@ -1,7 +1,7 @@
 'use client';
 
 import { getCurrencySymbol } from '../lib/validation';
-import { HandCoins, Heart, PiggyBank } from 'lucide-react';
+import { HandCoins, Heart, Coins } from 'lucide-react';
 
 function Skeleton() {
   return <div className="h-7 w-24 bg-slate-200 rounded-md animate-pulse" />;
@@ -19,7 +19,7 @@ export function DashboardStats({ balances, baseCurrency, distributionMode, loadi
         <div className={`w-48 sm:w-56 bg-white/80 backdrop-blur-sm rounded-xl p-4 border ${!loading && bal < 0 ? 'border-red-300' : 'border-slate-200/80'} shadow-sm`}>
           <div className="flex items-center justify-between mb-1">
             <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Maaser Balance</span>
-            <PiggyBank className={`w-5 h-5 ${loading ? 'text-slate-300' : bal >= 0 ? 'text-amber-500' : 'text-red-500'}`} />
+            <Coins className={`w-5 h-5 ${bal >= 0 ? 'text-amber-500' : 'text-red-500'}`} />
           </div>
           {loading ? <Skeleton /> : (
             <p data-testid="maaser-balance-amount" className={`text-2xl font-bold ${bal >= 0 ? 'text-amber-600' : 'text-red-600'}`}>
