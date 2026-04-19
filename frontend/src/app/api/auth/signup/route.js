@@ -49,14 +49,24 @@ export async function POST(request) {
         verification_expires: verify.expires,
       });
 
-        const { html, subject } = buildVerificationEmail(name, verify.code, verify.token, appUrl);
-        await resend.emails.send({
-          from: 'Maaser Tracker <mail@pinir.co.uk>',
-          to: [adminEmail],
-          subject: `New Signup: ${name}`,
-          html: `<div style="font-family:-apple-system,sans-serif;max-width:500px;margin:0 auto"><div style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);padding:24px;border-radius:12px 12px 0 0;color:white"><h2 style="margin:0">New User Registration</h2></div><div style="background:#f8fafc;padding:24px;border:1px solid #e2e8f0;border-radius:0 0 12px 12px"><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${lowerEmail}</p><p><strong>Type:</strong> ${password ? 'Password' : 'Passwordless'}</p><p><strong>Time:</strong> ${new Date().toISOString()}</p></div></div>`,
-        }).catch(() => {});
-      }
+      const { html, subject } = buildVerificationEmail(name, verify.code, verify.token, appUrl);
+      await sendEmail({
+        from: 'Maaser Tracker <onboarding@resend.dev>',
+        to: [lowerEmail],
+        subject,
+        html,
+      });
+
+      // Notify admin (fire and forget)
+      const adminEmail = process.env.ADMIN_EMAIL || 'mail@pinir.co.uk';
+      const signupType = password ? 'Password' : 'Passwordless';
+      const adminHtml = '<div style="font-family:-apple-system,sans-serif;max-width:500px;margin:0 auto"><div style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);padding:24px;border-radius:12px 12px 0 0;color:white"><h2 style="margin:0">New User Registration</h2></div><div style="background:#f8fafc;padding:24px;border:1px solid #e2e8f0;border-radius:0 0 12px 12px"><p><strong>Name:</strong> ' + name + '</p><p><strong>Email:</strong> ' + lowerEmail + '</p><p><strong>Type:</strong> ' + signupType + '</p><p><strong>Time:</strong> ' + new Date().toISOString() + '</p></div></div>';
+      sendEmail({
+        from: 'Maaser Tracker <mail@pinir.co.uk>',
+        to: [adminEmail],
+        subject: 'New Signup: ' + name,
+        html: adminHtml,
+      }).catch(() => {});
     } catch (emailErr) {
       console.error('[SIGNUP] Email send failed:', emailErr.message);
     }
