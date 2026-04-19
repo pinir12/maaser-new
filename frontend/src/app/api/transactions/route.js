@@ -6,11 +6,34 @@ export async function GET(request) {
   const auth = await getCurrentUser(request);
   if (auth.error) return jsonError(auth.error, auth.status);
 
+  const url = new URL(request.url);
+  const limit = parseInt(url.searchParams.get('limit')) || 50;
+  const offset = parseInt(url.searchParams.get('offset')) || 0;
+
+  const params = {
+    user_id: `eq.${auth.userId}`,
+    select: '*',
+    order: 'date.desc,created_at.desc',
+    limit: String(limit),
+    offset: String(offset),
+  };
+
+  // Optional date range filters
+  const dateFrom = url.searchParams.get('date_from');
+  const dateTo = url.searchParams.get('date_to');
+  if (dateFrom) params['date'] = `gte.${dateFrom}`;
+  if (dateTo) {
+    params[dateFrom ? 'and' : 'date'] = dateFrom
+      ? `(date.gte.${dateFrom},date.lte.${dateTo})`
+      : `lte.${dateTo}`;
+  }
+
   try {
-    const txns = await supaGetUser('transactions', { user_id: `eq.${auth.userId}`, select: '*', order: 'date.desc' }, auth.userId);
-    return Response.json(txns.map(decryptTransaction));
-  } catch {
-    return jsonError('Failed to fetch transactions', 500);
+    const txns = await supaGetUser('transactions', params, auth.userId);
+    const hasMore = txns.length === limit;
+    return Response.json({ transactions: txns.map(decryptTransaction), hasMore, offset, limit });
+  } catch (e) {
+    return jsonError(`Failed to fetch transactions: ${e.message}`, 500);
   }
 }
 

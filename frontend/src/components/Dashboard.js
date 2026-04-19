@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useAuth } from '../lib/auth-context';
-import { apiGetTransactions, apiCreateTransaction, apiUpdateTransaction, apiDeleteTransaction, apiProcessRecurring } from '../lib/api';
+import { apiGetTransactions, apiGetTransactionTotals, apiCreateTransaction, apiUpdateTransaction, apiDeleteTransaction, apiProcessRecurring } from '../lib/api';
 import { getCurrentHebrewMonth, getHebrewMonthBounds, getHebrewYearBounds } from '../lib/hebrew-calendar';
 import { TRANSACTION_TYPES, getCurrencySymbol } from '../lib/validation';
 import { ExportButtons } from '../lib/export';
@@ -46,6 +46,9 @@ export function Dashboard() {
   const [showAdmin, setShowAdmin] = useState(false);
   const [showRecurring, setShowRecurring] = useState(false);
   const [showCSVImport, setShowCSVImport] = useState(false);
+  const [hasMore, setHasMore] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [serverTotals, setServerTotals] = useState(null);
 
   const [viewMode, setViewMode] = useState(user?.default_view || VIEW_MODES.MONTH);
   const [useHebrewDates, setUseHebrewDates] = useState(user?.use_hebrew_calendar || false);
@@ -71,17 +74,17 @@ export function Dashboard() {
     }
   }, [user?.default_view, user?.use_hebrew_calendar]);
 
-  // --- Stats calculations with new Give/Lend split ---
+  // --- Stats from server-side totals (always accurate, regardless of pagination) ---
   const isGiveOnly = user?.distribution_mode === 'give_only';
   const giveRatio = (user?.give_ratio ?? 50) / 100;
   const lendRatio = (user?.lend_ratio ?? 50) / 100;
 
   const allTimeStats = useMemo(() => {
+    if (serverTotals) return serverTotals;
+    // Fallback to client-side calc while server totals load
     const baseCurrency = user?.base_currency || 'USD';
-
     return allTransactions.reduce((acc, t) => {
       const norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
-
       if (t.type === TRANSACTION_TYPES.INCOME) {
         const maaser = norm * ((t.maaser_percentage || 10) / 100);
         return { ...acc, totalIncome: acc.totalIncome + norm, totalMaaser: acc.totalMaaser + maaser, incomeCount: acc.incomeCount + 1 };
@@ -92,7 +95,7 @@ export function Dashboard() {
       }
       return acc;
     }, { totalIncome: 0, totalMaaser: 0, totalGiven: 0, totalLent: 0, incomeCount: 0, giveCount: 0, lendCount: 0 });
-  }, [allTransactions, user?.base_currency]);
+  }, [serverTotals, allTransactions, user?.base_currency]);
 
   // Balances depend on mode
   const balances = useMemo(() => {
@@ -109,18 +112,39 @@ export function Dashboard() {
     };
   }, [allTimeStats, isGiveOnly, giveRatio, lendRatio]);
 
+  const PAGE_SIZE = 50;
+
   const fetchAllTransactions = useCallback(async () => {
     if (!user) return;
     setLoading(true);
     try {
-      const data = await apiGetTransactions();
-      setAllTransactions(data || []);
+      const [txnResult, totals] = await Promise.all([
+        apiGetTransactions({ limit: PAGE_SIZE, offset: 0 }),
+        apiGetTransactionTotals(user.base_currency || 'USD'),
+      ]);
+      setAllTransactions(txnResult.transactions || []);
+      setHasMore(txnResult.hasMore || false);
+      setServerTotals(totals);
     } catch (error) {
       console.error('Error fetching transactions:', error);
     } finally {
       setLoading(false);
     }
   }, [user]);
+
+  const loadMore = useCallback(async () => {
+    if (loadingMore || !hasMore) return;
+    setLoadingMore(true);
+    try {
+      const result = await apiGetTransactions({ limit: PAGE_SIZE, offset: allTransactions.length });
+      setAllTransactions(prev => [...prev, ...(result.transactions || [])]);
+      setHasMore(result.hasMore || false);
+    } catch (error) {
+      console.error('Error loading more:', error);
+    } finally {
+      setLoadingMore(false);
+    }
+  }, [loadingMore, hasMore, allTransactions.length]);
 
   // --- TIMEZONE-SAFE date filtering using string comparison ---
   useEffect(() => {
@@ -177,12 +201,16 @@ export function Dashboard() {
 
   useEffect(() => { fetchAllTransactions(); }, [fetchAllTransactions]);
 
+  const refreshAfterChange = useCallback(async () => {
+    await fetchAllTransactions();
+  }, [fetchAllTransactions]);
+
   const processRecurringTransactions = async () => {
     setProcessingRecurring(true);
     try {
       const result = await apiProcessRecurring();
       if (result.created > 0) {
-        await fetchAllTransactions();
+        await refreshAfterChange();
         alert(`Created ${result.created} recurring transaction(s)`);
       } else {
         alert('No new recurring transactions');
@@ -201,7 +229,7 @@ export function Dashboard() {
       } else {
         await apiCreateTransaction(data);
       }
-      await fetchAllTransactions();
+      await refreshAfterChange();
     } catch (error) {
       console.error('Error:', error);
     }
@@ -210,7 +238,7 @@ export function Dashboard() {
   const handleDeleteTransaction = async (id) => {
     try {
       await apiDeleteTransaction(id);
-      await fetchAllTransactions();
+      await refreshAfterChange();
     } catch (error) {
       console.error('Error:', error);
     }
@@ -482,14 +510,31 @@ export function Dashboard() {
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
           <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
             <h3 className="font-semibold text-slate-900">Transactions</h3>
-            <span className="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded-full font-medium">{filteredTransactions.length} items</span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded-full font-medium">{filteredTransactions.length}{hasMore ? '+' : ''} items</span>
+              {serverTotals && <span className="text-xs text-slate-300">{serverTotals.totalCount} total</span>}
+            </div>
           </div>
           <div className="p-4">
             {loading ? (
               <div className="text-center py-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" /></div>
             ) : (
-              <TransactionList transactions={filteredTransactions} onEdit={(t) => { setEditTransaction(t); setShowModal(true); }}
-                onDelete={handleDeleteTransaction} useHebrewDates={useHebrewDates} baseCurrency={user?.base_currency || 'USD'} />
+              <>
+                <TransactionList transactions={filteredTransactions} onEdit={(t) => { setEditTransaction(t); setShowModal(true); }}
+                  onDelete={handleDeleteTransaction} useHebrewDates={useHebrewDates} baseCurrency={user?.base_currency || 'USD'} />
+                {hasMore && (
+                  <div className="text-center pt-4">
+                    <button data-testid="load-more-btn" onClick={loadMore} disabled={loadingMore}
+                      className="px-6 py-2.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors disabled:opacity-50">
+                      {loadingMore ? (
+                        <span className="flex items-center gap-2"><RefreshCw className="w-3.5 h-3.5 animate-spin" />Loading...</span>
+                      ) : (
+                        `Load more transactions`
+                      )}
+                    </button>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

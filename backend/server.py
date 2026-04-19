@@ -758,16 +758,46 @@ async def verify_magic_login(req: VerifyMagicLoginRequest):
 # ============ TRANSACTIONS ============
 
 @api_router.get("/transactions")
-async def get_transactions(user_id: str = Depends(get_current_user)):
+async def get_transactions(request: Request, user_id: str = Depends(get_current_user), limit: int = 50, offset: int = 0):
     async with httpx.AsyncClient() as c:
         r = await c.get(
             f'{SUPABASE_URL}/rest/v1/transactions',
-            params={'user_id': f'eq.{user_id}', 'select': '*', 'order': 'date.desc'},
+            params={'user_id': f'eq.{user_id}', 'select': '*', 'order': 'date.desc,created_at.desc', 'limit': str(limit), 'offset': str(offset)},
             headers=supa_headers()
         )
     if r.status_code != 200:
         raise HTTPException(status_code=500, detail="Failed to fetch transactions")
-    return [decrypt_transaction(t) for t in r.json()]
+    txns = r.json()
+    return {"transactions": [decrypt_transaction(t) for t in txns], "hasMore": len(txns) == limit, "offset": offset, "limit": limit}
+
+
+@api_router.get("/transactions/totals")
+async def get_transaction_totals(user_id: str = Depends(get_current_user), currency: str = 'USD'):
+    async with httpx.AsyncClient() as c:
+        r = await c.get(
+            f'{SUPABASE_URL}/rest/v1/transactions',
+            params={'user_id': f'eq.{user_id}', 'select': 'amount,amount_encrypted,maaser_amount_encrypted,type,currency,exchange_rate_to_base,maaser_percentage'},
+            headers=supa_headers()
+        )
+    if r.status_code != 200:
+        raise HTTPException(status_code=500, detail="Failed to fetch totals")
+    txns = r.json()
+    totals = {"totalIncome": 0, "totalMaaser": 0, "totalGiven": 0, "totalLent": 0, "incomeCount": 0, "giveCount": 0, "lendCount": 0, "totalCount": len(txns)}
+    for raw in txns:
+        t = decrypt_transaction(raw)
+        norm = t['amount'] if t.get('currency') == currency else t['amount'] * (t.get('exchange_rate_to_base') or 1)
+        if t.get('type') == 'income':
+            maaser = norm * ((t.get('maaser_percentage') or 10) / 100)
+            totals["totalIncome"] += norm
+            totals["totalMaaser"] += maaser
+            totals["incomeCount"] += 1
+        elif t.get('type') == 'give':
+            totals["totalGiven"] += norm
+            totals["giveCount"] += 1
+        elif t.get('type') == 'lend':
+            totals["totalLent"] += norm
+            totals["lendCount"] += 1
+    return totals
 
 
 @api_router.post("/transactions")
