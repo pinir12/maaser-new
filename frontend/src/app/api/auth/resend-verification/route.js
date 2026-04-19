@@ -1,7 +1,6 @@
-import { Resend } from 'resend';
 import { supaGet, supaPatch } from '@/lib/supabase-server';
 import { jsonError } from '@/lib/jwt-server';
-import { generateVerificationCode, buildVerificationEmail } from '@/lib/email-verification';
+import { generateVerificationCode, buildVerificationEmail, sendEmail } from '@/lib/email-verification';
 
 export async function POST(request) {
   const { email } = await request.json();
@@ -16,10 +15,10 @@ export async function POST(request) {
       return Response.json({ message: 'Email already verified' });
     }
 
-    // Rate limit: don't allow resend more than once per minute
+    // Rate limit
     if (user.verification_expires) {
       const expiresAt = new Date(user.verification_expires);
-      const createdAt = new Date(expiresAt.getTime() - 60 * 60 * 1000); // code was created 1hr before expiry
+      const createdAt = new Date(expiresAt.getTime() - 60 * 60 * 1000);
       const oneMinuteAfterCreation = new Date(createdAt.getTime() + 60 * 1000);
       if (new Date() < oneMinuteAfterCreation) {
         return jsonError('Please wait at least 1 minute before requesting a new code', 429);
@@ -33,15 +32,10 @@ export async function POST(request) {
       verification_expires: expires,
     });
 
-    // Send email
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) return jsonError('Email service not configured', 500);
-
-    const resend = new Resend(apiKey);
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || '';
     const { html, subject } = buildVerificationEmail(user.name, code, token, appUrl);
 
-    await resend.emails.send({
+    await sendEmail({
       from: 'Maaser Tracker <onboarding@resend.dev>',
       to: [user.email],
       subject,
@@ -50,6 +44,7 @@ export async function POST(request) {
 
     return Response.json({ message: 'Verification email sent' });
   } catch (e) {
+    console.error('[RESEND-VERIFY] Error:', e.message);
     return jsonError(`Failed to resend verification: ${e.message}`, 500);
   }
 }

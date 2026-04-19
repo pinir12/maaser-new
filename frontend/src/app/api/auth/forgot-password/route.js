@@ -1,8 +1,6 @@
-import bcrypt from 'bcryptjs';
 import { supaGet, supaPatch } from '@/lib/supabase-server';
 import { jsonError } from '@/lib/jwt-server';
-import { generateVerificationCode, isDisposableEmail, buildVerificationEmail } from '@/lib/email-verification';
-import { Resend } from 'resend';
+import { generateVerificationCode, sendEmail } from '@/lib/email-verification';
 
 export async function POST(request) {
   const { email } = await request.json();
@@ -11,12 +9,11 @@ export async function POST(request) {
   try {
     const users = await supaGet('users', { email: `eq.${email.toLowerCase()}`, select: '*', limit: '1' });
     if (!users.length) {
-      // Don't reveal if email exists — just say "sent"
       return Response.json({ message: 'If that email exists, a reset link has been sent.' });
     }
     const user = users[0];
 
-    // Rate limit: 1 minute
+    // Rate limit
     if (user.verification_expires) {
       const exp = new Date(user.verification_expires);
       const created = new Date(exp.getTime() - 60 * 60 * 1000);
@@ -32,30 +29,25 @@ export async function POST(request) {
       verification_expires: expires,
     });
 
-    const apiKey = process.env.RESEND_API_KEY;
-    if (apiKey) {
-      const resend = new Resend(apiKey);
-      const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || '';
-      const { html, subject } = buildResetEmail(user.name, code, token, appUrl);
-      await resend.emails.send({
-        from: 'Maaser Tracker <onboarding@resend.dev>',
-        to: [user.email],
-        subject,
-        html,
-      });
-    }
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || '';
+    const resetUrl = `${appUrl}?reset=${encodeURIComponent(token)}`;
+
+    await sendEmail({
+      from: 'Maaser Tracker <onboarding@resend.dev>',
+      to: [user.email],
+      subject: `${code} — Reset your Maaser Tracker password`,
+      html: buildResetEmail(user.name, code, resetUrl),
+    });
 
     return Response.json({ message: 'If that email exists, a reset link has been sent.' });
   } catch (e) {
+    console.error('[FORGOT-PW] Error:', e.message);
     return jsonError(`Failed: ${e.message}`, 500);
   }
 }
 
-function buildResetEmail(name, code, token, appUrl) {
-  const resetUrl = `${appUrl}?reset=${encodeURIComponent(token)}`;
-  return {
-    subject: `${code} — Reset your Maaser Tracker password`,
-    html: `<!DOCTYPE html>
+function buildResetEmail(name, code, resetUrl) {
+  return `<!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 <body style="margin:0;padding:0;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f1f5f9;padding:40px 16px;">
@@ -92,6 +84,5 @@ function buildResetEmail(name, code, token, appUrl) {
       </table>
     </td></tr>
   </table>
-</body></html>`
-  };
+</body></html>`;
 }

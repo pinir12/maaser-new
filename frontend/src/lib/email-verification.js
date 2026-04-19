@@ -1,4 +1,27 @@
 import jwt from 'jsonwebtoken';
+import { Resend } from 'resend';
+
+/**
+ * Send an email via Resend with proper error handling.
+ * Resend SDK does NOT throw on API errors — it returns { data, error }.
+ * This helper throws on error so callers can catch properly.
+ */
+export async function sendEmail({ from, to, subject, html }) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) throw new Error('Email service not configured (RESEND_API_KEY missing)');
+
+  const resend = new Resend(apiKey);
+  const result = await resend.emails.send({ from, to, subject, html });
+
+  if (result.error) {
+    const msg = result.error.message || JSON.stringify(result.error);
+    console.error(`[EMAIL] Resend error: ${msg} | to: ${to}`);
+    throw new Error(msg);
+  }
+
+  return result.data;
+}
+
 
 const JWT_SECRET = process.env.JWT_SECRET;
 

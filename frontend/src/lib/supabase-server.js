@@ -2,10 +2,12 @@
 import jwt from 'jsonwebtoken';
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_KEY = process.env.SUPABASE_KEY; // service_role key
+const SUPABASE_KEY = process.env.SUPABASE_KEY; // service_role key — admin only, bypasses RLS
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY; // anon key — safe for user-scoped calls
 const SUPABASE_JWT_SECRET = process.env.SUPABASE_JWT_SECRET; // from Supabase > Settings > API > JWT Secret
 
 // Service-role headers (admin-level, bypasses RLS)
+// Used for: signup, verification, admin panel, cron jobs
 export function supaHeaders() {
   return {
     'apikey': SUPABASE_KEY,
@@ -15,7 +17,9 @@ export function supaHeaders() {
   };
 }
 
-// User-scoped headers (subject to RLS). Falls back to service-role if JWT secret not configured.
+// User-scoped headers (subject to RLS).
+// Uses anon key + user JWT so PostgREST applies RLS policies.
+// Falls back to service-role if JWT secret or anon key not configured yet.
 export function supaUserHeaders(userId) {
   if (!SUPABASE_JWT_SECRET || !userId) return supaHeaders();
 
@@ -31,7 +35,7 @@ export function supaUserHeaders(userId) {
   );
 
   return {
-    'apikey': SUPABASE_KEY,
+    'apikey': SUPABASE_ANON_KEY || SUPABASE_KEY,
     'Authorization': `Bearer ${userToken}`,
     'Content-Type': 'application/json',
     'Prefer': 'return=representation',

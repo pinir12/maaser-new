@@ -1,8 +1,7 @@
 import bcrypt from 'bcryptjs';
-import { Resend } from 'resend';
 import { supaGet, supaPost } from '@/lib/supabase-server';
 import { jsonError } from '@/lib/jwt-server';
-import { generateVerificationCode, isDisposableEmail, buildVerificationEmail } from '@/lib/email-verification';
+import { generateVerificationCode, isDisposableEmail, buildVerificationEmail, sendEmail } from '@/lib/email-verification';
 
 export async function POST(request) {
   const { email, password, name, base_currency = 'USD' } = await request.json();
@@ -10,7 +9,6 @@ export async function POST(request) {
 
   const lowerEmail = email.toLowerCase().trim();
 
-  // Check for disposable/temp email
   const disposable = await isDisposableEmail(lowerEmail);
   if (disposable) {
     return jsonError('Temporary or disposable email addresses are not allowed. Please use a real email.', 400);
@@ -43,17 +41,13 @@ export async function POST(request) {
 
     // Send verification email
     try {
-      const apiKey = process.env.RESEND_API_KEY;
-      if (apiKey) {
-        const resend = new Resend(apiKey);
-        const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || '';
-        
-        const verify = generateVerificationCode(String(createdUser.id));
-        const { supaPatch } = await import('@/lib/supabase-server');
-        await supaPatch('users', { id: `eq.${createdUser.id}` }, {
-          verification_code: verify.code,
-          verification_expires: verify.expires,
-        });
+      const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || '';
+      const verify = generateVerificationCode(String(createdUser.id));
+      const { supaPatch } = await import('@/lib/supabase-server');
+      await supaPatch('users', { id: `eq.${createdUser.id}` }, {
+        verification_code: verify.code,
+        verification_expires: verify.expires,
+      });
 
         const { html, subject } = buildVerificationEmail(name, verify.code, verify.token, appUrl);
         await resend.emails.send({
@@ -64,7 +58,7 @@ export async function POST(request) {
         }).catch(() => {});
       }
     } catch (emailErr) {
-      console.error('Failed to send verification email:', emailErr);
+      console.error('[SIGNUP] Email send failed:', emailErr.message);
     }
 
     return Response.json({ needsVerification: true, email: lowerEmail });
