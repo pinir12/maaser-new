@@ -1,56 +1,64 @@
 # Maaser Tracker — Product Requirements Document
 
 ## Original Problem Statement
-Build a personal finance tracker for the frum community to track maaser (tithing) obligations. The app auto-calculates 10% maaser on income and tracks give/lend distributions against that obligation.
+Build a personal finance tracker for the frum community to track maaser (tithing) obligations.
 
 ## Architecture
 - **Framework**: Next.js (App Router) — unified frontend + serverless API routes
-- **Database**: Supabase (PostgreSQL), accessed server-side only
-- **Security**: AES zero-knowledge encryption, all DB calls server-side only
+- **Database**: Supabase (PostgreSQL), server-side only with JWT-based RLS
+- **Security**: AES zero-knowledge encryption, JWT RLS, all DB calls server-side
 - **Deployment**: Vercel-ready
 - **PWA**: Service Worker + manifest
-- **Email**: Resend for verification, password reset, magic login, contact, summaries
+- **Email**: Resend (requires verified domain for non-owner emails)
 
-## Core Features (All Implemented)
-- JWT auth with email verification on signup
-- **Passwordless signup** (email-only, no password required)
-- **Magic link login** (for passwordless users or anyone)
-- **Forgot password** (code + magic link → set new password)
-- **Set password in Settings** (for passwordless users)
+## Core Features
+- JWT auth with email verification (code + magic link)
+- Passwordless signup + magic link login
+- Forgot password flow
 - Disposable email blocking
 - Transaction CRUD with Give/Lend split balances
 - Hebrew & Gregorian calendar support
 - Recurring transactions with cron processing
-- CSV bank statement import with smart column mapping
-- Analytics charts, Export to CSV/PDF
-- Contact form, Admin panel
+- CSV import with smart column mapping + headerless CSV support
+- Analytics, Export, Contact form, Admin panel
 - SEO landing page, Skeleton loading states
 
-## What's Been Implemented
-- Full Next.js migration from CRA + FastAPI (Apr 2026)
-- Zero-knowledge AES encryption
-- CSV import modal
-- PWA setup
-- Polished landing page
-- Email verification on signup (Apr 2026)
-- **Forgot password flow** (Apr 2026)
-- **Passwordless signup + magic link login** (Apr 2026)
-- **Set password via Settings** (Apr 2026)
-- All 3 email templates: verification (blue), reset (slate/dark), magic login (green)
+## JWT RLS Setup (User Action Required)
+1. Get your Supabase JWT secret from: Project Settings > API > JWT Secret
+2. Add to .env.local: `SUPABASE_JWT_SECRET=your-secret-here`
+3. Run the RLS SQL in Supabase SQL Editor (see below)
+4. Restart the app
 
-## Database Schema
-- `users`: id, email, password_hash (empty string for passwordless), name, base_currency, distribution_mode, created_at, default_view, use_hebrew_calendar, is_admin, default_maaser_percentage, give_ratio, lend_ratio, email_verified, verification_code, verification_expires
+### RLS SQL to run:
+```sql
+-- Enable RLS on tables
+ALTER TABLE transactions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 
-## Backlog (NOT requested)
-- P1: Push notification / email reminders for recurring transactions
-- P2: Budget goals and tracking
+-- Transactions: users can only access their own
+CREATE POLICY "Users read own transactions" ON transactions FOR SELECT
+  USING (user_id = (current_setting('request.jwt.claims', true)::json->>'sub')::uuid);
+CREATE POLICY "Users insert own transactions" ON transactions FOR INSERT
+  WITH CHECK (user_id = (current_setting('request.jwt.claims', true)::json->>'sub')::uuid);
+CREATE POLICY "Users update own transactions" ON transactions FOR UPDATE
+  USING (user_id = (current_setting('request.jwt.claims', true)::json->>'sub')::uuid);
+CREATE POLICY "Users delete own transactions" ON transactions FOR DELETE
+  USING (user_id = (current_setting('request.jwt.claims', true)::json->>'sub')::uuid);
+
+-- Users: can only read/update their own row
+CREATE POLICY "Users read own profile" ON users FOR SELECT
+  USING (id = (current_setting('request.jwt.claims', true)::json->>'sub')::uuid);
+CREATE POLICY "Users update own profile" ON users FOR UPDATE
+  USING (id = (current_setting('request.jwt.claims', true)::json->>'sub')::uuid);
+
+-- Service role (used for signup, admin) bypasses RLS automatically
+```
+
+## Resend Email Note
+The `onboarding@resend.dev` sender only delivers to the Resend account owner's email. To send to all users, verify a custom domain at resend.com/domains and update the `from` address in the code.
 
 ## Key Files
-- `/app/backend/server.py` — FastAPI backend (mirrors Next.js routes for K8s dev)
-- `/app/frontend/src/app/api/auth/` — All auth API routes
-- `/app/frontend/src/components/AuthPage.js` — Auth with all flows
-- `/app/frontend/src/components/ForgotPassword.js` — Forgot password
-- `/app/frontend/src/components/MagicLoginFlow.js` — Magic link login
-- `/app/frontend/src/components/EmailVerification.js` — 6-digit code input
-- `/app/frontend/src/components/SettingsModal.js` — Settings with set password
-- `/app/frontend/src/lib/email-verification.js` — Code generation, disposable check, email template
+- `/app/frontend/src/lib/supabase-server.js` — User-scoped helpers (supaGetUser, supaPostUser, etc.)
+- `/app/frontend/src/app/api/` — All API routes (use user-scoped Supabase calls)
+- `/app/frontend/src/components/CSVImportModal.js` — CSV import with headerless support
+- `/app/backend/server.py` — FastAPI backend (mirrors Next.js for K8s)

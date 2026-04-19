@@ -1,5 +1,5 @@
 import { getCurrentUser, jsonError } from '@/lib/jwt-server';
-import { supaPatch, supaDelete } from '@/lib/supabase-server';
+import { supaPatchUser, supaDeleteUser } from '@/lib/supabase-server';
 import { encryptTransaction, decryptTransaction } from '@/lib/encryption';
 
 export async function PUT(request, { params }) {
@@ -11,11 +11,10 @@ export async function PUT(request, { params }) {
   data.updated_at = new Date().toISOString();
   if (data.maaser_percentage != null) data.maaser_percentage = Math.round(data.maaser_percentage);
 
-  // Encrypt sensitive fields
   const encrypted = encryptTransaction(data);
 
   try {
-    const result = await supaPatch('transactions', { id: `eq.${id}`, user_id: `eq.${auth.userId}` }, encrypted);
+    const result = await supaPatchUser('transactions', { id: `eq.${id}`, user_id: `eq.${auth.userId}` }, encrypted, auth.userId);
     if (Array.isArray(result) && result.length) return Response.json(decryptTransaction(result[0]));
     return Response.json({ success: true });
   } catch {
@@ -29,7 +28,7 @@ export async function DELETE(request, { params }) {
 
   const { id } = await params;
   try {
-    await supaDelete('transactions', { id: `eq.${id}`, user_id: `eq.${auth.userId}` });
+    await supaDeleteUser('transactions', { id: `eq.${id}`, user_id: `eq.${auth.userId}` }, auth.userId);
     return Response.json({ success: true });
   } catch {
     return jsonError('Failed to delete transaction', 500);

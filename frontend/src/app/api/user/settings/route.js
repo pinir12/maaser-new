@@ -1,12 +1,12 @@
 import { getCurrentUser, stripPassword, jsonError } from '@/lib/jwt-server';
-import { supaGet, supaPatch } from '@/lib/supabase-server';
+import { supaGetUser, supaPatchUser } from '@/lib/supabase-server';
 
 export async function GET(request) {
   const auth = await getCurrentUser(request);
   if (auth.error) return jsonError(auth.error, auth.status);
 
   try {
-    const users = await supaGet('users', { id: `eq.${auth.userId}`, select: '*' });
+    const users = await supaGetUser('users', { id: `eq.${auth.userId}`, select: '*' }, auth.userId);
     if (!users.length) return jsonError('User not found', 404);
     return Response.json(stripPassword(users[0]));
   } catch {
@@ -26,9 +26,8 @@ export async function PUT(request) {
     const bcrypt = (await import('bcryptjs')).default;
     const hash = await bcrypt.hash(updates.new_password, 10);
     try {
-      await supaPatch('users', { id: `eq.${auth.userId}` }, { password_hash: hash });
-      // Return fresh user
-      const users = await supaGet('users', { id: `eq.${auth.userId}`, select: '*' });
+      await supaPatchUser('users', { id: `eq.${auth.userId}` }, { password_hash: hash }, auth.userId);
+      const users = await supaGetUser('users', { id: `eq.${auth.userId}`, select: '*' }, auth.userId);
       if (users.length) return Response.json(stripPassword(users[0]));
       return Response.json({ success: true });
     } catch {
@@ -44,7 +43,7 @@ export async function PUT(request) {
   if (!Object.keys(safe).length) return jsonError('No valid fields to update');
 
   try {
-    const result = await supaPatch('users', { id: `eq.${auth.userId}` }, safe);
+    const result = await supaPatchUser('users', { id: `eq.${auth.userId}` }, safe, auth.userId);
     if (Array.isArray(result) && result.length) return Response.json(stripPassword(result[0]));
     return Response.json({ success: true });
   } catch {
