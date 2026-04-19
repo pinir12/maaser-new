@@ -41,7 +41,7 @@ export async function POST(request) {
 
     // Send verification email
     try {
-      const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || '';
+      const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || (process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : '');
       const verify = generateVerificationCode(String(createdUser.id));
       const { supaPatch } = await import('@/lib/supabase-server');
       await supaPatch('users', { id: `eq.${createdUser.id}` }, {

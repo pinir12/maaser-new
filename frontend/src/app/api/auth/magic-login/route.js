@@ -34,7 +34,7 @@ export async function POST(request) {
       verification_expires: expires,
     });
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || '';
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || (process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : '');
     const loginUrl = `${appUrl}?login=${encodeURIComponent(token)}`;
 
     console.log('[MAGIC-LOGIN] Sending email to', user.email);
