@@ -572,7 +572,7 @@ def _send_signup_email(name, email):
     </div>"""
     try:
         resend.Emails.send({
-            "from": "Finance Tracker <mail@pinir.co.uk>",
+            "from": "Maaser Tracker <mail@pinir.co.uk>",
             "to": [ADMIN_EMAIL],
             "subject": f"New Signup: {name}",
             "html": html
