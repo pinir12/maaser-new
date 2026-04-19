@@ -133,8 +133,12 @@ export function apiLogout() {
 }
 
 // Transactions
-export function apiGetTransactions() {
-  return request('/api/transactions');
+export function apiGetTransactions({ limit = 50, offset = 0 } = {}) {
+  return request(`/api/transactions?limit=${limit}&offset=${offset}`);
+}
+
+export function apiGetTransactionTotals(currency = 'USD') {
+  return request(`/api/transactions/totals?currency=${currency}`);
 }
 
 export function apiCreateTransaction(txn) {

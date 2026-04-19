@@ -14,7 +14,7 @@ function AccordionSection({ type, label, items, icon: Icon, colors, defaultOpen,
   const total = items.reduce((sum, t) => sum + (t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1)), 0);
 
   return (
-    <div data-testid={`accordion-${type}`} className="rounded-xl border border-slate-200/80 overflow-hidden bg-white/60 backdrop-blur-sm">
+    <div data-testid={`accordion-${type}`} className="rounded-xl border border-slate-200/80 bg-white/60 backdrop-blur-sm">
       <button
         data-testid={`accordion-trigger-${type}`}
         onClick={() => setOpen(!open)}
@@ -36,9 +36,9 @@ function AccordionSection({ type, label, items, icon: Icon, colors, defaultOpen,
       </button>
 
       <div
-        className={`transition-all duration-300 ease-in-out overflow-hidden ${open ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'}`}
+        className={`transition-all duration-300 ease-in-out ${open ? 'max-h-none' : 'max-h-0 overflow-hidden opacity-0'}`}
       >
-        <div className="px-3 pb-3 space-y-1.5">
+        <div className="px-3 pb-4 space-y-1.5">
           {items.map((t) => (
             <div
               key={t.id}

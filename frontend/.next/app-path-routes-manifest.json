@@ -3,9 +3,15 @@
   "/_not-found/page": "/_not-found",
   "/api/admin/users/[id]/route": "/api/admin/users/[id]",
   "/api/admin/users/route": "/api/admin/users",
+  "/api/auth/forgot-password/route": "/api/auth/forgot-password",
   "/api/auth/login/route": "/api/auth/login",
+  "/api/auth/magic-login/route": "/api/auth/magic-login",
   "/api/auth/me/route": "/api/auth/me",
+  "/api/auth/resend-verification/route": "/api/auth/resend-verification",
+  "/api/auth/reset-password/route": "/api/auth/reset-password",
   "/api/auth/signup/route": "/api/auth/signup",
+  "/api/auth/verify-email/route": "/api/auth/verify-email",
+  "/api/auth/verify-magic-login/route": "/api/auth/verify-magic-login",
   "/api/cron/monthly-summary/route": "/api/cron/monthly-summary",
   "/api/cron/recurring/route": "/api/cron/recurring",
   "/api/currency/rates/[base]/route": "/api/currency/rates/[base]",
@@ -17,6 +23,7 @@
   "/api/transactions/recurring/route": "/api/transactions/recurring",
   "/api/transactions/route": "/api/transactions",
   "/api/transactions/suggestions/route": "/api/transactions/suggestions",
+  "/api/transactions/totals/route": "/api/transactions/totals",
   "/api/user/settings/route": "/api/user/settings",
   "/page": "/"
 }

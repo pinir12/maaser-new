@@ -96,10 +96,22 @@
       "namedRegex": "^/api/admin/users(?:/)?$"
     },
     {
+      "page": "/api/auth/forgot-password",
+      "regex": "^/api/auth/forgot\\-password(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/forgot\\-password(?:/)?$"
+    },
+    {
       "page": "/api/auth/login",
       "regex": "^/api/auth/login(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/api/auth/login(?:/)?$"
+    },
+    {
+      "page": "/api/auth/magic-login",
+      "regex": "^/api/auth/magic\\-login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/magic\\-login(?:/)?$"
     },
     {
       "page": "/api/auth/me",
@@ -108,10 +120,34 @@
       "namedRegex": "^/api/auth/me(?:/)?$"
     },
     {
+      "page": "/api/auth/resend-verification",
+      "regex": "^/api/auth/resend\\-verification(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/resend\\-verification(?:/)?$"
+    },
+    {
+      "page": "/api/auth/reset-password",
+      "regex": "^/api/auth/reset\\-password(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/reset\\-password(?:/)?$"
+    },
+    {
       "page": "/api/auth/signup",
       "regex": "^/api/auth/signup(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/api/auth/signup(?:/)?$"
+    },
+    {
+      "page": "/api/auth/verify-email",
+      "regex": "^/api/auth/verify\\-email(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/verify\\-email(?:/)?$"
+    },
+    {
+      "page": "/api/auth/verify-magic-login",
+      "regex": "^/api/auth/verify\\-magic\\-login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/verify\\-magic\\-login(?:/)?$"
     },
     {
       "page": "/api/cron/monthly-summary",
@@ -166,6 +202,12 @@
       "regex": "^/api/transactions/suggestions(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/api/transactions/suggestions(?:/)?$"
+    },
+    {
+      "page": "/api/transactions/totals",
+      "regex": "^/api/transactions/totals(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/transactions/totals(?:/)?$"
     },
     {
       "page": "/api/user/settings",
