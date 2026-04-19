@@ -1,8 +1,7 @@
 import bcrypt from 'bcryptjs';
-import { Resend } from 'resend';
 import { supaGet, supaPost } from '@/lib/supabase-server';
 import { jsonError } from '@/lib/jwt-server';
-import { generateVerificationCode, isDisposableEmail, buildVerificationEmail } from '@/lib/email-verification';
+import { generateVerificationCode, isDisposableEmail, buildVerificationEmail, sendEmail } from '@/lib/email-verification';
 
 export async function POST(request) {
   const { email, password, name, base_currency = 'USD' } = await request.json();
@@ -10,7 +9,6 @@ export async function POST(request) {
 
   const lowerEmail = email.toLowerCase().trim();
 
-  // Check for disposable/temp email
   const disposable = await isDisposableEmail(lowerEmail);
   if (disposable) {
     return jsonError('Temporary or disposable email addresses are not allowed. Please use a real email.', 400);
@@ -43,40 +41,32 @@ export async function POST(request) {
 
     // Send verification email
     try {
-      const apiKey = process.env.RESEND_API_KEY;
-      if (apiKey) {
-        const resend = new Resend(apiKey);
-        const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || '';
-        
-        const verify = generateVerificationCode(String(createdUser.id));
-        const { supaPatch } = await import('@/lib/supabase-server');
-        await supaPatch('users', { id: `eq.${createdUser.id}` }, {
-          verification_code: verify.code,
-          verification_expires: verify.expires,
-        });
+      const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || '';
+      const verify = generateVerificationCode(String(createdUser.id));
+      const { supaPatch } = await import('@/lib/supabase-server');
+      await supaPatch('users', { id: `eq.${createdUser.id}` }, {
+        verification_code: verify.code,
+        verification_expires: verify.expires,
+      });
 
-        const { html, subject } = buildVerificationEmail(name, verify.code, verify.token, appUrl);
-        const emailResult = await resend.emails.send({
-          from: 'Maaser Tracker <onboarding@resend.dev>',
-          to: [lowerEmail],
-          subject,
-          html,
-        });
-        if (emailResult.error) {
-          console.error('[SIGNUP] Resend error:', emailResult.error.message);
-        }
+      const { html, subject } = buildVerificationEmail(name, verify.code, verify.token, appUrl);
+      await sendEmail({
+        from: 'Maaser Tracker <onboarding@resend.dev>',
+        to: [lowerEmail],
+        subject,
+        html,
+      });
 
-        // Also notify admin (fire and forget)
-        const adminEmail = process.env.ADMIN_EMAIL || 'mail@pinir.co.uk';
-        resend.emails.send({
-          from: 'Finance Tracker <onboarding@resend.dev>',
-          to: [adminEmail],
-          subject: `New Signup: ${name}`,
-          html: `<div style="font-family:-apple-system,sans-serif;max-width:500px;margin:0 auto"><div style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);padding:24px;border-radius:12px 12px 0 0;color:white"><h2 style="margin:0">New User Registration</h2></div><div style="background:#f8fafc;padding:24px;border:1px solid #e2e8f0;border-radius:0 0 12px 12px"><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${lowerEmail}</p><p><strong>Type:</strong> ${password ? 'Password' : 'Passwordless'}</p><p><strong>Time:</strong> ${new Date().toISOString()}</p></div></div>`,
-        }).catch(() => {});
-      }
+      // Notify admin (fire and forget)
+      const adminEmail = process.env.ADMIN_EMAIL || 'mail@pinir.co.uk';
+      sendEmail({
+        from: 'Finance Tracker <onboarding@resend.dev>',
+        to: [adminEmail],
+        subject: `New Signup: ${name}`,
+        html: `<div style="font-family:-apple-system,sans-serif;max-width:500px;margin:0 auto"><div style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);padding:24px;border-radius:12px 12px 0 0;color:white"><h2 style="margin:0">New User Registration</h2></div><div style="background:#f8fafc;padding:24px;border:1px solid #e2e8f0;border-radius:0 0 12px 12px"><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${lowerEmail}</p><p><strong>Type:</strong> ${password ? 'Password' : 'Passwordless'}</p><p><strong>Time:</strong> ${new Date().toISOString()}</p></div></div>`,
+      }).catch(() => {});
     } catch (emailErr) {
-      console.error('[SIGNUP] Failed to send verification email:', emailErr);
+      console.error('[SIGNUP] Email send failed:', emailErr.message);
     }
 
     return Response.json({ needsVerification: true, email: lowerEmail });
