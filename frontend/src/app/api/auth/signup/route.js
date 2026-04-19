@@ -51,7 +51,7 @@ export async function POST(request) {
 
       const { html, subject } = buildVerificationEmail(name, verify.code, verify.token, appUrl);
       await sendEmail({
-        from: 'Maaser Tracker <onboarding@resend.dev>',
+        from: 'Maaser Tracker <mail@pinir.co.uk>',
         to: [lowerEmail],
         subject,
         html,
@@ -62,7 +62,7 @@ export async function POST(request) {
       const signupType = password ? 'Password' : 'Passwordless';
       const adminHtml = '<div style="font-family:-apple-system,sans-serif;max-width:500px;margin:0 auto"><div style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);padding:24px;border-radius:12px 12px 0 0;color:white"><h2 style="margin:0">New User Registration</h2></div><div style="background:#f8fafc;padding:24px;border:1px solid #e2e8f0;border-radius:0 0 12px 12px"><p><strong>Name:</strong> ' + name + '</p><p><strong>Email:</strong> ' + lowerEmail + '</p><p><strong>Type:</strong> ' + signupType + '</p><p><strong>Time:</strong> ' + new Date().toISOString() + '</p></div></div>';
       sendEmail({
-        from: 'Finance Tracker <onboarding@resend.dev>',
+        from: 'Maaser Tracker <mail@pinir.co.uk>',
         to: [adminEmail],
         subject: 'New Signup: ' + name,
         html: adminHtml,

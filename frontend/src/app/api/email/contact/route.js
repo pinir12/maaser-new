@@ -14,7 +14,7 @@ export async function POST(request) {
   try {
     const resend = new Resend(apiKey);
     const result = await resend.emails.send({
-      from: 'Finance Tracker <onboarding@resend.dev>',
+      from: 'Finance Tracker <mail@pinir.co.uk>',
       to: [adminEmail],
       subject: `Contact: ${name}`,
       html,

@@ -10,6 +10,7 @@ export async function POST(request) {
 
   try {
     const users = await supaGet('users', { email: `eq.${lowerEmail}`, select: '*', limit: '1' });
+    console.log('[MAGIC-LOGIN] User lookup for', lowerEmail, '- found:', users.length);
     if (!users.length) {
       return Response.json({ message: 'If that email exists, a login link has been sent.', sent: true });
     }
@@ -20,11 +21,13 @@ export async function POST(request) {
       const exp = new Date(user.verification_expires);
       const created = new Date(exp.getTime() - 60 * 60 * 1000);
       if (new Date() < new Date(created.getTime() + 60 * 1000)) {
+        console.log('[MAGIC-LOGIN] Rate limited for', lowerEmail);
         return jsonError('Please wait at least 1 minute before requesting another link', 429);
       }
     }
 
     const { code, expires, token } = generateVerificationCode(String(user.id), 'magic_login');
+    console.log('[MAGIC-LOGIN] Generated code for', lowerEmail);
 
     await supaPatch('users', { id: `eq.${user.id}` }, {
       verification_code: code,
@@ -34,12 +37,14 @@ export async function POST(request) {
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || '';
     const loginUrl = `${appUrl}?login=${encodeURIComponent(token)}`;
 
+    console.log('[MAGIC-LOGIN] Sending email to', user.email);
     await sendEmail({
-      from: 'Maaser Tracker <onboarding@resend.dev>',
+      from: 'Maaser Tracker <mail@pinir.co.uk>',
       to: [user.email],
       subject: `${code} — Sign in to Maaser Tracker`,
       html: buildMagicLoginEmail(user.name, code, loginUrl),
     });
+    console.log('[MAGIC-LOGIN] Email sent successfully to', user.email);
 
     return Response.json({ message: 'If that email exists, a login link has been sent.', sent: true });
   } catch (e) {

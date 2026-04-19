@@ -287,3 +287,4 @@ credentials.json
 *.pem
 *.key
 .credentials
+frontend/.next/dev/cache/turbopack/c573e8c4/00001009.sst

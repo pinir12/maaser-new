@@ -33,7 +33,7 @@ export async function POST(request) {
     const resetUrl = `${appUrl}?reset=${encodeURIComponent(token)}`;
 
     await sendEmail({
-      from: 'Maaser Tracker <onboarding@resend.dev>',
+      from: 'Maaser Tracker <mail@pinir.co.uk>',
       to: [user.email],
       subject: `${code} — Reset your Maaser Tracker password`,
       html: buildResetEmail(user.name, code, resetUrl),
