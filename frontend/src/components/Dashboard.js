@@ -218,10 +218,9 @@ export function Dashboard() {
 
   const handleMonthChange = (month, year) => { setSelectedMonth(month); setSelectedYear(year); };
 
-  const handleCalendarToggle = async () => {
+  const handleCalendarToggle = () => {
     const newVal = !useHebrewDates;
     setUseHebrewDates(newVal);
-    await updateUser({ use_hebrew_calendar: newVal });
     if (newVal) {
       const heb = getCurrentHebrewMonth();
       setSelectedMonth(heb.month); setSelectedYear(heb.year);
