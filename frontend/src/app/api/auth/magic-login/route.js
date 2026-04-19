@@ -10,6 +10,7 @@ export async function POST(request) {
 
   try {
     const users = await supaGet('users', { email: `eq.${lowerEmail}`, select: '*', limit: '1' });
+    console.log('[MAGIC-LOGIN] User lookup for', lowerEmail, '- found:', users.length);
     if (!users.length) {
       return Response.json({ message: 'If that email exists, a login link has been sent.', sent: true });
     }
@@ -20,11 +21,13 @@ export async function POST(request) {
       const exp = new Date(user.verification_expires);
       const created = new Date(exp.getTime() - 60 * 60 * 1000);
       if (new Date() < new Date(created.getTime() + 60 * 1000)) {
+        console.log('[MAGIC-LOGIN] Rate limited for', lowerEmail);
         return jsonError('Please wait at least 1 minute before requesting another link', 429);
       }
     }
 
     const { code, expires, token } = generateVerificationCode(String(user.id), 'magic_login');
+    console.log('[MAGIC-LOGIN] Generated code for', lowerEmail);
 
     await supaPatch('users', { id: `eq.${user.id}` }, {
       verification_code: code,
@@ -34,12 +37,14 @@ export async function POST(request) {
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.REACT_APP_BACKEND_URL || '';
     const loginUrl = `${appUrl}?login=${encodeURIComponent(token)}`;
 
+    console.log('[MAGIC-LOGIN] Sending email to', user.email);
     await sendEmail({
-      from: 'Maaser Tracker <onboarding@resend.dev>',
+      from: 'Maaser Tracker <mail@pinir.co.uk>',
       to: [user.email],
       subject: `${code} — Sign in to Maaser Tracker`,
       html: buildMagicLoginEmail(user.name, code, loginUrl),
     });
+    console.log('[MAGIC-LOGIN] Email sent successfully to', user.email);
 
     return Response.json({ message: 'If that email exists, a login link has been sent.', sent: true });
   } catch (e) {
@@ -56,9 +61,9 @@ function buildMagicLoginEmail(name, code, loginUrl) {
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.06);">
         <tr><td style="background:linear-gradient(135deg,#059669 0%,#047857 100%);padding:32px 32px 28px;text-align:center;">
-          <div style="width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 16px;"><tr><td style="width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:12px;text-align:center;vertical-align:middle;">
             <span style="color:#ffffff;font-size:24px;font-weight:800;line-height:48px;">M</span>
-          </div>
+          </td></tr></table>
           <h1 style="color:#ffffff;font-size:22px;font-weight:700;margin:0;">Sign in to Maaser Tracker</h1>
           <p style="color:rgba(255,255,255,0.8);font-size:14px;margin:8px 0 0;">Hi ${name || 'there'}!</p>
         </td></tr>

@@ -36,7 +36,7 @@ export async function POST(request) {
     const { html, subject } = buildVerificationEmail(user.name, code, token, appUrl);
 
     await sendEmail({
-      from: 'Maaser Tracker <onboarding@resend.dev>',
+      from: 'Maaser Tracker <mail@pinir.co.uk>',
       to: [user.email],
       subject,
       html,

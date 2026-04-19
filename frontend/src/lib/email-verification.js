@@ -74,9 +74,9 @@ export function buildVerificationEmail(userName, code, token, appUrl) {
         
         <!-- Header -->
         <tr><td style="background:linear-gradient(135deg,#2563eb 0%,#4f46e5 100%);padding:32px 32px 28px;text-align:center;">
-          <div style="width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 16px;"><tr><td style="width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:12px;text-align:center;vertical-align:middle;">
             <span style="color:#ffffff;font-size:24px;font-weight:800;line-height:48px;">M</span>
-          </div>
+          </td></tr></table>
           <h1 style="color:#ffffff;font-size:22px;font-weight:700;margin:0;letter-spacing:-0.3px;">Verify your email</h1>
           <p style="color:rgba(255,255,255,0.8);font-size:14px;margin:8px 0 0;">Welcome to Maaser Tracker, ${userName || 'there'}!</p>
         </td></tr>

@@ -33,7 +33,7 @@ export async function POST(request) {
     const resetUrl = `${appUrl}?reset=${encodeURIComponent(token)}`;
 
     await sendEmail({
-      from: 'Maaser Tracker <onboarding@resend.dev>',
+      from: 'Maaser Tracker <mail@pinir.co.uk>',
       to: [user.email],
       subject: `${code} — Reset your Maaser Tracker password`,
       html: buildResetEmail(user.name, code, resetUrl),
@@ -54,9 +54,9 @@ function buildResetEmail(name, code, resetUrl) {
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.06);">
         <tr><td style="background:linear-gradient(135deg,#1e293b 0%,#334155 100%);padding:32px 32px 28px;text-align:center;">
-          <div style="width:48px;height:48px;background:rgba(255,255,255,0.15);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 16px;"><tr><td style="width:48px;height:48px;background:rgba(255,255,255,0.15);border-radius:12px;text-align:center;vertical-align:middle;">
             <span style="color:#ffffff;font-size:24px;font-weight:800;line-height:48px;">M</span>
-          </div>
+          </td></tr></table>
           <h1 style="color:#ffffff;font-size:22px;font-weight:700;margin:0;">Reset your password</h1>
           <p style="color:rgba(255,255,255,0.7);font-size:14px;margin:8px 0 0;">Hi ${name || 'there'}, we received a password reset request.</p>
         </td></tr>

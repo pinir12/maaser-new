@@ -51,7 +51,7 @@ export async function POST() {
 
       try {
         await resend.emails.send({
-          from: "Maaser Tracker <mail@pinir.co.uk>",
+          from: 'Maaser Tracker <mail@pinir.co.uk>',
           to: [userEmail],
           subject: `Your Maaser Summary - ${monthName}`,
           html,

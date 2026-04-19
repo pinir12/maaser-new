@@ -282,9 +282,9 @@ def _build_verification_email_html(name, code, token, app_url):
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.06);">
         <tr><td style="background:linear-gradient(135deg,#2563eb 0%,#4f46e5 100%);padding:32px 32px 28px;text-align:center;">
-          <div style="width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 16px;"><tr><td style="width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:12px;text-align:center;vertical-align:middle;">
             <span style="color:#ffffff;font-size:24px;font-weight:800;line-height:48px;">M</span>
-          </div>
+          </td></tr></table>
           <h1 style="color:#ffffff;font-size:22px;font-weight:700;margin:0;">Verify your email</h1>
           <p style="color:rgba(255,255,255,0.8);font-size:14px;margin:8px 0 0;">Welcome to Maaser Tracker, {name or 'there'}!</p>
         </td></tr>
@@ -407,7 +407,7 @@ async def signup(req: SignupRequest):
                 app_url = os.environ.get('REACT_APP_BACKEND_URL', '')
                 html = _build_verification_email_html(req.name, code, verify_token, app_url)
                 await asyncio.to_thread(resend.Emails.send, {
-                    "from": "Maaser Tracker <onboarding@resend.dev>",
+                    "from": "Maaser Tracker <mail@pinir.co.uk>",
                     "to": [lower_email],
                     "subject": f"{code} is your Maaser Tracker verification code",
                     "html": html
@@ -546,7 +546,7 @@ async def resend_verification(req: ResendVerificationRequest):
             html = _build_verification_email_html(user.get('name', ''), code, verify_token, app_url)
             try:
                 await asyncio.to_thread(resend.Emails.send, {
-                    "from": "Maaser Tracker <onboarding@resend.dev>",
+                    "from": "Maaser Tracker <mail@pinir.co.uk>",
                     "to": [user['email']],
                     "subject": f"{code} is your Maaser Tracker verification code",
                     "html": html
@@ -572,7 +572,7 @@ def _send_signup_email(name, email):
     </div>"""
     try:
         resend.Emails.send({
-            "from": "Maaser Tracker <mail@pinir.co.uk>",
+            "from": "Finance Tracker <mail@pinir.co.uk>",
             "to": [ADMIN_EMAIL],
             "subject": f"New Signup: {name}",
             "html": html
@@ -610,7 +610,7 @@ async def forgot_password(req: ForgotPasswordRequest):
             html = _build_verification_email_html(user.get('name', ''), code, verify_token, app_url).replace('Verify your email', 'Reset your password').replace('verify=', 'reset=').replace('Verify Email Address', 'Reset Password')
             try:
                 await asyncio.to_thread(resend.Emails.send, {
-                    "from": "Maaser Tracker <onboarding@resend.dev>",
+                    "from": "Maaser Tracker <mail@pinir.co.uk>",
                     "to": [user['email']],
                     "subject": f"{code} — Reset your Maaser Tracker password",
                     "html": html
@@ -699,7 +699,7 @@ async def magic_login(req: MagicLoginRequest):
             html = _build_verification_email_html(user.get('name', ''), code, verify_token, app_url).replace('Verify your email', 'Sign in to Maaser Tracker').replace('verify=', 'login=').replace('Verify Email Address', 'Sign In Now')
             try:
                 await asyncio.to_thread(resend.Emails.send, {
-                    "from": "Maaser Tracker <onboarding@resend.dev>",
+                    "from": "Maaser Tracker <mail@pinir.co.uk>",
                     "to": [user['email']],
                     "subject": f"{code} — Sign in to Maaser Tracker",
                     "html": html
