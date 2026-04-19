@@ -345,12 +345,12 @@ export function Dashboard() {
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex gap-2">
             <button data-testid="add-transaction-btn" onClick={() => { setEditTransaction(null); setShowModal(true); }}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/30 active:translate-y-0">
-              <Plus className="w-5 h-5" />Add Transaction
+              className="flex items-center justify-center gap-2 px-5 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/30 active:translate-y-0">
+              <Plus className="w-4 h-4" />Add Transaction
             </button>
             <button data-testid="csv-import-open-btn" onClick={() => setShowCSVImport(true)}
-              className="p-3 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl border border-slate-200 transition-all" title="Import from CSV">
-              <FileSpreadsheet className="w-5 h-5" />
+              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl border border-slate-200 transition-all" title="Import from CSV">
+              <FileSpreadsheet className="w-4 h-4" />
             </button>
           </div>
           <div className="flex-1">
