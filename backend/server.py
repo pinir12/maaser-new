@@ -772,19 +772,25 @@ async def get_transactions(request: Request, user_id: str = Depends(get_current_
 
 
 @api_router.get("/transactions/totals")
-async def get_transaction_totals(user_id: str = Depends(get_current_user), currency: str = 'USD'):
+async def get_transaction_totals(user_id: str = Depends(get_current_user), currency: str = 'USD', date_from: str = None, date_to: str = None):
     async with httpx.AsyncClient() as c:
         r = await c.get(
             f'{SUPABASE_URL}/rest/v1/transactions',
-            params={'user_id': f'eq.{user_id}', 'select': 'amount,amount_encrypted,maaser_amount_encrypted,type,currency,exchange_rate_to_base,maaser_percentage'},
+            params={'user_id': f'eq.{user_id}', 'select': 'amount,amount_encrypted,maaser_amount_encrypted,type,currency,exchange_rate_to_base,maaser_percentage,date'},
             headers=supa_headers()
         )
     if r.status_code != 200:
         raise HTTPException(status_code=500, detail="Failed to fetch totals")
     txns = r.json()
-    totals = {"totalIncome": 0, "totalMaaser": 0, "totalGiven": 0, "totalLent": 0, "incomeCount": 0, "giveCount": 0, "lendCount": 0, "totalCount": len(txns)}
+    totals = {"totalIncome": 0, "totalMaaser": 0, "totalGiven": 0, "totalLent": 0, "incomeCount": 0, "giveCount": 0, "lendCount": 0, "totalCount": 0}
     for raw in txns:
         t = decrypt_transaction(raw)
+        ds = (t.get('date') or '').split('T')[0]
+        if date_from and ds < date_from:
+            continue
+        if date_to and ds > date_to:
+            continue
+        totals["totalCount"] += 1
         norm = t['amount'] if t.get('currency') == currency else t['amount'] * (t.get('exchange_rate_to_base') or 1)
         if t.get('type') == 'income':
             maaser = norm * ((t.get('maaser_percentage') or 10) / 100)

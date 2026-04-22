@@ -137,8 +137,11 @@ export function apiGetTransactions({ limit = 50, offset = 0 } = {}) {
   return request(`/api/transactions?limit=${limit}&offset=${offset}`);
 }
 
-export function apiGetTransactionTotals(currency = 'USD') {
-  return request(`/api/transactions/totals?currency=${currency}`);
+export function apiGetTransactionTotals(currency = 'USD', dateFrom, dateTo) {
+  let url = `/api/transactions/totals?currency=${currency}`;
+  if (dateFrom) url += `&date_from=${dateFrom}`;
+  if (dateTo) url += `&date_to=${dateTo}`;
+  return request(url);
 }
 
 export function apiCreateTransaction(txn) {
