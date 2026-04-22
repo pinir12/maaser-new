@@ -432,16 +432,14 @@ export function Dashboard() {
             baseCurrency={user?.base_currency || 'USD'} userName={user?.name || 'User'} />
         </div>
 
-        {/* Totals Summary */}
+        {/* Totals Summary — always shows all-time totals from server */}
         {(() => {
-          const isAllTime = viewMode === VIEW_MODES.ALL_TIME;
-          const s = isAllTime ? allTimeStats : periodStats;
-          const label = isAllTime ? 'All Time' : viewMode === VIEW_MODES.YEAR ? 'Year' : 'Month';
+          const s = allTimeStats;
           const dot = (color) => <span className={`w-2 h-2 rounded-full ${loading ? 'bg-slate-300' : color}`} />;
           const skel = <span className="h-4 w-16 bg-slate-200 rounded animate-pulse inline-block" />;
           return (
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl px-5 py-4 border border-slate-200/80 shadow-sm">
-              <p className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-3">{label} Totals</p>
+              <p className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-3">Totals</p>
               {isGiveOnly ? (
                 <div className="flex items-center gap-6 flex-wrap">
                   <div className="flex items-center gap-2">
