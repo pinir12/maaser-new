@@ -1,5 +1,5 @@
 import { getCurrentUser, jsonError } from '@/lib/jwt-server';
-import { supaPostUser } from '@/lib/supabase-server';
+import { supaPost } from '@/lib/supabase-server';
 import { encryptTransaction } from '@/lib/encryption';
 
 export async function POST(request) {
@@ -31,7 +31,7 @@ export async function POST(request) {
     });
 
     try {
-      await supaPostUser('transactions', data, auth.userId);
+      await supaPost('transactions', data);
       imported++;
     } catch (e) {
       errors.push({ description: txn.description, error: e.message });

@@ -1,5 +1,5 @@
 import { getCurrentUser, jsonError } from '@/lib/jwt-server';
-import { supaGetUser } from '@/lib/supabase-server';
+import { supaGet } from '@/lib/supabase-server';
 import { decryptTransaction } from '@/lib/encryption';
 
 export async function GET(request) {
@@ -12,20 +12,11 @@ export async function GET(request) {
     const dateFrom = url.searchParams.get('date_from');
     const dateTo = url.searchParams.get('date_to');
 
-    const params = {
+    const txns = await supaGet('transactions', {
       user_id: `eq.${auth.userId}`,
       select: 'amount,amount_encrypted,maaser_amount_encrypted,type,currency,exchange_rate_to_base,maaser_percentage,date',
       order: 'date.desc',
-    };
-
-    // Server-side date filtering if provided
-    if (dateFrom && dateTo) {
-      params['date'] = `gte.${dateFrom}`;
-      // Supabase doesn't support multiple filters on same column via params easily,
-      // so we filter in code after fetch (the encrypted amounts need decryption anyway)
-    }
-
-    const txns = await supaGetUser('transactions', params, auth.userId);
+    });
 
     const totals = { totalIncome: 0, totalMaaser: 0, totalGiven: 0, totalLent: 0, incomeCount: 0, giveCount: 0, lendCount: 0, totalCount: 0 };
 
@@ -33,7 +24,6 @@ export async function GET(request) {
       const t = decryptTransaction(raw);
       const ds = (t.date || '').split('T')[0];
 
-      // Apply date filter if specified
       if (dateFrom && ds < dateFrom) continue;
       if (dateTo && ds > dateTo) continue;
 
