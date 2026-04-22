@@ -1078,7 +1078,7 @@ async def get_suggestions(user_id: str = Depends(get_current_user)):
             f'{SUPABASE_URL}/rest/v1/transactions',
             params={
                 'user_id': f'eq.{user_id}',
-                'select': 'description,amount,currency,recipient_name,type,maaser_percentage',
+                'select': 'description,amount,amount_encrypted,maaser_amount_encrypted,currency,recipient_name,type,maaser_percentage,exchange_rate_to_base',
                 'order': 'created_at.desc',
                 'limit': '200'
             },
@@ -1154,7 +1154,7 @@ async def get_currency_rates(base: str):
 
 # ============ CRON ============
 
-@api_router.post("/cron/recurring", response_model=CronResult)
+@api_router.api_route("/cron/recurring", methods=["GET", "POST"], response_model=CronResult)
 async def process_recurring_transactions():
     headers = supa_headers()
     today = datetime.now(timezone.utc).date()

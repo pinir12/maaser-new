@@ -1,7 +1,17 @@
+// cron-job.org - peshpesh
+
 import { supaGet, supaPost } from '@/lib/supabase-server';
 import { encryptTransaction, decryptTransaction } from '@/lib/encryption';
 
 export async function POST() {
+  return processRecurring();
+}
+
+export async function GET() {
+  return processRecurring();
+}
+
+async function processRecurring() {
   const today = new Date();
   let createdCount = 0;
 
