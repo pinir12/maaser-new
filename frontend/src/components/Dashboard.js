@@ -119,17 +119,20 @@ export function Dashboard() {
     if (!user) return;
     setLoading(true);
     try {
-      const [txnResult, totals] = await Promise.all([
-        apiGetTransactions({ limit: PAGE_SIZE, offset: 0 }),
-        apiGetTransactionTotals(user.base_currency || 'USD'),
-      ]);
+      const txnResult = await apiGetTransactions({ limit: PAGE_SIZE, offset: 0 });
       setAllTransactions(txnResult.transactions || []);
       setHasMore(txnResult.hasMore || false);
-      setServerTotals(totals);
     } catch (error) {
       console.error('Error fetching transactions:', error);
     } finally {
       setLoading(false);
+    }
+    // Fetch totals independently (don't block transactions)
+    try {
+      const totals = await apiGetTransactionTotals(user.base_currency || 'USD');
+      setServerTotals(totals);
+    } catch (error) {
+      console.error('Error fetching totals:', error);
     }
   }, [user]);
 
