@@ -7,19 +7,37 @@ export async function GET(request) {
   if (auth.error) return jsonError(auth.error, auth.status);
 
   try {
-    // Fetch ALL transactions (just the fields we need for totals)
-    const txns = await supaGetUser('transactions', {
+    const url = new URL(request.url);
+    const baseCurrency = url.searchParams.get('currency') || 'USD';
+    const dateFrom = url.searchParams.get('date_from');
+    const dateTo = url.searchParams.get('date_to');
+
+    const params = {
       user_id: `eq.${auth.userId}`,
-      select: 'amount,amount_encrypted,maaser_amount_encrypted,type,currency,exchange_rate_to_base,maaser_percentage',
+      select: 'amount,amount_encrypted,maaser_amount_encrypted,type,currency,exchange_rate_to_base,maaser_percentage,date',
       order: 'date.desc',
-    }, auth.userId);
+    };
 
-    const baseCurrency = new URL(request.url).searchParams.get('currency') || 'USD';
+    // Server-side date filtering if provided
+    if (dateFrom && dateTo) {
+      params['date'] = `gte.${dateFrom}`;
+      // Supabase doesn't support multiple filters on same column via params easily,
+      // so we filter in code after fetch (the encrypted amounts need decryption anyway)
+    }
 
-    const totals = { totalIncome: 0, totalMaaser: 0, totalGiven: 0, totalLent: 0, incomeCount: 0, giveCount: 0, lendCount: 0, totalCount: txns.length };
+    const txns = await supaGetUser('transactions', params, auth.userId);
+
+    const totals = { totalIncome: 0, totalMaaser: 0, totalGiven: 0, totalLent: 0, incomeCount: 0, giveCount: 0, lendCount: 0, totalCount: 0 };
 
     for (const raw of txns) {
       const t = decryptTransaction(raw);
+      const ds = (t.date || '').split('T')[0];
+
+      // Apply date filter if specified
+      if (dateFrom && ds < dateFrom) continue;
+      if (dateTo && ds > dateTo) continue;
+
+      totals.totalCount++;
       const norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
 
       if (t.type === 'income') {

@@ -49,6 +49,7 @@ export function Dashboard() {
   const [hasMore, setHasMore] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
   const [serverTotals, setServerTotals] = useState(null);
+  const [serverPeriodTotals, setServerPeriodTotals] = useState(null);
 
   const [viewMode, setViewMode] = useState(user?.default_view || VIEW_MODES.MONTH);
   const [useHebrewDates, setUseHebrewDates] = useState(user?.use_hebrew_calendar || false);
@@ -201,9 +202,56 @@ export function Dashboard() {
 
   useEffect(() => { fetchAllTransactions(); }, [fetchAllTransactions]);
 
+  // Fetch period-specific totals from server whenever view/month/year changes
+  const getDateBounds = useCallback(() => {
+    if (viewMode === VIEW_MODES.ALL_TIME) return { dateFrom: null, dateTo: null };
+    let startStr, endStr;
+    if (viewMode === VIEW_MODES.MONTH) {
+      if (useHebrewDates) {
+        const bounds = getHebrewMonthBounds(selectedYear, selectedMonth);
+        startStr = dateToStr(bounds.start);
+        endStr = dateToStr(bounds.end);
+      } else {
+        startStr = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-01`;
+        const lastDay = new Date(selectedYear, selectedMonth, 0).getDate();
+        endStr = `${selectedYear}-${String(selectedMonth).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
+      }
+    } else {
+      if (useHebrewDates) {
+        const yearBounds = getHebrewYearBounds(selectedYear);
+        startStr = dateToStr(yearBounds.start);
+        endStr = dateToStr(yearBounds.end);
+      } else {
+        startStr = `${selectedYear}-01-01`;
+        endStr = `${selectedYear}-12-31`;
+      }
+    }
+    return { dateFrom: startStr, dateTo: endStr };
+  }, [viewMode, selectedMonth, selectedYear, useHebrewDates]);
+
+  useEffect(() => {
+    if (!user) return;
+    const { dateFrom, dateTo } = getDateBounds();
+    if (!dateFrom) {
+      // All time — use serverTotals
+      setServerPeriodTotals(null);
+      return;
+    }
+    apiGetTransactionTotals(user.base_currency || 'USD', dateFrom, dateTo)
+      .then(setServerPeriodTotals)
+      .catch(() => setServerPeriodTotals(null));
+  }, [user, getDateBounds]);
+
   const refreshAfterChange = useCallback(async () => {
     await fetchAllTransactions();
-  }, [fetchAllTransactions]);
+    // Also refresh period totals
+    const { dateFrom, dateTo } = getDateBounds();
+    if (dateFrom) {
+      apiGetTransactionTotals(user?.base_currency || 'USD', dateFrom, dateTo)
+        .then(setServerPeriodTotals)
+        .catch(() => {});
+    }
+  }, [fetchAllTransactions, getDateBounds, user?.base_currency]);
 
   const processRecurringTransactions = async () => {
     setProcessingRecurring(true);
@@ -263,8 +311,10 @@ export function Dashboard() {
   };
 
   const periodStats = useMemo(() => {
+    // Use server-computed period totals when available
+    if (serverPeriodTotals) return serverPeriodTotals;
+    // Fallback to client-side from loaded transactions
     const baseCurrency = user?.base_currency || 'USD';
-
     return filteredTransactions.reduce((acc, t) => {
       const norm = t.currency === baseCurrency ? t.amount : t.amount * (t.exchange_rate_to_base || 1);
       if (t.type === TRANSACTION_TYPES.INCOME) {
@@ -277,7 +327,7 @@ export function Dashboard() {
       }
       return acc;
     }, { totalIncome: 0, totalMaaser: 0, totalGiven: 0, totalLent: 0 });
-  }, [filteredTransactions, user?.base_currency]);
+  }, [serverPeriodTotals, filteredTransactions, user?.base_currency]);
 
   // Previous period stats for Insights comparison
   const previousPeriodStats = useMemo(() => {
@@ -432,14 +482,16 @@ export function Dashboard() {
             baseCurrency={user?.base_currency || 'USD'} userName={user?.name || 'User'} />
         </div>
 
-        {/* Totals Summary — always shows all-time totals from server */}
+        {/* Totals Summary */}
         {(() => {
-          const s = allTimeStats;
+          const isAllTime = viewMode === VIEW_MODES.ALL_TIME;
+          const s = isAllTime ? allTimeStats : periodStats;
+          const label = isAllTime ? 'All Time' : viewMode === VIEW_MODES.YEAR ? 'Year' : 'Month';
           const dot = (color) => <span className={`w-2 h-2 rounded-full ${loading ? 'bg-slate-300' : color}`} />;
           const skel = <span className="h-4 w-16 bg-slate-200 rounded animate-pulse inline-block" />;
           return (
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl px-5 py-4 border border-slate-200/80 shadow-sm">
-              <p className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-3">Totals</p>
+              <p className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-3">{label} Totals</p>
               {isGiveOnly ? (
                 <div className="flex items-center gap-6 flex-wrap">
                   <div className="flex items-center gap-2">
