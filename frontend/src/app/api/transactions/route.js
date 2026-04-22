@@ -1,5 +1,5 @@
 import { getCurrentUser, jsonError } from '@/lib/jwt-server';
-import { supaGetUser, supaPostUser } from '@/lib/supabase-server';
+import { supaGet, supaPost } from '@/lib/supabase-server';
 import { encryptTransaction, decryptTransaction } from '@/lib/encryption';
 
 export async function GET(request) {
@@ -18,18 +18,8 @@ export async function GET(request) {
     offset: String(offset),
   };
 
-  // Optional date range filters
-  const dateFrom = url.searchParams.get('date_from');
-  const dateTo = url.searchParams.get('date_to');
-  if (dateFrom) params['date'] = `gte.${dateFrom}`;
-  if (dateTo) {
-    params[dateFrom ? 'and' : 'date'] = dateFrom
-      ? `(date.gte.${dateFrom},date.lte.${dateTo})`
-      : `lte.${dateTo}`;
-  }
-
   try {
-    const txns = await supaGetUser('transactions', params, auth.userId);
+    const txns = await supaGet('transactions', params);
     const hasMore = txns.length === limit;
     return Response.json({ transactions: txns.map(decryptTransaction), hasMore, offset, limit });
   } catch (e) {
@@ -49,7 +39,7 @@ export async function POST(request) {
   const encrypted = encryptTransaction(data);
 
   try {
-    const result = await supaPostUser('transactions', encrypted, auth.userId);
+    const result = await supaPost('transactions', encrypted);
     const created = Array.isArray(result) ? result[0] : result;
     return Response.json(decryptTransaction(created));
   } catch (e) {
