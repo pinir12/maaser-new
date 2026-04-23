@@ -248,3 +248,11 @@ export function apiImportTransactions(transactions) {
   });
 }
 
+// Admin - Key Rotation
+export function apiRotateEncryptionKey(oldKey, newKey) {
+  return request('/api/admin/rotate-key', {
+    method: 'POST',
+    body: JSON.stringify({ oldKey, newKey }),
+  });
+}
+

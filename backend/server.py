@@ -1007,6 +1007,101 @@ async def admin_delete_user(target_id: int, admin_id: str = Depends(get_current_
     return {"success": True}
 
 
+class RotateKeyRequest(BaseModel):
+    oldKey: str
+    newKey: str
+
+@api_router.post("/admin/rotate-key")
+async def admin_rotate_key(req: RotateKeyRequest, admin_id: str = Depends(get_current_admin)):
+    if not req.oldKey or not req.newKey:
+        raise HTTPException(status_code=400, detail="Both oldKey and newKey are required")
+    if req.oldKey == req.newKey:
+        raise HTTPException(status_code=400, detail="New key must be different from old key")
+
+    current_key = os.environ.get('ENCRYPTION_KEY') or os.environ.get('JWT_SECRET', '')
+    old_hash = hashlib.sha256(req.oldKey.encode()).digest()
+    current_hash = hashlib.sha256(current_key.encode()).digest()
+
+    if old_hash != current_hash:
+        raise HTTPException(status_code=403, detail="Old key does not match current encryption key")
+
+    new_key_buf = hashlib.sha256(req.newKey.encode()).digest()
+
+    async with httpx.AsyncClient() as c:
+        r = await c.get(
+            f'{SUPABASE_URL}/rest/v1/transactions',
+            params={'select': 'id,description,amount_encrypted,maaser_amount_encrypted,recipient_name'},
+            headers=supa_headers()
+        )
+        if r.status_code != 200:
+            raise HTTPException(status_code=500, detail="Failed to fetch transactions")
+
+        txns = r.json()
+        re_encrypted = 0
+        failed = 0
+
+        for txn in txns:
+            try:
+                updates = {}
+                changed = False
+                for field in ['description', 'recipient_name']:
+                    val = txn.get(field)
+                    if val and str(val).startswith('enc:'):
+                        plain = _decrypt_with(val, old_hash)
+                        if plain is not None:
+                            updates[field] = _encrypt_with(plain, new_key_buf)
+                            changed = True
+                for field in ['amount_encrypted', 'maaser_amount_encrypted']:
+                    val = txn.get(field)
+                    if val and str(val).startswith('enc:'):
+                        plain = _decrypt_with(val, old_hash)
+                        if plain is not None:
+                            updates[field] = _encrypt_with(plain, new_key_buf)
+                            changed = True
+                if changed:
+                    await c.patch(
+                        f'{SUPABASE_URL}/rest/v1/transactions',
+                        params={'id': f'eq.{txn["id"]}'},
+                        json=updates,
+                        headers=supa_headers()
+                    )
+                    re_encrypted += 1
+            except Exception:
+                failed += 1
+
+    return {
+        "success": True, "total": len(txns), "reEncrypted": re_encrypted, "failed": failed,
+        "message": f"Re-encrypted {re_encrypted} transactions. {failed} failed. Update ENCRYPTION_KEY in your environment to the new key now."
+    }
+
+
+def _decrypt_with(text, key_bytes):
+    try:
+        import base64 as b64
+        parts = str(text).split(':')
+        if len(parts) != 3: return None
+        iv = b64.b64decode(parts[1])
+        combined = b64.b64decode(parts[2])
+        tag = combined[:16]
+        ct = combined[16:]
+        from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+        return AESGCM(key_bytes).decrypt(iv, ct + tag, None).decode()
+    except Exception:
+        return None
+
+
+def _encrypt_with(text, key_bytes):
+    import base64 as b64
+    iv = os.urandom(12)
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    ct = AESGCM(key_bytes).encrypt(iv, text.encode(), None)
+    tag = ct[-16:]
+    ciphertext = ct[:-16]
+    combined = tag + ciphertext
+    return f"enc:{b64.b64encode(iv).decode()}:{b64.b64encode(combined).decode()}"
+
+
+
 # ============ RECURRING (autofill + management) ============
 
 @api_router.get("/transactions/recurring")
@@ -1202,22 +1297,31 @@ async def process_recurring_transactions():
                 if next_date > today: break
 
                 ds = next_date.isoformat()
+                # Use raw encrypted description for idempotency check
                 check = await c.get(
                     f'{SUPABASE_URL}/rest/v1/transactions',
-                    params={'user_id': f'eq.{txn["user_id"]}', 'description': f'eq.{txn["description"]}', 'date': f'eq.{ds}', 'select': 'id'},
+                    params={'user_id': f'eq.{raw_txn["user_id"]}', 'description': f'eq.{raw_txn["description"]}', 'date': f'eq.{ds}', 'type': f'eq.{raw_txn["type"]}', 'select': 'id', 'limit': '1'},
                     headers=headers
                 )
                 if check.status_code == 200 and not check.json():
-                    new_txn = encrypt_transaction({
-                        'user_id': txn['user_id'], 'description': txn['description'],
-                        'amount': txn['amount'], 'currency': txn['currency'],
-                        'exchange_rate_to_base': txn.get('exchange_rate_to_base', 1),
-                        'type': txn['type'], 'maaser_percentage': txn.get('maaser_percentage'),
-                        'maaser_amount': txn.get('maaser_amount'), 'recipient_name': txn.get('recipient_name'),
-                        'date': ds, 'is_recurring': True, 'recurring_frequency': freq,
-                        'recurring_end_date': txn.get('recurring_end_date'),
+                    # Copy encrypted fields directly — don't re-encrypt
+                    new_txn = {
+                        'user_id': raw_txn['user_id'],
+                        'description': raw_txn['description'],
+                        'amount': raw_txn['amount'],
+                        'amount_encrypted': raw_txn.get('amount_encrypted'),
+                        'maaser_amount_encrypted': raw_txn.get('maaser_amount_encrypted'),
+                        'currency': raw_txn.get('currency'),
+                        'exchange_rate_to_base': raw_txn.get('exchange_rate_to_base', 1),
+                        'type': raw_txn['type'],
+                        'maaser_percentage': raw_txn.get('maaser_percentage'),
+                        'recipient_name': raw_txn.get('recipient_name'),
+                        'date': ds,
+                        'is_recurring': True,
+                        'recurring_frequency': freq,
+                        'recurring_end_date': raw_txn.get('recurring_end_date'),
                         'created_at': datetime.now(timezone.utc).isoformat()
-                    })
+                    }
                     ins = await c.post(f'{SUPABASE_URL}/rest/v1/transactions', json=new_txn, headers=headers)
                     if ins.status_code in [200, 201]: created_count += 1
 

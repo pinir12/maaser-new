@@ -1,14 +1,20 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { apiGetAdminUsers, apiUpdateAdminUser, apiDeleteAdminUser } from '../lib/api';
-import { ArrowLeft, Users, Shield, ShieldOff, Trash2, Search, RefreshCw } from 'lucide-react';
+import { apiGetAdminUsers, apiUpdateAdminUser, apiDeleteAdminUser, apiRotateEncryptionKey } from '../lib/api';
+import { ArrowLeft, Users, Shield, ShieldOff, Trash2, Search, RefreshCw, KeyRound, AlertTriangle, CheckCircle2 } from 'lucide-react';
 
 export function AdminPanel({ onBack }) {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [actionLoading, setActionLoading] = useState(null);
+  const [showKeyRotation, setShowKeyRotation] = useState(false);
+  const [oldKey, setOldKey] = useState('');
+  const [newKey, setNewKey] = useState('');
+  const [rotationLoading, setRotationLoading] = useState(false);
+  const [rotationResult, setRotationResult] = useState(null);
+  const [rotationError, setRotationError] = useState('');
 
   const fetchUsers = useCallback(async () => {
     setLoading(true);
@@ -46,6 +52,23 @@ export function AdminPanel({ onBack }) {
       console.error('Error deleting user:', err);
     } finally {
       setActionLoading(null);
+    }
+  };
+
+  const handleRotateKey = async () => {
+    if (!oldKey.trim() || !newKey.trim()) { setRotationError('Both keys are required'); return; }
+    if (oldKey === newKey) { setRotationError('New key must be different'); return; }
+    if (!window.confirm('This will re-encrypt ALL transaction data with the new key. Make sure you have the new key saved. Continue?')) return;
+    setRotationError('');
+    setRotationResult(null);
+    setRotationLoading(true);
+    try {
+      const result = await apiRotateEncryptionKey(oldKey, newKey);
+      setRotationResult(result);
+    } catch (e) {
+      setRotationError(e.message);
+    } finally {
+      setRotationLoading(false);
     }
   };
 
@@ -136,6 +159,70 @@ export function AdminPanel({ onBack }) {
             </div>
           </div>
         )}
+
+        {/* Key Rotation - Admin Only */}
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <button data-testid="toggle-key-rotation" onClick={() => setShowKeyRotation(!showKeyRotation)}
+            className="w-full px-5 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 bg-amber-100 rounded-lg flex items-center justify-center">
+                <KeyRound className="w-4.5 h-4.5 text-amber-600" />
+              </div>
+              <div className="text-left">
+                <p className="font-semibold text-slate-900 text-sm">Encryption Key Rotation</p>
+                <p className="text-xs text-slate-400">Re-encrypt all transaction data with a new key</p>
+              </div>
+            </div>
+            <span className="text-slate-400 text-xs">{showKeyRotation ? 'Hide' : 'Show'}</span>
+          </button>
+
+          {showKeyRotation && (
+            <div className="px-5 pb-5 space-y-3 border-t border-slate-100 pt-4">
+              <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2">
+                <AlertTriangle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" />
+                <div className="text-xs text-amber-700">
+                  <p className="font-semibold mb-1">Before rotating:</p>
+                  <ol className="list-decimal ml-4 space-y-0.5">
+                    <li>Enter your current encryption key</li>
+                    <li>Enter the new key (save it somewhere safe!)</li>
+                    <li>After rotation, update <code className="bg-amber-100 px-1 rounded">ENCRYPTION_KEY</code> in Vercel env vars to the new key</li>
+                    <li>Redeploy on Vercel</li>
+                  </ol>
+                </div>
+              </div>
+
+              {rotationError && (
+                <div data-testid="rotation-error" className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">{rotationError}</div>
+              )}
+              {rotationResult && (
+                <div data-testid="rotation-result" className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-sm">
+                  <div className="flex items-center gap-2 text-emerald-700 font-semibold mb-1">
+                    <CheckCircle2 className="w-4 h-4" />Key rotation complete
+                  </div>
+                  <p className="text-emerald-600 text-xs">{rotationResult.reEncrypted} re-encrypted, {rotationResult.failed} failed out of {rotationResult.total} total</p>
+                  <p className="text-amber-600 text-xs font-semibold mt-2">Now update ENCRYPTION_KEY in Vercel and redeploy!</p>
+                </div>
+              )}
+
+              <div>
+                <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1 block">Current Key</label>
+                <input data-testid="rotation-old-key" type="password" value={oldKey} onChange={e => setOldKey(e.target.value)}
+                  placeholder="Your current ENCRYPTION_KEY"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-amber-500" />
+              </div>
+              <div>
+                <label className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1 block">New Key</label>
+                <input data-testid="rotation-new-key" type="password" value={newKey} onChange={e => setNewKey(e.target.value)}
+                  placeholder="New encryption key"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-amber-500" />
+              </div>
+              <button data-testid="rotation-submit-btn" onClick={handleRotateKey} disabled={rotationLoading || !oldKey || !newKey}
+                className="w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-xl shadow-lg shadow-amber-600/20 transition-all disabled:opacity-50 text-sm flex items-center justify-center gap-2">
+                {rotationLoading ? <><RefreshCw className="w-4 h-4 animate-spin" />Re-encrypting all data...</> : 'Rotate Encryption Key'}
+              </button>
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );
