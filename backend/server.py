@@ -1202,22 +1202,31 @@ async def process_recurring_transactions():
                 if next_date > today: break
 
                 ds = next_date.isoformat()
+                # Use raw encrypted description for idempotency check
                 check = await c.get(
                     f'{SUPABASE_URL}/rest/v1/transactions',
-                    params={'user_id': f'eq.{txn["user_id"]}', 'description': f'eq.{txn["description"]}', 'date': f'eq.{ds}', 'select': 'id'},
+                    params={'user_id': f'eq.{raw_txn["user_id"]}', 'description': f'eq.{raw_txn["description"]}', 'date': f'eq.{ds}', 'type': f'eq.{raw_txn["type"]}', 'select': 'id', 'limit': '1'},
                     headers=headers
                 )
                 if check.status_code == 200 and not check.json():
-                    new_txn = encrypt_transaction({
-                        'user_id': txn['user_id'], 'description': txn['description'],
-                        'amount': txn['amount'], 'currency': txn['currency'],
-                        'exchange_rate_to_base': txn.get('exchange_rate_to_base', 1),
-                        'type': txn['type'], 'maaser_percentage': txn.get('maaser_percentage'),
-                        'maaser_amount': txn.get('maaser_amount'), 'recipient_name': txn.get('recipient_name'),
-                        'date': ds, 'is_recurring': True, 'recurring_frequency': freq,
-                        'recurring_end_date': txn.get('recurring_end_date'),
+                    # Copy encrypted fields directly — don't re-encrypt
+                    new_txn = {
+                        'user_id': raw_txn['user_id'],
+                        'description': raw_txn['description'],
+                        'amount': raw_txn['amount'],
+                        'amount_encrypted': raw_txn.get('amount_encrypted'),
+                        'maaser_amount_encrypted': raw_txn.get('maaser_amount_encrypted'),
+                        'currency': raw_txn.get('currency'),
+                        'exchange_rate_to_base': raw_txn.get('exchange_rate_to_base', 1),
+                        'type': raw_txn['type'],
+                        'maaser_percentage': raw_txn.get('maaser_percentage'),
+                        'recipient_name': raw_txn.get('recipient_name'),
+                        'date': ds,
+                        'is_recurring': True,
+                        'recurring_frequency': freq,
+                        'recurring_end_date': raw_txn.get('recurring_end_date'),
                         'created_at': datetime.now(timezone.utc).isoformat()
-                    })
+                    }
                     ins = await c.post(f'{SUPABASE_URL}/rest/v1/transactions', json=new_txn, headers=headers)
                     if ins.status_code in [200, 201]: created_count += 1
 

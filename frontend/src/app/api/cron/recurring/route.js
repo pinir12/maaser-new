@@ -1,7 +1,7 @@
 // cron-job.org - peshpesh
 
 import { supaGet, supaPost } from '@/lib/supabase-server';
-import { encryptTransaction, decryptTransaction } from '@/lib/encryption';
+import { decryptTransaction } from '@/lib/encryption';
 
 export async function POST() {
   return processRecurring();
@@ -45,31 +45,37 @@ async function processRecurring() {
         if (nextDate > today) break;
 
         const ds = nextDate.toISOString().split('T')[0];
-        // Check if already exists (idempotent — safe to call multiple times)
-        const check = await supaGet('transactions', {
-          user_id: `eq.${txn.user_id}`,
-          description: `eq.${txn.description}`,
+
+        // Idempotency: check if a transaction with same user+date+type already exists
+        // Use the raw encrypted description for exact match in DB
+        const existing = await supaGet('transactions', {
+          user_id: `eq.${rawTxn.user_id}`,
           date: `eq.${ds}`,
+          type: `eq.${rawTxn.type}`,
+          description: `eq.${rawTxn.description}`,
           select: 'id',
+          limit: '1',
         });
 
-        if (!check.length) {
-          const newTxn = encryptTransaction({
-            user_id: txn.user_id,
-            description: txn.description,
-            amount: txn.amount,
-            currency: txn.currency,
-            exchange_rate_to_base: txn.exchange_rate_to_base || 1,
-            type: txn.type,
-            maaser_percentage: txn.maaser_percentage,
-            maaser_amount: txn.maaser_amount,
-            recipient_name: txn.recipient_name,
+        if (!existing.length) {
+          // Copy encrypted fields directly — don't re-encrypt (avoids different IV issue)
+          const newTxn = {
+            user_id: rawTxn.user_id,
+            description: rawTxn.description,
+            amount: rawTxn.amount,
+            amount_encrypted: rawTxn.amount_encrypted,
+            maaser_amount_encrypted: rawTxn.maaser_amount_encrypted,
+            currency: rawTxn.currency,
+            exchange_rate_to_base: rawTxn.exchange_rate_to_base || 1,
+            type: rawTxn.type,
+            maaser_percentage: rawTxn.maaser_percentage,
+            recipient_name: rawTxn.recipient_name,
             date: ds,
             is_recurring: true,
             recurring_frequency: freq,
-            recurring_end_date: txn.recurring_end_date,
+            recurring_end_date: rawTxn.recurring_end_date,
             created_at: new Date().toISOString(),
-          });
+          };
           try {
             await supaPost('transactions', newTxn);
             createdCount++;
