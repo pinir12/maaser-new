@@ -67,7 +67,7 @@ export function decryptTransaction(txn) {
   const dec = { ...txn };
   for (const f of SENSITIVE_FIELDS) {
     if (dec[f] && String(dec[f]).startsWith('enc:')) {
-      dec[f] = decrypt(dec[f]);
+      try { dec[f] = decrypt(dec[f]); } catch { dec[f] = '[encrypted]'; }
     }
   }
   for (const f of NUMERIC_ENCRYPTED_FIELDS) {
@@ -75,7 +75,9 @@ export function decryptTransaction(txn) {
     if (dec[ef]) {
       try {
         dec[f] = parseFloat(decrypt(dec[ef]));
-      } catch {}
+      } catch {
+        dec[f] = 0;
+      }
       delete dec[ef];
     }
   }
